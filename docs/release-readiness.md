@@ -10,7 +10,9 @@ The shared schema, general recipe runtime, whole-repository source handling, CLI
 
 The public workspace example passed three navigation comparisons, three validation comparisons, and a subsequent WORKTREE comparison through the selected installed package. Independent review confirmed actual drawer motion, inner scrolling, feedback changes, preservation, and cleanup. The exact package and source association are recorded in [G19 acceptance](../evidence/revision-0.3/G19-public-app-acceptance.json).
 
-The selected package also passed all six macOS synthetic motion cases and normal-speed playback review. The first final Linux attempt failed its motion limit during a narrow-screen case. That failure remains open. Docker lifecycle acceptance and the complete Linux gate also remain pending. The static, npm, pnpm workspace, and Python installed results have separate identity-scoped records in [candidate verification progress](../evidence/revision-0.3/candidate-verification-progress.json).
+The selected package passed the complete macOS and Linux synthetic motion matrix with numerical checks and normal-speed review, recorded in [G10 acceptance](../evidence/revision-0.3/G10-motion-acceptance.json). Docker lifecycle and interruption requirements passed the combined review in [G07 and G15 acceptance](../evidence/revision-0.3/G07-G15-docker-cleanup-acceptance.json). Earlier failed runs retain their original outcomes and unresolved causes.
+
+The ledger currently accepts 21 of 24 gates. G20 remains pending because the complete Linux suite failed a public navigation clock-bound check. A subsequent single diagnostic did not reproduce that failure and does not replace the required full platform verification. G23 and G24 still require the final release audit and exact publishing handoff. The static, npm, pnpm workspace, and Python installed results have separate records in [candidate verification progress](../evidence/revision-0.3/candidate-verification-progress.json).
 
 A previous schema 1 candidate has [historical release evidence](../evidence/release-candidate.json). Its checks and hashes do not establish readiness of the current implementation.
 
