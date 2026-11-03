@@ -1,0 +1,1036 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-acceptance",
+  "recordedAt": "2026-11-03T07:11:55.438088+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "acceptedGates": [
+    "G08",
+    "G09",
+    "G13",
+    "G21",
+    "G22"
+  ],
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
+    "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e",
+    "offlineReviewExit": 0,
+    "offlineReviewScript": {
+      "name": "swc-final-behavior-package-verify.py",
+      "sha256": "4d00af6778415b37f4dad792693ab513451341a434423cbafb6758575517a305",
+      "bytes": 18734
+    },
+    "offlineReviewResult": {
+      "name": "swc-final-behavior-package-verification.json",
+      "sha256": "96d13242cbba08b3050dd00dded1d4c361ce85980f508e898cad53c008c68770",
+      "bytes": 1225451
+    }
+  },
+  "artifactVerification": {
+    "indexedRecords": 32,
+    "sourceArchiveRegularMembers": 434,
+    "packageMembers": 171,
+    "verifiedFileHashes": 3886,
+    "meaning": "Artifact byte checks, not product tests or new runtime executions."
+  },
+  "sourceEvidenceAccounting": {
+    "unitContracts": {
+      "passed": 792,
+      "skipped": 11,
+      "exitCode": 0
+    },
+    "integration": {
+      "passed": 103,
+      "exitCode": 0
+    },
+    "laterPortability": {
+      "passed": 121,
+      "overlapsPriorRuns": true,
+      "notAdded": true
+    },
+    "combinedTestTotal": null
+  },
+  "packageAssociation": {
+    "executedEarlierPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+    "currentPackageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "members": 171,
+    "unchangedRuntimeMembers": 170,
+    "identicalDependencies": 7,
+    "onlyChangedMember": "package/README.md",
+    "instructionCodeFencesUnchanged": true,
+    "finalPackageCleanInstallExit": 0
+  },
+  "coverage": [
+    {
+      "id": "G08",
+      "status": "accepted",
+      "requirement": "Every scenario action, inner-container smooth scroll, exact locator ambiguity, fragment navigation, timeout cancellation, and hover persistence is exercised.",
+      "evidence": [
+        {
+          "requirement": "All seven scenario actions, exact locator variants, hover persistence",
+          "assertion": "All actions have ok/ok status with non-null ratios; role/name, label, text, testId and CSS are used. The later screenshot still contains more than 100 green hover-state pixels.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              221,
+              271
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              44,
+              44
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Exact locator ambiguity and allowMissing strictness",
+          "assertion": "Ambiguous, hidden, disabled, chained selector and XPath-like targets fail both sides; following step is blocked and observed clicks remain empty.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              432,
+              457
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              52,
+              57
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Same-document fragment navigation",
+          "assertion": "A fragment after a successful clicked document succeeds. Repeating the unchanged null-response fragment fails with NAVIGATION_NO_RESPONSE.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              409,
+              430
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              51,
+              51
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Whole-step timeout and cancellation stop pending actions",
+          "assertion": "STEP_TIMEOUT blocks the next step, completes within the bound, and no delayed click occurs after an additional 1100 ms. Font settlement uses the same step deadline.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              471,
+              512
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              59,
+              60
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Typed interruption and overall deadline",
+          "assertion": "The pending recording rejects with SIGINT and exit 130. The separate real overall-deadline case at lines 718 onward preserves its cancellation code.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              624,
+              633
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              76,
+              87
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Actual narrow inner-container smooth scroll",
+          "assertion": "391 by 845 motion scenario scrolls an exact inner target; each side remains ok and retains more than 15 actual motion frames.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              635,
+              687
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              81,
+              81
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Installed representative navigation and independent inner-scroll observation",
+          "observed": "Seven actual cb641 comparisons exit 0. The unchanged 19-file fixture and source commits associate the independent DOM observation. On each side the inner scrollTop changes from 0 to 560 while windowScrollY remains 0. Existing decoded content review confirms rows move while drawer chrome stays fixed.",
+          "report": {
+            "name": "report.json",
+            "sha256": "4b5ca72ca0e6f5a388ea828343bb313cf8501e2a8bb0dec7aa48c366300f69ba",
+            "bytes": 31299
+          }
+        }
+      ],
+      "remainingInScopeGaps": []
+    },
+    {
+      "id": "G09",
+      "status": "accepted",
+      "requirement": "Expected absence/exclusion are unverified pairs; required failure blocks later side actions and is visibly labeled at the correct motion time.",
+      "evidence": [
+        {
+          "requirement": "Expected absence and exclusion remain unverified and permit later actions",
+          "assertion": "Expected absence and skipped_by_side retain the safe open image; both ratios are null; the later screenshot succeeds.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              273,
+              307
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              45,
+              45
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Required failure blocks only the affected side",
+          "assertion": "Both side permutations assert partial outcome, failed required step, blocked later step, retained safe image, healthy peer ok, and null failed/blocked ratios.",
+          "source": {
+            "path": "test/integration/recorder.test.ts",
+            "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+            "lines": [
+              309,
+              333
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              46,
+              47
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Installed keyframe absence/exclusion behavior",
+          "observed": "3fac9 installed compare-success exits 0 and records five verified pairs, one expected absence, and one exclusion. Direct saved capture inspection finds null ratios for the two unverified pairs. Byte-identical runtime association to cb641 is explicit.",
+          "report": {
+            "name": "report.json",
+            "sha256": "0b90059a8b9477f10aee55fca0714e72cde18a65ab37aca77072dca0efa28983",
+            "bytes": 14768
+          }
+        },
+        {
+          "requirement": "Failure labels begin at actual markers and persist after sub-frame failure intervals",
+          "assertion": "Source selection cuts off at failure time. The previous tick has no failure badge. Reached ticks show failed or blocked status. A short failed interval still produces BLOCKED, PRIOR STEP FAILED, HELD and UNVERIFIED PAIR through later steps; ordinary annotation intervals remain half-open.",
+          "source": {
+            "path": "test/unit/timeline-presentation.test.ts",
+            "sha256": "7b55260bf5168e19b6ee8bae32f9545c44c459b3477c55b932d1b680969831ff",
+            "lines": [
+              227,
+              441
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-unit-contracts-20261103T0427.log",
+              "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+              "bytes": 109665
+            },
+            "lines": [
+              737,
+              760
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Current installed partial-motion timing and continuing peer",
+          "report": {
+            "name": "report.private.json",
+            "sha256": "e4235d5228e935826cbcc2ef7b5ddbe119049d9be386a58473d8100ec701425e",
+            "bytes": 152706
+          },
+          "observed": {
+            "actualProductExits": [
+              0,
+              3,
+              8,
+              3
+            ],
+            "failureAtRunElapsedMs": 6528.677,
+            "firstFailureOutputFrame": 169,
+            "firstFailureTickRunElapsedMs": 6547.264041333333,
+            "firstFailureVideoTimeSeconds": 5.633333333333334,
+            "blockedAtRunElapsedMs": 6543.745041,
+            "failedAnnotationDurationFrames": 0,
+            "heldBeforeSource": "frames/partial-motion-before-00180.png",
+            "distinctHealthyAfterSelectionsFromFailure": 20,
+            "summary": {
+              "verifiedPairs": 3,
+              "changedPairs": 3,
+              "expectedAbsences": 0,
+              "exclusions": 0,
+              "failedSteps": 1,
+              "blockedSteps": 3,
+              "coverageOmissions": 0
+            }
+          }
+        },
+        {
+          "requirement": "Correct visible failed-history and blocked labels",
+          "observed": "Retained actual 1x playback reports 265 frames and no drops/corruption. This reviewer directly viewed the already saved 5.7-second blocked sample. The BEFORE header includes BLOCKED | PRIOR STEP FAILED | HELD | UNVERIFIED PAIR; AFTER shows completion, and the footer says CAPTURE INCOMPLETE.",
+          "report": {
+            "name": "review.json",
+            "sha256": "1b4c8a3e621634ddb23b790588a21b2587a44a17e865dbd40450ca053e52d860",
+            "bytes": 2122
+          }
+        }
+      ],
+      "remainingInScopeGaps": []
+    },
+    {
+      "id": "G13",
+      "status": "accepted",
+      "requirement": "Trusted titles/labels/status intervals, dimensions, safe failure panels, poster selection, Unicode fallback, and text escaping render correctly.",
+      "evidence": [
+        {
+          "requirement": "One-second titles, native frame schedule and status intervals",
+          "assertion": "A single 30-frame title precedes native duration; selected frames use shared original-speed ticks. Failure and blocked status starts from reached markers, not widened terminal annotations.",
+          "source": {
+            "path": "test/unit/timeline-presentation.test.ts",
+            "sha256": "7b55260bf5168e19b6ee8bae32f9545c44c459b3477c55b932d1b680969831ff",
+            "lines": [
+              183,
+              441
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-unit-contracts-20261103T0427.log",
+              "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+              "bytes": 109665
+            },
+            "lines": [
+              734,
+              760
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Canvas dimensions and actual first/boundary/final images",
+          "assertion": "Actual encoded output is 1920 by 686. Decoded frames 0,27,29,30,42,54 are compared to the expected title or step image. Masks and divider pixels are checked.",
+          "source": {
+            "path": "test/integration/composer-media.test.ts",
+            "sha256": "2f7be65ffa2e0eb61c7de4df173349debf2f2a0d8b924c94c02cfeb09f369a7d",
+            "lines": [
+              152,
+              234
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              22,
+              22
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Trusted label renderer, font, escaping and bounded text",
+          "assertion": "Actual browser geometry is a 48-pixel header, 598-pixel panels and 40-pixel caption; local Inter loads; long injected HTML remains text with zero img elements; ellipsis applies; network and foreign app cookies are absent.",
+          "source": {
+            "path": "test/integration/composer-media.test.ts",
+            "sha256": "2f7be65ffa2e0eb61c7de4df173349debf2f2a0d8b924c94c02cfeb09f369a7d",
+            "lines": [
+              236,
+              303
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              23,
+              23
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Actual production renderer passes text through textContent",
+          "assertion": "All labels, badges, caption, title and route use element.textContent; images come from validated data URLs; outgoing requests abort; missing local font or observed requests fail rendering.",
+          "source": {
+            "path": "src/composer/index.ts",
+            "sha256": "cfaf1df7cb3188a022f5509cf5c0c3d4cdab656f3f8d1c50b72fdc0245bfde4b",
+            "lines": [
+              119,
+              181
+            ]
+          }
+        },
+        {
+          "requirement": "Safe first-failure panel and visible incomplete badge",
+          "assertion": "Neutral BEFORE panel has the expected pixels, AFTER retains its safe source, the incomplete badge contains more than 1000 expected pixels, and this result encodes.",
+          "source": {
+            "path": "test/integration/composer-media.test.ts",
+            "sha256": "2f7be65ffa2e0eb61c7de4df173349debf2f2a0d8b924c94c02cfeb09f369a7d",
+            "lines": [
+              305,
+              345
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              24,
+              24
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Poster selection and Unicode fallback",
+          "assertion": "Earliest maximum valid ratio wins a tie. With no verified pair the poster is incomplete. Unsupported presentation characters become ASCII question marks and FONT_GLYPH_UNSUPPORTED is emitted.",
+          "source": {
+            "path": "test/unit/timeline-presentation.test.ts",
+            "sha256": "7b55260bf5168e19b6ee8bae32f9545c44c459b3477c55b932d1b680969831ff",
+            "lines": [
+              442,
+              474
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-unit-contracts-20261103T0427.log",
+              "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+              "bytes": 109665
+            },
+            "lines": [
+              761,
+              763
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "No upscaling and correct letterboxing",
+          "assertion": "An actual 391 by 241 motion source renders at native size inside the output panels. Decoded mask, panel and content coordinates are checked.",
+          "source": {
+            "path": "test/integration/composer-media.test.ts",
+            "sha256": "2f7be65ffa2e0eb61c7de4df173349debf2f2a0d8b924c94c02cfeb09f369a7d",
+            "lines": [
+              451,
+              507
+            ]
+          },
+          "execution": {
+            "record": {
+              "name": "swc-integrated-integration-20261103T0430.log",
+              "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+              "bytes": 16443
+            },
+            "lines": [
+              32,
+              32
+            ],
+            "actualExit": 0
+          }
+        },
+        {
+          "requirement": "Current installed media and saved review",
+          "observed": "Six cb641 installed-module recorder/composer runs retain source/timeline/media. Their actual output dimensions and earliest valid posters were rechecked. Existing 1x records cover these six plus seven public CLI outputs. Current partial output has an uncapped 265-frame decode. This reviewer viewed the current public poster and saved 390 by 844 late sample, confirming visible labels, divider and letterboxes.",
+          "report": {
+            "name": "motion-check.json",
+            "sha256": "30795503114d7a700a7250df4815281546ad8510a8932f7aa46471c0d7de3ec4",
+            "bytes": 1027209
+          }
+        }
+      ],
+      "remainingInScopeGaps": []
+    },
+    {
+      "id": "G21",
+      "status": "accepted",
+      "requirement": "npm pack allowlist, clean tarball installation, help/doctor/plan/compare/compose/clean, bundled assets/skill, and literal public quickstarts pass without source-tree dependencies.",
+      "evidence": [
+        {
+          "requirement": "Package allowlist, bundled assets, schemas and skill"
+        },
+        {
+          "requirement": "Final tarball clean install without source-tree runtime dependencies"
+        },
+        {
+          "requirement": "Installed help, doctor, plan, compare and compose",
+          "observed": "All 18 retained process exits match the single stdout envelope. Required paths include help 0, doctor 0, plan 0, compare success 0, partial 3, compose success without browser 0, unavailable encoder 8 and recovered partial 3. These ran 3fac9; all 170 runtime members and seven resolved dependency identities are identical in cb641.",
+          "report": {
+            "name": "report.json",
+            "sha256": "0b90059a8b9477f10aee55fca0714e72cde18a65ab37aca77072dca0efa28983",
+            "bytes": 14768
+          }
+        },
+        {
+          "requirement": "Literal public quickstart and README instructions",
+          "assertion": "The harness parses the literal quickstart JSON, checks it equals the seven-step pricing scenario, runs the installed saved-plan sequence, and executes the README default HEAD/WORKTREE plan and compare sequence. All README code fences are unchanged in the repack.",
+          "source": {
+            "path": "scripts/release-smoke.mjs",
+            "sha256": "e498aca4b364892b427c9b0275c300858d0c2e45ac764e550a621b3ed46eab8a",
+            "lines": [
+              24,
+              112
+            ]
+          },
+          "report": {
+            "name": "report.json",
+            "sha256": "0b90059a8b9477f10aee55fca0714e72cde18a65ab37aca77072dca0efa28983",
+            "bytes": 14768
+          }
+        },
+        {
+          "requirement": "Documented custom Python recipe, compose, clean and doctor",
+          "observed": "The fresh agent used the public docs and installed skill/schema without reading product implementation. Plan, compare, compose, clean and doctor-after all exit 0. The run directory is now absent, doctor lists no abandoned runs, and caller preservation records have no differences. The executed archive is 3fac9, transferred by unchanged runtime/instruction identity.",
+          "report": {
+            "name": "swc-fresh-recipe-execution.json",
+            "sha256": "1cbcb391a6187a5fc322935f9ed7ba9f0b0fc6b27f4bfb46072276d25dcc7c70",
+            "bytes": 15227
+          }
+        }
+      ],
+      "remainingInScopeGaps": []
+    },
+    {
+      "id": "G22",
+      "status": "accepted",
+      "requirement": "README, support matrix, CLI help, skill, and synthetic success/partial motion demos accurately describe implemented behavior. A fresh agent completes a documented custom-recipe run.",
+      "evidence": [
+        {
+          "requirement": "README and support limits describe implemented general web-app behavior",
+          "observed": "Reviewed current README.md and docs/limitations.md describe explicit recipes, separate tool/app runtime, motion default, explicit keyframes, viewport and resource limits, exact locators, masks, failure behavior, state declarations, Chromium/Linux/macOS bounds, and pending release acceptance. README contains the support matrix; there is no separate docs/support-matrix.md."
+        },
+        {
+          "requirement": "CLI help and packaged agent skill agree with implementation",
+          "assertion": "Flags, defaults, saved-plan override rejection, timeout bounds and consent match public instructions. The installed help result and unchanged runtime identity bind this source. The skill requires inspecting a real recipe, reviewing bounded output and privacy, keeping failures truthful, and using existing authorization.",
+          "source": {
+            "path": "src/cli/args.ts",
+            "sha256": "a2681f2b59726ad062cee94d3d06b22f76083bbddec237a856b04f15c7557240",
+            "lines": [
+              28,
+              94
+            ]
+          }
+        },
+        {
+          "requirement": "Current synthetic success and partial motion previews",
+          "observed": "Both preview directories contain video, poster, original public manifest and an identity record. All six preview file hashes match the exact retained run artifacts. Both use cb641 motion. The index explicitly identifies them as viewing subsets that cannot be recomposed and separates historical keyframes/development clips. Saved normal-speed playback and sampled review exist for both."
+        },
+        {
+          "requirement": "A fresh agent completes the documented custom-recipe run",
+          "report": {
+            "name": "swc-fresh-recipe-execution.json",
+            "sha256": "1cbcb391a6187a5fc322935f9ed7ba9f0b0fc6b27f4bfb46072276d25dcc7c70",
+            "bytes": 15227
+          }
+        },
+        {
+          "requirement": "Latest public-document identity is separate from frozen implementation"
+        }
+      ],
+      "remainingInScopeGaps": []
+    }
+  ],
+  "reviewedDocuments": [
+    {
+      "relativePath": "README.md",
+      "sha256": "a9b48b3162f2cabb68616a4c0134c5005af8b940017c60bf10d2f0afcfcd0454",
+      "bytes": 10362,
+      "matchesFrozenCandidate": true
+    },
+    {
+      "relativePath": "docs/quickstart.md",
+      "sha256": "fda901ae398eee5bed511eb4f05527e2d331c318896ebf9056281e33dabe9da2",
+      "bytes": 8470,
+      "matchesFrozenCandidate": true
+    },
+    {
+      "relativePath": "docs/limitations.md",
+      "sha256": "67c50321f9cfb9a3ed00cb2b6c9b6af515614e0874bd28290683e99042259b90",
+      "bytes": 13707,
+      "matchesFrozenCandidate": true
+    },
+    {
+      "relativePath": "skills/show-what-changed/SKILL.md",
+      "sha256": "9ff9ce6a0253fc4cc42894d18739b40c9286a59f36bc92ed309d4e829bbc90a8",
+      "bytes": 3730,
+      "matchesFrozenCandidate": true
+    },
+    {
+      "relativePath": "src/cli/args.ts",
+      "sha256": "a2681f2b59726ad062cee94d3d06b22f76083bbddec237a856b04f15c7557240",
+      "bytes": 7948,
+      "matchesFrozenCandidate": true
+    },
+    {
+      "relativePath": "docs/demo/README.md",
+      "sha256": "de7f4312efaafa22e36670a1565cfbe0c7c7055001b292146fe971a202bbd26e",
+      "bytes": 2324,
+      "matchesFrozenCandidate": false
+    },
+    {
+      "relativePath": "docs/demo/motion-success/preview.json",
+      "sha256": "c8e0ee56d048b0c67db41cd316ff25263034568911e50e366e694b6ef7c77f44",
+      "bytes": 1271,
+      "matchesFrozenCandidate": false
+    },
+    {
+      "relativePath": "docs/demo/motion-partial/preview.json",
+      "sha256": "ac1d498d125a3c08b0b8a3ee2069da5a4c853b4bd3562bd394d1a5f5dfae0535",
+      "bytes": 1271,
+      "matchesFrozenCandidate": false
+    },
+    {
+      "relativePath": "docs/release-readiness.md",
+      "sha256": "ec6317e9716c038e85a559633a3a1db4d27ef46772bf4b9fd0c7135aab1a279e",
+      "bytes": 5606,
+      "matchesFrozenCandidate": false
+    }
+  ],
+  "reviewedPreviews": [
+    {
+      "name": "motion-success",
+      "executedSourceCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+      "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "captureMode": "motion",
+      "files": [
+        {
+          "path": "compare.mp4",
+          "sha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
+          "bytes": 115270
+        },
+        {
+          "path": "poster.png",
+          "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+          "bytes": 79698
+        },
+        {
+          "path": "manifest.json",
+          "sha256": "86e63b094f971a868de857c769f38e0ad99a7e83805c497d0df7bc86b1f66ff8",
+          "bytes": 18087
+        }
+      ]
+    },
+    {
+      "name": "motion-partial",
+      "executedSourceCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+      "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "captureMode": "motion",
+      "files": [
+        {
+          "path": "compare.mp4",
+          "sha256": "1b6e3787a13dc76c638958ff229f11b509fdabd33eb772ad0f6df03e572b195a",
+          "bytes": 108999
+        },
+        {
+          "path": "poster.png",
+          "sha256": "577b735fa55538ebfc0d92a16f5eb4534e78fb387f6984df4d8bdb29e7af26f1",
+          "bytes": 53582
+        },
+        {
+          "path": "manifest.json",
+          "sha256": "2b3d898d6d94fbe386f94eedd00b54948a3fa754642965276bbc0159f0a7e335",
+          "bytes": 15736
+        }
+      ]
+    }
+  ],
+  "retainedCommandExits": {
+    "cliSmokeOriginal3fac": [
+      {
+        "name": "help",
+        "actualExit": 0,
+        "record": {
+          "name": "help.json",
+          "sha256": "9535f5fbe82717e2926254c894898b657aad5c2926e061c3c69e036aa68bd17c",
+          "bytes": 1518
+        }
+      },
+      {
+        "name": "doctor",
+        "actualExit": 0,
+        "record": {
+          "name": "doctor.json",
+          "sha256": "3e96175845ae45215f23c084b24bfef5b701d7a3d57423e7b4748c5003e34101",
+          "bytes": 2560
+        }
+      },
+      {
+        "name": "invalid-flag",
+        "actualExit": 2,
+        "record": {
+          "name": "invalid-flag.json",
+          "sha256": "c2b6aa29d7a122a6ad198e07414690f02501bf478e62bd69246dc641c10a29ac",
+          "bytes": 718
+        }
+      },
+      {
+        "name": "missing-compose",
+        "actualExit": 2,
+        "record": {
+          "name": "missing-compose.json",
+          "sha256": "ac8168c0eda020b965d804a9bbb4af2730176f9aeacbddfc333b966047cb1edf",
+          "bytes": 839
+        }
+      },
+      {
+        "name": "plan",
+        "actualExit": 0,
+        "record": {
+          "name": "plan.json",
+          "sha256": "fb140b0b75651ebacf1d46e94cb9e0153d51f18bf713f716e17bd1afadf75bc4",
+          "bytes": 10440
+        }
+      },
+      {
+        "name": "consent-required",
+        "actualExit": 7,
+        "record": {
+          "name": "consent-required.json",
+          "sha256": "e48272bde3610ea476b7f71987f0cc447be5812da71290d44861d492b1b012fa",
+          "bytes": 1044
+        }
+      },
+      {
+        "name": "compare-success",
+        "actualExit": 0,
+        "record": {
+          "name": "compare-success.json",
+          "sha256": "63d06ca180d90c9e3119702e62f1b561960dce3effdb428b5f2ea1d84260f0c4",
+          "bytes": 10311
+        }
+      },
+      {
+        "name": "compose-success-without-browser",
+        "actualExit": 0,
+        "record": {
+          "name": "compose-success-without-browser.json",
+          "sha256": "c90e15fe2a3c33de1898d5c01d2853f02f9996b85bda0cfb828c25978452d3eb",
+          "bytes": 10314
+        }
+      },
+      {
+        "name": "compare-merge-base",
+        "actualExit": 0,
+        "record": {
+          "name": "compare-merge-base.json",
+          "sha256": "dbca86b79865c2c0f72b2d3d7ff0bdcae2e9aa0341a9a545c77ee024b22c7158",
+          "bytes": 7063
+        }
+      },
+      {
+        "name": "compare-partial",
+        "actualExit": 3,
+        "record": {
+          "name": "compare-partial.json",
+          "sha256": "764a6add840a4795666b51040d43ca044d4c540ca7aeda429f43989952c02569",
+          "bytes": 10358
+        }
+      },
+      {
+        "name": "compose-unavailable-encoder",
+        "actualExit": 8,
+        "record": {
+          "name": "compose-unavailable-encoder.json",
+          "sha256": "46201dc4e88e7e9b8b2271fe0eaf23f770e01c86c0f27f6a596541a46c3dcc6c",
+          "bytes": 10785
+        }
+      },
+      {
+        "name": "compose-recovered-partial",
+        "actualExit": 3,
+        "record": {
+          "name": "compose-recovered-partial.json",
+          "sha256": "aa0bf562d8aaf19d0a90e5080111dfe1a0b4125706b007969cd87fb477286175",
+          "bytes": 10521
+        }
+      },
+      {
+        "name": "compare-worktree",
+        "actualExit": 0,
+        "record": {
+          "name": "compare-worktree.json",
+          "sha256": "1b6873d4589c6b955e7bc1096b7d7e39a244e3b5014cd0f8ac0c3d42d177c275",
+          "bytes": 10370
+        }
+      },
+      {
+        "name": "readme-plan",
+        "actualExit": 0,
+        "record": {
+          "name": "readme-plan.json",
+          "sha256": "0eedfa8140137e383ff18acdd26486f2fdd36ed548873f59593aa09f380b1573",
+          "bytes": 9439
+        }
+      },
+      {
+        "name": "readme-compare",
+        "actualExit": 0,
+        "record": {
+          "name": "readme-compare.json",
+          "sha256": "714d302e174fcb6e17c9186f25a20896d58efa59d749d403ca275f0776d8c9b9",
+          "bytes": 6895
+        }
+      },
+      {
+        "name": "plan-worktree",
+        "actualExit": 0,
+        "record": {
+          "name": "plan-worktree.json",
+          "sha256": "a07b3425c9320cb1434852c40edef31d95a6015633a950153acb9abb35e93a6d",
+          "bytes": 10321
+        }
+      },
+      {
+        "name": "stale-worktree-plan",
+        "actualExit": 2,
+        "record": {
+          "name": "stale-worktree-plan.json",
+          "sha256": "a6724174230e7548e220b3643f89ea0fbba7ca58cce9194d9e19028e8c45c560",
+          "bytes": 897
+        }
+      },
+      {
+        "name": "compare-automatic-incomplete",
+        "actualExit": 3,
+        "record": {
+          "name": "compare-automatic-incomplete.json",
+          "sha256": "a4f9621601d1799a2a6cafd355fea1069e8768ca1a7b73cce07851c5eebc0a71",
+          "bytes": 7254
+        }
+      }
+    ],
+    "publicCliFinalCb641": [],
+    "partialFinalCb641": [],
+    "freshRecipeOriginal3fac": []
+  },
+  "evidenceRecords": {
+    "macosUnitContracts": {
+      "name": "swc-integrated-unit-contracts-20261103T0427.log",
+      "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+      "bytes": 109665
+    },
+    "macosIntegration": {
+      "name": "swc-integrated-integration-20261103T0430.log",
+      "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+      "bytes": 16443
+    },
+    "publicApplication": {
+      "name": "report.json",
+      "sha256": "4b5ca72ca0e6f5a388ea828343bb313cf8501e2a8bb0dec7aa48c366300f69ba",
+      "bytes": 31299
+    },
+    "publicDOMAssociation": {
+      "name": "swc-final-public-dom-association-20261103.json",
+      "sha256": "ddfd9fed761bcaf5ed182060e520965ca21a5ac494c2ea79772d33330905fdc7",
+      "bytes": 996
+    },
+    "publicMediaReview": {
+      "name": "swc-final-public-media-independent-review.md",
+      "sha256": "3f54c8e5a76a38226574c9748cee88c24513b92c631ef95b3b2f87421f8a1fc6",
+      "bytes": 6260
+    },
+    "macosMotion": {
+      "name": "motion-check.json",
+      "sha256": "30795503114d7a700a7250df4815281546ad8510a8932f7aa46471c0d7de3ec4",
+      "bytes": 1027209
+    },
+    "macosMotionPlayback": {
+      "name": "review.json",
+      "sha256": "97b77bd07f077988c1c4f4c5a2c85baf0d4892a7cbcad7d7603b6b45ec50baa6",
+      "bytes": 7117
+    },
+    "partialMotion": {
+      "name": "report.private.json",
+      "sha256": "e4235d5228e935826cbcc2ef7b5ddbe119049d9be386a58473d8100ec701425e",
+      "bytes": 152706
+    },
+    "partialMotionPlayback": {
+      "name": "review.json",
+      "sha256": "1b4c8a3e621634ddb23b790588a21b2587a44a17e865dbd40450ca053e52d860",
+      "bytes": 2122
+    },
+    "finalPartialMediaFormat": {
+      "name": "media-format-review.json",
+      "sha256": "8d81f61b184d5b09213b7aadfe4ea599f43904294e4ff7af1496b5f6617e9a52",
+      "bytes": 734
+    },
+    "freshDocumentationRecipe": {
+      "name": "swc-fresh-recipe-execution.md",
+      "sha256": "09426fd5f0e520884c27de7f6d6d5474bb2eefd71a20a9dbad4b49df1190a2a1",
+      "bytes": 6834
+    },
+    "macosCliSmoke": {
+      "name": "report.json",
+      "sha256": "0b90059a8b9477f10aee55fca0714e72cde18a65ab37aca77072dca0efa28983",
+      "bytes": 14768
+    },
+    "readmeTransferReview": {
+      "name": "swc-readme-runtime-evidence-transfer-review.json",
+      "sha256": "96d7ec59bd66723743b492b9451a70f0025be5c010b61941e0eca172de69d418",
+      "bytes": 66146
+    },
+    "sourceTransfer": {
+      "name": "swc-final-acceptance-source-transfer.json",
+      "sha256": "a4a513521d21a2c8da9112406248cba9c92d184478d56533a8a9e49d04f62d46",
+      "bytes": 97699
+    },
+    "sourceIdentity": {
+      "name": "source-commit-portable-tests.json",
+      "sha256": "ece4b52f48a4ce0807a6075a698e833961b098f19f21ea0f27b00ec9fa9b459d",
+      "bytes": 1309
+    },
+    "packageIdentity": {
+      "name": "package-identity.json",
+      "sha256": "b572a88bd15a62ec093b8d6f52d2b5e84818ec8c9a75d930eae93d5a9bee159d",
+      "bytes": 30315
+    },
+    "installedIdentity": {
+      "name": "installed-identity.json",
+      "sha256": "22a86698092e194307725d422e3ab4edc320e6cc48ca3b0409a8fb410c17070c",
+      "bytes": 31058
+    },
+    "freshRecipeJson": {
+      "name": "swc-fresh-recipe-execution.json",
+      "sha256": "1cbcb391a6187a5fc322935f9ed7ba9f0b0fc6b27f4bfb46072276d25dcc7c70",
+      "bytes": 15227
+    },
+    "publicDecodedReview": {
+      "name": "swc-final-public-media-visual-review.json",
+      "sha256": "4bb0b28e88e22ebcccdd4e9bcafd508cb57e70bbd86d380318977bed2c2a8269",
+      "bytes": 8497
+    },
+    "publicDecodeRecord": {
+      "name": "record.json",
+      "sha256": "e8b72fcd6ba4a464edf67505053b8bb3901abc64707335bced0db10ebda2c503",
+      "bytes": 68654
+    },
+    "publicMediaVerifier": {
+      "name": "swc-final-public-media-check.py",
+      "sha256": "5c04d6ee18355d48fcc39179d9de8571a63589252caa898fa251842bee231d2e",
+      "bytes": 9678
+    },
+    "publicMediaHashResult": {
+      "name": "swc-final-public-media-offline-check.json",
+      "sha256": "85ca79ee8bba33ae4831dad058708e6e1f9b3a623c4841ccf37eb908173933af",
+      "bytes": 998620
+    },
+    "offlineVerification": {
+      "name": "swc-final-behavior-package-verification.json",
+      "sha256": "96d13242cbba08b3050dd00dded1d4c361ce85980f508e898cad53c008c68770",
+      "bytes": 1225451
+    },
+    "offlineVerifier": {
+      "name": "swc-final-behavior-package-verify.py",
+      "sha256": "4d00af6778415b37f4dad792693ab513451341a434423cbafb6758575517a305",
+      "bytes": 18734
+    }
+  },
+  "reproduction": [
+    "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+    "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+    "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
+    "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
+    "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+  ],
+  "limitations": [
+    "Source tests, installed CLI observations, installed-module motion, saved decoded images and actual normal-speed playback are separate evidence classes.",
+    "The source association was recorded after testing; it is not a retroactive pre-test freeze. Overlapping portability checks are not added to earlier test counts.",
+    "The reviewer inspected three saved images. Existing playback and other media observations retain their original reviewer attribution.",
+    "G22 covers exact recorded document and preview bytes. Later changes require targeted review. Some reviewed documents are later than frozen f02 source.",
+    "The package excludes linked documentation, fixture generators and demos; the product runtime was installed separately from its source checkout.",
+    "Conservative literal title redaction remains disclosed. Linux, Docker, final public history/archive/privacy and publishing handoff remain open."
+  ],
+  "releaseReady": false,
+  "publicationPerformed": false
+}

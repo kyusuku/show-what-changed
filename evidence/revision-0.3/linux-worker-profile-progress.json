@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-03T15:08:07.916399+00:00",
+  "status": "diagnostic-incomplete",
+  "scope": "private-worker-cpu-profile-diagnostic",
+  "sourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+  "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+  "preparedManifestSha256": "fbfc6a960e7c62405fdaaed57dcfcd936c68f0711bbea7cdfb036047f2345534",
+  "fixedCases": 10,
+  "controlCases": 5,
+  "profileCases": 5,
+  "originalMovingGapLimitMs": 200,
+  "originalClockLimitMs": 40,
+  "nativeCapability": "profile-start-and-stop-promises-settled-reduction-unvalidated",
+  "diagnosis": "No CPU hotspot attribution established.",
+  "selectedProductRepair": null,
+  "releaseAcceptance": false,
+  "nativeExitCode": 1,
+  "outcomes": {
+    "planned": 10,
+    "controlNumericPassed": 1,
+    "instrumentedCanonicalNumericPassed": 1,
+    "instrumentedDiagnosticIncomplete": 1,
+    "notStarted": 8
+  },
+  "failure": {
+    "producer": "Missing or incomplete private profile evidence",
+    "workerReasons": [
+      "malformed-profile",
+      "malformed-profile"
+    ],
+    "exactFailingPredicate": "unobserved; raw profiles and predicate detail were not retained",
+    "exportVerifier": "failed-retained-package-identity-mismatch",
+    "retainedInventoryFiles": 606,
+    "retainedInventoryBytes": 27075872,
+    "retainedInventoryHashesRevalidated": true
+  },
+  "independentAnalysis": {
+    "status": "reviewed-with-limits",
+    "overlayFileEntriesMatched": 171,
+    "otherInstalledIdentityFieldsMatched": true,
+    "staleExpectedField": "expectedOverlayInstalled.packageFilesSha256",
+    "traceReplay": "complete against original capture",
+    "traceRequests": 250,
+    "qualifyingTargetRequests": 0,
+    "originalFailedResultsPreserved": true,
+    "reviewSha256": "385daf8ce8ecabe26645b769c587e97ebfd7e2a59ef5b6efa1452489d542eca3"
+  },
+  "cleanup": {
+    "evidenceExported": true,
+    "containerRemoved": true,
+    "baselinePreserved": true,
+    "vmStopped": true,
+    "hostCommandExitsReviewed": 25,
+    "oomKilled": false
+  },
+  "ownershipSha256": "9d1c2b423a45d8a5f8dc0538cd502ccc33ae03ffb65352926286700cb2cabfd3",
+  "diagnosticSha256": "e8f4574ff35861f5ad59fe58971c022f52f4c24606b29d5abe456e82728a57c4",
+  "freshNativeFormatRun": {
+    "status": "failed-diagnostic-cleanup-complete",
+    "commands": 25,
+    "vmState": "Stopped",
+    "originalCommandOutcome": 1,
+    "oomKilled": false,
+    "ownershipSha256": "257158b21d86a29acff11168c9d1ec0ccba4760d3bee22f825bff20d40ec95e2",
+    "diagnosticResultSha256": "4c9b7edf8ae4d7d32af5917f958bc395617d7ae916d0c2a651ce4fd45da6494d",
+    "verifierSha256": "e676a9b331c97ecfb0a7ac9db712b900a0c4e2d903a9dd7c3859b18a1c8ea02d",
+    "releaseAcceptance": false,
+    "evidenceValidity": "verified-available",
+    "diagnosticCompleteness": "incomplete",
+    "controlCasesPassed": 1,
+    "profileCasesNumericFailed": 1,
+    "unstartedArms": 8,
+    "knownMovingGapMs": 349.9860000000044,
+    "workerReductionReasons": [
+      "clock-invalid",
+      "clock-invalid"
+    ],
+    "rawProfileRetained": false,
+    "exactClockPredicateObserved": false,
+    "sourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "productPackageChanged": false,
+    "hotspotAttribution": null
+  },
+  "freshAggregateActualRun": {
+    "recordedAt": "2026-11-03T17:59:13.842744+00:00",
+    "status": "numeric-passed-profile-incomplete",
+    "sourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "productPackageChanged": false,
+    "nativeExitCode": 1,
+    "controlNumericPassed": 1,
+    "instrumentedNumericPassed": 1,
+    "unstartedArms": 8,
+    "evidenceValidity": "verified-available",
+    "diagnosticCompleteness": "incomplete",
+    "retainedFiles": 738,
+    "retainedBytes": 34656965,
+    "rootAndIndependentAnalysisSha256": "593e7337b19c1b7858f3190efca2b5b84583ed9ad251f2a03beb910c2b7a9941",
+    "ownershipSha256": "21082db6219219e1762abd17ea9c5e3a93a8f137dcebdcc8cb0277cdec642f57",
+    "exportInventorySha256": "677b68cc549680204c240f625c70b406ced7d10d4024c90322d1faacae738329",
+    "beforeWorker": {
+      "mappingValidity": "valid",
+      "profileCompleteness": "complete",
+      "samples": 2175,
+      "aggregateScope": "whole-worker-profile",
+      "temporalAssociation": "none",
+      "qualifyingTargets": 0,
+      "topModule": "dist/recorder/capture-png.js",
+      "topFunction": "decodeRows",
+      "attributedLeafSamples": 636
+    },
+    "afterWorker": {
+      "mappingValidity": "unavailable",
+      "profileCompleteness": "incomplete",
+      "reason": "profile-sample-delta",
+      "clockCalibration": "not-evaluated",
+      "rawRejectedValueObserved": false
+    },
+    "limitations": [
+      "Sample counts do not establish CPU duration or causal attribution to a failing frame.",
+      "This passing case does not reproduce the prior motion gap.",
+      "This diagnostic is not the final three-run acceptance matrix."
+    ],
+    "cleanup": {
+      "containerRemoved": true,
+      "baselinePreserved": true,
+      "vmStopped": true,
+      "oomKilled": false
+    },
+    "selectedProductRepair": null,
+    "releaseAcceptance": false
+  },
+  "retainedFailureDiscrimination": {
+    "recordedAt": "2026-11-03T18:21:22.628260+00:00",
+    "status": "cause-unresolved-next-full-path-discriminator-selected-for-preparation",
+    "independentReportSha256": "628b56cff1cf4d37af6b234fefd514d307ff6d6fa711230126da2f131a653256",
+    "rootReranArtifactChecks": true,
+    "existingMicroProcessRuns": 40,
+    "existingMicroCalls": 1320,
+    "existingMicroCallsAtLeast100000UsThreadCpu": 0,
+    "olderUnprofiledSimultaneousLateGapMs": 299.988,
+    "universalStartupOnlyExplanationRejected": true,
+    "productPatchSelected": false,
+    "nextDiagnostic": "Five fixed control/instrumented pairs at the narrow viewport with frame, worker-stage, parent-lag and parent-GC observations; no native profiler or synchronous diagnostic writes during capture.",
+    "releaseAcceptance": false
+  }
+}

@@ -8,13 +8,15 @@ The required outcome is a verified experimental 0.1.0 package implementing schem
 
 The shared schema, general recipe runtime, whole-repository source handling, CLI integration, and motion implementation have development checks and independent reviews. These results are recorded under [the implementation work log](../evidence/revision-0.3/work.md). They do not certify a final package or platform.
 
-The public workspace example has deterministic source versions, a frozen offline pnpm installation, and a shared-package build. The compatibility matrix includes static, npm, pnpm workspace, Python, and Docker recipes. Final installed-package repetitions, browser motion, platform checks, and independent media review remain pending.
+The public workspace example passed three navigation comparisons, three validation comparisons, and a subsequent WORKTREE comparison through the selected installed package. Independent review confirmed actual drawer motion, inner scrolling, feedback changes, preservation, and cleanup. The exact package and source association are recorded in [G19 acceptance](../evidence/revision-0.3/G19-public-app-acceptance.json).
+
+The selected package also passed all six macOS synthetic motion cases and normal-speed playback review. The first final Linux attempt failed its motion limit during a narrow-screen case. That failure remains open. Docker lifecycle acceptance and the complete Linux gate also remain pending. The static, npm, pnpm workspace, and Python installed results have separate identity-scoped records in [candidate verification progress](../evidence/revision-0.3/candidate-verification-progress.json).
 
 A previous schema 1 candidate has [historical release evidence](../evidence/release-candidate.json). Its checks and hashes do not establish readiness of the current implementation.
 
 ## Candidate identity and public scope
 
-Freeze the implementation before final acceptance. Record the implementation commit, specification digest, complete public source archive SHA-256, and npm tarball SHA-256. Source or package changes invalidate affected evidence. Do not substitute a rebuild without verifying its identity.
+Freeze the implementation before final acceptance. Record the tested implementation commit, specification digest, tested source archive SHA-256, and npm tarball SHA-256. Record the later documentation-only handoff commit and its complete public source archive digest separately. Deliver those final identities in a release manifest outside the archive it hashes. The final manifest binds the exact intended refs, reviewed document and media hashes, scan reports, advisory triage, and gate dispositions. A manifest cannot contain its own final digest, and an archive cannot contain a record of its own final digest. Source or package changes invalidate affected evidence. Do not substitute a rebuild without verifying its identity.
 
 The public repository, package, demos, and full intended Git history must contain no private application context. The current development history is held from publication. Prepare a separate sanitized public history from the reviewed tree. Keep original private development history and private inputs outside that release repository.
 

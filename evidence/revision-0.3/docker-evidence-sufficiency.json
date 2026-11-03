@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-03T18:52:50.831529+00:00",
+  "status": "scoped-evidence-sufficiency-decision",
+  "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+  "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+  "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+  "independentAuditSha256": "fa9921c6ab880411e7c2cdbba77facd74efe11b02306731f69e670fc083b6a59",
+  "unitLogSha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+  "decision": {
+    "imageLoadUncertainty": "Accept retained controlled evidence for active-load cancellation, lost response, archive disposal after consumer stop, uncertain ownership and lock retention, failed adoption persistence, exact recovery and foreign-resource preservation. Real normal build/export/load and cleanup are separately observed.",
+    "partialTarUploadProbe": "superseded-unrun; not a passed test",
+    "builderCreation": "Still requires a real pre-confirmation ownership/reconciliation case. Holding acknowledgement after genuine completed buildx create --bootstrap may test this product boundary without claiming daemon bootstrap remains active.",
+    "serviceCreation": "Finish the already selected direct service-create SIGTERM case.",
+    "relay": "Preserve failed W5 and separate recovery. No transparent relay is required by the specification for the direct ownership tests."
+  },
+  "coverageLimits": [
+    "Controlled Engine tests do not establish actual partially transmitted Docker archive behavior.",
+    "No additional live partial-upload success is claimed.",
+    "Historical failed aggregate workloads remain failed; accepted subcases keep their separate identities.",
+    "Full current Linux suite and final independent G07/G15 acceptance remain pending."
+  ],
+  "rootReview": "Read the complete independent traceability audit, inspected relevant cancellation/recovery assertions, rehashed the actual unit log and checked the named passing results.",
+  "gateAccepted": false,
+  "releaseAcceptance": false,
+  "publicationPerformed": false
+}

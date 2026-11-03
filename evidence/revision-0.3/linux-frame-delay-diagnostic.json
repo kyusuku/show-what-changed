@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-completed-with-motion-failure",
+  "recordedAt": "2026-11-03T10:33:50.165127+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "scope": "One fixed five-pair diagnostic of fresh desktop repetition 3. Original controls and instrumented requests retain distinct identities. This is not the complete release matrix.",
+  "bounds": {
+    "containerTotalSeconds": 1200,
+    "hostAttachSeconds": 1260,
+    "cpus": 2,
+    "memoryGiB": 3,
+    "pids": 512,
+    "sharedMemoryMiB": 512,
+    "guestSwap": false
+  },
+  "counts": {
+    "plannedCases": 10,
+    "completedCases": 10,
+    "numericPassed": 9,
+    "numericFailed": 1,
+    "controlPassed": 5,
+    "instrumentedPassed": 4,
+    "instrumentedFailed": 1,
+    "observedHandlers": 1424,
+    "frameHandlers": 1384,
+    "checkpointHandlers": 40
+  },
+  "arms": [
+    {
+      "id": "C1",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 133.32799999999952,
+          "clockErrorBoundMs": 6.8356869999988135,
+          "stats": {
+            "receivedFrames": 107,
+            "persistedFrames": 107,
+            "acknowledgedFrames": 107,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999999964
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 173.49499999999898,
+          "clockErrorBoundMs": 7.111562499999536,
+          "stats": {
+            "receivedFrames": 104,
+            "persistedFrames": 104,
+            "acknowledgedFrames": 104,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 199.99199999999996
+          }
+        }
+      }
+    },
+    {
+      "id": "I1",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 64.90400000000227,
+          "clockErrorBoundMs": 8.295549500001925,
+          "stats": {
+            "receivedFrames": 152,
+            "persistedFrames": 152,
+            "acknowledgedFrames": 152,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.3240000000032
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 49.99800000000687,
+          "clockErrorBoundMs": 3.5429260000022964,
+          "stats": {
+            "receivedFrames": 150,
+            "persistedFrames": 150,
+            "acknowledgedFrames": 150,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65800000000246
+          }
+        }
+      }
+    },
+    {
+      "id": "C2",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 116.66199999998207,
+          "clockErrorBoundMs": 3.990119000003233,
+          "stats": {
+            "receivedFrames": 131,
+            "persistedFrames": 131,
+            "acknowledgedFrames": 131,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 99.99599999998463,
+          "clockErrorBoundMs": 2.422889999981237,
+          "stats": {
+            "receivedFrames": 139,
+            "persistedFrames": 139,
+            "acknowledgedFrames": 139,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 199.99199999999462
+          }
+        }
+      }
+    },
+    {
+      "id": "I2",
+      "status": "numeric-failed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 66.66400000000431,
+          "clockErrorBoundMs": 4.2221224999928495,
+          "stats": {
+            "receivedFrames": 137,
+            "persistedFrames": 137,
+            "acknowledgedFrames": 137,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.3239999999961
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 299.98799999999756,
+          "clockErrorBoundMs": 4.613740500005633,
+          "stats": {
+            "receivedFrames": 139,
+            "persistedFrames": 139,
+            "acknowledgedFrames": 139,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 299.98799999999903
+          }
+        }
+      }
+    },
+    {
+      "id": "C3",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 57.86000000000058,
+          "clockErrorBoundMs": 6.371529999978321,
+          "stats": {
+            "receivedFrames": 153,
+            "persistedFrames": 153,
+            "acknowledgedFrames": 153,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 57.98199999998906,
+          "clockErrorBoundMs": 6.661480500015529,
+          "stats": {
+            "receivedFrames": 160,
+            "persistedFrames": 160,
+            "acknowledgedFrames": 160,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        }
+      }
+    },
+    {
+      "id": "I3",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 83.3300000000163,
+          "clockErrorBoundMs": 5.459599999968191,
+          "stats": {
+            "receivedFrames": 138,
+            "persistedFrames": 138,
+            "acknowledgedFrames": 138,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 66.66399999998976,
+          "clockErrorBoundMs": 5.270228000005716,
+          "stats": {
+            "receivedFrames": 137,
+            "persistedFrames": 137,
+            "acknowledgedFrames": 137,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        }
+      }
+    },
+    {
+      "id": "C4",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 116.66200000001118,
+          "clockErrorBoundMs": 6.694994500005805,
+          "stats": {
+            "receivedFrames": 117,
+            "persistedFrames": 117,
+            "acknowledgedFrames": 117,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65800000002378
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 83.3299999999872,
+          "clockErrorBoundMs": 7.396482500019545,
+          "stats": {
+            "receivedFrames": 117,
+            "persistedFrames": 117,
+            "acknowledgedFrames": 117,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 199.99200000000883
+          }
+        }
+      }
+    },
+    {
+      "id": "I4",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 66.66400000001886,
+          "clockErrorBoundMs": 3.752831500017521,
+          "stats": {
+            "receivedFrames": 120,
+            "persistedFrames": 120,
+            "acknowledgedFrames": 120,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999998188
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 83.3299999999872,
+          "clockErrorBoundMs": 4.345912500020063,
+          "stats": {
+            "receivedFrames": 121,
+            "persistedFrames": 121,
+            "acknowledgedFrames": 121,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999998188
+          }
+        }
+      }
+    },
+    {
+      "id": "C5",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 116.66199999995297,
+          "clockErrorBoundMs": 6.472563999934664,
+          "stats": {
+            "receivedFrames": 137,
+            "persistedFrames": 137,
+            "acknowledgedFrames": 137,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999998188
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 99.99599999998463,
+          "clockErrorBoundMs": 6.281083000007527,
+          "stats": {
+            "receivedFrames": 129,
+            "persistedFrames": 129,
+            "acknowledgedFrames": 129,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999998188
+          }
+        }
+      }
+    },
+    {
+      "id": "I5",
+      "status": "numeric-passed",
+      "caseId": "1280x800-run-3",
+      "tracks": {
+        "before": {
+          "maxMovingSourceGapMs": 49.99799999996321,
+          "clockErrorBoundMs": 10.702498500005277,
+          "stats": {
+            "receivedFrames": 152,
+            "persistedFrames": 152,
+            "acknowledgedFrames": 152,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        },
+        "after": {
+          "maxMovingSourceGapMs": 49.99800000002142,
+          "clockErrorBoundMs": 5.419739499971627,
+          "stats": {
+            "receivedFrames": 138,
+            "persistedFrames": 138,
+            "acknowledgedFrames": 138,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        }
+      }
+    }
+  ],
+  "localizedRequest": {
+    "arm": "I2",
+    "side": "after",
+    "worker": 1,
+    "request": 4,
+    "frameSequence": 3,
+    "sourceGapMs": 299.98799999999756,
+    "sourceClockErrorMs": 4.613740500005633,
+    "wallMs": 276.088556,
+    "cpuUserUs": 238082,
+    "cpuSystemUs": 1395,
+    "cpuMs": 239.477,
+    "checkpointExitToHandlerEntryMs": 53.857253,
+    "oppositeTrackCallbacks": 13,
+    "nonOverlappingEventPartition": [
+      {
+        "kind": "frame-event-to-dispatch",
+        "durationMs": 0.084217
+      },
+      {
+        "kind": "dispatch-to-worker-entry",
+        "durationMs": 1.397228
+      },
+      {
+        "kind": "worker-entry-to-reply",
+        "durationMs": 276.062095
+      },
+      {
+        "kind": "reply-to-parent-handler",
+        "durationMs": 0.047546
+      },
+      {
+        "kind": "parent-handler-to-continuation",
+        "durationMs": 0.03017
+      },
+      {
+        "kind": "continuation-to-ack-call",
+        "durationMs": 0.069507
+      },
+      {
+        "kind": "ack-command-round-trip",
+        "durationMs": 0.986603
+      },
+      {
+        "kind": "owned-ack-continuation",
+        "durationMs": 0.001041
+      },
+      {
+        "kind": "ack-owned-to-next-frame-event",
+        "durationMs": 20.049538
+      }
+    ]
+  },
+  "comparison": {
+    "otherHandlerCount": 1423,
+    "otherMaxWallMs": 59.509473,
+    "otherMaxCpuMs": 33.527,
+    "otherRequest4Count": 9,
+    "otherRequest4WallMs": {
+      "median": 17.478193,
+      "min": 12.794407,
+      "max": 32.359647
+    },
+    "otherRequest4CpuMs": {
+      "median": 11.541,
+      "min": 8.866,
+      "max": 15.308
+    }
+  },
+  "observations": [
+    "The dominant observed delay is inside one synchronous worker handler. Its preceding checkpoint had already completed.",
+    "All 20 tracks have equal received, persisted and acknowledged counts and zero rejected frames. All five instrumented traces have complete valid frame/checkpoint/request joins.",
+    "Nine cases complete canonical source, mask, encode and decode checks. I2 stops at the moving-source-gap assertion before later rendering and encoding."
+  ],
+  "limits": [
+    "The CPU measurement brackets the entire worker body; it does not identify a PNG stage, allocation, GC or JIT cause.",
+    "One instrumented failure and five passing controls do not establish an observer effect or failure rate.",
+    "The 20.050 ms tail after acknowledgement remains separately observed.",
+    "No product repair, Linux release acceptance or release-readiness conclusion follows."
+  ],
+  "cleanup": {
+    "evidenceExported": true,
+    "containerRemoved": true,
+    "ownedCleanupConfirmed": true,
+    "baselinePreserved": true,
+    "vmStopped": true
+  },
+  "exportVerifiedFiles": 3278,
+  "inputRecords": {
+    "ownership": {
+      "name": "ownership.json",
+      "sha256": "d42ed36ffc98b5cce2c43d8316ea7d3c2deee7ffab182418d2c455e73d8b392c",
+      "bytes": 8869
+    },
+    "exportInventory": {
+      "name": "export-inventory.json",
+      "sha256": "d38aa1bb4741bd275ff0404f9901fde85c699851bbeeef556dbcb804482209dd",
+      "bytes": 851397
+    },
+    "diagnosticResult": {
+      "name": "diagnostic-result.json",
+      "sha256": "2cc6b9cfc361c86c02c12f4fe2feb5b8eaaa44aaa73afcafe89158300a647a1b",
+      "bytes": 134151
+    },
+    "analysis": {
+      "name": "swc-frame-delay-result-analysis.md",
+      "sha256": "47fcb127d58c11c43f9e786b23a2eea7e6b1c08fcf64299eacb6ec794a4e3db4",
+      "bytes": 9937
+    },
+    "structuredAnalysis": {
+      "name": "swc-frame-delay-result-analysis.json",
+      "sha256": "837bcc4a1062bc53cee978a6f64893bc4981e08513edd2f56fca2ce62612f051",
+      "bytes": 122004
+    }
+  },
+  "independentAnalysis": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "releaseAcceptance": "not-evaluated"
+  },
+  "nextStep": "One separately reviewed private acquisition measuring sanitizer stages, with unchanged controls, schedule, motion thresholds and cleanup. No production repair selected.",
+  "releaseReady": false,
+  "publicationPerformed": false
+}

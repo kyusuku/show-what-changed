@@ -1,0 +1,491 @@
+{
+  "schemaVersion": 2,
+  "toolVersion": "0.1.0",
+  "runId": "20261103T052335836Z-e9696e34a8840bc3",
+  "state": "terminal",
+  "status": "partial",
+  "exitCode": 3,
+  "captureMode": "motion",
+  "specRevision": "0.3",
+  "startedAt": "2026-11-03T05:23:35.836Z",
+  "endedAt": "2026-11-03T05:24:41.286Z",
+  "sources": {
+    "before": {
+      "requested": "fdb005435fa379315cf8e425c385b8f943779b2c",
+      "commit": "fdb005435fa379315cf8e425c385b8f943779b2c",
+      "kind": "commit",
+      "materializedHash": "e3e9df9c68411a6979d1595d21b5c0a4f3c89ea9856f15a5209911bbddf198db"
+    },
+    "after": {
+      "requested": "334aba6897390ec02b3c324bba76b0651f6ae8cd",
+      "commit": "334aba6897390ec02b3c324bba76b0651f6ae8cd",
+      "kind": "commit",
+      "materializedHash": "bb2910c70a5be792b4d8bf1e1e90862e5c981f4a9d12aa7996181bdff208dced"
+    },
+    "baseResolution": "exact"
+  },
+  "versions": {
+    "node": "v24.22.2",
+    "browser": "156.0.8078.4",
+    "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "publicRecipeDigest": "4a6fa807fcc724b5e3e79bd88403dc5db21d68a1f3ae53e0fad0b77dc38e4312",
+  "publicScenarioDigest": "3c9945b03c5ca1417ce86a00f3d95b9dda418809bc7a5da5e433ff04e7030dc9",
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "dataParity": "stateless-declared",
+  "coverage": {
+    "selected": [
+      {
+        "path": "/",
+        "reason": "EXPLICIT_SELECTION",
+        "via": []
+      }
+    ],
+    "unresolved": [],
+    "omitted": [],
+    "unsupported": [],
+    "complete": false
+  },
+  "execution": {
+    "before": {
+      "state": "stateless",
+      "seedId": null,
+      "dependencyReproducibility": "none",
+      "services": [],
+      "kind": "process",
+      "buildArtifacts": "unverified"
+    },
+    "after": {
+      "state": "stateless",
+      "seedId": null,
+      "dependencyReproducibility": "none",
+      "services": [],
+      "kind": "process",
+      "buildArtifacts": "unverified"
+    }
+  },
+  "captureQuality": [
+    {
+      "scenarioId": "partial-motion",
+      "side": "before",
+      "stats": {
+        "receivedFrames": 181,
+        "persistedFrames": 181,
+        "acknowledgedFrames": 181,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 249.9599999282509
+      },
+      "clockErrorBoundMs": 6.321375003814865,
+      "maxDriftMs": 2.6085000038146973,
+      "failureAtMs": null
+    },
+    {
+      "scenarioId": "partial-motion",
+      "side": "after",
+      "stats": {
+        "receivedFrames": 206,
+        "persistedFrames": 206,
+        "acknowledgedFrames": 206,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 1566.6039999341592
+      },
+      "clockErrorBoundMs": 6.725895588966068,
+      "maxDriftMs": 2.8794370889663696,
+      "failureAtMs": null
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "partial-motion",
+      "title": "Synthetic motion with one required failure",
+      "initialRoute": "/",
+      "outcome": "partial",
+      "errors": [],
+      "steps": [
+        {
+          "id": "open",
+          "op": "goto",
+          "caption": "Open route",
+          "observeMs": 200,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/000-before.png",
+              "sha256": "77af8da2de9640ae13e1a0d07982753875e198d7d3d341f4e95e9c4c285e1c29",
+              "bytes": 44734
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 302.4803340000003
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/000-after.png",
+              "sha256": "756c356c8265d2bf555f7b5641585710f1ff7a86f1158d4d79408deeedf5958b",
+              "bytes": 65819
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 304.2125000000001
+          },
+          "changeRatio": 0.003193359375
+        },
+        {
+          "id": "move",
+          "op": "click",
+          "caption": "Click control",
+          "observeMs": 3000,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/001-before.png",
+              "sha256": "073b411604434e206bbf46835a05b1ccd363612ad558a7032883e45ea347e40f",
+              "bytes": 44810
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 3114.6177500000003
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/001-after.png",
+              "sha256": "6b71bfacd5134eaaac49aeee97e891bc0f25d96bae24fd19406213de3fdff1b9",
+              "bytes": 65892
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 3125.524583
+          },
+          "changeRatio": 0.003193359375
+        },
+        {
+          "id": "prior-success",
+          "op": "screenshot",
+          "caption": "Capture state",
+          "observeMs": 150,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/002-before.png",
+              "sha256": "073b411604434e206bbf46835a05b1ccd363612ad558a7032883e45ea347e40f",
+              "bytes": 44810
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 204.59379199999967
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/002-after.png",
+              "sha256": "6b71bfacd5134eaaac49aeee97e891bc0f25d96bae24fd19406213de3fdff1b9",
+              "bytes": 65892
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 201.90954200000033
+          },
+          "changeRatio": 0.003193359375
+        },
+        {
+          "id": "required-button",
+          "op": "click",
+          "caption": "Click control",
+          "observeMs": 500,
+          "before": {
+            "status": "failed",
+            "reasonCode": "LOCATOR_MISSING",
+            "image": {
+              "path": "frames/003-before.png",
+              "sha256": "073b411604434e206bbf46835a05b1ccd363612ad558a7032883e45ea347e40f",
+              "bytes": 44810
+            },
+            "imageKind": "held",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": "prior-success",
+            "elapsedMs": 956.2841250000001
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/003-after.png",
+              "sha256": "a8635e9f02aa400217f454ef1db52b374474020ab1bb97e7964a3e1de96b7520",
+              "bytes": 63681
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 573.5370830000002
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "scroll",
+          "op": "scrollBy",
+          "caption": "Scroll page",
+          "observeMs": 500,
+          "before": {
+            "status": "blocked",
+            "reasonCode": "PREVIOUS_STEP_FAILED",
+            "image": {
+              "path": "frames/004-before.png",
+              "sha256": "073b411604434e206bbf46835a05b1ccd363612ad558a7032883e45ea347e40f",
+              "bytes": 44810
+            },
+            "imageKind": "held",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": "prior-success",
+            "elapsedMs": 0.002375000000029104
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/004-after.png",
+              "sha256": "71e31857591433e264fa15427a94a36c5f76a6cde98170d526f21ba25c5d6c84",
+              "bytes": 60243
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 1075.5414169999995
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "after-completed",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "observeMs": 500,
+          "before": {
+            "status": "blocked",
+            "reasonCode": "PREVIOUS_STEP_FAILED",
+            "image": {
+              "path": "frames/005-before.png",
+              "sha256": "073b411604434e206bbf46835a05b1ccd363612ad558a7032883e45ea347e40f",
+              "bytes": 44810
+            },
+            "imageKind": "held",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": "prior-success",
+            "elapsedMs": 0.004750000000058208
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/005-after.png",
+              "sha256": "71e31857591433e264fa15427a94a36c5f76a6cde98170d526f21ba25c5d6c84",
+              "bytes": 60243
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 526.1382080000003
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "final",
+          "op": "screenshot",
+          "caption": "Capture state",
+          "observeMs": 1500,
+          "before": {
+            "status": "blocked",
+            "reasonCode": "PREVIOUS_STEP_FAILED",
+            "image": {
+              "path": "frames/006-before.png",
+              "sha256": "073b411604434e206bbf46835a05b1ccd363612ad558a7032883e45ea347e40f",
+              "bytes": 44810
+            },
+            "imageKind": "held",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": "prior-success",
+            "elapsedMs": 0.002833999998983927
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/006-after.png",
+              "sha256": "71e31857591433e264fa15427a94a36c5f76a6cde98170d526f21ba25c5d6c84",
+              "bytes": 60243
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 1555.324834000001
+          },
+          "changeRatio": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "verifiedPairs": 3,
+    "changedPairs": 3,
+    "expectedAbsences": 0,
+    "exclusions": 0,
+    "failedSteps": 1,
+    "blockedSteps": 3,
+    "coverageOmissions": 0
+  },
+  "timeline": {
+    "fps": 30,
+    "totalFrames": 265,
+    "templateVersion": 2,
+    "width": 1920,
+    "height": 686
+  },
+  "artifacts": {
+    "video": {
+      "path": "compare.mp4",
+      "sha256": "1b6e3787a13dc76c638958ff229f11b509fdabd33eb772ad0f6df03e572b195a",
+      "bytes": 108999
+    },
+    "poster": {
+      "path": "poster.png",
+      "sha256": "577b735fa55538ebfc0d92a16f5eb4534e78fb387f6984df4d8bdb29e7af26f1",
+      "bytes": 53582
+    },
+    "capture": {
+      "path": "capture.json",
+      "sha256": "bdc2e9ed30b490976bdef38ff44f4997e10bd812573d6d9a371fd2a0aebcc38b",
+      "bytes": 418064
+    },
+    "timeline": {
+      "path": "timeline.json",
+      "sha256": "b7e3b1d7a3939a650b7f293af5837cd9b06e09b2ae020fb9d59297179b91a507",
+      "bytes": 122006
+    },
+    "pr": {
+      "path": "pr.md",
+      "sha256": "b2f21267fbf3dfdc27aa58fe5c6cc1038b2f92352f6951a9b4f848eda05f479d",
+      "bytes": 930
+    }
+  },
+  "comparisonOutcome": {
+    "status": "partial",
+    "capture": "partial",
+    "coverage": "explicit",
+    "provenance": {
+      "before": {
+        "valid": true,
+        "actualHash": "e3e9df9c68411a6979d1595d21b5c0a4f3c89ea9856f15a5209911bbddf198db",
+        "errors": []
+      },
+      "after": {
+        "valid": true,
+        "actualHash": "bb2910c70a5be792b4d8bf1e1e90862e5c981f4a9d12aa7996181bdff208dced",
+        "errors": []
+      }
+    }
+  },
+  "cleanupOutcome": {
+    "status": "ok",
+    "errors": []
+  },
+  "encodingOutcome": {
+    "status": "ok",
+    "errors": []
+  },
+  "warnings": [
+    {
+      "code": "EXPLICIT_SELECTION",
+      "message": "A recorded limitation applies. Review this warning code in the support documentation."
+    }
+  ],
+  "errors": [
+    {
+      "code": "LOCATOR_MISSING",
+      "phase": "recording",
+      "side": "before",
+      "stepId": "required-button",
+      "message": "A required action or capture condition failed.",
+      "hint": "Inspect the sanitized frames and error code. Correct the app, scenario, masks, or host conditions without making required failures optional."
+    }
+  ],
+  "errorHistory": [
+    {
+      "code": "MEDIA_CAPABILITY_UNAVAILABLE",
+      "phase": "capabilities",
+      "message": "The operation could not satisfy its recorded requirement.",
+      "hint": "Check the command inputs and error code. If it persists, report the code and tool version while keeping private plans and logs local."
+    }
+  ],
+  "phaseTimings": {
+    "validating": 575.059667,
+    "preparing": 233.40050000000008,
+    "starting": 970.4133750000001,
+    "recording": 8215.886292,
+    "rendering": 2454.612167000001,
+    "encoding": 16944.456416,
+    "cleaning": 483.64491599999747
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-acceptance",
+  "recordedAt": "2026-11-03T07:42:54.712832+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "acceptedGates": [
+    "G22"
+  ],
+  "priorAcceptance": "evidence/revision-0.3/behavior-package-acceptance.json",
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "e3bf4f38f5752b614304cb5db13d2794c10506716ce35cb5d46457dc2ff068ad",
+    "structuredReportSha256": "c7114c0579e49510f871a1e76968352a32a24896cc61ec60acaa1246c22278fd",
+    "actualExit": 0
+  },
+  "currentDocuments": {
+    "docs/publishing.md": {
+      "sha256": "4de55f0d7bd0bf693f673e23fe5f6b0d74f4ed59bf31606ecc4b485b0d958938",
+      "bytes": 18695
+    },
+    "docs/release-readiness.md": {
+      "sha256": "db7cd1b5d6a2b769d7b0dc20361a263c57db30375021525c12cc1fac0a318ec6",
+      "bytes": 6049
+    }
+  },
+  "reviewedG22Documents": [
+    {
+      "relativePath": "README.md",
+      "priorSha256": "a9b48b3162f2cabb68616a4c0134c5005af8b940017c60bf10d2f0afcfcd0454",
+      "sha256": "a9b48b3162f2cabb68616a4c0134c5005af8b940017c60bf10d2f0afcfcd0454",
+      "bytes": 10362,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/quickstart.md",
+      "priorSha256": "fda901ae398eee5bed511eb4f05527e2d331c318896ebf9056281e33dabe9da2",
+      "sha256": "fda901ae398eee5bed511eb4f05527e2d331c318896ebf9056281e33dabe9da2",
+      "bytes": 8470,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/limitations.md",
+      "priorSha256": "67c50321f9cfb9a3ed00cb2b6c9b6af515614e0874bd28290683e99042259b90",
+      "sha256": "67c50321f9cfb9a3ed00cb2b6c9b6af515614e0874bd28290683e99042259b90",
+      "bytes": 13707,
+      "unchanged": true
+    },
+    {
+      "relativePath": "skills/show-what-changed/SKILL.md",
+      "priorSha256": "9ff9ce6a0253fc4cc42894d18739b40c9286a59f36bc92ed309d4e829bbc90a8",
+      "sha256": "9ff9ce6a0253fc4cc42894d18739b40c9286a59f36bc92ed309d4e829bbc90a8",
+      "bytes": 3730,
+      "unchanged": true
+    },
+    {
+      "relativePath": "src/cli/args.ts",
+      "priorSha256": "a2681f2b59726ad062cee94d3d06b22f76083bbddec237a856b04f15c7557240",
+      "sha256": "a2681f2b59726ad062cee94d3d06b22f76083bbddec237a856b04f15c7557240",
+      "bytes": 7948,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/README.md",
+      "priorSha256": "de7f4312efaafa22e36670a1565cfbe0c7c7055001b292146fe971a202bbd26e",
+      "sha256": "de7f4312efaafa22e36670a1565cfbe0c7c7055001b292146fe971a202bbd26e",
+      "bytes": 2324,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/motion-success/preview.json",
+      "priorSha256": "c8e0ee56d048b0c67db41cd316ff25263034568911e50e366e694b6ef7c77f44",
+      "sha256": "c8e0ee56d048b0c67db41cd316ff25263034568911e50e366e694b6ef7c77f44",
+      "bytes": 1271,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/motion-partial/preview.json",
+      "priorSha256": "ac1d498d125a3c08b0b8a3ee2069da5a4c853b4bd3562bd394d1a5f5dfae0535",
+      "sha256": "ac1d498d125a3c08b0b8a3ee2069da5a4c853b4bd3562bd394d1a5f5dfae0535",
+      "bytes": 1271,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/release-readiness.md",
+      "priorSha256": "ec6317e9716c038e85a559633a3a1db4d27ef46772bf4b9fd0c7135aab1a279e",
+      "sha256": "db7cd1b5d6a2b769d7b0dc20361a263c57db30375021525c12cc1fac0a318ec6",
+      "bytes": 6049,
+      "unchanged": false
+    }
+  ],
+  "reviewedPreviews": [
+    {
+      "relativePath": "docs/demo/motion-success/compare.mp4",
+      "sha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
+      "bytes": 115270,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/motion-success/poster.png",
+      "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+      "bytes": 79698,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/motion-success/manifest.json",
+      "sha256": "86e63b094f971a868de857c769f38e0ad99a7e83805c497d0df7bc86b1f66ff8",
+      "bytes": 18087,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/motion-partial/compare.mp4",
+      "sha256": "1b6e3787a13dc76c638958ff229f11b509fdabd33eb772ad0f6df03e572b195a",
+      "bytes": 108999,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/motion-partial/poster.png",
+      "sha256": "577b735fa55538ebfc0d92a16f5eb4534e78fb387f6984df4d8bdb29e7af26f1",
+      "bytes": 53582,
+      "unchanged": true
+    },
+    {
+      "relativePath": "docs/demo/motion-partial/manifest.json",
+      "sha256": "2b3d898d6d94fbe386f94eedd00b54948a3fa754642965276bbc0159f0a7e335",
+      "bytes": 15736,
+      "unchanged": true
+    }
+  ],
+  "checks": [
+    {
+      "id": "D01",
+      "subject": "Owner-only and release boundaries",
+      "result": "passed",
+      "proof": "Readiness is held until all G01-G24 gates pass. Login, publication, destination/public history, tag/release, visibility, hosted-publisher configuration and faulty-release registry mutations remain owner actions. No authorization is inferred from these instructions."
+    },
+    {
+      "id": "D02",
+      "subject": "Exact reviewed handoff and package inputs",
+      "result": "passed",
+      "proof": "The first shell block pins Node/npm, enters the reviewed public checkout, requires exact handoff HEAD and clean Git state, checks implementation ancestry and unchanged package/build inputs, then verifies package and final public source SHA-256. It inspects the package manifest and performs only a dry-run before later authority steps."
+    },
+    {
+      "id": "D03",
+      "subject": "Final identity without a self-hash cycle",
+      "result": "passed",
+      "proof": "The final handoff commit and final public source digest are delivered in a separate manifest outside the source archive it hashes. The tested implementation/archive identities remain separate. The final manifest also binds refs, reviewed docs/media, scans, advisory triage and gate dispositions. Its own digest is not embedded inside itself."
+    },
+    {
+      "id": "D04",
+      "subject": "Destination privacy and exact ref push",
+      "result": "passed",
+      "proof": "The empty-or-reviewed destination requirement precedes the push. Existing refs and hosted PR/release/Actions content remain part of the destination review. The push names only the approved handoff SHA and refs/heads/main, with --no-follow-tags. The guide stops on private destination content or non-fast-forward history and does not silently replace an existing remote."
+    },
+    {
+      "id": "D05",
+      "subject": "npm authority and provenance routes",
+      "result": "passed",
+      "proof": "The interactive route requires account 2FA, login/whoami and explicit owner verification when the package exists. E404 is not authority or reservation. Existing 0.1.0 stops publication. The local route is explicitly without provenance. The hosted route requires a public matching repository, hosted runner permissions, exact rebuilt package equality, separately configured authority and owner approval. Trusted-publisher staging defaults, first-publication expiry, explicit publish action, separate dist-tag permission and first-stage placeholder are retained as current-source-backed policy from the accepted prereview and root refresh. No route is claimed configured."
+    },
+    {
+      "id": "D06",
+      "subject": "Registry archive and separate name installation",
+      "result": "passed",
+      "proof": "A fresh cache and directory retrieve pinned-version metadata and archive. JavaScript asserts package name/version, approved SHA-256 and a matching SHA-512 SRI token before execution. A separate registry-name installation provides registry lock identity for audit signatures. The guide requires inspection of this package attestation source commit and workflow, rather than treating dependency signatures as package provenance."
+    },
+    {
+      "id": "D07",
+      "subject": "Installed behavioral verification and public-app scope",
+      "result": "passed",
+      "proof": "Both invocations match actual two-argument script interfaces. installCandidate installs the supplied archive, hashes its bytes, imports installed schemas and calls its installed binary. The package smoke covers help/doctor/plan, successful and partial compare, browser-unavailable composition, encoder failure/recovery, WORKTREE and cleanup assertions. The public script runs navigation and validation three times each plus validation WORKTREE. Both save report.json with passed/failed and candidate.sha256, and set exit 1 on failure. Normal-speed inspection remains explicit. These are future post-publish actions, not newly executed evidence."
+    },
+    {
+      "id": "D08",
+      "subject": "Prerequisites, sequencing and error handling",
+      "result": "passed",
+      "proof": "Node 24.22.2 and npm 11.12.1 are checked at entry. Browser installation and doctor appear in the review sequence. The post-publication section links the quickstart for browser/system prerequisites, states pnpm 11.9.0, and checks it before both workloads. The public fixture declares that pnpm version and uses only local workspace links in its frozen offline lock. set -eu and assertions stop digest, version, ancestry or command failures. Expected absent registry records require the stated inspection; network/auth errors stay unresolved. No script claim substitutes for platform or visual acceptance."
+    },
+    {
+      "id": "D09",
+      "subject": "Exact applied edit reconstruction",
+      "result": "passed",
+      "proof": "Reversing the privacy-paragraph relocation and pnpm prose/version check reproduces the integration record hashes. Reversing each of the nine prereview edits then reproduces both prereview document hashes exactly. This excludes any additional undocumented current document change."
+    },
+    {
+      "id": "D10",
+      "subject": "Affected G22 delta only",
+      "result": "passed",
+      "proof": "The only changed member of the previously accepted nine-document G22 set is the readiness E06 identity paragraph. All other eight documents and all six media/manifest preview members are unchanged. The new paragraph changes release identity procedure and preserves existing hold statements and behavior limits. It does not alter public recipes, support/help/skill text, preview content or the previous fresh-agent recipe evidence."
+    }
+  ],
+  "counts": {
+    "shellSyntaxChecks": 10,
+    "javascriptSyntaxChecks": 3,
+    "unchangedPriorG22Documents": 8,
+    "changedReviewedG22Documents": 1,
+    "unchangedPriorPreviewArtifacts": 6
+  },
+  "countMeaning": "Document identity and syntax checks only. These counts are not product test totals.",
+  "retainedEvidence": "The prior accepted G22 behavior/recipe/media findings remain the basis for unchanged content. This refresh directly proves the eight unaffected document identities and six preview identities, and reviews only the changed readiness paragraph. No fresh recipe, playback or runtime execution is claimed.",
+  "invalidationRule": "A later relevant document, package, source, recipe or media change requires its affected evidence and G22 coverage to be checked again. Final archive inclusion is separate from this main-tree document acceptance.",
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "G23": "pending",
+  "G24": "pending"
+}

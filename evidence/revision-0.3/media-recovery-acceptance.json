@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-acceptance",
+  "recordedAt": "2026-11-03T07:58:24.910401+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "acceptedGates": [
+    "G11",
+    "G14",
+    "G16"
+  ],
+  "independentReview": {
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
+    "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137",
+    "offlineReviewExits": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "coverage": {
+    "G11": {
+      "recommendation": "accept",
+      "status": "accepted-with-stated-scope",
+      "requirement": "Every persisted frame has exact opaque masks before encoding through navigation, motion, failure, and cancellation. Decoded output is checked in scaled/letterboxed coordinates with codec-aware criteria for absence of sensitive content, not exact pixel equality after lossy H.264. No unmasked raw artifact exists. Keyframe selector masking still passes.",
+      "coverage": [
+        "Independent full-rectangle exact RGBA checks passed for 4,772 existing source PNGs in six macOS motion runs, final partial motion and three corrected recording interruptions.",
+        "Independent supplementary exact RGBA checks passed for all 1,150 persisted Linux motion PNGs, including 352 diagnostic frames from the failed narrow attempt.",
+        "Retained hash-bound decoded checks use scaled/pillarboxed geometry, tolerance 24, inset 4. Every selected synthetic motion side is checked. Keyframe selector regression fully decodes all content frames with tolerance 8.",
+        "No native raw recording exists in retained run inventories. Source paths sanitize before persistence, failed mask cases prohibit raw fallback, and fresh interruption reports inventory retained media.",
+        "Seven final public application comparisons have empty maskRects. They prove zero-mask rendering and artifact integrity, not positive private-rectangle coverage."
+      ],
+      "gaps": []
+    },
+    "G14": {
+      "recommendation": "accept",
+      "status": "accepted-with-stated-scope",
+      "requirement": "Exact frame schedule/count, first/boundary/final decoded images, codec/FPS/faststart, and offline recompose pass. Recovery cannot clear capture/source/cleanup faults.",
+      "coverage": [
+        "Independent schedule reduction passed for 14 retained macOS/public/partial bundles plus three encoded Linux bundles.",
+        "ISO-BMFF sample tables independently establish exact scheduled sample counts, avc1 H.264, 1920 by 686 dimensions, 30 FPS and moov before mdat for 15 base video artifacts plus three Linux outputs.",
+        "Real source media tests compare first, title-boundary, midpoint and final decoded images and exact schedules. Final partial uncapped ffprobe/decode reports exactly 265 H.264/yuv420p frames.",
+        "Installed fresh recipe compose exits 0 with raw capture/timeline and video/poster identities unchanged and no observed browser/app/Docker descendants. Original executed archive is retained under the independently verified README-only runtime transfer.",
+        "Installed final partial compare exits 3, unavailable-encoder compose exits 8, and recovered compose remains 3. Capture, source image/timeline and comparison/cleanup outcomes remain unchanged.",
+        "Source outcome tests, source-provenance integration and compose invariant establish that capture, source and cleanup faults cannot be cleared by a successful encode."
+      ],
+      "gaps": []
+    },
+    "G16": {
+      "recommendation": "accept",
+      "status": "accepted-with-stated-scope",
+      "requirement": "Locks, PID reuse, stale ledgers, malicious output paths, symlink outputs, repeated clean, and forced-kill residue recovery preserve unrelated resources.",
+      "coverage": [
+        "Exact-candidate matched source suites contain passing real SIGKILL recovery, stale mismatched-start PID ledger and repeated CLI clean tests.",
+        "Containment/symlink/malicious path and lock/concurrent-clean/finalization tests pass in current retained source logs.",
+        "Fresh installed documented clean exits 0, removes only its exact inactive run, leaves doctor with no abandoned runs and preserves caller identity.",
+        "Controlled fake-Engine recovery cases remain source proof only. Actual interrupted Docker build/create and unrelated builder/image survival remain G07/G15 requirements."
+      ],
+      "gaps": []
+    }
+  },
+  "scopeBoundaries": [
+    {
+      "source": "spec.md:190,392,400,401",
+      "finding": "The specification explicitly assigns interrupted build and unrelated builder/image survival to G07/G15. G16 names generic identity/path/lock/forced-kill recovery. Its real T13 SIGKILL and stale PID ledger tests establish that scope. No new Docker SIGKILL requirement is inferred. Docker acceptance remains mandatory elsewhere."
+    },
+    {
+      "source": "spec.md:299-305,395,396,399,413; docs/implementation-goal.md:67-78",
+      "finding": "The complete per-platform repeated pipeline and normal-speed quality condition belongs to section 7.4 and G10. G20 owns final platform verification. G11 still covers all actual persisted artifacts, including failed Linux output. G14 integrity checks apply to actual encoded media and recoverability, with source assertions and real final installed evidence. These acceptances do not waive the Linux quality/matrix failure or certify overall readiness."
+    },
+    {
+      "source": "Linux retained motion-check.json and source artifacts",
+      "finding": "Four final-cb641 attempts are retained. Three wide attempts encode valid media. Narrow fails at 299.9879999998957 ms before encoding and leaves no compare.mp4 or timeline. Its 352 persisted diagnostic source frames are independently masked. Original failed G10 status and missing matrix remain unchanged."
+    }
+  ],
+  "baseAccounting": {
+    "indexedRecords": 32,
+    "sourceArchiveFiles": 434,
+    "installedPackageFiles": 171,
+    "artifactHashes": 5904,
+    "maskedSourcePngFiles": 4772,
+    "scheduledBundles": 14,
+    "mediaArtifactEntries": 15
+  },
+  "linuxSupplementAccounting": {
+    "artifactHashes": 1212,
+    "maskedSourcePngFiles": 1150,
+    "scheduledBundles": 3,
+    "mediaArtifactEntries": 3,
+    "originalMotionStatus": "failed",
+    "narrowDiagnosticPngFiles": 352
+  },
+  "countMeaning": "Artifact, schedule and mask checks. These counts are not new runtime tests or fresh playback. The Linux supplement is separate from the base reduction.",
+  "sourceEvidenceAccounting": {
+    "productSourcesMatched": 52,
+    "unitContracts": {
+      "filesPassed": 45,
+      "testsPassed": 792,
+      "testsSkipped": 11,
+      "exitCode": 0,
+      "skipScope": "Opt-in real Docker cases require separate actual execution."
+    },
+    "integration": {
+      "filesPassed": 8,
+      "testsPassed": 103,
+      "testsSkipped": 0,
+      "exitCode": 0
+    },
+    "laterPortabilityOverlapsAndNotAdded": 121
+  },
+  "packageTransfer": {
+    "status": "passed",
+    "originalExecutedPackage": {
+      "name": "show-what-changed-0.1.0.tgz",
+      "sha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+      "bytes": 384327
+    },
+    "finalPackage": {
+      "name": "show-what-changed-0.1.0.tgz",
+      "sha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "bytes": 384148
+    },
+    "changedPackageFiles": [
+      "package/README.md"
+    ],
+    "unchangedRuntimeFiles": 170,
+    "identicalDependencyIdentities": 7,
+    "readmeCommandFencesUnchanged": true
+  },
+  "actualCommandExits": [
+    {
+      "actualExit": 0,
+      "passed": 792,
+      "skipped": 11,
+      "scope": "retained source unit/contracts",
+      "record": {
+        "name": "swc-integrated-unit-contracts-20261103T0427.log",
+        "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+        "bytes": 109665
+      }
+    },
+    {
+      "actualExit": 0,
+      "passed": 103,
+      "skipped": 0,
+      "scope": "retained source integration",
+      "record": {
+        "name": "swc-integrated-integration-20261103T0430.log",
+        "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+        "bytes": 16443
+      }
+    },
+    {
+      "name": "plan",
+      "record": {
+        "name": "plan.raw.json",
+        "sha256": "cf2bfcd0b4b2fd6062b63539073580d12b81f1e1bfeec49d625576be19ff77e9",
+        "bytes": 6328
+      },
+      "actualExit": 0,
+      "status": "ok",
+      "errorCode": null
+    },
+    {
+      "name": "compare-partial",
+      "record": {
+        "name": "compare-partial.raw.json",
+        "sha256": "bb2a9d1fb585f50bd8bdcc80109e9d6a4e78be7105bfd53988a92a0fd5a944b8",
+        "bytes": 13528
+      },
+      "actualExit": 3,
+      "status": "partial",
+      "errorCode": "LOCATOR_MISSING"
+    },
+    {
+      "name": "compose-unavailable-encoder",
+      "record": {
+        "name": "compose-unavailable-encoder.raw.json",
+        "sha256": "b62c3384fc275e3d035c86c1fa046bc7cb314bdcd29b868d62022bf71e92b0aa",
+        "bytes": 13278
+      },
+      "actualExit": 8,
+      "status": "failed",
+      "errorCode": "MEDIA_CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "name": "compose-recovered-partial",
+      "record": {
+        "name": "compose-recovered-partial.raw.json",
+        "sha256": "cb196a7511e890a72cf1fa67c6fb193bdf36dc2020d123327317ef0e5f940dcd",
+        "bytes": 13016
+      },
+      "actualExit": 3,
+      "status": "partial",
+      "errorCode": "LOCATOR_MISSING"
+    },
+    {
+      "name": "recording-sigint",
+      "record": {
+        "name": "comparison-command.json",
+        "sha256": "f2edd3f3725d227ab0ecf9e567f5c5709632b86d1f35481156aae72c29bb2b67",
+        "bytes": 9845
+      },
+      "actualExit": 130,
+      "status": "cancelled",
+      "errorCode": "SIGINT"
+    },
+    {
+      "name": "recording-sigterm",
+      "record": {
+        "name": "comparison-command.json",
+        "sha256": "1167344a1e17175085eabbb0765f6e25838c70a0a4d991adca4397a2685fb260",
+        "bytes": 9894
+      },
+      "actualExit": 143,
+      "status": "cancelled",
+      "errorCode": "SIGTERM"
+    },
+    {
+      "name": "recording-deadline",
+      "record": {
+        "name": "comparison-command.json",
+        "sha256": "f76b8fb6f911f42b1bb2b0e8b1e111eb456721d4e2e4feb4fd2c940f1465f5f5",
+        "bytes": 9746
+      },
+      "actualExit": 10,
+      "status": "cancelled",
+      "errorCode": "DEADLINE_EXCEEDED"
+    },
+    {
+      "name": "fresh-recipe-plan",
+      "actualExit": 0,
+      "originalExecutedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+    },
+    {
+      "name": "fresh-recipe-compare",
+      "actualExit": 0,
+      "originalExecutedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+    },
+    {
+      "name": "fresh-recipe-compose",
+      "actualExit": 0,
+      "originalExecutedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+    },
+    {
+      "name": "fresh-recipe-clean",
+      "actualExit": 0,
+      "originalExecutedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+    },
+    {
+      "name": "fresh-recipe-doctor-after",
+      "actualExit": 0,
+      "originalExecutedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+    },
+    {
+      "actualExit": 0,
+      "scope": "new offline artifact reducer"
+    },
+    {
+      "actualExit": 0,
+      "scope": "new offline artifact reducer"
+    },
+    {
+      "actualExit": 0,
+      "scope": "new offline artifact reducer"
+    },
+    {
+      "actualExit": 0,
+      "scope": "new offline artifact reducer"
+    }
+  ],
+  "sourceAssertions": [
+    {
+      "file": "test/unit/runtime.test.ts",
+      "lines": [
+        17,
+        58
+      ],
+      "proves": "Private file containment, malicious relative paths, symlink ancestors/output root, duplicate/active locks, idempotent cleanup, stale PID lock refusal, and failed disposal ownership retention.",
+      "passedLog": "macosUnitContracts",
+      "logLines": [
+        69,
+        73
+      ],
+      "sourceArtifact": {
+        "name": "runtime.test.ts",
+        "sha256": "0f12e507e480d1c0d514724c7dc0efffbcf20de85581bc2fb65a1c4413a6b668",
+        "bytes": 14058
+      }
+    },
+    {
+      "file": "test/unit/runtime.test.ts",
+      "lines": [
+        94,
+        109
+      ],
+      "proves": "A real detached owner receives SIGKILL. Its run becomes abandoned, exact residue is cleaned, and unrelated bytes survive.",
+      "passedLog": "macosUnitContracts",
+      "logLines": [
+        80,
+        80
+      ],
+      "sourceArtifact": {
+        "name": "runtime.test.ts",
+        "sha256": "0f12e507e480d1c0d514724c7dc0efffbcf20de85581bc2fb65a1c4413a6b668",
+        "bytes": 14058
+      }
+    },
+    {
+      "file": "test/unit/runtime-finalization.test.ts",
+      "lines": [
+        31,
+        175
+      ],
+      "proves": "Exclusive ownership through terminal writes, incomplete lock refusal, concurrent cleaner/reopen protection, exact abandoned lock claim, marker replacement refusal.",
+      "passedLog": "macosUnitContracts",
+      "logLines": [
+        84,
+        98
+      ],
+      "sourceArtifact": {
+        "name": "runtime-finalization.test.ts",
+        "sha256": "a4c1d77f0c21e326d5b52dc599d3f91f87f2983c1d703f7e6cf8bd7b39cfb865",
+        "bytes": 14923
+      }
+    },
+    {
+      "file": "test/integration/r03-ownership-gaps.test.ts",
+      "lines": [
+        157,
+        184
+      ],
+      "proves": "CLI clean sees a live unrelated PID with mismatched start time. It preserves that process, stale ledger and owner bytes, then cleans only after safe ledger correction.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        104,
+        104
+      ],
+      "sourceArtifact": {
+        "name": "r03-ownership-gaps.test.ts",
+        "sha256": "a8f6c84ad364e120074d375ff63b652cf7c36e85827c7acf5752923284ba8022",
+        "bytes": 14390
+      }
+    },
+    {
+      "file": "test/integration/r03-ownership-gaps.test.ts",
+      "lines": [
+        222,
+        248
+      ],
+      "proves": "Repeated real CLI clean removes the inactive owned run once, returns truthful missing-run status on repetition, and preserves unrelated output/process/caller.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        107,
+        107
+      ],
+      "sourceArtifact": {
+        "name": "r03-ownership-gaps.test.ts",
+        "sha256": "a8f6c84ad364e120074d375ff63b652cf7c36e85827c7acf5752923284ba8022",
+        "bytes": 14390
+      }
+    },
+    {
+      "file": "test/integration/adversarial-gaps.test.ts",
+      "lines": [
+        216,
+        268
+      ],
+      "proves": "Keyframe selector masks remain intact through fill, required failure, blocked steps, composition and every decoded content frame. Synthetic secret and fill metadata remain private.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        12,
+        12
+      ],
+      "sourceArtifact": {
+        "name": "adversarial-gaps.test.ts",
+        "sha256": "cedd5b102037d5c7f0c9a5fa22e2e4f1db3d1d15e60cb5ceadf610bd60581d01",
+        "bytes": 25810
+      }
+    },
+    {
+      "file": "test/integration/recorder.test.ts",
+      "lines": [
+        459,
+        468
+      ],
+      "proves": "Invalid CSS selector masks fail without a raw screenshot fallback.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        58,
+        58
+      ],
+      "sourceArtifact": {
+        "name": "recorder.test.ts",
+        "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+        "bytes": 30798
+      }
+    },
+    {
+      "file": "test/integration/recorder.test.ts",
+      "lines": [
+        635,
+        678
+      ],
+      "proves": "Real odd narrow motion and inner scroll. Every persisted motion frame has exact opaque rectangles.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        81,
+        81
+      ],
+      "sourceArtifact": {
+        "name": "recorder.test.ts",
+        "sha256": "106f50cae1ca83fd2d4b0f6ea7c9da889774b0d2754bc098291adc7f8cf3ba58",
+        "bytes": 30798
+      }
+    },
+    {
+      "file": "test/unit/scenario-states-metrics.test.ts",
+      "lines": [
+        256,
+        279
+      ],
+      "proves": "Missing clocks, scale mismatches and malformed PNGs fail without raw persistence.",
+      "passedLog": "macosUnitContracts",
+      "logLines": [
+        340,
+        340
+      ],
+      "sourceArtifact": {
+        "name": "scenario-states-metrics.test.ts",
+        "sha256": "edc9fff4451b12f4703c900a6044bddc6e1e40fdce49ac75ee21f4f7ddfa88fe",
+        "bytes": 75431
+      }
+    },
+    {
+      "file": "test/integration/composer-media.test.ts",
+      "lines": [
+        152,
+        225
+      ],
+      "proves": "Exact 55-frame schedule, six decoded first/title-boundary/midpoint/final images, H.264/yuv420p, 30 FPS, dimensions, faststart, loss-aware expected-image comparison.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        22,
+        22
+      ],
+      "sourceArtifact": {
+        "name": "composer-media.test.ts",
+        "sha256": "2f7be65ffa2e0eb61c7de4df173349debf2f2a0d8b924c94c02cfeb09f369a7d",
+        "bytes": 24270
+      }
+    },
+    {
+      "file": "test/integration/composer-media.test.ts",
+      "lines": [
+        347,
+        450
+      ],
+      "proves": "Imported path/hash/limit/cumulative-boundary validation, failed encoder preserving prior media, and fresh-process re-encoding without installed browser/font assets.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        25,
+        27
+      ],
+      "sourceArtifact": {
+        "name": "composer-media.test.ts",
+        "sha256": "2f7be65ffa2e0eb61c7de4df173349debf2f2a0d8b924c94c02cfeb09f369a7d",
+        "bytes": 24270
+      }
+    },
+    {
+      "file": "test/unit/runner-outcomes.test.ts",
+      "lines": [
+        12,
+        34
+      ],
+      "proves": "Successful re-encoding preserves capture/comparison partial and cleanup failure. Corrupted success claims and summary counts fail validation.",
+      "passedLog": "macosUnitContracts",
+      "logLines": [
+        802,
+        808
+      ],
+      "sourceArtifact": {
+        "name": "runner-outcomes.test.ts",
+        "sha256": "bce945deb9d9bc675418f05c8981b125b7b1e2f205bbb6768f804de55b5ac142",
+        "bytes": 3629
+      }
+    },
+    {
+      "file": "test/integration/provenance-capture.test.ts",
+      "lines": [
+        15,
+        60
+      ],
+      "proves": "Capture-created source makes provenance invalid and media partial while preserving the caller and cleaning processes.",
+      "passedLog": "macosIntegration",
+      "logLines": [
+        108,
+        108
+      ],
+      "sourceArtifact": {
+        "name": "provenance-capture.test.ts",
+        "sha256": "39947fe594b1bffc404a5d58f57793f4c40db3f92635456ea8a2c7392b2f14ea",
+        "bytes": 5638
+      }
+    },
+    {
+      "file": "src/runner/index.ts",
+      "lines": [
+        199,
+        239
+      ],
+      "proves": "compose validates saved capture/timeline/outcomes, modifies encoding fields and artifacts, appends encoding error history, and only merges further cleanup failure. It never replaces comparison/provenance or erases cleanup failure.",
+      "sourceArtifact": {
+        "name": "index.ts",
+        "sha256": "4447b732a344a0e53bc6921067534a3a4412eddf45d9d8560aebea6e33efd0b0",
+        "bytes": 19341
+      }
+    },
+    {
+      "file": "src/runner/outcomes.ts",
+      "lines": [
+        19,
+        50
+      ],
+      "proves": "Invalid provenance or partial capture makes comparison partial. validateCompletedComparison recomputes this invariant. Successful encoding cannot override partial comparison or failed cleanup.",
+      "sourceArtifact": {
+        "name": "outcomes.ts",
+        "sha256": "e674ccf62396154a1b4ccfd73750e279fc8d5f64d77e4e01bdd01bb0b3ec2cbd",
+        "bytes": 4520
+      }
+    },
+    {
+      "file": "scripts/revision-0.3-motion-check.mjs",
+      "lines": [
+        35,
+        65
+      ],
+      "proves": "DPR-1 panel letterboxing geometry and mapped mask interiors use opaque source checks and decoded per-channel tolerance 24 with inset 4.",
+      "sourceArtifact": {
+        "name": "revision-0.3-motion-check.mjs",
+        "sha256": "2915eb49edf5d2af4b7c01b8269b33527cfe26641b29090eb9b687faf6571112",
+        "bytes": 28980
+      }
+    },
+    {
+      "file": "scripts/revision-0.3-motion-check.mjs",
+      "lines": [
+        246,
+        319
+      ],
+      "proves": "Inventory equals all persisted source images. Every selected decoded side checks its scaled mask. Decoder result, frame count and numeric failures remain explicit.",
+      "sourceArtifact": {
+        "name": "revision-0.3-motion-check.mjs",
+        "sha256": "2915eb49edf5d2af4b7c01b8269b33527cfe26641b29090eb9b687faf6571112",
+        "bytes": 28980
+      }
+    },
+    {
+      "file": "scripts/r03-phase-check.mjs",
+      "lines": [
+        254,
+        265
+      ],
+      "proves": "Every retained source PNG receives exact mask or explicitly safe neutral checks. The fresh recording report binds the corrected candidate harness hash.",
+      "sourceArtifact": {
+        "name": "r03-phase-check.mjs",
+        "sha256": "74dd3f0571a5119208c9ec6d48b27112f43b2f254189ba399fa1f7205c90c5a6",
+        "bytes": 43144
+      }
+    }
+  ],
+  "offlineReviewArtifacts": [
+    {
+      "name": "swc-remaining-media-recovery-verification.json",
+      "sha256": "7502d6bf6546274c1bb2bba3a81022e70b00970a5583130e83ce16a17ebfb79b",
+      "bytes": 3993922
+    },
+    {
+      "name": "swc-remaining-media-recovery-mask-verification.json",
+      "sha256": "a614ab7fd74b50f86529de240b3acf8795becaecc168ce04048effb1a334d2a9",
+      "bytes": 1208
+    },
+    {
+      "name": "swc-remaining-media-recovery-linux-verification.json",
+      "sha256": "fcaf25c425f1834bfef5f5c25ba50577168fde0c572f2bf752538a5027faab00",
+      "bytes": 396602
+    },
+    {
+      "name": "swc-remaining-media-recovery-linux-mask-verification.json",
+      "sha256": "da6edda41bfed2a2f2790f53d7f7620c578f9e73c48a9a32e3c3496bf9d3e3e4",
+      "bytes": 709
+    },
+    {
+      "name": "swc-remaining-media-recovery-transfer-verification.json",
+      "sha256": "01d5793d8e922aa6e60413e4380af368e049806da69294d378559dae12e06380",
+      "bytes": 849
+    },
+    {
+      "name": "swc-remaining-media-recovery-verify.py",
+      "sha256": "8e89472a1b7db04f1c9a1a668b5819ddee9ee2fb9da9b77c9ff03a1c4512bb2f",
+      "bytes": 11455
+    },
+    {
+      "name": "swc-remaining-media-recovery-mask-verify.cjs",
+      "sha256": "05eea4b5aba31262bb15fd7e823dc9bc9311cca2ca6191da956ada7f2d90b35e",
+      "bytes": 1722
+    },
+    {
+      "name": "swc-remaining-media-recovery-linux-verify.py",
+      "sha256": "b352fb6daabe57d86d58129487e3282394a07c55f972d3168545d513f4eea342",
+      "bytes": 3326
+    },
+    {
+      "name": "swc-remaining-media-recovery-linux-mask-verify.cjs",
+      "sha256": "6ce24e24340f96ed200f3e16f70b32c25229abddc082d87dcca637f974a8a4ef",
+      "bytes": 1734
+    }
+  ],
+  "retainedReports": {
+    "macosMotion": {
+      "name": "motion-check.json",
+      "sha256": "30795503114d7a700a7250df4815281546ad8510a8932f7aa46471c0d7de3ec4",
+      "bytes": 1027209
+    },
+    "partialMotion": {
+      "name": "report.private.json",
+      "sha256": "e4235d5228e935826cbcc2ef7b5ddbe119049d9be386a58473d8100ec701425e",
+      "bytes": 152706
+    },
+    "recordingInterruptions": {
+      "name": "report.json",
+      "sha256": "b8bf65223690059c2086621fb0c2e1ef4fc8eb81c876e8c6414ed69d21fe11aa",
+      "bytes": 38300
+    },
+    "hostInterruptions": {
+      "name": "report.json",
+      "sha256": "4293e40c6be6ec71f4a06a5a4b6f6d1b7ed72529f8e28a590341fb7c7d552fd7",
+      "bytes": 55960
+    },
+    "finalPartialMediaFormat": {
+      "name": "media-format-review.json",
+      "sha256": "8d81f61b184d5b09213b7aadfe4ea599f43904294e4ff7af1496b5f6617e9a52",
+      "bytes": 734
+    },
+    "firstLinuxFailure": {
+      "name": "result.json",
+      "sha256": "9809e8196c3c832d47f53498d40049edf83c7513257c60f7e2a4fd6c3cbcc0ad",
+      "bytes": 72354
+    },
+    "macosMotionPlayback": {
+      "name": "review.json",
+      "sha256": "97b77bd07f077988c1c4f4c5a2c85baf0d4892a7cbcad7d7603b6b45ec50baa6",
+      "bytes": 7117
+    },
+    "partialMotionPlayback": {
+      "name": "review.json",
+      "sha256": "1b4c8a3e621634ddb23b790588a21b2587a44a17e865dbd40450ca053e52d860",
+      "bytes": 2122
+    },
+    "freshDocumentationRecipe": {
+      "name": "swc-fresh-recipe-execution.md",
+      "sha256": "09426fd5f0e520884c27de7f6d6d5474bb2eefd71a20a9dbad4b49df1190a2a1",
+      "bytes": 6834
+    },
+    "macosUnitContracts": {
+      "name": "swc-integrated-unit-contracts-20261103T0427.log",
+      "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+      "bytes": 109665
+    },
+    "macosIntegration": {
+      "name": "swc-integrated-integration-20261103T0430.log",
+      "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+      "bytes": 16443
+    }
+  },
+  "mediaArtifacts": [
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "dd0c6ee0c30b15e3849a92dc7e79c9b76d16246a691ccfbe864fe5ca7625e292",
+        "bytes": 62736
+      },
+      "sampleCount": 161,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "ae58f2562b3476cf1ad05fa0adf7ffd89b24e06cf8482102880f32dd25570011",
+        "bytes": 60441
+      },
+      "sampleCount": 156,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "38c2dff6aff7960a65295f502ab1969ccf0fb2bdb3147df879f83b5eb0bc1924",
+        "bytes": 62348
+      },
+      "sampleCount": 155,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "1cc2e26fc9bab9da360e68a6eada8c0d0d96b830e10ce82d9da2df6b01911ccb",
+        "bytes": 55309
+      },
+      "sampleCount": 154,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "830655a8a9e3ad8f9470eb15b65d3e9d90d851b80f8bef5d4012ec5fd496630d",
+        "bytes": 54126
+      },
+      "sampleCount": 153,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "fcb8ce8cc3ae22a0d9dae5e06243fe875f27c2fbc2c32a081a0426ae8c43f0c1",
+        "bytes": 57043
+      },
+      "sampleCount": 152,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "1b6e3787a13dc76c638958ff229f11b509fdabd33eb772ad0f6df03e572b195a",
+        "bytes": 108999
+      },
+      "sampleCount": 265,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "1ab22bc421dd20fe920974aed5e81363005fc305476511e12e9762ce2ed0bab1",
+        "bytes": 303209
+      },
+      "sampleCount": 258,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
+        "bytes": 115270
+      },
+      "sampleCount": 199,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "bcb0bd767ea7cbec723924b7c9b5b1f8120a3ffad53364670371351a0b5e9b27",
+        "bytes": 296518
+      },
+      "sampleCount": 258,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "48a9a555a41afbee5dc28b6ba923367b3eeb6237514d8d0da2e42c3777977979",
+        "bytes": 112787
+      },
+      "sampleCount": 189,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "5b2ccf62633aa50e06aafae07b570c41c562dad82dcf9f59ca76f83b45bfdaf7",
+        "bytes": 299147
+      },
+      "sampleCount": 253,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "d5b5b82d849fd21fe170ba32064557e222f74c4c5890b34d5aab97cf0a6814b1",
+        "bytes": 112848
+      },
+      "sampleCount": 185,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "b315ff8b4d6582391bef9d19a65b75ddc01f13d05df47bc9d9f55e17d16ce419",
+        "bytes": 113540
+      },
+      "sampleCount": 185,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "fe9593cd393bcbe06016c593d6c32eb69371a3066aecdb0866419dc4f4590440",
+        "bytes": 220445
+      },
+      "sampleCount": 285,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "245c99157c531bb54049522c2a7c06219ecfcfe63f0bfcacbdae07f8a8aa9489",
+        "bytes": 64974
+      },
+      "sampleCount": 168,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "914f931fb4f6d102d0329a5a12c1f6fa67d106c2314583d38ff4555abf487852",
+        "bytes": 65575
+      },
+      "sampleCount": 160,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "artifact": {
+        "name": "compare.mp4",
+        "sha256": "e7cd426dcb8671be174688ef254ef434ea941349b14295eb02c6c5ab466f6309",
+        "bytes": 65282
+      },
+      "sampleCount": 157,
+      "dimensions": [
+        1920,
+        686
+      ],
+      "codecSampleEntry": "avc1",
+      "fps": 30,
+      "faststart": true,
+      "topLevelBoxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    }
+  ],
+  "priorPlayback": [
+    {
+      "observer": "Original coordinator playback and sample reviewer",
+      "record": {
+        "name": "review.json",
+        "sha256": "97b77bd07f077988c1c4f4c5a2c85baf0d4892a7cbcad7d7603b6b45ec50baa6",
+        "bytes": 7117
+      },
+      "thisReviewerPerformedPlayback": false
+    },
+    {
+      "observer": "Original coordinator partial playback and sample reviewer",
+      "record": {
+        "name": "review.json",
+        "sha256": "1b4c8a3e621634ddb23b790588a21b2587a44a17e865dbd40450ca053e52d860",
+        "bytes": 2122
+      },
+      "thisReviewerPerformedPlayback": false
+    },
+    {
+      "observer": "Fresh documentation-recipe execution reviewer",
+      "record": {
+        "name": "swc-fresh-recipe-execution.json",
+        "sha256": "1cbcb391a6187a5fc322935f9ed7ba9f0b0fc6b27f4bfb46072276d25dcc7c70",
+        "bytes": 15227
+      },
+      "thisReviewerPerformedPlayback": false
+    }
+  ],
+  "newPlaybackPerformed": false,
+  "newLiveTests": false,
+  "failedEvidencePreserved": {
+    "originalHostPhaseReportStatus": "failed",
+    "originalRecordingCheckerFailures": [
+      "recording-sigint",
+      "recording-sigterm",
+      "recording-deadline"
+    ],
+    "replacementRecordingReportStatus": "passed",
+    "replacementProductExits": [
+      130,
+      143,
+      10
+    ],
+    "linuxMotionFailure": "before known-moving source gap is 299.9879999998957 ms"
+  },
+  "reproduction": [
+    "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+    "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+    "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\"",
+    "Offline artifact reducer identities above refer to retained private review scripts and inputs."
+  ],
+  "releaseReady": false,
+  "publicationPerformed": false
+}

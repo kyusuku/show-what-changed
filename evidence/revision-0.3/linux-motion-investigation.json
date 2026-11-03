@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "status": "inconclusive-diagnostic-not-acceptance",
+  "recordedAt": "2026-11-03T06:56:32.156606+00:00",
+  "sourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+  "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+  "originalFailure": {
+    "knownMovingGapMs": 299.988,
+    "limitMs": 200,
+    "reproducedByInstrumentedRun": false
+  },
+  "instrumentedRun": {
+    "passedDesktopCases": 3,
+    "failedCase": "390x844-run-1",
+    "failureCode": "CAPTURE_CLOCK_DRIFT",
+    "clockRoundTripMs": 50.570355,
+    "clockErrorBoundMs": 43.610115,
+    "clockLimitMs": 40,
+    "knownMovingGapMs": {
+      "before": 133.328,
+      "after": 116.662
+    },
+    "wholeTrackMaximumAfterMs": 233.324,
+    "wholeTrackMaximumAfterInsideMovingWindow": false,
+    "releaseAcceptance": false
+  },
+  "observations": {
+    "delayedFrameInterval": {
+      "sampledWallTimeInOwnershipSpawnMs": 64.062,
+      "schedulerBracketMs": 250.281087,
+      "mainThreadRuntimeMs": 52.741796,
+      "mainThreadRunnableWaitMs": 100.896582,
+      "additionalQuotaThrottleMs": 0,
+      "overlappingGC": false
+    },
+    "failedCalibrationInterval": {
+      "schedulerBracketMs": 255.968617,
+      "mainThreadRuntimeMs": 72.522469,
+      "mainThreadRunnableWaitMs": 79.992863,
+      "additionalQuotaThrottleMs": 0,
+      "overlappingGC": false
+    },
+    "residentMemoryBeforeFirstFrameMiB": [
+      221.348,
+      637.172,
+      550.34,
+      714.059
+    ],
+    "mainIsolateHeapUsedBeforeFirstFrameMiB": [
+      70.566,
+      69.599,
+      62.033,
+      74.656
+    ]
+  },
+  "interpretation": [
+    "The first delayed receipt precedes the largest source gap. Ownership process polling and scheduling interference are observed during a diagnostic delay.",
+    "Sampled stack durations are wall time, not CPU runtime. Resource acquisition brackets are coarse and clock alignment is approximate.",
+    "The data does not establish the original gap cause, the calibration cause, or a memory leak. Process-wide RSS and main-isolate heap measurements have different scopes.",
+    "The instrumented workload is not a performance comparison. All actual failures remain retained."
+  ],
+  "nextDecision": "Design a bounded experiment that distinguishes synchronous ownership-probe delay, asynchronous completion, and scheduling interference without changing product checks or limits.",
+  "records": {
+    "analysis": {
+      "name": "swc-linux-motion-diagnostic-analysis.md",
+      "sha256": "a5a1ba1f6e16438a1041d250a43f478f2d3c1ebaa9876812cc6f22ef025bb9bb",
+      "bytes": 17544
+    },
+    "reduction": {
+      "name": "swc-linux-motion-diagnostic-reduced.json",
+      "sha256": "5a94b1c3d00ee1acaef873757bb1929b3f42881a39c20bb5de0c3c444a4aa1cf",
+      "bytes": 82433
+    },
+    "reproducer": {
+      "name": "swc-linux-motion-diagnostic-reduce.py",
+      "sha256": "1ff20d70dd6bcd37f864af5fa82ce7c95beb0deb19f0ebd0d39a4a417d7af608",
+      "bytes": 12940
+    },
+    "grounding": {
+      "name": "swc-motion-harness-grounding.md",
+      "sha256": "6cad20cc181abb451b317f7c0e00398180c4a090db994a845294f58d8b9fab23",
+      "bytes": 21008
+    }
+  },
+  "productChanged": false,
+  "thresholdsChanged": false,
+  "releaseReady": false
+}

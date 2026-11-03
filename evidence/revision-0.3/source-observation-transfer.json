@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-existing-evidence-transfer-accepted",
+  "recordedAt": "2026-11-03T10:06:58.236579+00:00",
+  "verificationKind": "Read-only Git, archive, file identity and retained execution evidence review; no new product execution.",
+  "fromCandidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "toCandidate": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "newSourceTree": "dfdd256a38d7d8e9cd691bc4234af9bb18f098c5",
+  "linuxSourceArchiveSha256": "b88e9c618f4caed2506a3e4c136ab5f52d367e98e55a7697eac6a30a7cd394b2",
+  "changedFiles": [
+    {
+      "path": "test/unit/runtime-recipe.test.ts",
+      "sha256": "951d2087f216d69af482968ad39cb8900eb3a993b739b0436756595ddd896f83"
+    },
+    {
+      "path": "fixtures/services/isolated-store.cjs",
+      "sha256": "ebda26d440cb676392beeed8d0de5f5eb706dbc4d18e66ffe487a42ca9ab2a0f"
+    },
+    {
+      "path": "fixtures/services/ordered.cjs",
+      "sha256": "f3161a85097e815d94a5877c8ab5933c5f90c8779df24fba323cfaf01bdbcc26"
+    },
+    {
+      "path": "test/unit/runtime-docker.test.ts",
+      "sha256": "0f601ab90b277481c45c6e3e2ac5ca67f5036a4810fdf8570024e85fe69ed365"
+    }
+  ],
+  "unchangedTrackedFiles": 430,
+  "unchangedPackageInputs": 70,
+  "packageTarballUnchanged": true,
+  "transferredExistingGates": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G06",
+    "G08",
+    "G09",
+    "G11",
+    "G12",
+    "G13",
+    "G14",
+    "G16",
+    "G17",
+    "G18",
+    "G19",
+    "G21",
+    "G22"
+  ],
+  "newlyAcceptedGates": [],
+  "supplementalAssociations": {
+    "G04": "Python and PATH cases remain byte-identical outside the modified ordered-services case and added import. The old whole-file hash is not relabeled as unchanged.",
+    "G17": {
+      "artifact": "evidence/revision-0.3/recipe-observation-progress.json",
+      "focusedHostCommand": "npm test -- test/unit/runtime-recipe.test.ts -t 'ordered services resolve separate env and seed independent datasets'",
+      "recordedExitCode": 0,
+      "passedTests": 1,
+      "skippedTests": 11,
+      "hostOutputSha256": "dd0340cee8e35ec25c3265e15e1ae4700dba66048522df7d1f645f3ca8470414",
+      "scope": "The changed seed-isolation case preserves its original side, mutation and provenance checks. The unchanged authentication evidence retains its original scope."
+    },
+    "G22": "Accepted reviewed documents and demos still require final source inclusion. This existing limit is unchanged."
+  },
+  "independentReview": {
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "84631f030b2b684ed1f924d9a223c35ad2c4e1bc1d13da6dc3f59d6a8abcddfc",
+    "structuredReportSha256": "ead16cf73801ae0138c7d9480b269e527726441e3178958c05da84f5e705e9a4"
+  },
+  "rootReview": {
+    "completeReportAndFourFileDeltaRead": true,
+    "originalSourceAndExecutionIdentitiesPreserved": true
+  },
+  "pendingGates": [
+    "G05",
+    "G07",
+    "G10",
+    "G15",
+    "G20",
+    "G23",
+    "G24"
+  ],
+  "limits": [
+    "Original full-suite exits remain associated with their original inputs. G20 is still pending for the new source.",
+    "Docker tests with the new assertions remain unrun and require new source bindings.",
+    "Old candidate, archives and diagnostic inputs remain unchanged.",
+    "Final documentation, media inclusion, credential/history scans and owner handoff remain pending."
+  ],
+  "releaseReady": false,
+  "publicationPerformed": false
+}

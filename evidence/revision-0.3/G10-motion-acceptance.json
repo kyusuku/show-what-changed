@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "gate": "G10",
+  "status": "accepted",
+  "scope": "Exact finite final synthetic motion matrix: three runs each at 1280x800 and 390x844 on macOS and Linux.",
+  "candidate": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "linuxSelectedSourceArchiveSha256": "b88e9c618f4caed2506a3e4c136ab5f52d367e98e55a7697eac6a30a7cd394b2",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "actualMatrixCases": 12,
+  "unchangedLimits": {
+    "minimumSourceAndDecodedPositions": 60,
+    "maximumKnownMotionSourceGapMs": 200,
+    "maximumPulseAlignmentErrorMs": 80,
+    "maximumCombinedClockBoundMs": 40
+  },
+  "normalSpeedReview": {
+    "playbackRate": 1,
+    "cleanPlaybackRecordedSeparately": true,
+    "temporalSampleCount": 330,
+    "temporalPresentedFrames": 1873,
+    "droppedFrames": 0,
+    "corruptedFrames": 0,
+    "method": "Agent inspection of all chronological timestamp-bracketed image sequences acquired during uninterrupted 1x playback of the exact videos.",
+    "verdict": "No visible stall, invented transition or poor progression observed in sampled sequences.",
+    "maxAcquisitionBracketMs": 75.1,
+    "maxBetweenAcquisitionBracketsMs": 168.6,
+    "maxConservativeAdjacentImageTimeSpanMs": 258.7,
+    "limitation": "Sampled agent review, not continuous human viewing or every-frame inspection; screenshot overhead is separate from source cadence and clean playback measurements.",
+    "sheetRenderingLimit": "One initial contact-sheet cell did not render; its intact original timestamped screenshot was independently inspected directly."
+  },
+  "proofs": {
+    "linuxMotionReportSha256": "2aa51fa79c2c8602eeaa4f4712a14e61b45659fb9503f9f7c5d3c258f9464290",
+    "macosMotionReportSha256": "30795503114d7a700a7250df4815281546ad8510a8932f7aa46471c0d7de3ec4",
+    "linuxIndependentMediaRecalculationSha256": "3872031ebe1437253567b61d5fe5061d53a9a83e9f7b7f49df9b1a93062993a6",
+    "linuxIndependentActualReviewSha256": "1ef0df973273f96e835f1b048e8a361c34f8e2b601855f63fe41716527c75e20",
+    "linuxCleanPlaybackReviewSha256": "a097c48b424fec05e50067aa3b5e23a4153fe7f9059f4f4a50e5991af104a0d8",
+    "macosCleanPlaybackReviewSha256": "97b77bd07f077988c1c4f4c5a2c85baf0d4892a7cbcad7d7603b6b45ec50baa6",
+    "temporalPlaybackSha256": "79bf817652450bd525efcecdd78c19f4e70f52fe02dee347ea69e7ea76315a94",
+    "temporalSampleManifestSha256": "a79db23beceeda7607233619c0db95164161c3c41015a21c367a9d4f72886fc8",
+    "independentOriginalAuditSha256": "f63c8bea9e30319a9bfe65352b9bb50ace76bd5676e323696b649004ebbd357e",
+    "independentTemporalVisualVerdictSha256": "b342498e7a8ad01720cab8c7d17fc5df0c344f9e0a3c56b97d1398cacfa0bfaa",
+    "independentCombinedReviewSha256": "faa8e30d3dc7677238430afff6bc2d12da22447bd4f18b579f13b3ca1a5bc57f",
+    "historyAwareFiniteExperimentDecisionSha256": "072afb4ade94459985093d27fc20cfc4ffd04d29887c0c6c787cf19be6a49014",
+    "currentFailedLinuxSuiteSha256": "669550c2354f23b2ec2776b07de541162e1c8e219be41a64ef53dcd92214480a"
+  },
+  "limitations": [
+    "Earlier same-runtime motion failures remain failed, with unresolved causes. No product motion fix or changed failure probability is established.",
+    "No host-cause or universal stall-free reliability claim; no diagnostic passes pooled into this final matrix.",
+    "Unobserved upstream browser frames remain outside delivered counters; sourceDroppedFrames is null.",
+    "Current Linux suite remains failed: public-app navigation-3 CAPTURE_CLOCK_DRIFT bound 44.028714 ms exceeds 40 ms. Subsequent required cases did not complete. Failed detailed media/calibration evidence was not retained by that harness.",
+    "G10 acceptance does not accept G20, re-adjudicate other gates, complete the goal or establish release readiness."
+  ],
+  "G20AcceptedFromCurrentLinuxSuite": false,
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "recordedAt": "2026-11-03T20:11:32.518719+00:00",
+  "reproduceCommand": "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_EVIDENCE\"",
+  "reproduceScope": "Run once per supported platform using a clean installation of the bound package. Default repetitions are three at each required viewport. Retain originals and review the resulting videos at normal speed.",
+  "actualExitCode": {
+    "linuxInstalledMotionStage": 0,
+    "macosMotionCheck": 0
+  },
+  "platformMeasurements": {
+    "linux": {
+      "sourcePositionsRange": [
+        101,
+        171
+      ],
+      "decodedPositionsRange": [
+        85,
+        89
+      ],
+      "maximumKnownMotionSourceGapMs": 69.015,
+      "maximumCombinedClockBoundMs": 6.428
+    },
+    "macos": {
+      "sourcePositionsRange": [
+        73,
+        177
+      ],
+      "decodedPositionsRange": [
+        73,
+        89
+      ],
+      "maximumKnownMotionSourceGapMs": 68.233,
+      "maximumCombinedClockBoundMs": 6.814
+    }
+  }
+}

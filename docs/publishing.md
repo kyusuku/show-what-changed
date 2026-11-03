@@ -1,8 +1,8 @@
 # Publish the reviewed 0.1.0 candidate
 
-> Release hold: the historical candidate does not satisfy [spec revision 0.3](../spec.md). Complete the new gates and replace the active candidate identity before using this publishing procedure. This document does not authorize publication.
+> Release hold: the revision 0.3 candidate is undergoing final verification. Use this procedure only after [release readiness](release-readiness.md) records every required gate as passed for the exact candidate. This document does not authorize publication.
 
-> Public-history hold: the current development history contains private context. Do not push it or change its repository visibility. The revision 0.3 handoff must identify a separately prepared, fully scanned public history, source archive, and package. Private development originals are preserved outside the public release repository.
+> Public-history hold: the development history contains private context. Do not push it or change its repository visibility. Use only the separately prepared public checkout named by the final handoff, after its complete intended history, source archive, and package have passed review. Private development originals remain outside that checkout.
 
 This is the owner handoff for `show-what-changed@0.1.0` and the GitHub repository [kyusuku/show-what-changed](https://github.com/kyusuku/show-what-changed). Preparing these instructions does not authorize publication, a public GitHub release, a visibility change, or an announcement.
 
@@ -23,19 +23,37 @@ Missing implementation, platform evidence, or package verification prevents read
 Use Node `24.22.2` and npm `11.12.1`. Set these values from the readiness record, not from an older build.
 
 ```sh
-SWC_RELEASE_COMMIT='replace-with-reviewed-full-commit-id'
+set -eu
+SWC_PUBLIC_ROOT='/absolute/path/from-reviewed-public-handoff'
+SWC_RELEASE_COMMIT='replace-with-tested-implementation-commit'
+SWC_HANDOFF_COMMIT='read-from-separately-delivered-release-identity.json'
+SWC_SOURCE_ARCHIVE='/absolute/path/to/final-public-source.tar'
+SWC_EXPECTED_SOURCE_SHA256='read-from-separately-delivered-release-identity.json'
 SWC_TARBALL='/absolute/path/show-what-changed-0.1.0.tgz'
-SWC_EXPECTED_SHA256='replace-with-reviewed-sha256'
-git show --no-patch --format=fuller "$SWC_RELEASE_COMMIT"
-git status --short
-git diff --exit-code "$SWC_RELEASE_COMMIT" -- src package.json package-lock.json tsconfig.json tsconfig.build.json schema skills assets README.md LICENSE THIRD_PARTY_NOTICES.md scripts
-shasum -a 256 "$SWC_TARBALL"
+SWC_EXPECTED_SHA256='replace-with-reviewed-package-sha256'
+cd "$SWC_PUBLIC_ROOT"
+test "$(node --version)" = 'v24.22.2'
+test "$(npm --version)" = '11.12.1'
+test "$(git rev-parse HEAD)" = "$SWC_HANDOFF_COMMIT"
+test -z "$(git status --porcelain)"
+git merge-base --is-ancestor "$SWC_RELEASE_COMMIT" "$SWC_HANDOFF_COMMIT"
+git diff --exit-code "$SWC_RELEASE_COMMIT" "$SWC_HANDOFF_COMMIT" -- src package.json package-lock.json tsconfig.json tsconfig.build.json schema skills assets README.md LICENSE THIRD_PARTY_NOTICES.md scripts
+node --input-type=module - "$SWC_TARBALL" "$SWC_EXPECTED_SHA256" "$SWC_SOURCE_ARCHIVE" "$SWC_EXPECTED_SOURCE_SHA256" <<'NODE'
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+const [packagePath, packageHash, sourcePath, sourceHash] = process.argv.slice(2);
+for (const [path, expected] of [[packagePath, packageHash], [sourcePath, sourceHash]]) {
+	assert.match(expected, /^[a-f0-9]{64}$/);
+	assert.equal(createHash('sha256').update(readFileSync(path)).digest('hex'), expected);
+}
+NODE
 tar -tzf "$SWC_TARBALL"
 tar -xOf "$SWC_TARBALL" package/package.json
 npm publish "$SWC_TARBALL" --dry-run --ignore-scripts --access public --registry=https://registry.npmjs.org/
 ```
 
-Use `sha256sum` on Linux if needed. Check that the implementation and package inputs match `SWC_RELEASE_COMMIT`, the archive hash equals `SWC_EXPECTED_SHA256`, and the manifest names `show-what-changed` version `0.1.0`. A later documentation-only handoff commit can follow the tested implementation commit. It must not change package inputs. A dry run does not verify publishing authority.
+Check that the package manifest names `show-what-changed` version `0.1.0`. `SWC_RELEASE_COMMIT` identifies the tested implementation. `SWC_HANDOFF_COMMIT` identifies the final documentation and evidence commit. Read the handoff commit and final source archive digest from the separately delivered release identity manifest. Keep that manifest outside the archive it hashes. A documentation-only handoff must preserve package inputs and the approved tarball bytes. A dry run does not verify publishing authority.
 
 The package allowlist is `dist`, `schema`, `skills`, `assets`, `README.md`, `LICENSE`, and `THIRD_PARTY_NOTICES.md`, plus npm's package metadata. Reject fixtures, private plans, logs, local configuration, credentials, and audit temp files in the archive.
 
@@ -72,20 +90,27 @@ Record the new archive hash and rerun the installed-package and platform checks.
 
 After approving the release, use only the sanitized public checkout identified by the final readiness record. Its complete history, refs, source archive, and package must have passed the public privacy review. Do not add the development repository as a remote or transfer its refs, tags, or objects into this checkout. Review the handoff and tested implementation identities there, and confirm the configured remote before pushing.
 
+Use a new empty owner-controlled destination, or independently review every existing destination ref and its hosted content before any visibility change. A clean local checkout does not remove remote branches, tags, pull-request content, releases, or Actions history and logs. GitHub exposes Actions history and logs when a repository becomes public. If the named destination contains private development material, stop and prepare a separately approved clean destination. A different repository URL changes package metadata and requires a new candidate. See [GitHub repository visibility](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility).
+
 ```sh
 SWC_PUBLIC_ROOT='/absolute/path/from-reviewed-public-handoff'
 cd "$SWC_PUBLIC_ROOT"
 git remote -v
 git log --oneline -3
 git status --short
-git push origin main
+git branch --show-current
+git remote add origin https://github.com/kyusuku/show-what-changed.git
+git remote get-url origin
+git push --no-follow-tags origin "$SWC_HANDOFF_COMMIT:refs/heads/main"
 ```
 
-The owner can then change repository visibility to public in GitHub and create the `v0.1.0` release tag at the reviewed handoff commit. These are public owner actions and have not been performed. Recheck the documentation and synthetic demos in the public repository before announcing it. The license, README, contribution guide, security policy, and reproducible verification instructions are already in the candidate source.
+The prepared checkout has no remote. Add `origin` only after confirming the owner-controlled destination above. If `origin` already exists, inspect its URL instead of replacing it silently. Confirm that the reviewed handoff is on `main` before the push. A non-fast-forward rejection requires review of the remote history; do not force-push as part of this procedure.
+
+After that review and explicit authorization, the owner can change repository visibility and create the `v0.1.0` release tag at `SWC_HANDOFF_COMMIT`. These public owner actions have not been performed. Recheck the documentation and synthetic demos in the public repository before announcing it. The license, README, contribution guide, security policy, and reproducible verification instructions are already in the candidate source.
 
 ## Confirm registry access
 
-The owner must authorize the public release before the publish command. Authenticate using npm's interactive login and complete any required second factor. Do not paste credentials into repository files, logs, chat, or command arguments.
+The owner must authorize the public release before the publish command. For this interactive local route, verify that the npm account has two-factor authentication enabled, then log in and complete the publish challenge. Direct npm publication requires account 2FA or a granular token with bypass 2FA. This guide uses the interactive account route. Do not paste credentials into repository files, logs, chat, or command arguments. See [npm public package publishing](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages/).
 
 ```sh
 npm login --registry=https://registry.npmjs.org/
@@ -94,11 +119,11 @@ npm view show-what-changed name version maintainers --json --registry=https://re
 npm view show-what-changed@0.1.0 version --json --registry=https://registry.npmjs.org/
 ```
 
-An `E404` means no readable registry record at that time. If the name now exists, confirm that the authenticated owner has publishing rights. If `0.1.0` already exists, stop. npm does not permit reuse of a published name and version. See [npm publish](https://docs.npmjs.com/cli/v11/commands/npm-publish/).
+An `E404` means no readable registry record at that time. It does not reserve the name or prove publication rights. If the name now exists, run `npm owner ls show-what-changed --registry=https://registry.npmjs.org/` and confirm that the authenticated identity has publishing rights. Treat network or authentication errors as unresolved checks. If `0.1.0` already exists, stop. npm does not permit reuse of a published name and version. See [npm owners](https://docs.npmjs.com/cli/v11/commands/npm-owner/) and [npm publish](https://docs.npmjs.com/cli/v11/commands/npm-publish/).
 
 ## Publish the archive from the owner's machine
 
-This route publishes the exact reviewed archive without npm provenance. A local shell cannot produce npm's supported CI provenance. The current private GitHub repository also prevents provenance generation.
+The prepared handoff uses this local archive route. It publishes the exact reviewed archive without npm provenance. A local shell cannot produce npm's supported CI provenance. The optional hosted route below requires separate setup and approval.
 
 After approval and identity checks, the owner can publish with this command.
 
@@ -136,6 +161,9 @@ For token-free publishing after package settings are available, configure npm's 
 | Repository | `show-what-changed` |
 | Workflow filename | `publish.yml` |
 | Environment | Match the workflow's environment exactly if one is configured |
+| Allowed actions | Explicitly allow `npm publish` for this direct publication route |
+
+New trusted-publisher configurations default to staging permission. They must complete their first successful publication within two days or be recreated. Dist-tag permission is separate. Do not substitute staged publication without separate approval. Staging an unpublished package can create a public placeholder. See [npm trusted publishers](https://docs.npmjs.com/trusted-publishers/) and [npm staged publication](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages/#staged-publishing).
 
 Trusted publishing requires a matching existing workflow and npm package configuration. Do not assume an unpublished package already has that configuration. npm automatically adds provenance for trusted publication from a public repository. Node `24.22.2` and npm `11.12.1` meet the documented minimums. See [npm trusted publishers](https://docs.npmjs.com/trusted-publishers/) for setup and current provider restrictions.
 
@@ -143,16 +171,41 @@ No workflow, trusted-publisher connection, public repository, or publishing cred
 
 ## Verify the published version
 
-After a successful authorized publish, inspect the exact version and install it in a fresh directory.
+After a successful authorized publish, use a fresh directory and cache to retrieve the exact registry archive. Compare its bytes with the approved package digest and its SHA-512 with registry integrity before running it. Use the reviewed public handoff checkout for the verification scripts and install the prerequisites documented in the quickstart. The public-app check also requires pnpm `11.9.0` on `PATH`.
 
 ```sh
-npm view show-what-changed@0.1.0 version dist.integrity dist.tarball repository --json --registry=https://registry.npmjs.org/
+set -eu
 SWC_VERIFY_DIR="$(mktemp -d)"
-npm install --prefix "$SWC_VERIFY_DIR" --no-audit --no-fund show-what-changed@0.1.0
-"$SWC_VERIFY_DIR/node_modules/.bin/show-what-changed" --version
+SWC_REGISTRY_TARBALL="$SWC_VERIFY_DIR/show-what-changed-0.1.0.tgz"
+npm view show-what-changed@0.1.0 --json --cache "$SWC_VERIFY_DIR/npm-cache" --registry=https://registry.npmjs.org/ > "$SWC_VERIFY_DIR/registry.json"
+npm pack show-what-changed@0.1.0 --ignore-scripts --json --pack-destination "$SWC_VERIFY_DIR" --cache "$SWC_VERIFY_DIR/npm-cache" --registry=https://registry.npmjs.org/ > "$SWC_VERIFY_DIR/registry-pack.json"
+node --input-type=module - "$SWC_REGISTRY_TARBALL" "$SWC_EXPECTED_SHA256" "$SWC_VERIFY_DIR/registry.json" <<'NODE'
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+const [path, approvedHash, metadataPath] = process.argv.slice(2);
+const metadata = JSON.parse(readFileSync(metadataPath, 'utf8'));
+const bytes = readFileSync(path);
+assert.equal(metadata.name, 'show-what-changed');
+assert.equal(metadata.version, '0.1.0');
+assert.match(approvedHash, /^[a-f0-9]{64}$/);
+assert.equal(createHash('sha256').update(bytes).digest('hex'), approvedHash);
+const integrity = 'sha512-' + createHash('sha512').update(bytes).digest('base64');
+assert(metadata.dist.integrity.split(/\s+/).includes(integrity));
+NODE
+mkdir "$SWC_VERIFY_DIR/registry-install"
+npm install --prefix "$SWC_VERIFY_DIR/registry-install" --ignore-scripts --no-audit --no-fund --cache "$SWC_VERIFY_DIR/npm-cache" --registry=https://registry.npmjs.org/ show-what-changed@0.1.0
+"$SWC_VERIFY_DIR/registry-install/node_modules/.bin/show-what-changed" --version
+cd "$SWC_PUBLIC_ROOT"
+test "$(git rev-parse HEAD)" = "$SWC_HANDOFF_COMMIT"
+test "$(pnpm --version)" = '11.9.0'
+node scripts/release-smoke.mjs "$SWC_REGISTRY_TARBALL" "$SWC_VERIFY_DIR/package-smoke"
+node scripts/real-app-smoke.mjs "$SWC_REGISTRY_TARBALL" "$SWC_VERIFY_DIR/public-app"
 ```
 
-Record the registry integrity, release commit, original candidate SHA-256, publishing identity, and chosen provenance route. When published with provenance, inspect the package's attestation and use `npm audit signatures` in the fresh installation directory. Do not claim provenance from the presence of a successful publish alone.
+Both smoke reports must say `passed` and record the approved package SHA-256. The first script exercises installed CLI behavior, success and partial output, offline composition, and cleanup. The second exercises the public web-app navigation and validation scenarios three times each plus WORKTREE behavior. Inspect its resulting motion videos at normal speed and verify the intended visible changes. These checks do not replace the prepublication platform gates.
+
+Retain the registry metadata, downloaded tarball digest, source and handoff commits, command exits, report hashes, publishing identity, and chosen route. When the route includes provenance, run `npm --prefix "$SWC_VERIFY_DIR/registry-install" audit signatures --registry=https://registry.npmjs.org/`. Inspect the attestation for this package and confirm its source commit and workflow match the approved publication. A successful command or verified dependency signatures alone do not establish this package's provenance. [npm provenance verification](https://docs.npmjs.com/generating-provenance-statements/#verifying-provenance-attestations)
 
 Only after publication can the README's pinned `npx` example resolve the public `0.1.0` package. Update candidate wording and repository visibility claims to match the observed release state.
 

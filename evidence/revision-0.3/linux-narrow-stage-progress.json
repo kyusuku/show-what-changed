@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-03T18:56:41.152350+00:00",
+  "status": "diagnostic-complete-non-reproducing",
+  "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+  "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+  "scope": "Fixed five control and instrumented pairs at 390x844, fresh verifier per arm. Diagnostic only.",
+  "payloadManifestSha256": "bd0029dd138b59876e17157248b69e6595e517033a932e95bf816b62ca882c96",
+  "physicalAdapterSealSha256": "8d566030ebc66e92a9580ef3303ea3c48b16e728907c5d38d5486f453df0c1d4",
+  "independentPreparationReviewSha256": "d5e7dfdc93ca2aa25bb786b7df248e0a6e19ca24aefefa6c0e3bcb61117c4eb7",
+  "offlineChecks": 17,
+  "stagedPayloadReadback": "passed",
+  "runtimeOutcome": {
+    "nativeExitCode": 0,
+    "fixedArms": 10,
+    "numericPassed": 10,
+    "failedInstrumentedGaps": 0,
+    "structuralFailures": 0,
+    "laterArmsUnstarted": 0,
+    "originalsSha256": "5d47b397c11cbee36caac3b4cc251e18174116bb3decb49d3959b9c102bd69cb"
+  },
+  "cleanupOutcome": {
+    "hostCommands": 32,
+    "allExitZero": true,
+    "exportEntries": 4877,
+    "evidenceExported": true,
+    "ownedContainerRemoved": true,
+    "fullBaselinePreserved": true,
+    "vmStopped": true,
+    "ownershipSha256": "47faf072897014ab43287242ff905a33ace6829e0ba7c35346767ea025cc3ada",
+    "rootActualReviewSha256": "3a1f27e000485f742a2dc5c9a6e16db230c7529f000dc4eac6344de3f598ca92"
+  },
+  "automaticRetry": false,
+  "releaseAcceptance": false,
+  "publicationPerformed": false,
+  "limits": "Preparation checks and a running diagnostic do not prove motion quality. Prior failed runs remain failed.",
+  "independentActualReview": {
+    "status": "passed-nonreproducing-stop",
+    "reportSha256": "d51927748883adffd9f27cb2c635d99d3b9ca87d1b89b7ebf2cfc761cdc0bded",
+    "machineReportSha256": "c8de7158b87132504dec5f28b1f9254f164abf9a97271a39289ed2752c63c884",
+    "physicalClosureSha256": "258d4d5b1a03869aa96ed883feae3c272d0d062493925fd51d153c6a702d7893",
+    "maxMovingGapMs": 83.330000000002,
+    "maxClockErrorMs": 10.064213500013,
+    "instrumentedRequests": 2118,
+    "stageBoundaries": 21180,
+    "observerAttributionIneligibleRequests": 3,
+    "videoRedecodePerformedByReviewer": false
+  },
+  "causeEstablished": false,
+  "productFixEstablished": false,
+  "next": "The fixed diagnostic is closed. One separate full current Linux suite is selected, including the unchanged canonical six-case motion matrix and its later normal-speed review. Historical failures remain unchanged; no repair or cause claim."
+}

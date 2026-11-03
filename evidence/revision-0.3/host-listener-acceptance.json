@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-acceptance",
+  "recordedAt": "2026-11-03T09:29:47.074985+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "acceptedGates": [
+    "G06"
+  ],
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "status": "accepted-with-stated-scope",
+    "reportSha256": "94ddca2ef8d279d9e2fb2756f3c7bd6ab4dea4685d9e83f59b2411ce0d7e7674",
+    "structuredReportSha256": "59ee6690f8189bdbbd6d1e2a7a61359226dd8595a1506a9531c7e9fac8a59071"
+  },
+  "coverage": {
+    "id": "G06",
+    "requirement": "Host listener conflicts, silent fallback, unrelated listeners, readiness redirects/timeouts, and startup/capture exits produce truthful errors; unrelated processes survive.",
+    "recommendation": "accept",
+    "normativeReferences": [
+      {
+        "path": "spec.md",
+        "lines": [
+          174,
+          176
+        ]
+      },
+      {
+        "path": "spec.md",
+        "lines": [
+          391,
+          392
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "claim": "Real occupied port excluded, independent pair starts, actual listeners disappear on cleanup, unrelated listener remains.",
+        "source": "test/integration/lifecycle.test.ts",
+        "lines": [
+          35,
+          44
+        ],
+        "log": "macosIntegration",
+        "class": "actual-host-listener source test"
+      },
+      {
+        "claim": "Real wildcard bind, fallback port, wrong status, external redirect and startup process exit produce exit 6 with precise reason codes and empty owned groups after cleanup.",
+        "source": "test/integration/lifecycle.test.ts",
+        "lines": [
+          46,
+          58
+        ],
+        "expectedReasons": [
+          "NON_LOOPBACK_LISTENER",
+          "SERVER_TIMEOUT",
+          "READINESS_REDIRECT",
+          "SERVER_EXITED"
+        ],
+        "log": "macosIntegration",
+        "class": "actual-host-listener/process source tests"
+      },
+      {
+        "claim": "An unrelated live listener is rejected as UNOWNED_LISTENER and survives.",
+        "source": "test/integration/lifecycle.test.ts",
+        "lines": [
+          59,
+          64
+        ],
+        "log": "macosIntegration",
+        "class": "actual-host-listener source test"
+      },
+      {
+        "claim": "A real bind-after-selection race retries onto other ports and preserves unrelated listener. The spawn spy schedules the race but calls the real original spawn.",
+        "source": "test/integration/adversarial-gaps.test.ts",
+        "lines": [
+          187,
+          214
+        ],
+        "log": "macosIntegration",
+        "class": "actual-host-port-race with controlled trigger"
+      },
+      {
+        "claim": "Real supervised server leader exit resolves code 12 even while a descendant holds inherited pipes. Runtime directly forwards child.exited to Server.exited.",
+        "sources": [
+          "test/unit/runtime.test.ts:124-129",
+          "src/runtime/index.ts:189-193",
+          "src/runtime/supervisor.ts:32-58"
+        ],
+        "log": "macosUnitContracts",
+        "class": "actual-process producer plus inspected direct wiring"
+      },
+      {
+        "claim": "Real recorder consumes controlled Server.exited promises during pending capture, after a side checkpoint, and before first motion. It emits SERVER_EXITED, partial outcome, no verified ratio for the failed pair, blocked later actions and intact peer output.",
+        "sources": [
+          "test/integration/recorder.test.ts:162-164",
+          "test/integration/recorder.test.ts:531-543",
+          "test/integration/recorder.test.ts:604-622",
+          "test/integration/recorder.test.ts:689-715",
+          "src/recorder/index.ts:245-246"
+        ],
+        "log": "macosIntegration",
+        "class": "real-browser recorder with injected exit boundary; not a real process-kill-during-capture run"
+      },
+      {
+        "claim": "Installed setup/startup interruption rows preserve unrelated process identity and return actual 130,143,10; repaired installed recording rows also pass. These support lifecycle wiring and do not replace the more specific listener tests.",
+        "reports": [
+          "hostInterruptions",
+          "recordingInterruptions"
+        ],
+        "class": "retained installed subprocess evidence"
+      }
+    ],
+    "scopeReason": "The normative G06 row expressly says Host. Real container startup failure is expressly in G07 and is not an extra G06 condition. G06 does not require every negative listener case through an installed archive; G04/G19/G20 explicitly state installed-package requirements where intended. The host producer and recorder consumer boundaries are tested separately with direct source wiring inspected.",
+    "limits": [
+      "No new runtime execution in this review.",
+      "Recorder exit classification uses controlled exit promises, not a newly observed actual server death during installed capture. This is explicitly paired with actual supervisor-exit and direct wiring evidence.",
+      "Fake Docker readiness tests and skipped live Docker tests are not used to accept G06.",
+      "Earlier host recording failures remain failed records; only the later cb641 actual reruns supersede those affected observations.",
+      "No verdict for G07 or any other gate; no publication readiness claim."
+    ],
+    "missingAssertions": []
+  },
+  "inputRecords": {
+    "sourceIdentity": {
+      "name": "source-commit-portable-tests.json",
+      "sha256": "ece4b52f48a4ce0807a6075a698e833961b098f19f21ea0f27b00ec9fa9b459d",
+      "bytes": 1309
+    },
+    "packageIdentity": {
+      "name": "package-identity.json",
+      "sha256": "b572a88bd15a62ec093b8d6f52d2b5e84818ec8c9a75d930eae93d5a9bee159d",
+      "bytes": 30315
+    },
+    "installedIdentity": {
+      "name": "installed-identity.json",
+      "sha256": "22a86698092e194307725d422e3ab4edc320e6cc48ca3b0409a8fb410c17070c",
+      "bytes": 31058
+    },
+    "macosUnitContracts": {
+      "name": "swc-integrated-unit-contracts-20261103T0427.log",
+      "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+      "bytes": 109665
+    },
+    "macosIntegration": {
+      "name": "swc-integrated-integration-20261103T0430.log",
+      "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+      "bytes": 16443
+    },
+    "hostCompatibility": {
+      "name": "report.json",
+      "sha256": "0e9a048e83808139ce59a516e5775d52ed4636108f5b4db8cf197beb12bbcb63",
+      "bytes": 20376
+    },
+    "hostInterruptions": {
+      "name": "report.json",
+      "sha256": "4293e40c6be6ec71f4a06a5a4b6f6d1b7ed72529f8e28a590341fb7c7d552fd7",
+      "bytes": 55960
+    },
+    "recordingInterruptions": {
+      "name": "report.json",
+      "sha256": "b8bf65223690059c2086621fb0c2e1ef4fc8eb81c876e8c6414ed69d21fe11aa",
+      "bytes": 38300
+    },
+    "sourceTransfer": {
+      "name": "swc-final-acceptance-source-transfer.json",
+      "sha256": "a4a513521d21a2c8da9112406248cba9c92d184478d56533a8a9e49d04f62d46",
+      "bytes": 97699
+    },
+    "runtimeTransferReview": {
+      "name": "swc-remaining-gate-evidence-review.md",
+      "sha256": "7b49bf54cf2231ccf0cd505a52d58389f56931f0bffc457b233e858b0a3360a1",
+      "bytes": 21225
+    },
+    "freshDocumentationRecipe": {
+      "name": "swc-fresh-recipe-execution.md",
+      "sha256": "09426fd5f0e520884c27de7f6d6d5474bb2eefd71a20a9dbad4b49df1190a2a1",
+      "bytes": 6834
+    },
+    "immutableStartingIndex": {
+      "name": "swc-final-gate-review-inputs-20261103.json",
+      "sha256": "e0489ed7ee94bae6fe45233fc658b1f688f1416a9160ad44befc091ba116364b",
+      "bytes": 11191
+    },
+    "priorIndependentSourceReview": {
+      "name": "swc-final-source-gates-independent-review.md",
+      "sha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+      "bytes": 5954
+    },
+    "priorIndependentSourceReviewJson": {
+      "name": "swc-final-source-gates-independent-review.json",
+      "sha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec",
+      "bytes": 75367
+    },
+    "priorIndependentSourceVerification": {
+      "name": "swc-final-source-gates-verification.json",
+      "sha256": "55648b4b0f7de274e4327860531f850643c07f3e974f6db7e1c5b8ca06051f03",
+      "bytes": 48179
+    },
+    "dockerRecipePreparation": {
+      "name": "swc-r8-docker-recipe-preparation.md",
+      "sha256": "9d2ae02089b9a1f904a89c4d27d81e8aae040529a73603c0e00cbdb0678d7a3b",
+      "bytes": 4423
+    },
+    "dockerRecipePreparationIdentity": {
+      "name": "swc-r8-docker-recipe-preparation-identity.json",
+      "sha256": "16fccf30a2328c5a64cc52abadd81958d03b8a86a523202cb1c4e8a14ffbffbf",
+      "bytes": 2949
+    },
+    "spec": {
+      "name": "spec.md",
+      "sha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+      "bytes": 61921
+    }
+  },
+  "retainedSourceCommands": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+      "actualExitCode": 0,
+      "passed": 792,
+      "skipped": 11
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+      "actualExitCode": 0,
+      "passed": 103,
+      "skipped": 0
+    }
+  ],
+  "sourceAndPackageIdentityLimits": "Selected source inputs match the retained source-transfer manifest; the complete archive comparison remains the prior independent review. The transfer manifest was recorded after the source test runs. Earlier installed host observations transfer across unchanged runtime bytes, with README as the only package change.",
+  "openG05": [
+    "Add an observed readiness-dependent process-service setup and app setup case.",
+    "Read the existing private setup/bootstrap records in the already planned real container recipe and execute it."
+  ],
+  "newRuntimeExecution": false,
+  "releaseReady": false,
+  "publicationPerformed": false
+}

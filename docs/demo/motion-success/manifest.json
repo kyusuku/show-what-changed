@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 2,
+  "toolVersion": "0.1.0",
+  "runId": "20261103T053301275Z-1f932e651b249641",
+  "state": "terminal",
+  "status": "ok",
+  "exitCode": 0,
+  "captureMode": "motion",
+  "specRevision": "0.3",
+  "startedAt": "2026-11-03T05:33:01.275Z",
+  "endedAt": "2026-11-03T05:33:58.657Z",
+  "sources": {
+    "before": {
+      "requested": "0363218e459653bdfdf806407241148cb09212f8",
+      "commit": "0363218e459653bdfdf806407241148cb09212f8",
+      "kind": "commit",
+      "materializedHash": "0aff0ff675ff7e860c6ae4002d386e17e41f71be163976de733f865685fc1582"
+    },
+    "after": {
+      "requested": "cbc415a909dc27b625361be51dea09b18ecd8ab8",
+      "commit": "cbc415a909dc27b625361be51dea09b18ecd8ab8",
+      "kind": "commit",
+      "materializedHash": "06bb25997ae1d4fea863051f9709fd1d5467a8dc8a8078769ec5c84136d05103"
+    },
+    "baseResolution": "exact"
+  },
+  "versions": {
+    "node": "v24.22.2",
+    "browser": "156.0.8078.4",
+    "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "publicRecipeDigest": "f061748c9dec73690a520bb39110c72c1862663b4c0893925dae57913eef8200",
+  "publicScenarioDigest": "5c4ada455a8d007632afac11390dc58d3fe675afe4027b1ca48c41d14cbe520d",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "deviceScaleFactor": 1
+  },
+  "dataParity": "stateless-declared",
+  "coverage": {
+    "selected": [
+      {
+        "path": "/board",
+        "reason": "EXPLICIT_SELECTION",
+        "via": []
+      }
+    ],
+    "unresolved": [],
+    "omitted": [],
+    "unsupported": [],
+    "complete": false
+  },
+  "execution": {
+    "before": {
+      "state": "stateless",
+      "seedId": null,
+      "dependencyReproducibility": "unverified",
+      "services": [],
+      "kind": "process",
+      "buildArtifacts": "unverified"
+    },
+    "after": {
+      "state": "stateless",
+      "seedId": null,
+      "dependencyReproducibility": "unverified",
+      "services": [],
+      "kind": "process",
+      "buildArtifacts": "unverified"
+    }
+  },
+  "captureQuality": [
+    {
+      "scenarioId": "workshop-validation",
+      "side": "before",
+      "stats": {
+        "receivedFrames": 20,
+        "persistedFrames": 20,
+        "acknowledgedFrames": 20,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 933.295999886468
+      },
+      "clockErrorBoundMs": 32.908604580017254,
+      "maxDriftMs": 14.07883358001709,
+      "failureAtMs": null
+    },
+    {
+      "scenarioId": "workshop-validation",
+      "side": "after",
+      "stats": {
+        "receivedFrames": 20,
+        "persistedFrames": 20,
+        "acknowledgedFrames": 20,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 933.295999886468
+      },
+      "clockErrorBoundMs": 33.50933286476129,
+      "maxDriftMs": 14.555395364761353,
+      "failureAtMs": null
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "workshop-validation",
+      "title": "E[redacted]plain an invalid task proposal",
+      "initialRoute": "/board",
+      "outcome": "ok",
+      "errors": [],
+      "steps": [
+        {
+          "id": "open-board",
+          "op": "goto",
+          "caption": "Open route",
+          "observeMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/000-before.png",
+              "sha256": "a6aed1b87c690772f94ac933ef1ac662097f2bdb1071af02a924a8e6bf5ff7bf",
+              "bytes": 332211
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 1048.574834
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/000-after.png",
+              "sha256": "a6aed1b87c690772f94ac933ef1ac662097f2bdb1071af02a924a8e6bf5ff7bf",
+              "bytes": 332211
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 1047.0447079999994
+          },
+          "changeRatio": 0
+        },
+        {
+          "id": "board-ready",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "observeMs": 400,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/001-before.png",
+              "sha256": "a6aed1b87c690772f94ac933ef1ac662097f2bdb1071af02a924a8e6bf5ff7bf",
+              "bytes": 332211
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 477.3621670000002
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/001-after.png",
+              "sha256": "a6aed1b87c690772f94ac933ef1ac662097f2bdb1071af02a924a8e6bf5ff7bf",
+              "bytes": 332211
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 477.2630829999998
+          },
+          "changeRatio": 0
+        },
+        {
+          "id": "navigate-proposal",
+          "op": "click",
+          "caption": "Click control",
+          "observeMs": 600,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/002-before.png",
+              "sha256": "6cfdbe5302d264faf138cf6f4bf6f948567dc3b0dc56ea84668b6739c772917d",
+              "bytes": 320161
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 697.3024999999998
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/002-after.png",
+              "sha256": "6cfdbe5302d264faf138cf6f4bf6f948567dc3b0dc56ea84668b6739c772917d",
+              "bytes": 320161
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 697.3056250000009
+          },
+          "changeRatio": 0
+        },
+        {
+          "id": "proposal-ready",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "observeMs": 400,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/003-before.png",
+              "sha256": "6cfdbe5302d264faf138cf6f4bf6f948567dc3b0dc56ea84668b6739c772917d",
+              "bytes": 320161
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 467.06354199999987
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/003-after.png",
+              "sha256": "6cfdbe5302d264faf138cf6f4bf6f948567dc3b0dc56ea84668b6739c772917d",
+              "bytes": 320161
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 469.6119580000013
+          },
+          "changeRatio": 0
+        },
+        {
+          "id": "short-title",
+          "op": "fill",
+          "caption": "Fill input",
+          "observeMs": 300,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/004-before.png",
+              "sha256": "d65dd5ce579d10971a27b0356b55390b83daba168334f654e10eb44df1831d78",
+              "bytes": 321164
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 405.42483399999946
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/004-after.png",
+              "sha256": "d65dd5ce579d10971a27b0356b55390b83daba168334f654e10eb44df1831d78",
+              "bytes": 321164
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 405.48504200000025
+          },
+          "changeRatio": 0
+        },
+        {
+          "id": "invalid-email",
+          "op": "fill",
+          "caption": "Fill input",
+          "observeMs": 300,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/005-before.png",
+              "sha256": "81df111399d67857081bfc59eca7413b4e2a1379b42a2dea8c7537589bd5331b",
+              "bytes": 319408
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 383.41158299999915
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/005-after.png",
+              "sha256": "81df111399d67857081bfc59eca7413b4e2a1379b42a2dea8c7537589bd5331b",
+              "bytes": 319408
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 383.3719579999997
+          },
+          "changeRatio": 0
+        },
+        {
+          "id": "submit-task",
+          "op": "click",
+          "caption": "Click control",
+          "observeMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/006-before.png",
+              "sha256": "c398ab4d051c698552262f10b99ce67c38394bd491c0598b6339a990fee090ff",
+              "bytes": 348599
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 909.4095830000006
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/006-after.png",
+              "sha256": "deb370a08c83451b91c8c832a96f335da4b3a754aab5fdd6717ec962820655be",
+              "bytes": 347111
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 913.3039589999989
+          },
+          "changeRatio": 0.05285271600437477
+        },
+        {
+          "id": "validation-visible",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "observeMs": 400,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/007-before.png",
+              "sha256": "c398ab4d051c698552262f10b99ce67c38394bd491c0598b6339a990fee090ff",
+              "bytes": 348599
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 480.21716600000036
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/007-after.png",
+              "sha256": "deb370a08c83451b91c8c832a96f335da4b3a754aab5fdd6717ec962820655be",
+              "bytes": 347111
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 480.21941700000025
+          },
+          "changeRatio": 0.05285271600437477
+        },
+        {
+          "id": "validation-feedback",
+          "op": "screenshot",
+          "caption": "Shared checkpoint retains the actual feedback source change.",
+          "observeMs": 400,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/008-before.png",
+              "sha256": "c398ab4d051c698552262f10b99ce67c38394bd491c0598b6339a990fee090ff",
+              "bytes": 348599
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 470.4912910000003
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "frames/008-after.png",
+              "sha256": "deb370a08c83451b91c8c832a96f335da4b3a754aab5fdd6717ec962820655be",
+              "bytes": 347111
+            },
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "rectangles",
+              "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 490.6324170000007
+          },
+          "changeRatio": 0.05285271600437477
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "verifiedPairs": 9,
+    "changedPairs": 3,
+    "expectedAbsences": 0,
+    "exclusions": 0,
+    "failedSteps": 0,
+    "blockedSteps": 0,
+    "coverageOmissions": 0
+  },
+  "timeline": {
+    "fps": 30,
+    "totalFrames": 199,
+    "templateVersion": 2,
+    "width": 1920,
+    "height": 686
+  },
+  "artifacts": {
+    "video": {
+      "path": "compare.mp4",
+      "sha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
+      "bytes": 115270
+    },
+    "poster": {
+      "path": "poster.png",
+      "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+      "bytes": 79698
+    },
+    "capture": {
+      "path": "capture.json",
+      "sha256": "987f5eabfbc0d558631fd0adb5ddd10107027a380308477323fd39d71af65202",
+      "bytes": 87522
+    },
+    "timeline": {
+      "path": "timeline.json",
+      "sha256": "b705da30af6c69a935001ea0bfb896c40ffd1f4bf342f1d368dda9753695393e",
+      "bytes": 54124
+    },
+    "pr": {
+      "path": "pr.md",
+      "sha256": "7d905c0ccee0c1dbcb3d5f1d5760109152f7af722776966bd7e628c9a564d6df",
+      "bytes": 925
+    }
+  },
+  "comparisonOutcome": {
+    "status": "ok",
+    "capture": "ok",
+    "coverage": "explicit",
+    "provenance": {
+      "before": {
+        "valid": true,
+        "actualHash": "0aff0ff675ff7e860c6ae4002d386e17e41f71be163976de733f865685fc1582",
+        "errors": []
+      },
+      "after": {
+        "valid": true,
+        "actualHash": "06bb25997ae1d4fea863051f9709fd1d5467a8dc8a8078769ec5c84136d05103",
+        "errors": []
+      }
+    }
+  },
+  "cleanupOutcome": {
+    "status": "ok",
+    "errors": []
+  },
+  "encodingOutcome": {
+    "status": "ok",
+    "errors": []
+  },
+  "warnings": [
+    {
+      "code": "EXPLICIT_SELECTION",
+      "message": "A recorded limitation applies. Review this warning code in the support documentation."
+    },
+    {
+      "code": "CSS_LOCATOR",
+      "message": "A recorded limitation applies. Review this warning code in the support documentation."
+    },
+    {
+      "code": "CSS_LOCATOR",
+      "message": "A recorded limitation applies. Review this warning code in the support documentation."
+    }
+  ],
+  "errors": [],
+  "errorHistory": [],
+  "phaseTimings": {
+    "validating": 813.021917,
+    "preparing": 433.12649999999985,
+    "starting": 4725.4292080000005,
+    "recording": 7696.2810420000005,
+    "rendering": 6648.497083999999,
+    "encoding": 35399.107541,
+    "cleaning": 1798.9615419999973
+  }
+}

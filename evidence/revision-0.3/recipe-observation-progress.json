@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "status": "host-correction-accepted-container-run-pending",
+  "recordedAt": "2026-11-03T09:54:31.127202+00:00",
+  "gate": "G05",
+  "baselineCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+  "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+  "newSourceCommitPending": false,
+  "sourceDelta": [
+    {
+      "path": "test/unit/runtime-recipe.test.ts",
+      "beforeSha256": "79b8b7a22fcd18ae1337a7d20a53739a16f098876c0fd7ec75b11d6509e8f178",
+      "currentSha256": "951d2087f216d69af482968ad39cb8900eb3a993b739b0436756595ddd896f83"
+    },
+    {
+      "path": "fixtures/services/isolated-store.cjs",
+      "beforeSha256": "4ff0b044f91daa66d30a66994d760a388283ddf9b464914d974870e5bd127331",
+      "currentSha256": "ebda26d440cb676392beeed8d0de5f5eb706dbc4d18e66ffe487a42ca9ab2a0f"
+    },
+    {
+      "path": "fixtures/services/ordered.cjs",
+      "beforeSha256": "528d94d96332e67e8e0079a5fc8d6868257092a69c405ae41ab86f0e2a414e40",
+      "currentSha256": "f3161a85097e815d94a5877c8ab5933c5f90c8779df24fba323cfaf01bdbcc26"
+    },
+    {
+      "path": "test/unit/runtime-docker.test.ts",
+      "beforeSha256": "454b0b5f47e527d123843b4ac8f9cd4d5bbc44c94ad6c2965e669893389b55e5",
+      "currentSha256": "0f601ab90b277481c45c6e3e2ac5ca67f5036a4810fdf8570024e85fe69ed365"
+    }
+  ],
+  "checks": [
+    {
+      "name": "focused ordered host services",
+      "exitCode": 0,
+      "passedTests": 1,
+      "skippedTests": 11
+    },
+    {
+      "name": "store TCP readiness counterfactual",
+      "exitCode": 1,
+      "expectedFailure": "Required downstream observation returned HTTP 503 instead of 200."
+    },
+    {
+      "name": "missing service setup counterfactual",
+      "exitCode": 1,
+      "expectedFailure": "Required setup file was absent before the service could listen."
+    },
+    {
+      "name": "typecheck",
+      "exitCode": 0
+    }
+  ],
+  "initialSandboxAttempt": {
+    "exitCode": 1,
+    "scope": "Process inspection was unavailable before fixture execution. The authorized elevated run then passed."
+  },
+  "sourceAssertionCounts": {
+    "meaning": "Whole-file textual expect call sites, not executed assertion counts.",
+    "runtimeRecipe": {
+      "before": 31,
+      "after": 36
+    },
+    "runtimeDocker": {
+      "before": 91,
+      "after": 100
+    }
+  },
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "blockingFindings": [],
+    "reportSha256": "4bf87e7cf7322fcbd97c6c2795545add5d098b0318bbd2b3fed25e2492daeaae",
+    "structuredReportSha256": "a5666f5cd0631b4702dea2f4c79d9d9af10916a796d14bc17a19e2c9133a625d"
+  },
+  "rootVerification": {
+    "exactFourFileDeltaReviewed": true,
+    "baselineFilesMatchPriorCandidate": true,
+    "currentFilesMatchReviewedAfterSnapshots": true,
+    "productionSourcesUnchanged": true,
+    "packageMetadataLockReadmeAndBuildConfigUnchanged": true
+  },
+  "limits": [
+    "The seeded Docker setup/bootstrap and published-port assertions have not run.",
+    "Counterfactual copies link the existing product source and dependencies. Their evidence is focused behavior proof, not a frozen whole-candidate run.",
+    "The new source candidate requires independent evidence transfer and a source-bound Docker runner before dependent acceptance.",
+    "G05 remains pending acceptance."
+  ],
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "preparedSourceCandidate": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "tree": "dfdd256a38d7d8e9cd691bc4234af9bb18f098c5",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "linuxSourceArchiveSha256": "b88e9c618f4caed2506a3e4c136ab5f52d367e98e55a7697eac6a30a7cd394b2",
+    "changedFiles": 4,
+    "packageTarballUnchanged": true,
+    "status": "prepared-independent-transfer-and-platform-verification-pending",
+    "privacyLiteralScan": {
+      "status": "passed",
+      "checkedInputs": 4100,
+      "findings": 0,
+      "reportSha256": "3e79ff291c1f972441d1de751b06a1111e981633074b365b058d5b6a54c8b72a",
+      "scope": "Prepared source tree, all reachable history, full source archive and existing package. Credential classification and final public artifact acceptance remain separate."
+    }
+  }
+}

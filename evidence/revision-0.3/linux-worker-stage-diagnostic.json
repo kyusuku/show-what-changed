@@ -1,0 +1,633 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-incomplete",
+  "recordedAt": "2026-11-03T11:00:16.502523+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "manifestSha256": "7d7d63930c8c2c966bace8d1aaeba486a798e148a0230a55481c0e99fbe506ab"
+  },
+  "scope": "One fixed five-pair desktop stage diagnostic. Four instrumented cases have complete timing records. The final control failed before a bundle returned; the final instrumented case was not started.",
+  "counts": {
+    "plannedCases": 10,
+    "startedCases": 9,
+    "numericPassed": 7,
+    "numericFailed": 1,
+    "incomplete": 1,
+    "notStarted": 1,
+    "instrumentedTelemetry": {
+      "frames": 1125,
+      "checkpoints": 32,
+      "requests": 1157,
+      "boundaries": 11570
+    }
+  },
+  "arms": [
+    {
+      "id": "C1",
+      "status": "numeric-passed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "C1",
+            "side": "before",
+            "durationMs": 49.99800000000141,
+            "fromSequence": 20,
+            "toSequence": 21,
+            "sourceIntervalMs": [
+              963.161958499999,
+              1013.1599585000004
+            ],
+            "clockErrorBoundMs": 4.000666500000364,
+            "receiverIntervalMs": [
+              968.0539589999998,
+              1010.0278759999999
+            ]
+          },
+          "stats": {
+            "receivedFrames": 153,
+            "persistedFrames": 153,
+            "acknowledgedFrames": 153,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999999964
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "C1",
+            "side": "after",
+            "durationMs": 59.73800000000119,
+            "fromSequence": null,
+            "toSequence": 3,
+            "sourceIntervalMs": [
+              486.7069999999985,
+              546.4449999999997
+            ],
+            "clockErrorBoundMs": 5.2157710000001885,
+            "receiverIntervalMs": [
+              null,
+              542.0380009999999
+            ]
+          },
+          "stats": {
+            "receivedFrames": 145,
+            "persistedFrames": 145,
+            "acknowledgedFrames": 145,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.6580000000007
+          }
+        }
+      }
+    },
+    {
+      "id": "I1",
+      "status": "numeric-passed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "I1",
+            "side": "before",
+            "durationMs": 66.66399999999703,
+            "fromSequence": 3,
+            "toSequence": 4,
+            "sourceIntervalMs": [
+              599.2459935000079,
+              665.9099935000049
+            ],
+            "clockErrorBoundMs": 2.9126744999893504,
+            "receiverIntervalMs": [
+              609.860576,
+              663.877019
+            ]
+          },
+          "stats": {
+            "receivedFrames": 143,
+            "persistedFrames": 143,
+            "acknowledgedFrames": 143,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65800000000246
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "I1",
+            "side": "after",
+            "durationMs": 60.25300000000425,
+            "fromSequence": null,
+            "toSequence": 3,
+            "sourceIntervalMs": [
+              539.0214435000016,
+              599.2744435000059
+            ],
+            "clockErrorBoundMs": 4.307163499990224,
+            "receiverIntervalMs": [
+              null,
+              595.572596
+            ]
+          },
+          "stats": {
+            "receivedFrames": 147,
+            "persistedFrames": 147,
+            "acknowledgedFrames": 147,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65800000000246
+          }
+        }
+      }
+    },
+    {
+      "id": "C2",
+      "status": "numeric-passed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "C2",
+            "side": "before",
+            "durationMs": 49.99800000000687,
+            "fromSequence": 22,
+            "toSequence": 23,
+            "sourceIntervalMs": [
+              1042.7666369999934,
+              1092.7646370000002
+            ],
+            "clockErrorBoundMs": 5.264551999988157,
+            "receiverIntervalMs": [
+              1048.515014,
+              1098.196611
+            ]
+          },
+          "stats": {
+            "receivedFrames": 138,
+            "persistedFrames": 138,
+            "acknowledgedFrames": 138,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 249.98999999999683
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "C2",
+            "side": "after",
+            "durationMs": 49.99800000000687,
+            "fromSequence": 3,
+            "toSequence": 4,
+            "sourceIntervalMs": [
+              559.4083459999965,
+              609.4063460000034
+            ],
+            "clockErrorBoundMs": 6.5249904999806745,
+            "receiverIntervalMs": [
+              557.736539,
+              603.896092
+            ]
+          },
+          "stats": {
+            "receivedFrames": 135,
+            "persistedFrames": 135,
+            "acknowledgedFrames": 135,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        }
+      }
+    },
+    {
+      "id": "I2",
+      "status": "numeric-passed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "I2",
+            "side": "before",
+            "durationMs": 49.99800000000687,
+            "fromSequence": 71,
+            "toSequence": 72,
+            "sourceIntervalMs": [
+              2336.3756454999966,
+              2386.3736455000035
+            ],
+            "clockErrorBoundMs": 8.624189499993292,
+            "receiverIntervalMs": [
+              2335.98758,
+              2396.784339
+            ]
+          },
+          "stats": {
+            "receivedFrames": 143,
+            "persistedFrames": 143,
+            "acknowledgedFrames": 143,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.3239999999961
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "I2",
+            "side": "after",
+            "durationMs": 49.99800000000687,
+            "fromSequence": 11,
+            "toSequence": 12,
+            "sourceIntervalMs": [
+              753.182822999981,
+              803.1808229999879
+            ],
+            "clockErrorBoundMs": 4.904486999987341,
+            "receiverIntervalMs": [
+              757.0656220000001,
+              798.6241750000002
+            ]
+          },
+          "stats": {
+            "receivedFrames": 140,
+            "persistedFrames": 140,
+            "acknowledgedFrames": 140,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.3239999999961
+          }
+        }
+      }
+    },
+    {
+      "id": "C3",
+      "status": "numeric-failed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "C3",
+            "side": "before",
+            "durationMs": 49.99800000002142,
+            "fromSequence": 51,
+            "toSequence": 52,
+            "sourceIntervalMs": [
+              1779.306569999986,
+              1829.3045700000075
+            ],
+            "clockErrorBoundMs": 4.393287000000782,
+            "receiverIntervalMs": [
+              1801.093394,
+              1825.152381
+            ]
+          },
+          "stats": {
+            "receivedFrames": 131,
+            "persistedFrames": 131,
+            "acknowledgedFrames": 131,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 266.65599999998335
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "C3",
+            "side": "after",
+            "durationMs": 299.987999999983,
+            "fromSequence": 3,
+            "toSequence": 4,
+            "sourceIntervalMs": [
+              529.3263290000032,
+              829.3143289999862
+            ],
+            "clockErrorBoundMs": 5.087469000010401,
+            "receiverIntervalMs": [
+              528.12916,
+              824.559187
+            ]
+          },
+          "stats": {
+            "receivedFrames": 137,
+            "persistedFrames": 137,
+            "acknowledgedFrames": 137,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 299.9879999999848
+          }
+        }
+      }
+    },
+    {
+      "id": "I3",
+      "status": "numeric-passed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "I3",
+            "side": "before",
+            "durationMs": 51.30400000003283,
+            "fromSequence": null,
+            "toSequence": 2,
+            "sourceIntervalMs": [
+              491.21741349998047,
+              542.5214135000133
+            ],
+            "clockErrorBoundMs": 7.462371499986375,
+            "receiverIntervalMs": [
+              null,
+              545.5713890000001
+            ]
+          },
+          "stats": {
+            "receivedFrames": 140,
+            "persistedFrames": 140,
+            "acknowledgedFrames": 140,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "I3",
+            "side": "after",
+            "durationMs": 51.451000000030035,
+            "fromSequence": null,
+            "toSequence": 3,
+            "sourceIntervalMs": [
+              491.1005479999876,
+              542.5515480000176
+            ],
+            "clockErrorBoundMs": 7.7848189999872375,
+            "receiverIntervalMs": [
+              null,
+              539.3938420000001
+            ]
+          },
+          "stats": {
+            "receivedFrames": 144,
+            "persistedFrames": 144,
+            "acknowledgedFrames": 144,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        }
+      }
+    },
+    {
+      "id": "C4",
+      "status": "numeric-passed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "C4",
+            "side": "before",
+            "durationMs": 57.24099999997998,
+            "fromSequence": null,
+            "toSequence": 3,
+            "sourceIntervalMs": [
+              502.7670560000115,
+              560.0080559999915
+            ],
+            "clockErrorBoundMs": 5.240658999995162,
+            "receiverIntervalMs": [
+              null,
+              570.693546
+            ]
+          },
+          "stats": {
+            "receivedFrames": 146,
+            "persistedFrames": 146,
+            "acknowledgedFrames": 146,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.3240000000103
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "C4",
+            "side": "after",
+            "durationMs": 66.66400000001886,
+            "fromSequence": 3,
+            "toSequence": 4,
+            "sourceIntervalMs": [
+              559.9123894999793,
+              626.5763894999982
+            ],
+            "clockErrorBoundMs": 7.643607000009695,
+            "receiverIntervalMs": [
+              571.0997659999999,
+              623.066413
+            ]
+          },
+          "stats": {
+            "receivedFrames": 147,
+            "persistedFrames": 147,
+            "acknowledgedFrames": 147,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.3240000000103
+          }
+        }
+      }
+    },
+    {
+      "id": "I4",
+      "status": "numeric-passed",
+      "tracks": {
+        "before": {
+          "maxGap": {
+            "arm": "I4",
+            "side": "before",
+            "durationMs": 83.3300000000163,
+            "fromSequence": 14,
+            "toSequence": 15,
+            "sourceIntervalMs": [
+              896.3408314999833,
+              979.6708314999996
+            ],
+            "clockErrorBoundMs": 4.003039499998636,
+            "receiverIntervalMs": [
+              929.3111900000001,
+              997.9013830000001
+            ]
+          },
+          "stats": {
+            "receivedFrames": 133,
+            "persistedFrames": 133,
+            "acknowledgedFrames": 133,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        },
+        "after": {
+          "maxGap": {
+            "arm": "I4",
+            "side": "after",
+            "durationMs": 83.3300000000454,
+            "fromSequence": 15,
+            "toSequence": 16,
+            "sourceIntervalMs": [
+              929.6994529999502,
+              1013.0294529999956
+            ],
+            "clockErrorBoundMs": 2.811272499981783,
+            "receiverIntervalMs": [
+              973.5710800000002,
+              1042.537787
+            ]
+          },
+          "stats": {
+            "receivedFrames": 135,
+            "persistedFrames": 135,
+            "acknowledgedFrames": 135,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 216.65799999999535
+          }
+        }
+      }
+    },
+    {
+      "id": "C5",
+      "status": "incomplete",
+      "tracks": {}
+    },
+    {
+      "id": "I5",
+      "status": "not-started",
+      "tracks": {}
+    }
+  ],
+  "stageDecision": {
+    "primaryCandidates": 0,
+    "handlersAtLeast100msCpu": 0,
+    "instrumentedFailedSourceGaps": 0,
+    "dominantStages": [],
+    "attributionEligible": 1152,
+    "attributionIneligible": 5,
+    "limits": {
+      "maximumBoundaryWallUs": 1000,
+      "maximumObserverWallUs": 5000,
+      "maximumObserverCpuUs": 5000,
+      "primaryHandlerCpuUs": 100000,
+      "dominantCpuFraction": 0.5,
+      "minimumComparableStageExcessUs": 50000
+    }
+  },
+  "maximumHandlerCpu": {
+    "arm": "I4",
+    "side": "before",
+    "worker": 0,
+    "requestId": 15,
+    "origin": {
+      "kind": "frame",
+      "sequence": 14
+    },
+    "handlerCpuUs": 26004,
+    "handlerWallMs": 33.837157
+  },
+  "observerCost": {
+    "observerWallUs": {
+      "count": 1157,
+      "min": 7,
+      "median": 18,
+      "max": 2629,
+      "sum": 39644
+    },
+    "observerCpuUs": {
+      "count": 1157,
+      "min": 0,
+      "median": 0,
+      "max": 1001,
+      "sum": 9622
+    },
+    "maximumObserverWallUs": {
+      "count": 1157,
+      "min": 1,
+      "median": 5,
+      "max": 2601,
+      "sum": 22189
+    }
+  },
+  "shortStageCpuAccounting": {
+    "intervalsWhoseCpuExceedsWall": 1107,
+    "interpretation": "Exact additive closure checks bookkeeping. Short intervals and zero values do not establish fine-grained current-thread CPU precision; values remain unclipped."
+  },
+  "failures": [
+    {
+      "arm": "C3",
+      "observation": "Original-package AFTER frame 3 to 4 has a 299.988 ms source gap. Its aggregate maximum sanitizer time is 287.159 ms. No worker-stage trace exists for this control."
+    },
+    {
+      "arm": "C5",
+      "observation": "The capture call did not return. Its 292 source PNGs and eight checkpoint PNGs remain, but the verifier discarded the original exception. Missing capture.json is a later observation, not the identified cause."
+    }
+  ],
+  "export": {
+    "completeVerifierStatus": "export-validation-failed",
+    "completeVerifierFailureBoundary": "The complete-run predicate failed before per-arm validation. The original verifier is retained and was not rerun.",
+    "inventoriedFiles": 3047,
+    "independentlyCheckedConsumedFiles": 66,
+    "independentlyRevalidatedStageExports": 4,
+    "completeExportAccepted": false
+  },
+  "cleanup": {
+    "evidenceExported": true,
+    "containerRemoved": true,
+    "ownedCleanupConfirmed": true,
+    "baselinePreserved": true,
+    "vmStopped": true
+  },
+  "limits": [
+    "No instrumented request met the declared CPU localization rule. No sanitizer repair is justified by this acquisition.",
+    "Five requests exceeded the measured per-boundary observer-cost limit and remain in the all-results distributions.",
+    "Original-package failures and instrumented passes do not establish an instrumentation effect or failure rate.",
+    "I5 remains unstarted. The earlier independently measured worker CPU burst is not cleared."
+  ],
+  "inputRecords": {
+    "ownership": {
+      "name": "ownership.json",
+      "sha256": "d47a190b2fe79f0417fc818142030cfb122e44d82f8bef49af4042f25085994b",
+      "bytes": 8864
+    },
+    "diagnosticResult": {
+      "name": "diagnostic-result.json",
+      "sha256": "e63e595a1b321dbf8d21ebfebb9fd4e9f45183354d77e48bddacda7ee1e42bca",
+      "bytes": 121313
+    },
+    "exportInventory": {
+      "name": "export-inventory.json",
+      "sha256": "eccb6f011f2a2cabeb5e48e6c955278262794840c8ae0f0502dbb4cf055e05d1",
+      "bytes": 792739
+    },
+    "analysis": {
+      "name": "swc-worker-stage-result-analysis.md",
+      "sha256": "7b702a7e51a1b6463c62d564bfd4f4754facc019ac29bddeec025cdc559caa90",
+      "bytes": 9059
+    },
+    "structuredAnalysis": {
+      "name": "swc-worker-stage-result-analysis.json",
+      "sha256": "60eedc83f2c0975bef8a1dd300a2c63fe4fd06bf8fdd46bdfc24513027dc21a6",
+      "bytes": 162636
+    }
+  },
+  "nextStep": "Preserve the original exception at the private verifier boundary, test the error path, and explicitly select the next diagnostic. Continue independent Docker verification through a separately reviewed source/package identity admission.",
+  "releaseReady": false,
+  "publicationPerformed": false
+}

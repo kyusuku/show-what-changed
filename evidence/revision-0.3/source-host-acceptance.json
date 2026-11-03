@@ -1,0 +1,781 @@
+{
+  "schemaVersion": 1,
+  "status": "seven-scoped-gates-accepted",
+  "recordedAt": "2026-11-03T06:45:43.964429+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+    "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec",
+    "verificationArtifacts": [
+      {
+        "name": "swc-final-source-gates-verification.json",
+        "sha256": "55648b4b0f7de274e4327860531f850643c07f3e974f6db7e1c5b8ca06051f03",
+        "bytes": 48179
+      },
+      {
+        "name": "swc-final-source-gates-verify.py",
+        "sha256": "c45e1d5fad16cb4ce6a54f9e76e59368f5ec7406d79dbad7ce58127dbb4f94fe",
+        "bytes": 13625
+      },
+      {
+        "name": "swc-final-source-gates-pure.json",
+        "sha256": "848cb68526e934625aa5861f36f1597a9f80de152aeba95485dce3ee6acada41",
+        "bytes": 7347
+      },
+      {
+        "name": "swc-final-source-gates-pure.mjs",
+        "sha256": "aed2becd8d91ccded6cb6b3e76221d7edba46061fa8047560cb8f824d71bfb0f",
+        "bytes": 6896
+      }
+    ]
+  },
+  "sourceAssociation": {
+    "unchangedProductSourceFiles": 52,
+    "matchingOriginalTransferEntries": 240,
+    "changedTransferEntries": 7,
+    "onlyPackageChangeFromPreviouslyExecutedArchive": "README.md",
+    "unchangedRuntimePackageMembers": 170,
+    "installedDependencyIdentitiesMatch": 7,
+    "executedEarlierPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+  },
+  "executionAccounting": {
+    "unitAndContracts": {
+      "passed": 792,
+      "skipped": 11,
+      "actualExit": 0
+    },
+    "integration": {
+      "passed": 103,
+      "actualExit": 0
+    },
+    "affectedDockerTests": {
+      "passed": 121,
+      "actualExit": 0,
+      "logSha256": "a5ba375035ab5b2a88375c340161892ba449318cef4b256d35ecece7979bd89a"
+    },
+    "rule": "Overlapping runs are not added. Eleven opt-in skips are not live Docker proof. Source tests, installed observations, and pure review probes remain distinct."
+  },
+  "reproductionSetup": "Use the pinned Node/npm toolchain from README. SWC_TARBALL must identify the reviewed archive; SWC_NEW_EVIDENCE must be a fresh output directory. Full original commands and raw evidence remain private, bound below by hashes.",
+  "gates": [
+    {
+      "id": "G01",
+      "status": "accepted",
+      "requirement": "Strict schema 2 and every documented JSON example validate; unknown fields, tokens, unsafe paths, v1 inputs, incompatible mask modes, and malformed plans fail.",
+      "reproductionCommands": [
+        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+      ],
+      "retainedCommandResults": [
+        {
+          "class": "retained-source-unit-contracts",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-unit-contracts-20261103T0427.log",
+            "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d"
+          }
+        },
+        {
+          "class": "current-review-pure-installed-validator",
+          "actualExit": 0,
+          "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "evidence": {
+            "name": "swc-final-source-gates-pure.json",
+            "sha256": "848cb68526e934625aa5861f36f1597a9f80de152aeba95485dce3ee6acada41"
+          }
+        }
+      ],
+      "evidenceArtifacts": [
+        {
+          "name": "swc-current-doc-json-20261103.json",
+          "sha256": "8f0312096feccea5aaa616304d89e5a7ee1b4cd29f9c85e2dfa34cc30c1b64b8",
+          "bytes": 6229
+        },
+        {
+          "name": "swc-integrated-unit-contracts-20261103T0427.log",
+          "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+          "bytes": 109665
+        }
+      ],
+      "coverage": [
+        "All 25 current documentation files match the candidate. Four current fenced JSON examples validate through the final installed schemas. Seven archived examples, including one historical jsonc block, remain explicitly historical.",
+        "Current contracts reject schema 1, unknown fields, unknown or embedded command tokens, traversal paths, incompatible mask modes and invalid structure. Fixture scenarios and public fixture configurations have passed runtime and generated-schema checks.",
+        "Six independent pure probes reject empty, version-1, unknown-field, invalid-hash, missing-WORKTREE-fingerprint and unsafe-inventory plans through the final installed PlanSchema."
+      ],
+      "assertionsInspected": [
+        {
+          "path": "test/contracts/revision-0.3.test.ts",
+          "lineStart": 13,
+          "lineEnd": 97,
+          "sha256": "fc21b193abf81d811d75f84aea16e824b200ec3c6630d6c9ed2d0a4daa703b33",
+          "assertion": "Current examples, required recipe, schema 1 and unknown fields, tokens, unsafe setup cwd, seeds/services, mode-specific masks, contained source paths."
+        },
+        {
+          "path": "test/contracts/public-examples.test.ts",
+          "lineStart": 6,
+          "lineEnd": 21,
+          "sha256": "0580aa655905db8c0f16f9ca7e2f3de58e61cf09a579bf35ebf69c8e0072d860",
+          "assertion": "Recursively validates shipped fixture configs and scenarios."
+        },
+        {
+          "path": "test/unit/schema.test.ts",
+          "lineStart": 40,
+          "lineEnd": 69,
+          "sha256": "1153f5cafc0abdf106b624c25ac07df74b8567bd6ca19fed3a759c75f194b389",
+          "assertion": "Negative scenarios and config boundaries."
+        },
+        {
+          "path": "test/unit/schema-fixtures.test.ts",
+          "lineStart": 1,
+          "lineEnd": 22,
+          "sha256": "b100ef4c3210c59c5ed4cb911d852cef12b800cc3a8ce7c593662f0a17733aed",
+          "assertion": "Committed fixtures validate through runtime and generated schemas."
+        },
+        {
+          "path": "src/planner/index.ts",
+          "lineStart": 104,
+          "lineEnd": 120,
+          "sha256": "a77240d119469618777531ae9614c471b7fd3c870c37ac0c07d67967cd6ac8ba",
+          "assertion": "Saved plans parse strict PlanSchema before source and bound-input validation."
+        }
+      ],
+      "limitations": [
+        "Acceptance is for the exact frozen docs. Newly integrated handoff documentation requires an updated example inventory. Historical schema-1 examples are not current usage instructions."
+      ]
+    },
+    {
+      "id": "G02",
+      "status": "accepted",
+      "requirement": "Exact refs, diverged endpoints, unique merge base, shallow missing refs, detached HEAD, index-only deletion, staged/unstaged cancellation, and WORKTREE additions/deletions preserve existing semantics.",
+      "reproductionCommands": [
+        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
+      ],
+      "retainedCommandResults": [
+        {
+          "class": "retained-source-unit-contracts",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-unit-contracts-20261103T0427.log",
+            "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d"
+          }
+        },
+        {
+          "class": "retained-source-integration",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-integration-20261103T0430.log",
+            "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92"
+          }
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 2,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        }
+      ],
+      "evidenceArtifacts": [
+        {
+          "name": "swc-integrated-unit-contracts-20261103T0427.log",
+          "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+          "bytes": 109665
+        },
+        {
+          "name": "swc-integrated-integration-20261103T0430.log",
+          "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+          "bytes": 16443
+        },
+        {
+          "name": "report.json",
+          "sha256": "0b90059a8b9477f10aee55fca0714e72cde18a65ab37aca77072dca0efa28983",
+          "bytes": 14768
+        }
+      ],
+      "coverage": [
+        "Source assertions cover exact diverged endpoints while caller HEAD is detached, explicit unique merge base, zero/multiple merge-base rejection, staged bytes cancelled by final disk bytes, index-only deletion with a retained disk file, and WORKTREE addition/deletion.",
+        "The integration test creates a depth-one clone and rejects an absent endpoint without changing its shallow boundary or creating tool output.",
+        "Retained installed plan, merge-base and WORKTREE comparisons exit 0. Stale WORKTREE plan exits 2. Raw JSON command records agree with their recorded exits."
+      ],
+      "assertionsInspected": [
+        {
+          "path": "test/unit/source.test.ts",
+          "lineStart": 112,
+          "lineEnd": 148,
+          "sha256": "b189247c3fd7fbc008d18d25bc55f47e755f89a7903068fa16b4a2db29464cd1",
+          "assertion": "Final filesystem semantics, exact refs and diverged endpoints under detached HEAD."
+        },
+        {
+          "path": "test/unit/source.test.ts",
+          "lineStart": 210,
+          "lineEnd": 219,
+          "sha256": "b189247c3fd7fbc008d18d25bc55f47e755f89a7903068fa16b4a2db29464cd1",
+          "assertion": "Zero and multiple merge bases fail."
+        },
+        {
+          "path": "test/integration/adversarial-gaps.test.ts",
+          "lineStart": 173,
+          "lineEnd": 184,
+          "sha256": "cedd5b102037d5c7f0c9a5fa22e2e4f1db3d1d15e60cb5ceadf610bd60581d01",
+          "assertion": "Actual shallow clone missing-ref failure and preservation."
+        },
+        {
+          "path": "test/unit/planner-inputs.test.ts",
+          "lineStart": 51,
+          "lineEnd": 63,
+          "sha256": "842c385bf5ce8c9cf2e43c75d02ebf380f5ae52a9f203efafe323b6ea525f3e5",
+          "assertion": "Moved refs cannot retarget explicit plans; WORKTREE pins HEAD."
+        },
+        {
+          "path": "scripts/release-smoke.mjs",
+          "lineStart": 58,
+          "lineEnd": 70,
+          "sha256": "e498aca4b364892b427c9b0275c300858d0c2e45ac764e550a621b3ed46eab8a",
+          "assertion": "Installed merge-base checks requested and resolved refs, equal materialized hashes and unchanged caller."
+        }
+      ],
+      "limitations": [
+        "The retained installed archive is 3fac9cc8. Transfer to cb641268 is supported by identical runtime bytes and dependency identities. This is not a new platform run."
+      ]
+    },
+    {
+      "id": "G03",
+      "status": "accepted",
+      "requirement": "Streaming inventories handle large-repository source and shared packages; source mutation/copy races fail; caller HEAD/index/tracked/untracked/dependencies remain unchanged.",
+      "reproductionCommands": [
+        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+      ],
+      "retainedCommandResults": [
+        {
+          "class": "retained-source-unit-contracts",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-unit-contracts-20261103T0427.log",
+            "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d"
+          }
+        },
+        {
+          "class": "retained-source-integration",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-integration-20261103T0430.log",
+            "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92"
+          }
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        }
+      ],
+      "evidenceArtifacts": [
+        {
+          "name": "swc-integrated-unit-contracts-20261103T0427.log",
+          "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+          "bytes": 109665
+        },
+        {
+          "name": "swc-integrated-integration-20261103T0430.log",
+          "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+          "bytes": 16443
+        },
+        {
+          "name": "report.json",
+          "sha256": "b1d8c97b62e5ac4d99ce5cf85c06148b2a52079e8cefe443458071e37c3ccc92",
+          "bytes": 5119
+        },
+        {
+          "name": "report.json",
+          "sha256": "0e9a048e83808139ce59a516e5775d52ed4636108f5b4db8cf197beb12bbcb63",
+          "bytes": 20376
+        }
+      ],
+      "coverage": [
+        "The source streaming test commits a 224 MiB blob, verifies equal inventory digest and exact byte count, requires chunks at most 64 KiB, and confirms tree inventory entries do not retain blob payloads.",
+        "Mutation tests detect post-plan edits, newly materialized files, concurrent edits and change-and-restore copy races. Caller HEAD, index, tracked source, untracked files and ignored dependencies are preserved.",
+        "The installed pnpm observation combines an exact 234881024-byte generated source file and changed packages/shared/index.js under the unchanged 1 GiB source budget. Retained plan inventories bind both blob digest and each shared-package digest. Plan and compare exit 0, with four verified changed pairs.",
+        "The retained caller-before and caller-after snapshots are byte-identical. They include staged, unstaged, untracked and dependency sentinels. Retained cleanup records report removed owned workspaces."
+      ],
+      "assertionsInspected": [
+        {
+          "path": "test/unit/source.test.ts",
+          "lineStart": 240,
+          "lineEnd": 258,
+          "sha256": "b189247c3fd7fbc008d18d25bc55f47e755f89a7903068fa16b4a2db29464cd1",
+          "assertion": "Streaming large Git blob and bounded disk-read chunks."
+        },
+        {
+          "path": "test/unit/snapshot.test.ts",
+          "lineStart": 28,
+          "lineEnd": 95,
+          "sha256": "50f18c9aecab86c75a8f728afd2f1695ea5775edbe7757343cac5f7ddda9b28d",
+          "assertion": "Caller preservation, immutable copies and both real copy-race failures."
+        },
+        {
+          "path": "test/unit/planner-inputs.test.ts",
+          "lineStart": 28,
+          "lineEnd": 40,
+          "sha256": "842c385bf5ce8c9cf2e43c75d02ebf380f5ae52a9f203efafe323b6ea525f3e5",
+          "assertion": "Whole-repository inventory includes the shared package."
+        },
+        {
+          "path": "scripts/release-harness.mjs",
+          "lineStart": 45,
+          "lineEnd": 70,
+          "sha256": "66089590a9d90446e0d03d4273720cb04143f2e3aecc67b7fc3b9d7ddf2a4f13",
+          "assertion": "Caller state records HEAD, index, tracked/untracked bytes and complete dependency disk entries."
+        }
+      ],
+      "limitations": [
+        "The large comparison is an installed keyframe observation, separate from motion quality and Linux platform completion. Source test and installed large-fixture observations are not summed into a test total."
+      ]
+    },
+    {
+      "id": "G04",
+      "status": "accepted",
+      "requirement": "Installed package compares root npm, pnpm workspace, Python app, and static site; non-JavaScript/static fixtures have no npm manifest. Tool/app runtime separation is exercised.",
+      "reproductionCommands": [
+        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+        "node scripts/compatibility-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
+      ],
+      "retainedCommandResults": [
+        {
+          "class": "retained-source-unit-contracts",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-unit-contracts-20261103T0427.log",
+            "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d"
+          }
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        }
+      ],
+      "evidenceArtifacts": [
+        {
+          "name": "swc-integrated-unit-contracts-20261103T0427.log",
+          "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+          "bytes": 109665
+        },
+        {
+          "name": "report.json",
+          "sha256": "0e9a048e83808139ce59a516e5775d52ed4636108f5b4db8cf197beb12bbcb63",
+          "bytes": 20376
+        }
+      ],
+      "coverage": [
+        "The installed host report has exactly static, npm, pnpm workspace and Python rows. All eight plan/compare commands exit 0, and every row has two verified changed pairs.",
+        "Each retained host manifest and advertised artifact was rehashed. Static and Python fixture trees contain no package.json. The source tests also assert these manifest-free inventories.",
+        "The executed runtime test selects a separate application runtime through PATH, requires its synthetic 7.8.9 prerequisite result, and verifies the tool process.execPath remains unchanged. Python is also exercised through its declared runtime."
+      ],
+      "assertionsInspected": [
+        {
+          "path": "test/unit/planner-inputs.test.ts",
+          "lineStart": 90,
+          "lineEnd": 100,
+          "sha256": "842c385bf5ce8c9cf2e43c75d02ebf380f5ae52a9f203efafe323b6ea525f3e5",
+          "assertion": "Four public fixtures plan without setup, static/Python have no npm manifest and pnpm includes shared source."
+        },
+        {
+          "path": "test/unit/runtime-recipe.test.ts",
+          "lineStart": 31,
+          "lineEnd": 61,
+          "sha256": "79b8b7a22fcd18ae1337a7d20a53739a16f098876c0fd7ec75b11d6509e8f178",
+          "assertion": "Python prerequisite and application PATH selection keep tool Node unchanged."
+        },
+        {
+          "path": "scripts/compatibility-smoke.mjs",
+          "lineStart": 80,
+          "lineEnd": 130,
+          "sha256": "2df4a0e03d0caeb7b0437fbc50c6c88d06a71c8014f646c3a3edec6b2434686d",
+          "assertion": "Installed recipe commands, artifact checks and preservation for each matrix row."
+        }
+      ],
+      "limitations": [
+        "This gate names four host stacks. Docker remains the separate G07 obligation. No claim is made about arbitrary frameworks, every dependency policy, or platform completion."
+      ]
+    },
+    {
+      "id": "G12",
+      "status": "accepted",
+      "requirement": "Clock fields, unit conversion, calibration uncertainty, drift, nonmonotonic/missing timestamps, queue overflow, static pages, and frame bounds have explicit tests.",
+      "reproductionCommands": [
+        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+      ],
+      "retainedCommandResults": [
+        {
+          "class": "retained-source-unit-contracts",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-unit-contracts-20261103T0427.log",
+            "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d"
+          }
+        },
+        {
+          "class": "current-review-pure-installed-validator",
+          "actualExit": 0,
+          "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "evidence": {
+            "name": "swc-final-source-gates-pure.json",
+            "sha256": "848cb68526e934625aa5861f36f1597a9f80de152aeba95485dce3ee6acada41"
+          }
+        }
+      ],
+      "evidenceArtifacts": [
+        {
+          "name": "swc-integrated-unit-contracts-20261103T0427.log",
+          "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+          "bytes": 109665
+        }
+      ],
+      "coverage": [
+        "The executed source tests cover bounded clock mapping, drift, reset rejection, missing timestamps, equal/backward timestamps, scale mismatch, explicit queue overflow, static-stream success, cancellation backpressure and frame/storage caps.",
+        "Fresh pure checks against cb641268 validate seconds-to-milliseconds conversion and reject a 1000-fold unit error, missing rate, understated uncertainty, error bounds above 40 ms and fixed-offset drift.",
+        "The count-limit test admits the safe prior frame, rejects further source admission, persists reserved checkpoints and asserts the total count is exactly 12000."
+      ],
+      "assertionsInspected": [
+        {
+          "path": "test/contracts/revision-0.3.test.ts",
+          "lineStart": 70,
+          "lineEnd": 75,
+          "sha256": "fc21b193abf81d811d75f84aea16e824b200ec3c6630d6c9ed2d0a4daa703b33",
+          "assertion": "Valid calibrated mapping and contradictory/error-bound rejection."
+        },
+        {
+          "path": "test/unit/scenario-states-metrics.test.ts",
+          "lineStart": 46,
+          "lineEnd": 77,
+          "sha256": "edc9fff4451b12f4703c900a6044bddc6e1e40fdce49ac75ee21f4f7ddfa88fe",
+          "assertion": "Fixed offset and drift/reset/storage limits."
+        },
+        {
+          "path": "test/unit/scenario-states-metrics.test.ts",
+          "lineStart": 230,
+          "lineEnd": 394,
+          "sha256": "edc9fff4451b12f4703c900a6044bddc6e1e40fdce49ac75ee21f4f7ddfa88fe",
+          "assertion": "Queue overflow, missing/regressing timestamps and static stream."
+        },
+        {
+          "path": "test/unit/scenario-states-metrics.test.ts",
+          "lineStart": 1084,
+          "lineEnd": 1104,
+          "sha256": "edc9fff4451b12f4703c900a6044bddc6e1e40fdce49ac75ee21f4f7ddfa88fe",
+          "assertion": "Exact bounded frame admission and reserved checkpoint count."
+        },
+        {
+          "path": "src/schema/index.ts",
+          "lineStart": 164,
+          "lineEnd": 201,
+          "sha256": "2b82810c277f522971f4492fbbba9f867bf53dd272aef93597f5258ac634b49a",
+          "assertion": "Strict clock/frame fields and seconds conversion invariants."
+        }
+      ],
+      "limitations": [
+        "This acceptance covers the explicitly required source tests. It does not accept G10 numeric motion or G20 Linux platform execution. Playback timing is not substituted for capture-clock evidence."
+      ]
+    },
+    {
+      "id": "G17",
+      "status": "accepted",
+      "requirement": "A synthetic authenticated app loads independent private storage states; isolated seeded state is side-specific; external-read-only state remains explicitly unverified. Secrets never enter public metadata/logs.",
+      "reproductionCommands": [
+        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+      ],
+      "retainedCommandResults": [
+        {
+          "class": "retained-source-unit-contracts",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-unit-contracts-20261103T0427.log",
+            "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d"
+          }
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        }
+      ],
+      "evidenceArtifacts": [
+        {
+          "name": "swc-integrated-unit-contracts-20261103T0427.log",
+          "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+          "bytes": 109665
+        },
+        {
+          "name": "report.json",
+          "sha256": "88d72f8a8525d933a37d0d25f16c35c075e75467c5f0ba0e0120ad8e079380a3",
+          "bytes": 5293
+        }
+      ],
+      "coverage": [
+        "Installed plan and compare exit 0. Retained capture steps show both auth factors, peer rejection, correct side identities and source headings all passed through the actual recorder.",
+        "Both sides accept their own cookie/storage pair and reject missing, peer and mixed states. Retained bootstrap-state hashes, private permissions, exact origins and corresponding synthetic canary values match their proofs.",
+        "Manifest execution declares external-read-only on both sides, dataParity is external-unverified, and the public PR text carries that warning.",
+        "The actual ordered-services host test initializes equal seeds, changes only BEFORE through a POST, then observes BEFORE changed and AFTER still equal-seed. Provenance identifies isolated state and the bound seed.",
+        "Independent byte scans find none of the four known synthetic auth values in retained public artifacts, CLI records or child logs. Caller snapshots are identical and recorded cleanup removes the side-private runtime state."
+      ],
+      "assertionsInspected": [
+        {
+          "path": "test/unit/runtime-recipe.test.ts",
+          "lineStart": 63,
+          "lineEnd": 88,
+          "sha256": "79b8b7a22fcd18ae1337a7d20a53739a16f098876c0fd7ec75b11d6509e8f178",
+          "assertion": "Real host independent seed mutation and private input/auth origin checks."
+        },
+        {
+          "path": "test/unit/runtime-recipe.test.ts",
+          "lineStart": 101,
+          "lineEnd": 117,
+          "sha256": "79b8b7a22fcd18ae1337a7d20a53739a16f098876c0fd7ec75b11d6509e8f178",
+          "assertion": "Independent authenticated real browser contexts."
+        },
+        {
+          "path": "test/unit/runtime-environment.test.ts",
+          "lineStart": 12,
+          "lineEnd": 28,
+          "sha256": "dd58d8ca2b594eeaff8b842a20ea61017b42350bd6b1b9f6174785f82afc5445",
+          "assertion": "All resolved application/service values enter text/log redaction before use."
+        }
+      ],
+      "limitations": [
+        "The installed auth comparison is keyframes and uses synthetic local state. Known-byte absence is not an OCR claim or proof about arbitrary unknown secrets. Docker-specific seeded-state execution remains in G07."
+      ]
+    },
+    {
+      "id": "G18",
+      "status": "accepted",
+      "requirement": "Pure planning executes no repository code; consent binding, private env resolution, JSON envelopes, artifact hashes, null missing artifacts, and no-change exits are correct.",
+      "reproductionCommands": [
+        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
+      ],
+      "retainedCommandResults": [
+        {
+          "class": "retained-source-unit-contracts",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-unit-contracts-20261103T0427.log",
+            "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d"
+          }
+        },
+        {
+          "class": "retained-source-integration",
+          "actualExit": 0,
+          "evidence": {
+            "name": "swc-integrated-integration-20261103T0430.log",
+            "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92"
+          }
+        },
+        {
+          "class": "current-review-pure-installed-validator",
+          "actualExit": 0,
+          "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "evidence": {
+            "name": "swc-final-source-gates-pure.json",
+            "sha256": "848cb68526e934625aa5861f36f1597a9f80de152aeba95485dce3ee6acada41"
+          }
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 2,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 2,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 7,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 0,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 3,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        },
+        {
+          "class": "retained-installed-command",
+          "actualExit": 2,
+          "executedPackageSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+        }
+      ],
+      "evidenceArtifacts": [
+        {
+          "name": "swc-integrated-unit-contracts-20261103T0427.log",
+          "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+          "bytes": 109665
+        },
+        {
+          "name": "swc-integrated-integration-20261103T0430.log",
+          "sha256": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92",
+          "bytes": 16443
+        },
+        {
+          "name": "report.json",
+          "sha256": "0b90059a8b9477f10aee55fca0714e72cde18a65ab37aca77072dca0efa28983",
+          "bytes": 14768
+        },
+        {
+          "name": "report.json",
+          "sha256": "88d72f8a8525d933a37d0d25f16c35c075e75467c5f0ba0e0120ad8e079380a3",
+          "bytes": 5293
+        }
+      ],
+      "coverage": [
+        "The pure-planning test includes executable setup/server sentinels and asserts none ran. Plans bind source identities, normalized cwd, config/scenario bytes and exact helper bytes/mode. Changed bound inputs fail STALE_PLAN.",
+        "The installed consent-required command exits 7, while the same reviewed saved plan with allow-exec completes. Stale WORKTREE plans exit 2. Consent text and private environment tests redact known inputs.",
+        "Retained installed stdout is exactly one parseable JSON envelope and agrees with each actual command exit. Manifest artifacts were rehashed against bytes and lengths. Source integration asserts absent video/poster/capture/timeline are null after setup/bootstrap failure.",
+        "Source route tests distinguish unchanged and proven docs-only work from unresolved work. Fresh pure installed checks produce exit 4 with status nothing and null data for NOTHING_CHANGED and NO_UI_CANDIDATES. CLI source directly returns the result exit code."
+      ],
+      "assertionsInspected": [
+        {
+          "path": "test/unit/planner-inputs.test.ts",
+          "lineStart": 14,
+          "lineEnd": 48,
+          "sha256": "842c385bf5ce8c9cf2e43c75d02ebf380f5ae52a9f203efafe323b6ea525f3e5",
+          "assertion": "Execution sentinels, whole-source binding and stale bound-input rejection."
+        },
+        {
+          "path": "test/unit/consent.test.ts",
+          "lineStart": 1,
+          "lineEnd": 71,
+          "sha256": "62d354e8fee2bcc2cf97694ee6372979ed0455186e1df36867b903211cde225a",
+          "assertion": "Consent display redacts private operands and only explicit environment values."
+        },
+        {
+          "path": "test/unit/runtime-environment.test.ts",
+          "lineStart": 12,
+          "lineEnd": 28,
+          "sha256": "dd58d8ca2b594eeaff8b842a20ea61017b42350bd6b1b9f6174785f82afc5445",
+          "assertion": "Private environment resolution before consumer use."
+        },
+        {
+          "path": "test/integration/adversarial-gaps.test.ts",
+          "lineStart": 304,
+          "lineEnd": 319,
+          "sha256": "cedd5b102037d5c7f0c9a5fa22e2e4f1db3d1d15e60cb5ceadf610bd60581d01",
+          "assertion": "Single JSON envelope, terminal manifest equality and artifact hash/size checks."
+        },
+        {
+          "path": "test/integration/r03-ownership-gaps.test.ts",
+          "lineStart": 189,
+          "lineEnd": 201,
+          "sha256": "a8f6c84ad364e120074d375ff63b652cf7c36e85827c7acf5752923284ba8022",
+          "assertion": "Failure exit 5 and null absent artifacts."
+        },
+        {
+          "path": "test/unit/planner-routes.test.ts",
+          "lineStart": 74,
+          "lineEnd": 81,
+          "sha256": "40783d6db412e6aed8cd57c99a0f28cb8ce436c0ca9555e3f74022dc4cbee931",
+          "assertion": "No-change and docs-only exit 4, unresolved exit 2, explicit selection still allowed."
+        },
+        {
+          "path": "src/cli/index.ts",
+          "lineStart": 23,
+          "lineEnd": 25,
+          "sha256": "988e5d97da8db937cefd5e4a5dce37d8753ab045decb153057d2bd5054c3ca3e",
+          "assertion": "JSON mode prints a validated envelope."
+        },
+        {
+          "path": "src/cli/index.ts",
+          "lineStart": 91,
+          "lineEnd": 102,
+          "sha256": "988e5d97da8db937cefd5e4a5dce37d8753ab045decb153057d2bd5054c3ca3e",
+          "assertion": "Result exit code becomes process.exitCode."
+        }
+      ],
+      "limitations": [
+        "No-change checks are pure installed contracts plus inspected CLI exit forwarding, not a new browser or application execution. The retained successful installed commands use 3fac9cc8 with the explicit runtime transfer."
+      ]
+    }
+  ],
+  "releaseReady": false
+}

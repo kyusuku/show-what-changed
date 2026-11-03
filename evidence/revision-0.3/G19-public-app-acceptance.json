@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "gate": "G19",
+  "status": "accepted",
+  "recordedAt": "2026-11-03T06:15:21.315882+00:00",
+  "sourceIdentity": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "executedSourceCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "association": "Only four Docker unit-test portability files changed after execution; package and public application runner inputs are unchanged."
+  },
+  "command": [
+    "node",
+    "scripts/real-app-smoke.mjs",
+    "show-what-changed-0.1.0.tgz",
+    "public-app-evidence"
+  ],
+  "actualExitCode": 0,
+  "commandPathNote": "Candidate and output operands are shown as portable relative paths; exact local command and raw evidence remain in the private execution record.",
+  "rawReportSha256": "4b5ca72ca0e6f5a388ea828343bb313cf8501e2a8bb0dec7aa48c366300f69ba",
+  "fixture": {
+    "baseCommit": "0363218e459653bdfdf806407241148cb09212f8",
+    "headCommit": "cbc415a909dc27b625361be51dea09b18ecd8ab8",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "expectedValidation": {
+      "before": {
+        "title": "Check the task details",
+        "message": "Add a longer title and a valid contact email.",
+        "tone": "neutral"
+      },
+      "after": {
+        "title": "Two details need attention",
+        "message": "Use at least 6 characters for the title and an email such as maker@example.invalid.",
+        "tone": "guided"
+      }
+    },
+    "worktreeReplacement": {
+      "from": "Two details need attention",
+      "to": "Ready for one final check"
+    }
+  },
+  "inputSha256": {
+    "config": "1ed3762d4ae128f5abdc8bcf792cd2d982ecfd5a40870a4d4d55d19f5b807dcf",
+    "navigation": "f99fdf2feb72b3fdc566cc124b6f83b1733a56fe49ea4dfb7d569ccd64bfd049",
+    "validation": "23dc5e9bb7ff051c8dc76c10eb25792ac21e87fb0d8201234e75c0887ae66af2"
+  },
+  "runs": [
+    {
+      "name": "navigation-1",
+      "status": "passed",
+      "command": {
+        "expectedExit": 0,
+        "actualExit": 0,
+        "attempted": true,
+        "signal": null
+      },
+      "summary": {
+        "verifiedPairs": 11,
+        "changedPairs": 0,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerPreserved": true,
+      "video": {
+        "path": "compare.mp4",
+        "sha256": "1ab22bc421dd20fe920974aed5e81363005fc305476511e12e9762ce2ed0bab1",
+        "bytes": 303209
+      },
+      "poster": {
+        "path": "poster.png",
+        "sha256": "08c03e1486f15a5e763404c23fbf6ac933881ebaf649af6d43cc0442b7a5367c",
+        "bytes": 63889
+      },
+      "cleanupStatus": "ok",
+      "verificationErrors": []
+    },
+    {
+      "name": "validation-1",
+      "status": "passed",
+      "command": {
+        "expectedExit": 0,
+        "actualExit": 0,
+        "attempted": true,
+        "signal": null
+      },
+      "summary": {
+        "verifiedPairs": 9,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerPreserved": true,
+      "video": {
+        "path": "compare.mp4",
+        "sha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
+        "bytes": 115270
+      },
+      "poster": {
+        "path": "poster.png",
+        "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+        "bytes": 79698
+      },
+      "cleanupStatus": "ok",
+      "verificationErrors": []
+    },
+    {
+      "name": "navigation-2",
+      "status": "passed",
+      "command": {
+        "expectedExit": 0,
+        "actualExit": 0,
+        "attempted": true,
+        "signal": null
+      },
+      "summary": {
+        "verifiedPairs": 11,
+        "changedPairs": 0,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerPreserved": true,
+      "video": {
+        "path": "compare.mp4",
+        "sha256": "bcb0bd767ea7cbec723924b7c9b5b1f8120a3ffad53364670371351a0b5e9b27",
+        "bytes": 296518
+      },
+      "poster": {
+        "path": "poster.png",
+        "sha256": "08c03e1486f15a5e763404c23fbf6ac933881ebaf649af6d43cc0442b7a5367c",
+        "bytes": 63889
+      },
+      "cleanupStatus": "ok",
+      "verificationErrors": []
+    },
+    {
+      "name": "validation-2",
+      "status": "passed",
+      "command": {
+        "expectedExit": 0,
+        "actualExit": 0,
+        "attempted": true,
+        "signal": null
+      },
+      "summary": {
+        "verifiedPairs": 9,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerPreserved": true,
+      "video": {
+        "path": "compare.mp4",
+        "sha256": "48a9a555a41afbee5dc28b6ba923367b3eeb6237514d8d0da2e42c3777977979",
+        "bytes": 112787
+      },
+      "poster": {
+        "path": "poster.png",
+        "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+        "bytes": 79698
+      },
+      "cleanupStatus": "ok",
+      "verificationErrors": []
+    },
+    {
+      "name": "navigation-3",
+      "status": "passed",
+      "command": {
+        "expectedExit": 0,
+        "actualExit": 0,
+        "attempted": true,
+        "signal": null
+      },
+      "summary": {
+        "verifiedPairs": 11,
+        "changedPairs": 0,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerPreserved": true,
+      "video": {
+        "path": "compare.mp4",
+        "sha256": "5b2ccf62633aa50e06aafae07b570c41c562dad82dcf9f59ca76f83b45bfdaf7",
+        "bytes": 299147
+      },
+      "poster": {
+        "path": "poster.png",
+        "sha256": "08c03e1486f15a5e763404c23fbf6ac933881ebaf649af6d43cc0442b7a5367c",
+        "bytes": 63889
+      },
+      "cleanupStatus": "ok",
+      "verificationErrors": []
+    },
+    {
+      "name": "validation-3",
+      "status": "passed",
+      "command": {
+        "expectedExit": 0,
+        "actualExit": 0,
+        "attempted": true,
+        "signal": null
+      },
+      "summary": {
+        "verifiedPairs": 9,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerPreserved": true,
+      "video": {
+        "path": "compare.mp4",
+        "sha256": "d5b5b82d849fd21fe170ba32064557e222f74c4c5890b34d5aab97cf0a6814b1",
+        "bytes": 112848
+      },
+      "poster": {
+        "path": "poster.png",
+        "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+        "bytes": 79698
+      },
+      "cleanupStatus": "ok",
+      "verificationErrors": []
+    },
+    {
+      "name": "validation-worktree",
+      "status": "passed",
+      "command": {
+        "expectedExit": 0,
+        "actualExit": 0,
+        "attempted": true,
+        "signal": null
+      },
+      "summary": {
+        "verifiedPairs": 9,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerPreserved": true,
+      "video": {
+        "path": "compare.mp4",
+        "sha256": "b315ff8b4d6582391bef9d19a65b75ddc01f13d05df47bc9d9f55e17d16ce419",
+        "bytes": 113540
+      },
+      "poster": {
+        "path": "poster.png",
+        "sha256": "e58706f3f2d06d0bb8f7a3b3a572a901a99d1296ce179a1780a1a556e0f1f4f6",
+        "bytes": 69106
+      },
+      "cleanupStatus": "ok",
+      "verificationErrors": []
+    }
+  ],
+  "independentAcceptance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "3f54c8e5a76a38226574c9748cee88c24513b92c631ef95b3b2f87421f8a1fc6",
+    "visualVerdictSha256": "4bb0b28e88e22ebcccdd4e9bcafd508cb57e70bbd86d380318977bed2c2a8269",
+    "decodedOutputFrames": 73,
+    "decodeRecordSha256": "e8b72fcd6ba4a464edf67505053b8bb3901abc64707335bced0db10ebda2c503",
+    "verifiedArtifactHashes": 3506,
+    "findings": [
+      "Actual intermediate drawer opening and closing on both sides in all three navigation runs.",
+      "Inner content moves while the drawer header stays fixed, independently associated with the actual element scrollTop observation.",
+      "All three validation comparisons and the subsequent WORKTREE comparison show the intended feedback.",
+      "Narrow framing and truthful partial-failure annotations remain visible."
+    ],
+    "limitations": [
+      "Direct frame samples supplement normal-speed playback; this is not human inspection of every output frame.",
+      "Conservative literal redaction changes Explain to E[redacted]plain in the validation title."
+    ]
+  },
+  "normalSpeedReview": {
+    "reviewSha256": "97b77bd07f077988c1c4f4c5a2c85baf0d4892a7cbcad7d7603b6b45ec50baa6",
+    "totalPlaybacks": 13,
+    "publicAppPlaybacks": 7,
+    "otherSyntheticMotionPlaybacks": 6,
+    "rate": 1,
+    "droppedFrames": 0,
+    "corruptedFrames": 0,
+    "allExpectedFrameCounts": true
+  },
+  "demo": "docs/demo/motion-success/compare.mp4",
+  "limitations": [
+    "Self-authored MIT public example with local synthetic data.",
+    "No external providers, accounts, hosted authentication, or production services are exercised."
+  ],
+  "overallReleaseReady": false
+}

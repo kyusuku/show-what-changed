@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-completed-with-motion-failures",
+  "recordedAt": "2026-11-03T09:38:57.518210+00:00",
+  "candidate": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "scope": "Fixed process-history diagnostic. No added in-capture hooks. Process snapshots occur at entry and exit; resource counters occur between arms. Observation cost is unknown.",
+  "bounds": {
+    "containerTotalSeconds": 1200,
+    "hostAttachSeconds": 1260,
+    "cpus": 2,
+    "memoryGiB": 3,
+    "pids": 512,
+    "sharedMemoryMiB": 512,
+    "guestSwap": false
+  },
+  "counts": {
+    "plannedSlots": 24,
+    "observedResults": 19,
+    "numericPassed": 16,
+    "failed": 3,
+    "notStarted": 5,
+    "verifierProcesses": 11
+  },
+  "arms": [
+    {
+      "id": "R1",
+      "lifetime": "retained",
+      "status": "numeric-failed",
+      "slots": [
+        {
+          "slot": 1,
+          "id": "1280x800-run-1",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 2,
+          "id": "1280x800-run-2",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 3,
+          "id": "1280x800-run-3",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 4,
+          "id": "390x844-run-1",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 5,
+          "id": "390x844-run-2",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 6,
+          "id": "390x844-run-3",
+          "kind": "observed-result",
+          "status": "failed",
+          "failure": {
+            "code": "ERR_ASSERTION",
+            "message": "before known-moving source gap is 366.65200000000186 ms"
+          }
+        }
+      ]
+    },
+    {
+      "id": "F1",
+      "lifetime": "fresh-per-case",
+      "status": "numeric-failed",
+      "slots": [
+        {
+          "slot": 1,
+          "id": "1280x800-run-1",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 2,
+          "id": "1280x800-run-2",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 3,
+          "id": "1280x800-run-3",
+          "kind": "observed-result",
+          "status": "failed",
+          "failure": {
+            "code": "ERR_ASSERTION",
+            "message": "before known-moving source gap is 433.3159999999916 ms"
+          }
+        },
+        {
+          "slot": 4,
+          "id": "390x844-run-1",
+          "kind": "not-started",
+          "reason": "prior-case-failed"
+        },
+        {
+          "slot": 5,
+          "id": "390x844-run-2",
+          "kind": "not-started",
+          "reason": "prior-case-failed"
+        },
+        {
+          "slot": 6,
+          "id": "390x844-run-3",
+          "kind": "not-started",
+          "reason": "prior-case-failed"
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "lifetime": "fresh-per-case",
+      "status": "numeric-passed",
+      "slots": [
+        {
+          "slot": 1,
+          "id": "1280x800-run-1",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 2,
+          "id": "1280x800-run-2",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 3,
+          "id": "1280x800-run-3",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 4,
+          "id": "390x844-run-1",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 5,
+          "id": "390x844-run-2",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 6,
+          "id": "390x844-run-3",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "lifetime": "retained",
+      "status": "numeric-failed",
+      "slots": [
+        {
+          "slot": 1,
+          "id": "1280x800-run-1",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 2,
+          "id": "1280x800-run-2",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 3,
+          "id": "1280x800-run-3",
+          "kind": "observed-result",
+          "status": "numeric-passed",
+          "failure": null
+        },
+        {
+          "slot": 4,
+          "id": "390x844-run-1",
+          "kind": "observed-result",
+          "status": "failed",
+          "failure": {
+            "code": "ERR_ASSERTION",
+            "message": "before known-moving source gap is 249.9899999999907 ms"
+          }
+        },
+        {
+          "slot": 5,
+          "id": "390x844-run-2",
+          "kind": "not-started",
+          "reason": "prior-case-failed"
+        },
+        {
+          "slot": 6,
+          "id": "390x844-run-3",
+          "kind": "not-started",
+          "reason": "prior-case-failed"
+        }
+      ]
+    }
+  ],
+  "observations": [
+    "The fresh F1 desktop repetition 3 fails the unchanged 200 ms moving-source-gap limit at 433.316 ms. Its F2 counterpart passes. Fresh process lifetime is insufficient as a fix.",
+    "During the F1 BEFORE receiver interval of 459.689 ms, AFTER delivers 14 frames. The whole parent receiver is not continuously paused throughout that interval.",
+    "All 38 observed tracks have equal received, persisted and acknowledged counts, zero rejections and passing clock bounds. Browser-internal dropped-frame counts remain unknown.",
+    "F2 narrow repetition 2 numerically passes at 199.992 ms on both tracks. This does not clear the failed arms.",
+    "Mask and acknowledgement maxima lack frame identity. Resource and memory samples are boundary values, not causal measurements of the failing intervals."
+  ],
+  "notEstablished": [
+    "The specific cause of the gaps.",
+    "A leak, fork mechanism, or speedup from changing process lifetime.",
+    "Linux motion acceptance, complete platform acceptance, normal-speed visual acceptance, or release readiness."
+  ],
+  "cleanup": {
+    "evidenceExported": true,
+    "containerRemoved": true,
+    "ownedCleanupConfirmed": true,
+    "baselinePreserved": true,
+    "vmStopped": true
+  },
+  "containerExitCode": 0,
+  "oomKilled": false,
+  "inputRecords": {
+    "ownership": {
+      "name": "ownership.json",
+      "sha256": "94af241d1750fa14be0c2b53a900895026368587c16d36a3f27c318f6900594e",
+      "bytes": 8917
+    },
+    "diagnosticResult": {
+      "name": "diagnostic-result.json",
+      "sha256": "eaa005947950bba7738dfc2651a7f2db8962820fd7da1d0a9137cf40dda0f7da",
+      "bytes": 100505
+    },
+    "exportInventory": {
+      "name": "export-inventory.json",
+      "sha256": "68abb44593ba8f358d42809f213ee3a2bae8790a0ef6c6d2156eb3631a26e1a8",
+      "bytes": 1588319
+    },
+    "analysis": {
+      "name": "swc-linux-process-history-result-analysis.md",
+      "sha256": "4dc5d57224bfa0e5c15a5e4dccff5d26d5b1b7ce76cb16e2909930f02dc8b381",
+      "bytes": 15986
+    },
+    "structuredAnalysis": {
+      "name": "swc-linux-process-history-result-analysis.json",
+      "sha256": "8b48d74f27192c4ee44c5542658deccff866dbb7379ec84a94d26e82b526437b",
+      "bytes": 203090
+    }
+  },
+  "independentAnalysis": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "releaseAcceptance": "not-evaluated"
+  },
+  "nextStep": "Measure correlated frame, worker response and acknowledgement intervals in a separately reviewed bounded diagnostic. No production repair selected.",
+  "releaseReady": false,
+  "publicationPerformed": false
+}

@@ -1,0 +1,1646 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-verification-in-progress",
+  "recordedAt": "2026-11-03T15:18:17.542242+00:00",
+  "candidate": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "preparation": {
+    "sourceFiles": 434,
+    "packageFiles": 171,
+    "oldHistoryIncluded": false,
+    "sourceCommitCount": 4,
+    "independentPreparationReview": "passed-limited-to-preparation"
+  },
+  "hostPhaseMatrix": {
+    "status": "failed",
+    "reportSha256": "4293e40c6be6ec71f4a06a5a4b6f6d1b7ed72529f8e28a590341fb7c7d552fd7",
+    "cases": [
+      {
+        "id": "setup-sigint",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "setup-sigterm",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "setup-deadline",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "startup-sigint",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "startup-sigterm",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "startup-deadline",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "recording-sigint",
+        "status": "failed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": [
+          {
+            "code": "PHASE_CHECK_FAILED",
+            "stage": "privacy"
+          }
+        ]
+      },
+      {
+        "id": "recording-sigterm",
+        "status": "failed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": [
+          {
+            "code": "PHASE_CHECK_FAILED",
+            "stage": "privacy"
+          }
+        ]
+      },
+      {
+        "id": "recording-deadline",
+        "status": "failed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": [
+          {
+            "code": "PHASE_CHECK_FAILED",
+            "stage": "privacy"
+          }
+        ]
+      },
+      {
+        "id": "encoding-sigint",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "encoding-sigterm",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      },
+      {
+        "id": "encoding-deadline",
+        "status": "passed",
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "errors": []
+      }
+    ],
+    "diagnosis": "Original failed report retained. Three verifier failures were corrected and fresh final-package recording runs passed; see finalRecordingInterruptions. The other nine unchanged runtime observations remain separately bound to the earlier archive.",
+    "directRetainedImageInspection": {
+      "images": 2323,
+      "status": "passed",
+      "scope": "All retained app-bearing PNG mask rectangles and capability media checked separately."
+    },
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+  },
+  "privacy": {
+    "treeArchivePackageAndNewHistory": {
+      "status": "passed",
+      "checkedInputs": 3255,
+      "reportSha256": "e1c1befbdd63a16b00666a0b48cccaba5b789556d59c0f3079cc3bea522194e3",
+      "implementationCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+      "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428"
+    },
+    "credentialPatternAudit": {
+      "status": "passed",
+      "reportSha256": "c8d59c40a048bfd90a259b7f91f39f962dce6e2abe1396f5b64013081e58b296",
+      "implementationCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+      "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "knownSyntheticFindings": 6
+    },
+    "limits": "Deny matching, credential pattern, and metadata checks do not replace semantic media review or advisory triage."
+  },
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "macosInstalledSmoke": {
+    "status": "passed",
+    "reportSha256": "0b90059a8b9477f10aee55fca0714e72cde18a65ab37aca77072dca0efa28983",
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+  },
+  "keyframeRepeatability": {
+    "status": "passed",
+    "reportSha256": "b2298b1a20f065f6bd36bf6a2aa0010f0da3b8fa963f08c010ea68b21576536d",
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+    "scope": "explicit-keyframes-repeatability"
+  },
+  "installedAuthentication": {
+    "status": "passed",
+    "reportSha256": "88d72f8a8525d933a37d0d25f16c35c075e75467c5f0ba0e0120ad8e079380a3",
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+    "scope": "Synthetic side-specific authenticated app and external-unverified labeling",
+    "captureMode": "keyframes",
+    "dataParity": "external-unverified",
+    "callerPreserved": true,
+    "summary": {
+      "verifiedPairs": 3,
+      "changedPairs": 3,
+      "expectedAbsences": 0,
+      "exclusions": 4,
+      "failedSteps": 0,
+      "blockedSteps": 0,
+      "coverageOmissions": 0
+    },
+    "limitations": [
+      "Focused keyframe observation. Independent motion and final-media review remain separate.",
+      "Safe generic local fixtures. No real external service or account."
+    ]
+  },
+  "installedLargePnpmWorkspace": {
+    "status": "passed",
+    "reportSha256": "b1d8c97b62e5ac4d99ce5cf85c06148b2a52079e8cefe443458071e37c3ccc92",
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+    "scope": "installed-focused-large-acceptance",
+    "captureMode": "keyframes",
+    "dataParity": "stateless-declared",
+    "callerPreserved": true,
+    "summary": {
+      "verifiedPairs": 4,
+      "changedPairs": 4,
+      "expectedAbsences": 0,
+      "exclusions": 2,
+      "failedSteps": 0,
+      "blockedSteps": 0,
+      "coverageOmissions": 0
+    },
+    "limitations": [
+      "Focused keyframe observation. Independent motion and final-media review remain separate.",
+      "Safe generic local fixtures. No real external service or account."
+    ],
+    "generatedTrackedBytes": 234881024,
+    "sourceBudget": 1073741824,
+    "sharedPackageChanged": true
+  },
+  "priorCandidate": {
+    "implementationCommit": "61f4584a09a1e69740735c06bc0f37c1fe4452b4",
+    "sourceArchiveSha256": "1064ea6be71d06343493b589d2892053fef1e53a6f411813aa1c3961541ad0aa",
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "readmeRepack": {
+    "changedPackageFiles": [
+      "README.md"
+    ],
+    "unchangedPackageFiles": 170,
+    "runtimeFilesUnchanged": true,
+    "sourceVerificationChanges": [
+      "scripts/r03-phase-check.mjs",
+      "test/unit/r03-phase-check.test.mjs",
+      "scripts/real-app-smoke.mjs",
+      "scripts/real-app-run.mjs",
+      "scripts/test-real-app-run.mjs"
+    ],
+    "priorObservationsRemainBoundToPriorPackage": true,
+    "transferAcceptance": "independently-reviewed-scoped-transfer"
+  },
+  "finalRecordingInterruptions": {
+    "status": "passed",
+    "reportSha256": "b8bf65223690059c2086621fb0c2e1ef4fc8eb81c876e8c6414ed69d21fe11aa",
+    "canonicalHelperSha256": "74dd3f0571a5119208c9ec6d48b27112f43b2f254189ba399fa1f7205c90c5a6",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "cases": [
+      {
+        "id": "recording-sigint",
+        "status": "passed",
+        "actualExit": 130,
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "recordingCheckpoint": {
+          "path": "frames/001-before.png",
+          "bytes": 6257,
+          "sha256": "f962d60eaeeafe0cc71bb5284ebb59a311ec72e45bd3bb2fa1ac1287e5066c78"
+        }
+      },
+      {
+        "id": "recording-sigterm",
+        "status": "passed",
+        "actualExit": 143,
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "recordingCheckpoint": {
+          "path": "frames/001-before.png",
+          "bytes": 6251,
+          "sha256": "80102b39cb950e5bbd4c93c60d5747397fd197da93f7839c860a8fe00af10a96"
+        }
+      },
+      {
+        "id": "recording-deadline",
+        "status": "passed",
+        "actualExit": 10,
+        "cleanup": "ok",
+        "callerPreserved": true,
+        "sentinelPreserved": true,
+        "recordingCheckpoint": {
+          "path": "frames/001-before.png",
+          "bytes": 6251,
+          "sha256": "ec9918f6d58a0c36022e7c7868ab6988a406828e298025ce9fa80b17207c8051"
+        }
+      }
+    ]
+  },
+  "unchangedRuntimeTransfer": {
+    "status": "independently-reviewed",
+    "executedArchiveSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+    "currentArchiveSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "unchangedPackageFiles": 170,
+    "changedPackageFiles": [
+      "README.md"
+    ],
+    "unchangedDependencyIdentities": 7,
+    "reviewSha256": "96d7ec59bd66723743b492b9451a70f0025be5c010b61941e0eca172de69d418",
+    "scope": [
+      "synthetic authentication and external-unverified state",
+      "224 MiB tracked source with a changed pnpm shared package",
+      "unchanged host runtime and existing source tests"
+    ],
+    "notANewExecution": true
+  },
+  "freshPublicDocumentationRecipe": {
+    "status": "passed-scoped-execution",
+    "executedArchiveSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27",
+    "reportSha256": "1cbcb391a6187a5fc322935f9ed7ba9f0b0fc6b27f4bfb46072276d25dcc7c70",
+    "reviewNoteSha256": "09426fd5f0e520884c27de7f6d6d5474bb2eefd71a20a9dbad4b49df1190a2a1",
+    "checkedSteps": 12,
+    "sourcePngs": 509,
+    "timelineImageHashes": 546,
+    "normalSpeedVideoFrames": 285,
+    "droppedVideoFrames": 0,
+    "offlineRecomposePreservedCaptureAndMedia": true,
+    "cleanRemovedRun": true,
+    "callerPreserved": true,
+    "instructionAndRuntimeTransfer": "Reviewed unchanged instructions and 170 unchanged package files. The executed archive remains identified separately."
+  },
+  "finalPartialMotion": {
+    "status": "numeric-and-playback-review-passed",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "reportSha256": "e4235d5228e935826cbcc2ef7b5ddbe119049d9be386a58473d8100ec701425e",
+    "visualReviewSha256": "1b4c8a3e621634ddb23b790588a21b2587a44a17e865dbd40450ca053e52d860",
+    "mediaFormatReviewSha256": "8d81f61b184d5b09213b7aadfe4ea599f43904294e4ff7af1496b5f6617e9a52",
+    "summary": {
+      "verifiedPairs": 3,
+      "changedPairs": 3,
+      "expectedAbsences": 0,
+      "exclusions": 0,
+      "failedSteps": 1,
+      "blockedSteps": 3,
+      "coverageOmissions": 0
+    },
+    "sourcePngs": 401,
+    "decodedFrames": 265,
+    "fps": 30,
+    "uncappedFrameCountVerified": true,
+    "offlineRecovery": {
+      "unavailableEncoderExitCode": 8,
+      "recoveryExitCode": 3,
+      "comparisonOutcomePreserved": true,
+      "cleanupOutcomePreserved": true,
+      "captureAndTimelineUnchanged": true,
+      "allSourceImagesUnchanged": true,
+      "browserUnavailable": true,
+      "earlierEncodingFailureRetained": true
+    },
+    "callerPreserved": true,
+    "cleanup": "ok",
+    "visualScope": "Full 1x playback and sampled visual inspection, not every-frame human review."
+  },
+  "priorMacosMotion": {
+    "status": "numeric-passed",
+    "completeRepetitionMatrix": true,
+    "installedPackageFilesSha256": "d26fa6a3ef8e331c018272e05c44c810d017ffc548efa4f412254d0423b5e3d4",
+    "reportSha256": "8f31e7cbb85c84fa3655727289427a715d78ea6cd716a39c85d71d791ac2eca6",
+    "cases": [
+      {
+        "id": "1280x800-run-1",
+        "status": "numeric-passed",
+        "cleanup": "ok",
+        "sourcePositions": {
+          "before": 173,
+          "after": 175
+        },
+        "decodedPositions": {
+          "before": 89,
+          "after": 89
+        },
+        "sourceMaxGapsMs": {
+          "before": 49.99799990653992,
+          "after": 49.99800002574921
+        },
+        "decodedMaxGapsMs": {
+          "before": 33.333333333333485,
+          "after": 33.333333333333485
+        },
+        "decodedPulseErrorsMs": [
+          0,
+          0,
+          0
+        ],
+        "artifacts": {
+          "compare.mp4": {
+            "path": "1280x800-run-1/compare.mp4",
+            "sha256": "704f1a589e845c10746bb5915dd825737a1e246eb446365bfd4768e92de183cf",
+            "bytes": 62080
+          },
+          "poster.png": {
+            "path": "1280x800-run-1/poster.png",
+            "sha256": "b206529b55fbe54b137349663aecf473d5fb649ce5988f581c3a6f51c474ee5a",
+            "bytes": 28149
+          },
+          "capture.json": {
+            "path": "1280x800-run-1/capture.json",
+            "sha256": "bf2e1334dcf337d00b8479612a07d53fbeffea6f5a5daea0e2b7267b5169e81c",
+            "bytes": 446863
+          },
+          "timeline.json": {
+            "path": "1280x800-run-1/timeline.json",
+            "sha256": "146ae87d90bbc651fb15ddfa84241e2976c1401d8a0690a28676e0c2d77265c3",
+            "bytes": 105830
+          }
+        }
+      },
+      {
+        "id": "1280x800-run-2",
+        "status": "numeric-passed",
+        "cleanup": "ok",
+        "sourcePositions": {
+          "before": 167,
+          "after": 170
+        },
+        "decodedPositions": {
+          "before": 88,
+          "after": 88
+        },
+        "sourceMaxGapsMs": {
+          "before": 66.66399991512299,
+          "after": 83.33000004291534
+        },
+        "decodedMaxGapsMs": {
+          "before": 33.33333333333394,
+          "after": 33.33333333333394
+        },
+        "decodedPulseErrorsMs": [
+          0,
+          0,
+          0
+        ],
+        "artifacts": {
+          "compare.mp4": {
+            "path": "1280x800-run-2/compare.mp4",
+            "sha256": "6e506fed218f57bda5b224cd3fdde18811fba6ba8ac767996258a6585cdbaff4",
+            "bytes": 61442
+          },
+          "poster.png": {
+            "path": "1280x800-run-2/poster.png",
+            "sha256": "b206529b55fbe54b137349663aecf473d5fb649ce5988f581c3a6f51c474ee5a",
+            "bytes": 28149
+          },
+          "capture.json": {
+            "path": "1280x800-run-2/capture.json",
+            "sha256": "49082074609dfcadc24d332d5be540539772695db212c2888c13b6f2d5afe4df",
+            "bytes": 442558
+          },
+          "timeline.json": {
+            "path": "1280x800-run-2/timeline.json",
+            "sha256": "0ee11ddfb6dc7fba7abe8775e082d7bb609c0ffe63f33dcab83f28f37a7ebd20",
+            "bytes": 104412
+          }
+        }
+      },
+      {
+        "id": "1280x800-run-3",
+        "status": "numeric-passed",
+        "cleanup": "ok",
+        "sourcePositions": {
+          "before": 172,
+          "after": 172
+        },
+        "decodedPositions": {
+          "before": 89,
+          "after": 89
+        },
+        "sourceMaxGapsMs": {
+          "before": 50.76199996471405,
+          "after": 50.82100009918213
+        },
+        "decodedMaxGapsMs": {
+          "before": 33.33333333333394,
+          "after": 33.33333333333394
+        },
+        "decodedPulseErrorsMs": [
+          0,
+          0,
+          0
+        ],
+        "artifacts": {
+          "compare.mp4": {
+            "path": "1280x800-run-3/compare.mp4",
+            "sha256": "c23209e1752e114763ebaebd74a9ea0751126448cd833a0b2882c62d56bab7d4",
+            "bytes": 60733
+          },
+          "poster.png": {
+            "path": "1280x800-run-3/poster.png",
+            "sha256": "b206529b55fbe54b137349663aecf473d5fb649ce5988f581c3a6f51c474ee5a",
+            "bytes": 28149
+          },
+          "capture.json": {
+            "path": "1280x800-run-3/capture.json",
+            "sha256": "ba8fc3e810dbd0fc1299ce008bf2bfc97a67e7fcb710e05d52efad776f57b625",
+            "bytes": 434510
+          },
+          "timeline.json": {
+            "path": "1280x800-run-3/timeline.json",
+            "sha256": "cdf578764008c35293ad44f5a5815c2afbd9ac1ce2a3af5b0dc95f8235064cfd",
+            "bytes": 103035
+          }
+        }
+      },
+      {
+        "id": "390x844-run-1",
+        "status": "numeric-passed",
+        "cleanup": "ok",
+        "sourcePositions": {
+          "before": 176,
+          "after": 176
+        },
+        "decodedPositions": {
+          "before": 88,
+          "after": 88
+        },
+        "sourceMaxGapsMs": {
+          "before": 59.18900012969971,
+          "after": 59.07299995422363
+        },
+        "decodedMaxGapsMs": {
+          "before": 33.33333333333394,
+          "after": 33.33333333333394
+        },
+        "decodedPulseErrorsMs": [
+          0,
+          0,
+          0
+        ],
+        "artifacts": {
+          "compare.mp4": {
+            "path": "390x844-run-1/compare.mp4",
+            "sha256": "601ead3a2d61826109e8f980d87ec5fcc0a70515d3a03768bc5c516bf6ae26fa",
+            "bytes": 56587
+          },
+          "poster.png": {
+            "path": "390x844-run-1/poster.png",
+            "sha256": "489581e3e2d0239ffa36033e6bc3495504bbfd2a6f8583c7db5c16ead432083e",
+            "bytes": 27732
+          },
+          "capture.json": {
+            "path": "390x844-run-1/capture.json",
+            "sha256": "ad48856953e9d215f6ddbb279039f9abb959afa0b47a1329082d35b037c9ccf8",
+            "bytes": 459338
+          },
+          "timeline.json": {
+            "path": "390x844-run-1/timeline.json",
+            "sha256": "2e3e6f99a55ba75271d97f7d15f4ac780ee30e807d4bf9f2d0d97010018009bb",
+            "bytes": 107095
+          }
+        }
+      },
+      {
+        "id": "390x844-run-2",
+        "status": "numeric-passed",
+        "cleanup": "ok",
+        "sourcePositions": {
+          "before": 177,
+          "after": 176
+        },
+        "decodedPositions": {
+          "before": 89,
+          "after": 89
+        },
+        "sourceMaxGapsMs": {
+          "before": 55.53500008583069,
+          "after": 55.64900016784668
+        },
+        "decodedMaxGapsMs": {
+          "before": 33.33333333333394,
+          "after": 33.33333333333394
+        },
+        "decodedPulseErrorsMs": [
+          0,
+          0,
+          0
+        ],
+        "artifacts": {
+          "compare.mp4": {
+            "path": "390x844-run-2/compare.mp4",
+            "sha256": "6133451a7b46e30b648b19185e2538520b61df6d25e1ba13e6b37d7fb26dbb02",
+            "bytes": 57543
+          },
+          "poster.png": {
+            "path": "390x844-run-2/poster.png",
+            "sha256": "489581e3e2d0239ffa36033e6bc3495504bbfd2a6f8583c7db5c16ead432083e",
+            "bytes": 27732
+          },
+          "capture.json": {
+            "path": "390x844-run-2/capture.json",
+            "sha256": "318e823f6e876a7b58a91fde547857aae498e9d9ec92c565b6495d97ae60469d",
+            "bytes": 460203
+          },
+          "timeline.json": {
+            "path": "390x844-run-2/timeline.json",
+            "sha256": "1bb213c57beab0f85bee2fbdef3e23863d03f7fedce134964d7d7486691165fd",
+            "bytes": 107197
+          }
+        }
+      },
+      {
+        "id": "390x844-run-3",
+        "status": "numeric-passed",
+        "cleanup": "ok",
+        "sourcePositions": {
+          "before": 177,
+          "after": 177
+        },
+        "decodedPositions": {
+          "before": 89,
+          "after": 89
+        },
+        "sourceMaxGapsMs": {
+          "before": 56.80199992656708,
+          "after": 57.36699998378754
+        },
+        "decodedMaxGapsMs": {
+          "before": 33.33333333333394,
+          "after": 33.33333333333394
+        },
+        "decodedPulseErrorsMs": [
+          0,
+          0,
+          0
+        ],
+        "artifacts": {
+          "compare.mp4": {
+            "path": "390x844-run-3/compare.mp4",
+            "sha256": "14fc132ed895e9c404682eebd7b19df6715a8346c7eb99f4b22bf145f88b6e63",
+            "bytes": 57756
+          },
+          "poster.png": {
+            "path": "390x844-run-3/poster.png",
+            "sha256": "489581e3e2d0239ffa36033e6bc3495504bbfd2a6f8583c7db5c16ead432083e",
+            "bytes": 27732
+          },
+          "capture.json": {
+            "path": "390x844-run-3/capture.json",
+            "sha256": "794054804aea9d3c4d33a07f50948bc5367a5cbbeb9acd726e59441367f84d71",
+            "bytes": 461461
+          },
+          "timeline.json": {
+            "path": "390x844-run-3/timeline.json",
+            "sha256": "515e7a08fe19150e1ebe448b2adc926959d8e7a0fc534e83a2ef7aed83705e71",
+            "bytes": 107015
+          }
+        }
+      }
+    ],
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+  },
+  "priorVisualObservation": {
+    "method": "Six full 1x browser playbacks without screenshot or canvas work during playback, followed by sampled contact-sheet review.",
+    "playbackRows": [
+      {
+        "file": "1280x800-run-1.mp4",
+        "duration": 5.233333,
+        "playbackRate": 1,
+        "elapsedMs": 5236,
+        "width": 1920,
+        "height": 686,
+        "totalVideoFrames": 153,
+        "droppedVideoFrames": 0,
+        "presentedCallbacks": 157,
+        "maxPresentationGapMs": 50.599999999998545,
+        "error": null
+      },
+      {
+        "file": "1280x800-run-2.mp4",
+        "duration": 5.166667,
+        "playbackRate": 1,
+        "elapsedMs": 5169.199999928474,
+        "width": 1920,
+        "height": 686,
+        "totalVideoFrames": 151,
+        "droppedVideoFrames": 0,
+        "presentedCallbacks": 155,
+        "maxPresentationGapMs": 51.400000000001455,
+        "error": null
+      },
+      {
+        "file": "1280x800-run-3.mp4",
+        "duration": 5.2,
+        "playbackRate": 1,
+        "elapsedMs": 5202.5,
+        "width": 1920,
+        "height": 686,
+        "totalVideoFrames": 152,
+        "droppedVideoFrames": 0,
+        "presentedCallbacks": 155,
+        "maxPresentationGapMs": 51.400000000001455,
+        "error": null
+      },
+      {
+        "file": "390x844-run-1.mp4",
+        "duration": 5.133333,
+        "playbackRate": 1,
+        "elapsedMs": 5136.400000095367,
+        "width": 1920,
+        "height": 686,
+        "totalVideoFrames": 150,
+        "droppedVideoFrames": 0,
+        "presentedCallbacks": 154,
+        "maxPresentationGapMs": 51.299999999995634,
+        "error": null
+      },
+      {
+        "file": "390x844-run-2.mp4",
+        "duration": 5.1,
+        "playbackRate": 1,
+        "elapsedMs": 5101.399999976158,
+        "width": 1920,
+        "height": 686,
+        "totalVideoFrames": 149,
+        "droppedVideoFrames": 0,
+        "presentedCallbacks": 152,
+        "maxPresentationGapMs": 51.099999999998545,
+        "error": null
+      },
+      {
+        "file": "390x844-run-3.mp4",
+        "duration": 5.066667,
+        "playbackRate": 1,
+        "elapsedMs": 5068.100000023842,
+        "width": 1920,
+        "height": 686,
+        "totalVideoFrames": 148,
+        "droppedVideoFrames": 0,
+        "presentedCallbacks": 152,
+        "maxPresentationGapMs": 50.599999999998545,
+        "error": null
+      }
+    ],
+    "sampleTimesSeconds": [
+      0.2,
+      2,
+      3.8
+    ],
+    "sampledReview": "Labels, opaque masks, moving marker progression and narrow letterboxing inspected.",
+    "limitation": "Sampled visual review is not a frame-by-frame human review.",
+    "packageTarballSha256": "3fac9cc817a2e89e3dd05ac79065f04c249b7735497cfd1965616fc019143b27"
+  },
+  "macosMotion": {
+    "status": "numeric-and-playback-review-passed",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "reportSha256": "30795503114d7a700a7250df4815281546ad8510a8932f7aa46471c0d7de3ec4",
+    "completeRepetitionMatrix": true,
+    "installedPackageFilesSha256": "e8c9ef91d4f3ab14f934e05babff5c677b11293a35f3d122106a45ae491bbdca",
+    "cases": [
+      {
+        "id": "1280x800-run-1",
+        "status": "numeric-passed",
+        "cleanup": {
+          "status": "ok",
+          "errors": [],
+          "ownedChildGroupsChecked": 16,
+          "serversClosed": 2
+        },
+        "totalFrames": 161,
+        "videoSha256": "dd0c6ee0c30b15e3849a92dc7e79c9b76d16246a691ccfbe864fe5ca7625e292"
+      },
+      {
+        "id": "1280x800-run-2",
+        "status": "numeric-passed",
+        "cleanup": {
+          "status": "ok",
+          "errors": [],
+          "ownedChildGroupsChecked": 16,
+          "serversClosed": 2
+        },
+        "totalFrames": 156,
+        "videoSha256": "ae58f2562b3476cf1ad05fa0adf7ffd89b24e06cf8482102880f32dd25570011"
+      },
+      {
+        "id": "1280x800-run-3",
+        "status": "numeric-passed",
+        "cleanup": {
+          "status": "ok",
+          "errors": [],
+          "ownedChildGroupsChecked": 16,
+          "serversClosed": 2
+        },
+        "totalFrames": 155,
+        "videoSha256": "38c2dff6aff7960a65295f502ab1969ccf0fb2bdb3147df879f83b5eb0bc1924"
+      },
+      {
+        "id": "390x844-run-1",
+        "status": "numeric-passed",
+        "cleanup": {
+          "status": "ok",
+          "errors": [],
+          "ownedChildGroupsChecked": 16,
+          "serversClosed": 2
+        },
+        "totalFrames": 154,
+        "videoSha256": "1cc2e26fc9bab9da360e68a6eada8c0d0d96b830e10ce82d9da2df6b01911ccb"
+      },
+      {
+        "id": "390x844-run-2",
+        "status": "numeric-passed",
+        "cleanup": {
+          "status": "ok",
+          "errors": [],
+          "ownedChildGroupsChecked": 16,
+          "serversClosed": 2
+        },
+        "totalFrames": 153,
+        "videoSha256": "830655a8a9e3ad8f9470eb15b65d3e9d90d851b80f8bef5d4012ec5fd496630d"
+      },
+      {
+        "id": "390x844-run-3",
+        "status": "numeric-passed",
+        "cleanup": {
+          "status": "ok",
+          "errors": [],
+          "ownedChildGroupsChecked": 16,
+          "serversClosed": 2
+        },
+        "totalFrames": 152,
+        "videoSha256": "fcb8ce8cc3ae22a0d9dae5e06243fe875f27c2fbc2c32a081a0426ae8c43f0c1"
+      }
+    ]
+  },
+  "finalVisualObservation": {
+    "status": "reviewed",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "reportSha256": "97b77bd07f077988c1c4f4c5a2c85baf0d4892a7cbcad7d7603b6b45ec50baa6",
+    "playbackCount": 13,
+    "sampleCount": 26,
+    "allPlaybackRate": 1,
+    "allDroppedFrames": 0,
+    "allCorruptedFrames": 0,
+    "playbackRows": [
+      {
+        "id": "motion-1280x800-run-1",
+        "rate": 1,
+        "duration": 5.366667,
+        "elapsedMs": 5369.899999976158,
+        "callbacks": 160,
+        "totalFrames": 161,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0.033333,
+        "last": 5.333333
+      },
+      {
+        "id": "motion-1280x800-run-2",
+        "rate": 1,
+        "duration": 5.2,
+        "elapsedMs": 5201.5,
+        "callbacks": 156,
+        "totalFrames": 156,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0,
+        "last": 5.166667
+      },
+      {
+        "id": "motion-1280x800-run-3",
+        "rate": 1,
+        "duration": 5.166667,
+        "elapsedMs": 5169.199999928474,
+        "callbacks": 154,
+        "totalFrames": 155,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0.033333,
+        "last": 5.133333
+      },
+      {
+        "id": "motion-390x844-run-1",
+        "rate": 1,
+        "duration": 5.133333,
+        "elapsedMs": 5136.299999952316,
+        "callbacks": 153,
+        "totalFrames": 154,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0.033333,
+        "last": 5.1
+      },
+      {
+        "id": "motion-390x844-run-2",
+        "rate": 1,
+        "duration": 5.1,
+        "elapsedMs": 5102.399999976158,
+        "callbacks": 153,
+        "totalFrames": 153,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0,
+        "last": 5.066667
+      },
+      {
+        "id": "motion-390x844-run-3",
+        "rate": 1,
+        "duration": 5.066667,
+        "elapsedMs": 5069.700000047684,
+        "callbacks": 151,
+        "totalFrames": 152,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0.033333,
+        "last": 5.033333
+      },
+      {
+        "id": "public-navigation-1",
+        "rate": 1,
+        "duration": 8.6,
+        "elapsedMs": 8601.199999928474,
+        "callbacks": 258,
+        "totalFrames": 258,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0,
+        "last": 8.566667
+      },
+      {
+        "id": "public-validation-1",
+        "rate": 1,
+        "duration": 6.633333,
+        "elapsedMs": 6636.400000095367,
+        "callbacks": 199,
+        "totalFrames": 199,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0,
+        "last": 6.6
+      },
+      {
+        "id": "public-navigation-2",
+        "rate": 1,
+        "duration": 8.6,
+        "elapsedMs": 8601.299999952316,
+        "callbacks": 258,
+        "totalFrames": 258,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0,
+        "last": 8.566667
+      },
+      {
+        "id": "public-validation-2",
+        "rate": 1,
+        "duration": 6.3,
+        "elapsedMs": 6302.899999976158,
+        "callbacks": 189,
+        "totalFrames": 189,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0,
+        "last": 6.266667
+      },
+      {
+        "id": "public-navigation-3",
+        "rate": 1,
+        "duration": 8.433333,
+        "elapsedMs": 8435,
+        "callbacks": 252,
+        "totalFrames": 253,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0.033333,
+        "last": 8.4
+      },
+      {
+        "id": "public-validation-3",
+        "rate": 1,
+        "duration": 6.166667,
+        "elapsedMs": 6168.700000047684,
+        "callbacks": 185,
+        "totalFrames": 185,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0,
+        "last": 6.133333
+      },
+      {
+        "id": "public-validation-worktree",
+        "rate": 1,
+        "duration": 6.166667,
+        "elapsedMs": 6168.399999976158,
+        "callbacks": 184,
+        "totalFrames": 185,
+        "dropped": 0,
+        "corrupted": 0,
+        "first": 0.033333,
+        "last": 6.133333
+      }
+    ],
+    "scope": "Actual uninterrupted 1x playback metrics plus two visually inspected samples per video; not human frame-by-frame inspection. Initial samples with browser controls were replaced by clean samples. Contact sheets reviewed."
+  },
+  "finalPublicWebApp": {
+    "status": "execution-and-playback-passed-pending-independent-acceptance",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "reportSha256": "4b5ca72ca0e6f5a388ea828343bb313cf8501e2a8bb0dec7aa48c366300f69ba",
+    "runs": [
+      {
+        "name": "navigation-1",
+        "status": "passed",
+        "summary": {
+          "verifiedPairs": 11,
+          "changedPairs": 0,
+          "expectedAbsences": 0,
+          "exclusions": 0,
+          "failedSteps": 0,
+          "blockedSteps": 0,
+          "coverageOmissions": 0
+        },
+        "callerPreserved": true,
+        "cleanup": "ok",
+        "videoSha256": "1ab22bc421dd20fe920974aed5e81363005fc305476511e12e9762ce2ed0bab1",
+        "verificationErrors": []
+      },
+      {
+        "name": "validation-1",
+        "status": "passed",
+        "summary": {
+          "verifiedPairs": 9,
+          "changedPairs": 3,
+          "expectedAbsences": 0,
+          "exclusions": 0,
+          "failedSteps": 0,
+          "blockedSteps": 0,
+          "coverageOmissions": 0
+        },
+        "callerPreserved": true,
+        "cleanup": "ok",
+        "videoSha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
+        "verificationErrors": []
+      },
+      {
+        "name": "navigation-2",
+        "status": "passed",
+        "summary": {
+          "verifiedPairs": 11,
+          "changedPairs": 0,
+          "expectedAbsences": 0,
+          "exclusions": 0,
+          "failedSteps": 0,
+          "blockedSteps": 0,
+          "coverageOmissions": 0
+        },
+        "callerPreserved": true,
+        "cleanup": "ok",
+        "videoSha256": "bcb0bd767ea7cbec723924b7c9b5b1f8120a3ffad53364670371351a0b5e9b27",
+        "verificationErrors": []
+      },
+      {
+        "name": "validation-2",
+        "status": "passed",
+        "summary": {
+          "verifiedPairs": 9,
+          "changedPairs": 3,
+          "expectedAbsences": 0,
+          "exclusions": 0,
+          "failedSteps": 0,
+          "blockedSteps": 0,
+          "coverageOmissions": 0
+        },
+        "callerPreserved": true,
+        "cleanup": "ok",
+        "videoSha256": "48a9a555a41afbee5dc28b6ba923367b3eeb6237514d8d0da2e42c3777977979",
+        "verificationErrors": []
+      },
+      {
+        "name": "navigation-3",
+        "status": "passed",
+        "summary": {
+          "verifiedPairs": 11,
+          "changedPairs": 0,
+          "expectedAbsences": 0,
+          "exclusions": 0,
+          "failedSteps": 0,
+          "blockedSteps": 0,
+          "coverageOmissions": 0
+        },
+        "callerPreserved": true,
+        "cleanup": "ok",
+        "videoSha256": "5b2ccf62633aa50e06aafae07b570c41c562dad82dcf9f59ca76f83b45bfdaf7",
+        "verificationErrors": []
+      },
+      {
+        "name": "validation-3",
+        "status": "passed",
+        "summary": {
+          "verifiedPairs": 9,
+          "changedPairs": 3,
+          "expectedAbsences": 0,
+          "exclusions": 0,
+          "failedSteps": 0,
+          "blockedSteps": 0,
+          "coverageOmissions": 0
+        },
+        "callerPreserved": true,
+        "cleanup": "ok",
+        "videoSha256": "d5b5b82d849fd21fe170ba32064557e222f74c4c5890b34d5aab97cf0a6814b1",
+        "verificationErrors": []
+      },
+      {
+        "name": "validation-worktree",
+        "status": "passed",
+        "summary": {
+          "verifiedPairs": 9,
+          "changedPairs": 3,
+          "expectedAbsences": 0,
+          "exclusions": 0,
+          "failedSteps": 0,
+          "blockedSteps": 0,
+          "coverageOmissions": 0
+        },
+        "callerPreserved": true,
+        "cleanup": "ok",
+        "videoSha256": "b315ff8b4d6582391bef9d19a65b75ddc01f13d05df47bc9d9f55e17d16ce419",
+        "verificationErrors": []
+      }
+    ],
+    "remaining": [
+      "Associate independent DOM observation with unchanged fixture identities",
+      "Independent final decoded artifact acceptance review"
+    ],
+    "independentAcceptance": {
+      "status": "accepted",
+      "evidence": "evidence/revision-0.3/G19-public-app-acceptance.json",
+      "reportSha256": "3f54c8e5a76a38226574c9748cee88c24513b92c631ef95b3b2f87421f8a1fc6",
+      "visualVerdictSha256": "4bb0b28e88e22ebcccdd4e9bcafd508cb57e70bbd86d380318977bed2c2a8269"
+    }
+  },
+  "candidateBeforeTestPortability": {
+    "implementationCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+    "sourceArchiveSha256": "5ea667cf8feda17823d573bfcc97aa457ffb311a4dc1b813161c3035bb2f3cfa",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "testFixturePortability": {
+    "status": "macos-focused-tests-passed-linux-pending",
+    "changedFiles": [
+      "test/unit/runtime-docker-archive-cleanup.test.ts",
+      "test/unit/runtime-docker-archive-directory.test.ts",
+      "test/unit/runtime-docker-export-terminal.test.ts",
+      "test/unit/runtime-docker-export.test.ts"
+    ],
+    "packageInputsChanged": false,
+    "macosPassed": 121,
+    "assertionsAndTimersUnchanged": true,
+    "integrationRecordSha256": "ffa65f2538448531c10f53b08ff87466b363d3cec46132362a9af642105c9219"
+  },
+  "firstLinuxFinalCandidateAttempt": {
+    "status": "failed",
+    "implementationCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "reportSha256": "9809e8196c3c832d47f53498d40049edf83c7513257c60f7e2a4fd6c3cbcc0ad",
+    "unitFailure": "121 tests used macOS-only /private/tmp fixture paths. Four test files corrected; new Linux verification pending.",
+    "motionFailure": {
+      "case": "390x844-run-1",
+      "knownMovingGapMs": 299.9879999998957,
+      "maximumAllowedGapMs": 200,
+      "desktopNumericPassed": 3,
+      "narrowMatrixComplete": false,
+      "limitsUnchanged": true
+    },
+    "oomKills": 0,
+    "containerRemoved": true,
+    "engineBaselinePreserved": true,
+    "vmStopped": true
+  },
+  "currentCandidatePrivacy": {
+    "status": "passed",
+    "checkedInputs": 3760,
+    "findings": 0,
+    "reportSha256": "96661468ae10248b5e3cd90c5e58262099463b2f83f9ff44dbb455e3e3cc0d37",
+    "sourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "scope": "Candidate f02 tree, source archive, package and reachable public Git history. Later handoff documents require a fresh scan."
+  },
+  "linuxMotionDiagnostic": {
+    "status": "instrumented-evidence-captured-not-acceptance",
+    "sourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "diagnosticReportSha256": "4e9ec98e0521f3349f581d9223047e71dd07c9bbea4ecce2e1eadc134fda75d1",
+    "ownershipReportSha256": "3d431464548367e363db633cc104cdd7132954af8ea406e86e67399f6e1156ef",
+    "instrumentedVerifierExitCode": 1,
+    "cases": [
+      {
+        "id": "1280x800-run-1",
+        "status": "numeric-passed"
+      },
+      {
+        "id": "1280x800-run-2",
+        "status": "numeric-passed"
+      },
+      {
+        "id": "1280x800-run-3",
+        "status": "numeric-passed"
+      },
+      {
+        "id": "390x844-run-1",
+        "status": "failed"
+      }
+    ],
+    "failure": {
+      "code": "CAPTURE_CLOCK_DRIFT",
+      "errorBoundMs": 43.610115000017686,
+      "limitMs": 40,
+      "calibrationRoundTripMs": 50.570355000003474
+    },
+    "cleanup": {
+      "evidenceExported": true,
+      "containerRemoved": true,
+      "ownedCleanupConfirmed": true,
+      "baselinePreserved": true,
+      "vmStopped": true
+    },
+    "firstDiagnosticPreparationFailure": "npm rejected identical user/global configuration paths before capture. Separate paths corrected in a fresh retained preparation.",
+    "limits": "Instrumentation changes timing. This neither accepts the candidate nor establishes the cause of the prior uninstrumented 300 ms motion gap.",
+    "analysisEvidence": "evidence/revision-0.3/linux-motion-investigation.json"
+  },
+  "linuxNativeSpawnDiagnostic": {
+    "status": "instrumented-evidence-captured-not-acceptance",
+    "evidence": "evidence/revision-0.3/linux-native-spawn-diagnostic.json",
+    "canonicalStatus": "failed",
+    "primaryFailure": {
+      "code": "CAPTURE_CLOCK_DRIFT",
+      "side": "after",
+      "clockUncertaintyMs": 37.95355399999971,
+      "maxDriftMs": 26.29894749999221,
+      "combinedBoundMs": 64.25250149999192,
+      "requiredMaximumMs": 40,
+      "sendToObserverMs": 75.87223399999493,
+      "synchronousSendMs": 0.15661900000122841
+    },
+    "interpretation": {
+      "status": "inconclusive",
+      "reason": "observer-confounded",
+      "observerWorkUnionMs": 0.46135400005732663,
+      "overlappingNativeWallMs": 16.881403000006685,
+      "recordedNodeTimerDelayMs": 31.299015999989933,
+      "recordedGcOverlap": false,
+      "schedulerWindowMs": 1184.70751953125,
+      "schedulerMainRuntimeMs": 189.814994,
+      "schedulerMainRunnableWaitMs": 131.829475,
+      "schedulerAttribution": "Coarse context only, cannot assign to the individual request or native call.",
+      "capturePolling": "Approximately one native ownership poll every150ms. This does not support redundant concurrent polling as the cause of this capture failure.",
+      "originalMovingGapReproduced": false,
+      "originalSymptomConclusion": "inconclusive-non-reproduction",
+      "causeEstablished": false
+    },
+    "cleanup": {
+      "evidenceExported": true,
+      "containerRemoved": true,
+      "ownedCleanupConfirmed": true,
+      "baselinePreserved": true,
+      "vmStopped": true
+    },
+    "releaseAcceptance": false
+  },
+  "linuxProcessHistoryDiagnostic": {
+    "status": "diagnostic-completed-with-motion-failures",
+    "evidence": "evidence/revision-0.3/linux-process-history-diagnostic.json",
+    "counts": {
+      "plannedSlots": 24,
+      "observedResults": 19,
+      "numericPassed": 16,
+      "failed": 3,
+      "notStarted": 5,
+      "verifierProcesses": 11
+    },
+    "freshProcessSufficiency": false,
+    "causeEstablished": false,
+    "cleanup": {
+      "evidenceExported": true,
+      "containerRemoved": true,
+      "ownedCleanupConfirmed": true,
+      "baselinePreserved": true,
+      "vmStopped": true
+    },
+    "releaseAcceptance": false
+  },
+  "recipeObservationCorrection": {
+    "status": "host-correction-accepted-container-run-pending",
+    "sourceDeltaPaths": [
+      "test/unit/runtime-recipe.test.ts",
+      "fixtures/services/isolated-store.cjs",
+      "fixtures/services/ordered.cjs",
+      "test/unit/runtime-docker.test.ts"
+    ],
+    "artifact": "evidence/revision-0.3/recipe-observation-progress.json",
+    "newSourceCommitPending": false,
+    "packageUnchanged": true,
+    "gateAccepted": false,
+    "preparedSourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "independentCandidateTransferPending": false,
+    "transferArtifact": "evidence/revision-0.3/source-observation-transfer.json"
+  },
+  "candidateBeforeRecipeObservation": {
+    "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+    "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "linuxFrameDelayDiagnostic": {
+    "status": "diagnostic-completed-with-motion-failure",
+    "evidence": "evidence/revision-0.3/linux-frame-delay-diagnostic.json",
+    "counts": {
+      "plannedCases": 10,
+      "completedCases": 10,
+      "numericPassed": 9,
+      "numericFailed": 1,
+      "controlPassed": 5,
+      "instrumentedPassed": 4,
+      "instrumentedFailed": 1,
+      "observedHandlers": 1424,
+      "frameHandlers": 1384,
+      "checkpointHandlers": 40
+    },
+    "dominantInterval": "worker-handler",
+    "stageCauseEstablished": false,
+    "cleanup": {
+      "evidenceExported": true,
+      "containerRemoved": true,
+      "ownedCleanupConfirmed": true,
+      "baselinePreserved": true,
+      "vmStopped": true
+    },
+    "releaseAcceptance": false
+  },
+  "linuxWorkerStageDiagnostic": {
+    "status": "diagnostic-incomplete",
+    "evidence": "evidence/revision-0.3/linux-worker-stage-diagnostic.json",
+    "counts": {
+      "plannedCases": 10,
+      "startedCases": 9,
+      "numericPassed": 7,
+      "numericFailed": 1,
+      "incomplete": 1,
+      "notStarted": 1,
+      "instrumentedTelemetry": {
+        "frames": 1125,
+        "checkpoints": 32,
+        "requests": 1157,
+        "boundaries": 11570
+      }
+    },
+    "localizedStage": null,
+    "originalCaptureExceptionRetained": false,
+    "cleanup": {
+      "evidenceExported": true,
+      "containerRemoved": true,
+      "ownedCleanupConfirmed": true,
+      "baselinePreserved": true,
+      "vmStopped": true
+    },
+    "releaseAcceptance": false
+  },
+  "dockerSetupRecovery": {
+    "status": "installed-comparison-observed-private-finalizer-failed-separate-recovery-complete",
+    "evidence": "evidence/revision-0.3/docker-setup-recovery-progress.json",
+    "productAcceptance": false
+  },
+  "linuxCaptureExceptionDiagnostic": {
+    "evidence": "evidence/revision-0.3/linux-capture-exception-diagnostic.json",
+    "status": "diagnostic-complete-with-numeric-failures",
+    "numericPassed": 8,
+    "numericFailed": 2,
+    "structuralExceptionReproduced": false,
+    "releaseReady": false
+  },
+  "linuxWorkerProfile": {
+    "evidence": "evidence/revision-0.3/linux-worker-profile-progress.json",
+    "status": "diagnostic-incomplete-no-cpu-attribution",
+    "releaseAcceptance": false
+  },
+  "currentCandidateSecurity": {
+    "evidence": "evidence/revision-0.3/candidate-security-progress.json",
+    "status": "current-candidate-scans-passed-final-handoff-review-pending",
+    "gateAccepted": false
+  },
+  "hostInterruptionIndependentAcceptance": {
+    "status": "accepted-scoped-host-evidence",
+    "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "acceptedCells": 12,
+    "phases": [
+      "setup",
+      "startup",
+      "recording",
+      "encoding"
+    ],
+    "stimuli": [
+      "SIGINT",
+      "SIGTERM",
+      "overall-deadline"
+    ],
+    "unchangedRuntimeTransferredCells": 9,
+    "freshFinalPackageRecordingCells": 3,
+    "originalFailedAggregatePreserved": true,
+    "independentReportSha256": "353ab2da8b4cdb12bf0884f18cafb0204d14877af49b5eb52da2fa893db6e30a",
+    "independentReviewSha256": "6eed6d2bafa03936ae1c414db3058c311eea09591a8cd4d60367bac7296e091d",
+    "checkerSha256": "ecc21e01e1027ffda2feb50aef99be0fbb77a4484aabaa002a2922f7df94d58f",
+    "fullG15Accepted": false,
+    "limits": "Historical process/sentinel checks remain original observations. This independent review rehashed artifacts and verified identities and assertions; it did not rerun workloads or re-observe past processes. Docker and final Linux acceptance remain separate."
+  },
+  "currentLinuxFullSuite": {
+    "status": "failed-public-app-clock-bound",
+    "recordedAt": "2026-11-03T19:46:01.883148+00:00",
+    "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "linuxSelectedSourceSha256": "b88e9c618f4caed2506a3e4c136ab5f52d367e98e55a7697eac6a30a7cd394b2",
+    "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "preparedBindingSha256": "0d3b957264536df288e5db9acdae1f5a87d037b47f3e1d60fe9b22f44bf36295",
+    "independentPreparationReviewSha256": "db92e515119dd03993b0acaabe0a0a513316c59a84efa05d7f7040cd6c8a1c22",
+    "freshPhysicalAdmission": "passed",
+    "imageIdAndExactContextLabel": "both-tag-and-id-verified",
+    "observedPassedStages": [
+      "extract",
+      "environment",
+      "install",
+      "sandbox",
+      "typecheck",
+      "build",
+      "schema-check",
+      "unit",
+      "contracts",
+      "privacy-scanner",
+      "integration",
+      "package-source-binding",
+      "package-smoke",
+      "installed-motion",
+      "host-compatibility",
+      "repeatability"
+    ],
+    "currentlyObservedStage": null,
+    "externalCeilingSeconds": 2700,
+    "automaticRetry": false,
+    "cleanup": "independently-verified-owned-absence-full-inventory-restored-normal-vm-stop",
+    "gateAcceptance": false,
+    "limits": "The full suite failed and remains release-blocking. Numerical motion results do not prove the public-app clock cause or repair historical stalls. Failed detailed capture artifacts were omitted by the existing test runner; a retention repair is separate from any product clock fix.",
+    "actualExitCode": 1,
+    "failedStages": [
+      "public-app"
+    ],
+    "notRunStages": [],
+    "resultSha256": "669550c2354f23b2ec2776b07de541162e1c8e219be41a64ef53dcd92214480a",
+    "executionSha256": "a2cc28744d4618beedf942c6a3e89fe9c2abcf26e5a62461b47b0d49408850c0",
+    "independentActualReviewSha256": "1ef0df973273f96e835f1b048e8a361c34f8e2b601855f63fe41716527c75e20",
+    "failure": {
+      "case": "navigation-3",
+      "code": "CAPTURE_CLOCK_DRIFT",
+      "actualCliExit": 3,
+      "timedOut": false,
+      "clockErrorBoundMs": 44.028714,
+      "requiredMaximumMs": 40,
+      "completedPublicCases": 4,
+      "remainingPublicCasesNotRun": 2,
+      "callerPreserved": true,
+      "cleanupReported": "ok",
+      "failedDetailedArtifactsExported": false,
+      "rootCauseEstablished": false
+    },
+    "motion": {
+      "numericCasesPassed": 6,
+      "independentlyCheckedSourceImages": 2056,
+      "independentlyDecodedFrames": 942,
+      "worstSourceGapMs": 69.015,
+      "worstClockBoundMs": 6.4279,
+      "worstDecodedPulseErrorMs": 33.3334,
+      "normalSpeedReview": "passed-sampled-agent-review-of-all-six-linux-clips",
+      "independentRecalculationSha256": "3872031ebe1437253567b61d5fe5061d53a9a83e9f7b7f49df9b1a93062993a6"
+    }
+  },
+  "publicAppFailureRetentionRepair": {
+    "status": "implemented-root-reviewed-focused-tests-passed-pending-installed-diagnostic",
+    "scope": "test-runner-only",
+    "testsPassed": 29,
+    "node": "24.22.2",
+    "productChanged": false,
+    "candidateChanged": false,
+    "clockFailureFixed": false,
+    "runnerSha256": "a0a4e031cbe65afea88a49282de9c856e4aa0afe4edb8f75c37585a4add6b2a5",
+    "testsSha256": "d07317c42df6eed3012dd7289850a53dabfe581715a1ba325381595978277d3a",
+    "successCompletenessRegression": "independently-reproduced-and-repaired; missing expected success artifacts fail while partial failed evidence remains retainable",
+    "productClockFix": false
+  },
+  "serviceCreateInterruptionActual": {
+    "status": "narrow-runtime-and-normal-close-independently-accepted",
+    "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "actualNativeExit": 0,
+    "actualCliExit": 143,
+    "actualCliStatus": "cancelled",
+    "realCreateCompletedBeforeInterruption": true,
+    "completionWithheldFromProduct": true,
+    "serviceIdentityReconciled": true,
+    "productServiceAndNetworkAbsent": true,
+    "callerPreserved": true,
+    "sentinelsPreserved": true,
+    "primaryProcessLedgerEntries": 15,
+    "cleanupLedgerAbsencePolicy": "direct-nonbuilder-only with exact file, directory and builder-definition absence",
+    "retainedInnerOriginalFiles": 84,
+    "retainedOuterOriginalFiles": 3,
+    "originalExportComplete": true,
+    "runtimeReviewSha256": "fa562a8fc90101c56ca1d87de9c2f23a96f0749ef500a4bcdd430ad474dafe37",
+    "normalCloseExit": 0,
+    "normalCloseSha256": "5fe090ca5a1c49d7c0f20b5b40258353d2f702bfb67bab361bd0cfbf92a4a49d",
+    "normalCloseReviewSha256": "3c88d36cf31ae473951cf5932396376e4d354df2af4fa0162398b61f0edf7cb6",
+    "vmStopped": true,
+    "limitations": [
+      "Narrow interruption after actual service creation, before product confirmation.",
+      "Cancelled source-provenance errors remain recorded; this is not a completed comparison.",
+      "Normal close compares stable projected image-list fields and full network inspections.",
+      "Normal close does not claim removal of the disposable test directory."
+    ],
+    "historicalFailedServiceAttemptPreserved": true,
+    "gateAcceptance": false,
+    "releaseReady": false
+  },
+  "motionIndependentAcceptance": {
+    "status": "accepted-finite-twelve-case-G10-matrix",
+    "artifact": "evidence/revision-0.3/G10-motion-acceptance.json",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "independentCombinedReviewSha256": "faa8e30d3dc7677238430afff6bc2d12da22447bd4f18b579f13b3ca1a5bc57f",
+    "historicalFailuresRemainFailed": true,
+    "G20Accepted": false,
+    "releaseReady": false
+  },
+  "builderCreateInterruptionActual": {
+    "status": "narrow-runtime-independently-accepted; physical-close-and-test-root-absence-independently-verified",
+    "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "actualNativeExit": 0,
+    "actualCliExit": 143,
+    "actualCliStatus": "cancelled",
+    "realCreateCompletedBeforeInterruption": true,
+    "completionWithheldFromProduct": true,
+    "builderIdentityReconciled": true,
+    "productResourcesAbsent": true,
+    "callerPreserved": true,
+    "sentinelsPreserved": true,
+    "processLedgerIdentitiesChecked": 19,
+    "witnessProcessIdentitiesChecked": 15,
+    "retainedInnerOriginalFiles": 103,
+    "retainedInnerOriginalBytes": 303300,
+    "independentRuntimeReviewSha256": "02397f0724246e3ef69094b849dae487ece3575d153b6b81e307476db0750030",
+    "originalExport": "held and preserved; export helper omitted builder case from allowlist",
+    "supplementalExport": "complete in a separate 30-second read-only collection window; no workload rerun",
+    "supplementalExportSeconds": 7.704794500023127,
+    "supplementalExportSha256": "9ccb0ede2612d2fd75aa38a76c0030e3e212730e2d0c720544eba1e01afd43ef",
+    "auditCorrection": "Bind private client to exact frozen fixture root, case, and run ID. Original validator rejections remain preserved.",
+    "normalCloseExit": 0,
+    "normalCloseSha256": "c66a348d1f3957ff2de372bfc68efcde863182e86069ca042257fdbfd1c61714",
+    "vmStopped": true,
+    "remainingPhysicalWork": null,
+    "limitations": [
+      "This covers interruption after real builder creation and before product confirmation, not interruption while daemon bootstrap remains active.",
+      "Cancelled source-provenance fields remain failures; this is not a completed comparison.",
+      "The original export remains failed. Supplemental collection does not change its outcome."
+    ],
+    "gateAcceptance": false,
+    "releaseReady": false,
+    "testDirectoryClosure": {
+      "status": "exact path already absent on resumed boot; cause unproven",
+      "deletionPerformed": false,
+      "failedCleanupAttemptsPreserved": 2,
+      "finalReadOnlyCommands": 17,
+      "finalNativeExit": 0,
+      "fullInventoryUnchanged": true,
+      "normalVmStop": true,
+      "observationSha256": "bfcfdaa56730c985f2a54fcd0579dbb091d47079abf0ff27ad75098274944bac",
+      "independentReviewSha256": "fdd1900f2a75e5953a4455f80314118482e5e42325b9d0033264ca1670895fe0"
+    }
+  },
+  "publicClockOneShotPreparation": {
+    "status": "prepared-and-consumed-once; see publicClockOneShotActual for the observed result",
+    "inputArchiveSha256": "3bef5d4aa55f23c32f535149647e88c56d9e9d4700fdf4a0839fdb207430d036",
+    "bindingSha256": "69d9ab465c413a799e61b4c4bd069b4ba4dfeaac0e5ded8fc8c1e1a5f45fd3a4",
+    "comparisons": 1,
+    "automaticRetry": false,
+    "comparisonTimeoutSeconds": 120,
+    "originalDefaultTimeoutSeconds": 1800,
+    "scope": "Diagnostic only; a pass means nonreproduction and cannot accept G20.",
+    "productClockFix": false,
+    "releaseReady": false
+  },
+  "dockerAndInterruptionAcceptance": {
+    "status": "accepted",
+    "gates": [
+      "G07",
+      "G15"
+    ],
+    "evidence": "evidence/revision-0.3/G07-G15-docker-cleanup-acceptance.json",
+    "candidate": {
+      "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+      "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+      "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+    },
+    "independentReview": {
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh",
+      "reportSha256": "212022283f6c293e77fc8f667636647f4fa50044bfefb4a3340ac0c3dcaa797e",
+      "machineReviewSha256": "4ff82ba8ccc2938d10226fa733529849004557348c9a4263d9621f76ec2230ca"
+    },
+    "historicalFailuresRemainFailed": true,
+    "G20Accepted": false,
+    "releaseReady": false
+  },
+  "publicClockOneShotActual": {
+    "status": "completed-nonreproducing-diagnostic",
+    "candidateSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "actualExit": 0,
+    "compareCount": 1,
+    "warmups": 0,
+    "compareTimeoutSeconds": 120,
+    "canonicalCompareTimeoutSeconds": 1800,
+    "callerPreserved": true,
+    "retainedFiles": 141,
+    "captureSha256": "27f68950b3151718eb9ed1d36ce4720c7a7db3d56dd952a523d6f386ff97bccd",
+    "beforeClockBoundMs": 15.727067500005433,
+    "afterClockBoundMs": 13.581441500007259,
+    "clockThresholdMs": 40,
+    "samplesPerSide": 35,
+    "independentReviewSha256": "9f88faf9c9731b95ca0e4b7c0a5b4f2fb93ebbc04bab1713ef5aac7a15ea8e8b",
+    "correctedAnalysisSha256": "1fa02ddbc82c33e33919bb126edf84a4e214b17e1b7b3b2eee822bdef20eaf61",
+    "analysisCorrection": "External analyzer copy corrected only scenario identifiers; original analyzer and original analysis remain retained.",
+    "physicalClosureSha256": "c967f5d1d49705d131cab6ea68fae09a212c0b7172fcb036400151bc455740c4",
+    "containerRemoved": true,
+    "fullInventoryUnchanged": true,
+    "normalVmStop": true,
+    "originalCanonicalFailureUnresolved": true,
+    "productClockChange": false,
+    "G19G20Accepted": false,
+    "releaseReady": false,
+    "limitations": [
+      "One fresh attempt with no preceding full-suite load and a different timeout does not diagnose the earlier failure.",
+      "Original-equal hashes were recorded in the container before export; independent review rehashed retained copies after container removal.",
+      "No host scheduling, physical clock, or reliability improvement claim is established."
+    ]
+  },
+  "nextCanonicalLinuxDecision": {
+    "status": "one full run approved after final-source freeze and identity review",
+    "independentDecisionSha256": "779382622f836f0597ecd754131b6cb283e7d6fb0020ef749a645ea78a0d7768",
+    "productClockChangeRequiredByEvidence": false,
+    "retainHistoricalFailures": true,
+    "defaultComparisonTimeoutSeconds": 1800,
+    "clockThresholdMs": 40,
+    "automaticRetry": false,
+    "macosFinalCandidateAcceptanceStillRequired": true,
+    "G20Accepted": false
+  }
+}

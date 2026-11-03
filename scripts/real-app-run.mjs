@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { copyFile, cp, lstat, mkdir, readFile, readdir, realpath } from 'node:fs/promises';
+import { constants } from 'node:fs';
+import { lstat, mkdir, open, readFile, readdir, realpath, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { assertNoOwnedActivity, command, hash, saveJson, sourceState, verifyArtifacts } from './release-harness.mjs';
 
@@ -18,6 +19,65 @@ async function ownedRuns(repoRoot) {
 
 const failure = (error) => ({ name: error.name, message: error.message, ...(error.code ? { code: error.code } : {}) });
 
+async function retainPublicArtifacts(runDir, output, name, runId, multiple) {
+  const directory = multiple ? join(name, runId) : name;
+  const evidence = { runId, directory, copied: [], missing: [] };
+  const failures = [];
+  const reject = (artifact, error) => failures.push({ artifact, error });
+  let destination;
+  try {
+    assert(/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(name), 'Evidence name must be one path segment');
+    assert.equal(await realpath(output), output, 'Evidence output must be canonical');
+    destination = output;
+    for (const segment of multiple ? [name, runId] : [name]) {
+      destination = join(destination, segment);
+      await mkdir(destination, { recursive: true });
+      assert.equal(await realpath(destination), destination, 'Evidence directory must not be a symlink');
+    }
+  } catch (error) { reject(null, error); return { evidence, failures }; }
+  const retainFile = async (artifact) => {
+    let source;
+    try {
+      const path = join(runDir, artifact);
+      const info = await lstat(path);
+      assert(info.isFile() && !info.isSymbolicLink(), 'Public artifact must be a regular file');
+      assert.equal(await realpath(path), path, 'Public artifact must stay in its owned run');
+      source = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
+      assert((await source.stat()).isFile(), 'Public artifact must remain a regular file');
+      await writeFile(join(destination, artifact), await source.readFile(), { flag: 'wx', mode: 0o600 });
+      evidence.copied.push(artifact);
+    } catch (error) {
+      if (error.code === 'ENOENT') evidence.missing.push(artifact);
+      else reject(artifact, error);
+    } finally {
+      try { await source?.close(); }
+      catch (error) { reject(artifact, error); }
+    }
+  };
+  for (const artifact of ['manifest.json', 'capture.json', 'timeline.json', 'compare.mp4', 'poster.png', 'pr.md']) await retainFile(artifact);
+  for (const directory of ['frames', 'composed']) {
+    try {
+      const path = join(runDir, directory);
+      const info = await lstat(path);
+      assert(info.isDirectory() && !info.isSymbolicLink(), 'Public image directory must be a real directory');
+      assert.equal(await realpath(path), path, 'Public image directory must stay in its owned run');
+      await mkdir(join(destination, directory));
+      for (const entry of await readdir(path, { withFileTypes: true })) {
+        const artifact = join(directory, entry.name);
+        if (!entry.name.endsWith('.png') || !entry.isFile()) {
+          reject(artifact, new Error('Public image evidence must be a regular PNG file'));
+          continue;
+        }
+        await retainFile(artifact);
+      }
+    } catch (error) {
+      if (error.code === 'ENOENT') evidence.missing.push(directory);
+      else reject(directory, error);
+    }
+  }
+  return { evidence, failures };
+}
+
 export async function capturePublicAppRun({ name, flow, args, source }, { candidate, fixture, output, report }, checks = {}) {
   const compare = checks.command ?? command;
   const verify = checks.verifyArtifacts ?? verifyArtifacts;
@@ -25,7 +85,7 @@ export async function capturePublicAppRun({ name, flow, args, source }, { candid
   const inspectCaller = checks.sourceState ?? sourceState;
   const row = {
     name, status: 'running', command: { expectedExit: 0, actualExit: null, attempted: false }, runIds: [],
-    cleanup: { status: 'pending', runs: [] }, callerPreserved: false, callerStateSha256: hash(JSON.stringify(source)), verificationErrors: [],
+    cleanup: { status: 'pending', runs: [] }, artifactEvidence: [], callerPreserved: false, callerStateSha256: hash(JSON.stringify(source)), verificationErrors: [],
   };
   report.runs.push(row);
   let existingRuns;
@@ -62,10 +122,6 @@ export async function capturePublicAppRun({ name, flow, args, source }, { candid
       assert.equal(run.manifest.sources.after.kind, 'worktree');
       assert(run.manifest.summary.changedPairs > 0);
     }
-    const destination = join(output, name);
-    await mkdir(destination, { recursive: true });
-    for (const filename of ['manifest.json', 'capture.json', 'timeline.json', 'compare.mp4', 'poster.png', 'pr.md']) await copyFile(join(run.runDir, filename), join(destination, filename));
-    for (const directory of ['frames', 'composed']) await cp(join(run.runDir, directory), join(destination, directory), { recursive: true });
     Object.assign(row, { runId: run.manifest.runId, summary: run.manifest.summary, comparison: run.manifest.comparisonOutcome, video: run.manifest.artifacts.video, poster: run.manifest.artifacts.poster, captureQuality: run.manifest.captureQuality });
   } catch (error) {
     primaryError = error;
@@ -91,6 +147,16 @@ export async function capturePublicAppRun({ name, flow, args, source }, { candid
             assert((await lstat(join(runDir, 'private'))).isDirectory(), 'Owned private directory must exist');
             assert.equal(await realpath(join(runDir, 'private')), join(runDir, 'private'), 'Owned private directory must be canonical');
           } catch (error) { row.verificationErrors.push({ stage: 'run-path', runId, ...failure(error) }); continue; }
+          const retained = await retainPublicArtifacts(runDir, output, name, runId, row.runIds.length > 1);
+          row.artifactEvidence.push(retained.evidence);
+          if (!primaryError) for (const artifact of retained.evidence.missing) {
+            retained.failures.push({ artifact, error: new Error('Successful comparison must retain every expected public artifact') });
+          }
+          for (const { artifact, error } of retained.failures) {
+            row.verificationErrors.push({ stage: 'artifact-evidence', runId, artifact, ...failure(error) });
+            primaryError ??= error;
+            row.error ??= failure(error);
+          }
           try { Object.assign(cleanup, await inspectCleanup(runDir), { activity: 'ok' }); }
           catch (error) { cleanup.activity = 'failed'; row.verificationErrors.push({ stage: 'activity', runId, ...failure(error) }); }
           try {

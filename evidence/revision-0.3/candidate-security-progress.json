@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-03T15:18:17.542242+00:00",
+  "status": "current-candidate-scans-passed-final-handoff-review-pending",
+  "candidate": {
+    "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+    "lockfileSha256": "1b1aa3eea3892b130460bdb6439576e3749074d994d58ea939b03f858df41797",
+    "intendedRefs": [
+      "refs/heads/main"
+    ]
+  },
+  "literalPrivacy": {
+    "scope": "candidate tree, complete reachable public history, exact source archive and package",
+    "checkedInputs": 4100,
+    "findings": 0,
+    "reportSha256": "3e79ff291c1f972441d1de751b06a1111e981633074b365b058d5b6a54c8b72a"
+  },
+  "credentialsAndLicenses": {
+    "scriptExitCode": 0,
+    "scannedObjects": 1465,
+    "explicitSyntheticFixtureMatches": 7,
+    "unreviewedCredentialMatches": 0,
+    "lockedDependencies": 97,
+    "installedDependencies": 54,
+    "reportSha256": "e8b85dac3c6b230ad1f25d0624ae7210ae8e45c7ba12b10c31eebad4a29f9eb2",
+    "scope": "credential pattern scan plus dependency license metadata; prior reviewed notices require identity transfer"
+  },
+  "npmAdvisories": {
+    "exitCode": 0,
+    "vulnerabilities": 0,
+    "reportSha256": "c7d6a399a5934ed31c9c66e8ff76397a86c117def05c8fe91ad01dd42b4793a7"
+  },
+  "candidateTrackedFilesUnchanged": true,
+  "remaining": [
+    "Review and integrate the final public handoff documents and media.",
+    "Bind the final intended refs and source archive after handoff changes.",
+    "Complete independent security and artifact acceptance for that final identity."
+  ],
+  "gateG23Accepted": false,
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "demoMediaReview": {
+    "status": "scoped-review-passed-with-known-presentation-blemish",
+    "files": 8,
+    "mainTreeArtifactsUnchanged": true,
+    "videosFullyDecoded": 2,
+    "sampledVisualReview": true,
+    "freshNormalSpeedPlayback": false,
+    "privacyMatches": 0,
+    "scope": "Literal/pattern scan, metadata and sampled visible content; final candidate transfer remains outstanding.",
+    "reportSha256": "ed4694fefd5404cc3e6054ee415c5d520881da11ae7f61fff260f39959794fcc",
+    "optionalPolish": "Use a generic scenario title in a future fresh demo generation to avoid the disclosed substring-redaction blemish.",
+    "g23Accepted": false
+  }
+}

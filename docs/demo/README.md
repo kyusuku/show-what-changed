@@ -1,5 +1,9 @@
 # Synthetic examples
 
+The current [success motion preview](motion-success/compare.mp4) compares changed validation feedback in the public Workshop example. The [partial motion preview](motion-partial/compare.mp4) shows a failed required BEFORE action: that side holds its last safe frame with failure/blocking labels while AFTER continues. Both use synthetic content and the installed package with SHA-256 `cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428`.
+
+Each preview directory includes its poster, original public manifest, and a `preview.json` identity record. These are viewing subsets. Source frames, capture bundles, timelines, and private run data are not included; the preview directories cannot be recomposed. Both videos received full normal-speed playback and sampled visual review. Final release acceptance remains tracked in [release readiness](../release-readiness.md).
+
 The existing [success](success/compare.mp4) and [partial](partial/compare.mp4) examples are historical keyframe recordings from the earlier candidate identified below. They do not establish revision 0.3 acceptance. All app content is synthetic. The success run executes the six-step example and contains one expected absence and one side exclusion. The partial run fails a required BEFORE action, holds its last safe frame, and blocks later BEFORE steps.
 
 The videos replay settled keyframes. They do not show continuous motion or action latency. Public metadata and the masked source and composed images are included so the declared hashes and timeline can be inspected. Private plans, logs, ownership markers and app workspaces are excluded. These copied public files are evidence; the compose command requires the original owned run directory.

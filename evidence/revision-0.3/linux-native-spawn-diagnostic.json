@@ -1,0 +1,161 @@
+{
+  "status": "instrumented-evidence-captured-not-acceptance",
+  "recordedAt": "2026-11-03T08:17:42.629412+00:00",
+  "sourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+  "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+  "actualHostExit": 0,
+  "instrumentedVerifierExit": 1,
+  "cases": [
+    {
+      "id": "1280x800-run-1",
+      "status": "numeric-passed",
+      "knownMovingGapsMs": {
+        "before": 66.66400000000067,
+        "after": 66.66400000000067
+      },
+      "observedCaptureRangeMs": [
+        508.860958,
+        4811.821127
+      ],
+      "nativeCallsInCaptureRange": 29
+    },
+    {
+      "id": "1280x800-run-2",
+      "status": "numeric-passed",
+      "knownMovingGapsMs": {
+        "before": 49.99800000000687,
+        "after": 66.66400000000431
+      },
+      "observedCaptureRangeMs": [
+        35273.663705,
+        39518.521371
+      ],
+      "nativeCallsInCaptureRange": 29
+    },
+    {
+      "id": "1280x800-run-3",
+      "status": "numeric-passed",
+      "knownMovingGapsMs": {
+        "before": 66.66400000000431,
+        "after": 66.66400000000431
+      },
+      "observedCaptureRangeMs": [
+        72378.982859,
+        76716.413141
+      ],
+      "nativeCallsInCaptureRange": 29
+    },
+    {
+      "id": "390x844-run-1",
+      "status": "failed",
+      "knownMovingGapsMs": {
+        "before": 70.528999999995,
+        "after": 53.6820000000007
+      },
+      "observedCaptureRangeMs": [
+        109264.697846,
+        113504.078501
+      ],
+      "nativeCallsInCaptureRange": 28
+    }
+  ],
+  "failure": {
+    "code": "CAPTURE_CLOCK_DRIFT",
+    "side": "after",
+    "clockUncertaintyMs": 37.95355399999971,
+    "maxDriftMs": 26.29894749999221,
+    "combinedBoundMs": 64.25250149999192,
+    "requiredMaximumMs": 40,
+    "sendToObserverMs": 75.87223399999493,
+    "synchronousSendMs": 0.15661900000122841
+  },
+  "interpretation": {
+    "status": "inconclusive",
+    "reason": "observer-confounded",
+    "observerWorkUnionMs": 0.46135400005732663,
+    "overlappingNativeWallMs": 16.881403000006685,
+    "recordedNodeTimerDelayMs": 31.299015999989933,
+    "recordedGcOverlap": false,
+    "schedulerWindowMs": 1184.70751953125,
+    "schedulerMainRuntimeMs": 189.814994,
+    "schedulerMainRunnableWaitMs": 131.829475,
+    "schedulerAttribution": "Coarse context only, cannot assign to the individual request or native call.",
+    "capturePolling": "Approximately one native ownership poll every150ms. This does not support redundant concurrent polling as the cause of this capture failure.",
+    "originalMovingGapReproduced": false,
+    "originalSymptomConclusion": "inconclusive-non-reproduction",
+    "causeEstablished": false
+  },
+  "reducerCorrection": {
+    "firstReduction": "Retained invalid result rejected identical saved and native capture copies.",
+    "correctedReduction": "Complete. Actual verifier copy behavior and canonical file identities are checked; mismatched or unassociated copies still fail.",
+    "offlineSelectionCasesPassed": 7,
+    "preparedProbeAndOriginalEvidenceUnchanged": true
+  },
+  "cleanup": {
+    "evidenceExported": true,
+    "containerRemoved": true,
+    "ownedCleanupConfirmed": true,
+    "baselinePreserved": true,
+    "vmStopped": true
+  },
+  "records": [
+    {
+      "name": "ownership.json",
+      "sha256": "28d013e353d0f64a310cfa475ed7232439858293f310a9a061fb6f4e719a54d3",
+      "bytes": 8887
+    },
+    {
+      "name": "diagnostic-result.json",
+      "sha256": "a1ab4333aadd20db756644997020ef439373f4a0f4b591358f116e8ef89f3353",
+      "bytes": 517290
+    },
+    {
+      "name": "motion-check.json",
+      "sha256": "a289b95db9664d752a1e5f80db389e590bc5bf46c150225596e5c9783ba341cb",
+      "bytes": 429368
+    },
+    {
+      "name": "manifest.json",
+      "sha256": "f05cb5eb92832953e5c40e60c5e20022fdf7cb20e171e043e7f4148804fab063",
+      "bytes": 29407
+    },
+    {
+      "name": "probe.mjs",
+      "sha256": "784931ec07e4e49799e483ae3c6ffd593283745cdf9f8e2cc66f3a4854d36300",
+      "bytes": 15204
+    },
+    {
+      "name": "diagnosis.json",
+      "sha256": "e395324a2a4b9e5bae7c363a8e2de132cf45db591a52d5a7f43374dbadd5b363",
+      "bytes": 4241679
+    },
+    {
+      "name": "reduce.py",
+      "sha256": "4e65a92c70831abb1e2cd76f3958a92fcc99206a8880cd4ee813cb2dea5a5372",
+      "bytes": 34124
+    },
+    {
+      "name": "diagnosis-final.json",
+      "sha256": "82c91ae04b332874f335a3a40646225a8709acdbe7e58b00d78c5c8ad8c156e8",
+      "bytes": 4657895
+    },
+    {
+      "name": "capture-selection-regressions.json",
+      "sha256": "7518752038c0b41420e88593d43164ef2db17a22627d955b59b023bc9101844d",
+      "bytes": 5190
+    },
+    {
+      "name": "checks.json",
+      "sha256": "5a7bd8a7f98fb0191d45878886538248d59398b515ef51dbee251605d65c03c1",
+      "bytes": 3368
+    },
+    {
+      "name": "swc-native-diagnostic-reduction-analysis.md",
+      "sha256": "81addded57b6c8d2d082e5a11d3d54072ad3146f51f8210ed755c8e724ab02bd",
+      "bytes": 12772
+    }
+  ],
+  "productChanged": false,
+  "thresholdsChanged": false,
+  "releaseReady": false
+}

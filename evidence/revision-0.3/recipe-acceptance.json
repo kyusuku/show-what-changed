@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-acceptance",
+  "recordedAt": "2026-11-03T16:15:52.543146+00:00",
+  "candidate": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "acceptedGates": [
+    "G05"
+  ],
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "status": "accepted-with-stated-scope",
+    "reportSha256": "a954080fbdad529b1a251c617355e8d0a32a865515f9fdb8192964cfb205e4fb",
+    "structuredReportSha256": "da1aeab5fcd14d9aaeac9d0eac217ea01c6f55952f5fee0eb477f1172df85098",
+    "closureConditionSatisfied": true,
+    "closureIndependentReviewSha256": "1b050ebc31130d6d49551283022c5645052e3735ca1f8dd31b4aa5c82546cb71"
+  },
+  "coverage": [
+    {
+      "predicate": "Host cwd, environment, tokens and ordered services",
+      "evidence": "recipe-observation-progress.json and source-host-acceptance.json",
+      "result": "Accepted host observations and focused readiness/setup correction retain source association."
+    },
+    {
+      "predicate": "Container setup/bootstrap and endpoint tokens",
+      "result": "Live host setup uses assigned published app/database ports; app uses container port 8080 and service-db:5432. Both bootstrap records match the live responses."
+    },
+    {
+      "predicate": "Generated build content and seeded isolation",
+      "result": "Per-side generated files match the built-app responses. Controller-initialized datasets read 7/7 then 99/7 after changing BEFORE."
+    },
+    {
+      "predicate": "Missing refs and prerequisites before startup",
+      "result": "Retained missing-ref and four preflight rejection cases pass with unchanged source association."
+    },
+    {
+      "predicate": "Lock/source mutation cannot yield success",
+      "result": "Retained setup/bootstrap lock mutations and real-browser capture mutation return truthful failure/partial outcomes with invalid provenance."
+    }
+  ],
+  "sourceExecution": {
+    "actualExitCode": 0,
+    "outerExitCode": 0,
+    "outerCloseCode": 0,
+    "passedTests": 1,
+    "unselectedTests": 8,
+    "retainedInnerFiles": 432,
+    "retainedOuterFiles": 2,
+    "exportBytes": 2533044,
+    "sourceCommandSha256": "d17adb3b31319cf24f94d6c111cdf9474a43c9cd8ce967d51326684cbfcf30de",
+    "sourceReportSha256": "6aa243918468ed3eb8a7de71cf55ec9e78ddc855e6af9b55f6c4127c90bb3a22",
+    "cleanupResponsesOk": 2,
+    "exactEngineAbsenceResponses": 12,
+    "callerPreserved": true,
+    "indexPreserved": true,
+    "sentinelsPreserved": true,
+    "noOomIncrease": true
+  },
+  "ownedWindowClosure": {
+    "status": "closed",
+    "unitOutcome": "passed",
+    "resultSha256": "b8684ba78ea18e95b9a088535c404a56c764cfbe3874c02d22fcf01f68fe97d6",
+    "commandsVerified": 21,
+    "completeHttpResponsesVerified": 28,
+    "exactOwnedActionsSettled": 6,
+    "exactBaselineRestored": true,
+    "vmState": "Stopped",
+    "missingOriginals": [],
+    "unsettledEffects": [],
+    "releaseAcceptance": false
+  },
+  "limits": [
+    "Prior host source-transfer evidence was recorded after execution; it does not establish a pre-test snapshot. Earlier run identities and capability-only loader substitutions remain disclosed.",
+    "The test controller initializes the database through exact owned IDs with validated seed bytes; this is not application bootstrap SQL.",
+    "The source-only test does not produce a runner manifest. Its exact source, complete export inventory and passing command support this noncreation finding; no manifest was synthesized.",
+    "Other Docker lifecycle checks and final platform checks remain pending."
+  ],
+  "releaseReady": false,
+  "publicationPerformed": false
+}

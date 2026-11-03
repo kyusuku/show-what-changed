@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-03T12:28:31.152458+00:00",
+  "status": "diagnostic-complete-with-numeric-failures",
+  "runtimeSourceCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+  "packageSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+  "acquisition": {
+    "startedAt": "2026-11-03T12:08:43.013Z",
+    "endedAt": "2026-11-03T12:14:14.834Z",
+    "nativeExit": 0,
+    "fixedDesktopCases": 10,
+    "automaticFollowup": "none",
+    "priorInvocation": "Stopped at missing host utility before VM startup or any case; preserved separately."
+  },
+  "results": {
+    "scope": "private diagnostic numerical result, not release acceptance",
+    "fixedArms": 10,
+    "numericPassed": 8,
+    "numericFailed": 2,
+    "structuralCaptureExceptionsObserved": 0,
+    "failedArms": [
+      {
+        "arm": "E7",
+        "side": "after",
+        "movingGapMs": 216.6579999999958,
+        "thresholdMs": 200
+      },
+      {
+        "arm": "E8",
+        "side": "before",
+        "movingGapMs": 349.9860000000044,
+        "thresholdMs": 200
+      }
+    ],
+    "processingEventSharedSanitizedBytesNonzero": [
+      {
+        "arm": "E1",
+        "side": "after",
+        "bytes": 65025
+      }
+    ],
+    "captureTracksComplete": 20,
+    "frameCountEqualityTracks": 20,
+    "timestampRejections": 0,
+    "shutdownFailures": 0,
+    "cleanupPassedArms": 10,
+    "packageUnchanged": true,
+    "oomEventDeltasZero": true,
+    "containerOOMKilled": false,
+    "ownedContainerAbsent": true,
+    "vmStopped": true,
+    "releaseAcceptance": "not-evaluated",
+    "publish": "not-performed"
+  },
+  "arms": [
+    {
+      "arm": "E1",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 99.996000000001,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 5.778187500000513,
+          "frames": 82,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 99.99599999999919,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 7.661124499999346,
+          "frames": 80,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 65025
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 66.66399999999703,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 7.553756500001327,
+          "frames": 138,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 65.14499999998952,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 5.216078499993216,
+          "frames": 132,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 99.99599999999919,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 4.28780749999396,
+          "frames": 85,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 99.99599999999919,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 6.738609999989876,
+          "frames": 84,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 46.66700000001583,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 8.101809500005857,
+          "frames": 138,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 49.99799999999232,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 4.486373499987565,
+          "frames": 136,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E5",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 66.66400000001886,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 3.5841050000134373,
+          "frames": 128,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 56.931999999971595,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 3.720386499970118,
+          "frames": 133,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E6",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 57.48099999997066,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 4.010880999993333,
+          "frames": 143,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 66.66400000001886,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 7.327740499995571,
+          "frames": 134,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E7",
+      "status": "numeric-failed",
+      "nativeExit": 1,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 183.32600000000093,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 12.840436500003307,
+          "frames": 82,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 216.6579999999958,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": false,
+          "clockErrorBoundMs": 8.554883499982452,
+          "frames": 83,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E8",
+      "status": "numeric-failed",
+      "nativeExit": 1,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 349.9860000000044,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": false,
+          "clockErrorBoundMs": 4.861770000003162,
+          "frames": 139,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 66.66400000001886,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 4.4927304999821445,
+          "frames": 144,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E9",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 58.3640000000014,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 2.7811564999821883,
+          "frames": 145,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 58.180999999982305,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 6.686641999971499,
+          "frames": 146,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    },
+    {
+      "arm": "E10",
+      "status": "numeric-passed",
+      "nativeExit": 0,
+      "captureOutcomeAssigned": true,
+      "sidecarStatus": "no-exception-observed",
+      "sides": {
+        "before": {
+          "movingGapMs": 58.80499999993481,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 7.92555200002522,
+          "frames": 149,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        },
+        "after": {
+          "movingGapMs": 58.901999999943655,
+          "movingGapLimitMs": 200,
+          "movingGapPassed": true,
+          "clockErrorBoundMs": 7.455633000036585,
+          "frames": 143,
+          "frameEquality": true,
+          "rejectedFrames": 0,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0
+        }
+      }
+    }
+  ],
+  "interpretation": {
+    "capturedExceptions": "Two numerical motion assertions after successful capture.",
+    "priorStructuralCaptureException": "Not reproduced; cause and elimination remain unproven.",
+    "processingSnapshot": "One snapshot retained 65025 shared sanitized bytes; this is not post-cleanup leak evidence.",
+    "causalAttribution": "Not established.",
+    "releaseAcceptance": "not-evaluated"
+  },
+  "verification": {
+    "exportFiles": 3001,
+    "exportValidity": "verified",
+    "exportCompleteness": "complete",
+    "exportInventorySha256": "47dc2df30a16a440d14768becdc6a86ad979d7968778111a8e37b081cc7ab645",
+    "independentlyConsumedInputs": 64,
+    "analysisSha256": "6c95870d740c030df26939ad2462ee0330e48d5f09eebad9ea0e927003f86124",
+    "analysisRecordSha256": "c8cf0c03c2437ee99b598be845f488028f1f91427e5a9f426abae2ce621d5e31"
+  },
+  "remainingGates": [
+    "G10",
+    "G20"
+  ],
+  "releaseReady": false,
+  "publicationPerformed": false
+}

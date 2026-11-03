@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "specRevision": "0.3",
+  "kind": "G07-G15-public-safe-acceptance",
+  "status": "accepted",
+  "candidate": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "gates": [
+    {
+      "id": "G07",
+      "acceptedEvidence": true,
+      "expectedResult": "Docker success, startup failure, interruption and timeout preserve unrelated resources and remove exact owned resources; side state and bounded image volumes remain isolated.",
+      "proofIds": [
+        "W1-report",
+        "W1-deadline-assessment",
+        "W1-deadline-review",
+        "W2-command",
+        "W2-review",
+        "W3-report",
+        "W3-state",
+        "W3-close",
+        "W4-report",
+        "W4-review",
+        "W4-close",
+        "W4-close-review",
+        "B1-runtime-review",
+        "B1-close",
+        "B1-physical-review",
+        "S1-runtime-review",
+        "S1-close",
+        "S1-close-review",
+        "controlled-unit-log"
+      ],
+      "remainingMandatoryProof": []
+    },
+    {
+      "id": "G15",
+      "acceptedEvidence": true,
+      "expectedResult": "SIGINT, SIGTERM and overall deadline during every required phase produce cancellation-specific exits and owned absence; cleanup faults cannot reduce to clean success.",
+      "proofIds": [
+        "host-report",
+        "host-review",
+        "W1-report",
+        "W1-deadline-assessment",
+        "W1-deadline-review",
+        "B1-runtime-review",
+        "B1-close",
+        "B1-physical-review",
+        "S1-runtime-review",
+        "S1-close",
+        "S1-close-review",
+        "controlled-unit-log"
+      ],
+      "remainingMandatoryProof": []
+    }
+  ],
+  "executedInstalledComparisonCommand": [
+    "show-what-changed",
+    "compare",
+    "--plan",
+    ".show-what-changed/plan.json",
+    "--allow-exec",
+    "--timeout",
+    "120",
+    "--json"
+  ],
+  "commandRepresentation": "The installed executable path is rendered as the package command. Exact execution records are bound by their hashes. The supporting source and interruption checks retain their own command records.",
+  "hostInterruptionCases": [
+    {
+      "id": "setup-sigint",
+      "actualExit": 130,
+      "commandSha256": "a93f086aa227393083df08551fd314b520eae2117bfb56c1b9ecd070df9f9f54",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "setup-sigterm",
+      "actualExit": 143,
+      "commandSha256": "a91250e5200bcbacf0d2350e94af9585d8292e778a4ef3e41639fbabdedd3a92",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "setup-deadline",
+      "actualExit": 10,
+      "commandSha256": "83b48ca5b89fbfb8dfad6e85bb8195747c2ebf80f332da928e4227bbb258bfbc",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "startup-sigint",
+      "actualExit": 130,
+      "commandSha256": "af5b33ce298938e9f2e08d924a3db28fdd5680371af6034a8a494df6e41f1126",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "startup-sigterm",
+      "actualExit": 143,
+      "commandSha256": "4becee4cbdaa64d276d416db058a441477eab2231c529fe82d18600047d95fb3",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "startup-deadline",
+      "actualExit": 10,
+      "commandSha256": "d14881b794d894df9618c7229ccb35d6cdef6570905e5595f275a1eac413d634",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "encoding-sigint",
+      "actualExit": 130,
+      "commandSha256": "68e10751d5b6cdc92d4555e13d97546367fde004d624115d95b8af66144627e8",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "encoding-sigterm",
+      "actualExit": 143,
+      "commandSha256": "fdd0c401248538d024ca9024dc7b5fedf97cd4700abd843b16f69f9d2f1ba24d",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "encoding-deadline",
+      "actualExit": 10,
+      "commandSha256": "07eceb503ff9d6800cee57e7cec4169c4b904aa5cfa9cb83e569bdbf48fb3c66",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "recording-sigint",
+      "actualExit": 130,
+      "commandSha256": "f2edd3f3725d227ab0ecf9e567f5c5709632b86d1f35481156aae72c29bb2b67",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "recording-sigterm",
+      "actualExit": 143,
+      "commandSha256": "1167344a1e17175085eabbb0765f6e25838c70a0a4d991adca4397a2685fb260",
+      "acceptance": "passed-within-host-case-scope"
+    },
+    {
+      "id": "recording-deadline",
+      "actualExit": 10,
+      "commandSha256": "f76b8fb6f911f42b1bb2b0e8b1e111eb456721d4e2e4feb4fd2c940f1465f5f5",
+      "acceptance": "passed-within-host-case-scope"
+    }
+  ],
+  "dockerInterruptionCases": [
+    {
+      "id": "build-sigint",
+      "actualExit": 130,
+      "status": "cancelled",
+      "originalCellStatus": "passed",
+      "acceptedEvidence": "original-recorded-runtime",
+      "commandRecordSha256": "cba3bf2eddab4ab0b56ba9365d1e074875f34bc713b1d6d9fe771f12a9af6670"
+    },
+    {
+      "id": "build-sigterm",
+      "actualExit": 143,
+      "status": "cancelled",
+      "originalCellStatus": "passed",
+      "acceptedEvidence": "original-recorded-runtime",
+      "commandRecordSha256": "830e2e68cb7a3c0e46d8ca1f378e87375ab7c7eaa021bb969748b6cfb419de8c"
+    },
+    {
+      "id": "build-deadline",
+      "actualExit": 10,
+      "status": "cancelled",
+      "originalCellStatus": "passed",
+      "acceptedEvidence": "original-recorded-runtime",
+      "commandRecordSha256": "8bcad5ed72001aa6b2630dc0f3a69ce0576127b0d9bd032ab46fcc0967c05899"
+    },
+    {
+      "id": "create-sigint",
+      "actualExit": 130,
+      "status": "cancelled",
+      "originalCellStatus": "passed",
+      "acceptedEvidence": "original-recorded-runtime",
+      "commandRecordSha256": "30c26a371bec2c4d772a5dd5ecf424db36e093bd6847182a332b447d91085dc7"
+    },
+    {
+      "id": "create-sigterm",
+      "actualExit": 143,
+      "status": "cancelled",
+      "originalCellStatus": "passed",
+      "acceptedEvidence": "original-recorded-runtime",
+      "commandRecordSha256": "f9f04c482921ab6244acfa48e4862a10c32e4c568b564cc62716f03054c9256b"
+    },
+    {
+      "id": "create-deadline",
+      "actualExit": 10,
+      "status": "cancelled",
+      "originalCellStatus": "failed",
+      "acceptedEvidence": "separate-controlled-behavioral-assessment",
+      "commandRecordSha256": "a991c2329f280145d1d6168882aaf6a6f8e55a4262d447cb3ee62c25094a88e9"
+    }
+  ],
+  "additionalReconciliationCases": [
+    {
+      "id": "builder-create-sigterm",
+      "actualExit": 143,
+      "status": "cancelled",
+      "runtimeReviewSha256": "02397f0724246e3ef69094b849dae487ece3575d153b6b81e307476db0750030",
+      "closureSha256": "c66a348d1f3957ff2de372bfc68efcde863182e86069ca042257fdbfd1c61714"
+    },
+    {
+      "id": "service-create-sigterm",
+      "actualExit": 143,
+      "status": "cancelled",
+      "runtimeReviewSha256": "fa562a8fc90101c56ca1d87de9c2f23a96f0749ef500a4bcdd430ad474dafe37",
+      "closureReviewSha256": "3c88d36cf31ae473951cf5932396376e4d354df2af4fa0162398b61f0edf7cb6"
+    }
+  ],
+  "proofs": [
+    {
+      "id": "normative-audit",
+      "sha256": "fa9921c6ab880411e7c2cdbba77facd74efe11b02306731f69e670fc083b6a59",
+      "bytes": 13810
+    },
+    {
+      "id": "host-report",
+      "sha256": "353ab2da8b4cdb12bf0884f18cafb0204d14877af49b5eb52da2fa893db6e30a",
+      "bytes": 61078
+    },
+    {
+      "id": "host-review",
+      "sha256": "6eed6d2bafa03936ae1c414db3058c311eea09591a8cd4d60367bac7296e091d",
+      "bytes": 7354
+    },
+    {
+      "id": "W1-report",
+      "sha256": "7e9e0aca6b6c8ce4e335ad4f7d53d7093d5e239abd657efd4873845d7cbb708f",
+      "bytes": 56189
+    },
+    {
+      "id": "W1-deadline-assessment",
+      "sha256": "6bdf8740f83f939e2e0eb40de6f14d9b41377b22da98ba412e46bdc257c33729",
+      "bytes": 8623
+    },
+    {
+      "id": "W1-deadline-review",
+      "sha256": "0f4755dd55c3c8a4aa3413b3cb6671874c1bd468916c49be687a7e6f2763baeb",
+      "bytes": 2011
+    },
+    {
+      "id": "W2-command",
+      "sha256": "cda598108d53dfc147cef23e03d0e2c74ed977bf4a0f77b76874ca484aecc13c",
+      "bytes": 9031
+    },
+    {
+      "id": "W2-review",
+      "sha256": "3b8fe07f162349b6b2b1a4b2600ea7f42d68ba39b3c37f691b0fbd2000323485",
+      "bytes": 4601
+    },
+    {
+      "id": "W3-report",
+      "sha256": "6aa243918468ed3eb8a7de71cf55ec9e78ddc855e6af9b55f6c4127c90bb3a22",
+      "bytes": 396
+    },
+    {
+      "id": "W3-state",
+      "sha256": "9ed792b081b559126fe8d69739b440056a9feeb7eac3fa03e7090c2733df2cce",
+      "bytes": 1058
+    },
+    {
+      "id": "W3-close",
+      "sha256": "b8684ba78ea18e95b9a088535c404a56c764cfbe3874c02d22fcf01f68fe97d6",
+      "bytes": 1369348
+    },
+    {
+      "id": "W4-report",
+      "sha256": "76ede2b84af3f7d9fccbfd25b3b621fa68a1a43bf9981c78b1b2997c2328e78c",
+      "bytes": 486
+    },
+    {
+      "id": "W4-review",
+      "sha256": "c3089d6e6b054f5256ff677b38ef42d49b96c4a511f329f23ac1e4a281a473ee",
+      "bytes": 1673
+    },
+    {
+      "id": "W4-close",
+      "sha256": "c8a22d2f890e585a7546692f3dafb67d93fd48802af7686bb21dbe80989e1e5e",
+      "bytes": 915452
+    },
+    {
+      "id": "W4-close-review",
+      "sha256": "be7190f83ea3503fe66a5870710dbecd143bc5656f1a3b8ceaa589668cebdb14",
+      "bytes": 964
+    },
+    {
+      "id": "B1-runtime-review",
+      "sha256": "02397f0724246e3ef69094b849dae487ece3575d153b6b81e307476db0750030",
+      "bytes": 2926
+    },
+    {
+      "id": "B1-close",
+      "sha256": "c66a348d1f3957ff2de372bfc68efcde863182e86069ca042257fdbfd1c61714",
+      "bytes": 937668
+    },
+    {
+      "id": "B1-physical-review",
+      "sha256": "fdd1900f2a75e5953a4455f80314118482e5e42325b9d0033264ca1670895fe0",
+      "bytes": 1951
+    },
+    {
+      "id": "S1-freeze",
+      "sha256": "d46fea1074c80aeba34531b459509e0f4c271e2170afdf142497e8400c9cc920",
+      "bytes": 21167
+    },
+    {
+      "id": "S1-runtime-review",
+      "sha256": "fa562a8fc90101c56ca1d87de9c2f23a96f0749ef500a4bcdd430ad474dafe37",
+      "bytes": 944
+    },
+    {
+      "id": "S1-command",
+      "sha256": "fb832cead992a66955140d9db2a3f6d1a9b086f8515dc993f7052154d0ead972",
+      "bytes": 30524
+    },
+    {
+      "id": "S1-witness",
+      "sha256": "dab3351fbffc228391e57549fe2e80eae82dffd8718013af85352e3f99d062b1",
+      "bytes": 24609
+    },
+    {
+      "id": "S1-manifest",
+      "sha256": "ee449405fd76b1e1990b1712d4fc31f04227e41a3ea6417923befa8fb4e499d5",
+      "bytes": 3843
+    },
+    {
+      "id": "S1-inner-export",
+      "sha256": "2340e21c47bff451132d447d4c506e156edc50c492918d8ac54d909499022735",
+      "bytes": 15576
+    },
+    {
+      "id": "S1-outer-export",
+      "sha256": "ea2a4a9cf4f1cf25dac6ebf2fc859ff88553634ef1346a1a1eebb755ffd71991",
+      "bytes": 4056
+    },
+    {
+      "id": "S1-close",
+      "sha256": "5fe090ca5a1c49d7c0f20b5b40258353d2f702bfb67bab361bd0cfbf92a4a49d",
+      "bytes": 911012
+    },
+    {
+      "id": "S1-close-review",
+      "sha256": "3c88d36cf31ae473951cf5932396376e4d354df2af4fa0162398b61f0edf7cb6",
+      "bytes": 976
+    },
+    {
+      "id": "controlled-unit-log",
+      "sha256": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+      "bytes": 109665
+    }
+  ],
+  "limits": [
+    "Historical process and resource observations are reviewed retained evidence, not freshly re-observed runtime facts.",
+    "W2 is one 120-second installed comparison inside a failed outer workload.",
+    "W3 data initialization was performed by the test controller through exact service identities.",
+    "The create-deadline acceptance is a controlled behavioral inference, without kernel signal or winning timer attribution.",
+    "B1 proves post-create and pre-confirmation interruption, not active daemon bootstrap.",
+    "Image uncertainty is covered by controlled behavior tests plus real successful export/load integration; no real partial-upload claim is made.",
+    "S1 normal closure compared stable image-list fields and full network inspections; full image inspection and harness guest-root deletion were not observed.",
+    "Both cancelled B1 and S1 manifests retain SOURCE_MUTATED provenance failures and are not completed comparison evidence.",
+    "G20 and final release acceptance remain outside this judgment."
+  ],
+  "historicalFailuresRemainFailed": true,
+  "standalonePartialTarProbe": "superseded-unrun",
+  "remainingG07G15MandatoryProof": [],
+  "G20Accepted": false,
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "privateEvidencePathsIncluded": false,
+  "coordinatorReviewed": true,
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "212022283f6c293e77fc8f667636647f4fa50044bfefb4a3340ac0c3dcaa797e",
+    "machineReviewSha256": "4ff82ba8ccc2938d10226fa733529849004557348c9a4263d9621f76ec2230ca"
+  }
+}
