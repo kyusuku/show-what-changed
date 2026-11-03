@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "kind": "canonical-linux-actual-failure",
+  "status": "failed",
+  "candidate": {
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "sourceArchiveBytes": 8601600,
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "sourceSelectedArchiveSha256": "f784ecf479fefe6c498621df5b286ed48ddd2ff291b5858549a276d38b712954",
+  "reportSha256": "05bb9619be56f8883695c89a9184b9022ebdedc8a7b4d03c1784032918fc836e",
+  "nativeExitCode": 1,
+  "stages": {
+    "extract": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "environment": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "install": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "sandbox": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "typecheck": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "build": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "schema-check": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "unit": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "contracts": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "privacy-scanner": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "integration": {
+      "exitCode": 1,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "package-source-binding": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "package-smoke": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "installed-motion": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "host-compatibility": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "public-app": {
+      "exitCode": 1,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    "repeatability": {
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    }
+  },
+  "notRunStages": [],
+  "failedStages": [
+    "integration",
+    "public-app"
+  ],
+  "publicApp": {
+    "passedComparisons": 5,
+    "failedComparison": "validation-3",
+    "failedExitCode": 9,
+    "errorCode": "INVALID_DOCUMENT",
+    "errorPhase": "recording",
+    "recordingDurationMs": 6943.030167,
+    "failedRunId": "20261103T213905407Z-3fb78c84510f42ac",
+    "reportSha256": "2ebf5b13ddb75ab8792f9e111ee59b28564de959bd22cb29cf57f8b696df8374",
+    "copiedFailedArtifacts": 59,
+    "copiedArtifactInventorySha256": "cd29fc0d294cae3aeb912aa5763a0cdaa2abe5531d0ef78d8d470ad293dc4f12",
+    "missingArtifacts": [
+      "capture.json",
+      "timeline.json",
+      "compare.mp4",
+      "poster.png"
+    ],
+    "callerPreserved": true,
+    "cleanupStatus": "ok",
+    "verificationErrors": [],
+    "worktreeComparisonRun": false,
+    "cause": "Exact schema issue and rejected in-memory capture were not retained by the product. Do not attribute this short recording to the separate sixty-second boundary finding."
+  },
+  "physicalClosure": {
+    "ownershipRecordSha256": "09291ea20503d65e71c0ac2bb4894d8d4e5ba7d18324f593a84e08eb3b51285a",
+    "exactOwnedContainerAbsent": true,
+    "fullFinalInventoryEqualsBaseline": true,
+    "normalVmStopObserved": true
+  },
+  "historicalFailuresRetained": true,
+  "automaticRetry": false,
+  "G20Accepted": false,
+  "releaseReady": false,
+  "publicationPerformed": false
+}

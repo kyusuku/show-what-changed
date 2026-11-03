@@ -1,4 +1,5 @@
 import { execFile } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
 import { chmod, cp, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -39,6 +40,64 @@ test('pure planning binds whole-repository source, normalized cwd, documents, an
   expect(selected.execution.estimatedSnapshotBytes).toBe(selected.sourceStats.before.bytes + selected.sourceStats.after.bytes);
   await expect(readFile(join(files.repo, 'apps/web/PLANNER-EXECUTED'))).rejects.toMatchObject({ code: 'ENOENT' });
   await expect(validateSavedPlan(selected, files.repo)).resolves.toMatchObject({ headCommit: selected.headCommit });
+});
+
+test.each([
+  { path: '.env', endpoint: 'before' },
+  { path: '.env.local', endpoint: 'before' },
+  { path: 'apps/web/.env.production', endpoint: 'before' },
+  { path: '.env', endpoint: 'after' },
+  { path: '.env.local', endpoint: 'after' },
+  { path: 'apps/web/.env.production', endpoint: 'after' },
+])('planning warns safely about tracked $path source in the $endpoint endpoint', async ({ path, endpoint }) => {
+  const files = await fixture();
+  const withoutEnvironment = await git(files.repo, 'rev-parse', 'HEAD');
+  const key = 'SWC_R6_SYNTHETIC_CREDENTIAL'; const value = 'swc-r6-test-only-value'; const contents = `${key}=${value}\n`;
+  await writeFile(join(files.repo, '.gitignore'), '.show-what-changed/\n.env\n.env.*\n');
+  await writeFile(join(files.repo, path), contents);
+  await git(files.repo, 'add', '.gitignore'); await git(files.repo, 'add', '-f', path); await git(files.repo, 'commit', '-qm', 'Tracked environment source');
+  const withEnvironment = await git(files.repo, 'rev-parse', 'HEAD');
+  const selected = await plan({ invocationDir: files.repo, configPath: files.config, routes: ['/'], base: endpoint === 'before' ? withEnvironment : withoutEnvironment, head: endpoint === 'after' ? withEnvironment : withoutEnvironment });
+  const inventory = endpoint === 'before' ? selected.inventories.before : selected.inventories.after;
+  const otherInventory = endpoint === 'before' ? selected.inventories.after : selected.inventories.before;
+  expect(inventory).toContainEqual(expect.objectContaining({ path, exists: true, byteLength: Buffer.byteLength(contents), sha256: createHash('sha256').update(contents).digest('hex') }));
+  expect(otherInventory.some((entry) => entry.path === path && entry.exists)).toBe(false);
+  expect(selected.warnings.some(({ message }) => /\benvironment\b|\.env\b/i.test(message))).toBe(true);
+  const serialized = JSON.stringify(selected);
+  expect(serialized).not.toContain(key); expect(serialized).not.toContain(value);
+});
+
+test('planning does not warn about ignored untracked environment files or include their bytes', async () => {
+  const files = await fixture();
+  await writeFile(join(files.repo, '.gitignore'), '.show-what-changed/\n.env\n.env.*\n');
+  await git(files.repo, 'add', '.gitignore'); await git(files.repo, 'commit', '-qm', 'Ignore local environment files');
+  const key = 'SWC_R6_IGNORED_CREDENTIAL'; const value = 'swc-r6-ignored-test-only-value';
+  const paths = ['.env', '.env.local', 'apps/web/.env.production'];
+  for (const path of paths) await writeFile(join(files.repo, path), `${key}=${value}\n`);
+  const selected = await plan({ invocationDir: files.repo, configPath: files.config, routes: ['/'] });
+  for (const inventory of [selected.inventories.before, selected.inventories.after]) expect(inventory.some((entry) => paths.includes(entry.path))).toBe(false);
+  expect(selected.warnings.some(({ message }) => /\benvironment\b|\.env\b/i.test(message))).toBe(false);
+  const serialized = JSON.stringify(selected);
+  expect(serialized).not.toContain(key); expect(serialized).not.toContain(value);
+});
+
+test('planning warns once without source paths or contents for eligible untracked environment files', async () => {
+  const files = await fixture();
+  const paths = ['.env', 'apps/web/.env.production'];
+  const key = 'SWC_R6_UNTRACKED_CREDENTIAL'; const value = 'swc-r6-untracked-test-only-value'; const contents = `${key}=${value}\n`;
+  for (const path of paths) await writeFile(join(files.repo, path), contents);
+  const selected = await plan({ invocationDir: files.repo, configPath: files.config, routes: ['/'] });
+  for (const path of paths) {
+    expect(selected.inventories.before.some((entry) => entry.path === path)).toBe(false);
+    expect(selected.inventories.after).toContainEqual(expect.objectContaining({ path, exists: true, byteLength: Buffer.byteLength(contents), sha256: createHash('sha256').update(contents).digest('hex') }));
+  }
+  const warnings = selected.warnings.filter(({ message }) => /\benvironment\b|\.env\b/i.test(message));
+  expect(warnings).toHaveLength(1);
+  expect(warnings[0]?.files).toBeUndefined();
+  expect(warnings[0]?.message).not.toMatch(/\btracked\b/);
+  expect(warnings[0]?.message).not.toContain('apps/web');
+  const serialized = JSON.stringify(selected);
+  expect(serialized).not.toContain(key); expect(serialized).not.toContain(value);
 });
 
 test.each(['config', 'scenario', 'helper', 'helper-mode'] as const)('saved plans reject changed bound %s inputs', async (kind) => {

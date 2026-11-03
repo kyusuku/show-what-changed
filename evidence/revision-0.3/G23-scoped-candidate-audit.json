@@ -1,0 +1,125 @@
+{
+  "scope": "independent-G23-scoped-audit-of-exact-candidate",
+  "status": "scoped-candidate-checks-passed-final-handoff-identity-refresh-required",
+  "reviewedAt": "2026-11-03T21:18:53.405542+00:00",
+  "candidate": {
+    "commit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "parent": "a080372d59edf32925f305782a6a81e81f37c121",
+    "clean": true,
+    "remotes": 0,
+    "reachableCommits": 7,
+    "refs": [
+      "refs/heads/main"
+    ],
+    "shallow": false,
+    "trackedFiles": 465,
+    "changedFilesFromParent": 38,
+    "sourceRefresh": {
+      "sha256": "7d718ce9a00bd5dbdd853b568b6bf9996bc9657799d322c9866e1605b411f601",
+      "bytes": 10488
+    },
+    "sourceArchive": {
+      "sha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+      "bytes": 8601600
+    },
+    "gitArchiveExactBytesEqual": true,
+    "package": {
+      "sha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "bytes": 384148
+    },
+    "packageMembers": 171,
+    "packageSourceBindingOriginal": {
+      "sha256": "e2ad9b496c35d0c3ea892953ccd6156f9a6dbc1b499c2dbf1d2527e7780ce188",
+      "bytes": 576
+    },
+    "spec": {
+      "sha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+      "bytes": 61921
+    },
+    "lockfile": {
+      "sha256": "1b1aa3eea3892b130460bdb6439576e3749074d994d58ea939b03f858df41797",
+      "bytes": 55089
+    }
+  },
+  "privacy": {
+    "record": {
+      "sha256": "1d92b56df7459bc5ad767e766ef6f129174db0a239b58686004d4e467f8d2943",
+      "bytes": 1378
+    },
+    "status": "passed",
+    "scannedInputs": 5438,
+    "findings": 0,
+    "scope": "clean source tree, all intended reachable Git history, source archive, npm tarball, literal deny rules",
+    "limits": "Literal matching cannot prove absence of unknown private information or understand image, video, audio, alternate encodings, or opaque archives beyond supported formats."
+  },
+  "credentials": {
+    "record": {
+      "sha256": "675783826c0c5b8010d6bfc77ae238f6305c38cff998501ccdfbb08cc8f14f5d",
+      "bytes": 444125
+    },
+    "status": "passed",
+    "scannedEntries": 1568,
+    "historyCommits": 7,
+    "historyBlobs": 460,
+    "packageEntries": 171,
+    "syntheticFixtureMatches": 7,
+    "unreviewedMatches": 0,
+    "binaryEntriesNotPatternInterpreted": 146,
+    "limits": "Pattern-based known credential shapes; seven matches are reviewed synthetic test fixtures, not claims of exhaustive secret absence."
+  },
+  "advisories": {
+    "source": "npm audit --package-lock-only --json, fresh registry query",
+    "record": {
+      "sha256": "c7d6a399a5934ed31c9c66e8ff76397a86c117def05c8fe91ad01dd42b4793a7",
+      "bytes": 362
+    },
+    "exitCode": 0,
+    "lockedDependencies": 97,
+    "vulnerabilities": 0,
+    "limits": "Registry advisory snapshot, not a guarantee against unknown or later advisories."
+  },
+  "licenses": {
+    "declaredDependencies": 97,
+    "installedDependenciesChecked": 54,
+    "runtimeDependencies": 7,
+    "declaredInventoryMatchesCurrentLock": true,
+    "runtimeDependencyLicenseNoticeFilesObserved": true,
+    "packageNoticesAndFontLicenseVerified": true,
+    "developmentOnlyException": "Installed optional @rolldown/binding-darwin-arm64 declares MIT but has no own license file. Parent rolldown distribution has LICENSE and THIRD-PARTY-LICENSE. This optional development binding is not included in the published package.",
+    "limits": "License metadata and notices checked; this is not a legal opinion."
+  },
+  "publicArtifacts": {
+    "priorIndependentDemoReview": {
+      "sha256": "ed4694fefd5404cc3e6054ee415c5d520881da11ae7f61fff260f39959794fcc",
+      "bytes": 9713
+    },
+    "priorIdentityInventory": {
+      "sha256": "ac25b74eeb21c315410ee51c032c74d0beea0b29aaa7938d3e024e75a0e724b0",
+      "bytes": 2118
+    },
+    "exactTransferredReviewedInputs": 10,
+    "demoFiles": 8,
+    "priorReviewScope": "Full video decode and sampled visual frames, not every-frame human review. Known scenario-title redaction blemish remains disclosed.",
+    "contextReview": "No absolute home paths in current evidence and demo context scan. Some historical evidence cites local temporary paths; those references are not portable."
+  },
+  "methodLimits": [
+    "No browser, VM, Docker, media regeneration, publication, source mutation, or extra comparison performed.",
+    "Current proof is bound to this exact commit, archive, package and spec. A later handoff commit or archive requires new final identity and affected review.",
+    "No G20 pass or overall release-readiness claim is made."
+  ],
+  "G23ScopedCandidateAuditPassed": true,
+  "G20Accepted": false,
+  "finalHandoffIdentityVerified": false,
+  "releaseAcceptance": false,
+  "publicationPerformed": false,
+  "schemaVersion": 1,
+  "kind": "G23-scoped-candidate-audit",
+  "coordinatorReviewed": true,
+  "independentReview": {
+    "model": "gpt-6.1-terra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "cb3b1318323c9dbf2a30330e0fd9afa147634e1d1dfcb8a3ca9196909f6c98f8"
+  },
+  "gateAccepted": false
+}

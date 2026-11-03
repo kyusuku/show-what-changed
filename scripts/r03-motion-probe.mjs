@@ -8,7 +8,7 @@ import { PNG } from 'pngjs';
 import { capture } from '../dist/recorder/index.js';
 import { render, encode, validateTimelineCapture } from '../dist/composer/index.js';
 import { createRunContext, cleanupRun } from '../dist/runtime/context.js';
-import { ScenarioSchema, CaptureSettingsSchema } from '../dist/schema/index.js';
+import { ScenarioSchema, CaptureSettingsSchema, motionPlaybackWindow } from '../dist/schema/index.js';
 const root = await mkdtemp(join(tmpdir(), 'swc-r03-motion-'));
 let html = await readFile(new URL('../fixtures/motion/index.html', import.meta.url));
 const longCapture = process.argv.includes('--long-capture');
@@ -122,7 +122,8 @@ try {
   );
   assert.equal(bundle.scenarios[0].outcome, 'ok');
   if (longCapture) {
-    const durationMs = bundle.motion[0].endMs - bundle.motion[0].startMs;
+    const window = motionPlaybackWindow(bundle.motion[0].timing);
+    const durationMs = window.endMs - window.startMs;
     assert(durationMs >= 59000 && durationMs <= 60000);
     const tracks = Object.fromEntries(
       Object.entries(bundle.motion[0].tracks).map(([side, track]) => {

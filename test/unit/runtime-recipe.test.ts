@@ -8,6 +8,7 @@ import type { Config, Plan } from '../../src/schema/index.js';
 import type { RunContext, WorkspacePair } from '../../src/schema/contracts.js';
 import { createRunContext, cleanupRun } from '../../src/runtime/context.js';
 import { start } from '../../src/runtime/index.js';
+import { groupMembers } from '../../src/runtime/process-table.js';
 import { sha256 } from '../../src/schema/io.js';
 import { applicationEnvironment, bindEnvironment, commandArguments, prepareInputs, readAuthState, readBoundInputs } from '../../src/runtime/recipe.js';
 const roots: string[] = []; const runs: RunContext[] = [];
@@ -39,15 +40,30 @@ test('Python uses the same generic runtime contract and selected prerequisite', 
   expect(JSON.parse(await readFile(join(f.run.paths.privateDir, 'execution.json'), 'utf8')).prerequisites).toHaveLength(2);
 });
 test.each([
-  [{ requires: [{ argv: ['swc-nonexistent-runtime-executable', '--version'], expectedVersion: '*' }] }, 'PREREQUISITE_MISSING'],
-  [{ requires: [{ argv: [process.execPath, '--version'], expectedVersion: '<1.0.0' }] }, 'PREREQUISITE_VERSION'],
-  [{ env: { PRIVATE_VALUE: { fromEnv: 'SWC_PRIVATE_TEST' } } }, 'MISSING_ENVIRONMENT'],
-  [{ pathPrependFromEnv: 'SWC_RUNTIME_PATH' }, 'INVALID_RUNTIME_PATH'],
-])('preflight failure happens before setup', async (fields, code) => {
+  [{ requires: [{ argv: ['swc-nonexistent-runtime-executable', '--version'], expectedVersion: '*' }] }, { exitCode: 8, detail: { code: 'PREREQUISITE_MISSING' } }],
+  [{ requires: [{ argv: [process.execPath, '--version'], expectedVersion: '<1.0.0' }] }, { exitCode: 8, detail: { code: 'PREREQUISITE_VERSION' } }],
+  [{ requires: [{ argv: [process.execPath, '-e', 'process.exit(12)'], expectedVersion: '*' }] }, { exitCode: 8, detail: { code: 'PREREQUISITE_VERSION' } }],
+  [{ env: { PRIVATE_VALUE: { fromEnv: 'SWC_PRIVATE_TEST' } } }, { detail: { code: 'MISSING_ENVIRONMENT' } }],
+  [{ pathPrependFromEnv: 'SWC_RUNTIME_PATH' }, { detail: { code: 'INVALID_RUNTIME_PATH' } }],
+])('preflight failure happens before setup', async (fields, expected) => {
   const f = await fixture({ ...basic, ...fields, setup: [{ argv: [process.execPath, '-e', "require('node:fs').writeFileSync('setup-ran','wrong')"] }] });
-  await expect(start(f.workspaces, f.plan, f.run)).rejects.toMatchObject({ detail: { code } });
+  await expect(start(f.workspaces, f.plan, f.run)).rejects.toMatchObject(expected);
   for (const workspace of Object.values(f.workspaces)) await expect(lstat(join(workspace.root, 'setup-ran'))).rejects.toMatchObject({ code: 'ENOENT' });
 });
+test.each([
+  { stage: 'setup', fields: { setup: [{ argv: [process.execPath, '-e', 'process.exit(12)'] }] }, exitCode: 5, code: 'SETUP_FAILED' },
+  { stage: 'bootstrap', fields: { bootstrap: [{ argv: [process.execPath, '-e', 'process.exit(12)'] }] }, exitCode: 5, code: 'BOOTSTRAP_FAILED' },
+  { stage: 'startup', fields: { start: { kind: 'process', argv: [process.execPath, '-e', 'process.exit(12)'] } }, exitCode: 6, code: 'SERVER_EXITED' },
+])('recipe $stage failure preserves its exit category and can clean all owned resources', async ({ fields, exitCode, code }) => {
+  const f = await fixture({ ...basic, ...fields, services: [{ id: 'store', kind: 'process', argv: [process.execPath, 'runtime-server.cjs', '{port}'], ready: { kind: 'http', path: '/', statuses: [200], timeoutMs: 3000 } }] });
+  await expect(start(f.workspaces, f.plan, f.run)).rejects.toMatchObject({ exitCode, detail: { code, phase: 'starting' } });
+  const processes = z.array(z.object({ group: z.number().int().positive() })).parse(JSON.parse(await readFile(join(f.run.paths.privateDir, 'processes.json'), 'utf8')));
+  expect((await Promise.all(processes.map(({ group }) => groupMembers(group)))).some((members) => members.length > 0)).toBe(true);
+  expect(await cleanupRun(f.run)).toEqual({ status: 'ok', errors: [] });
+  for (const { group } of processes) expect(await groupMembers(group)).toEqual([]);
+  for (const side of ['before', 'after']) expect(await readdir(join(f.run.paths.privateDir, 'execution', side))).toEqual([]);
+  for (const path of [f.run.paths.tempDir, join(f.run.paths.repoRoot, '.show-what-changed', 'run.lock')]) await expect(lstat(path)).rejects.toMatchObject({ code: 'ENOENT' });
+}, 15_000);
 test('application PATH selection leaves tool Node unchanged and exact secrets are redacted before log persistence', async () => {
   const f = await fixture({ ...basic, pathPrependFromEnv: 'SWC_RUNTIME_PATH', requires: [{ argv: ['selected-runtime', '--version'], expectedVersion: '7.8.9' }], env: { PRIVATE_VALUE: { fromEnv: 'SWC_PRIVATE_TEST' } }, setup: [{ argv: [process.execPath, '-e', 'process.stdout.write(process.env.PRIVATE_VALUE)'] }] });
   const bin = join(f.run.paths.repoRoot, 'bin'); await mkdir(bin); await writeFile(join(bin, 'selected-runtime'), '#!/bin/sh\nprintf 7.8.9\n'); await chmod(join(bin, 'selected-runtime'), 0o700);

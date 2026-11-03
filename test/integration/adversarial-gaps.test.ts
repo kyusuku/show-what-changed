@@ -231,7 +231,23 @@ test('T09 keeps one real masked secret and fill value private through failed cap
   const result = await compare({ kind: 'new', request: { invocationDir: fixture.path, scenarioPaths: [fixture.scenario] } }, {
     invocationDir: fixture.path, timeoutMs: 60_000, signal: new AbortController().signal, consent: { kind: 'allow-exec' }, diagnostics: { event() {} },
   });
-  expect(result).toMatchObject({ status: 'partial', exitCode: 3, data: { cleanupOutcome: { status: 'ok' }, summary: { verifiedPairs: 2, failedSteps: 2, blockedSteps: 2 } } });
+  const diagnostic = JSON.stringify({
+    status: result.status, exitCode: result.exitCode,
+    error: result.error && { code: result.error.code, phase: result.error.phase },
+    manifest: result.data && {
+      errors: result.data.errors.map(({ code, phase }) => ({ code, phase })),
+      errorHistory: result.data.errorHistory.map(({ code, phase }) => ({ code, phase })),
+      scenarios: result.data.scenarios.map((scenario) => ({
+        id: scenario.id, outcome: scenario.outcome, errors: scenario.errors.map(({ code, phase }) => ({ code, phase })),
+        steps: scenario.steps.map((step) => ({
+          id: step.id, op: step.op,
+          before: { status: step.before.status, reasonCode: step.before.reasonCode, elapsedMs: step.before.elapsedMs },
+          after: { status: step.after.status, reasonCode: step.after.reasonCode, elapsedMs: step.after.elapsedMs },
+        })),
+      })),
+    },
+  });
+  expect(result, `T09 capture diagnostic ${diagnostic}`).toMatchObject({ status: 'partial', exitCode: 3, data: { cleanupOutcome: { status: 'ok' }, summary: { verifiedPairs: 2, failedSteps: 2, blockedSteps: 2 } } });
   if (!result.data) throw new Error('Expected partial manifest');
   const runDir = join(fixture.path, '.show-what-changed/runs', result.data.runId);
   const bundle = CaptureBundleSchema.parse(JSON.parse(await readFile(join(runDir, 'capture.json'), 'utf8')));

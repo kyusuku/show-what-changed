@@ -1347,6 +1347,7 @@ describe('actual recorder operation failure boundary', () => {
           closeCalls: 1,
           runAborted: false,
         }),
+        expect.objectContaining({ probe: 'failure fallback uses the actual source host bracket', closeCalls: 3 }),
         expect.objectContaining({
           probe: 'pre-scenario fault preserves original time and records fresh failed attempt',
           closeCalls: 1,

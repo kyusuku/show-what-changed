@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "kind": "isolated-linux-t09-diagnostic",
+  "status": "passed-once-original-failure-not-reproduced",
+  "candidate": {
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "diagnosticTestSha256": "25381f6d323bebf9fdbbcaba6674a9c642c2e00c35e562313b52c75a92c51641",
+    "diagnosticPatchSha256": "3cff784abb6516b12c38d0586007548fc741a7c7021962861a026efdf6804c65"
+  },
+  "sourceChanges": "Only a privacy-safe assertion message was added before cleanup. Test counts, timeout values, original privacy assertions and product source were unchanged.",
+  "testName": "T09 keeps one real masked secret and fill value private through failed capture, composition and every decoded video frame",
+  "exitCode": 0,
+  "selectedTestsPassed": 1,
+  "unselectedTestsSkipped": 16,
+  "stdoutSha256": "d3776b61c6f87c771a262b655afe5fa68f41bc5e37f51f5d76ac2764eddaeb46",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "physicalClosure": {
+    "ownershipSha256": "1088f4045984ca3b5c92585b4bc4827c383792c79e8e8c01a9be56a7559c5103",
+    "exactContainerAbsent": true,
+    "fullInventoryRestored": true,
+    "normalVmStop": true
+  },
+  "limitations": [
+    "Original full-suite T09 failure remains preserved and unexplained.",
+    "This single isolated pass did not reproduce the preceding full-suite workload.",
+    "No retry or timeout increase occurred. A passing diagnostic does not replace complete final candidate verification."
+  ],
+  "G20Accepted": false,
+  "releaseReady": false,
+  "publicationPerformed": false
+}

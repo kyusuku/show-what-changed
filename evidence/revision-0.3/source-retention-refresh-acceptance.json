@@ -1,0 +1,84 @@
+{
+  "candidate": {
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "sourceArchiveBytes": 8601600,
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "previousCandidate": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "executableChanges": [
+    "scripts/real-app-run.mjs",
+    "scripts/test-real-app-run.mjs"
+  ],
+  "G22ReadinessDelta": [
+    {
+      "path": "docs/release-readiness.md",
+      "previousSha256": "db7cd1b5d6a2b769d7b0dc20361a263c57db30375021525c12cc1fac0a318ec6",
+      "currentSha256": "6256fe24e010e031b1eddf775cbbb52c1a6a9921b620f93ce232902882445cee"
+    }
+  ],
+  "retainedAcceptedGates": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12",
+    "G13",
+    "G14",
+    "G15",
+    "G16",
+    "G17",
+    "G18",
+    "G19",
+    "G21",
+    "G22"
+  ],
+  "pendingGates": [
+    "G20",
+    "G23",
+    "G24"
+  ],
+  "oneCanonicalLinuxRunEligibleAfterFreshPhysicalAdmission": true,
+  "runConstraints": {
+    "comparisonTimeoutSeconds": 1800,
+    "clockBoundMs": 40,
+    "automaticRetry": false,
+    "retainAndDiagnoseFailure": true
+  },
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "schemaVersion": 1,
+  "kind": "source-refresh-evidence-transfer",
+  "status": "accepted",
+  "productRuntimeChanged": false,
+  "packageInputsChanged": false,
+  "samePackageBytesVerified": true,
+  "packageBindingReportSha256": "e2ad9b496c35d0c3ea892953ccd6156f9a6dbc1b499c2dbf1d2527e7780ce188",
+  "retainedEvidenceIsHistorical": true,
+  "G20Accepted": false,
+  "G23Accepted": false,
+  "G24Accepted": false,
+  "privacyScope": "Known-term changed-content scan and unchanged reviewed media only; final release privacy review remains pending.",
+  "coordinatorReviewed": true,
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "ccaeaa0ce8cd80ee96bce0e908eb415ae86f65af68246523943dc2f2409c350a",
+    "structuredReportSha256": "8b07a4f54892cb4c1b288a9572c1debbbe2662159ac5fe0c64f300d8a5a545cc",
+    "verifiedBindings": 16
+  }
+}

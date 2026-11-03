@@ -1453,13 +1453,29 @@
                 "type": "string",
                 "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
               },
-              "startMs": {
-                "type": "number",
-                "minimum": 0
-              },
-              "endMs": {
-                "type": "number",
-                "minimum": 0
+              "timing": {
+                "type": "object",
+                "properties": {
+                  "startMs": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "limitMs": {
+                    "type": "integer",
+                    "minimum": 100,
+                    "maximum": 60000
+                  },
+                  "observedEndMs": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "startMs",
+                  "limitMs",
+                  "observedEndMs"
+                ],
+                "additionalProperties": false
               },
               "tracks": {
                 "type": "object",
@@ -3337,8 +3353,7 @@
             },
             "required": [
               "id",
-              "startMs",
-              "endMs",
+              "timing",
               "tracks",
               "steps",
               "annotations"

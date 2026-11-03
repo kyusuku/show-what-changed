@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "kind": "scoped-runtime-source-planner-repairs",
+  "status": "focused-verification-complete-final-candidate-pending",
+  "specRevision": "0.3",
+  "rootReview": {
+    "sourceAndPatchInspected": true,
+    "retainedEvidenceFilesRehashed": 51,
+    "currentOwnedFilesRehashed": 7,
+    "sourceResultSha256": "a56ef7689247e1450dd0311da336b1fe94a8369fe27973541b7bdd50ef4e822c",
+    "runtimeResultSha256": "c052a272c152e3fed205fa9933bd381d8fcbddfc743e489ef4266b8c8ff2bf26",
+    "sourcePatchSha256": "4a429fa0bfe4d7910cbf4b9ae392d4ba026e4d91c203ec39a880bbb65552c1af",
+    "runtimePatchSha256": "eec41165c19a1d4737fd792bdcd435c15501a843f920a75dfa23c370177649f3"
+  },
+  "sourcePlanner": {
+    "repairs": [
+      "Eligible application source beneath .show-what-changed remains in conservative route coverage.",
+      "Eligible .env and .env.* source inputs produce one content-free presence warning."
+    ],
+    "currentFileSha256": {
+      "src/planner/routes.ts": "9f11e3918107d8ef1511c0f623046453acd16708116e88b720ffe5b1e577955c",
+      "src/workspace/source.ts": "6a6c137742ffd48cba9a9f740818de8855659675ec70d642d90d4e8ced7af8f7",
+      "test/unit/planner-routes.test.ts": "3f81b32c921ff44c65121d852d96a5d6dd05b1a3e628960d62971a40ae06aeac",
+      "test/unit/planner-inputs.test.ts": "0c3d3bd661fed30e0464473cf61442f74dac19552b78e017f25099681c1c75c6"
+    },
+    "focusedTestsPassed": 11,
+    "completeFileEvidence": {
+      "initialPassed": 99,
+      "initialFailed": 9,
+      "initialFailureCause": "Sandbox denied the source-identity process inspection before assertions.",
+      "authorizedSourceIdentityRerunPassed": 27,
+      "distinctCasesWithPassingObservations": 108,
+      "singleAllPassingRunClaimed": false
+    }
+  },
+  "runtime": {
+    "repairs": [
+      {
+        "diagnostic": "PREREQUISITE_MISSING",
+        "exitCode": 8
+      },
+      {
+        "diagnostic": "PREREQUISITE_VERSION",
+        "exitCode": 8
+      },
+      {
+        "diagnostic": "SETUP_FAILED or BOOTSTRAP_FAILED",
+        "exitCode": 5
+      }
+    ],
+    "currentFileSha256": {
+      "src/runtime/index.ts": "a59434d2b07fd4edaf5a73c8674a1c7f48259bfe2852afebd64ac75cc1d1eabe",
+      "test/unit/runtime-recipe.test.ts": "b2d435582ea3c6473acc4cfe73d4c317acbe9f211274bf9657af9715fcb0fcf3",
+      "test/unit/runner-outcomes.test.ts": "3351d611897e1ec5b259f4ef111713da7bcc12320ef1a396264649f8b96a955d"
+    },
+    "expectedRedMismatches": 5,
+    "focusedTestsPassed": 11,
+    "completeFilesTestsPassed": 26,
+    "typecheckExitCode": 0,
+    "cancellationPrecedenceEvidence": "Existing outcome reducer cases; not new live-signal proof.",
+    "cleanupEvidence": "Backing-service ownership, process-group absence, private roots, workspace and lock checks passed in the stage-failure regressions."
+  },
+  "limitations": [
+    "These hashes describe dirty main source, not a new frozen release candidate.",
+    "The immutable 8ebf source and cb641 package are unchanged historical inputs.",
+    "No package rebuild, installed-package acceptance or full-platform acceptance follows from these focused checks.",
+    "G05 and G18 remain pending repair acceptance until final candidate evidence and review are complete.",
+    "Maximum-duration motion and the two failed Linux stages remain unresolved."
+  ],
+  "newGatesAccepted": [],
+  "releaseReady": false,
+  "publicationPerformed": false
+}

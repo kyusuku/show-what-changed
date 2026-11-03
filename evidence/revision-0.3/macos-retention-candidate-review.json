@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "status": "accepted-macos-evidence-scope",
+  "candidate": {
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "sourceArchiveBytes": 8601600,
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "reportSha256": "4fbd356b8efa8dc019d08ccab649e4269c2c76a6cc895e79613bcc392c75ba78",
+    "structuredReportSha256": "b61c1ba4c01a0b2ac3b0b14c028c2f16510a7f6076fa2e66a86cf0249b172d5c"
+  },
+  "freshPublicApp": {
+    "reportSha256": "ba1a55380881c9f9ee1da13316b44af07e5c965d735632d649af60e6fe637f12",
+    "actualExitCode": 0,
+    "passedComparisons": 7,
+    "commandRecords": 10,
+    "verifiedUniqueReferencedArtifacts": 1056,
+    "highestRecordedClockBoundMs": 7.966041,
+    "callerPreserved": true,
+    "cleanupPassed": true,
+    "freshMediaVisuallyReviewed": false
+  },
+  "retainedEvidence": {
+    "macosCliSmokeCommands": 18,
+    "hostMatrixRows": 4,
+    "packageMemberComparison": {
+      "total": 171,
+      "unchanged": 170,
+      "changed": [
+        "README.md"
+      ]
+    },
+    "dependencyIdentitiesUnchanged": 7,
+    "syntheticMotionVideos": 6,
+    "publicApplicationVideos": 7,
+    "visualReviewAppliesOnlyToOriginalMedia": true
+  },
+  "scope": "macOS evidence for the exact implementation and unchanged runtime association. Subsequent product repairs require affected revalidation.",
+  "G20Accepted": false,
+  "releaseReady": false,
+  "publicationPerformed": false
+}

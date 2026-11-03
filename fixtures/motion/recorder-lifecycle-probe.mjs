@@ -17,7 +17,7 @@ registerHooks({
   load(url, context, next) {
     const result = next(url, context);
     if (url === root + 'recorder/index.ts')
-      return { ...result, source: result.source.toString() + '\nexport { execute as probeExecute };\n' };
+      return { ...result, source: result.source.toString() + '\nexport { execute as probeExecute, settleFailedSide as probeSettleFailedSide };\n' };
     return result;
   },
 });
@@ -148,7 +148,7 @@ function harness(overrides = {}) {
     },
   };
 }
-const { probeExecute } = await import(root + 'recorder/index.ts');
+const { probeExecute, probeSettleFailedSide } = await import(root + 'recorder/index.ts');
 const results = [];
 async function bounded(promise, name) {
   const result = await Promise.race([
@@ -617,4 +617,18 @@ async function adapterProbe(stage) {
   results.push({ probe: 'pinned Playwright adapter subscription closure', stage, playwright: require('playwright-core/package.json').version, status: result.status, stats: result.stats, sanitized, acknowledged: acknowledgements, detachCalls: 1 });
 }
 for (const stage of ['admitted', 'upstream-queued', 'reentrant']) await adapterProbe(stage);
+{
+  const source = { kind: 'source', sourceSeconds: 0.0998, runElapsedMs: 99.8, hostBeforeMs: 100.2, hostAfterMs: 100.8, uncertaintyMs: 1.1 };
+  let closeCalls = 0;
+  const state = { faultAtMs: null, faultMarker: Promise.resolve(source), motion: null, close: async () => { closeCalls++; } };
+  const options = { state, attemptStartMs: 100, observedAtMs: 105, operation: null };
+  assert.deepEqual(await probeSettleFailedSide(options), source);
+  state.faultMarker = Promise.resolve({ ...source, hostBeforeMs: 99.9 });
+  state.faultAtMs = 102;
+  assert.deepEqual(await probeSettleFailedSide(options), { kind: 'host', runElapsedMs: 102, reason: 'source-clock-unavailable' });
+  state.faultAtMs = 90;
+  assert.deepEqual(await probeSettleFailedSide(options), { kind: 'host', runElapsedMs: 105, reason: 'source-clock-unavailable' });
+  assert.equal(closeCalls, 3);
+  results.push({ probe: 'failure fallback uses the actual source host bracket', closeCalls });
+}
 console.log(JSON.stringify(results, null, 2));

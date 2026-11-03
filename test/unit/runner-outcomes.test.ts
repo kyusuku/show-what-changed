@@ -14,6 +14,13 @@ describe('T07 and T14 outcome precedence', () => {
   it('does not clear cleanup failure after re-encoding', () => expect(reduceOutcome({ ...valid, cleanup: { status: 'failed', errors: [] } })).toMatchObject({ status: 'partial', exitCode: 3 }));
   it('gives fatal encode failure priority over partial', () => expect(reduceOutcome({ ...valid, comparison: { ...comparison, status: 'partial' }, fatal: failure(9, 'ENCODE_FAILED', 'encoding', 'Encoding failed.', 'Retry compose.') })).toMatchObject({ status: 'failed', exitCode: 9 }));
   it('gives cancellation before terminal priority over earlier failure', () => expect(reduceOutcome({ ...valid, fatal: failure(9, 'ENCODE_FAILED', 'encoding', 'Encoding failed.', 'Retry compose.'), cancelled: failure(130, 'SIGINT', 'execution', 'Interrupted.', 'Retry.') })).toMatchObject({ status: 'cancelled', exitCode: 130 }));
+  it.each([
+    [130, 'SIGINT'],
+    [143, 'SIGTERM'],
+    [10, 'DEADLINE_EXCEEDED'],
+  ] as const)('recipe setup failure retains cancellation exit %i', (exitCode, code) => {
+    expect(reduceOutcome({ ...valid, fatal: failure(5, 'SETUP_FAILED', 'starting', 'Setup failed.', 'Correct the recipe.'), cancelled: failure(exitCode, code, 'execution', 'Cancelled.', 'Retry.') })).toMatchObject({ status: 'cancelled', exitCode, error: { code } });
+  });
   it('cannot report an incomplete encoding as success', () => expect(reduceOutcome({ ...valid, encoding: { status: 'pending', errors: [] } })).toMatchObject({ status: 'failed', exitCode: 1 }));
 });
 

@@ -46,6 +46,27 @@ describe('T05 conservative route selection', () => {
     expect(result.coverage.unresolved).toHaveLength(1);
     expect(result.coverage.complete).toBe(false);
   });
+  it('requires an explicit route for a sole eligible output-prefix application change', () => {
+    const path = '.show-what-changed/app-data.txt';
+    const paths = ['app/page.tsx', path];
+    expect(failed(() => selectScenarios(inspection(paths, paths, [path]), config))).toMatchObject({ exitCode: 2, detail: { code: 'ROUTE_REQUIRED' } });
+  });
+  it('keeps an eligible output-prefix application change unresolved beside a page change', () => {
+    const path = '.show-what-changed/app-data.txt';
+    const paths = ['app/page.tsx', path];
+    const result = selectScenarios(inspection(paths, paths, paths), config);
+    expect(result.coverage.selected.map((candidate) => candidate.path)).toEqual(['/']);
+    expect(result.coverage.unresolved).toMatchObject([{ path, reason: 'UNRESOLVED_CHANGE' }]);
+    expect(result.coverage.complete).toBe(false);
+  });
+  it('respects explicit exclusions for output-prefix application changes', () => {
+    const path = '.show-what-changed/app-data.txt';
+    const paths = ['app/page.tsx', path];
+    const result = selectScenarios(inspection(paths, paths, paths), config, { excludePaths: [path] });
+    expect(result.coverage.selected.map((candidate) => candidate.path)).toEqual(['/']);
+    expect(result.coverage.unresolved).toEqual([]);
+    expect(result.coverage.complete).toBe(true);
+  });
   it('reports slots and intercepting routes without inventing a concrete path', () => {
     const paths = ['app/page.tsx', 'app/@modal/(.)photo/page.tsx'];
     const result = selectScenarios(inspection(paths, paths, paths), config);

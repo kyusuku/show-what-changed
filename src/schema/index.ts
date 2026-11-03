@@ -23,6 +23,7 @@ export const AppPathSchema = z.string().max(2048).regex(/^\/(?!\/)[^\x00-\x1f\x7
 export const ArtifactPathSchema = z.string().min(1).max(4096).regex(/^(?!\/|[A-Za-z]:)(?!.*(?:^|\/)\.{1,2}(?:\/|$))(?!.*\/\/)(?!.*\/$)[^\\\x00-\x1f\x7f]+$/);
 const MillisecondsSchema = z.number().finite().nonnegative();
 const ObserveMsSchema = z.number().int().min(0).max(3000);
+const ScenarioLimitMsSchema = z.number().int().min(100).max(60000);
 const StepTimeoutSchema = z.number().int().min(100).max(30000);
 const LocatorTextSchema = z.string().min(1).max(512);
 export const AriaRoleSchema = z.enum([
@@ -74,7 +75,7 @@ const CaptureFields = {
   viewport: ViewportInputSchema.default({ width: 1280, height: 800 }),
   fixedTime: z.iso.datetime({ offset: false }).nullable().default(null),
   stepTimeoutMs: StepTimeoutSchema.default(10000), observeMs: ObserveMsSchema.default(800),
-  maxScenarioMs: z.number().int().min(100).max(60000).default(60000),
+  maxScenarioMs: ScenarioLimitMsSchema.default(60000),
 };
 export const CaptureSettingsSchema = z.discriminatedUnion('mode', [
   z.strictObject({ ...CaptureFields, mode: z.literal('motion'), maskRects: z.array(MaskRectSchema).max(20).default([]) }),
@@ -215,22 +216,47 @@ export const StepTimingSchema = z.discriminatedUnion('kind', [
   z.strictObject({ kind: z.literal('blocked'), atMs: MillisecondsSchema }),
 ]);
 export const MotionAnnotationSchema = z.strictObject({ side: SideSchema, stepId: IdSchema, kind: z.enum(['waiting', 'expected_absent', 'skipped_by_side', 'failed', 'blocked']), startMs: MillisecondsSchema, endMs: MillisecondsSchema });
+export const MotionScenarioTimingSchema = z.strictObject({
+  startMs: MillisecondsSchema, limitMs: ScenarioLimitMsSchema, observedEndMs: MillisecondsSchema,
+}).refine((timing) => timing.observedEndMs > timing.startMs && timing.startMs + timing.limitMs > timing.startMs, 'Motion observation and playback intervals must be representable and positive');
+export type MotionScenarioTiming = z.infer<typeof MotionScenarioTimingSchema>;
+export function motionPlaybackWindow(timing: MotionScenarioTiming): { startMs: number; endMs: number; durationFrames: number } {
+  const endMs = Math.min(timing.observedEndMs, timing.startMs + timing.limitMs);
+  let lowerFrame = 0;
+  let upperFrame = Math.ceil(timing.limitMs * FPS / 1000);
+  while (lowerFrame < upperFrame) {
+    const frame = Math.floor((lowerFrame + upperFrame) / 2);
+    if (timing.startMs + frame * 1000 / FPS < endMs) lowerFrame = frame + 1;
+    else upperFrame = frame;
+  }
+  return { startMs: timing.startMs, endMs, durationFrames: lowerFrame };
+}
 export const MotionScenarioSchema = z.strictObject({
-  id: IdSchema, startMs: MillisecondsSchema, endMs: MillisecondsSchema,
+  id: IdSchema, timing: MotionScenarioTimingSchema,
   tracks: z.strictObject({ before: MotionTrackSchema, after: MotionTrackSchema }),
   steps: z.array(z.strictObject({ id: IdSchema, barrierMs: MillisecondsSchema, before: StepTimingSchema, after: StepTimingSchema })).min(1).max(12),
   annotations: z.array(MotionAnnotationSchema).max(144),
 }).superRefine((scenario, context) => {
-  if (scenario.endMs <= scenario.startMs || scenario.endMs - scenario.startMs > 60000) context.addIssue({ code: 'custom', message: 'Motion scenario duration must be positive and at most 60 seconds' });
-  for (const annotation of scenario.annotations) if (annotation.startMs < scenario.startMs || annotation.endMs > scenario.endMs || annotation.endMs < annotation.startMs) context.addIssue({ code: 'custom', message: 'Annotation must lie within its scenario' });
-  for (const step of scenario.steps) for (const side of ['before', 'after'] as const) {
-    const timing = step[side];
-    const markers = timing.kind === 'executed' ? [timing.dispatch, timing.completion, timing.observationEnd] : timing.kind === 'failed' ? [...(timing.dispatch ? [timing.dispatch] : []), timing.failure] : [];
-    const times = markers.length ? markers.map((marker) => marker.runElapsedMs) : 'atMs' in timing ? [timing.atMs] : [];
-    if (step.barrierMs < scenario.startMs || times.some((time, index) => time < step.barrierMs || time > scenario.endMs || index > 0 && time < (times[index - 1] ?? 0))) context.addIssue({ code: 'custom', message: 'Step markers must respect barrier and scenario order' });
-    for (const marker of markers) if (marker.kind === 'source') {
-      const clock = scenario.tracks[side].clock;
-      if (!clock || Math.abs(marker.runElapsedMs - (1000 * marker.sourceSeconds + clock.offsetMs)) > 0.001) context.addIssue({ code: 'custom', message: 'Action markers must use the fixed track clock mapping' });
+  for (const annotation of scenario.annotations) if (annotation.startMs < scenario.timing.startMs || annotation.endMs > scenario.timing.observedEndMs || annotation.endMs < annotation.startMs) context.addIssue({ code: 'custom', message: 'Annotation must lie within its scenario' });
+  for (let index = 0; index < scenario.steps.length; index++) {
+    const step = scenario.steps[index]!;
+    if (step.barrierMs < scenario.timing.startMs || step.barrierMs > scenario.timing.observedEndMs || step.barrierMs < (scenario.steps[index - 1]?.barrierMs ?? scenario.timing.startMs)) context.addIssue({ code: 'custom', message: 'Host barriers must respect scenario order' });
+    for (const side of ['before', 'after'] as const) {
+      const timing = step[side];
+      const markers = timing.kind === 'executed' ? [timing.dispatch, timing.completion, timing.observationEnd] : timing.kind === 'failed' ? [...(timing.dispatch ? [timing.dispatch] : []), timing.failure] : [];
+      if ('atMs' in timing && (timing.atMs < step.barrierMs || timing.atMs > scenario.timing.observedEndMs)) context.addIssue({ code: 'custom', message: 'Host step times must lie within their observed interval' });
+      for (let markerIndex = 0; markerIndex < markers.length; markerIndex++) {
+        const marker = markers[markerIndex]!;
+        const previous = markers[markerIndex - 1];
+        if (marker.kind === 'source') {
+          if (marker.hostBeforeMs < step.barrierMs || marker.hostAfterMs > scenario.timing.observedEndMs) context.addIssue({ code: 'custom', message: 'Source marker host brackets must lie within their observed interval' });
+          if (previous?.kind === 'source' && marker.runElapsedMs < previous.runElapsedMs) context.addIssue({ code: 'custom', message: 'Source action markers must retain source order' });
+          const clock = scenario.tracks[side].clock;
+          if (!clock || Math.abs(marker.runElapsedMs - (1000 * marker.sourceSeconds + clock.offsetMs)) > 0.001) context.addIssue({ code: 'custom', message: 'Action markers must use the fixed track clock mapping' });
+        } else if (marker.runElapsedMs < step.barrierMs || marker.runElapsedMs > scenario.timing.observedEndMs || previous?.kind === 'source' && marker.runElapsedMs < previous.hostBeforeMs) {
+          context.addIssue({ code: 'custom', message: 'Host failure must respect the dispatch host bracket and observed interval' });
+        }
+      }
     }
   }
 });
@@ -297,7 +323,7 @@ export const TimelineSchema = z.strictObject({
         if (timeline.captureMode !== 'keyframes' || stepIds.has(segment.stepId)) context.addIssue({ code: 'custom', message: 'Keyframe step IDs must be unique and keyframe-only' });
         stepIds.add(segment.stepId);
       } else {
-        if (timeline.captureMode !== 'motion' || stepCount !== 0 || segment.sourceEndMs <= segment.sourceStartMs || segment.durationFrames !== Math.ceil((segment.sourceEndMs - segment.sourceStartMs) * 30 / 1000)) context.addIssue({ code: 'custom', message: 'Motion scenario must retain its measured duration' });
+        if (timeline.captureMode !== 'motion' || stepCount !== 0 || segment.sourceEndMs <= segment.sourceStartMs || segment.sourceEndMs > segment.sourceStartMs + 60000 || segment.durationFrames !== motionPlaybackWindow({ startMs: segment.sourceStartMs, observedEndMs: segment.sourceEndMs, limitMs: 60000 }).durationFrames) context.addIssue({ code: 'custom', message: 'Motion scenario must retain its bounded playback schedule' });
         for (let frame = segment.startFrame; frame < segment.startFrame + segment.durationFrames; frame++) motionFrameNumbers.add(frame);
       }
       stepCount++;

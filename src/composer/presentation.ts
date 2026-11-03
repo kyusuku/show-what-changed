@@ -1,3 +1,4 @@
+import { motionPlaybackWindow } from '../schema/index.js';
 import type { CaptureBundle, CapturedStep, MotionScenario, Side, Timeline, Warning } from '../schema/index.js';
 import type { ComposerSettings } from '../schema/contracts.js';
 
@@ -77,7 +78,7 @@ export function selectSource(
   for (let i = 0; i < motion.steps.length; i++) {
     const timingStep = motion.steps[i];
     const step = scenario.steps[i];
-    if (!timingStep || !step || timingStep.barrierMs > atMs) continue;
+    if (!timingStep || !step) continue;
     const timing = timingStep[side];
     const result = step[side];
     if (timing.kind === 'failed' && atMs >= timing.failure.runElapsedMs) {
@@ -85,6 +86,7 @@ export function selectSource(
       held = undefined;
       break;
     }
+    if (timingStep.barrierMs > atMs) continue;
     if ((timing.kind === 'excluded' || timing.kind === 'blocked') && atMs >= timing.atMs)
       held = result.imageKind === 'neutral' ? null : result.image.path;
     else held = undefined;
@@ -98,6 +100,23 @@ export function selectSource(
     path = frame.artifact.path;
   }
   return path;
+}
+function finalMotionBadge(scenario: CaptureBundle['scenarios'][number], motion: MotionScenario, side: Side): string {
+  const outcomes = new Set(scenario.steps.map((step) => step[side].status));
+  const failures = motion.steps.flatMap((step) => {
+    const timing = step[side];
+    return timing.kind === 'failed' ? [timing.failure.runElapsedMs] : [];
+  });
+  const track = motion.tracks[side];
+  if (track.status === 'failed') failures.push(track.failureAtMs);
+  const statuses = [
+    outcomes.has('failed') ? 'FAILED' : '',
+    outcomes.has('blocked') ? 'BLOCKED' : '',
+    track.status === 'failed' ? 'CAPTURE FAILED' : '',
+  ].filter(Boolean);
+  if (!statuses.length) statuses.push(outcomes.size === 1 && outcomes.has('ok') ? 'OK' : 'UNVERIFIED PAIR');
+  const afterWindow = failures.length > 0 && Math.min(...failures) >= motionPlaybackWindow(motion.timing).endMs;
+  return ['FINAL OUTCOME', statuses.join(', '), afterWindow ? 'AFTER SHOWN WINDOW' : ''].filter(Boolean).join(' | ');
 }
 export function buildPresentation(bundle: CaptureBundle, settings: ComposerSettings): Presentation {
   const incompleteCapture = bundle.scenarios.some((scenario) => scenario.outcome === 'partial');
@@ -139,12 +158,13 @@ export function buildPresentation(bundle: CaptureBundle, settings: ComposerSetti
       title: presentationText(scenario.title),
       route: presentationText(scenario.initialRoute),
     };
+    const motion = bundle.captureMode === 'motion' ? bundle.motion[index] : undefined;
     const title = addCard({
       ...common,
       kind: 'title',
       caption: presentationText([mode, ...caveats, scenario.title, scenario.initialRoute].join(' | ')),
-      beforeBadge: '',
-      afterBadge: '',
+      beforeBadge: motion ? finalMotionBadge(scenario, motion, 'before') : '',
+      afterBadge: motion ? finalMotionBadge(scenario, motion, 'after') : '',
       beforeImage: null,
       afterImage: null,
     });
@@ -202,41 +222,43 @@ export function buildPresentation(bundle: CaptureBundle, settings: ComposerSetti
       }
     }
     if (bundle.captureMode === 'keyframes') continue;
-    const motion = bundle.motion[index];
     if (!motion) throw new Error('Missing motion');
     const startFrame = model.totalFrames;
-    const durationFrames = Math.ceil(((motion.endMs - motion.startMs) * 30) / 1000);
+    const window = motionPlaybackWindow(motion.timing);
+    const { durationFrames } = window;
     const output = (time: number) =>
-      startFrame + Math.max(0, Math.min(durationFrames, Math.ceil(((time - motion.startMs) * 30) / 1000 - 1e-9)));
+      startFrame + Math.max(0, Math.min(durationFrames, Math.ceil(((time - window.startMs) * 30) / 1000 - 1e-9)));
     model.segments.push({
       kind: 'motion',
       scenarioId: scenario.id,
       stepId: null,
       startFrame,
       durationFrames,
-      sourceStartMs: motion.startMs,
-      sourceEndMs: motion.endMs,
+      sourceStartMs: window.startMs,
+      sourceEndMs: window.endMs,
     });
-    motion.steps.forEach((step, i) =>
-      model.stepBoundaries.push({
-        scenarioId: scenario.id,
-        stepId: step.id,
-        startFrame: output(step.barrierMs),
-        endFrame: output(motion.steps[i + 1]?.barrierMs ?? motion.endMs),
-      }),
-    );
-    for (const annotation of motion.annotations)
-      model.annotations.push({
+    const visibleInterval = (startMs: number, endMs: number) => {
+      const start = Math.max(startMs, window.startMs);
+      const end = Math.min(endMs, window.endMs);
+      return start < end ? { startFrame: output(start), endFrame: output(end) } : null;
+    };
+    motion.steps.forEach((step, i) => {
+      const interval = visibleInterval(step.barrierMs, motion.steps[i + 1]?.barrierMs ?? motion.timing.observedEndMs);
+      if (interval) model.stepBoundaries.push({ scenarioId: scenario.id, stepId: step.id, ...interval });
+    });
+    for (const annotation of motion.annotations) {
+      const interval = visibleInterval(annotation.startMs, annotation.endMs);
+      if (interval) model.annotations.push({
         scenarioId: scenario.id,
         stepId: annotation.stepId,
         side: annotation.side,
         kind: annotation.kind,
-        startFrame: output(annotation.startMs),
-        endFrame: output(annotation.endMs),
+        ...interval,
       });
+    }
     const overlays = new Map<string, string>();
     for (let frame = 0; frame < durationFrames; frame++) {
-      const atMs = motion.startMs + (frame * 1000) / 30;
+      const atMs = window.startMs + (frame * 1000) / 30;
       let step: CapturedStep | undefined = scenario.steps[0];
       for (let i = 0; i < motion.steps.length; i++)
         if ((motion.steps[i]?.barrierMs ?? Infinity) <= atMs) step = scenario.steps[i];

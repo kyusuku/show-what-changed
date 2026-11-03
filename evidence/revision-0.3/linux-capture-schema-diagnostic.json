@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "kind": "linux-installed-capture-schema-diagnostic",
+  "status": "recording-rejection-reproduced",
+  "candidate": {
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428"
+  },
+  "comparisonCount": 1,
+  "cliExitCode": 9,
+  "callerPreserved": true,
+  "privateRejectedDocumentSha256": "b699e16372893319381bd354b1c9413fde2ba7993c5715d32f587ac0c2ef04d2",
+  "privateSchemaIssuesSha256": "8259b87cb80be7e79690bd447b1d2b971985544e6db3298c9f80a937694e5b83",
+  "diagnosticReportSha256": "2d9ea3a0f6d94809841d31f78b2ff3b81a4437d91e3506987ab83ea5e6942625",
+  "observedIssue": {
+    "code": "INVALID_DOCUMENT",
+    "phase": "recording",
+    "schemaMessage": "Step markers must respect barrier and scenario order",
+    "issueCount": 2,
+    "scenarioDurationMs": 5852.8545699999995,
+    "scenarioStartMs": 3416.430193,
+    "storedFirstBarrierMs": 3416.2413229999947,
+    "barrierPrecedesStartByMs": 0.18887000000540866,
+    "beforeDispatch": {
+      "kind": "source",
+      "sourceSeconds": 56.110279,
+      "hostBeforeMs": 3416.664446,
+      "hostAfterMs": 3417.313408,
+      "runElapsedMs": 3416.2413229999947,
+      "uncertaintyMs": 1.9616190000037932
+    },
+    "clockErrorBoundsMs": {
+      "before": 5.234180999999808,
+      "after": 16.987812499996608
+    },
+    "trackStatuses": {
+      "before": "ok",
+      "after": "ok"
+    }
+  },
+  "rootCause": "The recorder lowers its host barrier to the minimum mapped source dispatch time. A source marker within its valid host bracket and uncertainty can map just before the host scenario start. The schema then rejects the backdated barrier once for each side.",
+  "scopeLimits": [
+    "This identifies the reproduced diagnostic rejection. The original full-suite validation-3 rejected document was not retained, so its exact cause remains unproven.",
+    "This is distinct from the independently reproduced 60-second duration boundary.",
+    "The comparison was instrumented only to retain the original parse rejection privately. It is not release acceptance."
+  ],
+  "priorSetupFailure": {
+    "workloadExitCode": 2,
+    "comparisonCount": 0,
+    "cause": "Public payload archive was not readable by the non-root container user after docker cp.",
+    "preservedClosureSha256": "5fc58f6b852f6f36586d608852a74db3d10d514fac3eb84dd86eb7a4d220fa3b",
+    "correction": "The same archive bytes were copied with mode0644 inside a private directory."
+  },
+  "physicalClosure": {
+    "ownershipSha256": "4bac08bc65bb3ec2dac6babb63a23ed455ee1238333349a1fac5b1d79acad5d9",
+    "exactContainerAbsent": true,
+    "fullInventoryRestored": true,
+    "normalVmStop": true
+  },
+  "G20Accepted": false,
+  "releaseReady": false,
+  "publicationPerformed": false
+}

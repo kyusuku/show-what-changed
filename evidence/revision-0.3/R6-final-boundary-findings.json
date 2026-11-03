@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "status": "repairs-required",
+  "candidate": {
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "sourceArchiveBytes": 8601600,
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "runtimeProofIsSeparate": true,
+  "findings": [
+    {
+      "id": "runtime-failure-exits",
+      "status": "confirmed-static-trace",
+      "requirement": "Spec section 8.3 setup/bootstrap exit 5 and missing/incompatible declared capability exit 8",
+      "observed": "Runtime emits 6 and runner preserves it. Existing tests assert diagnostic codes without the required exits.",
+      "paths": [
+        "src/runtime/index.ts",
+        "src/runner/index.ts",
+        "test/unit/runtime-recipe.test.ts"
+      ],
+      "reviewSha256": "8b902f0471e4bdb11f92a25fc506dced314ddff26ae11941d35ad3f179c14726",
+      "ownerReview": "Worker C reviewing runtime/runner for R6"
+    },
+    {
+      "id": "scenario-deadline-bundle",
+      "status": "confirmed-static-boundary-inconsistency-runtime-reproduction-pending",
+      "requirement": "Preserve safe partial motion for required scenario failures while retaining truthful timestamps and the 60-second output bound.",
+      "observed": "At the default 60000 ms scenario deadline, failure settlement and checkpoint persistence precede end-time calculation. The interval exceeds the strict 60000 ms capture schema bound and bundle completion fails.",
+      "paths": [
+        "src/recorder/index.ts",
+        "src/schema/index.ts"
+      ],
+      "reviewSha256": "5f895f91d5d66f9f4b5bbb206c11bd1e4e62774940ed8ac9fa5107be86710194",
+      "ownerReview": "Worker A reviewing recorder/composer for R6"
+    },
+    {
+      "id": "tracked-output-prefix-planning",
+      "status": "confirmed-static-trace-runtime-reproduction-pending",
+      "requirement": "Unknown eligible application changes remain unresolved unless explicitly selected; source location alone is not proof of no UI relevance.",
+      "observed": "Automatic route selection drops every changed path under the output directory prefix, including eligible tracked application input.",
+      "paths": [
+        "src/planner/routes.ts"
+      ],
+      "reviewSha256": "e8e72543f5cce5f3b34595e7c16bb10ea74b2c283c231a96ee9a1fc741706ca4",
+      "ownerReview": "Worker B reviewing source/planner for R6"
+    },
+    {
+      "id": "tracked-environment-warning",
+      "status": "confirmed-static-trace-runtime-reproduction-pending",
+      "requirement": "Planning warns about eligible tracked environment files without printing contents.",
+      "observed": "Source inspection returns an empty warnings array and plan construction adds route and locator warnings only. Tracked environment input remains in source without the required presence warning.",
+      "paths": [
+        "src/workspace/source.ts",
+        "src/planner/index.ts"
+      ],
+      "reviewSha256": "e8e72543f5cce5f3b34595e7c16bb10ea74b2c283c231a96ee9a1fc741706ca4",
+      "ownerReview": "Worker B reviewing source/planner for R6"
+    }
+  ],
+  "currentLinuxIntegration": {
+    "status": "failed",
+    "actualExitCode": 1,
+    "passedTests": 102,
+    "failedTests": 1,
+    "test": "T09 keeps one real masked secret and fill value private through failed capture, composition and every decoded video frame",
+    "expectedSummary": {
+      "verifiedPairs": 2,
+      "failedSteps": 2,
+      "blockedSteps": 2
+    },
+    "actualSummary": {
+      "verifiedPairs": 1,
+      "failedSteps": 2,
+      "blockedSteps": 4
+    },
+    "cleanupStatus": "ok",
+    "stderrSha256": "819f53b468c429312b2e74f86609d53e173962d62b1fce596ca3b866008cf9b7",
+    "stdoutSha256": "59a84f2c4dccbf97a4f9ff82570585e62bc300afa886b9c291e47edde9e3d404",
+    "cause": "undetermined",
+    "rawFailureManifestAvailable": false,
+    "limitation": "The test removes its temporary run in afterEach before export. Logs are retained, but no specific action failure can be inferred from the aggregate assertion alone.",
+    "remainingSuiteStages": "still running"
+  },
+  "reopenedGates": [
+    "G05",
+    "G09",
+    "G14",
+    "G18"
+  ],
+  "priorExecutedObservationsPreserved": true,
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "R11IndependentPackageReview": {
+    "status": "accepted-packaging-only",
+    "ownerReview": "Worker B",
+    "reportSha256": "e3b6b048c9f40dace435c0d40fb5be6b0f4b4a202712303b2cf7275024f3f0e2",
+    "structuredReportSha256": "e8e72543f5cce5f3b34595e7c16bb10ea74b2c283c231a96ee9a1fc741706ca4",
+    "sourceFilesCompared": 465,
+    "packageMembersCompared": 171,
+    "mismatches": 0,
+    "originalRuntimeObservationsPreserved": true,
+    "sourceBehaviorAccepted": false
+  }
+}

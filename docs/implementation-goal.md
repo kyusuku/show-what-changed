@@ -14,9 +14,9 @@ Read these contracts in full before changing product code. Preserve the mandator
 
 Work in the current show-what-changed repository root. The observed baseline HEAD is a85f90f3436a14060a8af222c2941d55e8c5bdc5. The revised specification and supporting documents are uncommitted inputs at goal authoring time. Inspect current status and preserve them before creating an isolated implementation branch or worktree. Do not start from the older committed specification by accident. Preserve unrelated user changes.
 
-The owner-requested public privacy correction and the verified delivery-cutoff clarification reconciled the activated input contract. The latter defines delivered-frame accounting and discloses unobserved upstream frames without changing motion thresholds, masking, acknowledgement, or cleanup requirements. Verify these revised input digests before dependent work:
+The owner-requested public privacy correction and the verified delivery-cutoff clarification reconciled the activated input contract. The latter defines delivered-frame accounting and discloses unobserved upstream frames without changing motion thresholds, masking, acknowledgement, or cleanup requirements. The evidenced timing clarification also separates observed events from bounded playback and preserves host/source clock domains without changing the 60-second or 40 ms limits. Earlier input identities remain in the evidence trail. Verify these revised input digests before dependent work:
 
-- spec.md SHA-256 is f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250.
+- spec.md SHA-256 is 24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8.
 - docs/implementation-graph.json SHA-256 is e998e4a494d132f3ad4e36b6c12ddfee4e9949cdd70ea01c247b6007c0ed6274.
 - docs/web-app-acceptance.md SHA-256 is c7e3fca6f0fbc4fc7c6c56bf662ff9cd3efe3893d31c5909a8887fc93b766a46.
 

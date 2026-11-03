@@ -76,7 +76,7 @@ export function selectScenarios(inspection: SourceInspection, config: Config, se
   if (config.routes.include.length > 0) return explicitScenarios(config.routes.include);
   const roots = { before: appRoot(paths.before, config.appDir), after: appRoot(paths.after, config.appDir) };
   const excluded = new Set(['show-what-changed.config.json', ...(selection.excludePaths ?? [])]);
-  const changedPaths = [...new Set(inspection.changedFiles.flatMap((entry) => [entry.oldPath, entry.newPath].filter((path): path is string => path !== null)))].filter((path) => !excluded.has(path) && !path.startsWith('.show-what-changed/'));
+  const changedPaths = [...new Set(inspection.changedFiles.flatMap((entry) => [entry.oldPath, entry.newPath].filter((path): path is string => path !== null)))].filter((path) => !excluded.has(path));
   if (changedPaths.length === 0) throw failure(4, 'NOTHING_CHANGED', 'planning', 'No changed source files or explicit routes were selected.', 'Make a UI change or pass --route for an explicit comparison.');
   const ignored = docsOnly;
   if (changedPaths.every(ignored)) throw failure(4, 'NO_UI_CANDIDATES', 'planning', 'Only conventional documentation or test files changed.', 'Pass --route to compare a specific page anyway.');

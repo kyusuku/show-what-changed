@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "kind": "scoped-timing-repair-verification",
+  "status": "scoped-verification-passed-final-candidate-pending",
+  "recordedAt": "2026-11-03T22:43:41.827781+00:00",
+  "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+  "affectedGates": [
+    "G09",
+    "G12",
+    "G14",
+    "G20"
+  ],
+  "changes": [
+    "Record the actual host barrier without backdating it from uncertain source timestamps.",
+    "Keep measured observation end separate from the bounded playback window.",
+    "Count every actual 30 FPS tick inside the half-open playback window.",
+    "Retain late failures and label their final outcomes on the title."
+  ],
+  "sourceRuntime": {
+    "kind": "private-source-runtime-snapshot",
+    "npmInstalled": false,
+    "sourceBindingSha256": "99b4027bfb044a63e5357e12ef26f48c64cfccb431f6d8388d1d5431e1d96743",
+    "compiledTreeSha256": "8ee542daeddcb930742a00a3186bb2483f222aa5f9e712645a49b44f1f8df92c",
+    "identitySha256": "13ae3d233472d779004c85135a84a8515c781fea69ac0f28e539ae49ef506502",
+    "sourceInputCount": 67,
+    "compiledFileCount": 156,
+    "freshRootBuildMatchesWorkerBuild": true,
+    "currentSourceInputsMatch": true,
+    "finalImplementationCommit": null,
+    "finalPackageSha256": null
+  },
+  "correction": {
+    "patchSha256": "1f95055b70715d679e7bdcb3e2f0fd9d2792a466ec1c064206c1a40c72be3db3",
+    "reportSha256": "b4a1245a7f28958ef271d06bb349621355a99587071e51ab98ceeba7ca5082d2",
+    "artifactManifestSha256": "215f6d9580dd325d44c8d3fd0dd6c28e7bc4bb73917457de24071a6d641b05c4",
+    "sourceHashes": {
+      "src/schema/index.ts": "151115c5a402a36e927a6b4dde3709fe52bf9a38c21d6e80e1abff72d74fca1c",
+      "test/unit/timeline-presentation.test.ts": "bdef488c494f700384b50c34953de93df788ab1436b7ab972370e24f76a6e3c7",
+      "test/unit/schema-json.test.ts": "3cb2fa45e9adf716add1926c98b95dfbe65d2d3bad3221dd61aa948d5a27536d"
+    },
+    "affectedTests": {
+      "passed": 205,
+      "files": 10,
+      "exitCode": 0
+    },
+    "typecheckExitCode": 0,
+    "privateBuildExitCode": 0,
+    "generatedSchemaCheckExitCode": 0,
+    "earlierFailuresPreserved": true
+  },
+  "independentReview": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "xhigh",
+    "status": "R1-resolved-in-inspected-code",
+    "reportSha256": "0519a8ef0ea4197a8454e6c1b4a1970ff754b4a0fe5be52915d62615a98fccaa",
+    "probeSha256": "528d840d2ef2175ec1896c19ce398f2669f378b3fff3781c1cb5d60e4dec43f3",
+    "acceptedCases": 71488,
+    "failures": 0,
+    "runtimeAcceptanceGranted": false
+  },
+  "defaultCapCli": {
+    "platform": "darwin-arm64",
+    "reportSha256": "976911a5cc1f1287d0e591dc9fe76731859d9843f6938851bdc5538c9b25e550",
+    "scriptSha256": "5d3251346090a80ba173ee1033cf162427cf3f8d1af876e18b4ffe0c20308287",
+    "comparisonCount": 1,
+    "retryCount": 0,
+    "explicitMaxScenarioMs": false,
+    "defaultMaxScenarioMs": 60000,
+    "argv": [
+      "show-what-changed",
+      "compare",
+      "--base",
+      "0597ed78ee9baabb71b20541481af2cb70e0dfe2",
+      "--head",
+      "819c43a1ef6f88ddfe2e6adf20a16b8c38feb1c9",
+      "--config",
+      "show-what-changed.config.json",
+      "--scenario",
+      "default-cap.scenario.json",
+      "--allow-exec",
+      "--ci",
+      "--timeout",
+      "300",
+      "--json"
+    ],
+    "exitCode": 3,
+    "status": "partial",
+    "originalFailureCodes": {
+      "before": "SCENARIO_TIMEOUT",
+      "after": "SCENARIO_TIMEOUT"
+    },
+    "timing": {
+      "startMs": 3071.3653750000003,
+      "limitMs": 60000,
+      "observedEndMs": 63112.866334
+    },
+    "playbackWindow": {
+      "startMs": 3071.3653750000003,
+      "endMs": 63071.365375,
+      "durationFrames": 1800
+    },
+    "totalFrames": 1830,
+    "summary": {
+      "verifiedPairs": 3,
+      "changedPairs": 3,
+      "expectedAbsences": 0,
+      "exclusions": 0,
+      "failedSteps": 2,
+      "blockedSteps": 2,
+      "coverageOmissions": 0
+    },
+    "tracks": {
+      "before": {
+        "status": "ok",
+        "stats": {
+          "receivedFrames": 66,
+          "persistedFrames": 66,
+          "acknowledgedFrames": 66,
+          "rejectedFrames": 0,
+          "maxQueueDepth": 1,
+          "sourceDroppedFrames": null,
+          "maxGapMs": 1016.6260001715273
+        },
+        "clockErrorBoundMs": 18.176229629608088
+      },
+      "after": {
+        "status": "ok",
+        "stats": {
+          "receivedFrames": 66,
+          "persistedFrames": 66,
+          "acknowledgedFrames": 66,
+          "rejectedFrames": 0,
+          "maxQueueDepth": 1,
+          "sourceDroppedFrames": null,
+          "maxGapMs": 1016.6260001715273
+        },
+        "clockErrorBoundMs": 18.00679147720348
+      }
+    },
+    "artifactCount": 160,
+    "artifactHashesVerified": true,
+    "encoding": {
+      "status": "ok",
+      "errors": []
+    },
+    "cleanupStatus": "ok",
+    "independentCleanupVerified": true,
+    "callerPreserved": true,
+    "candidateUnchanged": true,
+    "video": {
+      "path": "compare.mp4",
+      "sha256": "99daa420a9a44ea194797c9ebd0e57d8399840e49918bc414d71039533c9794e",
+      "bytes": 296523
+    },
+    "title": {
+      "artifact": {
+        "path": "composed/000-title.png",
+        "bytes": 69135,
+        "sha256": "0a021f83f853f6df301707e5369b12a6b301acef8c40324a1874410fd736ed10"
+      },
+      "beforeBadge": "FINAL OUTCOME | FAILED, BLOCKED | AFTER SHOWN WINDOW",
+      "afterBadge": "FINAL OUTCOME | FAILED, BLOCKED | AFTER SHOWN WINDOW",
+      "visualObservation": "Root inspected the actual rendered title. Both final-outcome badges are fully visible. This is not a normal-speed review of the complete video."
+    }
+  },
+  "offlineCompose": {
+    "verificationSha256": "58611147688afd11a110ddca9467a71dc53d4660a71941e8fcf5f99f20f46ca1",
+    "commandRecordSha256": "96600baf3ef0559cb072febabb999b32120b845020d55232fcf209bfa62d06bb",
+    "exitCode": 3,
+    "browserPathAbsent": true,
+    "originalCaptureFailurePreserved": true,
+    "callerPreserved": true,
+    "independentCleanupVerified": true,
+    "preserved": {
+      "capture.json": {
+        "beforeSha256": "b15d444c55a08a6d8e71f43e6218dde708ffcbba81f28ee0d7b15c601b190798",
+        "afterSha256": "b15d444c55a08a6d8e71f43e6218dde708ffcbba81f28ee0d7b15c601b190798",
+        "byteEqual": true
+      },
+      "timeline.json": {
+        "beforeSha256": "93cb4b1d0394e054047667c1825c3021911257ca4d9f09d36135f0dff127de60",
+        "afterSha256": "93cb4b1d0394e054047667c1825c3021911257ca4d9f09d36135f0dff127de60",
+        "byteEqual": true
+      },
+      "compare.mp4": {
+        "beforeSha256": "99daa420a9a44ea194797c9ebd0e57d8399840e49918bc414d71039533c9794e",
+        "afterSha256": "99daa420a9a44ea194797c9ebd0e57d8399840e49918bc414d71039533c9794e",
+        "byteEqual": true
+      },
+      "poster.png": {
+        "beforeSha256": "14105409a7b0e0554078111515750c86946f562228ae870d98a32958a3eb6aff",
+        "afterSha256": "14105409a7b0e0554078111515750c86946f562228ae870d98a32958a3eb6aff",
+        "byteEqual": true
+      }
+    },
+    "decodedMedia": {
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 686,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1",
+      "duration": "61.000000",
+      "nb_read_frames": "1830"
+    },
+    "decodedMediaCommandSha256": "51a0f924c543bfc31d20e2aa6b4903e7975a86f99d698be7ba4bc731e5b812e2"
+  },
+  "limits": [
+    "This source-runtime snapshot is not an npm-installed final candidate.",
+    "Final package and affected macOS/Linux checks remain required.",
+    "This result does not explain or replace the original full-suite T09 failure.",
+    "Earlier candidate and failed diagnostic evidence remains historical."
+  ],
+  "newGatesAccepted": [],
+  "releaseReady": false,
+  "publicationPerformed": false
+}

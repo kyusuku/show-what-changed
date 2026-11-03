@@ -291,7 +291,8 @@ async function settleFailedSide(options: {
   let marker: Extract<Timing, { kind: 'failed' }>['failure'];
   try {
     marker = options.operation ? await Promise.race([candidate, options.operation]) : await candidate;
-    if (marker.runElapsedMs < options.attemptStartMs) marker = fallback;
+    const markerStartMs = marker.kind === 'source' ? marker.hostBeforeMs : marker.runElapsedMs;
+    if (markerStartMs < options.attemptStartMs) marker = fallback;
   } catch {
     marker = fallback;
   }
@@ -344,31 +345,25 @@ async function execute(
           'Increase the bounded timeout or simplify the scenario.',
         ),
     );
+  const deadlineFailure = () =>
+    run.deadlineMs <= actionDeadline
+      ? (cancellation(run.signal) ?? failure(
+          10, 'DEADLINE_EXCEEDED', 'execution', 'The overall run deadline was reached.',
+          'Increase the bounded timeout or simplify the scenario.',
+        ))
+      : new CaptureFault(performance.now() >= scenarioDeadline ? 'SCENARIO_TIMEOUT' : 'STEP_TIMEOUT');
   const interrupted = new Promise<never>((_resolve, reject) => {
     rejectInterrupt = reject;
     state.wakeFault = () => reject(state.fault ?? new CaptureFault('ACTION_FAILED'));
-    timer = setTimeout(
-      () =>
-        reject(
-          run.deadlineMs <= actionDeadline
-            ? (cancellation(run.signal) ??
-                failure(
-                  10,
-                  'DEADLINE_EXCEEDED',
-                  'execution',
-                  'The overall run deadline was reached.',
-                  'Increase the bounded timeout or simplify the scenario.',
-                ))
-            : new CaptureFault(performance.now() >= scenarioDeadline ? 'SCENARIO_TIMEOUT' : 'STEP_TIMEOUT'),
-        ),
-      Math.max(1, deadline - performance.now()),
-    );
+    timer = setTimeout(() => reject(deadlineFailure()), Math.max(1, deadline - performance.now()));
     run.signal.addEventListener('abort', abort, { once: true });
   });
   const action = (async (): Promise<Execution> => {
     if (state.fault) throw state.fault;
+    if (performance.now() >= deadline) throw deadlineFailure();
     if (step.op !== 'goto' && state.successfulDocument === null) throw new CaptureFault('DOCUMENT_UNAVAILABLE');
     if (state.motion) dispatch = await state.motion.marker();
+    if (performance.now() >= deadline) throw deadlineFailure();
     const result = await performAction({
       page: state.page,
       step,
@@ -528,15 +523,16 @@ export async function capture(
             );
           }),
         );
-      const startMs = elapsed(run);
-      const scenarioDeadline = performance.now() + settings.maxScenarioMs;
+      const scenarioStart = performance.now();
+      const startMs = scenarioStart - run.startedMonotonicMs;
+      const scenarioDeadline = scenarioStart + settings.maxScenarioMs;
       const steps: CapturedStep[] = [];
       const timingSteps: MotionScenario['steps'] = [];
       const comparisons: CapturedStep[] = [];
       let endMs = startMs;
       try {
         for (const step of scenario.steps) {
-          const barrierMs = Math.max(startMs, elapsed(run) - 2);
+          const barrierMs = elapsed(run);
           const [left, right] = await Promise.all([
             execute(before, step, settings, run, scenarioDeadline, budget),
             execute(after, step, settings, run, scenarioDeadline, budget),
@@ -608,15 +604,9 @@ export async function capture(
           };
           steps.push(capturedStep);
           if (left.status === 'ok' && right.status === 'ok') comparisons.push(capturedStep);
-          const firstTime = (value: Timing): number =>
-            value.kind === 'executed'
-              ? value.dispatch.runElapsedMs
-              : value.kind === 'failed'
-                ? (value.dispatch?.runElapsedMs ?? value.failure.runElapsedMs)
-                : value.atMs;
           timingSteps.push({
             id: step.id,
-            barrierMs: Math.min(barrierMs, firstTime(left.timing), firstTime(right.timing)),
+            barrierMs,
             before: left.timing,
             after: right.timing,
           });
@@ -674,22 +664,15 @@ export async function capture(
                 : value.kind === 'failed'
                   ? value.failure.runElapsedMs
                   : value.atMs;
-            if (status !== 'ok')
-              annotations.push({
-                side,
-                stepId: step.id,
-                kind: status,
-                startMs: Math.max(startMs, Math.min(at, endMs)),
-                endMs: Math.max(startMs, Math.min(next, endMs)),
-              });
-            else if (at < next)
-              annotations.push({ side, stepId: step.id, kind: 'waiting', startMs: Math.max(startMs, at), endMs: next });
+            const annotationStartMs = Math.max(startMs, at);
+            const annotationEndMs = Math.min(next, endMs);
+            if (annotationStartMs < annotationEndMs)
+              annotations.push({ side, stepId: step.id, kind: status === 'ok' ? 'waiting' : status, startMs: annotationStartMs, endMs: annotationEndMs });
           }
         }
         motion.push({
           id: scenario.id,
-          startMs,
-          endMs,
+          timing: { startMs, limitMs: settings.maxScenarioMs, observedEndMs: endMs },
           tracks: { before: before.motion.result(), after: after.motion.result() },
           steps: timingSteps,
           annotations,

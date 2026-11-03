@@ -105,13 +105,13 @@ async function waitReady(options: { port: number; ready: HttpReady | ExecutionRe
 async function executable(argv0: string, path: string, cwd: string): Promise<string> {
   const candidates = argv0.includes('/') ? [isAbsolute(argv0) ? argv0 : join(cwd, argv0)] : path.split(':').filter(Boolean).map((directory) => join(directory, argv0));
   for (const candidate of candidates) try { await access(candidate, constants.X_OK); return await realpath(candidate); } catch { /* Try the next explicitly selected executable directory. */ }
-  throw failure(6, 'PREREQUISITE_MISSING', 'starting', 'A declared application executable is unavailable.', 'Install the selected application runtime or correct its PATH.');
+  throw failure(8, 'PREREQUISITE_MISSING', 'starting', 'A declared application executable is unavailable.', 'Install the selected application runtime or correct its PATH.');
 }
 async function runCommand(command: RecipeCommand, purpose: 'setup' | 'bootstrap', consumer: Consumer, binding: BoundEnvironment, workspace: WorkspacePair[Side], recipe: ExecutionRecipe, run: RunContext): Promise<void> {
   const child = await run.supervisor.spawn({ argv: commandArguments(command.argv, consumer), cwd: await commandCwd(workspace, command.cwd), purpose, side: consumer.side, port: consumer.port, env: applicationEnvironment(recipe.env, binding, consumer), sensitiveValues: binding.sensitiveValues, timeoutMs: command.timeoutMs });
   const result = await child.exited;
   checkCancelled(run.signal);
-  if (result.code !== 0 || result.spawnError) throw failure(6, purpose === 'setup' ? 'SETUP_FAILED' : 'BOOTSTRAP_FAILED', 'starting', 'A declared application command failed.', 'Inspect its private diagnostic log and correct the recipe.');
+  if (result.code !== 0 || result.spawnError) throw failure(5, purpose === 'setup' ? 'SETUP_FAILED' : 'BOOTSTRAP_FAILED', 'starting', 'A declared application command failed.', 'Inspect its private diagnostic log and correct the recipe.');
 }
 async function executeRecipe(workspaces: WorkspacePair, plan: Plan, run: RunContext): Promise<RuntimeResult> {
   checkCancelled(run.signal);
@@ -157,7 +157,7 @@ async function executeRecipe(workspaces: WorkspacePair, plan: Plan, run: RunCont
     const result = await child.exited; checkCancelled(run.signal);
     const text = `${child.output().stdout}\n${child.output().stderr}`;
     const version = /\bv?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)(?![\d.])/.exec(text)?.[1];
-    if (result.code !== 0 || !version || !valid(version) || !satisfies(version, requirement.expectedVersion)) throw failure(6, 'PREREQUISITE_VERSION', 'starting', 'A declared application prerequisite is incompatible.', 'Select an executable matching the declared version range.');
+    if (result.code !== 0 || !version || !valid(version) || !satisfies(version, requirement.expectedVersion)) throw failure(8, 'PREREQUISITE_VERSION', 'starting', 'A declared application prerequisite is incompatible.', 'Select an executable matching the declared version range.');
     privatePrerequisites.push({ side, executable: resolved, version });
   }
   await atomicPrivateFile(run.paths.privateDir, 'execution.json', JSON.stringify({ prerequisites: privatePrerequisites, inputs: plan.inputs.map((input) => ({ id: input.id, path: input.path, sha256: input.sha256, executable: input.executable })) }), true);

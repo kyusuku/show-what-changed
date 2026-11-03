@@ -710,8 +710,10 @@ describe('real Chromium recorder', () => {
     if (bundle.captureMode !== 'motion') throw new Error('Expected motion');
     const first = bundle.motion[0]?.steps[0];
     expect(first?.before.kind).toBe('failed');
-    if (first?.before.kind === 'failed')
-      expect(first.before.failure.runElapsedMs).toBeGreaterThanOrEqual(first.barrierMs);
+    if (first?.before.kind === 'failed') {
+      const marker = first.before.failure;
+      expect(marker.kind === 'source' ? marker.hostBeforeMs : marker.runElapsedMs).toBeGreaterThanOrEqual(first.barrierMs);
+    }
     expect(CaptureBundleSchema.parse(bundle)).toEqual(bundle);
   }, 30000);
 

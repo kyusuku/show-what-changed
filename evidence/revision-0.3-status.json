@@ -3,7 +3,7 @@
   "specRevision": "0.3",
   "productSchemaVersion": 2,
   "date": "2026-11-02",
-  "status": "verification_in_progress",
+  "status": "repair_required",
   "currentGoal": "implementation",
   "implementationStarted": true,
   "executionEvidenceRecorded": true,
@@ -12,8 +12,10 @@
   "graphPath": "docs/implementation-graph.json",
   "specPath": "spec.md",
   "candidate": {
-    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
-    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "sourceArchiveBytes": 8601600,
     "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
     "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
   },
@@ -218,7 +220,7 @@
         "R8",
         "R16"
       ],
-      "status": "accepted",
+      "status": "pending_repair",
       "command": [
         "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
         "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
@@ -249,6 +251,12 @@
         "structuredReportSha256": "da1aeab5fcd14d9aaeac9d0eac217ea01c6f55952f5fee0eb477f1172df85098",
         "closureConditionSatisfied": true,
         "closureIndependentReviewSha256": "1b050ebc31130d6d49551283022c5645052e3735ca1f8dd31b4aa5c82546cb71"
+      },
+      "priorAcceptanceStatus": "accepted",
+      "acceptanceHold": {
+        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+        "reason": "Recipe prerequisite and setup/bootstrap exit classification contradicts the documented contract.",
+        "originalEvidencePreserved": true
       }
     },
     {
@@ -397,7 +405,7 @@
         "R8",
         "R16"
       ],
-      "status": "accepted",
+      "status": "pending_repair",
       "command": [
         "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
         "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
@@ -425,6 +433,12 @@
         "status": "accepted-with-stated-scope",
         "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
         "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+      },
+      "priorAcceptanceStatus": "accepted",
+      "acceptanceHold": {
+        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+        "reason": "Default maximum-duration scenario can lose usable partial capture after required failure.",
+        "originalEvidencePreserved": true
       }
     },
     {
@@ -530,7 +544,7 @@
         "R14",
         "R16"
       ],
-      "status": "accepted",
+      "status": "pending_repair",
       "command": [
         "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
       ],
@@ -556,6 +570,11 @@
         "status": "accepted-with-stated-scope",
         "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
         "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+      },
+      "priorAcceptanceStatus": "accepted",
+      "acceptanceHold": {
+        "reason": "A real Linux capture with valid bounded clocks was rejected because host barrier and uncertain source mapping were compared as exact times.",
+        "evidence": "evidence/revision-0.3/linux-capture-schema-diagnostic.json"
       }
     },
     {
@@ -609,7 +628,7 @@
         "R14",
         "R16"
       ],
-      "status": "accepted",
+      "status": "pending_repair",
       "command": [
         "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
         "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
@@ -640,6 +659,12 @@
         "status": "accepted-with-stated-scope",
         "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
         "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137"
+      },
+      "priorAcceptanceStatus": "accepted",
+      "acceptanceHold": {
+        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+        "reason": "Measured maximum-duration motion cannot currently pass its bounded timeline schema.",
+        "originalEvidencePreserved": true
       }
     },
     {
@@ -795,7 +820,7 @@
         "R8",
         "R16"
       ],
-      "status": "accepted",
+      "status": "pending_repair",
       "command": [
         "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
         "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
@@ -831,6 +856,12 @@
         "status": "accepted-with-stated-scope",
         "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
         "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+      },
+      "priorAcceptanceStatus": "accepted",
+      "acceptanceHold": {
+        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+        "reason": "Runtime JSON exit classification and automatic unknown-input coverage require repair.",
+        "originalEvidencePreserved": true
       }
     },
     {
@@ -972,7 +1003,8 @@
       },
       "artifacts": [
         "evidence/revision-0.3/behavior-package-acceptance.json",
-        "evidence/revision-0.3/document-refresh-acceptance.json"
+        "evidence/revision-0.3/document-refresh-acceptance.json",
+        "evidence/revision-0.3/source-retention-refresh-acceptance.json"
       ],
       "independentReview": {
         "model": "gpt-6-astra",
@@ -987,8 +1019,9 @@
         "evidence": "evidence/revision-0.3/document-refresh-acceptance.json",
         "priorAcceptedCoverage": "evidence/revision-0.3/behavior-package-acceptance.json",
         "changedReviewedDocument": "docs/release-readiness.md",
-        "currentSha256": "db7cd1b5d6a2b769d7b0dc20361a263c57db30375021525c12cc1fac0a318ec6",
-        "priorSha256": "ec6317e9716c038e85a559633a3a1db4d27ef46772bf4b9fd0c7135aab1a279e"
+        "currentSha256": "6256fe24e010e031b1eddf775cbbb52c1a6a9921b620f93ce232902882445cee",
+        "priorSha256": "ec6317e9716c038e85a559633a3a1db4d27ef46772bf4b9fd0c7135aab1a279e",
+        "latestDeltaEvidence": "evidence/revision-0.3/source-retention-refresh-acceptance.json"
       }
     },
     {
@@ -1062,8 +1095,9 @@
     },
     {
       "id": "R6",
-      "status": "in_progress",
-      "evidence": "evidence/revision-0.3/R6.md"
+      "status": "neighboring_reviews_identified_repairs",
+      "evidence": "evidence/revision-0.3/R6.md",
+      "currentEvidence": "evidence/revision-0.3/R6-final-boundary-findings.json"
     },
     {
       "id": "R7",
@@ -1112,13 +1146,14 @@
     },
     {
       "id": "R16",
-      "status": "pending",
-      "evidence": null
+      "status": "repairing_final_boundary_findings",
+      "evidence": null,
+      "currentEvidence": "evidence/revision-0.3/R6-final-boundary-findings.json"
     }
   ],
   "publicPrivacyCorrection": "Generic redistributable acceptance; private application inputs and original development records live outside the public repository. Clean public history is required.",
   "publicContractInputs": {
-    "spec.md": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+    "spec.md": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
     "docs/implementation-graph.json": "e998e4a494d132f3ad4e36b6c12ddfee4e9949cdd70ea01c247b6007c0ed6274",
     "docs/web-app-acceptance.md": "c7e3fca6f0fbc4fc7c6c56bf662ff9cd3efe3893d31c5909a8887fc93b766a46"
   },
@@ -1603,5 +1638,36 @@
     "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
     "acceptedGateCountUnchanged": 17,
     "originalExecutionIdentitiesPreserved": true
+  },
+  "candidateBeforeRetentionRefresh": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "sourceRetentionEvidenceTransfer": {
+    "status": "accepted",
+    "evidence": "evidence/revision-0.3/source-retention-refresh-acceptance.json",
+    "retainedAcceptedGateCount": 21,
+    "executedIdentitiesPreserved": true
+  },
+  "releaseBlockers": {
+    "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+    "reopenedGateCount": 5,
+    "historicalResultsRetained": true,
+    "additionalEvidence": [
+      "evidence/revision-0.3/linux-capture-schema-diagnostic.json"
+    ]
+  },
+  "timingContractClarification": {
+    "evidence": "evidence/revision-0.3/timing-contract-clarification.json",
+    "priorSpecSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+    "currentSpecSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+    "status": "implementation-and-acceptance-in-progress"
+  },
+  "timingRepairProgress": {
+    "status": "scoped-verification-passed-final-candidate-pending",
+    "evidence": "evidence/revision-0.3/timing-repair-progress.json",
+    "newGatesAccepted": []
   }
 }

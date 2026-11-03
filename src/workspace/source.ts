@@ -179,5 +179,10 @@ export async function inspectSources(request: SourceRequest, signal?: AbortSigna
     for (let index = 0; index < parts.length; index += 2) { const status = parts[index]; const path = parts[index + 1]; if (!path || !status || !(status === 'A' || status === 'D' || status === 'M' || status === 'T')) unsupported('Git returned an unsupported tree change.'); if (!excludedSource(path)) changedFiles.push({ status, oldPath: status === 'A' ? null : path, newPath: status === 'D' ? null : path }); }
     changedFiles.sort((a, b) => byteSort(a.newPath ?? a.oldPath ?? '', b.newPath ?? b.oldPath ?? ''));
   }
-  return { repoRoot, requestedBase, requestedHead, baseCommit, headCommit, baseResolution: request.mergeBase ? 'merge-base' : 'exact', headKind, inventories: { before, after }, sourceFingerprint: headKind === 'worktree' ? fingerprintInventory(after) : null, changedFiles, stats: { before: sourceStats(before), after: sourceStats(after) }, warnings: [] };
+  const hasEnvironmentSource = [before, after].some((inventory) => inventory.some((entry) => {
+    const name = basename(entry.path);
+    return entry.exists && (name === '.env' || name.startsWith('.env.'));
+  }));
+  const warnings: SourceInspection['warnings'] = hasEnvironmentSource ? [{ code: 'ENVIRONMENT_SOURCE', message: 'Eligible environment files (.env or .env.*) remain in source snapshots and may contain credentials. File contents are not printed.' }] : [];
+  return { repoRoot, requestedBase, requestedHead, baseCommit, headCommit, baseResolution: request.mergeBase ? 'merge-base' : 'exact', headKind, inventories: { before, after }, sourceFingerprint: headKind === 'worktree' ? fingerprintInventory(after) : null, changedFiles, stats: { before: sourceStats(before), after: sourceStats(after) }, warnings };
 }

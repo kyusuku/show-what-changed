@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "kind": "evidenced-prepublication-timing-contract-clarification",
+  "status": "implemented-scoped-verification-passed-final-candidate-pending",
+  "specRevision": "0.3",
+  "previousSpecSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+  "currentSpecSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+  "graphSha256": "e998e4a494d132f3ad4e36b6c12ddfee4e9949cdd70ea01c247b6007c0ed6274",
+  "publicAcceptanceSha256": "c7e3fca6f0fbc4fc7c6c56bf662ff9cd3efe3893d31c5909a8887fc93b766a46",
+  "evidence": [
+    "evidence/revision-0.3/linux-capture-schema-diagnostic.json",
+    "evidence/revision-0.3/R6-final-boundary-findings.json"
+  ],
+  "decisions": [
+    "Retain actual observed timing separately from a derived bounded playback prefix.",
+    "Keep host barriers as observed host samples and validate source markers through host brackets and fixed source order.",
+    "Preserve original failure timestamps and disclose late final outcomes on the existing title.",
+    "Update the unpublished strict capture schema2; obsolete experimental capture shapes require their historical binary."
+  ],
+  "unchangedLimits": {
+    "scenarioPlaybackMaximumMs": 60000,
+    "clockErrorMaximumMs": 40,
+    "fps": 30,
+    "maximumScenarios": 3
+  },
+  "unchangedRequirements": [
+    "mask before persistence",
+    "actual delivered-frame and ACK accounting",
+    "safe persistence drain",
+    "original-speed source-frame selection",
+    "cancellation and cleanup precedence",
+    "all G01-G24 with exact candidate evidence"
+  ],
+  "historicalCandidateIdentitiesRewritten": false,
+  "newGatesAccepted": [],
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "scopedVerification": "evidence/revision-0.3/timing-repair-progress.json"
+}

@@ -1,10 +1,12 @@
 {
   "schemaVersion": 1,
-  "status": "candidate-verification-in-progress",
+  "status": "candidate-repairs-required",
   "recordedAt": "2026-11-03T15:18:17.542242+00:00",
   "candidate": {
-    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
-    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "sourceArchiveBytes": 8601600,
     "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
     "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
   },
@@ -1642,5 +1644,167 @@
     "automaticRetry": false,
     "macosFinalCandidateAcceptanceStillRequired": true,
     "G20Accepted": false
+  },
+  "candidateBeforeRetentionRefresh": {
+    "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+    "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "sourceRetentionRefresh": {
+    "status": "accepted",
+    "evidence": "evidence/revision-0.3/source-retention-refresh-acceptance.json",
+    "productRuntimeChanged": false,
+    "packageInputsChanged": false,
+    "focusedTestsPassed": 29
+  },
+  "currentCandidateScopedReleaseAudit": {
+    "status": "scoped-pass-final-handoff-refresh-pending",
+    "evidence": "evidence/revision-0.3/G23-scoped-candidate-audit.json",
+    "independentReviewSha256": "cb3b1318323c9dbf2a30330e0fd9afa147634e1d1dfcb8a3ca9196909f6c98f8",
+    "fullHistoryCommits": 7,
+    "privacyInputs": 5438,
+    "privacyFindings": 0,
+    "unreviewedCredentialMatches": 0,
+    "knownDependencyVulnerabilities": 0,
+    "G23Accepted": false
+  },
+  "retentionCandidateMacosPublicApp": {
+    "status": "passed",
+    "candidate": {
+      "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+      "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+      "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+      "sourceArchiveBytes": 8601600,
+      "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+    },
+    "reportSha256": "ba1a55380881c9f9ee1da13316b44af07e5c965d735632d649af60e6fe637f12",
+    "actualExitCode": 0,
+    "commands": {
+      "doctor": 0,
+      "plan-navigation": 0,
+      "plan-validation": 0,
+      "navigation-1": 0,
+      "validation-1": 0,
+      "navigation-2": 0,
+      "validation-2": 0,
+      "navigation-3": 0,
+      "validation-3": 0,
+      "validation-worktree": 0
+    },
+    "compares": 7,
+    "callerPreserved": true,
+    "cleanupOk": true,
+    "freshMediaReviewPerformed": false,
+    "G20Accepted": false,
+    "independentReview": {
+      "status": "accepted-with-explicit-scope",
+      "evidence": "evidence/revision-0.3/macos-retention-candidate-review.json"
+    }
+  },
+  "retentionCandidateLinuxSuite": {
+    "status": "failed-closed",
+    "candidate": {
+      "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+      "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+      "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+      "sourceArchiveBytes": 8601600,
+      "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+      "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+    },
+    "selectedArchiveSha256": "f784ecf479fefe6c498621df5b286ed48ddd2ff291b5858549a276d38b712954",
+    "bindingSha256": "66708625abcfab32c3f7dfb390c8a34e5a9293a2191312921bb129cb32a2372f",
+    "defaultComparisonTimeoutSeconds": 1800,
+    "clockBoundMs": 40,
+    "automaticRetry": false,
+    "G20Accepted": false,
+    "integration": {
+      "exitCode": 1,
+      "passedTests": 102,
+      "failedTests": 1
+    },
+    "observedPassedStages": [
+      "extract",
+      "environment",
+      "install",
+      "sandbox",
+      "typecheck",
+      "build",
+      "schema-check",
+      "unit",
+      "contracts",
+      "privacy-scanner",
+      "package-source-binding",
+      "package-smoke",
+      "installed-motion",
+      "host-compatibility"
+    ],
+    "currentStage": null,
+    "evidence": "evidence/revision-0.3/linux-retention-candidate-result.json",
+    "actualExitCode": 1,
+    "failedStages": [
+      "integration",
+      "public-app"
+    ],
+    "publicApp": {
+      "passedComparisons": 5,
+      "failedComparison": "validation-3",
+      "failedExitCode": 9,
+      "errorCode": "INVALID_DOCUMENT",
+      "errorPhase": "recording",
+      "recordingDurationMs": 6943.030167,
+      "failedRunId": "20261103T213905407Z-3fb78c84510f42ac",
+      "reportSha256": "2ebf5b13ddb75ab8792f9e111ee59b28564de959bd22cb29cf57f8b696df8374",
+      "copiedFailedArtifacts": 59,
+      "copiedArtifactInventorySha256": "cd29fc0d294cae3aeb912aa5763a0cdaa2abe5531d0ef78d8d470ad293dc4f12",
+      "missingArtifacts": [
+        "capture.json",
+        "timeline.json",
+        "compare.mp4",
+        "poster.png"
+      ],
+      "callerPreserved": true,
+      "cleanupStatus": "ok",
+      "verificationErrors": [],
+      "worktreeComparisonRun": false,
+      "cause": "Exact schema issue and rejected in-memory capture were not retained by the product. Do not attribute this short recording to the separate sixty-second boundary finding."
+    },
+    "physicalClosure": {
+      "ownershipRecordSha256": "09291ea20503d65e71c0ac2bb4894d8d4e5ba7d18324f593a84e08eb3b51285a",
+      "exactOwnedContainerAbsent": true,
+      "fullFinalInventoryEqualsBaseline": true,
+      "normalVmStopObserved": true
+    }
+  },
+  "finalBoundaryReview": {
+    "status": "changes-required",
+    "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+    "reopenedGates": [
+      "G05",
+      "G09",
+      "G14",
+      "G18"
+    ]
+  },
+  "linuxCaptureSchemaReproduction": {
+    "evidence": "evidence/revision-0.3/linux-capture-schema-diagnostic.json",
+    "status": "reproduced-repair-required",
+    "originalFullSuiteCauseProven": false,
+    "releaseAcceptance": false
+  },
+  "scopedRuntimeSourcePlannerRepair": {
+    "evidence": "evidence/revision-0.3/R6-scoped-repair-progress.json",
+    "status": "focused-verification-complete-final-candidate-pending"
+  },
+  "linuxT09Diagnostic": {
+    "evidence": "evidence/revision-0.3/linux-t09-diagnostic.json",
+    "status": "passed-once-original-failure-not-reproduced",
+    "releaseAcceptance": false
+  },
+  "timingRepair": {
+    "status": "scoped-verification-passed-final-candidate-pending",
+    "evidence": "evidence/revision-0.3/timing-repair-progress.json",
+    "newGatesAccepted": []
   }
 }

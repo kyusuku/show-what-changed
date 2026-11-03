@@ -304,3 +304,23 @@ Independent evidence review accepted all twelve host interruption cells for the 
 Independent actual review closed the narrow diagnostic as non-reproducing. It recomputed maximum moving gap 83.330 ms and clock error 10.064 ms, verified full raw inventories, complete exports and normal VM stop. No cause or fix is established. A separate, predeclared full current Linux suite is now running after independent preparation review and fresh physical admission. The initial source, build, unit, contract and privacy stages passed. Remaining suite stages, all six canonical motion cases, visual review and final cleanup remain unaccepted.
 
 Before direct service execution, review found stale active admission window metadata and an overwritten case-policy variable in the private native launcher. Fresh isolated service and builder preparations correct both and exercise the complete pre-exec path with inert operations. The original service preparation remains unconsumed and byte-preserved. No product source or package changed.
+
+## Final source refresh and platform continuation
+
+The independently reviewed implementation candidate is 8ebf3a69b498e08e5a7755b61849a7e1cc651377. Its full source archive is cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816. The installed package remains cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428. The source-refresh acceptance record explicitly retains 21 gates under unchanged product and package inputs. Executed identities remain historical. The only executable changes retain failed public-app artifacts, with 29 focused tests passing.
+
+Fresh macOS doctor, both plans, three navigation comparisons, three validation comparisons and the subsequent WORKTREE comparison exited zero. Every comparison preserved caller state and reported clean resource cleanup. This result does not claim fresh media playback. One canonical Linux suite is running with its original workload, default 1800-second comparisons and unchanged 40 ms clock bound. The prior failed suite and subsequent nonreproducing diagnostic retain their outcomes.
+
+The exact candidate passed the independent scoped privacy, credential, advisory and license review. Its 7-commit public history, full source archive and package have no known private-term matches or unreviewed credential-pattern matches. Final handoff identity and affected document scans remain required. G20, G23 and G24 remain pending.
+
+## R6 final boundary review requires repairs
+
+The explicit neighboring-module reviews identified runtime failure-exit classification and maximum-duration motion bundle inconsistencies. The source/planner review also found an output-prefix coverage omission and a missing tracked-environment warning. Static reasoning and actual runtime observations remain separate in R6-final-boundary-findings.json. G05, G09, G14 and G18 are reopened for affected repair and verification; their original observations remain recorded. Seventeen gates retain acceptance.
+
+The current Linux suite passed102 integration tests and failed one privacy scenario summary assertion. It produced one verified pair instead of two and four blocked steps instead of two. Cleanup reported ok. The failing run directory was removed by test cleanup, so the specific action cause is not established. Original logs are retained and the remaining canonical stages continue. Do not retry the suite or call this result passing. Next actions are focused failure capture/reproduction, narrow code repairs, independent review and affected candidate revalidation.
+
+## Canonical retention-candidate Linux result
+
+The full17-stage Linux invocation exited1. Fifteen stages passed, including installed package, all six motion cases, static/npm/pnpm/Python compatibility and explicit-keyframe repeatability. Integration passed102 tests and failed one privacy-scenario assertion. Public application comparisons passed the first five runs; validation3 exited9 with recording INVALID_DOCUMENT after approximately6.94seconds. The later WORKTREE comparison did not run. The failed public run retained59 available artifacts, with capture/timeline/video/poster correctly reported missing. The product did not retain its rejected in-memory capture or exact schema issues, so the cause remains unresolved.
+
+The exact container is absent, complete final resource inventories equal baseline, and the owned VM stopped normally. Both original failures remain failed. No retry was started. Focused source/planner regressions subsequently reproduced six expected failures and one passing ignored-environment control. Narrow runtime and source repairs are now under owner verification.
