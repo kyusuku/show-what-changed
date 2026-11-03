@@ -1,5 +1,6 @@
-import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readdir, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { afterEach, expect, test, vi } from 'vitest';
 import type { RunContext } from '../../src/schema/contracts.js';
 const hooks = vi.hoisted(() => ({ replace: false }));
@@ -18,7 +19,7 @@ import { DockerImageArchive } from '../../src/runtime/docker-archive.js';
 const roots: string[] = [];
 afterEach(async () => { hooks.replace = false; await Promise.all(roots.splice(0).map((path) => rm(path, { recursive: true, force: true }))); });
 async function fixture() {
-  const root = await mkdtemp('/private/tmp/swc-dir-repair-'); roots.push(root);
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'swc-dir-repair-'))); roots.push(root);
   return { root, run: { paths: { privateDir: root }, signal: new AbortController().signal, resources: { register() {} } } as unknown as RunContext };
 }
 const name = 'docker-export-0123456789abcdef01234567';

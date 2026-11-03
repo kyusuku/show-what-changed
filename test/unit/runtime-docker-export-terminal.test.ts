@@ -1,5 +1,6 @@
 import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { afterEach, expect, test, vi } from 'vitest';
 import type { Plan } from '../../src/schema/index.js';
 import type { OwnedProcess, RunContext, RuntimeResult, Supervisor, Workspace, WorkspacePair } from '../../src/schema/contracts.js';
@@ -41,7 +42,7 @@ function barrier() { let resolve = () => {}; const promise = new Promise<void>((
 const imageId = `sha256:${'c'.repeat(64)}`;
 type DockerInternals = { inspectBuilder: () => Promise<unknown>; inspect: (_resource: unknown, _deadline?: number) => Promise<unknown>; removeBuilder: (_resource: unknown, deadline: number) => Promise<boolean> };
 async function fixture(options: { validArchive?: boolean; builderRemoval?: (deadline: number) => Promise<boolean>; processStop?: () => Promise<void>; stopAll?: () => Promise<void>; exportFailure?: boolean } = {}) {
-  const root = await mkdtemp('/private/tmp/swc-export-terminal-'); roots.push(root);
+  const root = await mkdtemp(join(tmpdir(), 'swc-export-terminal-')); roots.push(root);
   const config = parseConfig({ schemaVersion: 2, execution: { start: { kind: 'process', argv: ['synthetic', '{port}'] }, state: { kind: 'stateless' } } });
   state.plan = PlanSchema.parse({ schemaVersion: 2, planId: 'a'.repeat(64), generatedAt: new Date().toISOString(), repoRoot: root, requestedBase: 'HEAD', requestedHead: 'HEAD', baseCommit: 'a'.repeat(40), headCommit: 'a'.repeat(40), baseResolution: 'exact', headKind: 'commit', sourceFingerprint: null, configDigest: 'a'.repeat(64), configSource: null, scenarioSources: [], scenarioDigest: 'a'.repeat(64), inputs: [], inventories: { before: [], after: [] }, sourceStats: { before: { files: 1, bytes: 13, fingerprint: 'a'.repeat(64) }, after: { files: 1, bytes: 13, fingerprint: 'a'.repeat(64) } }, config, scenarios: [parseScenario({ schemaVersion: 2, id: 'synthetic', title: 'Synthetic', steps: [{ id: 'open', op: 'goto', path: '/' }] })], changedFiles: [], coverage: { selected: [{ path: '/', reason: 'EXPLICIT_SELECTION', via: [] }], unresolved: [], omitted: [], unsupported: [], complete: true }, execution: { sourceFileCounts: { before: 1, after: 1 }, sourceBytes: { before: 13, after: 13 }, estimatedSnapshotBytes: 26, environmentReferences: [], notice: 'Synthetic controlled test.' }, warnings: [] });
   const commands = new Map<OwnedProcess, readonly string[]>();

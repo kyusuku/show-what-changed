@@ -1,5 +1,6 @@
 import { mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { performance } from 'node:perf_hooks';
 import { afterEach, expect, test, vi } from 'vitest';
 import type { RunContext } from '../../src/schema/contracts.js';
@@ -14,7 +15,7 @@ const runs: RunContext[] = [];
 afterEach(async () => { for (const run of runs.splice(0)) await releaseRunOwnership(run); await Promise.all(roots.splice(0).map((root) => rm(root, { recursive: true, force: true }))); vi.restoreAllMocks(); });
 function barrier() { let resolve = () => {}; const promise = new Promise<void>((done) => { resolve = done; }); return { promise, resolve }; }
 async function run() {
-  const root = await mkdtemp('/private/tmp/swc-archive-cleanup-'); roots.push(root);
+  const root = await mkdtemp(join(tmpdir(), 'swc-archive-cleanup-')); roots.push(root);
   const value = await createRunContext({ repoRoot: root, timeoutMs: 60_000, signal: new AbortController().signal, diagnostics: { event() {} }, retainOwnership: true }); runs.push(value); return value;
 }
 const name = 'docker-export-0123456789abcdef01234567';

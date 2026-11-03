@@ -1,6 +1,7 @@
 import { createServer, request } from 'node:http';
 import { lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, rm, symlink, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { afterEach, expect, test, vi } from 'vitest';
 import type { OwnedProcess, ProcessExit, ResourceRegistry, RunContext, SpawnSpec, Supervisor, Workspace } from '../../src/schema/contracts.js';
 import { DockerRuntime } from '../../src/runtime/docker.js';
@@ -29,7 +30,7 @@ type RecordResource = { kind: string; name: string; id?: string | null; labels?:
 type Ledger = { pendingCreates: string[]; resources: RecordResource[] };
 type Options = { export?: (spec: SpawnSpec, defaults: () => Promise<void>) => Promise<ProcessExit | void>; load?: () => Promise<ProcessExit | void>; stop?: (command: readonly string[]) => Promise<void>; foreignImage?: boolean; returnedId?: string; from?: string; metadata?: (tag: string) => unknown; image?: (value: Record<string, unknown>) => unknown };
 async function fixture(options: Options = {}) {
-  const root = await realpath(await mkdtemp('/private/tmp/swc-export, space-'));
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'swc-export, space-')));
   const privateDir = join(root, 'private'); const source = join(privateDir, 'workspaces', 'before');
   await mkdir(source, { recursive: true }); await writeFile(join(source, 'Dockerfile'), options.from ?? 'FROM scratch\n');
   const controller = new AbortController();
@@ -282,7 +283,7 @@ test('retained manifest identity is persisted, passed to container creation and 
   const built = await f.docker.build(f.workspace, '.', 'Dockerfile');
   expect(built.imageId).toBe(manifestId); expect((await f.ledger()).resources.find((resource) => resource.kind === 'image')?.id).toBe(manifestId);
   const network = await f.docker.network('before');
-  const inputsRoot = await mkdtemp('/private/tmp/swc-container-inputs-'); cleanups.push(() => rm(inputsRoot, { recursive: true, force: true }));
+  const inputsRoot = await realpath(await mkdtemp(join(tmpdir(), 'swc-container-inputs-'))); cleanups.push(() => rm(inputsRoot, { recursive: true, force: true }));
   const stateDir = join(inputsRoot, 'state'); const inputDir = join(inputsRoot, 'inputs'); await mkdir(stateDir); await mkdir(inputDir);
   await expect(f.docker.container({ side: 'before', image: built.imageId, network, alias: 'app', port: 4321, containerPort: 8080, env: {}, inputs: { directory: inputsRoot, stateDir, inputDir, files: new Map<string, string>() } })).rejects.toThrow('container creation observed');
   expect(f.commands.find((argv) => argv[0] === 'container' && argv[1] === 'create')?.at(-1)).toBe(manifestId);
