@@ -2,6 +2,7 @@ import { chmod, lstat, mkdtemp, mkdir, readFile, readdir, realpath, rm, symlink,
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, expect, test } from 'vitest';
+import { z } from 'zod';
 import { ConfigSchema, PlanSchema } from '../../src/schema/index.js';
 import type { Config, Plan } from '../../src/schema/index.js';
 import type { RunContext, WorkspacePair } from '../../src/schema/contracts.js';
@@ -61,13 +62,34 @@ test('application PATH selection leaves tool Node unchanged and exact secrets ar
 }, 15_000);
 test('ordered services resolve separate env and seed independent datasets', async () => {
   process.env.SWC_PRIVATE_TEST = 'app-only-secret';
-  const f = await fixture({ ...basic, state: { kind: 'isolated', seedId: 'seed' }, inputs: [{ id: 'seed', path: '/placeholder' }], env: { PRIVATE_VALUE: { fromEnv: 'SWC_PRIVATE_TEST' }, SERVICE_URL: { template: 'http://{service.store.host}:{service.store.port}' } }, services: [{ id: 'store', kind: 'process', argv: [process.execPath, 'isolated-store.cjs', '{port}'], env: { DATA: { template: '{stateDir}' }, SEED: { template: '{input.seed}' } }, ready: { kind: 'http', timeoutMs: 3000 } }, { id: 'later', kind: 'process', argv: [process.execPath, 'ordered.cjs', '{port}'], env: { PREVIOUS: { template: '{service.store.host}:{service.store.port}' } }, ready: { kind: 'tcp', timeoutMs: 3000 } }] });
+  const f = await fixture({
+    ...basic, state: { kind: 'isolated', seedId: 'seed' }, inputs: [{ id: 'seed', path: '/placeholder' }],
+    env: { PRIVATE_VALUE: { fromEnv: 'SWC_PRIVATE_TEST' }, SERVICE_URL: { template: 'http://{service.store.host}:{service.store.port}' }, LATER_URL: { template: 'http://{service.later.host}:{service.later.port}' }, DATA: { template: '{stateDir}' }, SIDE: { template: '{side}' } },
+    services: [
+      { id: 'store', kind: 'process', cwd: 'store', argv: [process.execPath, '../isolated-store.cjs', '{port}'], env: { DATA: { template: '{stateDir}' }, SEED: { template: '{input.seed}' }, SIDE: { template: '{side}' }, SERVICE_VALUE: { literal: 'store-only' } }, ready: { kind: 'http', path: '/ready', statuses: [204], timeoutMs: 3000 } },
+      { id: 'later', kind: 'process', cwd: 'later', setup: [{ cwd: 'later', argv: [process.execPath, '../ordered.cjs', 'setup', '{port}'], timeoutMs: 3000 }], argv: [process.execPath, '../ordered.cjs', 'start', '{port}'], env: { PREVIOUS: { template: 'http://{service.store.host}:{service.store.port}' }, DATA: { template: '{stateDir}' }, SIDE: { template: '{side}' }, SERVICE_VALUE: { literal: 'later-only' } }, ready: { kind: 'http', path: '/ready', statuses: [204], timeoutMs: 3000 } },
+    ],
+    setup: [{ argv: [process.execPath, 'ordered.cjs', 'app-setup'], timeoutMs: 3000 }],
+  });
+  for (const workspace of Object.values(f.workspaces)) { await mkdir(join(workspace.root, 'store')); await mkdir(join(workspace.root, 'later')); }
   const path = join(f.run.paths.repoRoot, 'seed.json'); await writeFile(path, 'equal-seed');
   const bound = { id: 'seed', path, sha256: sha256(Buffer.from('equal-seed')), byteLength: 10, executable: false, extension: '.json' };
   const plan = { ...f.plan, inputs: [bound], config: { ...f.plan.config, execution: { ...f.plan.config.execution, inputs: [{ id: 'seed', path }] } } };
   const result = await start(f.workspaces, plan, f.run);
   const urls: Record<string, string> = {};
-  for (const side of ['before', 'after'] as const) { const app = await (await fetch(result.servers[side].origin)).json(); urls[side] = app.service; expect(await (await fetch(app.service)).json()).toEqual({ data: 'equal-seed' }); }
+  for (const side of ['before', 'after'] as const) {
+    const app = await (await fetch(result.servers[side].origin)).json(); urls[side] = app.service; expect(await (await fetch(app.service)).json()).toEqual({ data: 'equal-seed' });
+    const directories = await readdir(join(f.run.paths.privateDir, 'execution', side)); expect(directories).toHaveLength(1);
+    const directory = directories[0]; if (!directory) throw new Error('Missing private side service state');
+    const stateDir = join(f.run.paths.privateDir, 'execution', side, directory, 'state');
+    const laterSetup: unknown = JSON.parse(await readFile(join(stateDir, 'later-setup.json'), 'utf8'));
+    const appSetup = z.object({ side: z.enum(['before', 'after']), laterUrl: z.url(), observed: z.unknown() }).strict().parse(JSON.parse(await readFile(join(stateDir, 'app-setup.json'), 'utf8')));
+    expect(laterSetup).toEqual({ side, port: new URL(appSetup.laterUrl).port, cwd: join(f.workspaces[side].root, 'later'), serviceValue: 'later-only', dependencyUrl: app.service, dependency: { side, endpoint: app.service, cwd: join(f.workspaces[side].root, 'store'), serviceValue: 'store-only', readiness: [503, 204], data: 'equal-seed' } });
+    const response = await fetch(appSetup.laterUrl + '/observation', { signal: AbortSignal.timeout(1000) }); expect(response.status).toBe(200);
+    const observed: unknown = await response.json();
+    expect(observed).toEqual({ side, endpoint: appSetup.laterUrl, cwd: join(f.workspaces[side].root, 'later'), serviceValue: 'later-only', readiness: [503, 204], setup: laterSetup });
+    expect(appSetup).toEqual({ side, laterUrl: appSetup.laterUrl, observed });
+  }
   await fetch(urls.before!, { method: 'POST' });
   expect(await (await fetch(urls.before!)).json()).toEqual({ data: 'changed' });
   expect(await (await fetch(urls.after!)).json()).toEqual({ data: 'equal-seed' });

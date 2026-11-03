@@ -5,6 +5,7 @@ import { availableParallelism, freemem, loadavg, tmpdir, totalmem } from 'node:o
 import { atomicPrivateFile, safeDirectory } from '../../src/runtime/files.js';
 import { join } from 'node:path';
 import { afterAll, afterEach, beforeAll, expect, test } from 'vitest';
+import { z } from 'zod';
 import type { RunContext, Workspace } from '../../src/schema/contracts.js';
 import { beforeDeadline, createRunContext, cleanupRun } from '../../src/runtime/context.js';
 import { declaredTmpfs, DockerRuntime } from '../../src/runtime/docker.js';
@@ -198,9 +199,19 @@ test.skipIf(process.env.SWC_DOCKER_TESTS !== '1')('generic runtime binds seeded 
       const service = provenance.services.find((entry) => entry.id === 'db'); if (!service) throw new Error('Missing owned database service');
       expect(service.identity).toMatch(/^[a-f0-9]{64}$/); services.set(side, service.identity);
       const inspect = await dockerProbe(['container', 'inspect', service.identity]); expect(inspect.code).toBe(0);
-      expect(JSON.parse(inspect.stdout)[0]).toMatchObject({ Id: service.identity, Config: { Labels: { 'io.show-what-changed.run': run.runId, 'io.show-what-changed.side': side } } });
+      const inspected = z.object({ NetworkSettings: z.object({ Ports: z.object({ '5432/tcp': z.array(z.object({ HostIp: z.string(), HostPort: z.string() })) }) }) }).passthrough().parse(JSON.parse(inspect.stdout)[0]);
+      expect(inspected).toMatchObject({ Id: service.identity, Config: { Labels: { 'io.show-what-changed.run': run.runId, 'io.show-what-changed.side': side } } });
+      const mappings = inspected.NetworkSettings.Ports['5432/tcp']; expect(mappings).toHaveLength(1);
+      const published = mappings[0]; if (!published) throw new Error('Missing published database port'); expect(published.HostIp).toBe('127.0.0.1');
       const directories = await readdir(join(run.paths.privateDir, 'execution', side)); expect(directories).toHaveLength(1);
       const directory = directories[0]; if (!directory) throw new Error('Missing private side input copy');
+      const stateDir = join(run.paths.privateDir, 'execution', side, directory, 'state');
+      const setup = z.object({ port: z.string(), origin: z.string(), dbHost: z.string(), dbPort: z.string() }).parse(JSON.parse(await readFile(join(stateDir, 'setup.json'), 'utf8')));
+      const bootstrap: unknown = JSON.parse(await readFile(join(stateDir, 'bootstrap.json'), 'utf8'));
+      expect(setup.port).toBe(String(server.port)); expect(setup.port).not.toBe('8080');
+      expect(setup.origin).toBe(server.origin); expect(setup.dbHost).toBe('127.0.0.1');
+      expect(setup.dbPort).toBe(published.HostPort); expect(setup.dbPort).not.toBe('5432');
+      expect(bootstrap).toEqual(value);
       const copiedSeed = await readFile(join(run.paths.privateDir, 'execution', side, directory, 'inputs/seed.json'));
       expect(copiedSeed).toEqual(seed); expect(sha256(copiedSeed)).toBe(selected.inputs.find((input) => input.id === 'seed')?.sha256);
       const dataset = JSON.parse(copiedSeed.toString('utf8')); expect(dataset).toEqual({ value: 7 });
