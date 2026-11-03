@@ -1,0 +1,1056 @@
+{
+  "scope": "capture_only_diagnostic_not_release_acceptance",
+  "status": "inconclusive",
+  "decision": "retain_current_sendLastFrame_default_false_no_product_change",
+  "reason": "Both variants missed numeric thresholds once; the paired advantage is inconsistent and smaller than observed variation. No final full-path matrix is accepted.",
+  "verifierIdentitySha256": "4721cb8b95bc55a2cf503a2ed8b0217b7c524d1b637674cda63237cbb960b7c4",
+  "inputProbeSha256": "e8753ffe50a9abffdd989f0f148e0e000ea2ec60e7608dc3767c049d97947c10",
+  "packageSha256": "a9e0ddf8215714ca1739ca247d3a3bc952c85f67fc606fdcac3e335c5886e751",
+  "pairOrder": [
+    "AB",
+    "BA",
+    "AB",
+    "BA",
+    "AB"
+  ],
+  "resourceContract": {
+    "cpus": 2,
+    "memoryBytes": 3221225472,
+    "shmBytes": 536870912
+  },
+  "variantSummaries": {
+    "A": {
+      "sendLastFrame": false,
+      "numericPassed": 4,
+      "thresholdMissed": 1,
+      "positions": {
+        "before": {
+          "median": 85,
+          "min": 77,
+          "max": 88,
+          "count": 5
+        },
+        "after": {
+          "median": 83,
+          "min": 79,
+          "max": 87,
+          "count": 5
+        }
+      },
+      "cpuCoreSeconds": {
+        "median": 7.87586,
+        "min": 7.860598,
+        "max": 8.861172,
+        "count": 5
+      }
+    },
+    "B": {
+      "sendLastFrame": true,
+      "numericPassed": 4,
+      "thresholdMissed": 1,
+      "positions": {
+        "before": {
+          "median": 87,
+          "min": 32,
+          "max": 95,
+          "count": 5
+        },
+        "after": {
+          "median": 93,
+          "min": 32,
+          "max": 99,
+          "count": 5
+        }
+      },
+      "cpuCoreSeconds": {
+        "median": 8.526331,
+        "min": 8.296662,
+        "max": 12.225303,
+        "count": 5
+      }
+    }
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "positionDifferenceBMinusA": {
+        "before": -1,
+        "after": 12
+      }
+    },
+    {
+      "pair": 2,
+      "positionDifferenceBMinusA": {
+        "before": 18,
+        "after": 19
+      }
+    },
+    {
+      "pair": 3,
+      "positionDifferenceBMinusA": {
+        "before": -1,
+        "after": -6
+      }
+    },
+    {
+      "pair": 4,
+      "positionDifferenceBMinusA": {
+        "before": 9,
+        "after": 15
+      }
+    },
+    {
+      "pair": 5,
+      "positionDifferenceBMinusA": {
+        "before": -53,
+        "after": -55
+      }
+    }
+  ],
+  "checkedPersistedImages": 2098,
+  "hostLimit": "Shared host with an existing unowned VM and variable load; no globally isolated performance claim. Original thresholds and all failed cases retained.",
+  "finalCandidateAcceptance": false,
+  "cases": [
+    {
+      "id": "case-01-A-pair-1",
+      "variant": "A",
+      "pair": 1,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 88,
+          "maxDeliveredFrameGapMs": 99.996000000001,
+          "maxDetectedPositionGapMsSecondary": 99.996000000001,
+          "nativeDistinctPositions": 40,
+          "clockErrorBoundMs": 6.446791999998936,
+          "stats": {
+            "receivedFrames": 107,
+            "persistedFrames": 107,
+            "acknowledgedFrames": 107,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999999964
+          }
+        },
+        "after": {
+          "distinctPositions": 81,
+          "maxDeliveredFrameGapMs": 83.32999999999993,
+          "maxDetectedPositionGapMsSecondary": 83.32999999999993,
+          "nativeDistinctPositions": 35,
+          "clockErrorBoundMs": 7.800958000001174,
+          "stats": {
+            "receivedFrames": 98,
+            "persistedFrames": 98,
+            "acknowledgedFrames": 98,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 249.99000000000038
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        16.52410400000008,
+        0.14189600000099745,
+        33.47389599999951
+      ],
+      "checkedPersistedImages": 213,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 5.313271419,
+        "cpuCoreSeconds": 8.14726,
+        "averageLogicalCores": 1.533379222989775,
+        "utcElapsedSecondsDiagnosticOnly": 5.795
+      },
+      "memoryPeakBytes": 1122185216,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 107,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 65025,
+          "maskMs": 1752.3089129999973,
+          "writeMs": 990.0414640000042,
+          "maxMaskMs": 93.7649580000002,
+          "maxWriteMs": 69.04974999999968,
+          "maxAckLatencyMs": 95.9910420000001,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 207874,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 98,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 1694.4937569999988,
+          "writeMs": 933.8117940000009,
+          "maxMaskMs": 87.75712500000009,
+          "maxWriteMs": 72.34416599999986,
+          "maxAckLatencyMs": 96.64224999999988,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 155933,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-02-B-pair-1",
+      "variant": "B",
+      "pair": 1,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 87,
+          "maxDeliveredFrameGapMs": 83.33000000000175,
+          "maxDetectedPositionGapMsSecondary": 83.33000000000175,
+          "nativeDistinctPositions": 37,
+          "clockErrorBoundMs": 5.892185499995321,
+          "stats": {
+            "receivedFrames": 110,
+            "persistedFrames": 110,
+            "acknowledgedFrames": 110,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999999964
+          }
+        },
+        "after": {
+          "distinctPositions": 93,
+          "maxDeliveredFrameGapMs": 83.32999999999811,
+          "maxDetectedPositionGapMsSecondary": 83.32999999999811,
+          "nativeDistinctPositions": 39,
+          "clockErrorBoundMs": 3.582041999997273,
+          "stats": {
+            "receivedFrames": 113,
+            "persistedFrames": 113,
+            "acknowledgedFrames": 113,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 233.32399999999964
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        0.04724999999598367,
+        0.04724999999598367,
+        16.71324999999706
+      ],
+      "checkedPersistedImages": 231,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 4.8524676279999985,
+        "cpuCoreSeconds": 8.296662,
+        "averageLogicalCores": 1.7097820399926225,
+        "utcElapsedSecondsDiagnosticOnly": 4.848
+      },
+      "memoryPeakBytes": 1364000768,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 113,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 2273.722961000005,
+          "writeMs": 1661.7168719999954,
+          "maxMaskMs": 91.4544590000005,
+          "maxWriteMs": 68.6400420000009,
+          "maxAckLatencyMs": 94.16270799999984,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 215257,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 110,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 2260.0487130000092,
+          "writeMs": 1683.9466290000037,
+          "maxMaskMs": 70.96237500000097,
+          "maxWriteMs": 73.03249999999935,
+          "maxAckLatencyMs": 84.90879200000018,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 156358,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-03-B-pair-2",
+      "variant": "B",
+      "pair": 2,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 95,
+          "maxDeliveredFrameGapMs": 116.66200000000026,
+          "maxDetectedPositionGapMsSecondary": 116.66200000000026,
+          "nativeDistinctPositions": 39,
+          "clockErrorBoundMs": 7.359813499997472,
+          "stats": {
+            "receivedFrames": 116,
+            "persistedFrames": 116,
+            "acknowledgedFrames": 116,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 266.6560000000011
+          }
+        },
+        "after": {
+          "distinctPositions": 98,
+          "maxDeliveredFrameGapMs": 83.33000000000175,
+          "maxDetectedPositionGapMsSecondary": 83.33000000000175,
+          "nativeDistinctPositions": 40,
+          "clockErrorBoundMs": 7.5169370000021445,
+          "stats": {
+            "receivedFrames": 121,
+            "persistedFrames": 121,
+            "acknowledgedFrames": 121,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 266.65599999999756
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        16.621791500001564,
+        0.04420849999951315,
+        0.04420849999951315
+      ],
+      "checkedPersistedImages": 245,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 4.817373210999998,
+        "cpuCoreSeconds": 8.314687,
+        "averageLogicalCores": 1.7259794157144042,
+        "utcElapsedSecondsDiagnosticOnly": 4.856
+      },
+      "memoryPeakBytes": 1427648512,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 116,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 65025,
+          "maskMs": 2038.6716750000014,
+          "writeMs": 1702.5180830000245,
+          "maxMaskMs": 34.72029200000179,
+          "maxWriteMs": 85.13200000000143,
+          "maxAckLatencyMs": 49.59225000000151,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 156160,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 121,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 2228.6513380000033,
+          "writeMs": 1631.5587110000197,
+          "maxMaskMs": 54.41204099999959,
+          "maxWriteMs": 61.456999999998516,
+          "maxAckLatencyMs": 83.81787500000064,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 196399,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-04-A-pair-2",
+      "variant": "A",
+      "pair": 2,
+      "status": "threshold-missed",
+      "numericFailures": [
+        "after delivered-frame gap in the moving window is 233.32400000000052 ms",
+        "after must retain all three pulses, observed 2",
+        "Mapped source pulses must align within 80 ms"
+      ],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 77,
+          "maxDeliveredFrameGapMs": 183.32600000000093,
+          "maxDetectedPositionGapMsSecondary": 183.32600000000093,
+          "nativeDistinctPositions": 34,
+          "clockErrorBoundMs": 5.618811500000447,
+          "stats": {
+            "receivedFrames": 97,
+            "persistedFrames": 97,
+            "acknowledgedFrames": 97,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 249.99000000000393
+          }
+        },
+        "after": {
+          "distinctPositions": 79,
+          "maxDeliveredFrameGapMs": 233.32400000000052,
+          "maxDetectedPositionGapMsSecondary": 233.32400000000052,
+          "nativeDistinctPositions": 37,
+          "clockErrorBoundMs": 6.702395499996783,
+          "stats": {
+            "receivedFrames": 101,
+            "persistedFrames": 101,
+            "acknowledgedFrames": 101,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 266.65599999999756
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        16.67366600000969,
+        0.007666000004974194,
+        null
+      ],
+      "checkedPersistedImages": 206,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 4.938442376999999,
+        "cpuCoreSeconds": 7.87586,
+        "averageLogicalCores": 1.5948064994502216,
+        "utcElapsedSecondsDiagnosticOnly": 4.938
+      },
+      "memoryPeakBytes": 1449263104,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 101,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 65025,
+          "maskMs": 1601.1905029999652,
+          "writeMs": 1218.0378780000065,
+          "maxMaskMs": 64.81437499999811,
+          "maxWriteMs": 196.21937500000058,
+          "maxAckLatencyMs": 96.53483300000153,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 155876,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 97,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 1639.9902049999837,
+          "writeMs": 1270.0918289999972,
+          "maxMaskMs": 59.48374999999942,
+          "maxWriteMs": 175.916500000003,
+          "maxAckLatencyMs": 73.94562500000029,
+          "maxSanitizedQueueDepth": 1,
+          "maxSharedSanitizedBytes": 127340,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-05-A-pair-3",
+      "variant": "A",
+      "pair": 3,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 82,
+          "maxDeliveredFrameGapMs": 83.33000000000902,
+          "maxDetectedPositionGapMsSecondary": 83.33000000000902,
+          "nativeDistinctPositions": 34,
+          "clockErrorBoundMs": 13.509990500006097,
+          "stats": {
+            "receivedFrames": 104,
+            "persistedFrames": 104,
+            "acknowledgedFrames": 104,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 283.3219999999983
+          }
+        },
+        "after": {
+          "distinctPositions": 83,
+          "maxDeliveredFrameGapMs": 83.33000000000175,
+          "maxDetectedPositionGapMsSecondary": 83.33000000000175,
+          "nativeDistinctPositions": 35,
+          "clockErrorBoundMs": 13.068845500012685,
+          "stats": {
+            "receivedFrames": 106,
+            "persistedFrames": 106,
+            "acknowledgedFrames": 106,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 266.65599999999756
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        66.7252649999864,
+        16.7272649999868,
+        50.059264999988955
+      ],
+      "checkedPersistedImages": 218,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 4.908458550999996,
+        "cpuCoreSeconds": 7.860598,
+        "averageLogicalCores": 1.6014392132125812,
+        "utcElapsedSecondsDiagnosticOnly": 4.915
+      },
+      "memoryPeakBytes": 1471225856,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 106,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 1610.874966999967,
+          "writeMs": 1325.2064050000117,
+          "maxMaskMs": 55.178744999997434,
+          "maxWriteMs": 82.33742599999823,
+          "maxAckLatencyMs": 80.02581400000054,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 168223,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 104,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 1553.456097000002,
+          "writeMs": 1031.7244819999396,
+          "maxMaskMs": 49.733492999999726,
+          "maxWriteMs": 66.0804300000018,
+          "maxAckLatencyMs": 52.48659300000145,
+          "maxSanitizedQueueDepth": 1,
+          "maxSharedSanitizedBytes": 130050,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-06-B-pair-3",
+      "variant": "B",
+      "pair": 3,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 81,
+          "maxDeliveredFrameGapMs": 99.99599999999919,
+          "maxDetectedPositionGapMsSecondary": 99.99599999999919,
+          "nativeDistinctPositions": 39,
+          "clockErrorBoundMs": 7.507175000009738,
+          "stats": {
+            "receivedFrames": 106,
+            "persistedFrames": 106,
+            "acknowledgedFrames": 106,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 283.3219999999983
+          }
+        },
+        "after": {
+          "distinctPositions": 77,
+          "maxDeliveredFrameGapMs": 133.32800000000134,
+          "maxDetectedPositionGapMsSecondary": 133.32800000000134,
+          "nativeDistinctPositions": 37,
+          "clockErrorBoundMs": 4.89087500000096,
+          "stats": {
+            "receivedFrames": 103,
+            "persistedFrames": 103,
+            "acknowledgedFrames": 103,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 283.3219999999983
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        16.67074899999716,
+        33.33674900000187,
+        33.327251000002434
+      ],
+      "checkedPersistedImages": 217,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 4.966317802999998,
+        "cpuCoreSeconds": 8.554951,
+        "averageLogicalCores": 1.7225943524661713,
+        "utcElapsedSecondsDiagnosticOnly": 4.963
+      },
+      "memoryPeakBytes": 1501696000,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 106,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 65025,
+          "maskMs": 2263.6382400000075,
+          "writeMs": 1690.5481200000359,
+          "maxMaskMs": 56.81612699999823,
+          "maxWriteMs": 98.32846599999903,
+          "maxAckLatencyMs": 67.04436599999462,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 156288,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 103,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 2166.1821249999994,
+          "writeMs": 1695.2270649999991,
+          "maxMaskMs": 73.23951600000146,
+          "maxWriteMs": 117.08923399999912,
+          "maxAckLatencyMs": 81.66289700000198,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 208370,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-07-B-pair-4",
+      "variant": "B",
+      "pair": 4,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 94,
+          "maxDeliveredFrameGapMs": 66.66400000000431,
+          "maxDetectedPositionGapMsSecondary": 66.66400000000431,
+          "nativeDistinctPositions": 38,
+          "clockErrorBoundMs": 33.18190099999265,
+          "stats": {
+            "receivedFrames": 117,
+            "persistedFrames": 117,
+            "acknowledgedFrames": 117,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 283.3219999999983
+          }
+        },
+        "after": {
+          "distinctPositions": 99,
+          "maxDeliveredFrameGapMs": 83.33000000000175,
+          "maxDetectedPositionGapMsSecondary": 83.33000000000175,
+          "nativeDistinctPositions": 40,
+          "clockErrorBoundMs": 34.356789500008745,
+          "stats": {
+            "receivedFrames": 122,
+            "persistedFrames": 122,
+            "acknowledgedFrames": 122,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 283.3219999999983
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        0.06412849998741876,
+        16.730128499984858,
+        0.06412849998741876
+      ],
+      "checkedPersistedImages": 247,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 4.953387183999999,
+        "cpuCoreSeconds": 8.526331,
+        "averageLogicalCores": 1.721313251574804,
+        "utcElapsedSecondsDiagnosticOnly": 4.956
+      },
+      "memoryPeakBytes": 1514295296,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 117,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 2267.6906680000393,
+          "writeMs": 1673.3703470000255,
+          "maxMaskMs": 86.06967799999984,
+          "maxWriteMs": 118.78637900000467,
+          "maxAckLatencyMs": 115.39918500000203,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 171528,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 122,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 2195.824441999939,
+          "writeMs": 1663.9594369999832,
+          "maxMaskMs": 60.50243500000215,
+          "maxWriteMs": 121.31694199999765,
+          "maxAckLatencyMs": 66.65084999999817,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 207680,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-08-A-pair-4",
+      "variant": "A",
+      "pair": 4,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 85,
+          "maxDeliveredFrameGapMs": 83.33000000000175,
+          "maxDetectedPositionGapMsSecondary": 83.33000000000175,
+          "nativeDistinctPositions": 36,
+          "clockErrorBoundMs": 17.126040000010107,
+          "stats": {
+            "receivedFrames": 106,
+            "persistedFrames": 106,
+            "acknowledgedFrames": 106,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 199.99199999999462
+          }
+        },
+        "after": {
+          "distinctPositions": 84,
+          "maxDeliveredFrameGapMs": 83.33000000000175,
+          "maxDetectedPositionGapMsSecondary": 83.33000000000175,
+          "nativeDistinctPositions": 39,
+          "clockErrorBoundMs": 6.583614999999554,
+          "stats": {
+            "receivedFrames": 104,
+            "persistedFrames": 104,
+            "acknowledgedFrames": 104,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 249.98999999999683
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        16.460103999997955,
+        16.460104000012507,
+        0.20589599999948405
+      ],
+      "checkedPersistedImages": 218,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 4.820579454999999,
+        "cpuCoreSeconds": 7.875106,
+        "averageLogicalCores": 1.633643024352972,
+        "utcElapsedSecondsDiagnosticOnly": 4.841
+      },
+      "memoryPeakBytes": 1536540672,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 106,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 1589.2853719999985,
+          "writeMs": 1125.5361550000089,
+          "maxMaskMs": 48.72084499999619,
+          "maxWriteMs": 66.36904199999844,
+          "maxAckLatencyMs": 85.67878800000472,
+          "maxSanitizedQueueDepth": 1,
+          "maxSharedSanitizedBytes": 146776,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 104,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 1746.940793999951,
+          "writeMs": 1074.0653940000193,
+          "maxMaskMs": 59.43346300000121,
+          "maxWriteMs": 53.81284600000072,
+          "maxAckLatencyMs": 76.61366700000508,
+          "maxSanitizedQueueDepth": 1,
+          "maxSharedSanitizedBytes": 117584,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-09-A-pair-5",
+      "variant": "A",
+      "pair": 5,
+      "status": "numeric-passed",
+      "numericFailures": [],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 85,
+          "maxDeliveredFrameGapMs": 116.66199999999662,
+          "maxDetectedPositionGapMsSecondary": 116.66199999999662,
+          "nativeDistinctPositions": 38,
+          "clockErrorBoundMs": 5.328013999991526,
+          "stats": {
+            "receivedFrames": 99,
+            "persistedFrames": 99,
+            "acknowledgedFrames": 99,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 299.98799999999903
+          }
+        },
+        "after": {
+          "distinctPositions": 87,
+          "maxDeliveredFrameGapMs": 116.66200000001118,
+          "maxDetectedPositionGapMsSecondary": 116.66200000001118,
+          "nativeDistinctPositions": 37,
+          "clockErrorBoundMs": 6.965898500006006,
+          "stats": {
+            "receivedFrames": 100,
+            "persistedFrames": 100,
+            "acknowledgedFrames": 100,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 316.65399999999977
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        16.71402150001086,
+        0.04802150001341943,
+        16.61797849998402
+      ],
+      "checkedPersistedImages": 207,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 5.505608409000008,
+        "cpuCoreSeconds": 8.861172,
+        "averageLogicalCores": 1.6094809768007943,
+        "utcElapsedSecondsDiagnosticOnly": 5.66
+      },
+      "memoryPeakBytes": 1586704384,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 0,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 100,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 65025,
+          "maskMs": 1801.1171769999055,
+          "writeMs": 1258.6280809999153,
+          "maxMaskMs": 75.41184200000134,
+          "maxWriteMs": 171.077283000006,
+          "maxAckLatencyMs": 98.71985700000369,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 198851,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 99,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 1801.162567000094,
+          "writeMs": 1147.9866330000514,
+          "maxMaskMs": 71.4087889999937,
+          "maxWriteMs": 145.70092200000363,
+          "maxAckLatencyMs": 89.75977100001182,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 155866,
+          "backpressureWaits": 0
+        }
+      ]
+    },
+    {
+      "id": "case-10-B-pair-5",
+      "variant": "B",
+      "pair": 5,
+      "status": "threshold-missed",
+      "numericFailures": [
+        "before needs 60 actual moving-object positions, observed 32",
+        "before delivered-frame gap in the moving window is 266.6560000000027 ms",
+        "after needs 60 actual moving-object positions, observed 32",
+        "after delivered-frame gap in the moving window is 233.3240000000078 ms",
+        "after must retain all three pulses, observed 2",
+        "Mapped source pulses must align within 80 ms"
+      ],
+      "captureOutcome": "ok",
+      "tracks": {
+        "before": {
+          "distinctPositions": 32,
+          "maxDeliveredFrameGapMs": 266.6560000000027,
+          "maxDetectedPositionGapMsSecondary": 266.6560000000027,
+          "nativeDistinctPositions": 17,
+          "clockErrorBoundMs": 29.25158900000679,
+          "stats": {
+            "receivedFrames": 43,
+            "persistedFrames": 43,
+            "acknowledgedFrames": 43,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 749.9700000000047
+          }
+        },
+        "after": {
+          "distinctPositions": 32,
+          "maxDeliveredFrameGapMs": 233.3240000000078,
+          "maxDetectedPositionGapMsSecondary": 233.3240000000078,
+          "nativeDistinctPositions": 15,
+          "clockErrorBoundMs": 29.889127000009466,
+          "stats": {
+            "receivedFrames": 45,
+            "persistedFrames": 45,
+            "acknowledgedFrames": 45,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 816.6340000000076
+          }
+        }
+      },
+      "pulseErrorsMs": [
+        0.015834999998332933,
+        1033.3078349999996,
+        null
+      ],
+      "checkedPersistedImages": 96,
+      "cpu": {
+        "intervalClock": "monotonic",
+        "elapsedSeconds": 7.198890711999993,
+        "cpuCoreSeconds": 12.225303,
+        "averageLogicalCores": 1.6982203910418265,
+        "utcElapsedSecondsDiagnosticOnly": 7.209
+      },
+      "memoryPeakBytes": 1588506624,
+      "oomKillDelta": 0,
+      "throttledUsecDelta": 1078,
+      "processing": [
+        {
+          "kind": "capture-processing",
+          "side": "after",
+          "frames": 45,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 65025,
+          "maskMs": 2360.5824269999866,
+          "writeMs": 2968.632489000025,
+          "maxMaskMs": 127.77977800001099,
+          "maxWriteMs": 300.1938419999933,
+          "maxAckLatencyMs": 188.00609599999734,
+          "maxSanitizedQueueDepth": 3,
+          "maxSharedSanitizedBytes": 296724,
+          "backpressureWaits": 0
+        },
+        {
+          "kind": "capture-processing",
+          "side": "before",
+          "frames": 43,
+          "pendingRaw": 0,
+          "pendingSanitized": 0,
+          "sharedSanitizedBytes": 0,
+          "maskMs": 2244.8571899999224,
+          "writeMs": 2614.6589910000766,
+          "maxMaskMs": 122.64769399999932,
+          "maxWriteMs": 338.37279000000854,
+          "maxAckLatencyMs": 246.07846900000004,
+          "maxSanitizedQueueDepth": 2,
+          "maxSharedSanitizedBytes": 231699,
+          "backpressureWaits": 0
+        }
+      ]
+    }
+  ],
+  "cleanup": {
+    "status": "ok",
+    "ownedContainerAbsent": true,
+    "isolatedEngineContainers": 0,
+    "isolatedEngineVolumes": 0,
+    "ownedVmState": "Stopped",
+    "defaultDockerTouched": false,
+    "resourceWindowReturned": true
+  },
+  "evidenceSha256": "f4200f849d140e9f3ec5ff67f2c701f51001d5627afec81fe6cb4b80925ab21d"
+}

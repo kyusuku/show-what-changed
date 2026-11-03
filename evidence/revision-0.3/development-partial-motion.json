@@ -1,0 +1,412 @@
+{
+  "schemaVersion": 1,
+  "specRevision": "0.3",
+  "scope": "installed-synthetic-partial-motion-development-verification",
+  "status": "development-checks-completed-with-presentation-finding",
+  "candidate": {
+    "tarballSha256": "0edc4e1dc9e3a0e4fd3b3c70475815fbd2748cb99c51f85e5c3f9f41d54de306",
+    "bytes": 371715,
+    "cliSha256": "e77bb318586e3f89a647ea4cb18d609c0cab35930588bed310bf91640c3096f0",
+    "packageJsonSha256": "51af1f5379680e757a87f5423d2f4c953f997312c03c32ad083da096f20259fe"
+  },
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v24.22.2",
+  "commands": [
+    {
+      "name": "plan",
+      "code": 0,
+      "status": "ok"
+    },
+    {
+      "name": "compare-partial",
+      "code": 3,
+      "status": "partial",
+      "errorCode": "LOCATOR_MISSING"
+    },
+    {
+      "name": "compose-unavailable-encoder",
+      "code": 8,
+      "expectedCode": 8,
+      "status": "failed",
+      "errorCode": "MEDIA_CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "name": "compose-recovered-partial",
+      "code": 3,
+      "expectedCode": 3,
+      "status": "partial",
+      "errorCode": "LOCATOR_MISSING"
+    }
+  ],
+  "result": {
+    "status": "partial",
+    "exitCode": 3,
+    "captureMode": "motion",
+    "sourceCommits": {
+      "before": "08d2b5ee2885a80a3cc3735bcd4b6758ac20920c",
+      "after": "e23a5013840657988ba235d43cbfd487a4a243c2"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "sourcePreservation": "exact-match-including-index-dirty-untracked-and-caller-files-excluding-tool-owned-output",
+    "summary": {
+      "verifiedPairs": 3,
+      "changedPairs": 3,
+      "expectedAbsences": 0,
+      "exclusions": 0,
+      "failedSteps": 1,
+      "blockedSteps": 3,
+      "coverageOmissions": 0
+    },
+    "sources": {
+      "before": {
+        "status": "ok",
+        "frames": 186,
+        "stats": {
+          "receivedFrames": 186,
+          "persistedFrames": 186,
+          "acknowledgedFrames": 186,
+          "rejectedFrames": 0,
+          "maxQueueDepth": 2,
+          "sourceDroppedFrames": null,
+          "maxGapMs": 266.6440000757575
+        },
+        "clockErrorBoundMs": 5.1058120888747,
+        "movement": {
+          "distinctPositions": 176,
+          "maxMovingGapMs": 54.662999987602234
+        }
+      },
+      "after": {
+        "status": "ok",
+        "frames": 221,
+        "stats": {
+          "receivedFrames": 221,
+          "persistedFrames": 221,
+          "acknowledgedFrames": 221,
+          "rejectedFrames": 0,
+          "maxQueueDepth": 2,
+          "sourceDroppedFrames": null,
+          "maxGapMs": 1566.6039999341592
+        },
+        "clockErrorBoundMs": 4.433937988281286,
+        "movement": {
+          "distinctPositions": 175,
+          "maxMovingGapMs": 54.53100001811981
+        }
+      }
+    },
+    "steps": [
+      {
+        "id": "open",
+        "before": "ok",
+        "after": "ok",
+        "changeRatio": 0.003193359375
+      },
+      {
+        "id": "move",
+        "before": "ok",
+        "after": "ok",
+        "changeRatio": 0.003193359375
+      },
+      {
+        "id": "prior-success",
+        "before": "ok",
+        "after": "ok",
+        "changeRatio": 0.003193359375
+      },
+      {
+        "id": "required-button",
+        "before": "failed",
+        "after": "ok",
+        "changeRatio": null
+      },
+      {
+        "id": "scroll",
+        "before": "blocked",
+        "after": "ok",
+        "changeRatio": null
+      },
+      {
+        "id": "after-completed",
+        "before": "blocked",
+        "after": "ok",
+        "changeRatio": null
+      },
+      {
+        "id": "final",
+        "before": "blocked",
+        "after": "ok",
+        "changeRatio": null
+      }
+    ],
+    "annotations": [
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "open",
+        "side": "before",
+        "kind": "waiting",
+        "startFrame": 39,
+        "endFrame": 41
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "open",
+        "side": "after",
+        "kind": "waiting",
+        "startFrame": 39,
+        "endFrame": 41
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "move",
+        "side": "before",
+        "kind": "waiting",
+        "startFrame": 134,
+        "endFrame": 135
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "move",
+        "side": "after",
+        "kind": "waiting",
+        "startFrame": 134,
+        "endFrame": 135
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "prior-success",
+        "side": "before",
+        "kind": "waiting",
+        "startFrame": 141,
+        "endFrame": 142
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "prior-success",
+        "side": "after",
+        "kind": "waiting",
+        "startFrame": 141,
+        "endFrame": 142
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "required-button",
+        "side": "before",
+        "kind": "failed",
+        "startFrame": 171,
+        "endFrame": 171
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "required-button",
+        "side": "after",
+        "kind": "waiting",
+        "startFrame": 159,
+        "endFrame": 171
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "scroll",
+        "side": "before",
+        "kind": "blocked",
+        "startFrame": 171,
+        "endFrame": 203
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "scroll",
+        "side": "after",
+        "kind": "waiting",
+        "startFrame": 203,
+        "endFrame": 203
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "after-completed",
+        "side": "before",
+        "kind": "blocked",
+        "startFrame": 204,
+        "endFrame": 221
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "after-completed",
+        "side": "after",
+        "kind": "waiting",
+        "startFrame": 220,
+        "endFrame": 221
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "final",
+        "side": "before",
+        "kind": "blocked",
+        "startFrame": 221,
+        "endFrame": 267
+      },
+      {
+        "scenarioId": "partial-motion",
+        "stepId": "final",
+        "side": "after",
+        "kind": "waiting",
+        "startFrame": 267,
+        "endFrame": 267
+      }
+    ],
+    "sourceMasks": {
+      "checkedPersistedPngs": 421,
+      "exactRGBA": [
+        16,
+        16,
+        16,
+        255
+      ]
+    },
+    "decoded": {
+      "frames": 267,
+      "expectedFrames": 267,
+      "checkedMasks": {
+        "before": 236,
+        "after": 236
+      },
+      "movement": {
+        "before": {
+          "distinctPositions": 89,
+          "maxMovingGapMs": 33.33333333333394
+        },
+        "after": {
+          "distinctPositions": 89,
+          "maxMovingGapMs": 33.33333333333394
+        }
+      },
+      "maskTolerancePerChannel": 24,
+      "maskInteriorInsetPixels": 4
+    },
+    "cleanup": {
+      "processLedgers": 1,
+      "dockerIdentities": 0,
+      "runId": "20261102T202758879Z-cf92530ca3fdd4db",
+      "ownership": {
+        "processLedgers": 1,
+        "dockerIdentities": 0
+      },
+      "ownerState": "inactive",
+      "workspacesRemoved": true,
+      "ports": [
+        4310,
+        4311
+      ],
+      "listenersRemaining": 0
+    },
+    "offlineRecovery": {
+      "unavailableEncoderExitCode": 8,
+      "recoveryExitCode": 3,
+      "comparisonOutcomePreserved": true,
+      "cleanupOutcomePreserved": true,
+      "browserUnavailable": true,
+      "earlierEncodingFailureRetained": true
+    },
+    "video": {
+      "path": "compare.mp4",
+      "sha256": "b1c8e638df7c39f1a2732f4c7b5c793917c192055eec63310f4d35d92374f7b2",
+      "bytes": 107758,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "width": 1920,
+      "height": 686,
+      "fps": "30/1",
+      "frames": 267,
+      "durationSeconds": 8.9,
+      "faststart": true,
+      "audioStreams": 0
+    },
+    "contactSheetFrames": [
+      0,
+      30,
+      39,
+      42,
+      60,
+      90,
+      120,
+      134,
+      137,
+      141,
+      144,
+      159,
+      162,
+      171,
+      174,
+      203,
+      204,
+      206,
+      207,
+      220,
+      221,
+      223,
+      224,
+      266
+    ],
+    "metadataPrivacy": "known-private-values-absent",
+    "fixtureRuntime": "/usr/bin/python3 -m http.server",
+    "fixtureHasNpmManifest": false,
+    "mediaInventory": {
+      "sourcePngs": 421,
+      "trustedComposedPngs": 21,
+      "decodedBoundaryPngs": 3,
+      "nativeRecordings": 0,
+      "unexpectedMediaFiles": 0
+    }
+  },
+  "presentationReview": {
+    "status": "open",
+    "observed": "The video identifies MOTION, incomplete capture, held unverified results, and blocked-before intervals. The blocked badge does not state that a prior required step failed.",
+    "originalTimingPreserved": true,
+    "failedMarker": {
+      "sourceStartMs": 7606.484291,
+      "sourceEndMs": 7615.619416,
+      "outputStartFrame": 171,
+      "outputEndFrame": 171
+    },
+    "interpretation": "The sub-frame failed marker has truthful timing. A positive encoded duration is not required by this verification. The open question is whether the blocked badge should retain the reason that a prior step failed.",
+    "suggestedPresentationOnlyChange": "Include PRIOR STEP FAILED on blocked badges while keeping source timestamps, timeline duration, and actual selected frames unchanged.",
+    "contactSheet": "contact-sheet.png",
+    "normalSpeedReview": "pending"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "No run created. Default sandbox denied process inspection and compare exited 8."
+    },
+    {
+      "attempt": 2,
+      "result": "Real compare exited partial/3. The verifier fixture mistakenly placed a 3000 ms observation under a 1500 ms step deadline, causing both motion actions to time out. The run remains preserved and cleaned.",
+      "cleanup": {
+        "runId": "20261102T202647616Z-ef65bc7498b77c38",
+        "ownership": {
+          "processLedgers": 1,
+          "dockerIdentities": 0
+        },
+        "ownerState": "inactive",
+        "workspacesRemoved": true,
+        "ports": [
+          4310,
+          4311
+        ],
+        "listenersRemaining": 0
+      }
+    },
+    {
+      "attempt": 3,
+      "result": "Standard 10000 ms step deadline retained the intended one-side required failure. Saved verification then exercised encoder failure, offline recovery, every source mask, and every output-frame mask."
+    }
+  ],
+  "verifierCorrections": [
+    "An initial assertion wrongly required the truthful sub-frame failed annotation to occupy a full output frame. That assertion is retained in the original failed verifier report and is not used as a timing requirement.",
+    "Caller-source preservation excludes the known tool-owned .show-what-changed output directory. All caller source, index bytes, dirty content, untracked files, and worktree registrations otherwise match exactly."
+  ],
+  "releaseAcceptance": "not-evaluated"
+}

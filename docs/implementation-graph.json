@@ -1,0 +1,1018 @@
+{
+  "graphVersion": 2,
+  "specRevision": "0.3",
+  "productSchemaVersion": 2,
+  "estimatedHours": 24,
+  "maxConcurrentOwners": 4,
+  "status": "implementation_in_progress",
+  "specPath": "spec.md",
+  "statusLedgerPath": "evidence/revision-0.3-status.json",
+  "currentGoal": {
+    "kind": "implementation",
+    "scope": [
+      "implement spec revision 0.3",
+      "verify generic web-app compatibility",
+      "prepare a privacy-reviewed public candidate"
+    ],
+    "excludes": [
+      "public mutation",
+      "publication",
+      "private application context in repository or package"
+    ],
+    "implementationEvidenceAccepted": false
+  },
+  "laterGoal": {
+    "requiredInputs": [
+      "spec revision 0.3 and digest",
+      "implementation baseline and checkout inventory",
+      "Linux and macOS environments",
+      "bounded local/synthetic execution authorization",
+      "local Docker Engine/buildx capabilities and disposable builder permissions",
+      "redistributable web-app source and isolated candidate-worktree permission",
+      "private environment references and evidence paths",
+      "four permanent file owners",
+      "deadline",
+      "separately authorized public actions or an empty list"
+    ],
+    "donePredicate": {
+      "requiredAcceptedGates": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G16",
+        "G17",
+        "G18",
+        "G19",
+        "G20",
+        "G21",
+        "G22",
+        "G23",
+        "G24"
+      ],
+      "candidateIdentityFields": [
+        "implementationCommit",
+        "sourceArchiveSha256",
+        "packageTarballSha256",
+        "specSha256"
+      ],
+      "requiredEvidenceFields": [
+        "command",
+        "sourceIdentity",
+        "expectedResult",
+        "actualExitCode",
+        "artifacts",
+        "independentReview"
+      ],
+      "historicalPassesAccepted": false,
+      "packageInputChangesInvalidateAffectedEvidence": true,
+      "readyStatus": "ready_for_owner_publish",
+      "g24CanPassWithoutPublication": true,
+      "publicationRequiresSeparateExplicitAuthorization": true,
+      "publishedRequires": [
+        "observed public repository availability",
+        "observed public package availability",
+        "independent installation of published version"
+      ]
+    }
+  },
+  "owners": [
+    {
+      "id": "integrator",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh",
+      "role": "contracts, CLI, runner, integration, package, judgment",
+      "codingModel": "gpt-6.1-sol",
+      "codingReasoningEffort": "xhigh"
+    },
+    {
+      "id": "worker-a",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "xhigh",
+      "role": "workspace, pure planner, source fixtures, representative public web app"
+    },
+    {
+      "id": "worker-b",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "xhigh",
+      "role": "runtime, Docker, state/auth, adversarial checks, Linux"
+    },
+    {
+      "id": "worker-c",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "xhigh",
+      "role": "recorder, composer, motion, demos, agent docs, macOS"
+    }
+  ],
+  "reviewPolicy": {
+    "judgment": {
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh"
+    },
+    "secondReview": {
+      "model": "gpt-6.1-terra",
+      "reasoningEffort": "xhigh",
+      "slot": "worker-b",
+      "replacesSlotModel": true
+    },
+    "crossFamilyJudgePool": [],
+    "limitation": "All configured models belong to the GPT family. No cross-family judge is available.",
+    "missingApprovedModel": "Report the unavailable model and request a supported replacement.",
+    "maxFocusedRepairAttemptsBeforeDiagnosis": 2,
+    "reviewersEditOtherOwnersFiles": false,
+    "sharedContractWriter": "integrator"
+  },
+  "assumptions": [
+    "prepared tools",
+    "redistributable representative application source",
+    "usable local Docker daemon with buildx",
+    "Linux and macOS hosts",
+    "four owner slots",
+    "bounded private/synthetic inputs"
+  ],
+  "mandatoryCapabilities": [
+    "host-process recipes",
+    "restricted Docker Engine app/services",
+    "whole-repository streaming snapshots",
+    "schema 2",
+    "CDP PNG motion",
+    "all-frame fixed-rectangle masks",
+    "representative public web app acceptance",
+    "truthful failures",
+    "verified owned cleanup"
+  ],
+  "deferred": [
+    "arbitrary Compose",
+    "automatic arbitrary-stack discovery",
+    "dynamic selector-following motion masks",
+    "remote previews",
+    "automatic publication"
+  ],
+  "checkpoints": [
+    {
+      "hour": 2,
+      "nodeIds": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "required": "sanitized capture/mask/clock/schedule/encode/decode prototype plus early source-volume and service-ownership results",
+      "finalGateAcceptance": false
+    },
+    {
+      "hour": 10,
+      "nodeIds": [
+        "R6"
+      ],
+      "required": "integrated general-app CLI motion comparison"
+    },
+    {
+      "hour": 14,
+      "nodeIds": [
+        "R7"
+      ],
+      "required": "both representative public web-app normal-route comparisons",
+      "finalGateAcceptance": false
+    },
+    {
+      "hour": 18,
+      "nodeIds": [
+        "R11"
+      ],
+      "required": "clean installed candidate and cross-stack smoke"
+    },
+    {
+      "hour": 24,
+      "nodeIds": [
+        "R16"
+      ],
+      "required": "all accepted exact-candidate gates or explicit incomplete result"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "R0",
+      "title": "Freeze schema 2 and interfaces",
+      "owner": "integrator",
+      "dependsOn": [],
+      "startHour": 0,
+      "endHour": 1,
+      "owns": [
+        "src/schema/**",
+        "schema/**",
+        "scripts/generate-schemas.mjs",
+        "test/contracts/**",
+        "docs/architecture/contracts.md",
+        "evidence/revision-0.3/R0.md"
+      ],
+      "deliverables": [
+        "strict schema 2 examples and generated schemas",
+        "frozen Plan/RunContext/resource/CaptureBundle/Timeline/envelope interfaces",
+        "installed capability outcomes and migration map"
+      ],
+      "gateIds": [
+        "G01"
+      ],
+      "verification": [
+        "validate documented and negative examples",
+        "review interfaces before parallel changes",
+        "record actual API/tool capability outcomes and probe limits",
+        "check local Docker endpoint/buildx and disposable builder capabilities"
+      ],
+      "stopConditions": [
+        "contradictory examples",
+        "missing required capability",
+        "unfrozen shared interface"
+      ]
+    },
+    {
+      "id": "R1",
+      "title": "Prove fully sanitized motion",
+      "owner": "worker-c",
+      "dependsOn": [
+        "R0"
+      ],
+      "startHour": 1,
+      "endHour": 2,
+      "owns": [
+        "fixtures/motion/**",
+        "scripts/revision-0.3-motion-probe.mjs",
+        "evidence/revision-0.3/R1.md"
+      ],
+      "deliverables": [
+        "synthetic CDP PNG capture through masks, clocks, schedule, encode, and decoded output",
+        "bounded queue/gap measurements",
+        "prototype feasibility verdict"
+      ],
+      "gateIds": [
+        "G10",
+        "G11",
+        "G12",
+        "G14"
+      ],
+      "verification": [
+        "known object movement and pulse alignment",
+        "no raw persistence and correct masks",
+        "decoded encoded boundaries"
+      ],
+      "stopConditions": [
+        "missing monotonic clock",
+        "raw persisted frame",
+        "incorrect masks",
+        "unexplained motion gap",
+        "broken bounded encode"
+      ],
+      "isFinalGateAcceptance": false
+    },
+    {
+      "id": "R2",
+      "title": "Generalize source, recipes, and pure planning",
+      "owner": "worker-a",
+      "dependsOn": [
+        "R0"
+      ],
+      "startHour": 1,
+      "endHour": 7,
+      "owns": [
+        "src/workspace/**",
+        "src/planner/**",
+        "test/unit/source*.test.ts",
+        "test/unit/snapshot*.test.ts",
+        "test/unit/planner*.test.ts",
+        "test/integration/workspace*.test.ts",
+        "fixtures/cross-stack/**",
+        "evidence/revision-0.3/R2.md"
+      ],
+      "deliverables": [
+        "streaming whole-repository inventories/snapshots",
+        "exact refs and final WORKTREE preservation",
+        "pure recipes and immutable plans",
+        "positive static/Python/npm/pnpm-workspace fixtures"
+      ],
+      "gateIds": [
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G18"
+      ],
+      "verification": [
+        "large-repository source/shared-package probe by hour 2",
+        "positive cross-stack and exact-ref cases",
+        "copy races/source mutation rejected",
+        "caller HEAD/index/files/dependencies preserved",
+        "plan executes no repository code"
+      ],
+      "stopConditions": [
+        "omitted tracked input",
+        "accepted source mutation",
+        "changed caller state",
+        "repository execution during planning"
+      ]
+    },
+    {
+      "id": "R3",
+      "title": "Extend owned runtime and Docker services",
+      "owner": "worker-b",
+      "dependsOn": [
+        "R0"
+      ],
+      "startHour": 1,
+      "endHour": 7,
+      "owns": [
+        "src/runtime/**",
+        "test/unit/runtime*.test.ts",
+        "test/unit/lsof*.test.ts",
+        "test/integration/lifecycle*.test.ts",
+        "fixtures/services/**",
+        "fixtures/auth/**",
+        "evidence/revision-0.3/R3.md"
+      ],
+      "deliverables": [
+        "setup/services/start/readiness/bootstrap",
+        "private environment and independent auth states",
+        "restricted Docker Engine side-owned networks/data",
+        "inspected idempotent cleanup",
+        "disposable buildx builder/state volumes and app/service image-declared volume policy"
+      ],
+      "gateIds": [
+        "G05",
+        "G06",
+        "G07",
+        "G15",
+        "G16",
+        "G17"
+      ],
+      "verification": [
+        "Docker ownership feasibility by hour 2",
+        "process/listener identity",
+        "container labels/networks/ports/liveness",
+        "success/failure/signal/timeout resource absence",
+        "synthetic authenticated side isolation",
+        "app/service VOLUME mount inspection",
+        "interrupted builder creation/build and exact builder/state-volume cleanup",
+        "unrelated builder/image survival"
+      ],
+      "stopConditions": [
+        "Docker or required buildx capability unavailable",
+        "uncertain ownership",
+        "secret leakage",
+        "unverified cleanup",
+        "unrelated resource affected"
+      ]
+    },
+    {
+      "id": "R4",
+      "title": "Implement motion actions, privacy, and composition",
+      "owner": "worker-c",
+      "dependsOn": [
+        "R1"
+      ],
+      "startHour": 2,
+      "endHour": 7,
+      "owns": [
+        "src/recorder/**",
+        "src/composer/**",
+        "test/unit/scenario*.test.ts",
+        "test/unit/timeline*.test.ts",
+        "test/unit/png*.test.ts",
+        "test/integration/recorder*.test.ts",
+        "test/integration/composer*.test.ts",
+        "test/integration/motion*.test.ts",
+        "evidence/revision-0.3/R4.md"
+      ],
+      "deliverables": [
+        "CDP motion, strict actions, and source clocks",
+        "all-frame rectangles and schema 2 keyframe selectors",
+        "bounded FFmpeg composition and trusted overlays",
+        "truthful partial motion and offline recompose"
+      ],
+      "gateIds": [
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14"
+      ],
+      "verification": [
+        "action/absence/exclusion/failure behavior",
+        "clock/queue/frame validation",
+        "persisted and decoded frame masks",
+        "exact schedule and boundary images",
+        "original speed and independent recovery outcomes",
+        "fixed unit-rate session clock mapping remains valid across navigation or fails explicitly"
+      ],
+      "stopConditions": [
+        "synthetic motion",
+        "raw persistence",
+        "mask failure",
+        "per-side speed change",
+        "unsafe filters",
+        "false success"
+      ]
+    },
+    {
+      "id": "R5",
+      "title": "Prepare CLI, runner, and artifacts",
+      "owner": "integrator",
+      "dependsOn": [
+        "R0"
+      ],
+      "startHour": 1,
+      "endHour": 7,
+      "owns": [
+        "src/cli/**",
+        "src/runner/**",
+        "package.json",
+        "package-lock.json",
+        "test/unit/cli*.test.ts",
+        "test/unit/runner*.test.ts",
+        "evidence/revision-0.3/R5.md"
+      ],
+      "deliverables": [
+        "schema 2 CLI/JSON envelopes",
+        "consent and saved plans",
+        "resource registration and final outcome reduction",
+        "doctor filter/optional-Docker capabilities"
+      ],
+      "gateIds": [
+        "G01",
+        "G18",
+        "G20"
+      ],
+      "verification": [
+        "single JSON stdout",
+        "consent/stale-plan exits",
+        "null missing artifacts",
+        "plan/doctor execute no app code",
+        "recovery preserves earlier faults"
+      ],
+      "stopConditions": [
+        "contract mismatch",
+        "app execution from plan/doctor",
+        "secret public field",
+        "cleared prior fault"
+      ]
+    },
+    {
+      "id": "R6",
+      "title": "Integrate general-app motion and independent reviews",
+      "owner": "integrator",
+      "dependsOn": [
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "startHour": 7,
+      "endHour": 10,
+      "participants": [
+        {
+          "owner": "worker-a",
+          "startHour": 7,
+          "endHour": 10,
+          "role": "review recorder/composer; repair only own files"
+        },
+        {
+          "owner": "worker-b",
+          "startHour": 7,
+          "endHour": 10,
+          "role": "review source/planner; repair only own files"
+        },
+        {
+          "owner": "worker-c",
+          "startHour": 7,
+          "endHour": 10,
+          "role": "review runtime/runner; repair only own files"
+        }
+      ],
+      "owns": [
+        "src/runner/**",
+        "test/integration/compare*.test.ts",
+        "evidence/revision-0.3/R6.md"
+      ],
+      "deliverables": [
+        "complete general-app CLI motion",
+        "safe required-failure partial media",
+        "neighboring-module findings and dispositions"
+      ],
+      "gateIds": [
+        "G04",
+        "G05",
+        "G06",
+        "G08",
+        "G09",
+        "G11",
+        "G13",
+        "G14",
+        "G15",
+        "G16",
+        "G17",
+        "G18"
+      ],
+      "verification": [
+        "host/container recipes",
+        "masked useful media",
+        "exit 3 and actual-time failure labels",
+        "cleanup/caller preservation",
+        "three cross-owner reviews"
+      ],
+      "stopConditions": [
+        "no useful safe integrated motion",
+        "resource leak",
+        "false provenance/failure labels",
+        "interface mismatch"
+      ]
+    },
+    {
+      "id": "R7",
+      "title": "Prove representative public web-app flows early",
+      "owner": "worker-a",
+      "dependsOn": [
+        "R6"
+      ],
+      "startHour": 10,
+      "endHour": 14,
+      "owns": [
+        "fixtures/acceptance-app/**",
+        "docs/web-app-acceptance.md",
+        "evidence/revision-0.3/R7.md"
+      ],
+      "deliverables": [
+        "public source/license/runtime/package-manager identity",
+        "root-workspace recipe and normal-route scenarios",
+        "navigation/inner-scroll and changed form-feedback motion"
+      ],
+      "gateIds": [
+        "G03",
+        "G19"
+      ],
+      "verification": [
+        "390 by 844 menu or panel and inner-scroll",
+        "synthetic invalid form input",
+        "isolated candidate worktree source change",
+        "no real accounts or production/paid services",
+        "preservation and cleanup"
+      ],
+      "stopConditions": [
+        "unreviewed source/license",
+        "source-volume failure",
+        "replacement page bypasses selected application",
+        "normal route failure",
+        "caller changed"
+      ],
+      "isFinalGateAcceptance": false
+    },
+    {
+      "id": "R8",
+      "title": "Adversarial lifecycle, state, and provenance",
+      "owner": "worker-b",
+      "dependsOn": [
+        "R6"
+      ],
+      "startHour": 10,
+      "endHour": 16,
+      "owns": [
+        "test/integration/revision-0.3-adversarial*.test.ts",
+        "scripts/linux-gate/**",
+        "scripts/linux-gate.mjs",
+        "evidence/revision-0.3/R8.md"
+      ],
+      "deliverables": [
+        "failure-injection findings",
+        "Linux/container harness updates",
+        "public artifact/log secret checks"
+      ],
+      "gateIds": [
+        "G02",
+        "G03",
+        "G05",
+        "G06",
+        "G07",
+        "G09",
+        "G11",
+        "G12",
+        "G15",
+        "G16",
+        "G17",
+        "G18"
+      ],
+      "verification": [
+        "source races/stale plans/generated files",
+        "listener/redirect/PID/ledger/output/clean cases",
+        "interrupted Docker create/build and app/service image-declared volumes",
+        "signals/deadlines across phases",
+        "auth/secret rejection and unrelated-resource survival",
+        "low-entropy fill-value dictionary has identical public and distinct private digests",
+        "bound seed input equality and state independence",
+        "generated configuration has image identity or explicit unverified host-build provenance"
+      ],
+      "stopConditions": [
+        "cleanup failure",
+        "accepted provenance mutation",
+        "private leak",
+        "unrelated resource affected"
+      ]
+    },
+    {
+      "id": "R9",
+      "title": "Verify motion and document behavior",
+      "owner": "worker-c",
+      "dependsOn": [
+        "R6"
+      ],
+      "startHour": 10,
+      "endHour": 16,
+      "owns": [
+        "scripts/revision-0.3-motion-check.mjs",
+        "docs/demo/**",
+        "README.md",
+        "docs/quickstart.md",
+        "docs/limitations.md",
+        "skills/show-what-changed/**",
+        "evidence/revision-0.3/R9.md"
+      ],
+      "deliverables": [
+        "movement/pulse/mask checks",
+        "synthetic success/partial motion demos",
+        "cross-stack quickstarts and agent skill",
+        "honest state/privacy/coverage limits"
+      ],
+      "gateIds": [
+        "G10",
+        "G11",
+        "G13",
+        "G14",
+        "G22"
+      ],
+      "verification": [
+        "actual positions/gaps/alignment through full pipeline",
+        "normal-speed preliminary review",
+        "documented command accuracy",
+        "synthetic-only public media"
+      ],
+      "stopConditions": [
+        "stalled/invented motion",
+        "misleading claims",
+        "weakened required action",
+        "private application public material"
+      ]
+    },
+    {
+      "id": "R10",
+      "title": "Prepare package and evidence commands",
+      "owner": "integrator",
+      "dependsOn": [
+        "R6"
+      ],
+      "startHour": 10,
+      "endHour": 16,
+      "owns": [
+        "package.json",
+        "package-lock.json",
+        ".github/workflows/ci.yml",
+        "scripts/release-*.mjs",
+        "test/package/**",
+        "LICENSE",
+        "THIRD_PARTY_NOTICES.md",
+        "SECURITY.md",
+        "CONTRIBUTING.md",
+        "evidence/revision-0.3/R10.md"
+      ],
+      "deliverables": [
+        "allowlist and clean-install harness",
+        "quickstart/cross-stack/offline-compose smoke",
+        "license/notices and public package inputs completed before packing",
+        "configured check inventory and evidence commands"
+      ],
+      "gateIds": [
+        "G20",
+        "G21",
+        "G22"
+      ],
+      "verification": [
+        "all commands and assets represented",
+        "tool/app runtime separation",
+        "configured lint/format or explicit absence",
+        "source-tree independence cases"
+      ],
+      "stopConditions": [
+        "missing assets",
+        "source-tree imports",
+        "unsupported advertised behavior",
+        "private package inputs"
+      ]
+    },
+    {
+      "id": "R11",
+      "title": "Freeze and install candidate tarball",
+      "owner": "integrator",
+      "dependsOn": [
+        "R7",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "startHour": 16,
+      "endHour": 18,
+      "participants": [
+        {
+          "owner": "worker-b",
+          "startHour": 16,
+          "endHour": 18,
+          "role": "independent package review"
+        }
+      ],
+      "owns": [
+        "evidence/revision-0.3/candidate-identity.json",
+        "evidence/revision-0.3/R11.md"
+      ],
+      "deliverables": [
+        "hashed reviewed tarball",
+        "clean installed candidate",
+        "installed cross-stack and all-command smoke"
+      ],
+      "gateIds": [
+        "G04",
+        "G20",
+        "G21"
+      ],
+      "verification": [
+        "build/pack/allowlist",
+        "fresh install without source tree",
+        "help/doctor/plan/compare/compose/clean",
+        "manifest-free Python/static",
+        "runtime separation"
+      ],
+      "stopConditions": [
+        "private tarball material",
+        "missing asset",
+        "source-tree dependency",
+        "installed cross-stack failure"
+      ]
+    },
+    {
+      "id": "R12",
+      "title": "Final installed-package public web-app acceptance",
+      "owner": "worker-a",
+      "dependsOn": [
+        "R11"
+      ],
+      "startHour": 18,
+      "endHour": 20,
+      "owns": [
+        "evidence/revision-0.3/R12.md",
+        "public repeat recipe and acceptance evidence"
+      ],
+      "deliverables": [
+        "three consecutive final-tarball runs of both public scenarios",
+        "reviewed motion/preservation/cleanup",
+        "public reusable exact inputs and subsequent WORKTREE run"
+      ],
+      "gateIds": [
+        "G03",
+        "G19"
+      ],
+      "verification": [
+        "exact tarball and public application identities",
+        "both normal routes without manual intervention",
+        "visible real feedback change",
+        "caller/index/dependencies preserved",
+        "resource absence after each run",
+        "documented repeat command verified on subsequent WORKTREE comparison"
+      ],
+      "stopConditions": [
+        "any failed run",
+        "substituted scenario",
+        "private leak",
+        "caller change",
+        "owned residue"
+      ]
+    },
+    {
+      "id": "R13",
+      "title": "Final Linux and container acceptance",
+      "owner": "worker-b",
+      "dependsOn": [
+        "R11"
+      ],
+      "startHour": 18,
+      "endHour": 20,
+      "owns": [
+        "evidence/revision-0.3/R13.md",
+        "evidence/revision-0.3/linux/**"
+      ],
+      "deliverables": [
+        "Linux full-suite/installed-package evidence",
+        "three full motion/mask/compose runs",
+        "Docker lifecycle/unrelated-resource evidence"
+      ],
+      "gateIds": [
+        "G04",
+        "G07",
+        "G10",
+        "G11",
+        "G12",
+        "G15",
+        "G16",
+        "G20",
+        "G21"
+      ],
+      "verification": [
+        "exact-candidate checks",
+        "section 7.4 metrics and normal-speed review",
+        "all-frame masks",
+        "Docker success/failure/signal/timeout cleanup",
+        "interrupted build/create, app/service volume inspection, exact builder/cache cleanup, unrelated builder/image survival"
+      ],
+      "stopConditions": [
+        "Linux/Docker unavailable",
+        "motion/mask failure",
+        "owned residue",
+        "unrelated resource affected"
+      ]
+    },
+    {
+      "id": "R14",
+      "title": "Final macOS and media acceptance",
+      "owner": "worker-c",
+      "dependsOn": [
+        "R11"
+      ],
+      "startHour": 18,
+      "endHour": 20,
+      "owns": [
+        "evidence/revision-0.3/R14.md",
+        "evidence/revision-0.3/macos/**"
+      ],
+      "deliverables": [
+        "macOS full-suite/installed-package evidence",
+        "three full motion/mask/compose runs",
+        "decoded presentation/poster/recompose review"
+      ],
+      "gateIds": [
+        "G04",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G20",
+        "G21",
+        "G22"
+      ],
+      "verification": [
+        "exact-candidate checks",
+        "section 7.4 metrics and normal-speed review",
+        "narrow viewport and timed failures",
+        "decoded first/boundary/final images",
+        "offline compose preserves faults"
+      ],
+      "stopConditions": [
+        "macOS unavailable",
+        "poor motion",
+        "privacy/mask failure",
+        "bad schedule",
+        "false recovery success"
+      ]
+    },
+    {
+      "id": "R15",
+      "title": "Audit candidate and prepare publishing handoff",
+      "owner": "integrator",
+      "dependsOn": [
+        "R11"
+      ],
+      "startHour": 18,
+      "endHour": 20,
+      "owns": [
+        "docs/publishing.md",
+        "evidence/revision-0.3/candidate-audit.json",
+        "evidence/revision-0.3/R15.md"
+      ],
+      "deliverables": [
+        "candidate/archive/tarball/spec hashes",
+        "history/package/advisory/license/public-artifact review",
+        "exact owner publishing and independent-install handoff"
+      ],
+      "gateIds": [
+        "G23",
+        "G24"
+      ],
+      "verification": [
+        "read-only audit of frozen package inputs",
+        "full history and tarball scans",
+        "advisories/notices triage",
+        "no private application raw material",
+        "repository/license/npm ownership/auth/provenance prerequisites",
+        "rollback/deprecation and post-publish commands"
+      ],
+      "stopConditions": [
+        "private public material",
+        "unreviewed supply-chain finding",
+        "identity mismatch",
+        "missing ownership/prerequisite information"
+      ],
+      "publicMutationAllowed": false
+    },
+    {
+      "id": "R16",
+      "title": "Repair, revalidate, and decide readiness",
+      "owner": "integrator",
+      "dependsOn": [
+        "R12",
+        "R13",
+        "R14",
+        "R15"
+      ],
+      "startHour": 20,
+      "endHour": 24,
+      "participants": [
+        {
+          "owner": "worker-a",
+          "startHour": 20,
+          "endHour": 24,
+          "role": "fresh-agent documented recipe check and owned repairs"
+        },
+        {
+          "owner": "worker-b",
+          "startHour": 20,
+          "endHour": 24,
+          "role": "independent Terra review and owned repairs"
+        },
+        {
+          "owner": "worker-c",
+          "startHour": 20,
+          "endHour": 24,
+          "role": "normal-speed media review and owned repairs"
+        }
+      ],
+      "owns": [
+        "evidence/revision-0.3-status.json",
+        "evidence/revision-0.3/final-review.md",
+        "docs/release-readiness.md"
+      ],
+      "deliverables": [
+        "independent requirement/evidence review",
+        "fresh-agent installed custom-recipe evidence",
+        "revalidated exact candidate or explicit incomplete result",
+        "reviewed publishing handoff"
+      ],
+      "gateIds": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G16",
+        "G17",
+        "G18",
+        "G19",
+        "G20",
+        "G21",
+        "G22",
+        "G23",
+        "G24"
+      ],
+      "verification": [
+        "all gates bind one exact candidate",
+        "affected installed/platform/motion/representative web app reruns after package changes",
+        "Astra/Terra judgment in existing slots",
+        "no unresolved required defect",
+        "handoff complete without publication"
+      ],
+      "stopConditions": [
+        "required gate pending/failed",
+        "stale evidence",
+        "privacy/identity/cleanup defect",
+        "deadline before done predicate"
+      ],
+      "publicMutationAllowed": false
+    }
+  ],
+  "planPrompt": "Read spec.md revision 0.3, this graph, your node card, and frozen schema 2 contracts. Work only in assigned files and owner slots. Name exact fixture inputs, commands, expected outcomes, gate IDs, source identities, and artifact evidence. Preserve unrelated work. Use focused behavioral checks, implementation, verification, independent review, and integration. After two failed focused repairs, diagnose the contract. Never weaken motion, masking, representative public web app, identity, or cleanup. Report unavailable platforms/tools/models. Perform no public mutation or publication without separate explicit authorization."
+}

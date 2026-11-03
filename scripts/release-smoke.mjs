@@ -1,0 +1,148 @@
+#!/usr/bin/env node
+import assert from 'node:assert/strict';
+import { copyFile, cp, mkdir, mkdtemp, readFile, realpath, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { createFixture } from './create-fixture.mjs';
+import { hash, installCandidate, saveJson, sourceState, verifyArtifacts } from './release-harness.mjs';
+
+const [tarballArgument, outputArgument] = process.argv.slice(2);
+assert(tarballArgument && outputArgument && process.argv.length === 4, 'Usage: node scripts/release-smoke.mjs candidate.tgz output-directory');
+const output = resolve(outputArgument);
+await mkdir(output, { recursive: true });
+const root = await realpath(await mkdtemp(join(tmpdir(), 'swc-package-')));
+const report = { status: 'running', startedAt: new Date().toISOString(), platform: process.platform, arch: process.arch, node: process.version, root };
+try {
+  const candidate = await installCandidate(resolve(tarballArgument), root, output);
+  report.candidate = { path: candidate.tarball, sha256: candidate.sha256, bytes: candidate.bytes, files: candidate.listing };
+  const fixture = createFixture(join(root, 'app'));
+  report.fixture = fixture;
+  await mkdir(join(fixture.repoRoot, 'node_modules'), { recursive: true });
+  await writeFile(join(fixture.repoRoot, 'node_modules/caller-sentinel.txt'), 'Caller dependencies remain intact.\n');
+  const scenario = join(root, 'pricing.scenario.json');
+  const partialScenario = join(root, 'required-before.scenario.json');
+  const quickstart = await readFile(new URL('../docs/quickstart.md', import.meta.url), 'utf8');
+  const examples = [...quickstart.matchAll(/```json\n([\s\S]*?)\n```/g)].map((match) => JSON.parse(match[1]));
+  const quickstartScenarios = examples.filter((example) => example.id === 'pricing-toggle');
+  assert.equal(quickstartScenarios.length, 1, 'Quickstart must contain the reviewed pricing scenario');
+  candidate.schemas.ScenarioSchema.parse(quickstartScenarios[0]);
+  for (const example of examples.filter((example) => example.execution)) candidate.schemas.ConfigSchema.parse(example);
+  const canonicalScenario = JSON.parse(await readFile(new URL('../test/fixtures/scenarios/pricing.scenario.json', import.meta.url), 'utf8'));
+  assert.deepEqual(quickstartScenarios[0], canonicalScenario, 'Quickstart pricing scenario must match the reviewed fixture');
+  await saveJson(scenario, quickstartScenarios[0]);
+  await copyFile(new URL('../test/fixtures/scenarios/required-before-failure.scenario.json', import.meta.url), partialScenario);
+  const original = await sourceState(fixture.repoRoot);
+  const selection = ['--base', fixture.baseCommit, '--head', fixture.headCommit, '--scenario', scenario];
+  await candidate.cli('help', ['--help'], candidate.installRoot, 0);
+  await candidate.cli('doctor', ['doctor'], candidate.installRoot, 0);
+  await candidate.cli('invalid-flag', ['--unknown-option'], candidate.installRoot, 2);
+  await candidate.cli('missing-compose', ['compose', join(root, 'missing-run')], candidate.installRoot, 2);
+  const plan = await candidate.cli('plan', ['plan', ...selection], fixture.repoRoot, 0);
+  assert.equal(plan.data.baseCommit, fixture.baseCommit);
+  assert.equal(plan.data.headCommit, fixture.headCommit);
+  await candidate.cli('consent-required', ['compare', ...selection], fixture.repoRoot, 7);
+  const successEnvelope = await candidate.cli('compare-success', ['compare', '--plan', join(fixture.repoRoot, '.show-what-changed/plan.json'), '--allow-exec'], fixture.repoRoot, 0);
+  const success = await verifyArtifacts(fixture.repoRoot, successEnvelope, candidate.schemas);
+  assert.equal(success.manifest.summary.expectedAbsences, 1);
+  assert.equal(success.manifest.summary.exclusions, 1);
+  assert.equal(success.manifest.captureMode, 'keyframes');
+  assert.equal(success.manifest.summary.verifiedPairs, 5);
+  const successCapture = candidate.schemas.CaptureBundleSchema.parse(JSON.parse(await readFile(join(success.runDir, 'capture.json'), 'utf8')));
+  assert.equal(successCapture.scenarios[0].steps.find((step) => step.id === 'poster').after.status, 'ok');
+  assert.deepEqual(await sourceState(fixture.repoRoot), original);
+  const browserUnavailable = { PLAYWRIGHT_BROWSERS_PATH: join(root, 'browser-unavailable') };
+  const recomposedSuccess = await candidate.cli('compose-success-without-browser', ['compose', success.runDir], fixture.repoRoot, 0, browserUnavailable);
+  await verifyArtifacts(fixture.repoRoot, recomposedSuccess, candidate.schemas);
+  assert.deepEqual(recomposedSuccess.data.comparisonOutcome, success.manifest.comparisonOutcome);
+
+  const mergeBaseEnvelope = await candidate.cli('compare-merge-base', ['compare', '--base', fixture.headCommit, '--head', fixture.baseCommit, '--merge-base', '--route', '/pricing', '--allow-exec'], fixture.repoRoot, 0);
+  const mergeBase = await verifyArtifacts(fixture.repoRoot, mergeBaseEnvelope, candidate.schemas);
+  assert.equal(mergeBase.manifest.sources.baseResolution, 'merge-base');
+  assert.equal(mergeBase.manifest.sources.before.requested, fixture.headCommit);
+  assert.equal(mergeBase.manifest.sources.before.commit, fixture.baseCommit);
+  assert.equal(mergeBase.manifest.sources.after.commit, fixture.baseCommit);
+  assert.equal(mergeBase.manifest.sources.before.materializedHash, mergeBase.manifest.sources.after.materializedHash);
+  assert.equal(mergeBase.manifest.summary.verifiedPairs, 3);
+  for (const step of mergeBase.manifest.scenarios[0].steps) assert.equal(step.changeRatio, 0);
+  assert.deepEqual(await sourceState(fixture.repoRoot), original);
+
+  const partialEnvelope = await candidate.cli('compare-partial', ['compare', '--base', fixture.baseCommit, '--head', fixture.headCommit, '--scenario', partialScenario, '--allow-exec'], fixture.repoRoot, 3);
+  const partial = await verifyArtifacts(fixture.repoRoot, partialEnvelope, candidate.schemas);
+  assert.equal(partial.manifest.summary.failedSteps, 1);
+  assert.equal(partial.manifest.summary.blockedSteps, 3);
+  const failedStep = partial.manifest.scenarios[0].steps.find((step) => step.id === 'required-toggle');
+  assert.equal(failedStep.before.status, 'failed');
+  assert.equal(failedStep.changeRatio, null);
+  const failedEncoding = await candidate.cli('compose-unavailable-encoder', ['compose', partial.runDir], fixture.repoRoot, 8, { ...browserUnavailable, SWC_FFMPEG: join(root, 'ffmpeg-unavailable') });
+  assert.deepEqual(failedEncoding.data.comparisonOutcome, partial.manifest.comparisonOutcome);
+  const recovered = await candidate.cli('compose-recovered-partial', ['compose', partial.runDir], fixture.repoRoot, 3, browserUnavailable);
+  await verifyArtifacts(fixture.repoRoot, recovered, candidate.schemas);
+  assert.deepEqual(recovered.data.comparisonOutcome, partial.manifest.comparisonOutcome);
+  assert.equal(recovered.data.encodingOutcome.status, 'ok');
+  assert(recovered.data.errorHistory.length > 0);
+  assert.deepEqual(await sourceState(fixture.repoRoot), original);
+
+  const revisionPath = join(fixture.repoRoot, 'app/revision.js');
+  await writeFile(revisionPath, (await readFile(revisionPath, 'utf8')).replace('#d24b27', '#17845a'));
+  const editedState = await sourceState(fixture.repoRoot);
+  const worktreeEnvelope = await candidate.cli('compare-worktree', ['compare', '--base', fixture.baseCommit, '--head', 'WORKTREE', '--scenario', scenario, '--allow-exec'], fixture.repoRoot, 0);
+  const worktree = await verifyArtifacts(fixture.repoRoot, worktreeEnvelope, candidate.schemas);
+  assert.equal(worktree.manifest.sources.after.kind, 'worktree');
+  assert.notEqual(worktree.manifest.sources.after.materializedHash, success.manifest.sources.after.materializedHash);
+  assert.deepEqual(await sourceState(fixture.repoRoot), editedState);
+
+  const readmePlan = await candidate.cli('readme-plan', ['plan', '--route', '/pricing'], fixture.repoRoot, 0);
+  assert.equal(readmePlan.data.requestedBase, 'HEAD');
+  assert.equal(readmePlan.data.requestedHead, 'WORKTREE');
+  assert.equal(readmePlan.data.baseCommit, fixture.headCommit);
+  const readmeEnvelope = await candidate.cli('readme-compare', ['compare', '--plan', '.show-what-changed/plan.json', '--allow-exec'], fixture.repoRoot, 0);
+  const readme = await verifyArtifacts(fixture.repoRoot, readmeEnvelope, candidate.schemas);
+  assert.equal(readme.manifest.sources.before.commit, fixture.headCommit);
+  assert.equal(readme.manifest.sources.after.kind, 'worktree');
+  assert.equal(readme.manifest.summary.verifiedPairs, 3);
+  assert(readme.manifest.summary.changedPairs > 0);
+  assert.deepEqual(await sourceState(fixture.repoRoot), editedState);
+
+  const worktreePlan = await candidate.cli('plan-worktree', ['plan', '--scenario', scenario], fixture.repoRoot, 0);
+  await writeFile(revisionPath, (await readFile(revisionPath, 'utf8')).replace('#17845a', '#7c3aed'));
+  const stale = await candidate.cli('stale-worktree-plan', ['compare', '--plan', join(fixture.repoRoot, '.show-what-changed/plan.json'), '--allow-exec'], fixture.repoRoot, 2);
+  assert(stale.error.code.includes('STALE'));
+  assert.equal(worktreePlan.data.headKind, 'worktree');
+
+  const pagePath = join(fixture.repoRoot, 'app/pricing/page.jsx');
+  await writeFile(pagePath, (await readFile(pagePath, 'utf8')).replace('Make room for your next idea.', 'Make room for your next release.'));
+  const automaticConfig = join(root, 'automatic.config.json');
+  const fixtureConfig = JSON.parse(await readFile(join(fixture.repoRoot, 'show-what-changed.config.json'), 'utf8'));
+  await saveJson(automaticConfig, { ...fixtureConfig, routes: {}, capture: { ...fixtureConfig.capture, observeMs: 200 } });
+  const automaticState = await sourceState(fixture.repoRoot);
+  const automaticEnvelope = await candidate.cli('compare-automatic-incomplete', ['compare', '--base', fixture.baseCommit, '--head', 'WORKTREE', '--config', automaticConfig, '--allow-exec'], fixture.repoRoot, 3);
+  const automatic = await verifyArtifacts(fixture.repoRoot, automaticEnvelope, candidate.schemas);
+  assert.equal(automatic.manifest.comparisonOutcome.capture, 'ok');
+  assert.equal(automatic.manifest.comparisonOutcome.coverage, 'incomplete');
+  assert.equal(automatic.manifest.coverage.complete, false);
+  assert.deepEqual(automatic.manifest.coverage.selected.map((route) => route.path), ['/pricing']);
+  assert(automatic.manifest.coverage.unresolved.some((route) => route.reason === 'UNRESOLVED_CHANGE'));
+  assert(automatic.manifest.coverage.unresolved.every((route) => route.via.length === 0));
+  assert.equal(automatic.manifest.summary.failedSteps, 0);
+  assert.equal(automatic.manifest.summary.verifiedPairs, 3);
+  assert(automatic.manifest.summary.coverageOmissions > 0);
+  assert.deepEqual(await sourceState(fixture.repoRoot), automaticState);
+  report.commands = candidate.commands;
+  report.runs = { success: success.runDir, partial: partial.runDir, worktree: worktree.runDir, mergeBase: mergeBase.runDir, automaticIncomplete: automatic.runDir, readme: readme.runDir };
+  for (const [name, run] of [['success', success], ['partial', partial]]) {
+    const destination = join(output, 'demo', name);
+    await mkdir(destination, { recursive: true });
+    for (const filename of ['compare.mp4', 'poster.png', 'manifest.json', 'pr.md', 'capture.json', 'timeline.json']) await copyFile(join(run.runDir, filename), join(destination, filename));
+    await cp(join(run.runDir, 'frames'), join(destination, 'frames'), { recursive: true });
+    await cp(join(run.runDir, 'composed'), join(destination, 'composed'), { recursive: true });
+  }
+  report.demoVideoHashes = Object.fromEntries(await Promise.all(['success', 'partial'].map(async (name) => [name, hash(await readFile(join(output, 'demo', name, 'compare.mp4')))])));
+  report.status = 'passed';
+} catch (error) {
+  report.status = 'failed'; report.error = { message: error.message, stack: error.stack, command: error.result };
+  process.exitCode = 1;
+} finally {
+  report.endedAt = new Date().toISOString();
+  await saveJson(join(output, 'report.json'), report);
+  process.stdout.write(JSON.stringify({ status: report.status, report: join(output, 'report.json'), root }) + '\n');
+}

@@ -1,0 +1,103 @@
+name: Verify candidate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Node 24.22.2
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24.22.2
+      - name: Pin package-manager prerequisites
+        run: npm install --global npm@11.12.1 pnpm@11.9.0
+      - name: Install Linux prerequisites
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg procps build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates
+          sh scripts/linux-gate/install-lsof.sh "$HOME/.local"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Install macOS media prerequisite
+        if: runner.os == 'macOS'
+        run: brew install ffmpeg
+      - name: Install tool dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install pinned Chromium and Linux libraries
+        if: runner.os == 'Linux'
+        run: node node_modules/playwright/cli.js install --with-deps chromium
+      - name: Install pinned Chromium on macOS
+        if: runner.os == 'macOS'
+        run: node node_modules/playwright/cli.js install chromium
+      - name: Typecheck and build
+        run: |
+          npm run typecheck
+          npm run build
+          npm run schema:check
+      - name: Test source and integration behavior
+        run: |
+          npm run test:unit -- --maxWorkers=1
+          npm run test:contracts -- --maxWorkers=1
+          npm run test:privacy
+          npm run test:integration -- --maxWorkers=1 --no-file-parallelism
+      - name: Pack the candidate
+        run: |
+          mkdir -p "$RUNNER_TEMP/candidate"
+          npm pack --pack-destination "$RUNNER_TEMP/candidate" --json
+      - name: Bind the candidate to the tested source
+        run: node scripts/verify-package-source.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-source-binding"
+      - name: Verify the installed candidate
+        run: node scripts/release-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-smoke"
+      - name: Verify installed motion across both viewports and three repetitions
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { spawnSync } from 'node:child_process';
+          import { createHash } from 'node:crypto';
+          import { readFile } from 'node:fs/promises';
+          import { isAbsolute, join } from 'node:path';
+          const root = process.env.RUNNER_TEMP;
+          const smoke = JSON.parse(await readFile(join(root, 'package-smoke/report.json'), 'utf8'));
+          const tarball = await readFile(join(root, 'candidate/show-what-changed-0.1.0.tgz'));
+          assert.equal(smoke.status, 'passed', 'Installed package smoke must pass before motion verification.');
+          assert.equal(smoke.candidate?.sha256, createHash('sha256').update(tarball).digest('hex'), 'The installed package must match the candidate tarball.');
+          assert(typeof smoke.root === 'string' && isAbsolute(smoke.root), 'The smoke report must identify its fresh installation.');
+          const result = spawnSync(process.execPath, ['scripts/revision-0.3-motion-check.mjs', '--installed-root', join(smoke.root, 'installed/node_modules/show-what-changed'), '--output-dir', join(root, 'installed-motion')], { stdio: 'inherit' });
+          if (result.error) throw result.error;
+          assert.equal(result.signal, null, 'Installed motion verification must finish without a signal.');
+          assert.equal(result.status, 0, 'Installed motion verification must exit successfully.');
+          const motion = JSON.parse(await readFile(join(root, 'installed-motion/motion-check.json'), 'utf8'));
+          assert.equal(motion.status, 'numeric-passed');
+          assert.equal(motion.completeRepetitionMatrix, true, 'All required viewports and repetitions must complete.');
+          NODE
+      - name: Verify installed host recipes
+        run: node scripts/compatibility-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/compatibility-smoke"
+      - name: Verify installed public workspace application
+        run: node scripts/real-app-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/public-app-smoke"
+      - name: Verify Linux repeatability
+        if: runner.os == 'Linux'
+        run: node scripts/repeatability.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/repeatability"
+      - name: Review dependency metadata and scan candidate content
+        run: node scripts/release-audit.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/release-audit"

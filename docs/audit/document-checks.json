@@ -1,0 +1,52 @@
+{
+  "status": "pass",
+  "errors": [],
+  "markdownFilesChecked": 3,
+  "existingLocalLinks": 12,
+  "validJsonExamples": 2,
+  "graphNodes": 10,
+  "topologicalOrder": [
+    "N0",
+    "N1",
+    "N2",
+    "N3",
+    "N4",
+    "N5",
+    "N6",
+    "N7",
+    "N8",
+    "N9"
+  ],
+  "acceptanceChecksCovered": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17"
+  ],
+  "archive": {
+    "bytes": 68090,
+    "lines": 1049,
+    "sha256": "ad1abeef105aee4d58b277805545f75c6d830a9f4c50c14018d56c5b87662297"
+  },
+  "artifactHashes": {
+    "spec.md": "65f604f5ac2acad60e3bec0882b18f1bdc4ebfb3a51d3215f4396b6b1ec13ab8",
+    "docs/audit/report.md": "01cd0fed5206c666d0705b6b1f058f18b6184e08452fbececd8b51480b524ad3",
+    "docs/implementation-graph.md": "4366ea5818624527a94f59dfee4e1bfb8996c6528947df1c966e6c77a4c9da8e"
+  },
+  "scope": "Document structure and graph validation only; not a product test suite.",
+  "reviewDisposition": "all-three-scoped-reviews-no-blocking-findings",
+  "evidenceScope": "Historical pre-sanitization document snapshot. Recorded hashes do not describe current sanitized files and do not certify revision 0.3."
+}

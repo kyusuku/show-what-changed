@@ -1,0 +1,45 @@
+{
+  "status": "retained_export_loaded_manifest_identity_observed_exact_recovery_passed",
+  "scope": "development_direct_buildx_diagnostic_not_product_acceptance",
+  "controllerSha256": "1407c65c645f34278b0b8d50e717384cbcefd29c977835368107f6d7153dd93b",
+  "ownershipRecordSha256": "c93009800c936a18c112afad0c6d058df8c43fc86783889daae3134184076a5f",
+  "imageAttestations": false,
+  "metadataProvenance": "max",
+  "engineImageInventoryUnchanged": true,
+  "engineImageEvents": [],
+  "exportStartedEngineTime": "2026-11-03T07:20:43.241303458+07:00",
+  "exportEndedEngineTime": "2026-11-03T07:20:47.267699676+07:00",
+  "imageLoadIssued": false,
+  "failure": "verifier_rejected_normal_oci_ref_name_tag_only_annotation",
+  "archiveBytes": 1911296,
+  "configDigest": "sha256:2e17a03bfb9683e5e07b7c9b6ae4f485acf5d18f74290a6a105bd4c67dede598",
+  "iidMatchesConfig": true,
+  "metadataConfigMatchesConfig": true,
+  "baseMetadata": "observed_pinned_busybox_material",
+  "retainedOwnedResources": [
+    "historical_archive_evidence"
+  ],
+  "ownedVmStopped": true,
+  "cleanupOutcome": "subsequent_recovery_passed_original_trial_still_failed",
+  "finalCandidateAcceptance": false,
+  "archiveSha256": "6c3b1a6ee896c6d1d0f49db1039900eedee16c9454a0495101726ce748c96be9",
+  "configLabelsMatch": true,
+  "continuation": {
+    "controllerSha256": "7c4d19b090a3d270fbe97dc2974ab39e2300fe568e9f66170c1f76af6128c17f",
+    "loadCommandCompleted": true,
+    "normalAttemptStatus": "failed_config_id_only_hypothesis",
+    "actualEngineImageId": "sha256:8df32a848c402f1fcd9e96c7056c593cb777923332e9ce78148372a0ac5c542f",
+    "archiveManifestDigest": "sha256:8df32a848c402f1fcd9e96c7056c593cb777923332e9ce78148372a0ac5c542f",
+    "descriptorMatchesManifest": true,
+    "configDigestDiffersFromEngineId": true,
+    "labelsMatch": true,
+    "rootfsMatch": true,
+    "subsequentRecovery": {
+      "trialCleanupProven": true,
+      "sentinelSurvivalProven": true,
+      "sentinelCleanupProven": true,
+      "vmStoppedProven": true
+    },
+    "historicalFailuresPreserved": true
+  }
+}

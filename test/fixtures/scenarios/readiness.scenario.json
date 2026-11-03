@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 2,
+  "id": "live-timers",
+  "title": "Fixed Date with live timers and animation frames",
+  "steps": [
+    {
+      "id": "open",
+      "op": "goto",
+      "path": "/readiness"
+    },
+    {
+      "id": "delayed-ready",
+      "op": "expectVisible",
+      "target": {
+        "text": "Data ready"
+      }
+    },
+    {
+      "id": "date",
+      "op": "expectVisible",
+      "target": {
+        "text": "2026-01-15T10:00:00.000Z"
+      }
+    },
+    {
+      "id": "frames",
+      "op": "expectVisible",
+      "target": {
+        "text": "Animation frames live"
+      }
+    },
+    {
+      "id": "fill",
+      "op": "fill",
+      "target": {
+        "label": "Search plans"
+      },
+      "value": "synthetic"
+    },
+    {
+      "id": "debounced",
+      "op": "expectVisible",
+      "target": {
+        "text": "Results for synthetic"
+      }
+    },
+    {
+      "id": "fragment",
+      "op": "goto",
+      "path": "/readiness#details"
+    },
+    {
+      "id": "details",
+      "op": "expectVisible",
+      "target": {
+        "role": "heading",
+        "name": "Readiness details"
+      }
+    },
+    {
+      "id": "poster",
+      "op": "screenshot"
+    }
+  ]
+}

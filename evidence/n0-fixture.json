@@ -1,0 +1,24 @@
+{
+  "sourceSha256": "0ddafaabb5b1309660ca6a8bd7134c4f85d6dc686f9d77db28b8f2f72bf73747",
+  "deterministic": true,
+  "commits": 2,
+  "changedFiles": [
+    "app/revision.js"
+  ],
+  "sourceUnchanged": true,
+  "first": {
+    "repoRoot": "<synthetic-fixture-repository>",
+    "baseCommit": "30c3da70198a3fbabf627532f75b54fd761f1945",
+    "headCommit": "a9fee6837d1f57f4fde087a7a21bb95003f9d96a",
+    "baseRef": "fixture-base",
+    "headRef": "fixture-head"
+  },
+  "second": {
+    "repoRoot": "<synthetic-fixture-repository>",
+    "baseCommit": "30c3da70198a3fbabf627532f75b54fd761f1945",
+    "headCommit": "a9fee6837d1f57f4fde087a7a21bb95003f9d96a",
+    "baseRef": "fixture-base",
+    "headRef": "fixture-head"
+  },
+  "node": "v24.22.2"
+}

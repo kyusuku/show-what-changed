@@ -1,0 +1,341 @@
+{
+  "schemaVersion": 1,
+  "scope": "installed-development-keyframe-smoke",
+  "status": "passed",
+  "startedAt": "2026-11-02T19:49:38.763Z",
+  "endedAt": "2026-11-02T19:55:31.921Z",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v24.22.2",
+  "candidate": {
+    "sha256": "a402770beb1a39a125afc0b36ec02547821c7a0457973390870141fbc287da5b",
+    "bytes": 367554
+  },
+  "commands": [
+    {
+      "name": "help",
+      "code": 0,
+      "elapsedMs": 799.5377080000003
+    },
+    {
+      "name": "doctor",
+      "code": 0,
+      "elapsedMs": 3416.0844589999997
+    },
+    {
+      "name": "invalid-flag",
+      "code": 2,
+      "elapsedMs": 306.83745799999997
+    },
+    {
+      "name": "missing-compose",
+      "code": 2,
+      "elapsedMs": 313.16354200000023
+    },
+    {
+      "name": "plan",
+      "code": 0,
+      "elapsedMs": 499.4649159999999
+    },
+    {
+      "name": "consent-required",
+      "code": 7,
+      "elapsedMs": 407.8555839999999
+    },
+    {
+      "name": "compare-success",
+      "code": 0,
+      "elapsedMs": 63815.794582999995
+    },
+    {
+      "name": "compose-success-without-browser",
+      "code": 0,
+      "elapsedMs": 12394.11933300001
+    },
+    {
+      "name": "compare-merge-base",
+      "code": 0,
+      "elapsedMs": 54621.91141600002
+    },
+    {
+      "name": "compare-partial",
+      "code": 3,
+      "elapsedMs": 56609.866708000016
+    },
+    {
+      "name": "compose-unavailable-encoder",
+      "code": 8,
+      "elapsedMs": 1697.8147919999901
+    },
+    {
+      "name": "compose-recovered-partial",
+      "code": 3,
+      "elapsedMs": 12871.715625000012
+    },
+    {
+      "name": "compare-worktree",
+      "code": 0,
+      "elapsedMs": 56064.947625
+    },
+    {
+      "name": "readme-plan",
+      "code": 0,
+      "elapsedMs": 577.2920840000152
+    },
+    {
+      "name": "readme-compare",
+      "code": 0,
+      "elapsedMs": 45096.70437499997
+    },
+    {
+      "name": "plan-worktree",
+      "code": 0,
+      "elapsedMs": 603.0367499999702
+    },
+    {
+      "name": "stale-worktree-plan",
+      "code": 2,
+      "elapsedMs": 522.1459589999868
+    },
+    {
+      "name": "compare-automatic-incomplete",
+      "code": 3,
+      "elapsedMs": 40013.931125
+    }
+  ],
+  "demoVideoHashes": {
+    "success": "51b2158947312aac2aa504eb1e5ad62c68f5453fd18df8ba41c773c506296a95",
+    "partial": "f64373d4cb2ae1331f560bef622cfc07a0b91d488e61c8ddaf9479c61b423efe"
+  },
+  "runs": {
+    "success": {
+      "captureMode": "keyframes",
+      "summary": {
+        "verifiedPairs": 5,
+        "changedPairs": 5,
+        "expectedAbsences": 1,
+        "exclusions": 1,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "ok",
+        "capture": "ok",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "f17a2c29fe65cd90cdb7d6193a53101070231e4b6bee82422c55f350026b0deb",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "96b24c5dbc43a427739e7c73187d0af517b989069d929051c66a4e53a8a594a3",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      }
+    },
+    "partial": {
+      "captureMode": "keyframes",
+      "summary": {
+        "verifiedPairs": 2,
+        "changedPairs": 2,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 1,
+        "blockedSteps": 3,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "partial",
+        "capture": "partial",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "f17a2c29fe65cd90cdb7d6193a53101070231e4b6bee82422c55f350026b0deb",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "96b24c5dbc43a427739e7c73187d0af517b989069d929051c66a4e53a8a594a3",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      }
+    },
+    "worktree": {
+      "captureMode": "keyframes",
+      "summary": {
+        "verifiedPairs": 5,
+        "changedPairs": 5,
+        "expectedAbsences": 1,
+        "exclusions": 1,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "ok",
+        "capture": "ok",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "f17a2c29fe65cd90cdb7d6193a53101070231e4b6bee82422c55f350026b0deb",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "d840071316979dc02084c7fcbfbe513d2578ac9bce2c4d43c55211ab0842bd42",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      }
+    },
+    "mergeBase": {
+      "captureMode": "keyframes",
+      "summary": {
+        "verifiedPairs": 3,
+        "changedPairs": 0,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "ok",
+        "capture": "ok",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "f17a2c29fe65cd90cdb7d6193a53101070231e4b6bee82422c55f350026b0deb",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "f17a2c29fe65cd90cdb7d6193a53101070231e4b6bee82422c55f350026b0deb",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      }
+    },
+    "automaticIncomplete": {
+      "captureMode": "keyframes",
+      "summary": {
+        "verifiedPairs": 3,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 1
+      },
+      "comparisonOutcome": {
+        "status": "partial",
+        "capture": "ok",
+        "coverage": "incomplete",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "f17a2c29fe65cd90cdb7d6193a53101070231e4b6bee82422c55f350026b0deb",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "0b3af423a04db4e574263d45a0225a4a262d96a6051ca2b6799c1a0154f15c01",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      }
+    },
+    "readme": {
+      "captureMode": "keyframes",
+      "summary": {
+        "verifiedPairs": 3,
+        "changedPairs": 1,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "ok",
+        "capture": "ok",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "96b24c5dbc43a427739e7c73187d0af517b989069d929051c66a4e53a8a594a3",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "d840071316979dc02084c7fcbfbe513d2578ac9bce2c4d43c55211ab0842bd42",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      }
+    }
+  },
+  "finalCandidateAcceptance": false,
+  "motionAcceptance": false,
+  "pending": [
+    "Repaired motion performance and numeric matrix",
+    "Final candidate freeze and affected reruns",
+    "Required platform and independent acceptance"
+  ]
+}

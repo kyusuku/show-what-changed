@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "appDir": "apps/web",
+  "execution": {
+    "requires": [
+      { "argv": ["node", "--version"], "expectedVersion": "24.x" },
+      { "argv": ["pnpm", "--version"], "expectedVersion": "11.9.0" }
+    ],
+    "setup": [
+      { "cwd": ".", "argv": ["pnpm", "install", "--frozen-lockfile"], "timeoutMs": 120000 },
+      { "cwd": ".", "argv": ["pnpm", "--filter", "@workshop/board-data", "build"], "timeoutMs": 30000 }
+    ],
+    "start": { "kind": "process", "argv": ["node", "server.mjs", "{port}"] },
+    "ready": { "path": "/board", "statuses": [200], "timeoutMs": 30000 },
+    "state": { "kind": "stateless" }
+  },
+  "source": { "generatedDirs": ["packages/board-data/dist"] },
+  "routes": { "include": ["/board", "/proposals"] },
+  "capture": {
+    "mode": "motion",
+    "viewport": { "width": 390, "height": 844 },
+    "observeMs": 400,
+    "stepTimeoutMs": 10000,
+    "maxScenarioMs": 60000
+  }
+}

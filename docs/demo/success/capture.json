@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261101T220738255Z-870ae37f9adfb00e",
+  "toolVersion": "0.1.0",
+  "browserVersion": "156.0.8078.4",
+  "captureMode": "keyframes",
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "labels": {
+    "before": "30c3da70198a",
+    "after": "a9fee6837d1f"
+  },
+  "scenarios": [
+    {
+      "id": "pricing-toggle",
+      "title": "Switch yearly pricing",
+      "initialRoute": "/pricing",
+      "outcome": "ok",
+      "steps": [
+        {
+          "id": "open",
+          "op": "goto",
+          "caption": "Open route",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/000-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 2003.6441659999982
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/000-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 2387.0134999999973
+          },
+          "changeRatio": 0.0145703125
+        },
+        {
+          "id": "ready",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/001-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 254.4251669999976
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/001-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 177.95437500000116
+          },
+          "changeRatio": 0.014796875
+        },
+        {
+          "id": "toggle",
+          "op": "click",
+          "caption": "Click control",
+          "holdMs": 800,
+          "before": {
+            "status": "expected_absent",
+            "reasonCode": "EXPECTED_ABSENT",
+            "image": "frames/002-before.png",
+            "heldFromStepId": "ready",
+            "elapsedMs": 4950.307499999999
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/002-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 223.34316700000272
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "saving",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "holdMs": 800,
+          "before": {
+            "status": "skipped_by_side",
+            "reasonCode": "SIDE_EXCLUDED",
+            "image": "frames/003-before.png",
+            "heldFromStepId": "ready",
+            "elapsedMs": 0.008084000000962988
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/003-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 69.01195899999948
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "hover",
+          "op": "hover",
+          "caption": "Hover control",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/004-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 157.2944580000003
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/004-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 196.12679099999878
+          },
+          "changeRatio": 0.0130185546875
+        },
+        {
+          "id": "poster",
+          "op": "screenshot",
+          "caption": "Hover on the plan button",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/005-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 185.64816600000267
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/005-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 162.24858400000085
+          },
+          "changeRatio": 0.0130185546875
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}

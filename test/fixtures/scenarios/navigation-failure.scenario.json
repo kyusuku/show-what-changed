@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 2,
+  "id": "navigation-failure",
+  "title": "First navigation fails before a safe frame",
+  "steps": [
+    {
+      "id": "open",
+      "op": "goto",
+      "path": "/failure"
+    },
+    {
+      "id": "blocked-poster",
+      "op": "screenshot"
+    }
+  ]
+}

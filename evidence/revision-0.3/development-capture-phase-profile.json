@@ -1,0 +1,144 @@
+{
+  "status": "failed_instrumentation",
+  "scope": "single_excluded_scalar_capture_profile",
+  "identitySha256": "fdc5d2732aeeae5532b2970d2fedd4233bae807baa042bdf57112cbf9ca3786c",
+  "captureOutcome": "ok",
+  "failure": {
+    "code": "ERR_ASSERTION",
+    "message": "Every delivered frame requires a safe response profile"
+  },
+  "deliveredFrameRecordCounts": {
+    "before": 60,
+    "after": 61
+  },
+  "missingWorkerProfiles": 121,
+  "cause": "diagnostic_sanitizer_delegate_dropped_optional_profile_argument",
+  "cleanup": {
+    "status": "ok",
+    "ownedContainerAbsent": true,
+    "isolatedEngineContainers": 0,
+    "isolatedEngineVolumes": 0,
+    "ownedVmState": "Stopped"
+  },
+  "performanceComparison": false,
+  "finalCandidateAcceptance": false,
+  "repairAndNewFrozenCase": "executed_successfully_as_excluded_profile",
+  "preparedRepair": {
+    "identitySha256": "45c77505e2e3c450527231d799a719d7f11c9dde054ca0981ffee4f468b3a074",
+    "payloadSha256": "42d9999845161957eb659e3e7e680e73dc15c702fd7d894ddf3df2bc2419d633",
+    "change": "forward_existing_profile_through_creation_delegate",
+    "workerReportedNodeTests": 33,
+    "workerReportedHostTests": 21,
+    "rootVerifiedRealWorkerRecorderRegression": true,
+    "rootVerifiedFrozenPayloadEntries": 1290,
+    "executed": true
+  },
+  "repairedCase": {
+    "status": "excluded-profile-complete",
+    "caseStatus": "numeric-passed",
+    "probeSha256": "d6b8b0d74854123d5c762541e85c1862b3c00aa4b1454d498ec5a48aa46a8e3b",
+    "scope": "excluded-capture-phase-profile",
+    "instrumented": true,
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "summary": {
+      "before": {
+        "deliveredFrames": 104,
+        "filterHistogram": [
+          0,
+          0,
+          83200,
+          0,
+          0
+        ],
+        "workerPhaseCpuMs": {
+          "inspect": 1.086,
+          "compactIdat": 0.213,
+          "inflate": 63.93,
+          "reconstruct": 715.371,
+          "maskVerify": 11.547,
+          "safeEncode": 168.399,
+          "safeTransferCopy": 0.933
+        },
+        "workerPhaseTotalCpuMs": 961.4789999999999,
+        "distinctMovingPositions": 80,
+        "movingFrameGapMs": 83.32999999999993,
+        "nativeIntermediatePositions": 35,
+        "clockErrorBoundMs": 11.017502000000832,
+        "clockRate": 1,
+        "frameStats": {
+          "receivedFrames": 104,
+          "persistedFrames": 104,
+          "acknowledgedFrames": 104,
+          "rejectedFrames": 0,
+          "maxQueueDepth": 1,
+          "sourceDroppedFrames": null,
+          "maxGapMs": 249.99000000000038
+        }
+      },
+      "after": {
+        "deliveredFrames": 99,
+        "filterHistogram": [
+          0,
+          0,
+          79200,
+          0,
+          0
+        ],
+        "workerPhaseCpuMs": {
+          "inspect": 1.674,
+          "compactIdat": 0.515,
+          "inflate": 63.799,
+          "reconstruct": 753.59,
+          "maskVerify": 11.487,
+          "safeEncode": 156.172,
+          "safeTransferCopy": 0.845
+        },
+        "workerPhaseTotalCpuMs": 988.082,
+        "distinctMovingPositions": 75,
+        "movingFrameGapMs": 99.996000000001,
+        "nativeIntermediatePositions": 33,
+        "clockErrorBoundMs": 6.954453500002387,
+        "clockRate": 1,
+        "frameStats": {
+          "receivedFrames": 99,
+          "persistedFrames": 99,
+          "acknowledgedFrames": 99,
+          "rejectedFrames": 0,
+          "maxQueueDepth": 1,
+          "sourceDroppedFrames": null,
+          "maxGapMs": 233.32399999999964
+        }
+      }
+    },
+    "reconstructionCpuMs": 1468.961,
+    "measuredWorkerPhaseCpuMs": 1949.561,
+    "reconstructionShareOfMeasuredWorkerPhases": 0.7534829636005235,
+    "captureResourceInterval": {
+      "intervalClock": "monotonic",
+      "elapsedSeconds": 5.219494528,
+      "cpuCoreSeconds": 8.211572,
+      "averageLogicalCores": 1.5732504279770747,
+      "utcElapsedSecondsDiagnosticOnly": 5.225
+    },
+    "checkedPersistedImages": 211,
+    "pulseErrorsMs": [
+      16.57255449999866,
+      0.09344550000059826,
+      0.09344550000059826
+    ],
+    "cleanup": {
+      "status": "ok",
+      "ownedContainerAbsent": true,
+      "isolatedEngineContainers": 0,
+      "isolatedEngineVolumes": 0,
+      "ownedVmState": "Stopped",
+      "defaultDockerTouched": false
+    },
+    "interpretation": "The Up-row reconstruction cost motivates a narrow decoder experiment. The worker-phase fraction is not the fraction of whole-capture CPU. This instrumented single case is neither a performance comparison nor release acceptance.",
+    "performanceComparison": false,
+    "finalCandidateAcceptance": false
+  }
+}

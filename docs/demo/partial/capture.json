@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261101T220833817Z-948e08c2aacbbcc6",
+  "toolVersion": "0.1.0",
+  "browserVersion": "156.0.8078.4",
+  "captureMode": "keyframes",
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "labels": {
+    "before": "30c3da70198a",
+    "after": "a9fee6837d1f"
+  },
+  "scenarios": [
+    {
+      "id": "required-before-failure",
+      "title": "Required BEFORE control is missing",
+      "initialRoute": "/pricing",
+      "outcome": "partial",
+      "steps": [
+        {
+          "id": "open",
+          "op": "goto",
+          "caption": "Open route",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/000-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 686.0655830000014
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/000-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 663.760166
+          },
+          "changeRatio": 0.0145703125
+        },
+        {
+          "id": "ready",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/001-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 111.8187080000007
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/001-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 72.74041700000089
+          },
+          "changeRatio": 0.0145703125
+        },
+        {
+          "id": "required-toggle",
+          "op": "click",
+          "caption": "Click control",
+          "holdMs": 800,
+          "before": {
+            "status": "failed",
+            "reasonCode": "LOCATOR_MISSING",
+            "image": "frames/002-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 491.27791699999943
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/002-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 257.98070800000096
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "saving",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "holdMs": 800,
+          "before": {
+            "status": "blocked",
+            "reasonCode": "PREVIOUS_STEP_FAILED",
+            "image": "frames/003-before.png",
+            "heldFromStepId": "required-toggle",
+            "elapsedMs": 0.0657500000015716
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/003-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 84.28054200000042
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "hover",
+          "op": "hover",
+          "caption": "Hover control",
+          "holdMs": 800,
+          "before": {
+            "status": "blocked",
+            "reasonCode": "PREVIOUS_STEP_FAILED",
+            "image": "frames/004-before.png",
+            "heldFromStepId": "required-toggle",
+            "elapsedMs": 0.007792000000335975
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/004-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 89.83824999999888
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "poster",
+          "op": "screenshot",
+          "caption": "BEFORE must remain visibly incomplete",
+          "holdMs": 800,
+          "before": {
+            "status": "blocked",
+            "reasonCode": "PREVIOUS_STEP_FAILED",
+            "image": "frames/005-before.png",
+            "heldFromStepId": "required-toggle",
+            "elapsedMs": 0.012917000000015832
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/005-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 54.691624999999476
+          },
+          "changeRatio": null
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}

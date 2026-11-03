@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "implementationCommit": "927af366c3db101dc5875768432df20dba9e7675",
+  "version": "0.1.0",
+  "specSha256": "65f604f5ac2acad60e3bec0882b18f1bdc4ebfb3a51d3215f4396b6b1ec13ab8",
+  "archive": {
+    "path": "evidence/artifacts/release-0.1.0-c2/show-what-changed-0.1.0.tgz",
+    "sha256": "6b01bd51d5e713b205d734c29ab948458d32635c7e8dbe5b163364f7bc5d6194",
+    "bytes": 261943,
+    "files": 120
+  },
+  "runtimeGateStatus": "passed",
+  "sourceTests": {
+    "unit": 221,
+    "integration": 95,
+    "platforms": [
+      "darwin-arm64",
+      "linux-arm64"
+    ]
+  },
+  "packageCommandsPerPlatform": 18,
+  "realAppRuns": 3,
+  "reports": {
+    "linux": {
+      "path": "evidence/artifacts/linux-final-02/validation.json",
+      "sha256": "2fc7c7e0ecdecceb2866c13e31310c07a4d220f1e914e8165abebe37d8fd1abd",
+      "status": "passed"
+    },
+    "macosPackage": {
+      "path": "evidence/artifacts/release-0.1.0-c2/macos-package/report.json",
+      "sha256": "b01ab0c896294c0154e2394f444ca6ab70d2156551487d59316258df00eb27e6",
+      "status": "passed"
+    },
+    "realApp": {
+      "path": "evidence/artifacts/release-0.1.0-c2/real-app/report.json",
+      "sha256": "457c712fdd5d1fbc9c455467cf6946ffec66e04cf52908f3c4ed86dd91b1fd18",
+      "status": "passed"
+    },
+    "media": {
+      "path": "evidence/artifacts/release-0.1.0-c2/visual/extraction.json",
+      "sha256": "912f5a93ca5ab2d9507f2f18e938c85fbfd49bb87961a2762ea0aba351577f63",
+      "status": "reviewed"
+    },
+    "security": {
+      "path": "evidence/artifacts/security-final-02/report.json",
+      "sha256": "457088e37e64cf361fae349db8084958a30a95f0080be8cd96506865db90c8dc",
+      "status": "passed"
+    },
+    "linuxCapabilities": {
+      "path": "evidence/artifacts/linux-c2-capabilities/report.json",
+      "sha256": "0b273dc44f7d80362c7284f19a8c65e1432d7a51924f92096c7ba75aaad83956",
+      "status": "passed"
+    }
+  },
+  "linux": {
+    "releaseGateComplete": true,
+    "sourceArchiveSha256": "2bb65ad6ea939b3d6ea304484857ad2e69ae6872ea8c75849320b3c402c0388c",
+    "imageId": "sha256:c62eeb3aa1502cc9ec7071f8db8f14efdf66ade983e474eb319c14b503423432",
+    "repeatability": {
+      "status": "passed",
+      "runs": 2,
+      "sourceFrameComparisons": 14,
+      "maxSourceFrameRatio": 0.000177734375,
+      "encodedFrameComparisons": 16,
+      "maxEncodedBetweenRuns": 0.01821398202137998,
+      "maxEncodedAgainstSource": 2.036029114026563
+    },
+    "resources": {
+      "memoryPeakBytes": 3000872960,
+      "memoryMaxBytes": 3221225472,
+      "memoryEvents": {
+        "low": "0",
+        "high": "0",
+        "max": "0",
+        "oom": "0",
+        "oom_kill": "0",
+        "oom_group_kill": "0"
+      },
+      "cpuStat": "usage_usec 368393442\nuser_usec 270084706\nsystem_usec 98308735\ncore_sched.force_idle_usec 0\nnr_periods 3100\nnr_throttled 4\nthrottled_usec 3073\nnr_bursts 0\nburst_usec 0\n"
+    },
+    "sandbox": {
+      "uid": 1001,
+      "playwright": "1.64.1",
+      "chromium": "156.0.8078.4",
+      "revision": "1248",
+      "chromiumSandbox": true,
+      "noSandboxArgument": false,
+      "callerUserNamespace": "user:[4026531837]",
+      "renderers": [
+        {
+          "pid": 121,
+          "userNamespace": "user:[4026532455]",
+          "seccomp": 2,
+          "noNewPrivileges": 1
+        }
+      ]
+    }
+  },
+  "publicActionsPerformed": false,
+  "hostedCiExecuted": false,
+  "limits": [
+    "Keyframe replay, not continuous motion or performance evidence",
+    "Backend mutations are not isolated and data parity is unverified",
+    "Linux requires lsof 4.99.7 or newer",
+    "Platform evidence covers arm64; hosted CI and other architectures were not executed"
+  ],
+  "requirementAcceptance": {
+    "passed": 173,
+    "reviewed": 8,
+    "total": 181
+  },
+  "status": "ready_for_owner_publish"
+}

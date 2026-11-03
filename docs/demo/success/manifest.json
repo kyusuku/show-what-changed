@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "toolVersion": "0.1.0",
+  "runId": "20261101T220738255Z-870ae37f9adfb00e",
+  "state": "terminal",
+  "status": "ok",
+  "exitCode": 0,
+  "captureMode": "keyframes",
+  "startedAt": "2026-11-01T22:07:38.255Z",
+  "endedAt": "2026-11-01T22:08:13.479Z",
+  "sources": {
+    "before": {
+      "requested": "30c3da70198a3fbabf627532f75b54fd761f1945",
+      "commit": "30c3da70198a3fbabf627532f75b54fd761f1945",
+      "kind": "commit",
+      "materializedHash": "d9aa876c8e15a7728567054a97a8c326aea2100b888a3bf57c1b43c0ccca2f01"
+    },
+    "after": {
+      "requested": "a9fee6837d1f57f4fde087a7a21bb95003f9d96a",
+      "commit": "a9fee6837d1f57f4fde087a7a21bb95003f9d96a",
+      "kind": "commit",
+      "materializedHash": "fac0b9f4ec4edeed5cf4c8fae40dec8064e56758116062c3e77c5c7b34783e26"
+    },
+    "baseResolution": "exact"
+  },
+  "versions": {
+    "node": "v24.22.2",
+    "browser": "156.0.8078.4",
+    "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "configDigest": "eef3027b12bec9effb3c5c9518eab75a17b8b06b68082c4a7837cc0c3514452b",
+  "scenarioDigest": "a4744529a5d12154087d8ca160eb07a2d5018f34e9da3b0b4c0a7fd76322bc6c",
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "dataParity": "unverified",
+  "coverage": {
+    "selected": [
+      {
+        "path": "/pricing",
+        "reason": "EXPLICIT_SELECTION",
+        "via": []
+      }
+    ],
+    "unresolved": [],
+    "omitted": [],
+    "unsupported": [],
+    "complete": false
+  },
+  "scenarios": [
+    {
+      "id": "pricing-toggle",
+      "title": "Switch yearly pricing",
+      "initialRoute": "/pricing",
+      "outcome": "ok",
+      "steps": [
+        {
+          "id": "open",
+          "op": "goto",
+          "caption": "Open route",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/000-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 2003.6441659999982
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/000-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 2387.0134999999973
+          },
+          "changeRatio": 0.0145703125
+        },
+        {
+          "id": "ready",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/001-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 254.4251669999976
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/001-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 177.95437500000116
+          },
+          "changeRatio": 0.014796875
+        },
+        {
+          "id": "toggle",
+          "op": "click",
+          "caption": "Click control",
+          "holdMs": 800,
+          "before": {
+            "status": "expected_absent",
+            "reasonCode": "EXPECTED_ABSENT",
+            "image": "frames/002-before.png",
+            "heldFromStepId": "ready",
+            "elapsedMs": 4950.307499999999
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/002-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 223.34316700000272
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "saving",
+          "op": "expectVisible",
+          "caption": "Check visible state",
+          "holdMs": 800,
+          "before": {
+            "status": "skipped_by_side",
+            "reasonCode": "SIDE_EXCLUDED",
+            "image": "frames/003-before.png",
+            "heldFromStepId": "ready",
+            "elapsedMs": 0.008084000000962988
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/003-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 69.01195899999948
+          },
+          "changeRatio": null
+        },
+        {
+          "id": "hover",
+          "op": "hover",
+          "caption": "Hover control",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/004-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 157.2944580000003
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/004-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 196.12679099999878
+          },
+          "changeRatio": 0.0130185546875
+        },
+        {
+          "id": "poster",
+          "op": "screenshot",
+          "caption": "Hover on the plan button",
+          "holdMs": 800,
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/005-before.png",
+            "heldFromStepId": null,
+            "elapsedMs": 185.64816600000267
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": "frames/005-after.png",
+            "heldFromStepId": null,
+            "elapsedMs": 162.24858400000085
+          },
+          "changeRatio": 0.0130185546875
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "verifiedPairs": 4,
+    "changedPairs": 4,
+    "expectedAbsences": 1,
+    "exclusions": 1,
+    "failedSteps": 0,
+    "blockedSteps": 0,
+    "coverageOmissions": 0
+  },
+  "timeline": {
+    "fps": 30,
+    "totalFrames": 174,
+    "templateVersion": 1,
+    "width": 1920,
+    "height": 686
+  },
+  "artifacts": {
+    "video": {
+      "path": "compare.mp4",
+      "sha256": "706563d3d54cfc561e35792eb7b79dbd61a59daac6b93e42a339cb4614c6ea4c",
+      "bytes": 77043
+    },
+    "poster": {
+      "path": "poster.png",
+      "sha256": "aaa92753f38961fa1def31054930aac73180d57f6b1afcb9c47c345728b2fea3",
+      "bytes": 89691
+    },
+    "capture": {
+      "path": "capture.json",
+      "sha256": "939e91dd97aaca7cc41ce2cef30ea1cb8cfc13991363bf20827d3bc20aa237cb",
+      "bytes": 4291
+    },
+    "timeline": {
+      "path": "timeline.json",
+      "sha256": "20688c6b67ff0eb77522e456f73db438fc9390772b6e838305733475bdfa2e68",
+      "bytes": 2670
+    },
+    "pr": {
+      "path": "pr.md",
+      "sha256": "20e0c328c5cd59de3323424b6bff503c7b56b4a198c88bd99c8f6861326f44b7",
+      "bytes": 839
+    }
+  },
+  "comparisonOutcome": {
+    "status": "ok",
+    "capture": "ok",
+    "coverage": "explicit",
+    "provenance": {
+      "before": {
+        "valid": true,
+        "actualHash": "d9aa876c8e15a7728567054a97a8c326aea2100b888a3bf57c1b43c0ccca2f01",
+        "errors": []
+      },
+      "after": {
+        "valid": true,
+        "actualHash": "fac0b9f4ec4edeed5cf4c8fae40dec8064e56758116062c3e77c5c7b34783e26",
+        "errors": []
+      }
+    }
+  },
+  "cleanupOutcome": {
+    "status": "ok",
+    "errors": []
+  },
+  "encodingOutcome": {
+    "status": "ok",
+    "errors": []
+  },
+  "warnings": [
+    {
+      "code": "IGNORED_FILES_EXCLUDED",
+      "message": "Ignored untracked files, including environment files, are not copied. Add .show-what-changed/ to your own ignore rules before committing."
+    },
+    {
+      "code": "EXPLICIT_SELECTION",
+      "message": "Only the selected routes are compared. Changed-route coverage is not exhaustive."
+    }
+  ],
+  "errors": [],
+  "errorHistory": [],
+  "phaseTimings": {
+    "validating": 904.873541,
+    "preparing": 10846.015125,
+    "starting": 6579.4209169999995,
+    "recording": 9508.090457999999,
+    "rendering": 1521.2301249999982,
+    "encoding": 1219.8229170000013,
+    "cleaning": 2202.793832999996
+  }
+}

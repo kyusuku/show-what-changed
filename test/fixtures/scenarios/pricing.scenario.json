@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "id": "pricing-toggle",
+  "title": "Switch yearly pricing",
+  "steps": [
+    {
+      "id": "open",
+      "op": "goto",
+      "path": "/pricing"
+    },
+    {
+      "id": "ready",
+      "op": "expectVisible",
+      "target": {
+        "role": "heading",
+        "name": "Pricing"
+      }
+    },
+    {
+      "id": "toggle",
+      "op": "click",
+      "target": {
+        "role": "switch",
+        "name": "Yearly"
+      },
+      "allowMissing": [
+        "before"
+      ]
+    },
+    {
+      "id": "saving",
+      "op": "expectVisible",
+      "target": {
+        "text": "Save 20%"
+      },
+      "only": "after"
+    },
+    {
+      "id": "hover",
+      "op": "hover",
+      "target": {
+        "role": "button",
+        "name": "Get Pro"
+      }
+    },
+    {
+      "id": "hover-retained",
+      "op": "expectVisible",
+      "target": {
+        "testId": "hover-state"
+      }
+    },
+    {
+      "id": "poster",
+      "op": "screenshot",
+      "note": "Hover on the plan button"
+    }
+  ]
+}

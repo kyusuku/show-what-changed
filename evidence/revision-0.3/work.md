@@ -1,0 +1,96 @@
+# Revision 0.3 implementation work
+
+Status: in progress. No release gate is accepted yet.
+
+The goal is complete implementation of spec revision 0.3, useful real representative web app comparison, and an exact publish-ready candidate. Publication is not authorized. Activation is 2026-11-02 15:04:51 UTC, 22:04:51 Asia/Bangkok. The 24-hour target is 2026-11-03 at those times.
+
+## Workflow
+
+- [x] Read the Principles section of poteto-mode.
+- [x] Phase A: Frame. Read the activated goal and preserve the 18 revised input files.
+- [x] Phase B: Design the workflow. Freeze shared schema 2 contracts and module interfaces under R0.
+- [ ] Phase C: Run the loop. Implement R1 through R16 with focused verification and independent review.
+- [ ] Phase D: Keep the audit trail. Append decisions as work lands and retain exact evidence.
+- [ ] Phase E: Verify and hand back. Accept G01 through G24 for the exact final candidate.
+
+## Architecture and parallel work
+
+- [x] Ground the current planner/workspace, runtime, and recorder/composer seams.
+- [x] Sketch concrete interfaces from the already audited revision 0.3 design.
+- [x] Agree through independent owner review. No new human architecture checkpoint is required.
+- [ ] Implement the frozen contract in disjoint owner files.
+- [ ] Scrap a contract only if repeated evidenced failures show it is wrong.
+
+Swarm sequence is frame, fan out, aggregate, report. Initial read-only grounding partitions the three owner seams. Root integrates their contract findings. The audited Astra/Terra architecture alternatives remain the selected design; a second architecture competition is unnecessary unless implementation contradicts that design.
+
+Throughput checkpoint. Root owns schema, shared interfaces, CLI, runner, packaging, and the ledger. Worker A owns planner/workspace. Worker B owns runtime/services. Worker C owns recorder/composer. Maximum concurrency is four including root and reviewers. Contracts freeze before dependent product edits. The graph retains all checkpoints and gate assignments.
+
+## Evidence and continuation
+
+The starting input archive and digest inventory are preserved outside this repository. Public input digests are refreshed after the owner-requested privacy correction. The branch is impl/revision-0.3. The canonical decision log is evidence/revision-0.3/decisions.tsv. Per-node results live beside this document. R0 is accepted for dependent implementation. R1 motion feasibility, R2 source/planner, R3 runtime/services, and R5 runner/CLI migration are now active. See R0.md and docs/architecture/contracts.md.
+
+The configured models are all GPT-family models. Cross-family review is unavailable. The deslop skill is absent from installed skills; no commit has been attempted. Local commits remain authorized, but any substitute pre-commit review must be explicit and retain meaningful verification.
+
+## Public scope correction
+
+The owner requires a generic public tool with no private application context. Private acceptance material, original input archives, and development records were preserved outside the repository. Public G19 now uses redistributable web-app flows. Public history must be prepared from a sanitized tree because the development history contains private context. This changes public acceptance inputs at the owner's direction and does not count any pending gate as passed.
+
+R2 and R5 are implemented pending independent integration review. Full repository typecheck passes. Current public contract/digest checks and preserved adversarial integration checks pass. R4 is repairing measured durable-write interference with capture cadence using a bounded sanitized queue; motion thresholds remain unchanged. R3 is exercising exact Docker cleanup and state/authentication behavior. The privacy scanner is being repaired after independent adversarial review. No release gate is accepted from these preliminary results.
+
+The remote repository was checked read-only and remains private and empty. No development history has been pushed. The public publishing procedure now explicitly holds the current development history pending a separate sanitized history. Scanner closure review found concatenated-container cases that require strict consumed-byte validation; a bounded repair is in progress.
+
+The long continuously animated capture exposed a real clock-bound issue during animated navigation. The primary short fixture alone does not establish that behavior. Recorder ownership is evaluating offloading PNG sanitization from the event loop while preserving raw-memory limits, fixed clock bounds, frame masking, and cancellation. A separate maximum-window check remains pending. Host-load observations are diagnostic context, not a throughput benchmark or an excuse to pass a failed gate.
+
+The privacy scanner now passes 51 regressions and the current working-tree scan. Final archive/history and manual context/media review remain required. R5 independent review found and drove repairs to environment redaction, consent operands, and useful startup guidance. R4 now uses owned sanitizer workers; independent closure review found unbounded clock/start awaits that are being repaired before browser acceptance. R3 preserves pending Docker creation intents so a single absent-resource response cannot falsely prove cleanup after an interrupted request. Mock API regressions pass. The complete two-side Docker recipe remains unclosed.
+
+R7 is preparing a self-authored public pnpm workspace example with navigation, an animated drawer, inner scrolling, and real invalid-form feedback. Its offline frozen install and shared-package build passed. Browser and final installed-package evidence remain pending. R10 is migrating package/CI checks and the public-app repetition harness. No final gate is accepted by these development checks.
+
+At the subsequent development checkpoint, R2's source-identity repairs and R4's raw-memory ownership repairs have independent closure. A new clean-installed archive exactly matches the repaired built source. The current tree and package passed the deny-list scanner across 2,288 inputs. No final candidate is frozen. Default motion now captures successfully but missed the numeric motion gates; sanitizer profiling is underway without changing thresholds. A single installed Docker run against the preceding archive failed capture, then exact recovery proved all 12 registered resources absent. The corrected package smoke is running against the new archive.
+
+An independent DOM probe of both exact public example commits observed native intermediate drawer positions, inner scrollTop changes with unchanged window scroll, and actual HTTP 422 form feedback. Its final reusable-script rerun remains pending. Linux and CI now require the six-case installed motion matrix after matching package installation; eight orchestration tests also pass under Node 24. Current R8 evidence explicitly lists remaining Docker fault and dataset checks. Host-side focused cases are closing observed gaps, while final platform repetitions, normal-speed review, exact clean public history, and the publishing decision remain pending.
+
+Capture codec design checkpoint. Grounding is complete from the installed-stage profile and malformed-input reproductions. The remaining architect sequence is sketch two alternatives, select the smallest safe boundary, implement, and discard it if evidence contradicts its assumptions. Arena phases are frame, parallel sketches, cross-judge, select, graft, and verify. The configured cross-judge pool is empty, so that phase is explicitly unavailable. Root will score correctness and fail-closed behavior, peak-memory fit, measured-bottleneck coverage, maintainability and interface depth, and a feasible verification path. Worker ownership and motion thresholds stay fixed.
+
+At the next capture checkpoint, independent codec correctness and ownership review passed. Development archive `0edc4e1dc9e3a0e4fd3b3c70475815fbd2748cb99c51f85e5c3f9f41d54de306` passed one desktop and one narrow installed numeric motion check. Full repeated acceptance remains pending. The complete Docker source suite ended with four passes and four failures. Exact recovery proved all 20 known identities absent while preserving unrelated resources, but pending creation intent remains retained. Two independent designs are examining confirmed builder partial cleanup before a focused repair.
+
+The first full Linux development snapshot completed with two retained failures and no OOM. Independent targeted investigations own the unit deadline-settlement assertion and live browser timestamp regression. Motion status marker repair passed 30 focused tests and awaits fresh independent closure. Docker reconciliation passed focused independent review and still needs the live orphan regression and complete source suite. All G01 through G24 acceptance remains tied to a future frozen public candidate.
+
+The repaired Docker suite completed seven of nine cases successfully. Its startup-exit assertion assumed that a short-lived container could never be observed running; a test correction is in progress. The complete recipe separately failed after both existing bounded inspection attempts and independent transports lacked a complete Engine response. No transport retry or timeout change is justified by that evidence. Exact cleanup and unrelated-resource checks retain the limitations recorded in R3 and R8.
+
+Independent review closed the forced drain cutoff and motion status repairs. A bounded comparison is measuring one Chromium frame in flight against two without changing motion thresholds. A separate deterministic probe confirmed that the old stop-response boundary can silently omit a delivered frame. Two designs are examining explicit delivery closure and stable result publication. These are current implementation risks, not accepted final gates.
+
+A separate development staging tree now contains all 399 intended public source files and no Git metadata copied from development. Its literal privacy scan passed across 465 inputs. This is preparation only: source changes require refresh, and final media, archive, credentials, package, and new-history checks remain pending.
+
+The one-slot motion policy passed both required viewport screens with unchanged numeric thresholds and was selected as protocol hardening. Independent review verified the scalar diagnostic and retained strict timestamp rejection; the original Linux scalar pair remains unavailable. The separate delivery-closure repair passed independent fake/Worker/lifecycle review and live static/animated Chromium checks, with complete delivered-frame counters and stable final results. Final repeated capture and visual acceptance remain pending.
+
+Development archive `2f96e5056481992dce6d348f03165f2e8a7ef9efae30245dffbc154a4c6f180c` contains the reviewed recorder, presenter, and Docker recovery repairs. It clean-installed, matched a fresh source pack byte for byte, and passed the tree/package privacy scan across 2,315 inputs. Its 165 package files total 374,781 compressed archive bytes. A caller-cache permission failure on the first pack attempt was resolved with a task-owned temporary cache; no global cache ownership was changed. The final release identity remains unset.
+
+A targeted default-Engine diagnostic reached HTTP startup but failed cleanup on a timed-out deletion. The corrected short-lived-container check separately failed on inspection timeouts. One exact confirmed owned image remains with its original ledger and lock; recovery and unrelated-resource preservation evidence stay private. The next platform window uses only the separately owned Linux VM. Its evidence cannot reclassify the failed default endpoint.
+
+The updated Linux source archive `d9a7a28abd9196a9f42509ed247d79bfd69a75555ad9cadb0af00e7f57454ca1` passed 568 unit tests, with 11 explicit opt-in Docker skips, and 15 contract tests. Integration passed 102 cases and failed one narrow motion finalization with `CAPTURE_ACK_FAILED` after all action/checkpoint outcomes succeeded. No timestamp-rejection record appeared. The installed matrix was held, exact test-container absence was confirmed, and the owned VM stopped. The ACK/detach schedule was not retained, so the actual cause remains unproven; a controlled recorder reproduction demonstrates the already-modeled detach-before-ACK mechanism.
+
+Two independent designs led to a clarified subscription boundary in spec section 7.2 and the architecture contract. The selected design ends recorder callbacks synchronously, retains the command channel until all delivered masking and fulfilled ACK responses settle, then detaches. Known excluded forwarding invocations fail explicitly. Upstream notifications never delivered to that subscription can be omitted at shutdown and remain unmeasured, which the README now states. This is not a browser encode flush or a zero-source-loss claim. Motion thresholds, masking, public schema, strict delivered-frame counters, source-stop time, and actual cleanup ownership are unchanged. The active spec digest and implementation goal were refreshed; the earlier package is held pending repair and rebuild.
+
+At 2026-11-02 23:56 UTC, the current tree and development npm archive passed a fresh external-policy literal scan across 2,331 inputs. This excludes Git metadata and installed dependencies and does not interpret media. Public acceptance uses the redistributable generic web app. The development Git history remains held from publication; the final public repository must start from a separately reviewed tree with a new history. No publication or remote mutation occurred.
+
+### Public privacy refresh, 2026-11-03 00:38 UTC
+
+The current working tree and the a9e0ddf development npm archive passed the external-pattern privacy scanner across 2334 inputs with zero findings. Public acceptance remains generic. The original development history remains held from publication. Final media review, exact final package/source scans, and separately initialized public history remain required.
+
+An independent public privacy refresh found no new confirmed private-material leak in the reviewed current inputs. The 165-entry development package allowlist and public dependency origins were verified. Credential-pattern checks had only seven declared synthetic matches. Metadata for 44 PNGs and six MP4s and four selected images were reviewed. Historical N0 instructions were corrected to describe the retired probe, and both retained synthetic image hashes matched. Final media and separately initialized public-history checks remain pending.
+
+The phase-helper repair passed independent review and 41 focused checks. It rejects late phase witnesses without sending a signal, distinguishes actual child exit from pipe closure, and bounds a pipe holder as an explicit transport failure. The original twelve-second TERM allowance remains. The external freeze now rejects a mismatched owner-supplied CLI hash. Deadline phase continuity and a separately bounded outer controller remain required before live Docker interruption acceptance.
+
+The corrected excluded capture profile completed with 203 delivered, persisted, and acknowledged frames and no numeric source-motion failure. Every delivered PNG used Up rows. Reconstruction consumed 1468.961 ms of current-thread CPU across seven worker phases totaling 1949.561 ms. Whole-capture cgroup CPU was separately 8.211572 core-seconds. The original instrumentation failure remains recorded. Cleanup proved the owned container absent and stopped the dedicated VM. A narrow row specialization is under measurement; no performance improvement or final acceptance follows from the profile alone.
+
+The isolated PNG Up-row candidate passed all 1,320 output checks across 40 fresh processes. Five alternating pairs per synthetic fixture showed lower current-thread sanitizer CPU at both dimensions and color formats, with nonoverlapping subsequent-call process-mean ranges. The host was shared and busy. These measurements justify full capture and encode comparison but do not establish smoother motion or total-path speedup. The production decoder is unchanged.
+
+The canonical phase helper now records child exit separately from pipe closure and uses the observed exit for deadline-result checks. Independent review accepted the conservative Docker scheduled-deadline bound after a startup-gap counterexample. The helper tests exposed artificial 80 ms startup assumptions and an encoder-pipe observation race. Event-based synthetic fixtures repaired those assumptions without changing product budgets. Root and independent reviewer each passed 42 focused tests. The 29 controller tests also passed. All earlier failures remain recorded. Final installed input binding, actual phase continuity, six live Docker cells, and independent cleanup remain pending.
+
+The paired installed PNG comparison finished all 20 cases on 2026-11-03. The existing implementation passed 9 of 10 numeric cases and the candidate passed 7 of 10. All attempts and failures remain in the development evidence. One candidate capture failed clock validation and skipped downstream work, so its shorter total runtime is not a speedup. The exact test container was removed, the isolated Engine had no containers or volumes, and the VM stopped. The end-to-end performance verdict is inconclusive. The production PNG implementation remains unchanged. Two baseline videos were played at original speed and sampled visually, but playback dropped frames while the review also copied canvas samples. This does not close normal-speed visual acceptance.
+
+On 2026-11-03, the repaired source Docker runtime passed one actual normal build, Docker archive export, explicit image load, exact Engine identity, cleanup, and unrelated-resource preservation check. The loaded image ID matched the archive manifest digest; the configuration digest remained a distinct value. The reported base material matched the pinned fixture, while provenance materials completeness remained false. Candidate resources and controller sentinels were removed, source inputs were preserved, and the isolated VM stopped. The ten reviewed runtime, test, and limitation files were integrated after that pass. A new installed package and final cancellation checks remain required.
+
+The canonical motion verifier now retains bounded numeric clocks, failure codes, statistics, and first/last frame times before rejecting a partial capture. It validates all exported artifact bytes and expected media hashes before copying any case media or assigning artifact records. Ten focused fault checks pass, including a valid export control; nine reject the old verifier. A portable regression test is included. No product schema, capture threshold, or playback policy changed.
+
+The integrated source build, typecheck, and generated-schema check passed under Node 24.22.2. The one-worker combined unit and contract suite passed 792 tests in 45 files and skipped 11 opt-in real Docker cases. The one-worker integration suite passed all 103 tests in eight files. Those source checks include the integrated runtime and verifier repairs. They do not replace final installed-package, platform, motion, public-app, and cancellation acceptance.

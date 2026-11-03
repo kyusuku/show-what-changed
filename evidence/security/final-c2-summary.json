@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-01T22:09:05.117Z",
+  "commit": "927af366c3db101dc5875768432df20dba9e7675",
+  "lockfileSha256": "1b1aa3eea3892b130460bdb6439576e3749074d994d58ea939b03f858df41797",
+  "tarball": {
+    "path": "<release-evidence>/show-what-changed-0.1.0.tgz",
+    "sha256": "6b01bd51d5e713b205d734c29ab948458d32635c7e8dbe5b163364f7bc5d6194",
+    "bytes": 261943
+  },
+  "status": "passed",
+  "report": "evidence/artifacts/security-final-02/report.json",
+  "reportSha256": "457088e37e64cf361fae349db8084958a30a95f0080be8cd96506865db90c8dc",
+  "dependencyCount": 97,
+  "licenses": {
+    "MIT": 55,
+    "Apache-2.0": 25,
+    "BSD-3-Clause": 2,
+    "MPL-2.0": 12,
+    "ISC": 3
+  },
+  "scannedObjects": 868,
+  "scopeCounts": {
+    "candidate-worktree": 238,
+    "git-index": 238,
+    "git-history-commit": 3,
+    "git-history-blob": 269,
+    "npm-tarball": 120
+  },
+  "findings": [
+    {
+      "identity": "test/integration/adversarial-gaps.test.ts",
+      "scope": "candidate-worktree",
+      "rule": "literal-credential",
+      "line": 215,
+      "matchSha256": "3e87fb25cc7a413e4e424f9cae3aa58b42e92af821d88f35f15533269c7ce92a",
+      "disposition": "explicit-synthetic-fixture",
+      "reason": "T09 synthetic masking canary from adversarial-gaps.test.ts"
+    },
+    {
+      "identity": "test/unit/source.test.ts",
+      "scope": "candidate-worktree",
+      "rule": "credential-url",
+      "line": 102,
+      "matchSha256": "a69ede8ec6c0b4d2c8e8f277631e2263c9c386fe44adbbbb4ef9ff7baa4bcb12",
+      "disposition": "explicit-synthetic-fixture",
+      "reason": "T04 fake credential URL at registry.example.invalid in source.test.ts"
+    },
+    {
+      "identity": "test/integration/adversarial-gaps.test.ts",
+      "scope": "git-index",
+      "rule": "literal-credential",
+      "line": 215,
+      "matchSha256": "3e87fb25cc7a413e4e424f9cae3aa58b42e92af821d88f35f15533269c7ce92a",
+      "disposition": "explicit-synthetic-fixture",
+      "reason": "T09 synthetic masking canary from adversarial-gaps.test.ts"
+    },
+    {
+      "identity": "test/unit/source.test.ts",
+      "scope": "git-index",
+      "rule": "credential-url",
+      "line": 102,
+      "matchSha256": "a69ede8ec6c0b4d2c8e8f277631e2263c9c386fe44adbbbb4ef9ff7baa4bcb12",
+      "disposition": "explicit-synthetic-fixture",
+      "reason": "T04 fake credential URL at registry.example.invalid in source.test.ts"
+    },
+    {
+      "identity": "af17fa054102b019cb9755371dc7e2643180c5e2",
+      "scope": "git-history-blob",
+      "rule": "literal-credential",
+      "line": 215,
+      "matchSha256": "3e87fb25cc7a413e4e424f9cae3aa58b42e92af821d88f35f15533269c7ce92a",
+      "disposition": "explicit-synthetic-fixture",
+      "reason": "T09 synthetic masking canary from adversarial-gaps.test.ts"
+    },
+    {
+      "identity": "3abc6ae93ec7b055e4c6ae06d534b67e2cfe7cbf",
+      "scope": "git-history-blob",
+      "rule": "credential-url",
+      "line": 102,
+      "matchSha256": "a69ede8ec6c0b4d2c8e8f277631e2263c9c386fe44adbbbb4ef9ff7baa4bcb12",
+      "disposition": "explicit-synthetic-fixture",
+      "reason": "T04 fake credential URL at registry.example.invalid in source.test.ts"
+    },
+    {
+      "identity": "7292c176262297f8697c5796ea7ebe8d406573df",
+      "scope": "git-history-blob",
+      "rule": "credential-url",
+      "line": 68,
+      "matchSha256": "a69ede8ec6c0b4d2c8e8f277631e2263c9c386fe44adbbbb4ef9ff7baa4bcb12",
+      "disposition": "explicit-synthetic-fixture",
+      "reason": "T04 fake credential URL at registry.example.invalid in source.test.ts"
+    }
+  ],
+  "limitations": "Pattern-based review of known credential shapes and literal credentials. Binary files are hashed but not interpreted. A clean scan is not proof that no secret can exist."
+}

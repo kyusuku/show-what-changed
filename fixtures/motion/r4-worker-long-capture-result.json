@@ -1,0 +1,75 @@
+{
+  "host": {
+    "parallelism": 10,
+    "loadAverage": [
+      14.95654296875,
+      19.09326171875,
+      17.65966796875
+    ]
+  },
+  "durationMs": 59246.32137499999,
+  "tracks": {
+    "before": {
+      "frames": 2783,
+      "stats": {
+        "receivedFrames": 2783,
+        "persistedFrames": 2783,
+        "acknowledgedFrames": 2783,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 2,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 183.32599999848753
+      },
+      "clockErrorBoundMs": 11.353520425704119
+    },
+    "after": {
+      "frames": 2785,
+      "stats": {
+        "receivedFrames": 2785,
+        "persistedFrames": 2785,
+        "acknowledgedFrames": 2785,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 2,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 166.65999998804182
+      },
+      "clockErrorBoundMs": 12.296603978065832
+    }
+  },
+  "processing": [
+    {
+      "kind": "capture-processing",
+      "side": "after",
+      "frames": 2785,
+      "pendingRaw": 0,
+      "pendingSanitized": 0,
+      "sharedSanitizedBytes": 0,
+      "maskMs": 31832.544898000026,
+      "writeMs": 57030.998957999946,
+      "maxMaskMs": 113.37470800000119,
+      "maxWriteMs": 201.73545799999556,
+      "maxAckLatencyMs": 197.67395899999974,
+      "maxSanitizedQueueDepth": 128,
+      "maxSharedSanitizedBytes": 13841804,
+      "backpressureWaits": 740
+    },
+    {
+      "kind": "capture-processing",
+      "side": "before",
+      "frames": 2783,
+      "pendingRaw": 0,
+      "pendingSanitized": 0,
+      "sharedSanitizedBytes": 0,
+      "maskMs": 32115.827160999914,
+      "writeMs": 57037.78044999972,
+      "maxMaskMs": 113.84466699999939,
+      "maxWriteMs": 203.3560409999991,
+      "maxAckLatencyMs": 217.69133399999555,
+      "maxSanitizedQueueDepth": 128,
+      "maxSharedSanitizedBytes": 13841870,
+      "backpressureWaits": 691
+    }
+  ],
+  "persistedPngs": 5576,
+  "scope": "Synthetic continuously animated capture/drain diagnostic; no encode, final package, or repeated platform claim."
+}

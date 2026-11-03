@@ -1,0 +1,1 @@
+{"schemaVersion":2,"execution":{"requires":[{"argv":["python3","--version"],"expectedVersion":">=3.9.0"}],"start":{"kind":"process","argv":["python3","server.py","{port}"]},"state":{"kind":"stateless"}},"routes":{"include":["/"]}}

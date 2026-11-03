@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "required-after-failure",
+  "title": "Required AFTER control is missing",
+  "steps": [
+    {
+      "id": "open",
+      "op": "goto",
+      "path": "/pricing"
+    },
+    {
+      "id": "legacy",
+      "op": "click",
+      "target": {
+        "role": "button",
+        "name": "Legacy details"
+      },
+      "timeoutMs": 2000
+    },
+    {
+      "id": "blocked-poster",
+      "op": "screenshot",
+      "note": "AFTER must remain visibly incomplete"
+    }
+  ]
+}

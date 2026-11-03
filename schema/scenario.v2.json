@@ -1,0 +1,1264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+    },
+    "title": {
+      "type": "string",
+      "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+      "maxLength": 160
+    },
+    "steps": {
+      "minItems": 1,
+      "maxItems": 12,
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+                "maxLength": 160
+              },
+              "only": {
+                "default": "both",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after",
+                  "both"
+                ]
+              },
+              "allowMissing": {
+                "default": [],
+                "maxItems": 0,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "before",
+                    "after"
+                  ]
+                }
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 30000
+              },
+              "observeMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3000
+              },
+              "op": {
+                "type": "string",
+                "const": "goto"
+              },
+              "path": {
+                "type": "string",
+                "maxLength": 2048,
+                "pattern": "^\\/(?!\\/)[^\\x00-\\x1f\\x7f-\\x9f\\\\]*$"
+              }
+            },
+            "required": [
+              "id",
+              "op",
+              "path"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+                "maxLength": 160
+              },
+              "only": {
+                "default": "both",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after",
+                  "both"
+                ]
+              },
+              "allowMissing": {
+                "default": [],
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "before",
+                    "after"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 30000
+              },
+              "observeMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3000
+              },
+              "op": {
+                "type": "string",
+                "const": "click"
+              },
+              "target": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "alert",
+                          "alertdialog",
+                          "application",
+                          "article",
+                          "banner",
+                          "blockquote",
+                          "button",
+                          "caption",
+                          "cell",
+                          "checkbox",
+                          "code",
+                          "columnheader",
+                          "combobox",
+                          "complementary",
+                          "contentinfo",
+                          "definition",
+                          "deletion",
+                          "dialog",
+                          "directory",
+                          "document",
+                          "emphasis",
+                          "feed",
+                          "figure",
+                          "form",
+                          "generic",
+                          "grid",
+                          "gridcell",
+                          "group",
+                          "heading",
+                          "img",
+                          "insertion",
+                          "link",
+                          "list",
+                          "listbox",
+                          "listitem",
+                          "log",
+                          "main",
+                          "marquee",
+                          "math",
+                          "meter",
+                          "menu",
+                          "menubar",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "navigation",
+                          "none",
+                          "note",
+                          "option",
+                          "paragraph",
+                          "presentation",
+                          "progressbar",
+                          "radio",
+                          "radiogroup",
+                          "region",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "scrollbar",
+                          "search",
+                          "searchbox",
+                          "separator",
+                          "slider",
+                          "spinbutton",
+                          "status",
+                          "strong",
+                          "subscript",
+                          "superscript",
+                          "switch",
+                          "tab",
+                          "table",
+                          "tablist",
+                          "tabpanel",
+                          "term",
+                          "textbox",
+                          "time",
+                          "timer",
+                          "toolbar",
+                          "tooltip",
+                          "tree",
+                          "treegrid",
+                          "treeitem"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "testId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "testId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "css": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "css"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "op",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+                "maxLength": 160
+              },
+              "only": {
+                "default": "both",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after",
+                  "both"
+                ]
+              },
+              "allowMissing": {
+                "default": [],
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "before",
+                    "after"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 30000
+              },
+              "observeMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3000
+              },
+              "op": {
+                "type": "string",
+                "const": "fill"
+              },
+              "target": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "alert",
+                          "alertdialog",
+                          "application",
+                          "article",
+                          "banner",
+                          "blockquote",
+                          "button",
+                          "caption",
+                          "cell",
+                          "checkbox",
+                          "code",
+                          "columnheader",
+                          "combobox",
+                          "complementary",
+                          "contentinfo",
+                          "definition",
+                          "deletion",
+                          "dialog",
+                          "directory",
+                          "document",
+                          "emphasis",
+                          "feed",
+                          "figure",
+                          "form",
+                          "generic",
+                          "grid",
+                          "gridcell",
+                          "group",
+                          "heading",
+                          "img",
+                          "insertion",
+                          "link",
+                          "list",
+                          "listbox",
+                          "listitem",
+                          "log",
+                          "main",
+                          "marquee",
+                          "math",
+                          "meter",
+                          "menu",
+                          "menubar",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "navigation",
+                          "none",
+                          "note",
+                          "option",
+                          "paragraph",
+                          "presentation",
+                          "progressbar",
+                          "radio",
+                          "radiogroup",
+                          "region",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "scrollbar",
+                          "search",
+                          "searchbox",
+                          "separator",
+                          "slider",
+                          "spinbutton",
+                          "status",
+                          "strong",
+                          "subscript",
+                          "superscript",
+                          "switch",
+                          "tab",
+                          "table",
+                          "tablist",
+                          "tabpanel",
+                          "term",
+                          "textbox",
+                          "time",
+                          "timer",
+                          "toolbar",
+                          "tooltip",
+                          "tree",
+                          "treegrid",
+                          "treeitem"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "testId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "testId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "css": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "css"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "value": {
+                "type": "string",
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "id",
+              "op",
+              "target",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+                "maxLength": 160
+              },
+              "only": {
+                "default": "both",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after",
+                  "both"
+                ]
+              },
+              "allowMissing": {
+                "default": [],
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "before",
+                    "after"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 30000
+              },
+              "observeMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3000
+              },
+              "op": {
+                "type": "string",
+                "const": "hover"
+              },
+              "target": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "alert",
+                          "alertdialog",
+                          "application",
+                          "article",
+                          "banner",
+                          "blockquote",
+                          "button",
+                          "caption",
+                          "cell",
+                          "checkbox",
+                          "code",
+                          "columnheader",
+                          "combobox",
+                          "complementary",
+                          "contentinfo",
+                          "definition",
+                          "deletion",
+                          "dialog",
+                          "directory",
+                          "document",
+                          "emphasis",
+                          "feed",
+                          "figure",
+                          "form",
+                          "generic",
+                          "grid",
+                          "gridcell",
+                          "group",
+                          "heading",
+                          "img",
+                          "insertion",
+                          "link",
+                          "list",
+                          "listbox",
+                          "listitem",
+                          "log",
+                          "main",
+                          "marquee",
+                          "math",
+                          "meter",
+                          "menu",
+                          "menubar",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "navigation",
+                          "none",
+                          "note",
+                          "option",
+                          "paragraph",
+                          "presentation",
+                          "progressbar",
+                          "radio",
+                          "radiogroup",
+                          "region",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "scrollbar",
+                          "search",
+                          "searchbox",
+                          "separator",
+                          "slider",
+                          "spinbutton",
+                          "status",
+                          "strong",
+                          "subscript",
+                          "superscript",
+                          "switch",
+                          "tab",
+                          "table",
+                          "tablist",
+                          "tabpanel",
+                          "term",
+                          "textbox",
+                          "time",
+                          "timer",
+                          "toolbar",
+                          "tooltip",
+                          "tree",
+                          "treegrid",
+                          "treeitem"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "testId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "testId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "css": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "css"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "op",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+                "maxLength": 160
+              },
+              "only": {
+                "default": "both",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after",
+                  "both"
+                ]
+              },
+              "allowMissing": {
+                "default": [],
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "before",
+                    "after"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 30000
+              },
+              "observeMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3000
+              },
+              "op": {
+                "type": "string",
+                "const": "scrollBy"
+              },
+              "target": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "alert",
+                          "alertdialog",
+                          "application",
+                          "article",
+                          "banner",
+                          "blockquote",
+                          "button",
+                          "caption",
+                          "cell",
+                          "checkbox",
+                          "code",
+                          "columnheader",
+                          "combobox",
+                          "complementary",
+                          "contentinfo",
+                          "definition",
+                          "deletion",
+                          "dialog",
+                          "directory",
+                          "document",
+                          "emphasis",
+                          "feed",
+                          "figure",
+                          "form",
+                          "generic",
+                          "grid",
+                          "gridcell",
+                          "group",
+                          "heading",
+                          "img",
+                          "insertion",
+                          "link",
+                          "list",
+                          "listbox",
+                          "listitem",
+                          "log",
+                          "main",
+                          "marquee",
+                          "math",
+                          "meter",
+                          "menu",
+                          "menubar",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "navigation",
+                          "none",
+                          "note",
+                          "option",
+                          "paragraph",
+                          "presentation",
+                          "progressbar",
+                          "radio",
+                          "radiogroup",
+                          "region",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "scrollbar",
+                          "search",
+                          "searchbox",
+                          "separator",
+                          "slider",
+                          "spinbutton",
+                          "status",
+                          "strong",
+                          "subscript",
+                          "superscript",
+                          "switch",
+                          "tab",
+                          "table",
+                          "tablist",
+                          "tabpanel",
+                          "term",
+                          "textbox",
+                          "time",
+                          "timer",
+                          "toolbar",
+                          "tooltip",
+                          "tree",
+                          "treegrid",
+                          "treeitem"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "testId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "testId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "css": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "css"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -1600,
+                "maximum": 1600
+              }
+            },
+            "required": [
+              "id",
+              "op",
+              "y"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+                "maxLength": 160
+              },
+              "only": {
+                "default": "both",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after",
+                  "both"
+                ]
+              },
+              "allowMissing": {
+                "default": [],
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "before",
+                    "after"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 30000
+              },
+              "observeMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3000
+              },
+              "op": {
+                "type": "string",
+                "const": "expectVisible"
+              },
+              "target": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "alert",
+                          "alertdialog",
+                          "application",
+                          "article",
+                          "banner",
+                          "blockquote",
+                          "button",
+                          "caption",
+                          "cell",
+                          "checkbox",
+                          "code",
+                          "columnheader",
+                          "combobox",
+                          "complementary",
+                          "contentinfo",
+                          "definition",
+                          "deletion",
+                          "dialog",
+                          "directory",
+                          "document",
+                          "emphasis",
+                          "feed",
+                          "figure",
+                          "form",
+                          "generic",
+                          "grid",
+                          "gridcell",
+                          "group",
+                          "heading",
+                          "img",
+                          "insertion",
+                          "link",
+                          "list",
+                          "listbox",
+                          "listitem",
+                          "log",
+                          "main",
+                          "marquee",
+                          "math",
+                          "meter",
+                          "menu",
+                          "menubar",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "navigation",
+                          "none",
+                          "note",
+                          "option",
+                          "paragraph",
+                          "presentation",
+                          "progressbar",
+                          "radio",
+                          "radiogroup",
+                          "region",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "scrollbar",
+                          "search",
+                          "searchbox",
+                          "separator",
+                          "slider",
+                          "spinbutton",
+                          "status",
+                          "strong",
+                          "subscript",
+                          "superscript",
+                          "switch",
+                          "tab",
+                          "table",
+                          "tablist",
+                          "tabpanel",
+                          "term",
+                          "textbox",
+                          "time",
+                          "timer",
+                          "toolbar",
+                          "tooltip",
+                          "tree",
+                          "treegrid",
+                          "treeitem"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "testId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "testId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "css": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "css"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "op",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]*$",
+                "maxLength": 160
+              },
+              "only": {
+                "default": "both",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after",
+                  "both"
+                ]
+              },
+              "allowMissing": {
+                "default": [],
+                "maxItems": 0,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "before",
+                    "after"
+                  ]
+                }
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 30000
+              },
+              "observeMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3000
+              },
+              "op": {
+                "type": "string",
+                "const": "screenshot"
+              }
+            },
+            "required": [
+              "id",
+              "op"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "steps"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "properties": {
+        "steps": {
+          "prefixItems": [
+            {
+              "properties": {
+                "op": {
+                  "const": "goto"
+                }
+              },
+              "required": [
+                "op"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

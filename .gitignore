@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.show-what-changed/
+.DS_Store
+*.tgz
+.env
+.env.*
+!.env.example
+evidence/artifacts/
+evidence/logs/
+.tmp/
+.playwright-mcp/

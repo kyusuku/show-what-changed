@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "specRevision": "0.2",
+  "status": "design-only",
+  "targetHours": 24,
+  "concurrentOwners": 4,
+  "maxRepairRounds": 2,
+  "nodes": [
+    {
+      "id": "N0",
+      "name": "schemas-toolchain-fixture",
+      "owner": "integrator",
+      "dependsOn": [],
+      "hourWindow": [
+        0,
+        2
+      ],
+      "owns": [
+        "src/schema/**",
+        "schema/**",
+        "fixtures/next-app-basic/**",
+        "assets/fonts/**"
+      ],
+      "tests": [
+        "T01",
+        "T10",
+        "T11"
+      ],
+      "evidence": "evidence/N0.md",
+      "required": true
+    },
+    {
+      "id": "N1",
+      "name": "source-runtime",
+      "owner": "worker-a",
+      "dependsOn": [
+        "N0"
+      ],
+      "hourWindow": [
+        2,
+        7
+      ],
+      "owns": [
+        "src/workspace/**",
+        "src/runtime/**"
+      ],
+      "tests": [
+        "T02",
+        "T03",
+        "T04",
+        "T12",
+        "T13"
+      ],
+      "evidence": "evidence/N1.md",
+      "required": true
+    },
+    {
+      "id": "N2",
+      "name": "recorder",
+      "owner": "worker-b",
+      "dependsOn": [
+        "N0"
+      ],
+      "hourWindow": [
+        2,
+        7
+      ],
+      "owns": [
+        "src/recorder/**"
+      ],
+      "tests": [
+        "T06",
+        "T07",
+        "T08",
+        "T09"
+      ],
+      "evidence": "evidence/N2.md",
+      "required": true
+    },
+    {
+      "id": "N3",
+      "name": "composer",
+      "owner": "worker-c",
+      "dependsOn": [
+        "N0"
+      ],
+      "hourWindow": [
+        2,
+        7
+      ],
+      "owns": [
+        "src/composer/**"
+      ],
+      "tests": [
+        "T07",
+        "T10",
+        "T11"
+      ],
+      "evidence": "evidence/N3.md",
+      "required": true
+    },
+    {
+      "id": "N4",
+      "name": "planner-cli",
+      "owner": "integrator",
+      "dependsOn": [
+        "N0"
+      ],
+      "hourWindow": [
+        2,
+        7
+      ],
+      "owns": [
+        "src/planner/**",
+        "src/cli/**"
+      ],
+      "tests": [
+        "T01",
+        "T05",
+        "T14"
+      ],
+      "evidence": "evidence/N4.md",
+      "required": true
+    },
+    {
+      "id": "N5",
+      "name": "integration",
+      "owner": "integrator",
+      "dependsOn": [
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ],
+      "hourWindow": [
+        7,
+        12
+      ],
+      "owns": [
+        "src/runner/**",
+        "test/integration/compare*.test.ts"
+      ],
+      "tests": [
+        "T02",
+        "T03",
+        "T07",
+        "T14"
+      ],
+      "evidence": "evidence/N5.md",
+      "required": true
+    },
+    {
+      "id": "N6",
+      "name": "adversarial-verification",
+      "owner": "review-team",
+      "dependsOn": [
+        "N5"
+      ],
+      "hourWindow": [
+        12,
+        16
+      ],
+      "owns": [
+        "test/integration/**"
+      ],
+      "tests": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15"
+      ],
+      "evidence": "evidence/N6.md",
+      "required": true
+    },
+    {
+      "id": "N7",
+      "name": "package-skill",
+      "owner": "integrator+worker-c",
+      "dependsOn": [
+        "N6"
+      ],
+      "hourWindow": [
+        16,
+        18
+      ],
+      "owns": [
+        "test/package/**",
+        "skills/show-what-changed/**",
+        "README.md"
+      ],
+      "tests": [
+        "T16"
+      ],
+      "evidence": "evidence/N7.md",
+      "required": true
+    },
+    {
+      "id": "N8",
+      "name": "platform-real-app",
+      "owner": "review-team",
+      "dependsOn": [
+        "N7"
+      ],
+      "hourWindow": [
+        18,
+        20
+      ],
+      "owns": [
+        ".github/workflows/ci.yml",
+        "docs/limitations.md",
+        "docs/ci.md"
+      ],
+      "tests": [
+        "T16",
+        "T17"
+      ],
+      "evidence": "evidence/N8.md",
+      "required": true
+    },
+    {
+      "id": "N9",
+      "name": "release-candidate",
+      "owner": "integrator",
+      "dependsOn": [
+        "N8"
+      ],
+      "hourWindow": [
+        20,
+        24
+      ],
+      "owns": [
+        "LICENSE",
+        "THIRD_PARTY_NOTICES.md",
+        "SECURITY.md",
+        "CONTRIBUTING.md"
+      ],
+      "tests": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "evidence": "evidence/N9.md",
+      "required": true
+    }
+  ],
+  "planPrompt": "Read spec.md revision 0.2 and your node card in docs/implementation-graph.md. Produce a detailed implementation plan for your owned files and frozen interfaces, with concrete fixture cases, commands and expected outcomes for every assigned test ID. Do not add deferred features or alter shared schemas without the integrator. Use the bounded behavior-test, implementation, verification and independent-review loop. Return evidence and blockers honestly; publication is outside scope."
+}

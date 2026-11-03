@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "scope": "Development Linux source snapshot, not final installed-package acceptance.",
+  "sourceArchiveSha256": "8f3f7c2bf101609ae2e5d30799a260f806b949d3fe5ca2f37316d6b9d05b523b",
+  "platform": "linux-arm64",
+  "image": {
+    "id": "sha256:66c505e5d6f54ec18de43ff61fb0dac6e698d516d7c8a31b74564c60f3624d32",
+    "repoDigests": [
+      "swc-v01-linux-gate@sha256:66c505e5d6f54ec18de43ff61fb0dac6e698d516d7c8a31b74564c60f3624d32"
+    ],
+    "os": "linux",
+    "architecture": "arm64",
+    "created": "2026-11-03T03:38:46.086657279+07:00"
+  },
+  "stages": [
+    {
+      "id": "extract",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "environment",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "install",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "sandbox",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "typecheck",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "build",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "schema-check",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "unit",
+      "exitCode": 1,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "contracts",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "privacy-scanner",
+      "exitCode": 0,
+      "signal": null,
+      "oomKillDelta": 0
+    },
+    {
+      "id": "integration",
+      "exitCode": 1,
+      "signal": null,
+      "oomKillDelta": 0
+    }
+  ],
+  "unit": {
+    "passed": 529,
+    "failed": 1,
+    "skipped": 11,
+    "failure": "Deadline interruption test observed zero rejected frames immediately after stop."
+  },
+  "integration": {
+    "passed": 102,
+    "failed": 1,
+    "failure": "Narrow odd-sized live motion returned CAPTURE_TIMESTAMP_REGRESSION."
+  },
+  "container": {
+    "exitCode": 1,
+    "oomKilled": false,
+    "removed": true
+  },
+  "platformChecksComplete": false,
+  "releaseGateComplete": false,
+  "finalGateAcceptance": false,
+  "diagnosis": "Targeted deadline-settlement and scalar browser-timestamp investigations are in progress."
+}

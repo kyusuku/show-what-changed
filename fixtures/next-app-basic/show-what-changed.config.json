@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 2,
+  "routes": { "include": ["/pricing"] },
+  "source": { "generatedDirs": ["node_modules", ".next"] },
+  "execution": {
+    "requires": [{ "argv": ["node", "--version"], "expectedVersion": "24.x" }, { "argv": ["npm", "--version"], "expectedVersion": "11.x" }],
+    "setup": [{ "argv": ["npm", "ci", "--no-audit", "--no-fund"] }],
+    "start": { "kind": "process", "argv": ["npm", "run", "dev", "--", "--hostname", "127.0.0.1", "--port", "{port}"] },
+    "ready": { "path": "/pricing", "statuses": [200] },
+    "state": { "kind": "stateless" }
+  },
+  "capture": {
+    "mode": "keyframes",
+    "fixedTime": "2026-01-15T10:00:00.000Z",
+    "maskSelectors": ["[data-testid=synthetic-secret]"],
+    "stepTimeoutMs": 5000,
+    "observeMs": 800
+  }
+}

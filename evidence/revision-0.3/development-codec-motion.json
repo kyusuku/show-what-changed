@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "status": "numeric-passed",
+  "scope": "Development candidate installed recorder, composer, encoder, and decoded media checks; direct installed module calls, not CLI acceptance.",
+  "candidateSha256": "0edc4e1dc9e3a0e4fd3b3c70475815fbd2748cb99c51f85e5c3f9f41d54de306",
+  "node": "v24.22.2",
+  "platform": "darwin-arm64",
+  "repetitionsPerViewport": 1,
+  "completeRepetitionMatrix": false,
+  "normalSpeedVisualReview": "pending",
+  "finalGateAcceptance": false,
+  "repeatCommand": "node scripts/revision-0.3-motion-check.mjs --installed-root \"$INSTALLED_PACKAGE_ROOT\" --output-dir \"$NEW_OUTPUT_DIRECTORY\" --repetitions 1",
+  "cases": [
+    {
+      "id": "1280x800-run-1",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "status": "numeric-passed",
+      "source": {
+        "tracks": {
+          "before": {
+            "distinctPositions": 120,
+            "maxMovingGapMs": 99.99599993228912,
+            "nativeDistinctPositions": 43,
+            "clockErrorBoundMs": 7.847707949546759,
+            "stats": {
+              "receivedFrames": 159,
+              "persistedFrames": 159,
+              "acknowledgedFrames": 159,
+              "rejectedFrames": 0,
+              "maxQueueDepth": 2,
+              "sourceDroppedFrames": null,
+              "maxGapMs": 216.65800001937896
+            }
+          },
+          "after": {
+            "distinctPositions": 124,
+            "maxMovingGapMs": 66.66400003433228,
+            "nativeDistinctPositions": 44,
+            "clockErrorBoundMs": 2.207520476341301,
+            "stats": {
+              "receivedFrames": 162,
+              "persistedFrames": 162,
+              "acknowledgedFrames": 162,
+              "rejectedFrames": 0,
+              "maxQueueDepth": 2,
+              "sourceDroppedFrames": null,
+              "maxGapMs": 233.32400002982467
+            }
+          }
+        },
+        "pulseErrorsMs": [
+          0.15643763542175293,
+          16.509562373161316,
+          0.15643775463104248
+        ],
+        "checkedPersistedImages": 329
+      },
+      "decoded": {
+        "decodedFrames": 158,
+        "tracks": {
+          "before": {
+            "distinctPositions": 80,
+            "maxMovingGapMs": 33.333333333333485,
+            "checkedMasks": 127,
+            "panelGeometry": {
+              "x": 1,
+              "y": 48,
+              "width": 956,
+              "height": 598,
+              "scaleX": 0.746875,
+              "scaleY": 0.7475
+            }
+          },
+          "after": {
+            "distinctPositions": 86,
+            "maxMovingGapMs": 33.333333333333485,
+            "checkedMasks": 128,
+            "panelGeometry": {
+              "x": 963,
+              "y": 48,
+              "width": 956,
+              "height": 598,
+              "scaleX": 0.746875,
+              "scaleY": 0.7475
+            }
+          }
+        },
+        "pulseErrorsMs": [
+          0,
+          33.33333333333303,
+          0
+        ],
+        "maskTolerancePerChannel": 24
+      },
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "media": {
+        "video": {
+          "path": "compare.mp4",
+          "sha256": "95cd4d21e7118c28e1d0e33ca8fe1c9b6c664499e43c05d88d437ae0f39c9d14",
+          "bytes": 62162
+        },
+        "poster": {
+          "path": "poster.png",
+          "sha256": "b206529b55fbe54b137349663aecf473d5fb649ce5988f581c3a6f51c474ee5a",
+          "bytes": 28149
+        },
+        "ffmpegVersion": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+        "ffprobeVersion": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+      }
+    },
+    {
+      "id": "390x844-run-1",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "numeric-passed",
+      "source": {
+        "tracks": {
+          "before": {
+            "distinctPositions": 175,
+            "maxMovingGapMs": 60.413999915122986,
+            "nativeDistinctPositions": 69,
+            "clockErrorBoundMs": 1.5589374141673034,
+            "stats": {
+              "receivedFrames": 216,
+              "persistedFrames": 216,
+              "acknowledgedFrames": 216,
+              "rejectedFrames": 0,
+              "maxQueueDepth": 2,
+              "sourceDroppedFrames": null,
+              "maxGapMs": 216.65800001937896
+            }
+          },
+          "after": {
+            "distinctPositions": 175,
+            "maxMovingGapMs": 60.48699986934662,
+            "nativeDistinctPositions": 69,
+            "clockErrorBoundMs": 1.1213754598538799,
+            "stats": {
+              "receivedFrames": 216,
+              "persistedFrames": 216,
+              "acknowledgedFrames": 216,
+              "rejectedFrames": 0,
+              "maxQueueDepth": 2,
+              "sourceDroppedFrames": null,
+              "maxGapMs": 199.99200000893325
+            }
+          }
+        },
+        "pulseErrorsMs": [
+          0.10995852947235107,
+          0.10995852947235107,
+          0.10995852947235107
+        ],
+        "checkedPersistedImages": 440
+      },
+      "decoded": {
+        "decodedFrames": 154,
+        "tracks": {
+          "before": {
+            "distinctPositions": 88,
+            "maxMovingGapMs": 33.33333333333394,
+            "checkedMasks": 124,
+            "panelGeometry": {
+              "x": 341,
+              "y": 48,
+              "width": 276,
+              "height": 598,
+              "scaleX": 0.7076923076923077,
+              "scaleY": 0.7085308056872038
+            }
+          },
+          "after": {
+            "distinctPositions": 88,
+            "maxMovingGapMs": 33.33333333333394,
+            "checkedMasks": 124,
+            "panelGeometry": {
+              "x": 1303,
+              "y": 48,
+              "width": 276,
+              "height": 598,
+              "scaleX": 0.7076923076923077,
+              "scaleY": 0.7085308056872038
+            }
+          }
+        },
+        "pulseErrorsMs": [
+          0,
+          0,
+          0
+        ],
+        "maskTolerancePerChannel": 24
+      },
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "media": {
+        "video": {
+          "path": "compare.mp4",
+          "sha256": "4322aeaedaaa8fb6788cd501e67571873a55af79b49cfacce065402445d98e6d",
+          "bytes": 56504
+        },
+        "poster": {
+          "path": "poster.png",
+          "sha256": "489581e3e2d0239ffa36033e6bc3495504bbfd2a6f8583c7db5c16ead432083e",
+          "bytes": 27732
+        },
+        "ffmpegVersion": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+        "ffprobeVersion": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 2,
+  "id": "workshop-validation",
+  "title": "Explain an invalid task proposal",
+  "steps": [
+    { "id": "open-board", "op": "goto", "path": "/board", "observeMs": 800 },
+    { "id": "board-ready", "op": "expectVisible", "target": { "role": "heading", "name": "Workshop board" } },
+    { "id": "navigate-proposal", "op": "click", "target": { "role": "link", "name": "Propose a task" }, "observeMs": 600 },
+    { "id": "proposal-ready", "op": "expectVisible", "target": { "role": "heading", "name": "Propose a task" } },
+    { "id": "short-title", "op": "fill", "target": { "label": "Task title" }, "value": "x", "observeMs": 300 },
+    { "id": "invalid-email", "op": "fill", "target": { "label": "Contact email" }, "value": "broken", "observeMs": 300 },
+    { "id": "submit-task", "op": "click", "target": { "role": "button", "name": "Add task" }, "observeMs": 800 },
+    { "id": "validation-visible", "op": "expectVisible", "target": { "css": "[data-testid=\"proposal-feedback\"][role=\"alert\"]" } },
+    { "id": "validation-feedback", "op": "screenshot", "note": "Shared checkpoint retains the actual feedback source change." }
+  ]
+}

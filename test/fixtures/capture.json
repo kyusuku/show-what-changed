@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 2,
+  "runId": "20261102T000000000Z-0000000000000000",
+  "toolVersion": "0.1.0",
+  "browserVersion": "156.0.8078.4",
+  "captureMode": "keyframes",
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "labels": {
+    "before": "synthetic BEFORE <b>data</b>",
+    "after": "synthetic apr\u00e8s"
+  },
+  "scenarios": [
+    {
+      "id": "n0-probe",
+      "title": "Synthetic media capability probe",
+      "initialRoute": "/probe",
+      "outcome": "ok",
+      "steps": [
+        {
+          "id": "masked-pair",
+          "op": "screenshot",
+          "caption": "KEYFRAMES | Synthetic capability only | <img src=x onerror=alert(1)>",
+          "before": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "source/before.png",
+              "sha256": "9b09ddc88203a49884966f4eca4034885eadfcac51cfb89863eb7cf5d9c837a6",
+              "bytes": 29587
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 0,
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "selectors",
+              "selectorCount": 1
+            }
+          },
+          "after": {
+            "status": "ok",
+            "reasonCode": null,
+            "image": {
+              "path": "source/after.png",
+              "sha256": "ef90999382829ddce82ca8926afa0630c4d367ec60077d1084e72921a734a7ca",
+              "bytes": 34540
+            },
+            "heldFromStepId": null,
+            "elapsedMs": 0,
+            "imageKind": "checkpoint",
+            "sanitization": {
+              "kind": "selectors",
+              "selectorCount": 1
+            }
+          },
+          "changeRatio": 0.023333984375,
+          "observeMs": 800
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "warnings": [
+    {
+      "code": "PROBE_ONLY",
+      "message": "Synthetic capability proof. Product execution, coverage and provenance are unverified."
+    },
+    {
+      "code": "FONT_GLYPH_UNSUPPORTED",
+      "message": "Presentation maps non-ASCII source-label characters to ?. JSON preserves Unicode."
+    }
+  ],
+  "settings": {
+    "fixedTime": null
+  },
+  "sources": {
+    "before": {
+      "requested": "before",
+      "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "kind": "commit",
+      "materializedHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "after": {
+      "requested": "after",
+      "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "kind": "commit",
+      "materializedHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  }
+}

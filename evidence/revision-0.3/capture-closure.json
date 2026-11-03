@@ -1,0 +1,92 @@
+{
+  "scope": "Development capture delivery closure repair, source-loaded, no release-readiness claim",
+  "runtime": {
+    "node": "24.22.2",
+    "playwright": "1.64.1",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "chromium": "156.0.8078.4"
+  },
+  "changedFiles": {
+    "src/recorder/motion.ts": "5f75ab4cb94e95d898aaf314ac14a62834f05fb657c39957745f09afbca4bb8d",
+    "test/unit/scenario-states-metrics.test.ts": "674ef5377723d73127ad1e405fed7064e4848e409391a81a7fc40909401abc8f",
+    "fixtures/motion/recorder-lifecycle-probe.mjs": "017829eb05f6b3737da83f9b98933a16154b0a33dd351263383c7ea7ca32bfbc"
+  },
+  "priorMotionSha256": "079a584fc958b4d43405a004e9efdb2597336be205db54fadae1909355b129e4",
+  "checks": {
+    "newRegressionTestsFailedBefore": 9,
+    "newRegressionTestsPassedAfter": 9,
+    "completeFrameStreamTestsPassed": 65,
+    "typecheck": "passed",
+    "actualPlaywrightDispatchSchedulesPassed": 4
+  },
+  "live": [
+    {
+      "mode": "static",
+      "browser": "156.0.8078.4",
+      "delivered": 1,
+      "detachCalls": 1,
+      "detachResolved": true,
+      "closeEvents": 1,
+      "stats": {
+        "receivedFrames": 1,
+        "persistedFrames": 1,
+        "acknowledgedFrames": 1,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 0
+      },
+      "rawBytes": 0,
+      "sanitizedBytes": 0,
+      "faults": [],
+      "maskPixelsExact": true,
+      "finalResultStable": true,
+      "postDetachCallbacksObserved": 0
+    },
+    {
+      "mode": "animated",
+      "browser": "156.0.8078.4",
+      "delivered": 25,
+      "detachCalls": 1,
+      "detachResolved": true,
+      "closeEvents": 1,
+      "stats": {
+        "receivedFrames": 25,
+        "persistedFrames": 25,
+        "acknowledgedFrames": 25,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 16.666000010445714
+      },
+      "rawBytes": 0,
+      "sanitizedBytes": 0,
+      "faults": [],
+      "maskPixelsExact": true,
+      "finalResultStable": true,
+      "postDetachCallbacksObserved": 0
+    }
+  ],
+  "cleanup": {
+    "browserClosed": true,
+    "sourceIdentityUnchanged": true
+  },
+  "preserved": {
+    "maxFramesInFlight": 1,
+    "sourceDroppedFrames": null,
+    "strictSourceTimestampOrdering": true,
+    "sourceCaptureEndSemantics": true,
+    "originalTimestampMetadata": true,
+    "rawOwnershipUntilActualSettlement": true,
+    "forcedDeadlineClamp": true,
+    "schemaUnchanged": true
+  },
+  "limitations": [
+    "Live check used a small public synthetic page at 320x240 on macOS only.",
+    "Delivery closure does not prove that every browser encode or presentation was delivered.",
+    "Failure snapshots may contain explicitly incomplete counters while real resource ownership persists.",
+    "Full installed CLI motion quality, repeated platform matrix, Linux, and release package identity remain separate checks.",
+    "Original nonmonotonic timestamp cause remains unknown."
+  ]
+}

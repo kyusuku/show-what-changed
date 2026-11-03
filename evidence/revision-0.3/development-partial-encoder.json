@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "scope": "installed_synthetic_partial_motion_development_verification",
+  "status": "numeric-passed",
+  "packageTarballSha256": "a9e0ddf8215714ca1739ca247d3a3bc952c85f67fc606fdcac3e335c5886e751",
+  "liveComparison": {
+    "runId": "20261102T233109510Z-802ba93facd5fb09",
+    "actualExitCode": 3,
+    "recordingRepeated": false,
+    "originalVerifierFailure": "incorrect_positive_duration_requirement_for_subframe_failure_annotation",
+    "ownedOutputExcludedAfterInitialAbsence": true
+  },
+  "sourceCommits": {
+    "before": "08d2b5ee2885a80a3cc3735bcd4b6758ac20920c",
+    "after": "e23a5013840657988ba235d43cbfd487a4a243c2"
+  },
+  "summary": {
+    "verifiedPairs": 3,
+    "changedPairs": 3,
+    "expectedAbsences": 0,
+    "exclusions": 0,
+    "failedSteps": 1,
+    "blockedSteps": 3,
+    "coverageOmissions": 0
+  },
+  "sourcePreservation": "exact-match-including-index-dirty-untracked-and-caller-files",
+  "sources": {
+    "before": {
+      "status": "ok",
+      "frames": 77,
+      "stats": {
+        "receivedFrames": 77,
+        "persistedFrames": 77,
+        "acknowledgedFrames": 77,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 383.3180000074208
+      },
+      "clockErrorBoundMs": 4.467770445823589,
+      "distinctPositions": 70,
+      "maxKnownMovingDeliveredGapMs": 133.32800018787384
+    },
+    "after": {
+      "status": "ok",
+      "frames": 95,
+      "stats": {
+        "receivedFrames": 95,
+        "persistedFrames": 95,
+        "acknowledgedFrames": 95,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 1566.6040000505745
+      },
+      "clockErrorBoundMs": 4.646145330429135,
+      "distinctPositions": 66,
+      "maxKnownMovingDeliveredGapMs": 133.32799994945526
+    }
+  },
+  "sourceMasks": {
+    "checkedPersistedPngs": 186,
+    "exactRGBA": [
+      16,
+      16,
+      16,
+      255
+    ]
+  },
+  "decoded": {
+    "frames": 279,
+    "expectedFrames": 279,
+    "checkedMasks": {
+      "before": 249,
+      "after": 249
+    },
+    "maskTolerancePerChannel": 24,
+    "maskInteriorInsetPixels": 4,
+    "movement": {
+      "before": {
+        "distinctPositions": 72,
+        "maxKnownMovingDeliveredGapMs": 33.33333333333394
+      },
+      "after": {
+        "distinctPositions": 66,
+        "maxKnownMovingDeliveredGapMs": 33.33333333333394
+      }
+    }
+  },
+  "offlineRecovery": {
+    "unavailableEncoderExitCode": 8,
+    "recoveryExitCode": 3,
+    "comparisonOutcomePreserved": true,
+    "cleanupOutcomePreserved": true,
+    "browserUnavailable": true,
+    "earlierEncodingFailureRetained": true
+  },
+  "terminalCleanup": {
+    "processLedgers": 1,
+    "dockerIdentities": 0
+  },
+  "video": {
+    "sha256": "30275462857730a7426005699e1d160794b085624e09b1812205dd1cd5f57014",
+    "bytes": 111149
+  },
+  "normalSpeedVisualReview": "pending",
+  "decodedFinalFrameInspection": {
+    "beforeBadge": "BLOCKED | PRIOR STEP FAILED | HELD | UNVERIFIED PAIR",
+    "afterActionCompletedVisible": true,
+    "exactObservedFrame": 278,
+    "imageSha256": "18c9a60bf84c1fe05e59ab22876c07b807a1a32d9ccc6ea3677f8a14eefe0543"
+  },
+  "originalVerifierFailurePreserved": true,
+  "continuationVerificationSha256": "03cdad071cf76d28c9a7b577112debd199620c62320f4ed4f8d15bffec397780",
+  "liveCaptureRepeated": false,
+  "finalCandidateAcceptance": false
+}

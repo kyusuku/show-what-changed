@@ -1,0 +1,55 @@
+{
+  "name": "show-what-changed",
+  "version": "0.1.0",
+  "description": "Compare web-app behavior across Git snapshots with labeled BEFORE and AFTER motion recordings.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Tampraphon Lorattanasane",
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "npm@11.12.1",
+  "bin": {
+    "show-what-changed": "dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "skills",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyusuku/show-what-changed.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/generate-schemas.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "test:contracts": "vitest run test/contracts",
+    "test:privacy": "python3 scripts/test_public_privacy.py",
+    "schema:generate": "node scripts/generate-schemas.mjs",
+    "schema:check": "node scripts/generate-schemas.mjs --check"
+  },
+  "dependencies": {
+    "commander": "15.0.0",
+    "pixelmatch": "8.0.0",
+    "playwright": "1.64.1",
+    "pngjs": "7.0.0",
+    "semver": "7.8.5",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/pngjs": "6.0.5",
+    "@types/semver": "7.8.0",
+    "ajv": "8.20.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

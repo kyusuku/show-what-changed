@@ -1,0 +1,9 @@
+{
+  "name": "@workshop/board-data",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "exports": "./dist/index.mjs",
+  "scripts": { "build": "node build.mjs" }
+}

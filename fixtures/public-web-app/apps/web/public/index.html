@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <title>Workshop board</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/board" data-route><span class="brand-mark" aria-hidden="true">w.</span> Workshop</a>
+      <button class="library-button" type="button" aria-label="Open library" aria-expanded="false" aria-controls="library-panel"><span aria-hidden="true">☰</span> Library</button>
+    </header>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="/board" data-route>Board</a>
+      <a href="/proposals" data-route>Propose a task</a>
+    </nav>
+    <main id="main"><p class="loading" role="status">Opening the workshop…</p></main>
+    <button class="drawer-backdrop" type="button" aria-label="Close library overlay" tabindex="-1" aria-hidden="true"></button>
+    <aside id="library-panel" data-testid="library-panel" data-open="false" class="library-panel" aria-label="Workshop library" aria-hidden="true" inert>
+      <div class="panel-heading"><div><p class="eyebrow">A shelf of useful things</p><h2>Workshop library</h2></div><button class="icon-button" type="button" aria-label="Close library">×</button></div>
+      <p class="panel-intro">Find a small guide for your next project.</p>
+      <div class="library-list" data-testid="library-list" tabindex="0" aria-label="Workshop guides"></div>
+      <footer class="panel-footer"><output data-testid="library-scroll-readout" data-scroll-top="0" data-scrolled="false">Panel scroll 0 px</output><span>30 guides</span></footer>
+    </aside>
+  </body>
+</html>

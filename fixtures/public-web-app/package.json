@@ -1,0 +1,13 @@
+{
+  "name": "workshop-board-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "packageManager": "pnpm@11.9.0",
+  "engines": { "node": "24.x" },
+  "scripts": {
+    "build": "pnpm --filter @workshop/board-data build",
+    "start": "pnpm --filter @workshop/web start"
+  }
+}

@@ -1,0 +1,6 @@
+FROM busybox@sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec
+WORKDIR /app
+COPY run-container.sh /app/run-container.sh
+COPY generated/runtime.json /app/runtime.json
+VOLUME /data
+ENTRYPOINT ["/bin/sh", "/app/run-container.sh"]

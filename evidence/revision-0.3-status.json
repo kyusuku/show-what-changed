@@ -1,0 +1,819 @@
+{
+  "ledgerVersion": 1,
+  "specRevision": "0.3",
+  "productSchemaVersion": 2,
+  "date": "2026-11-02",
+  "status": "implementation_in_progress",
+  "currentGoal": "implementation",
+  "implementationStarted": true,
+  "executionEvidenceRecorded": true,
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "graphPath": "docs/implementation-graph.json",
+  "specPath": "spec.md",
+  "candidate": {
+    "implementationCommit": null,
+    "sourceArchiveSha256": null,
+    "packageTarballSha256": null,
+    "specSha256": null
+  },
+  "policy": {
+    "initialGateStatus": "pending_implementation",
+    "historicalPassesCarryForward": false,
+    "requiredAcceptedGateCount": 24,
+    "everyGateRequires": [
+      "reproducible command",
+      "source identity",
+      "expected result",
+      "actual exit code",
+      "artifact evidence",
+      "independent acceptance"
+    ],
+    "candidateChangesRequireAffectedRevalidation": true,
+    "readyStatus": "ready_for_owner_publish",
+    "g24AcceptsReviewedHandoffWithoutPublication": true,
+    "publicationRequiresSeparateExplicitAuthorization": true
+  },
+  "historicalReferenceOnly": [
+    "docs/audit/spec.r02-completed-2026-11-02.md",
+    "docs/audit/implementation-graph.r02.md",
+    "docs/audit/implementation-graph.r02.json",
+    "evidence/release-candidate.json"
+  ],
+  "gates": [
+    {
+      "id": "G01",
+      "requirement": "Strict schema 2 and every documented JSON example validate; unknown fields, tokens, unsafe paths, v1 inputs, incompatible mask modes, and malformed plans fail.",
+      "nodeIds": [
+        "R0",
+        "R5",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G02",
+      "requirement": "Exact refs, diverged endpoints, unique merge base, shallow missing refs, detached HEAD, index-only deletion, staged/unstaged cancellation, and WORKTREE additions/deletions preserve existing semantics.",
+      "nodeIds": [
+        "R2",
+        "R8",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G03",
+      "requirement": "Streaming inventories handle large-repository source and shared packages; source mutation/copy races fail; caller HEAD/index/tracked/untracked/dependencies remain unchanged.",
+      "nodeIds": [
+        "R2",
+        "R7",
+        "R8",
+        "R12",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G04",
+      "requirement": "Installed package compares root npm, pnpm workspace, Python app, and static site; non-JavaScript/static fixtures have no npm manifest. Tool/app runtime separation is exercised.",
+      "nodeIds": [
+        "R2",
+        "R6",
+        "R11",
+        "R13",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G05",
+      "requirement": "Recipe cwd/env/tokens/ordered services/setup/bootstrap behave as declared. Missing refs/prerequisites fail before app startup; lock/source mutation cannot yield success.",
+      "nodeIds": [
+        "R2",
+        "R3",
+        "R6",
+        "R8",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G06",
+      "requirement": "Host listener conflicts, silent fallback, unrelated listeners, readiness redirects/timeouts, and startup/capture exits produce truthful errors; unrelated processes survive.",
+      "nodeIds": [
+        "R3",
+        "R6",
+        "R8",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G07",
+      "requirement": "Docker app plus backing service has side-isolated data, inspected ownership, and exact cleanup on success, startup failure, cancellation, and timeout. App/service image-declared volumes and interrupted buildx builders are covered; unrelated containers, networks, builders, and images survive.",
+      "nodeIds": [
+        "R3",
+        "R8",
+        "R13",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G08",
+      "requirement": "Every scenario action, inner-container smooth scroll, exact locator ambiguity, fragment navigation, timeout cancellation, and hover persistence is exercised.",
+      "nodeIds": [
+        "R4",
+        "R6",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G09",
+      "requirement": "Expected absence/exclusion are unverified pairs; required failure blocks later side actions and is visibly labeled at the correct motion time.",
+      "nodeIds": [
+        "R4",
+        "R6",
+        "R8",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G10",
+      "requirement": "Full motion pipeline meets section 7.4 on both platforms across three runs. Actual positions, source gaps, pulse alignment, and normal-speed viewing are recorded.",
+      "nodeIds": [
+        "R1",
+        "R4",
+        "R9",
+        "R13",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G11",
+      "requirement": "Every persisted frame has exact opaque masks before encoding through navigation, motion, failure, and cancellation. Decoded output is checked in scaled/letterboxed coordinates with codec-aware criteria for absence of sensitive content, not exact pixel equality after lossy H.264. No unmasked raw artifact exists. Keyframe selector masking still passes.",
+      "nodeIds": [
+        "R1",
+        "R4",
+        "R6",
+        "R8",
+        "R9",
+        "R13",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G12",
+      "requirement": "Clock fields, unit conversion, calibration uncertainty, drift, nonmonotonic/missing timestamps, queue overflow, static pages, and frame bounds have explicit tests.",
+      "nodeIds": [
+        "R1",
+        "R4",
+        "R8",
+        "R13",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G13",
+      "requirement": "Trusted titles/labels/status intervals, dimensions, safe failure panels, poster selection, Unicode fallback, and text escaping render correctly.",
+      "nodeIds": [
+        "R4",
+        "R6",
+        "R9",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G14",
+      "requirement": "Exact frame schedule/count, first/boundary/final decoded images, codec/FPS/faststart, and offline recompose pass. Recovery cannot clear capture/source/cleanup faults.",
+      "nodeIds": [
+        "R1",
+        "R4",
+        "R6",
+        "R9",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G15",
+      "requirement": "SIGINT/SIGTERM and overall deadline during setup, container build/create, startup, recording, and encoding leave no owned resources; cleanup faults cannot report clean success.",
+      "nodeIds": [
+        "R3",
+        "R6",
+        "R8",
+        "R13",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G16",
+      "requirement": "Locks, PID reuse, stale ledgers, malicious output paths, symlink outputs, repeated clean, and forced-kill residue recovery preserve unrelated resources.",
+      "nodeIds": [
+        "R3",
+        "R6",
+        "R8",
+        "R13",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G17",
+      "requirement": "A synthetic authenticated app loads independent private storage states; isolated seeded state is side-specific; external-read-only state remains explicitly unverified. Secrets never enter public metadata/logs.",
+      "nodeIds": [
+        "R3",
+        "R6",
+        "R8",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G18",
+      "requirement": "Pure planning executes no repository code; consent binding, private env resolution, JSON envelopes, artifact hashes, null missing artifacts, and no-change exits are correct.",
+      "nodeIds": [
+        "R2",
+        "R5",
+        "R6",
+        "R8",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G19",
+      "requirement": "Publicly redistributable web-app navigation/inner-scroll and form-feedback comparisons pass three consecutive times through the final installed package; exact public inputs, useful reviewed media, a subsequent WORKTREE run, preservation, and cleanup are verified.",
+      "nodeIds": [
+        "R7",
+        "R12",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G20",
+      "requirement": "Typecheck, build, generated schema checks, configured lint/format, unit/integration, full Linux and macOS installed-package smoke pass against the new candidate.",
+      "nodeIds": [
+        "R5",
+        "R10",
+        "R11",
+        "R13",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G21",
+      "requirement": "npm pack allowlist, clean tarball installation, help/doctor/plan/compare/compose/clean, bundled assets/skill, and literal public quickstarts pass without source-tree dependencies.",
+      "nodeIds": [
+        "R10",
+        "R11",
+        "R13",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G22",
+      "requirement": "README, support matrix, CLI help, skill, and synthetic success/partial motion demos accurately describe implemented behavior. A fresh agent completes a documented custom-recipe run.",
+      "nodeIds": [
+        "R9",
+        "R10",
+        "R14",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G23",
+      "requirement": "Exact candidate/archive/spec hashes, full-history/package secret scan, dependency advisory triage, license notices, and public artifact review are complete. Private application context and raw material are absent from the full intended public history and package.",
+      "nodeIds": [
+        "R15",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    },
+    {
+      "id": "G24",
+      "requirement": "Owner publishing handoff has exact commands, public-repository/license prerequisites, npm ownership/auth/provenance path, rollback/deprecation guidance, and independent post-publish install verification. Actual publication requires explicit authorization.",
+      "nodeIds": [
+        "R15",
+        "R16"
+      ],
+      "status": "pending_implementation",
+      "command": null,
+      "sourceIdentity": null,
+      "expectedResult": null,
+      "actualExitCode": null,
+      "artifacts": [],
+      "independentReview": null
+    }
+  ],
+  "activation": {
+    "head": "a85f90f3436a14060a8af222c2941d55e8c5bdc5",
+    "startUtc": "2026-11-02T15:04:51+00:00",
+    "targetUtc": "2026-11-03T15:04:51+00:00",
+    "startBangkok": "2026-11-02T22:04:51+07:00",
+    "targetBangkok": "2026-11-03T22:04:51+07:00"
+  },
+  "nodes": [
+    {
+      "id": "R0",
+      "status": "completed_contract_freeze",
+      "evidence": "evidence/revision-0.3/R0.md"
+    },
+    {
+      "id": "R1",
+      "status": "prototype_demonstrated_pending_backend_revalidation",
+      "evidence": "evidence/revision-0.3/R1.md"
+    },
+    {
+      "id": "R2",
+      "status": "reviewed_source_repairs_pending_final_integration",
+      "evidence": "evidence/revision-0.3/R2.md"
+    },
+    {
+      "id": "R3",
+      "status": "reviewed_recovery_live_seven_passed_two_failed_diagnosed",
+      "evidence": "evidence/revision-0.3/R3.md"
+    },
+    {
+      "id": "R4",
+      "status": "encoder_repair_verified_linux_capture_cadence_failure_under_investigation",
+      "evidence": "evidence/revision-0.3/R4.md"
+    },
+    {
+      "id": "R5",
+      "status": "implemented_pending_integration_review",
+      "evidence": "evidence/revision-0.3/R5.md"
+    },
+    {
+      "id": "R6",
+      "status": "in_progress",
+      "evidence": "evidence/revision-0.3/R6.md"
+    },
+    {
+      "id": "R7",
+      "status": "in_progress",
+      "evidence": "evidence/revision-0.3/R7.md"
+    },
+    {
+      "id": "R8",
+      "status": "adversarial_evidence_review_in_progress",
+      "evidence": "evidence/revision-0.3/R8.md"
+    },
+    {
+      "id": "R9",
+      "status": "reviewed_motion_status_repair_pending_installed_revalidation",
+      "evidence": "evidence/revision-0.3/R9.md"
+    },
+    {
+      "id": "R10",
+      "status": "fresh_package_bound_installed_linux_motion_repetition_failed",
+      "evidence": "evidence/revision-0.3/R10.md"
+    },
+    {
+      "id": "R11",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "R12",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "R13",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "R14",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "R15",
+      "status": "audit_preparation_pending_final_candidate",
+      "evidence": "evidence/revision-0.3/R15.md"
+    },
+    {
+      "id": "R16",
+      "status": "pending",
+      "evidence": null
+    }
+  ],
+  "publicPrivacyCorrection": "Generic redistributable acceptance; private application inputs and original development records live outside the public repository. Clean public history is required.",
+  "publicContractInputs": {
+    "spec.md": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+    "docs/implementation-graph.json": "e998e4a494d132f3ad4e36b6c12ddfee4e9949cdd70ea01c247b6007c0ed6274",
+    "docs/web-app-acceptance.md": "c7e3fca6f0fbc4fc7c6c56bf662ff9cd3efe3893d31c5909a8887fc93b766a46"
+  },
+  "checkpoints": [
+    {
+      "hour": 2,
+      "recordedAt": "2026-11-02T17:06:57.225128+00:00",
+      "result": "prototype_demonstrated_with_open_runtime_risks",
+      "evidence": [
+        "evidence/revision-0.3/R1.md",
+        "evidence/revision-0.3/R2.md",
+        "evidence/revision-0.3/R3.md",
+        "evidence/revision-0.3/R4.md"
+      ],
+      "observed": [
+        "complete synthetic mask-clock-compose-encode-decode development path",
+        "public large-source streaming and preservation checks",
+        "owned Docker builder/image/network and cancellation checks"
+      ],
+      "open": [
+        "always-animating navigation and maximum-window capture after thread lifecycle repairs",
+        "complete two-side container recipe transport diagnosis",
+        "independent archive scanner closure and final candidate privacy checks"
+      ],
+      "releaseGateAcceptance": false
+    }
+  ],
+  "latestDevelopmentPackage": {
+    "sha256": "a9e0ddf8215714ca1739ca247d3a3bc952c85f67fc606fdcac3e335c5886e751",
+    "bytes": 377590,
+    "cleanInstall": "passed",
+    "exactSourcePackBinding": "passed",
+    "currentSourceBinding": true,
+    "status": "failed_installed_linux_motion_acceptance",
+    "sourceArchiveSha256": "8f3f8a6764a70775109674f646ecbee7a0c233b9e4dfcbb7584d125b3a7d6613",
+    "sourceArchiveScope": "frozen_verification_inputs_not_complete_public_release_source",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+    "motionSourceSha256": "5b2e97ad2ff1b8d8e64eae5213cd50ae3ccf7bc272a662c5dd233a4304b6fd73",
+    "encoderInputSourceSha256": "ed0989f5f481666648a2f6840a85807bf806f5d33077795ac04ec051d2f7de79",
+    "privacyScan": {
+      "status": "passed",
+      "checkedInputs": 1037,
+      "findings": [],
+      "scope": "frozen_verification_tree_canonical_source_archive_and_npm_archive",
+      "mediaInterpretation": false,
+      "developmentHistory": "excluded_from_public_release_expected_scan_failure"
+    },
+    "supersedesHeldPackage": "58ed20c601492de3ecbbd84c3a186c7e3ce399de58c82ed22be88171d3998cc0",
+    "priorPackageFailure": {
+      "status": "failed",
+      "completedCases": 0,
+      "requiredCases": 6,
+      "failure": "SIGKILL_during_encoding_cgroup_oom",
+      "memoryLimitBytes": 3221225472,
+      "cause": "under_controlled_investigation",
+      "finalCandidateAcceptance": false
+    },
+    "finalCandidateAcceptance": false,
+    "updatedAt": "2026-11-02T23:02:00.666032+00:00",
+    "linuxInstalledMotion": {
+      "status": "failed",
+      "passedCases": 1,
+      "attemptedCases": 2,
+      "requiredCases": 6,
+      "failedCase": "1280x800-run-2",
+      "failure": "after_distinct_source_positions_58_below_60",
+      "firstCaseFullEncodeDecodeMasksCleanup": "passed",
+      "memoryLimitBytes": 3221225472,
+      "memoryPeakBytes": 1640660992,
+      "oomEvents": 0,
+      "oomKills": 0,
+      "ownedContainerRemoved": true,
+      "ownedVmStopped": true,
+      "visualReview": "pending",
+      "finalCandidateAcceptance": false
+    }
+  },
+  "deliveryCutoffClarification": {
+    "reason": "A source-stop response is not an encode flush, and detach can close acknowledgement commands for already delivered frames.",
+    "requirement": "Synchronous subscriber cutoff, exact delivered-frame processing and acknowledgements, then transport disposal; unknown upstream loss disclosed.",
+    "thresholdsChanged": false,
+    "publicSchemaChanged": false,
+    "status": "implemented_reviewed_focused_linux_narrow_passed_full_gates_pending"
+  },
+  "encoderInputRepair": {
+    "status": "independently_reviewed_original_linux_encoding_case_passed",
+    "decision": "evidence/revision-0.3/encoder-input-design.md",
+    "confirmedControlledDefect": "completed_write_buffers_retained_by_per_frame_process_exit_reactions",
+    "selectedOperation": "writeEncoderFrames",
+    "requiredProcessObserverCount": 1,
+    "publicContractChanged": false,
+    "acceptanceThresholdsChanged": false,
+    "linuxOomAttribution": "controlled_retention_defect_repaired_and_original_installed_workload_passed_under_same_limit_no_claim_of_exclusive_causation",
+    "updatedAt": "2026-11-02T22:50:21.936111+00:00",
+    "controlledReachability": {
+      "completedFrameBuffers": 16,
+      "bytesPerFrame": 4194304,
+      "collectableBeforeProcessExit": 16,
+      "processExitObservers": 1,
+      "evidenceClass": "pinned_node_controlled_probe_not_installed_linux_acceptance"
+    },
+    "independentReview": {
+      "verdict": "no_blocking_defect_in_scoped_repair",
+      "focusedTestsPassed": 69,
+      "sourceSha256": "ed0989f5f481666648a2f6840a85807bf806f5d33077795ac04ec051d2f7de79",
+      "limitation": "cooperative_cancellation_while_producer_next_or_return_is_pending",
+      "installedLinuxVerified": false
+    }
+  },
+  "publicAppDevelopment": {
+    "evidence": "evidence/revision-0.3/development-public-web-app.json",
+    "status": "failed_three_run_sequence",
+    "passedComparisons": 2,
+    "failedComparisons": 1,
+    "failure": "CAPTURE_CLOCK_DRIFT",
+    "worktreeFollowup": "not_reached",
+    "callerPreservation": "passed",
+    "ownedCleanup": "passed_all_three",
+    "normalSpeedReview": "pending",
+    "finalCandidateAcceptance": false
+  },
+  "partialMotionDevelopment": {
+    "status": "numeric_passed",
+    "evidence": "evidence/revision-0.3/development-partial-encoder.json",
+    "sourcePngMasksChecked": 186,
+    "decodedFramesChecked": 279,
+    "offlineRecoveryPreservedPartialExit": true,
+    "visibleFinalFailureBadgeInspected": true,
+    "normalSpeedVisualReview": "pending",
+    "finalCandidateAcceptance": false
+  },
+  "publicPrivacyRefresh": {
+    "checkedAt": "2026-11-03T00:36:07.548285+00:00",
+    "status": "passed_literal_scan",
+    "checkedInputs": 2334,
+    "findings": [],
+    "scope": "current_working_tree_including_ignored_files_except_git_and_node_modules_and_development_npm_archive",
+    "packageSha256": "a9e0ddf8215714ca1739ca247d3a3bc952c85f67fc606fdcac3e335c5886e751",
+    "privatePatterns": "external_only",
+    "mediaReview": "pending",
+    "publicHistory": "must_be_initialized_separately_from_reviewed_tree",
+    "developmentHistory": "held_from_publication",
+    "finalCandidateAcceptance": false
+  },
+  "captureTransportDiagnostic": {
+    "status": "inconclusive",
+    "evidence": "evidence/revision-0.3/development-capture-transport.json",
+    "completedCases": 10,
+    "repetitionsPerVariant": 5,
+    "thresholdMissesPerVariant": {
+      "A": 1,
+      "B": 1
+    },
+    "selectedChange": null,
+    "productSetting": "default_sendLastFrame_false",
+    "finalCandidateAcceptance": false
+  },
+  "privacyIndependentRefresh": {
+    "checkedAt": "2026-11-03T00:54:28.642737+00:00",
+    "status": "no_new_confirmed_private_material_leak_in_reviewed_inputs",
+    "packageSha256": "a9e0ddf8215714ca1739ca247d3a3bc952c85f67fc606fdcac3e335c5886e751",
+    "packageEntries": 165,
+    "lockfileOrigins": "97_public_npm_registry_entries",
+    "credentialPatternAudit": {
+      "status": "passed",
+      "checkedInputs": 1146,
+      "declaredSyntheticMatches": 7,
+      "reviewRequired": 0,
+      "doesNotClearDevelopmentHistory": true
+    },
+    "mediaMetadata": {
+      "pngCount": 44,
+      "mp4Count": 6,
+      "selectedImagesViewed": 4,
+      "fullFinalMediaReview": "pending"
+    },
+    "historicalMediaInstructions": "corrected_retired_probe_reference_and_verified_two_retained_image_hashes",
+    "publicHistory": "must_be_initialized_separately_from_reviewed_tree",
+    "finalCandidateAcceptance": false
+  },
+  "phaseHelperRepair": {
+    "status": "independently_verified_canonical_helper",
+    "helperSha256": "4516be9a641eaedde947de0f2ad6eb79d993a21f7b62b04432d4a7209b453318",
+    "testSha256": "e3c7222e8bfbf3a3b03776dedeb57f7f3ef9f70d7b2ead7ef980642ccd52cbde",
+    "rootFocusedPassed": 42,
+    "independentFocusedPassed": 42,
+    "deadlineResultUsesObservedChildExit": true,
+    "originalSignalReachMs": 45000,
+    "termAllowanceMs": 12000,
+    "pipeSettlementMs": 1000,
+    "priorFailuresRetained": true,
+    "syntheticFixtureChanges": [
+      "Use actual SIGTERM after a completed phase witness for privacy and preservation rows.",
+      "Keep the separate early-deadline rejection case.",
+      "Compare real child exit and pipe close using a between-event synthetic boundary.",
+      "Observe a completed stdout write before injecting the diagnostic failure.",
+      "Wait for the encoder progress marker within its original two-second budget."
+    ],
+    "dockerContinuity": {
+      "status": "reviewed_scheduled_deadline_upper_bound",
+      "boundary": "first unique new run-directory observation plus the unchanged 120-second duration",
+      "limitations": [
+        "The conservative bound can reject valid cancellation.",
+        "Observed callbacks are not kernel exit or timer-callback timestamps."
+      ],
+      "controllerTestsPassed": 29,
+      "finalCandidateBinding": "pending",
+      "liveSixCellMatrix": "pending"
+    },
+    "finalCandidateAcceptance": false
+  },
+  "capturePhaseDiagnostic": {
+    "status": "excluded-profile-complete",
+    "evidence": "evidence/revision-0.3/development-capture-phase-profile.json",
+    "originalInstrumentationFailureRetained": true,
+    "deliveredFrames": 203,
+    "allDeliveredFramesUsedUpFilter": true,
+    "reconstructionCpuMs": 1468.961,
+    "measuredWorkerPhaseCpuMs": 1949.561,
+    "wholeCaptureCpuCoreSeconds": 8.211572,
+    "performanceComparison": false,
+    "finalCandidateAcceptance": false
+  },
+  "pngUpDevelopment": {
+    "status": "full_path_inconclusive_candidate_held",
+    "evidence": "evidence/revision-0.3/development-png-up-comparison.json",
+    "mainProductionSourceChanged": false,
+    "numericPassed": {
+      "baseline": 9,
+      "candidate": 7
+    },
+    "casesPerVariant": 10,
+    "releaseAcceptance": false,
+    "nextAction": "Retain the baseline while completing required Docker and final candidate acceptance. Do not use the microbenchmark or failed partial capture as a release or smoothness claim."
+  },
+  "dockerNormalParityDevelopment": {
+    "status": "passed_integrated_pending_new_package",
+    "evidence": "evidence/revision-0.3/development-docker-normal-parity.json",
+    "releaseAcceptance": false
+  },
+  "motionVerifierEvidenceRepair": {
+    "status": "integrated",
+    "verifierSha256": "2915eb49edf5d2af4b7c01b8269b33527cfe26641b29090eb9b687faf6571112",
+    "testSha256": "9ddc9ff3a15dbfaf8357c9a7cfdc10cb7518aeccb0da4eed996b5c2f21867eed",
+    "focusedTestsPassed": 10,
+    "baselineFocusedFailures": 9,
+    "releaseAcceptance": false
+  },
+  "integratedSourceDevelopment": {
+    "status": "passed_pending_frozen_installed_candidate",
+    "evidence": "evidence/revision-0.3/development-integrated-source.json",
+    "testsPassed": 895,
+    "optInDockerTestsSkipped": 11,
+    "releaseAcceptance": false
+  }
+}

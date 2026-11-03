@@ -1,0 +1,9 @@
+{
+  "name": "@workshop/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": { "start": "node server.mjs" },
+  "dependencies": { "@workshop/board-data": "workspace:*" }
+}

@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+const setup = JSON.parse(await readFile(join(process.env.DATA, 'setup.json'), 'utf8'));
+const container = JSON.parse(await readFile(join(process.env.DATA, 'container-runtime.json'), 'utf8'));
+assert.equal(setup.origin, process.env.APP_ORIGIN);
+assert.equal(setup.port, process.env.PORT);
+assert.equal(container.origin, setup.origin);
+assert.equal(container.port, '8080');
+assert.equal(container.state, '/swc-state');
+assert.equal(container.dbHost, 'service-db');
+assert.equal(container.dbPort, '5432');
+const response = await fetch(process.env.APP_ORIGIN, { signal: AbortSignal.timeout(5000) });
+assert.equal(response.status, 200);
+assert((await response.text()).includes('<h1>'));
+await writeFile(join(process.env.DATA, 'bootstrap.json'), JSON.stringify({ origin: setup.origin, hostPort: setup.port, containerPort: container.port, backingServiceHost: container.dbHost, backingServicePort: container.dbPort }), { mode: 0o600 });

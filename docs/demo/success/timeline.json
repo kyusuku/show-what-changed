@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261101T220738255Z-870ae37f9adfb00e",
+  "fps": 30,
+  "templateVersion": 1,
+  "width": 1920,
+  "height": 686,
+  "totalFrames": 174,
+  "segments": [
+    {
+      "scenarioId": "pricing-toggle",
+      "image": "composed/000-title.png",
+      "startFrame": 0,
+      "kind": "title",
+      "stepId": null,
+      "durationFrames": 30
+    },
+    {
+      "scenarioId": "pricing-toggle",
+      "image": "composed/001-step.png",
+      "startFrame": 30,
+      "kind": "step",
+      "stepId": "open",
+      "durationFrames": 24
+    },
+    {
+      "scenarioId": "pricing-toggle",
+      "image": "composed/002-step.png",
+      "startFrame": 54,
+      "kind": "step",
+      "stepId": "ready",
+      "durationFrames": 24
+    },
+    {
+      "scenarioId": "pricing-toggle",
+      "image": "composed/003-step.png",
+      "startFrame": 78,
+      "kind": "step",
+      "stepId": "toggle",
+      "durationFrames": 24
+    },
+    {
+      "scenarioId": "pricing-toggle",
+      "image": "composed/004-step.png",
+      "startFrame": 102,
+      "kind": "step",
+      "stepId": "saving",
+      "durationFrames": 24
+    },
+    {
+      "scenarioId": "pricing-toggle",
+      "image": "composed/005-step.png",
+      "startFrame": 126,
+      "kind": "step",
+      "stepId": "hover",
+      "durationFrames": 24
+    },
+    {
+      "scenarioId": "pricing-toggle",
+      "image": "composed/006-step.png",
+      "startFrame": 150,
+      "kind": "step",
+      "stepId": "poster",
+      "durationFrames": 24
+    }
+  ],
+  "poster": "composed/002-step.png",
+  "images": [
+    {
+      "path": "composed/000-title.png",
+      "sha256": "5b4ea9d521b15bd084cddb0c723b0423e584f44c2256ad1c501b69e4ba51a696",
+      "bytes": 76218
+    },
+    {
+      "path": "composed/001-step.png",
+      "sha256": "828e4bb6221aaab46f86c114857cbdad5bc0e659b9d828b7552e4287a7ce9adc",
+      "bytes": 87979
+    },
+    {
+      "path": "composed/002-step.png",
+      "sha256": "aaa92753f38961fa1def31054930aac73180d57f6b1afcb9c47c345728b2fea3",
+      "bytes": 89691
+    },
+    {
+      "path": "composed/003-step.png",
+      "sha256": "f305e88a2103eda5eb61a9f433b178f583e0c8eb2dc9e653bfcb93ef1f112424",
+      "bytes": 97200
+    },
+    {
+      "path": "composed/004-step.png",
+      "sha256": "80ef630addd0571ca6a9faf574a58ba19bc5dd150b75cbe981fff4766b372c93",
+      "bytes": 97775
+    },
+    {
+      "path": "composed/005-step.png",
+      "sha256": "d587bd674299875ee76bcbb53adf57789eea10aa73d30bc4365fdcd7f6c298ec",
+      "bytes": 92278
+    },
+    {
+      "path": "composed/006-step.png",
+      "sha256": "72dbdf91ff784b9efd147bdbab76f16d6366fc53b7ab2895ddf10e56f9cb49c7",
+      "bytes": 93509
+    }
+  ]
+}

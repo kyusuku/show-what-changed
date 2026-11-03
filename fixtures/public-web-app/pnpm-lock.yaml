@@ -1,0 +1,16 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+  .: {}
+
+  apps/web:
+    dependencies:
+      '@workshop/board-data':
+        specifier: workspace:*
+        version: link:../../packages/board-data
+
+  packages/board-data: {}

@@ -1,0 +1,62 @@
+{
+  "metrics": {
+    "before": {
+      "frames": 138,
+      "distinctPositions": 108,
+      "maxMovingGapMs": 66.66400003433228,
+      "pulses": [
+        645.1377705335617,
+        1645.0977705717087,
+        2661.7237706184387
+      ],
+      "clockErrorBoundMs": 1.6954578360595747
+    },
+    "after": {
+      "frames": 138,
+      "distinctPositions": 108,
+      "maxMovingGapMs": 66.66399991512299,
+      "pulses": [
+        663.5168328285217,
+        1663.4768328666687,
+        2663.4368327856064
+      ],
+      "clockErrorBoundMs": 1.4452708435058526
+    }
+  },
+  "pulseErrorsMs": [
+    18.379062294960022,
+    18.379062294960022,
+    1.7130621671676636
+  ],
+  "decodedDistinctPositions": {
+    "before": 84,
+    "after": 86
+  },
+  "decodedPulses": {
+    "before": [
+      1433.3333333333333,
+      2433.3333333333335,
+      3433.3333333333335
+    ],
+    "after": [
+      1433.3333333333333,
+      2433.3333333333335,
+      3433.3333333333335
+    ]
+  },
+  "totalFrames": 158,
+  "media": {
+    "video": {
+      "path": "compare.mp4",
+      "sha256": "346c2abf7ddbdc28d7689781aed73b465805bb8da00b79632112c3355fb496dd",
+      "bytes": 66995
+    },
+    "poster": {
+      "path": "poster.png",
+      "sha256": "130407e7b7993fa369c9a1254b703f80d42463f95ceaaf145505d302dca0213b",
+      "bytes": 28882
+    },
+    "ffmpegVersion": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobeVersion": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+  }
+}

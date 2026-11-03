@@ -1,0 +1,5 @@
+node_modules/
+.next/
+.show-what-changed/
+output/
+npm-debug.log*

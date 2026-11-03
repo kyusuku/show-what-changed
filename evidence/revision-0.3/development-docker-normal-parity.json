@@ -1,0 +1,60 @@
+{
+  "status": "actual_normal_parity_passed",
+  "scope": "One source candidate DockerRuntime build/export/load/identity/normal cleanup on an isolated Engine. This is not installed-package, G15, or final release acceptance.",
+  "releaseAcceptance": false,
+  "preparationManifestSha256": "e4bc0b1ebf2ce1de4654e3eaae2cb51dce367b893bd9bcc2fd0164b55de1bb39",
+  "sourceFiles": {
+    "src/runtime/docker.ts": "9cb86d8656edd605fd98c5a5f18f041f7dd86bfb5e092484d5f621e0d2bf7613",
+    "src/runtime/context.ts": "43ce39f74598a9866cffd2bcd3342005a6fd8dc6f51e74ba91672bd46a11e48c",
+    "src/runtime/docker-archive.ts": "5116d7c2b9ceb436a446936312020a11adfef5b8aa39a822a36885656cb33683",
+    "src/runtime/cleanup-lifetime.ts": "1d799cb9a0b36fb8223164f41e9024b9ba91b90520d74f1915c588ac0b1903fa"
+  },
+  "actualExitCode": 0,
+  "engine": {
+    "Version": "29.4.0",
+    "Os": "linux",
+    "Arch": "arm64"
+  },
+  "archive": {
+    "sha256": "61222da563d69570192a3640dcde786324a0f54a451b97ecd675777b8ddc8265",
+    "bytes": 1911296,
+    "archiveConfigDigest": "sha256:ba0f222c00223cfa9e185feb008b6de384ce990133acfe35e7d441c7c43cda98",
+    "archiveManifestDigest": "sha256:adea40c4f7c5128f1039d434d03c288907d5c58e074936422ca91ba2a4cc44e5",
+    "iid": "sha256:ba0f222c00223cfa9e185feb008b6de384ce990133acfe35e7d441c7c43cda98"
+  },
+  "returnedImageId": "sha256:adea40c4f7c5128f1039d434d03c288907d5c58e074936422ca91ba2a4cc44e5",
+  "loadedEngineImageId": "sha256:adea40c4f7c5128f1039d434d03c288907d5c58e074936422ca91ba2a4cc44e5",
+  "reportedMatchingBaseMaterials": [
+    {
+      "digest": {
+        "sha256": "a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec"
+      },
+      "uri": "pkg:docker/busybox?digest=sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec&platform=linux%2Farm64"
+    }
+  ],
+  "materialsComplete": false,
+  "candidateCleanup": {
+    "status": "ok",
+    "errors": []
+  },
+  "ownershipRelease": {
+    "status": "ok",
+    "ownership": "released",
+    "errors": []
+  },
+  "checks": {
+    "candidateCleanupProven": true,
+    "archiveCleanupProven": true,
+    "sentinelSurvivalProven": true,
+    "sentinelCleanupProven": true,
+    "sourceAndInputsPreserved": true,
+    "vmStoppedProven": true
+  },
+  "finalResourceCounts": {
+    "containers": 0,
+    "networks": 3,
+    "volumes": 0
+  },
+  "errors": [],
+  "productionIntegration": "10 reviewed files integrated after this result; current package must be rebuilt."
+}

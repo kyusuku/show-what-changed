@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 2,
+  "id": "workshop-navigation",
+  "title": "Browse the workshop library",
+  "steps": [
+    { "id": "open-board", "op": "goto", "path": "/board", "observeMs": 800 },
+    { "id": "board-ready", "op": "expectVisible", "target": { "role": "heading", "name": "Workshop board" } },
+    { "id": "open-library", "op": "click", "target": { "role": "button", "name": "Open library" }, "observeMs": 800 },
+    { "id": "library-ready", "op": "expectVisible", "target": { "css": "[data-testid=\"library-panel\"][data-open=\"true\"]" } },
+    { "id": "scroll-library", "op": "scrollBy", "target": { "testId": "library-list" }, "y": 560, "observeMs": 600 },
+    { "id": "inner-scroll-observed", "op": "expectVisible", "target": { "css": "[data-testid=\"library-scroll-readout\"][data-scrolled=\"true\"]" } },
+    { "id": "library-inner-scroll", "op": "screenshot", "note": "The panel footer reports its list scrollTop." },
+    { "id": "close-library", "op": "click", "target": { "role": "button", "name": "Close library" }, "observeMs": 800 },
+    { "id": "navigate-proposal", "op": "click", "target": { "role": "link", "name": "Propose a task" }, "observeMs": 600 },
+    { "id": "proposal-route-ready", "op": "expectVisible", "target": { "role": "heading", "name": "Propose a task" } },
+    { "id": "navigation-complete", "op": "screenshot" }
+  ]
+}

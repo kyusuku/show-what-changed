@@ -1,0 +1,12 @@
+lockfileVersion: '9.0'
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+importers:
+  .: {}
+  apps/web:
+    dependencies:
+      swc-general-shared:
+        specifier: workspace:*
+        version: link:../../packages/shared
+  packages/shared: {}

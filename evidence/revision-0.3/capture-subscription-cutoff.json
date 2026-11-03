@@ -1,0 +1,137 @@
+{
+  "scope": "Development subscription-cutoff repair; controlled Node and pinned Playwright dispatch checks only",
+  "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
+  "runtime": {
+    "node": "24.22.2",
+    "playwright": "1.64.1",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "changedFiles": {
+    "src/recorder/motion.ts": "0b16de4875d69ff7c9fcd4e1e1241650d13e140d15e7721634e883cf37d4488a",
+    "test/unit/scenario-states-metrics.test.ts": "b97cfe426006d7ea1b860dffc52561d79049e6bfcf633eba7bd4cb8cab25b826",
+    "fixtures/motion/recorder-lifecycle-probe.mjs": "00186cf4f8175a5250034d2653cc3f7d0cbd63ad4dc2642007c4115b6b8b4e77"
+  },
+  "priorMotionSha256": "5f75ab4cb94e95d898aaf314ac14a62834f05fb657c39957745f09afbca4bb8d",
+  "checks": {
+    "newRegressionTestsFailedBefore": 3,
+    "newRegressionTestsPassedAfter": 3,
+    "completeFrameStreamTestsPassed": 67,
+    "typecheck": "passed",
+    "lifecycleProbesPassed": 10,
+    "productionAdapterDispatchSchedulesPassed": 3,
+    "safeWritesDoNotDelayDetach": true
+  },
+  "productionAdapterChecks": [
+    {
+      "probe": "pinned Playwright adapter subscription closure",
+      "stage": "admitted",
+      "playwright": "1.64.1",
+      "status": "ok",
+      "stats": {
+        "receivedFrames": 2,
+        "persistedFrames": 2,
+        "acknowledgedFrames": 2,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 2.817208000000071
+      },
+      "sanitized": 2,
+      "acknowledged": [
+        1,
+        2
+      ],
+      "detachCalls": 1
+    },
+    {
+      "probe": "pinned Playwright adapter subscription closure",
+      "stage": "upstream-queued",
+      "playwright": "1.64.1",
+      "status": "ok",
+      "stats": {
+        "receivedFrames": 1,
+        "persistedFrames": 1,
+        "acknowledgedFrames": 1,
+        "rejectedFrames": 0,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 0
+      },
+      "sanitized": 1,
+      "acknowledged": [
+        1
+      ],
+      "detachCalls": 1
+    },
+    {
+      "probe": "pinned Playwright adapter subscription closure",
+      "stage": "reentrant",
+      "playwright": "1.64.1",
+      "status": "failed",
+      "stats": {
+        "receivedFrames": 2,
+        "persistedFrames": 1,
+        "acknowledgedFrames": 2,
+        "rejectedFrames": 1,
+        "maxQueueDepth": 1,
+        "sourceDroppedFrames": null,
+        "maxGapMs": 0
+      },
+      "sanitized": 1,
+      "acknowledged": [
+        1,
+        2
+      ],
+      "detachCalls": 1
+    }
+  ],
+  "diagnostic": {
+    "kind": "capture-shutdown-failure",
+    "frequency": "at most one final failure event per recorder",
+    "content": "fixed fault code, scalar source-stop/cutoff/detach times and state, first ACK failure category/time, counters and pending ownership counts",
+    "throwingSinkGuarded": true
+  },
+  "preserved": {
+    "maxFramesInFlight": 1,
+    "sourceDroppedFrames": null,
+    "strictSourceTimestampOrdering": true,
+    "sourceCaptureEndSemantics": true,
+    "originalTimestampMetadata": true,
+    "rawOwnershipUntilActualSettlement": true,
+    "forcedDeadlineClamp": true,
+    "detachedFinalSnapshots": true,
+    "schemaUnchanged": true
+  },
+  "stopDiagnosticRepair": {
+    "scope": "Follow-up diagnostic truth repair after independent source review; controlled source checks only",
+    "changedFiles": {
+      "src/recorder/motion.ts": "5b2e97ad2ff1b8d8e64eae5213cd50ae3ccf7bc272a662c5dd233a4304b6fd73",
+      "test/unit/scenario-states-metrics.test.ts": "edc9fff4451b12f4703c900a6044bddc6e1e40fdce49ac75ee21f4f7ddfa88fe"
+    },
+    "sourceStoppedAtMs": "A confirmed source-stop time, or null when the stop request or startup guard rejects or exceeds its cleanup deadline",
+    "failedTrackCaptureEndSemanticsPreserved": true,
+    "rejectedStopFirstFault": "CAPTURE_STOP_FAILED",
+    "timedOutStopFirstFault": "CAPTURE_DRAIN_TIMEOUT",
+    "checks": {
+      "rejectedAndTimedOutStopTestsFailedBefore": 2,
+      "rejectedAndTimedOutStopTestsPassedAfter": 2,
+      "confirmedStopFailureDiagnosticRetainsNumericTime": true,
+      "completeFrameStreamTestsPassed": 69,
+      "typecheck": "passed",
+      "originalRejectedStopProbeWithNullAssertion": "passed"
+    },
+    "earlierLifecycleEvidence": "The ten lifecycle probes and three pinned-client schedules above ran against the pre-repair source identity in changedFiles. They were not rerun for this diagnostic-only follow-up.",
+    "limitations": [
+      "No browser, Docker, FFmpeg, build, package, installed-package, Linux, or live verification was run for this follow-up.",
+      "This repair changes one failure-diagnostic field. It does not establish release readiness or the causes of earlier Linux failures."
+    ]
+  },
+  "limitations": [
+    "No browser, Docker, FFmpeg, Linux, or installed-package verification was run for this repair.",
+    "The Linux ACK failure cause remains unproven; the controlled reproduction models a compatible detach-before-ACK race.",
+    "Subscription cutoff is not a browser encode or protocol flush. Upstream queued events that never reach the subscriber remain unmeasured.",
+    "Failed bounded cleanup may retain explicitly incomplete counters and real owned work.",
+    "Original nonmonotonic timestamp cause remains unknown."
+  ]
+}

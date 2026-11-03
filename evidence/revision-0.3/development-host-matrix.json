@@ -1,0 +1,645 @@
+{
+  "status": "passed",
+  "scope": "installed-host-recipe-matrix",
+  "mode": "host",
+  "gateComplete": false,
+  "pending": [
+    "docker installed-package acceptance"
+  ],
+  "releaseAcceptance": "pending independent final-candidate platform, repetition, motion, security, and release gates",
+  "startedAt": "2026-11-02T19:12:44.143Z",
+  "endedAt": "2026-11-02T19:13:38.794Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "node": "v24.22.2",
+  "candidate": {
+    "sha256": "65f98c362116cc96381abdda8897cf0ad355f8671c5ff6083cb9b431c05a164d",
+    "bytes": 364308
+  },
+  "fixtureLicense": {
+    "spdx": "MIT",
+    "path": "LICENSE",
+    "sha256": "754312c03bc98b2932c69bc7c2e15acc962e78d7203e565a347f1ac5d448b4d6"
+  },
+  "doctor": {
+    "cwd": "installed",
+    "argv": [
+      "show-what-changed",
+      "doctor",
+      "--json"
+    ],
+    "expectedExit": 0,
+    "actualExit": 0
+  },
+  "tools": [
+    {
+      "name": "node",
+      "available": true,
+      "version": "v24.22.2"
+    },
+    {
+      "name": "git",
+      "available": true,
+      "version": "git version 2.53.0"
+    },
+    {
+      "name": "lsof",
+      "available": true,
+      "version": "4.91"
+    },
+    {
+      "name": "ps",
+      "available": true,
+      "version": "72829"
+    },
+    {
+      "name": "ffmpeg",
+      "available": true,
+      "version": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    {
+      "name": "ffprobe",
+      "available": true,
+      "version": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+    },
+    {
+      "name": "docker",
+      "available": true,
+      "version": "29.4.0"
+    },
+    {
+      "name": "buildx",
+      "available": true,
+      "version": null
+    },
+    {
+      "name": "font",
+      "available": true,
+      "version": "Inter 4.1 Regular"
+    },
+    {
+      "name": "chromium",
+      "available": true,
+      "version": "156.0.8078.4"
+    },
+    {
+      "name": "h264",
+      "available": true,
+      "version": null
+    }
+  ],
+  "rows": [
+    {
+      "application": "static",
+      "fixture": "fixtures/general-app/static",
+      "status": "passed",
+      "base": "b704f01075212560623760a07366c0b8a0ccfdc5",
+      "head": "1c7afeff63c91712eb18a03d63645f46ab4e4feb",
+      "sourceChange": {
+        "path": "index.html",
+        "beforeSha256": "a8bd3f0cf7c5e0d168eb5531afe076e406969a66a891c3c83972de4ed7bc26bf",
+        "afterSha256": "825644aad480d64661660b781c62079fdbcc4708befa8969c57d5fbb8c995161"
+      },
+      "configSha256": "6c4d5a83feee72a02df7e239b2891bf910d1c83c3da4c06cdf75f4bd18b6645e",
+      "scenarioSha256": "f764cee5e9b2b785bc5469f0b4349dd49f3ecbd766fc48c298a03738d87987c0",
+      "environmentReferences": [],
+      "commands": [
+        {
+          "cwd": "static",
+          "argv": [
+            "show-what-changed",
+            "plan",
+            "--base",
+            "b704f01075212560623760a07366c0b8a0ccfdc5",
+            "--head",
+            "1c7afeff63c91712eb18a03d63645f46ab4e4feb",
+            "--scenario",
+            "../static.scenario.json",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        },
+        {
+          "cwd": "static",
+          "argv": [
+            "show-what-changed",
+            "compare",
+            "--plan",
+            ".show-what-changed/plan.json",
+            "--allow-exec",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        }
+      ],
+      "artifactRedaction": "passed",
+      "callerPreserved": true,
+      "cleanup": {
+        "status": "ok",
+        "runs": [
+          {
+            "runId": "20261102T191248213Z-69a88258a6785b25",
+            "processLedgers": 1,
+            "dockerIdentities": 0,
+            "workspacesAbsent": true
+          }
+        ]
+      },
+      "plan": {
+        "planId": "bca9f427fb47ed17b75a26faca7b7145c11b2bcdedeef4efc6da754d3b622124",
+        "configDigest": "57f1ab98fff76b9941a596639c1c3585874ae60f7284d7aaf6774becd4652506",
+        "scenarioDigest": "7fc58ab2ac0e54ecdc16ee78ff013d154f1c27506d762933326f2f94c17aafa5",
+        "sourceStats": {
+          "before": {
+            "files": 5,
+            "bytes": 736,
+            "fingerprint": "97ff86d62ee9e6c652899237425d90142c191ecb4e1f25e7d5af52a1581d0dce"
+          },
+          "after": {
+            "files": 5,
+            "bytes": 744,
+            "fingerprint": "fb255fd87654e414590be6e620152f4f3c1df07a5dfd6199f0d37183ed0a0948"
+          }
+        }
+      },
+      "runId": "20261102T191248213Z-69a88258a6785b25",
+      "execution": {
+        "before": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "none",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        },
+        "after": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "none",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        }
+      },
+      "versions": {
+        "node": "v24.22.2",
+        "browser": "156.0.8078.4",
+        "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+        "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+      },
+      "summary": {
+        "verifiedPairs": 2,
+        "changedPairs": 2,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerStateSha256": "78a497522f782778f52ccef726180356351085cbd9d61a8c1cdef3be20c90172",
+      "artifacts": {
+        "video": {
+          "path": "static/compare.mp4",
+          "sha256": "0c2a3211e7ee34ee8eedcded3d8870fd75235d73dc083fe5a03f58d06eb30ec2",
+          "bytes": 36618
+        },
+        "poster": {
+          "path": "static/poster.png",
+          "sha256": "521dce608ee4f00a4fae860761490de4bfb3ea003417acd1eec16c739d3c1f65",
+          "bytes": 33093
+        },
+        "capture": {
+          "path": "static/capture.json",
+          "sha256": "a80de8f6e2044aaef86968edaf67923ecbd18205d855ca860049fbf91a867f56",
+          "bytes": 20904
+        },
+        "timeline": {
+          "path": "static/timeline.json",
+          "sha256": "4f791e2c3e1784a9bfc016e025d6d442de04f1d2226c27c5894640579af46bb2",
+          "bytes": 12078
+        },
+        "pr": {
+          "path": "static/pr.md",
+          "sha256": "b91f931ba9bfd610f52f2e699ebf668cbc1e10093c7286ca0c12070f6a3b4a3a",
+          "bytes": 925
+        }
+      }
+    },
+    {
+      "application": "npm",
+      "fixture": "fixtures/general-app/npm",
+      "status": "passed",
+      "base": "d2fb9d9dc2e087195f0125c7fbb91a3c8123fb5d",
+      "head": "d0c0b17adbf39d469078fab449bf751fd556d59c",
+      "sourceChange": {
+        "path": "index.html",
+        "beforeSha256": "a8bd3f0cf7c5e0d168eb5531afe076e406969a66a891c3c83972de4ed7bc26bf",
+        "afterSha256": "949e2e38091bb367ef9035a5e195d345aa98ca094e5cf6820b1c0bdcd7bdebca"
+      },
+      "configSha256": "0f9f70cc6adc43ae8a04698b34095721193f965bb5e302c47fb3ae28009ab96d",
+      "scenarioSha256": "f764cee5e9b2b785bc5469f0b4349dd49f3ecbd766fc48c298a03738d87987c0",
+      "environmentReferences": [],
+      "commands": [
+        {
+          "cwd": "npm",
+          "argv": [
+            "show-what-changed",
+            "plan",
+            "--base",
+            "d2fb9d9dc2e087195f0125c7fbb91a3c8123fb5d",
+            "--head",
+            "d0c0b17adbf39d469078fab449bf751fd556d59c",
+            "--scenario",
+            "../npm.scenario.json",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        },
+        {
+          "cwd": "npm",
+          "argv": [
+            "show-what-changed",
+            "compare",
+            "--plan",
+            ".show-what-changed/plan.json",
+            "--allow-exec",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        }
+      ],
+      "artifactRedaction": "passed",
+      "callerPreserved": true,
+      "cleanup": {
+        "status": "ok",
+        "runs": [
+          {
+            "runId": "20261102T191305808Z-55314f7145cf23eb",
+            "processLedgers": 1,
+            "dockerIdentities": 0,
+            "workspacesAbsent": true
+          }
+        ]
+      },
+      "plan": {
+        "planId": "0c64660cc00555ae39fe1ee8b8c385276fe405870f023c200fc5cd5a9142570f",
+        "configDigest": "8aa11f52cc291d0fc2292577c643f0f9ac974c0b3dd8a8c2ad6a2cbb789600bc",
+        "scenarioDigest": "7fc58ab2ac0e54ecdc16ee78ff013d154f1c27506d762933326f2f94c17aafa5",
+        "sourceStats": {
+          "before": {
+            "files": 7,
+            "bytes": 1067,
+            "fingerprint": "44e69f6a158c164552ffbcc53575f3f1737a3ea88b0660b15beeaa73db8201ce"
+          },
+          "after": {
+            "files": 7,
+            "bytes": 1072,
+            "fingerprint": "3afabde7757ed0a0dfa29c7e2d5323efea6fee932823db849abac2622e12b9ea"
+          }
+        }
+      },
+      "runId": "20261102T191305808Z-55314f7145cf23eb",
+      "execution": {
+        "before": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "unverified",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        },
+        "after": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "unverified",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        }
+      },
+      "versions": {
+        "node": "v24.22.2",
+        "browser": "156.0.8078.4",
+        "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+        "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+      },
+      "summary": {
+        "verifiedPairs": 2,
+        "changedPairs": 2,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerStateSha256": "0df011a77c8188ec89101a6b6eacfb043b877efeb5d534cddfb4d3ca02b9db84",
+      "artifacts": {
+        "video": {
+          "path": "npm/compare.mp4",
+          "sha256": "de9b9cfdd7e997b081d134b7df674ffd67c29b1bcc95768756a80db4bef02002",
+          "bytes": 36643
+        },
+        "poster": {
+          "path": "npm/poster.png",
+          "sha256": "620ecdc8344200ddfd54922c8ac114f8557d95f71523d1effca690aaf822558b",
+          "bytes": 33249
+        },
+        "capture": {
+          "path": "npm/capture.json",
+          "sha256": "5e1496e712bfd5614e5ff3db2faa20134887bb061bc678985796607afb457c31",
+          "bytes": 20710
+        },
+        "timeline": {
+          "path": "npm/timeline.json",
+          "sha256": "c0794b80b0941225a3f9bd704715755b36607ed901245495f5bf31148f53ae08",
+          "bytes": 12072
+        },
+        "pr": {
+          "path": "npm/pr.md",
+          "sha256": "9ddfbe109e118ff3fc72898c482c5447adca971d4d44657a1f0863bde19b0f63",
+          "bytes": 925
+        }
+      }
+    },
+    {
+      "application": "pnpm",
+      "fixture": "fixtures/general-app/pnpm",
+      "status": "passed",
+      "base": "e369dbd6248da799f2eecf3da3737d2c6189356b",
+      "head": "651983e834916c67d4b939235067b37f911ddff5",
+      "sourceChange": {
+        "path": "packages/shared/index.js",
+        "beforeSha256": "edbce94be2c68f94633bfb7e8ad179186ef25d8b2eb1262ce4edbc10a16323c3",
+        "afterSha256": "d0d4ef3be3ec4aa627bd8e79656b7e8f68de34c7e806a964763061b9c96216fd"
+      },
+      "configSha256": "54e508f2c5e37c2debb73bfa511068441b9b7b37ae305bd49828240870249275",
+      "scenarioSha256": "f764cee5e9b2b785bc5469f0b4349dd49f3ecbd766fc48c298a03738d87987c0",
+      "environmentReferences": [],
+      "commands": [
+        {
+          "cwd": "pnpm",
+          "argv": [
+            "show-what-changed",
+            "plan",
+            "--base",
+            "e369dbd6248da799f2eecf3da3737d2c6189356b",
+            "--head",
+            "651983e834916c67d4b939235067b37f911ddff5",
+            "--scenario",
+            "../pnpm.scenario.json",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        },
+        {
+          "cwd": "pnpm",
+          "argv": [
+            "show-what-changed",
+            "compare",
+            "--plan",
+            ".show-what-changed/plan.json",
+            "--allow-exec",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        }
+      ],
+      "artifactRedaction": "passed",
+      "callerPreserved": true,
+      "cleanup": {
+        "status": "ok",
+        "runs": [
+          {
+            "runId": "20261102T191316403Z-41535d521dca5e0a",
+            "processLedgers": 1,
+            "dockerIdentities": 0,
+            "workspacesAbsent": true
+          }
+        ]
+      },
+      "plan": {
+        "planId": "71f0c687e91720b14ab3dd91b653d1f659f437a3847dabea38b56ea9e2df5829",
+        "configDigest": "0c20d1d713e44ffa5e0de2f0dcd12679c26f94d4febd0c8c3d77d1978443f8ce",
+        "scenarioDigest": "7fc58ab2ac0e54ecdc16ee78ff013d154f1c27506d762933326f2f94c17aafa5",
+        "sourceStats": {
+          "before": {
+            "files": 10,
+            "bytes": 1377,
+            "fingerprint": "a23efaf53bd23bf1ebc614e4f6c075e3abe8c0705358444603c3f6bd19f45d10"
+          },
+          "after": {
+            "files": 10,
+            "bytes": 1385,
+            "fingerprint": "e5f2cc9a748938246ed77b46d513dd917337b82fa4c308f0ccf4f325c1aad9aa"
+          }
+        }
+      },
+      "runId": "20261102T191316403Z-41535d521dca5e0a",
+      "execution": {
+        "before": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "unverified",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        },
+        "after": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "unverified",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        }
+      },
+      "versions": {
+        "node": "v24.22.2",
+        "browser": "156.0.8078.4",
+        "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+        "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+      },
+      "summary": {
+        "verifiedPairs": 2,
+        "changedPairs": 2,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerStateSha256": "c776faf3653a10f418ce630a71befc62f3b4bf55a7766b342751c65c8d079372",
+      "artifacts": {
+        "video": {
+          "path": "pnpm/compare.mp4",
+          "sha256": "1d67eba989538bf6489813abb5c21df5966975a0c846ac822d08b7739c1a5fe7",
+          "bytes": 37711
+        },
+        "poster": {
+          "path": "pnpm/poster.png",
+          "sha256": "b0890a28058b763b012dd07d3030f9d7a2a04552b503dfce96d2575f37dc67d3",
+          "bytes": 40051
+        },
+        "capture": {
+          "path": "pnpm/capture.json",
+          "sha256": "95e51ad47b2092cdaa68533c434ae2b8934269ad159a4d5a6d343a331400103a",
+          "bytes": 20897
+        },
+        "timeline": {
+          "path": "pnpm/timeline.json",
+          "sha256": "83a2460c09814ccc19e35ad118c58d47e001b8d1ef94c4a03adf075ccc9f60ea",
+          "bytes": 12072
+        },
+        "pr": {
+          "path": "pnpm/pr.md",
+          "sha256": "6839564b24b138c3ebce1e3b5a72730b3ecef3e56286c4d2a415ca12b769887d",
+          "bytes": 925
+        }
+      }
+    },
+    {
+      "application": "python",
+      "fixture": "fixtures/general-app/python",
+      "status": "passed",
+      "base": "fb2ab839cf884934e8a4aa227c0dca3a16beeadc",
+      "head": "0ba77e485f9911d63818521e3c017522d8cfbbf9",
+      "sourceChange": {
+        "path": "server.py",
+        "beforeSha256": "93268845889d5ad60449fffc1a4fbe911fe6470b359d90d6718cb901e661f2f5",
+        "afterSha256": "6ad00e4c1176b5bd25bbde721a8f36482d7c4ff096ed9ab7238c0d0fa849bb41"
+      },
+      "configSha256": "9413874fea236e4e675f2d8eeadb319e0b0c49f365a4cb06156cda50e26adaac",
+      "scenarioSha256": "f764cee5e9b2b785bc5469f0b4349dd49f3ecbd766fc48c298a03738d87987c0",
+      "environmentReferences": [],
+      "commands": [
+        {
+          "cwd": "python",
+          "argv": [
+            "show-what-changed",
+            "plan",
+            "--base",
+            "fb2ab839cf884934e8a4aa227c0dca3a16beeadc",
+            "--head",
+            "0ba77e485f9911d63818521e3c017522d8cfbbf9",
+            "--scenario",
+            "../python.scenario.json",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        },
+        {
+          "cwd": "python",
+          "argv": [
+            "show-what-changed",
+            "compare",
+            "--plan",
+            ".show-what-changed/plan.json",
+            "--allow-exec",
+            "--json"
+          ],
+          "expectedExit": 0,
+          "actualExit": 0
+        }
+      ],
+      "artifactRedaction": "passed",
+      "callerPreserved": true,
+      "cleanup": {
+        "status": "ok",
+        "runs": [
+          {
+            "runId": "20261102T191326890Z-9001676b2223969a",
+            "processLedgers": 1,
+            "dockerIdentities": 0,
+            "workspacesAbsent": true
+          }
+        ]
+      },
+      "plan": {
+        "planId": "b376215e4e11614385e77bbbeff71702483ecd5aa330cad9cf539efb226b25d7",
+        "configDigest": "e29ac4a2ff111f09cf5b9729fd97ae7da0dc8162e79c4bd8ba7a209d8f505f24",
+        "scenarioDigest": "7fc58ab2ac0e54ecdc16ee78ff013d154f1c27506d762933326f2f94c17aafa5",
+        "sourceStats": {
+          "before": {
+            "files": 4,
+            "bytes": 723,
+            "fingerprint": "b1e802c06f36e2eb60e6da5907b4928fdcef7088da08ec3879176f6cba7ceefc"
+          },
+          "after": {
+            "files": 4,
+            "bytes": 731,
+            "fingerprint": "33c4e2e133aaf748cd8e91dbf1aad0778263534076744bd7d05f0d279bb2610c"
+          }
+        }
+      },
+      "runId": "20261102T191326890Z-9001676b2223969a",
+      "execution": {
+        "before": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "none",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        },
+        "after": {
+          "state": "stateless",
+          "seedId": null,
+          "dependencyReproducibility": "none",
+          "services": [],
+          "kind": "process",
+          "buildArtifacts": "unverified"
+        }
+      },
+      "versions": {
+        "node": "v24.22.2",
+        "browser": "156.0.8078.4",
+        "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+        "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+      },
+      "summary": {
+        "verifiedPairs": 2,
+        "changedPairs": 2,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "callerStateSha256": "087d5a41b1d5723edecf6cd76286adf6e15041e5cacff80dcfc5b79c33aca03f",
+      "artifacts": {
+        "video": {
+          "path": "python/compare.mp4",
+          "sha256": "a2ef583eae8c5c524626a2fc213d8f0ffc2d3ba66e7d7553fcf283659f166a9c",
+          "bytes": 36461
+        },
+        "poster": {
+          "path": "python/poster.png",
+          "sha256": "b0d7c80ee9b33c9c15e850eb451c1d29cf4b0816656f44f3dc8c0c590bb48ee1",
+          "bytes": 34546
+        },
+        "capture": {
+          "path": "python/capture.json",
+          "sha256": "12e22b422c86fe3907c57f21486a7376339a2ff85b6617906365e65c274032be",
+          "bytes": 20735
+        },
+        "timeline": {
+          "path": "python/timeline.json",
+          "sha256": "c064d0b620a96470c160031c4ab47391e3db9c92879b75b0f490d2a3396244b2",
+          "bytes": 11671
+        },
+        "pr": {
+          "path": "python/pr.md",
+          "sha256": "032f3e9dd01e9723b9b3bd6e0aae2164f871056d2f8094b8227f05e167b85a3a",
+          "bytes": 925
+        }
+      }
+    }
+  ]
+}

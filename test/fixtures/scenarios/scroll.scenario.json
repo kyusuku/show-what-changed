@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "different-page-heights",
+  "title": "Independent scrolling on different page heights",
+  "steps": [
+    {
+      "id": "open",
+      "op": "goto",
+      "path": "/pricing"
+    },
+    {
+      "id": "scroll",
+      "op": "scrollBy",
+      "y": 1200
+    },
+    {
+      "id": "details",
+      "op": "expectVisible",
+      "target": {
+        "testId": "page-end"
+      }
+    },
+    {
+      "id": "poster",
+      "op": "screenshot"
+    }
+  ]
+}

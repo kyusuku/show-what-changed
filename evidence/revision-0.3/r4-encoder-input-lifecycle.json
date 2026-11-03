@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "stage": "encoder-input-unit-checkpoint",
+  "status": "passed-local-awaiting-independent-review",
+  "runtime": {
+    "node": "v24.22.2",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "sourceSha256": {
+    "src/composer/process.ts": "ed0989f5f481666648a2f6840a85807bf806f5d33077795ac04ec051d2f7de79",
+    "src/composer/index.ts": "cfaf1df7cb3188a022f5509cf5c0c3d4cdab656f3f8d1c50b72fdc0245bfde4b",
+    "src/composer/capabilities.ts": "81744bb1192b7f9f13e5ae32147cb603757e2b7d15504141f8b20c7d7fe7160b",
+    "src/schema/contracts.ts": "f0ae4f212cca6162e4a1e9a0b883336b4cc7734900933b67193f62b4f99e404d",
+    "src/runtime/supervisor.ts": "12c2517f9344601b1ff5c7e5ac208fc0ca45fbec6b7d63f2b50e5d3619cabf32",
+    "src/runtime/process-anchor.ts": "f118ae677040e486cd70f4fec20ee554fa617d36de73af827de325cd8d9a1878",
+    "test/unit/composer-input.test.ts": "c91be2ebe9a6270b7f629a304607be9b91a32896948f49bfbc1b31336459c70e",
+    "fixtures/motion/encoder-input-lifecycle-probe.mjs": "610050fdee740903f141739b7497ebfe80873d535b570c9a68e8a37ecea61a82"
+  },
+  "originalRed": {
+    "tests": 2,
+    "failed": 2,
+    "completedWrites": 16,
+    "observedExitSubscriptions": 16,
+    "requiredExitSubscriptions": 1,
+    "secondFailure": "SIGTERM reason replaced by generic CANCELLED"
+  },
+  "focusedChecks": {
+    "files": 3,
+    "tests": 69,
+    "passed": 69,
+    "lifecycleTests": 31,
+    "typecheck": "passed",
+    "diffCheck": "passed"
+  },
+  "reachability": {
+    "count": 16,
+    "bytesPerFrame": 4194304,
+    "totalFrameBytes": 67108864,
+    "gcRoundsPerObservation": 12,
+    "beforeExit": {
+      "buffers": 0,
+      "backingStores": 0,
+      "finalized": 32,
+      "completedWriteCallbacks": 16,
+      "pendingStreamBytes": 0,
+      "errorListeners": 1,
+      "closeListeners": 1,
+      "abortListeners": 1,
+      "exitSubscriptions": 1
+    },
+    "afterExit": {
+      "buffers": 0,
+      "backingStores": 0,
+      "finalized": 32,
+      "completedWriteCallbacks": 16,
+      "pendingStreamBytes": 0,
+      "errorListeners": 0,
+      "closeListeners": 0,
+      "abortListeners": 0,
+      "exitSubscriptions": 1
+    }
+  },
+  "anchor": {
+    "targetClosed": {
+      "kind": "closed",
+      "code": 0,
+      "signal": null,
+      "spawnError": null
+    },
+    "writes": 1,
+    "anchorExitCode": null,
+    "anchorSignalCode": null,
+    "inputDestroyed": false,
+    "inputEnded": false,
+    "callbackWasPending": true,
+    "abortListeners": 0
+  },
+  "limits": [
+    "The source was loaded through Node type transformation without a package build.",
+    "Weak reachability is runtime-specific and is not an RSS or Linux memory measurement.",
+    "The actual anchor probe deliberately held its public write callback; it proves process-exit observation while the anchor input remains open.",
+    "No browser, actual FFmpeg, Docker, package build, publication, or installed workload ran in this checkpoint.",
+    "Independent review and the same-limit installed Linux workload remain required."
+  ]
+}

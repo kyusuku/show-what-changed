@@ -1,0 +1,7 @@
+# N0 interface design task
+
+The user wants the complete spec implemented and verified within 24 hours, with a release candidate ready for publishing review. This is a greenfield project whose module boundaries are already fixed in spec.md. Design a concrete TypeScript interface contract for those modules, especially source inspection, RunContext, Supervisor, workspace, ServerPair, recorder settings, composer settings and failure propagation. Preserve all normative behavior. Do not redesign scope or create implementation.
+
+Read spec.md, docs/build-goal.md and docs/implementation-graph.md. Use the installed architect skill and its red-flags document. This is one candidate inside a parent-run architect arena. Do not spawn agents or execute the parent playbook. Use poteto-mode style.
+
+Write a self-contained candidate document in your assigned output path. Include caller usage first, types/signatures, module ownership, lifecycle and error flow, pure source helper signatures that planner can depend on, and rationale including one structurally different alternative rejected. Wire documents derive from Zod schemas; avoid redundant public model copies. Record details needed to make N1/N2/N3 independent. A pragmatic contract that covers the spec is more useful than speculative abstractions. Limit to about 200 lines and return a short report. No source files or dependencies may be changed.

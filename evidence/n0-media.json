@@ -1,0 +1,336 @@
+{
+  "capabilityProbeOnly": true,
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v24.22.2",
+  "fonts": [
+    {
+      "path": "assets/fonts/Inter-Regular.woff2",
+      "upstreamPath": "docs/font-files/Inter-Regular.woff2",
+      "sha256": "e06f6b1bc553aaea4e4668023ed0ab0a147129c3107f511bc7d03d361b0ae085",
+      "bytes": 111268,
+      "upstreamCommit": "e3a3d4c57d5ecc01453a575621882a384c1995a3",
+      "upstreamTag": "v4.1",
+      "upstreamUrl": "https://raw.githubusercontent.com/rsms/inter/e3a3d4c57d5ecc01453a575621882a384c1995a3/docs/font-files/Inter-Regular.woff2"
+    },
+    {
+      "path": "assets/fonts/OFL.txt",
+      "upstreamPath": "LICENSE.txt",
+      "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+      "bytes": 4380,
+      "upstreamCommit": "e3a3d4c57d5ecc01453a575621882a384c1995a3",
+      "upstreamTag": "v4.1",
+      "upstreamUrl": "https://raw.githubusercontent.com/rsms/inter/e3a3d4c57d5ecc01453a575621882a384c1995a3/LICENSE.txt"
+    }
+  ],
+  "lifecycle": [
+    {
+      "operation": "close",
+      "pid": 55351,
+      "processGroup": 55351,
+      "membersAtLaunch": [
+        {
+          "pid": 55351,
+          "ppid": 55349,
+          "pgid": 55351,
+          "command": "<playwright-browser-executable> --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --user-data-dir=<disposable-browser-profile> --remote-debugging-pipe --no-startup-window"
+        },
+        {
+          "pid": 55352,
+          "ppid": 55351,
+          "pgid": 55351,
+          "command": "<playwright-browser-executable> --type=gpu-process --gpu-recent-crash-count=0 --disable-breakpad --headless --use-angle=swiftshader-webgl --enable-unsafe-swiftshader --gpu-preferences=WAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAADAAAAAEAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --shared-files --field-trial-handle=1718379636,r,1002551240739624674,4705527863800664129,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,9431144991480077957,5124308669711511455,4 --trace-process-track-uuid=3190708988185955192 --seatbelt-client=21"
+        },
+        {
+          "pid": 55353,
+          "ppid": 55351,
+          "pgid": 55351,
+          "command": "<playwright-browser-executable> --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --use-angle=swiftshader-webgl --use-gl=angle --mute-audio --headless=old --shared-files --field-trial-handle=1718379636,r,1002551240739624674,4705527863800664129,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,9431144991480077957,5124308669711511455,4 --trace-process-track-uuid=3190708989122997041"
+        }
+      ],
+      "membersBeforeCleanup": [
+        {
+          "pid": 55351,
+          "ppid": 55349,
+          "pgid": 55351,
+          "command": "<playwright-browser-executable> --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --user-data-dir=<disposable-browser-profile> --remote-debugging-pipe --no-startup-window"
+        },
+        {
+          "pid": 55352,
+          "ppid": 55351,
+          "pgid": 55351,
+          "command": "<playwright-browser-executable> --type=gpu-process --gpu-recent-crash-count=0 --disable-breakpad --headless --use-angle=swiftshader-webgl --enable-unsafe-swiftshader --gpu-preferences=WAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAADAAAAAEAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --shared-files --field-trial-handle=1718379636,r,1002551240739624674,4705527863800664129,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,9431144991480077957,5124308669711511455,4 --trace-process-track-uuid=3190708988185955192 --seatbelt-client=21"
+        },
+        {
+          "pid": 55353,
+          "ppid": 55351,
+          "pgid": 55351,
+          "command": "<playwright-browser-executable> --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --use-angle=swiftshader-webgl --use-gl=angle --mute-audio --headless=old --shared-files --field-trial-handle=1718379636,r,1002551240739624674,4705527863800664129,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,9431144991480077957,5124308669711511455,4 --trace-process-track-uuid=3190708989122997041"
+        }
+      ],
+      "survivors": [],
+      "sentinelSurvived": true,
+      "supervisorSurvived": true
+    },
+    {
+      "operation": "kill",
+      "pid": 55391,
+      "processGroup": 55391,
+      "membersAtLaunch": [
+        {
+          "pid": 55391,
+          "ppid": 55349,
+          "pgid": 55391,
+          "command": "<playwright-browser-executable> --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --user-data-dir=<disposable-browser-profile> --remote-debugging-pipe --no-startup-window"
+        },
+        {
+          "pid": 55392,
+          "ppid": 55391,
+          "pgid": 55391,
+          "command": "<playwright-browser-executable> --type=gpu-process --gpu-recent-crash-count=0 --disable-breakpad --headless --use-angle=swiftshader-webgl --enable-unsafe-swiftshader --gpu-preferences=WAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAADAAAAAEAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --shared-files --field-trial-handle=1718379636,r,6466169771732570017,1507370638199269376,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15462834468094911506,15037073899375335919,4 --trace-process-track-uuid=3190708988185955192 --seatbelt-client=21"
+        },
+        {
+          "pid": 55393,
+          "ppid": 55391,
+          "pgid": 55391,
+          "command": "<playwright-browser-executable> --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --use-angle=swiftshader-webgl --use-gl=angle --mute-audio --headless=old --shared-files --field-trial-handle=1718379636,r,6466169771732570017,1507370638199269376,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15462834468094911506,15037073899375335919,4 --trace-process-track-uuid=3190708989122997041"
+        }
+      ],
+      "membersBeforeCleanup": [
+        {
+          "pid": 55391,
+          "ppid": 55349,
+          "pgid": 55391,
+          "command": "<playwright-browser-executable> --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --user-data-dir=<disposable-browser-profile> --remote-debugging-pipe --no-startup-window"
+        },
+        {
+          "pid": 55392,
+          "ppid": 55391,
+          "pgid": 55391,
+          "command": "<playwright-browser-executable> --type=gpu-process --gpu-recent-crash-count=0 --disable-breakpad --headless --use-angle=swiftshader-webgl --enable-unsafe-swiftshader --gpu-preferences=WAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAADAAAAAEAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --shared-files --field-trial-handle=1718379636,r,6466169771732570017,1507370638199269376,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15462834468094911506,15037073899375335919,4 --trace-process-track-uuid=3190708988185955192 --seatbelt-client=21"
+        },
+        {
+          "pid": 55393,
+          "ppid": 55391,
+          "pgid": 55391,
+          "command": "<playwright-browser-executable> --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --use-angle=swiftshader-webgl --use-gl=angle --mute-audio --headless=old --shared-files --field-trial-handle=1718379636,r,6466169771732570017,1507370638199269376,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15462834468094911506,15037073899375335919,4 --trace-process-track-uuid=3190708989122997041"
+        },
+        {
+          "pid": 55405,
+          "ppid": 55391,
+          "pgid": 55391,
+          "command": "<playwright-browser-executable> --type=renderer --headless=old --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --disable-gpu-compositing --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=4 --launch-time-ticks=939195478825 --shared-files --field-trial-handle=1718379636,r,6466169771732570017,1507370638199269376,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AimEnabled,AutoDeElevate,AvoidCorsURLLoaderRestartOnRedirect,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,NetworkTimeServiceQuerying,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15462834468094911506,15037073899375335919,4 --trace-process-track-uuid=3190708990060038890 --seatbelt-client=37"
+        }
+      ],
+      "survivors": [],
+      "sentinelSurvived": true,
+      "supervisorSurvived": true
+    }
+  ],
+  "checks": {
+    "sourceDimensions": "1280x800",
+    "composedDimensions": "1920x686",
+    "privateMaskPixelsPerSide": 29440,
+    "sourceDifferencePixels": 23894,
+    "sourceChangeRatio": 0.023333984375,
+    "captureContextsSeparate": true,
+    "rendererContextSeparate": true,
+    "captureCookiesIsolated": true,
+    "captureClockDidNotReachRenderer": true,
+    "textContentInjectionSafe": true,
+    "unicodeJsonPreserved": true,
+    "asciiPresentationFallback": true,
+    "networkAttempts": 0,
+    "forbiddenFetchBlocked": true,
+    "rendererState": {
+      "fontLoaded": true,
+      "fonts": [
+        {
+          "family": "Inter",
+          "status": "loaded"
+        }
+      ],
+      "year": 2026,
+      "beforeLabel": "BEFORE | synthetic BEFORE <b>data</b>",
+      "afterLabel": "AFTER | synthetic apr?s",
+      "inlineBElements": 0,
+      "imageSizes": [
+        {
+          "width": 1280,
+          "height": 800
+        },
+        {
+          "width": 1280,
+          "height": 800
+        }
+      ],
+      "csp": "default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src data:; script-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    }
+  },
+  "browser": {
+    "version": "156.0.8078.4",
+    "packageVersion": "1.64.1",
+    "chromiumSandbox": true
+  },
+  "encodingStartedAfterBrowserCleanup": true,
+  "encoding": {
+    "executable": "/opt/homebrew/bin/ffmpeg",
+    "args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-f",
+      "image2pipe",
+      "-framerate",
+      "30",
+      "-vcodec",
+      "png",
+      "-i",
+      "pipe:0",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-pix_fmt",
+      "yuv420p",
+      "-r",
+      "30",
+      "-fps_mode",
+      "cfr",
+      "-crf",
+      "23",
+      "-preset",
+      "veryfast",
+      "-threads",
+      "2",
+      "-movflags",
+      "+faststart",
+      "-frames:v",
+      "54",
+      "comparison.part.mp4"
+    ],
+    "probeExecutable": "/opt/homebrew/bin/ffprobe",
+    "probeArgs": [
+      "-v",
+      "error",
+      "-count_frames",
+      "-show_streams",
+      "-show_format",
+      "-of",
+      "json",
+      "comparison.part.mp4"
+    ],
+    "writtenFrames": 54,
+    "backpressureDrains": 34,
+    "decodedFrames": 54,
+    "duration": 1.8,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "fps": "30/1",
+    "width": 1920,
+    "height": 686
+  },
+  "extractions": [
+    {
+      "frame": 0,
+      "path": "extracted/frame-000.png",
+      "expectedPath": "composed/title.png",
+      "meanAbsoluteRgbError": 0.6514427943796566,
+      "wrongSegmentError": 173.21008867832847,
+      "sha256": "08e5383ab841203d6ab2351ce04448104c128851e5d6c9ca48bab0ce6cfc9a3f",
+      "bytes": 127190
+    },
+    {
+      "frame": 27,
+      "path": "extracted/frame-027.png",
+      "expectedPath": "composed/title.png",
+      "meanAbsoluteRgbError": 0.6485157009232264,
+      "wrongSegmentError": 173.21000718739876,
+      "sha256": "2210636d32cc798b5f10e8ea2d3daa48ce4c8cd216dff69ffc4c5f961c6871f5",
+      "bytes": 128496
+    },
+    {
+      "frame": 29,
+      "path": "extracted/frame-029.png",
+      "expectedPath": "composed/title.png",
+      "meanAbsoluteRgbError": 0.6482122610949141,
+      "wrongSegmentError": 173.2101127206835,
+      "sha256": "fbd9e8c95070a46b62858f934c05e350aa7cbfc3c13357c2082ae25872d4cca5",
+      "bytes": 128574
+    },
+    {
+      "frame": 30,
+      "path": "extracted/frame-030.png",
+      "expectedPath": "composed/step.png",
+      "meanAbsoluteRgbError": 0.785002632005183,
+      "wrongSegmentError": 173.37760441974407,
+      "sha256": "9d984ef8dad4a9250422e95df3a1c30bae530169bedb836ffc1cbb76cfc04d4d",
+      "bytes": 158560
+    },
+    {
+      "frame": 53,
+      "path": "extracted/frame-053.png",
+      "expectedPath": "composed/step.png",
+      "meanAbsoluteRgbError": 0.779536159701976,
+      "wrongSegmentError": 173.35711577785875,
+      "sha256": "042df75c4f7582e9c9f68eed57a669df85923dfbaccdefe887e788e050aa7e9f",
+      "bytes": 158548
+    }
+  ],
+  "ffmpegVersion": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "ffprobeVersion": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers",
+  "artifacts": [
+    {
+      "path": "capture.json",
+      "sha256": "5cdf2f957490e72adfef8b38136c37d6588f79a76ada6e0777ad1a7d88a70572",
+      "bytes": 1498
+    },
+    {
+      "path": "timeline.json",
+      "sha256": "3f0af14340d7a76f63ec4fa1ee72e23bc404c532d155436b7b81818806cf5c10",
+      "bytes": 908
+    },
+    {
+      "path": "source/before.png",
+      "sha256": "9b09ddc88203a49884966f4eca4034885eadfcac51cfb89863eb7cf5d9c837a6",
+      "bytes": 29587
+    },
+    {
+      "path": "source/after.png",
+      "sha256": "ef90999382829ddce82ca8926afa0630c4d367ec60077d1084e72921a734a7ca",
+      "bytes": 34540
+    },
+    {
+      "path": "composed/title.png",
+      "sha256": "2f4fabe76cfacecdf6a6ca1bb26beef0293f591b3dc4340072dd8723f2219454",
+      "bytes": 47753
+    },
+    {
+      "path": "composed/step.png",
+      "sha256": "171e2d9c5b96ff9ef470ec6950cd78683fcc1145e19dae5dcd6a4fae0df2f877",
+      "bytes": 81697
+    },
+    {
+      "path": "poster.png",
+      "sha256": "171e2d9c5b96ff9ef470ec6950cd78683fcc1145e19dae5dcd6a4fae0df2f877",
+      "bytes": 81697
+    },
+    {
+      "path": "comparison.mp4",
+      "sha256": "c0e2cf7cf5da1d5f564817016627bc5fbb34e128fb8a957ae11e3a89de9d9e39",
+      "bytes": 43153
+    },
+    {
+      "path": "ffprobe.json",
+      "sha256": "d705de4466a781d2d4f7577e669a80ba6ec339fb313723c75e44a97592d2b5db",
+      "bytes": 2196
+    }
+  ],
+  "limitations": [
+    "This is a macOS arm64 capability probe, not product or Linux release evidence.",
+    "Source pages are fixed synthetic HTML setContent fixtures; no Git snapshots, app servers, scenario executor or provenance validation are exercised.",
+    "The probe does not implement composer APIs, doctor capability policy, cancellation races or malformed-input coverage.",
+    "Fonts and media are pinned and verified. Screenshot hashes can vary across host/browser versions.",
+    "H.264 frame comparisons use mean absolute RGB error below 3 because encoding is lossy."
+  ]
+}

@@ -1,0 +1,31 @@
+* { box-sizing: border-box; }
+html { color-scheme: light; scroll-behavior: auto; }
+body { margin: 0; color: #172033; background: #f4f6fa; font: 18px/1.5 Arial, sans-serif; }
+main { --accent: #2563eb; width: 100%; padding: 42px 72px; }
+h1 { margin: 0; font-size: 44px; line-height: 1.15; letter-spacing: -1.5px; }
+h2 { margin: 14px 0 8px; font-size: 28px; line-height: 1.25; }
+p { margin: 12px 0; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: #58657b; }
+header > p:last-child { color: #58657b; }
+.billing { min-height: 64px; display: flex; align-items: center; gap: 20px; margin: 20px 0 12px; }
+button, input { font: inherit; }
+button { cursor: pointer; border: 1px solid #c7cfdd; border-radius: 9px; background: white; color: #172033; padding: 10px 22px; }
+button:disabled { cursor: default; opacity: .5; }
+button[role="switch"][aria-checked="true"] { background: var(--accent); color: white; border-color: var(--accent); }
+.saving { font-size: 16px; color: #13724a; background: #dff6e9; padding: 6px 12px; border-radius: 20px; }
+.plan { width: 480px; background: white; padding: 24px 30px; border: 2px solid var(--accent); border-radius: 14px; }
+.plan h2 { font-size: 24px; }
+.price { font-size: 44px; font-weight: 700; line-height: 1.2; margin: 16px 0; }
+.price small { font-size: 16px; font-weight: 400; color: #58657b; }
+ul { padding-left: 22px; font-size: 16px; margin: 16px 0; }
+.cta { display: flex; align-items: center; gap: 12px; }
+.get-pro { background: var(--accent); border-color: var(--accent); color: white; min-width: 144px; font-weight: 700; }
+.get-pro:hover { background: #172033; border-color: #172033; outline: 4px solid #c9d6eb; }
+.hover-state { visibility: hidden; font-size: 13px; color: #172033; }
+.get-pro:hover + .hover-state { visibility: visible; }
+.secret { position: absolute; top: 46px; right: 48px; width: 270px; padding: 12px; background: #fff0e7; font-size: 11px; overflow-wrap: anywhere; }
+.legacy { margin-top: 20px; }
+.details { margin-top: 660px; padding: 24px; background: #e4eaf4; }
+label { display: block; margin-top: 24px; }
+input { display: block; width: 420px; margin: 8px 0; padding: 10px; border: 1px solid #a5b0c2; border-radius: 6px; }
+#details { scroll-margin-top: 24px; }

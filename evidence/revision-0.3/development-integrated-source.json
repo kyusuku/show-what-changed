@@ -1,0 +1,89 @@
+{
+  "scope": "Integrated working-tree source checks after the reviewed Docker runtime and motion verifier repairs. Final installed candidate acceptance remains pending.",
+  "releaseAcceptance": false,
+  "node": "24.22.2",
+  "build": {
+    "exitCode": 0
+  },
+  "typecheck": {
+    "exitCode": 0
+  },
+  "schemaCheck": {
+    "exitCode": 0
+  },
+  "unitAndContracts": {
+    "filesPassed": 45,
+    "testsPassed": 792,
+    "testsSkipped": 11,
+    "exitCode": 0,
+    "skipScope": "Opt-in real Docker cases require separate actual execution."
+  },
+  "integration": {
+    "filesPassed": 8,
+    "testsPassed": 103,
+    "testsSkipped": 0,
+    "exitCode": 0
+  },
+  "sourceFiles": {
+    "src/cli/args.ts": "a2681f2b59726ad062cee94d3d06b22f76083bbddec237a856b04f15c7557240",
+    "src/cli/consent.ts": "2f304b6f1478b36bb7b0c2b2ce6c8366a6b5f3acfc56ef900e4553232dc15231",
+    "src/cli/index.ts": "988e5d97da8db937cefd5e4a5dce37d8753ab045decb153057d2bd5054c3ca3e",
+    "src/composer/capabilities.ts": "81744bb1192b7f9f13e5ae32147cb603757e2b7d15504141f8b20c7d7fe7160b",
+    "src/composer/decoded.ts": "b30e3dbcd3e2833e59711d2b5c59571f8b825e0c8234323e09e20a5c01f97523",
+    "src/composer/images.ts": "f74cfe548565a60df04043d4a91c5798bb34da07296172747532e43c6efb5c92",
+    "src/composer/index.ts": "cfaf1df7cb3188a022f5509cf5c0c3d4cdab656f3f8d1c50b72fdc0245bfde4b",
+    "src/composer/packed.ts": "2bfed6353013c3fcc48a091caec0dd34873316784939358f7561fa14819b2853",
+    "src/composer/presentation.ts": "65db4b3fa3052f656b53676dcccbee0230afd84e03e067a3ee03f734b7a27eac",
+    "src/composer/probe.ts": "e77ad26857e5d2903cebd34f33c7a154eb788966913b213b21ec435ac4f4f9bb",
+    "src/composer/process.ts": "ed0989f5f481666648a2f6840a85807bf806f5d33077795ac04ec051d2f7de79",
+    "src/composer/template.ts": "430fbfa8dbe699fade6ce08fe6be6ee8e16e18d7444bbe3862e4952b55f6ecdd",
+    "src/planner/index.ts": "a77240d119469618777531ae9614c471b7fd3c870c37ac0c07d67967cd6ac8ba",
+    "src/planner/persist.ts": "773897175d841fe98ea9c3cf71cf6c98425c33f1c62c988be5aa03df591954c0",
+    "src/planner/routes.ts": "9e3a0bdcdc2efc071494f3e0db42af7ee6140bd8a332b38c96b2533dcf6c90b3",
+    "src/recorder/actions.ts": "99668eb4149580fc8f80418522a3799f7ff88768eb4dded45bc7ecdf0a30d13b",
+    "src/recorder/capture-png.ts": "99fbb19f70235c6229b0daab80ce59ccdd428fabcf5fdd187e1eca9835de2392",
+    "src/recorder/images.ts": "112ce39bb2ee952e677d927e8a242b892881c1d4b6724c8986673bc96f4ef390",
+    "src/recorder/index.ts": "66d514c73e40ef55d1bd5ecc213fe3394c8a676acd09f3d069ab51ff7d130991",
+    "src/recorder/mask-worker.ts": "014767d056598a0ec08c2c30e15e684fd7c785bb919ae4e300939593d12ec6c7",
+    "src/recorder/masker.ts": "534e695c2b2d6bb8ecece1062647b9d8f40a76d8cecfb1c287b435f7184d6855",
+    "src/recorder/motion.ts": "5b2e97ad2ff1b8d8e64eae5213cd50ae3ccf7bc272a662c5dd233a4304b6fd73",
+    "src/recorder/source-loader.ts": "0c24fdc90241d08c7bd5ca2add67b07e155068bd6f78445362a0e24a733df904",
+    "src/runner/artifacts.ts": "83181fb3eb4867d97e49b1fe0c5e884b15a8d892b775e8ef1a6e4e777c0cee88",
+    "src/runner/doctor.ts": "718f8a8e49cae6f43ef75edf423a93a19e8e2f19159f58de5a68269296ce132e",
+    "src/runner/index.ts": "4447b732a344a0e53bc6921067534a3a4412eddf45d9d8560aebea6e33efd0b0",
+    "src/runner/outcomes.ts": "e674ccf62396154a1b4ccfd73750e279fc8d5f64d77e4e01bdd01bb0b3ec2cbd",
+    "src/runtime/browser.ts": "97c506885c0f30d04bfa9e4ca101b85c90254a86d214bb5fa139b4d22a25da23",
+    "src/runtime/cleanup-lifetime.ts": "1d799cb9a0b36fb8223164f41e9024b9ba91b90520d74f1915c588ac0b1903fa",
+    "src/runtime/context.ts": "43ce39f74598a9866cffd2bcd3342005a6fd8dc6f51e74ba91672bd46a11e48c",
+    "src/runtime/docker-archive.ts": "5116d7c2b9ceb436a446936312020a11adfef5b8aa39a822a36885656cb33683",
+    "src/runtime/docker-intents.ts": "6ed452a675761e558a5aab564510e5687d6460119d211d73a98eca38ffa753d7",
+    "src/runtime/docker.ts": "9cb86d8656edd605fd98c5a5f18f041f7dd86bfb5e092484d5f621e0d2bf7613",
+    "src/runtime/files.ts": "d7e2546d9f397c7725acc9cc18be65770d81d7dca9466f7bd0134b0b813b9a71",
+    "src/runtime/index.ts": "511e54c074b49e831c1715979fbef7938f3bdcae9739c2f506884a837106f0b5",
+    "src/runtime/lsof.ts": "b7235dd55d754e18e57ae4be5dbfd4c5caed5e91ac25790a3e3f5a77997b2eb4",
+    "src/runtime/outputs.ts": "79130681e9c2e28a65b9d2f7124219a70821d984d5c57d28b0e11184c2875c26",
+    "src/runtime/ownership.ts": "63846cc54df33ad810d7177ed8e7d180d5d36d51c7832838e426de1dd25198a2",
+    "src/runtime/ports.ts": "40bb673c40207a43d5fec675bdf19f63762c330871384f5324bb5bc12fba6d30",
+    "src/runtime/process-anchor.ts": "f118ae677040e486cd70f4fec20ee554fa617d36de73af827de325cd8d9a1878",
+    "src/runtime/process-table.ts": "851ac505e99182c5a3b9959861f724bc7b1701e6e6893d006744d20a1cd74bed",
+    "src/runtime/recipe.ts": "aff69b14cbf4d960fe2931d7332671c4faa71aeec4ce42b8323a9d7b4756efcf",
+    "src/runtime/supervisor.ts": "12c2517f9344601b1ff5c7e5ac208fc0ca45fbec6b7d63f2b50e5d3619cabf32",
+    "src/schema/contracts.ts": "f0ae4f212cca6162e4a1e9a0b883336b4cc7734900933b67193f62b4f99e404d",
+    "src/schema/errors.ts": "c8798d8119fb8f42ba84e3bd2dcf82e559faa93fcfd89ac9a8dfea37a3a63b9e",
+    "src/schema/index.ts": "2b82810c277f522971f4492fbbba9f867bf53dd272aef93597f5258ac634b49a",
+    "src/schema/io.ts": "fce75b2387aaa7c3dd28060849d3ff76160cd1a5dda03908f34e004d4c376bbe",
+    "src/schema/public.ts": "c5a7c66548822051c477280975ae8d5ac3cbcf3eaee6cd9fe99278dac7b69f7c",
+    "src/schema/recipe.ts": "408d5de4d2c66e53709d2dcb0e3af3218b78f2ff3c47eb495c6387cb2e39ba24",
+    "src/workspace/git.ts": "8d1eedf5c1e4c52c303ce7e02fbfb609fe1d6d86973b3daaafe10d0f321e474b",
+    "src/workspace/index.ts": "9ac38fff363848ab45bde5b1d8201da5f3fccaca8b7c78efa6871cc4e8ca0c4a",
+    "src/workspace/source.ts": "c2592f67d727ce4db3e868863f064daaa0d77b43d122fa68470d2812813c78ff"
+  },
+  "sourceFilesDigest": "a34ba75c8428831b78ac46b49bba289e5465c60e5f7ff90948b74fc18f8fa577",
+  "logs": {
+    "build": "82ba8e5f06d7d1a612027a34134d56c81b61a7aef5bb8cfd3c9d00042c91afea",
+    "typecheck": "d1e5a265fd2a1657c16b373a2a79425d607997303a5ee6fd3d5323deb4bf6718",
+    "schema": "fbf96b4f395e22b7994465f1d6ba9817413b90a9cb1686ec1262a9bab91def4a",
+    "unitContracts": "c276ab3e6130b70ab70b9cfbba9f39c2be7319f8cfe831627813593a8c4fdb6d",
+    "integration": "bba33f786a0d763fa933f4e4ed6f9a66928867a702458cc656cc1e029fbd0f92"
+  }
+}

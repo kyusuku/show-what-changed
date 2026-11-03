@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "scope": "installed_public_web_app_development_sequence",
+  "status": "failed_repeatability",
+  "packageTarballSha256": "a9e0ddf8215714ca1739ca247d3a3bc952c85f67fc606fdcac3e335c5886e751",
+  "harnessSha256": "b87cfb3459f41e272d30b7ee58cf18bcf86e12352642b447ada0a8a052657f48",
+  "fixture": {
+    "name": "Workshop board",
+    "license": "MIT",
+    "baseCommit": "0363218e459653bdfdf806407241148cb09212f8",
+    "headCommit": "cbc415a909dc27b625361be51dea09b18ecd8ab8",
+    "packageManager": "pnpm@11.9.0",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1
+    }
+  },
+  "cases": [
+    {
+      "repetition": 1,
+      "actualExitCode": 0,
+      "status": "ok",
+      "runId": "20261102T230320640Z-8e225398aa8829d7",
+      "summary": {
+        "verifiedPairs": 20,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "ok",
+        "capture": "ok",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "0aff0ff675ff7e860c6ae4002d386e17e41f71be163976de733f865685fc1582",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "06bb25997ae1d4fea863051f9709fd1d5467a8dc8a8078769ec5c84136d05103",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "captureQuality": [
+        {
+          "scenarioId": "workshop-navigation",
+          "side": "before",
+          "stats": {
+            "receivedFrames": 47,
+            "persistedFrames": 47,
+            "acknowledgedFrames": 47,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 849.9659999506548
+          },
+          "clockErrorBoundMs": 7.397958489326356,
+          "maxDriftMs": 3.442916989326477,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-navigation",
+          "side": "after",
+          "stats": {
+            "receivedFrames": 52,
+            "persistedFrames": 52,
+            "acknowledgedFrames": 52,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 833.2999999402091
+          },
+          "clockErrorBoundMs": 7.077354068847853,
+          "maxDriftMs": 2.9148330688476562,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-validation",
+          "side": "before",
+          "stats": {
+            "receivedFrames": 23,
+            "persistedFrames": 23,
+            "acknowledgedFrames": 23,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 883.2979999715462
+          },
+          "clockErrorBoundMs": 16.10722895040908,
+          "maxDriftMs": 1.7457499504089355,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-validation",
+          "side": "after",
+          "stats": {
+            "receivedFrames": 23,
+            "persistedFrames": 23,
+            "acknowledgedFrames": 23,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 883.2979999715462
+          },
+          "clockErrorBoundMs": 16.818479408264466,
+          "maxDriftMs": 2.27791690826416,
+          "failureAtMs": null
+        }
+      ],
+      "artifacts": {
+        "video": {
+          "path": "compare.mp4",
+          "sha256": "46e252aff578bd795b1704c953c0e73da6fe7a94b8a8c4ba1395f349e7eef363",
+          "bytes": 402196
+        },
+        "poster": {
+          "path": "poster.png",
+          "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+          "bytes": 79698
+        },
+        "capture": {
+          "path": "capture.json",
+          "sha256": "d51b8b001d5070d657190ca311ca3286cd1f78b4e52057f82003f9c4753968de",
+          "bytes": 248636
+        },
+        "timeline": {
+          "path": "timeline.json",
+          "sha256": "086b8672aa6f18fdb9010489aa967c08b8fdd387ab6a6ff1e7f250c8212683bf",
+          "bytes": 132604
+        },
+        "pr": {
+          "path": "pr.md",
+          "sha256": "65238c16c50374c7ad7ab72f234502057d957886f4a8f89a6ad79ded3248b267",
+          "bytes": 926
+        }
+      },
+      "independentCleanup": {
+        "runId": "20261102T230320640Z-8e225398aa8829d7",
+        "status": "passed",
+        "processLedgers": 1,
+        "dockerIdentities": 0,
+        "workspaceAbsent": true,
+        "ownerInactive": true
+      }
+    },
+    {
+      "repetition": 2,
+      "actualExitCode": 0,
+      "status": "ok",
+      "runId": "20261102T230514857Z-d9ab9187a27b91d5",
+      "summary": {
+        "verifiedPairs": 20,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 0,
+        "blockedSteps": 0,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "ok",
+        "capture": "ok",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "0aff0ff675ff7e860c6ae4002d386e17e41f71be163976de733f865685fc1582",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "06bb25997ae1d4fea863051f9709fd1d5467a8dc8a8078769ec5c84136d05103",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "captureQuality": [
+        {
+          "scenarioId": "workshop-navigation",
+          "side": "before",
+          "stats": {
+            "receivedFrames": 50,
+            "persistedFrames": 50,
+            "acknowledgedFrames": 50,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 816.6339999297634
+          },
+          "clockErrorBoundMs": 16.03102051535052,
+          "maxDriftMs": 7.875854015350342,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-navigation",
+          "side": "after",
+          "stats": {
+            "receivedFrames": 51,
+            "persistedFrames": 51,
+            "acknowledgedFrames": 51,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 816.6339999297634
+          },
+          "clockErrorBoundMs": 15.535854581833064,
+          "maxDriftMs": 7.175604581832886,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-validation",
+          "side": "before",
+          "stats": {
+            "receivedFrames": 26,
+            "persistedFrames": 26,
+            "acknowledgedFrames": 26,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 816.6340000461787
+          },
+          "clockErrorBoundMs": 6.259749984740665,
+          "maxDriftMs": 2.972249984741211,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-validation",
+          "side": "after",
+          "stats": {
+            "receivedFrames": 25,
+            "persistedFrames": 25,
+            "acknowledgedFrames": 25,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 816.6339999297634
+          },
+          "clockErrorBoundMs": 2.209646028610223,
+          "maxDriftMs": 0.4231250286102295,
+          "failureAtMs": null
+        }
+      ],
+      "artifacts": {
+        "video": {
+          "path": "compare.mp4",
+          "sha256": "90ccebc4f7fc3fbde36964b4505d67b77118f4a1fc11bb49a169a4cc1298c335",
+          "bytes": 400731
+        },
+        "poster": {
+          "path": "poster.png",
+          "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74",
+          "bytes": 79698
+        },
+        "capture": {
+          "path": "capture.json",
+          "sha256": "f8662e5306c3220f7978b04ca3b399e70021e936846eee7a5b42e57d37b149cd",
+          "bytes": 255327
+        },
+        "timeline": {
+          "path": "timeline.json",
+          "sha256": "0c1cd95b7a0129b8815e90874d0cf9197e503ed4a1abca98ea1e480b1db3e532",
+          "bytes": 132812
+        },
+        "pr": {
+          "path": "pr.md",
+          "sha256": "e5fd018aad23df0837f9187f50ff856bde41b8f17c482a5fe376e93cafd076cc",
+          "bytes": 926
+        }
+      },
+      "independentCleanup": {
+        "runId": "20261102T230514857Z-d9ab9187a27b91d5",
+        "status": "passed",
+        "processLedgers": 1,
+        "dockerIdentities": 0,
+        "workspaceAbsent": true,
+        "ownerInactive": true
+      }
+    },
+    {
+      "repetition": 3,
+      "actualExitCode": 3,
+      "status": "partial",
+      "runId": "20261102T230630868Z-9904b99708f2dbfc",
+      "summary": {
+        "verifiedPairs": 17,
+        "changedPairs": 3,
+        "expectedAbsences": 0,
+        "exclusions": 0,
+        "failedSteps": 1,
+        "blockedSteps": 2,
+        "coverageOmissions": 0
+      },
+      "comparisonOutcome": {
+        "status": "partial",
+        "capture": "partial",
+        "coverage": "explicit",
+        "provenance": {
+          "before": {
+            "valid": true,
+            "actualHash": "0aff0ff675ff7e860c6ae4002d386e17e41f71be163976de733f865685fc1582",
+            "errors": []
+          },
+          "after": {
+            "valid": true,
+            "actualHash": "06bb25997ae1d4fea863051f9709fd1d5467a8dc8a8078769ec5c84136d05103",
+            "errors": []
+          }
+        }
+      },
+      "encodingOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "cleanupOutcome": {
+        "status": "ok",
+        "errors": []
+      },
+      "captureQuality": [
+        {
+          "scenarioId": "workshop-navigation",
+          "side": "before",
+          "stats": {
+            "receivedFrames": 57,
+            "persistedFrames": 56,
+            "acknowledgedFrames": 57,
+            "rejectedFrames": 1,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 866.6319999611005
+          },
+          "clockErrorBoundMs": 79.12033307534057,
+          "maxDriftMs": 37.33037507534027,
+          "failureAtMs": 11128.557166
+        },
+        {
+          "scenarioId": "workshop-navigation",
+          "side": "after",
+          "stats": {
+            "receivedFrames": 64,
+            "persistedFrames": 64,
+            "acknowledgedFrames": 64,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 833.2999999402091
+          },
+          "clockErrorBoundMs": 9.252229552452263,
+          "maxDriftMs": 3.1559375524520874,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-validation",
+          "side": "before",
+          "stats": {
+            "receivedFrames": 24,
+            "persistedFrames": 24,
+            "acknowledgedFrames": 24,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 816.6340000461787
+          },
+          "clockErrorBoundMs": 2.9357499266589,
+          "maxDriftMs": 0.7204164266586304,
+          "failureAtMs": null
+        },
+        {
+          "scenarioId": "workshop-validation",
+          "side": "after",
+          "stats": {
+            "receivedFrames": 23,
+            "persistedFrames": 23,
+            "acknowledgedFrames": 23,
+            "rejectedFrames": 0,
+            "maxQueueDepth": 1,
+            "sourceDroppedFrames": null,
+            "maxGapMs": 866.6319999611005
+          },
+          "clockErrorBoundMs": 4.131978502182392,
+          "maxDriftMs": 1.5673120021820068,
+          "failureAtMs": null
+        }
+      ],
+      "artifacts": {
+        "video": {
+          "path": "compare.mp4",
+          "sha256": "24479d2913780e6e6f62398ab559e6cf3798dc81801a64a18fe988846bcb4383",
+          "bytes": 414591
+        },
+        "poster": {
+          "path": "poster.png",
+          "sha256": "b3e83713a27d16061c05363dba9aa41388f0dda02eeff4c0fcf6c265e183e3b8",
+          "bytes": 82197
+        },
+        "capture": {
+          "path": "capture.json",
+          "sha256": "7c29c42eb8789f6ab52cbb2afd7aa6585eb0063626bf1e62a248f253d13ce217",
+          "bytes": 267189
+        },
+        "timeline": {
+          "path": "timeline.json",
+          "sha256": "15a02fec28e750797775a869c141a834f4a158e76683df7bf53207fd5aba81fd",
+          "bytes": 136665
+        },
+        "pr": {
+          "path": "pr.md",
+          "sha256": "d44bc7d5ee22a120e2e39bf2ce7990ad7ebbb1118b4d0d7c9ff1c39d20d09a33",
+          "bytes": 931
+        }
+      },
+      "independentCleanup": {
+        "runId": "20261102T230630868Z-9904b99708f2dbfc",
+        "status": "passed",
+        "processLedgers": 1,
+        "dockerIdentities": 0,
+        "workspaceAbsent": true,
+        "ownerInactive": true
+      }
+    }
+  ],
+  "callerPreservation": "passed",
+  "worktreeFollowup": "not_reached_after_third_comparison_failed",
+  "normalSpeedMediaReview": "pending",
+  "posterInspection": "first_success_poster_showed_expected_generic_feedback_change_and_narrow_letterboxing",
+  "clockDiagnosis": {
+    "failedSampleIndex": 26,
+    "marker": "workshop_navigation_before_navigate_proposal_completion",
+    "roundTripMs": 83.579916,
+    "halfWidthMs": 41.789958,
+    "midpointDeltaMs": 37.33037507534027,
+    "reportedErrorBoundMs": 79.12033307534057,
+    "requiredMaxErrorBoundMs": 40,
+    "physicalDriftProven": false,
+    "allSampleOffsetIntervalsOverlap": true,
+    "thresholdChanged": false
+  },
+  "finalCandidateAcceptance": false,
+  "earlierVerifierFailures": [
+    {
+      "kind": "npm_install_declared_bin_executable_mode",
+      "productExecuted": false,
+      "resolvedInTemporaryHarness": true
+    },
+    {
+      "kind": "viewport_default_device_scale_factor_missing_in_expected_object",
+      "productCompareExitCode": 0,
+      "callerAndCleanupPassed": true,
+      "resolvedInTemporaryHarness": true
+    }
+  ]
+}

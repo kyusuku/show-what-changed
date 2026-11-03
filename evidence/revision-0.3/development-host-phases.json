@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "scope": "development_installed_host_setup_and_startup_deadlines",
+  "status": "passed",
+  "tarballSha256": "58ed20c601492de3ecbbd84c3a186c7e3ce399de58c82ed22be88171d3998cc0",
+  "runnerManifestSha256": "df27de02cd3e656b423638f630b21390cc4958912da770da9474904825440894",
+  "runnerSha256": "c0a972e49ed3a8d578e6e59d6eaba3a0312594d27c8d1182ba7f4ae1700d9a1c",
+  "cases": [
+    {
+      "id": "setup-deadline",
+      "phase": "setup",
+      "stimulus": "deadline",
+      "status": "passed",
+      "runSeconds": 8,
+      "phaseReached": true,
+      "elapsedMs": 8432.391375,
+      "actualExit": 10,
+      "expectedInterruption": {
+        "status": "cancelled",
+        "exitCode": 10,
+        "errorCode": "DEADLINE_EXCEEDED"
+      },
+      "callerPreserved": true,
+      "sentinelPreserved": true,
+      "independentProcesses": {
+        "observedProcesses": 9,
+        "observedGroups": 7,
+        "status": "absent"
+      },
+      "cleanup": "ok",
+      "cleanupDetails": {
+        "processLedgers": 1,
+        "dockerIdentities": 0
+      },
+      "sourceMasks": {
+        "checkedImages": 0
+      },
+      "mediaInspection": {
+        "status": "inspected",
+        "scope": "known synthetic private rectangle, neutral panels, and capability pixels; no whole-image secret detection claim",
+        "files": [
+          {
+            "path": "private/000-capability.mp4",
+            "bytes": 1877,
+            "decodedFrames": 2,
+            "status": "decoded-complete",
+            "checkedPanels": 0,
+            "titleFrames": 0,
+            "tolerancePerChannel": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "startup-deadline",
+      "phase": "startup",
+      "stimulus": "deadline",
+      "status": "passed",
+      "runSeconds": 8,
+      "phaseReached": true,
+      "elapsedMs": 8844.579209000001,
+      "actualExit": 10,
+      "expectedInterruption": {
+        "status": "cancelled",
+        "exitCode": 10,
+        "errorCode": "DEADLINE_EXCEEDED"
+      },
+      "callerPreserved": true,
+      "sentinelPreserved": true,
+      "independentProcesses": {
+        "observedProcesses": 9,
+        "observedGroups": 7,
+        "status": "absent"
+      },
+      "cleanup": "ok",
+      "cleanupDetails": {
+        "processLedgers": 1,
+        "dockerIdentities": 0
+      },
+      "sourceMasks": {
+        "checkedImages": 0
+      },
+      "mediaInspection": {
+        "status": "inspected",
+        "scope": "known synthetic private rectangle, neutral panels, and capability pixels; no whole-image secret detection claim",
+        "files": [
+          {
+            "path": "private/000-capability.mp4",
+            "bytes": 1877,
+            "decodedFrames": 2,
+            "status": "decoded-complete",
+            "checkedPanels": 0,
+            "titleFrames": 0,
+            "tolerancePerChannel": 24
+          }
+        ]
+      }
+    }
+  ],
+  "earlierAttempt": "two_rows_failed_at_verifier_empty_directory_removal_preserved_unchanged",
+  "limits": [
+    "Whole CLI elapsed time is checked, not an independently timed deadline event.",
+    "Independent process observations cover one snapshot, supplemented by product ledgers and process-group absence checks.",
+    "These phases retained no application source frames. The two-frame synthetic capability media was decoded and checked.",
+    "Recording, encoding, Docker phases and final candidate acceptance remain pending.",
+    "The development package remains held for the separate encoder buffer lifetime repair."
+  ],
+  "finalCandidateAcceptance": false
+}

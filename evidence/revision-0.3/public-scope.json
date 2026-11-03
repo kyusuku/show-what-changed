@@ -1,0 +1,49 @@
+{
+  "status": "in_progress",
+  "scope": "Public source and release preparation only; no final release acceptance.",
+  "checkedAt": "2026-11-02T16:39:29.327148+00:00",
+  "remote": {
+    "repository": "kyusuku/show-what-changed",
+    "visibility": "PRIVATE",
+    "isEmpty": true,
+    "source": "gh repo view read-only metadata"
+  },
+  "privateOriginalsRetainedOutsideRepository": true,
+  "publicApplicationContract": "docs/web-app-acceptance.md",
+  "currentTreeLiteralPolicyScan": "passed_development_tree_and_package_2318_inputs",
+  "developmentHistory": "not_approved_for_public_release",
+  "finalPublicHistory": "pending_clean_snapshot_and_scan",
+  "sourceArchive": "pending_final_candidate",
+  "package": "development_package_scanned_final_candidate_pending",
+  "contextualAndMediaReview": "pending_final_candidate",
+  "publicationPerformed": false,
+  "developmentPackageSha256": "58ed20c601492de3ecbbd84c3a186c7e3ce399de58c82ed22be88171d3998cc0",
+  "developmentScan": {
+    "checkedAt": "2026-11-02T22:18:11.093089+00:00",
+    "status": "passed",
+    "checkedInputs": 2318,
+    "findings": [],
+    "finalCandidateAcceptance": false
+  },
+  "latestTreeScan": {
+    "checkedAt": "2026-11-02T22:13:55.710823+00:00",
+    "status": "passed",
+    "checkedInputs": 2151,
+    "findings": [],
+    "finalCandidateAcceptance": false
+  },
+  "publicStaging": {
+    "status": "prepared_not_final",
+    "files": 399,
+    "sourceBytes": 6842628,
+    "copiedDevelopmentGitMetadata": false,
+    "literalPolicyScan": {
+      "status": "passed",
+      "checkedInputs": 465,
+      "findings": []
+    },
+    "requiresRefreshAfterImplementationChanges": true,
+    "completeHistoryScan": "pending_new_public_history",
+    "finalCandidateAcceptance": false
+  }
+}

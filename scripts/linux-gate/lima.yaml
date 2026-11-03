@@ -1,0 +1,48 @@
+minimumLimaVersion: 2.2.1
+vmType: vz
+arch: aarch64
+cpus: 2
+memory: 4GiB
+disk: 32GiB
+images:
+- location: https://cloud-images.ubuntu.com/releases/noble/release-20260926/ubuntu-24.04-server-cloudimg-arm64.img
+  arch: aarch64
+  digest: sha256:1d6bffe64b848468ac97f821d369a4846d983de1800ccf6b5ec8853e85cefc55
+mounts: []
+propagateProxyEnv: false
+ssh:
+  forwardAgent: false
+  loadDotSSHPubKeys: false
+containerd:
+  system: false
+  user: false
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    command -v docker >/dev/null 2>&1 && exit 0
+    export DEBIAN_FRONTEND=noninteractive
+    curl -fsSL https://get.docker.com -o /tmp/swc-install-docker.sh
+    sha256sum /tmp/swc-install-docker.sh > /var/log/swc-docker-installer.sha256
+    VERSION=29.4.0 sh /tmp/swc-install-docker.sh
+- mode: yq
+  path: /etc/systemd/system/docker.socket.d/override.conf
+  format: ini
+  expression: .Socket.SocketUser="{{.User}}"
+- mode: yq
+  path: /etc/docker/daemon.json
+  expression: .features.cdi = true | .features.containerd-snapshotter = true
+probes:
+- script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    command -v docker
+    pgrep dockerd
+portForwards:
+- guestSocket: /var/run/docker.sock
+  hostSocket: "{{.Dir}}/sock/docker.sock"
+- guestPortRange: [1, 65535]
+  guestIP: 0.0.0.0
+  proto: any
+  ignore: true

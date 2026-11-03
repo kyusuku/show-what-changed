@@ -1,0 +1,111 @@
+{
+  "host": {
+    "parallelism": 10,
+    "loadAverage": [
+      17.46044921875,
+      20.06884765625,
+      17.80224609375
+    ]
+  },
+  "processing": [
+    {
+      "kind": "capture-processing",
+      "side": "before",
+      "frames": 205,
+      "pendingRaw": 0,
+      "pendingSanitized": 0,
+      "sharedSanitizedBytes": 51400,
+      "maskMs": 2383.1123800000005,
+      "writeMs": 3464.2930030000043,
+      "maxMaskMs": 41.03666599999997,
+      "maxWriteMs": 106.24074999999993,
+      "maxAckLatencyMs": 48.672333999999864,
+      "maxSanitizedQueueDepth": 21,
+      "maxSharedSanitizedBytes": 2112765,
+      "backpressureWaits": 0
+    },
+    {
+      "kind": "capture-processing",
+      "side": "after",
+      "frames": 203,
+      "pendingRaw": 0,
+      "pendingSanitized": 0,
+      "sharedSanitizedBytes": 0,
+      "maskMs": 2414.550667000003,
+      "writeMs": 3435.4950110000004,
+      "maxMaskMs": 35.28754200000003,
+      "maxWriteMs": 97.55733299999974,
+      "maxAckLatencyMs": 53.69875000000002,
+      "maxSanitizedQueueDepth": 19,
+      "maxSharedSanitizedBytes": 2166845,
+      "backpressureWaits": 0
+    }
+  ],
+  "dispatchSkewMs": 0.22281241416931152,
+  "decodedPulseErrorsMs": [
+    0,
+    0,
+    0
+  ],
+  "metrics": {
+    "before": {
+      "frames": 205,
+      "distinctPositions": 167,
+      "maxMovingGapMs": 49.99800002574921,
+      "pulses": [
+        881.6541458368301,
+        1881.614145874977,
+        2881.574145913124
+      ],
+      "clockErrorBoundMs": 3.7832289923705957
+    },
+    "after": {
+      "frames": 203,
+      "distinctPositions": 165,
+      "maxMovingGapMs": 49.99800002574921,
+      "pulses": [
+        881.1833335161209,
+        1881.1433335542679,
+        2881.1033334732056
+      ],
+      "clockErrorBoundMs": 3.8603755275649974
+    }
+  },
+  "pulseErrorsMs": [
+    0.4708123207092285,
+    0.4708123207092285,
+    0.47081243991851807
+  ],
+  "decodedDistinctPositions": {
+    "before": 90,
+    "after": 91
+  },
+  "decodedPulses": {
+    "before": [
+      1400,
+      2400,
+      3400
+    ],
+    "after": [
+      1400,
+      2400,
+      3400
+    ]
+  },
+  "totalFrames": 157,
+  "media": {
+    "video": {
+      "path": "r4-worker-development-compare.mp4",
+      "sha256": "6c81cd3f539c50fce7c7933efc59760ac85c4a23f6834a6828fdb0ddae099b62",
+      "bytes": 65633
+    },
+    "poster": {
+      "path": "r4-worker-development-poster.png",
+      "sha256": "e90e790ae18759019a7d451aaba3836f53de31cbbfa8fdab8f1b691b64158a95",
+      "bytes": 27733
+    },
+    "ffmpegVersion": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobeVersion": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "scope": "Synthetic development run from the current source build; final installed candidate and repeated platform acceptance remain pending."
+}

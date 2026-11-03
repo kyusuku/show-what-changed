@@ -1,0 +1,1801 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-02T19:56:48.003Z",
+  "repeatCommand": "node scripts/verify-public-web-app-dom.mjs --output evidence/revision-0.3/public-dom-observation.json",
+  "purpose": "Independent public Workshop board DOM observation. This does not establish final installed-package acceptance or normal-speed media acceptance.",
+  "sourceIdentity": {
+    "application": "Workshop board",
+    "origin": "Self-authored public example with no upstream application.",
+    "license": "MIT",
+    "licenseSha256": "a5a18863f67c257556a9c06c6dee594981a1c14e63d83255ee319cb96d72ad05",
+    "fixtureFilesSha256": "cda67a65efb0d30a3bf8b9b5959f79c2044e29b2fe7ab71ece6d31c1dd16d283",
+    "fixtureFiles": [
+      {
+        "path": ".gitignore",
+        "sha256": "bb7188e6c233140cdb7ee1133095a6efeb8e15aa5e21e469546105a404dbc115"
+      },
+      {
+        "path": "acceptance/feedback.after.mjs",
+        "sha256": "ef55dbff07f63ee477e9a828dc380cd3d72e07532a105758f82bb41fbd829e12"
+      },
+      {
+        "path": "acceptance/navigation.scenario.json",
+        "sha256": "f99fdf2feb72b3fdc566cc124b6f83b1733a56fe49ea4dfb7d569ccd64bfd049"
+      },
+      {
+        "path": "acceptance/validation.scenario.json",
+        "sha256": "23dc5e9bb7ff051c8dc76c10eb25792ac21e87fb0d8201234e75c0887ae66af2"
+      },
+      {
+        "path": "apps/web/package.json",
+        "sha256": "c3f0b628ae7689f19d15b1895b0443cb9fd9339d5fd79ef3ef897b25a721cb8a"
+      },
+      {
+        "path": "apps/web/public/app.js",
+        "sha256": "2e16bdd850e75e52d8c190fc0cc191aa94a96e90018237fdd5e7e6abd027c7d8"
+      },
+      {
+        "path": "apps/web/public/index.html",
+        "sha256": "19212319c1e2266cb4f1c2402a3c071add6b4b7eaaa71a01d06105823350d940"
+      },
+      {
+        "path": "apps/web/public/styles.css",
+        "sha256": "589e6d5e17667d4041fe34c89a7ce59e7fedd60e38c903e01eca52b8162752c5"
+      },
+      {
+        "path": "apps/web/server.mjs",
+        "sha256": "f94799543ecac906759572b67a16f7d237d0bb14a0deddd1dc6efbef58f5c1a0"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "a5a18863f67c257556a9c06c6dee594981a1c14e63d83255ee319cb96d72ad05"
+      },
+      {
+        "path": "package.json",
+        "sha256": "584d092cd2e8ad981c43b507091b5aefeedc17e87157d27516a39b70c9da02b4"
+      },
+      {
+        "path": "packages/board-data/build.mjs",
+        "sha256": "d7a0b29600a009c30837e052900a2226cafe3bfec909edafc18d22b2fea8883d"
+      },
+      {
+        "path": "packages/board-data/package.json",
+        "sha256": "2237dbdcade11d0eb5ba8653de917be605d7a9b21936aaededfec1ec01962bf1"
+      },
+      {
+        "path": "packages/board-data/src/feedback.mjs",
+        "sha256": "40e3c4c882c2ae2eb8ae629729599c5226fb19b3d6789b49349627dce34f8877"
+      },
+      {
+        "path": "packages/board-data/src/index.mjs",
+        "sha256": "710271a9bb554f25869cab1fc4f27683ce514cc77264195af8ce6c9104561c31"
+      },
+      {
+        "path": "pnpm-lock.yaml",
+        "sha256": "f9f8f801b7648cc2d3a590e55fb4c26c5551198ca585947fabf18fb7c90aa42f"
+      },
+      {
+        "path": "pnpm-workspace.yaml",
+        "sha256": "253208fa7c1b64372c219b9e19cef15ed70ca93b66a4d5c4c4d2297a5aff8880"
+      },
+      {
+        "path": "README.md",
+        "sha256": "0b0855afdb43b86c2562dbb74e4fa5bdcccd8d8fd71c29e1097264f954621460"
+      },
+      {
+        "path": "show-what-changed.config.json",
+        "sha256": "1ed3762d4ae128f5abdc8bcf792cd2d982ecfd5a40870a4d4d55d19f5b807dcf"
+      }
+    ],
+    "generatorSha256": "adec9007236a8e2dfc5e5662344279381144fa180a231e6144d12e914e29fff0",
+    "probeSha256": "568fbc7013e25e2aa4a173333a0453547dc9b0d537f720962c57e9762d734181",
+    "baseCommit": "0363218e459653bdfdf806407241148cb09212f8",
+    "headCommit": "cbc415a909dc27b625361be51dea09b18ecd8ab8",
+    "baseTree": "83ef0369331c73a6c5633b2039bc87cedd8ddbbb",
+    "headTree": "89924be571bf83dd7e2af054c258ad8610c2797e",
+    "changedPaths": [
+      "packages/board-data/src/feedback.mjs"
+    ]
+  },
+  "runtime": {
+    "node": "v24.22.2",
+    "pnpm": "11.9.0",
+    "git": "git version 2.53.0",
+    "playwright": "1.64.1",
+    "browser": "156.0.8078.4"
+  },
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "observations": [
+    {
+      "side": "before",
+      "commit": "0363218e459653bdfdf806407241148cb09212f8",
+      "normalRoutes": [
+        "/board",
+        "/proposals"
+      ],
+      "setup": {
+        "frozenOfflineInstallExit": 0,
+        "sharedPackageBuildExit": 0,
+        "sharedPackageImport": {
+          "title": "Check the task details",
+          "message": "Add a longer title and a valid contact email.",
+          "tone": "neutral"
+        }
+      },
+      "opening": {
+        "direction": "opening",
+        "openX": 50,
+        "closedX": 390,
+        "intermediatePositionCount": 17,
+        "samples": [
+          {
+            "elapsedMs": -4.1,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 12.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 29.3,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 46,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 62.6,
+            "x": 341.298,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 79.2,
+            "x": 294.669,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 96,
+            "x": 251.465,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 112.6,
+            "x": 214.022,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 129.3,
+            "x": 182.006,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 145.9,
+            "x": 155.484,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 162.6,
+            "x": 133.48,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 179.3,
+            "x": 115.438,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 195.9,
+            "x": 100.767,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 212.6,
+            "x": 88.729,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 229.3,
+            "x": 78.958,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 245.9,
+            "x": 71.126,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 262.6,
+            "x": 64.842,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 279.3,
+            "x": 59.918,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 296,
+            "x": 56.161,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 312.6,
+            "x": 53.425,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 329.3,
+            "x": 51.548,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 346,
+            "x": 50.44,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 362.6,
+            "x": 50.012,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 379.2,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 395.9,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 412.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 429.2,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 446,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 462.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 479.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 496,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 512.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 529.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 545.9,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 562.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 579.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 595.9,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 612.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 629.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 646,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 662.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          }
+        ]
+      },
+      "innerScroll": {
+        "observationSource": "Direct HTMLElement.scrollTop and window.scrollY reads. The app footer was not used for assertions.",
+        "input": {
+          "kind": "mouseWheel",
+          "deltaY": 560
+        },
+        "before": {
+          "scrollTop": 0,
+          "scrollHeight": 1920,
+          "clientHeight": 674,
+          "windowScrollY": 0
+        },
+        "after": {
+          "scrollTop": 560,
+          "scrollHeight": 1920,
+          "clientHeight": 674,
+          "windowScrollY": 0
+        }
+      },
+      "closing": {
+        "direction": "closing",
+        "openX": 50,
+        "closedX": 390,
+        "intermediatePositionCount": 17,
+        "samples": [
+          {
+            "elapsedMs": -11.7,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 4.9,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 21.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 38.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 54.9,
+            "x": 98.713,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 71.6,
+            "x": 145.613,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 88.3,
+            "x": 188.544,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 104.9,
+            "x": 225.986,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 121.6,
+            "x": 258.001,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 138.2,
+            "x": 284.521,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 154.9,
+            "x": 306.525,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 171.6,
+            "x": 324.566,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 188.3,
+            "x": 339.316,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 204.9,
+            "x": 351.274,
+            "y": 0,
+            "width": 339.9999694824219,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 221.6,
+            "x": 361.044,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 238.3,
+            "x": 368.918,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 254.9,
+            "x": 375.16,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 271.6,
+            "x": 380.083,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 288.3,
+            "x": 383.84,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 304.9,
+            "x": 386.575,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 321.6,
+            "x": 388.452,
+            "y": 0,
+            "width": 339.9999694824219,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 338.3,
+            "x": 389.56,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 354.9,
+            "x": 389.988,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 371.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 388.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 404.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 421.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 438.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 454.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 471.5,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 488.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 504.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 521.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 538.3,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 554.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 571.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 588.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 604.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 621.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 638.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 654.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          }
+        ]
+      },
+      "validation": {
+        "method": "POST",
+        "path": "/api/proposals",
+        "status": 422,
+        "requestBody": {
+          "title": "x",
+          "email": "broken"
+        },
+        "responseBody": {
+          "feedback": {
+            "title": "Check the task details",
+            "message": "Add a longer title and a valid contact email.",
+            "tone": "neutral"
+          },
+          "errors": [
+            {
+              "field": "title",
+              "message": "Task title must contain at least 6 characters."
+            },
+            {
+              "field": "email",
+              "message": "Contact email must be a valid email address."
+            }
+          ]
+        },
+        "renderedFeedback": {
+          "title": "Check the task details",
+          "message": "Add a longer title and a valid contact email.",
+          "tone": "neutral",
+          "errors": [
+            "Task title must contain at least 6 characters.",
+            "Contact email must be a valid email address."
+          ],
+          "bounds": {
+            "x": 49,
+            "y": 562.703125,
+            "width": 292,
+            "height": 115.140625
+          },
+          "titleInvalid": "true",
+          "emailInvalid": "true",
+          "visible": true
+        },
+        "interceptionUsed": false
+      },
+      "preservation": {
+        "trackedDiffUnchanged": true,
+        "indexTreeUnchanged": true
+      }
+    },
+    {
+      "side": "after",
+      "commit": "cbc415a909dc27b625361be51dea09b18ecd8ab8",
+      "normalRoutes": [
+        "/board",
+        "/proposals"
+      ],
+      "setup": {
+        "frozenOfflineInstallExit": 0,
+        "sharedPackageBuildExit": 0,
+        "sharedPackageImport": {
+          "title": "Two details need attention",
+          "message": "Use at least 6 characters for the title and an email such as maker@example.invalid.",
+          "tone": "guided"
+        }
+      },
+      "opening": {
+        "direction": "opening",
+        "openX": 50,
+        "closedX": 390,
+        "intermediatePositionCount": 17,
+        "samples": [
+          {
+            "elapsedMs": 6.4,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 23.1,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 39.7,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 56.4,
+            "x": 341.18,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 73.1,
+            "x": 294.287,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 89.8,
+            "x": 251.366,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 106.4,
+            "x": 213.937,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 123,
+            "x": 182.109,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 139.7,
+            "x": 155.425,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 156.4,
+            "x": 133.431,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 173,
+            "x": 115.495,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 189.7,
+            "x": 100.735,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 206.3,
+            "x": 88.767,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 223.1,
+            "x": 78.936,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 239.7,
+            "x": 71.108,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 256.4,
+            "x": 64.828,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 273.1,
+            "x": 59.908,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 289.7,
+            "x": 56.172,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 306.4,
+            "x": 53.42,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 323,
+            "x": 51.553,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 339.7,
+            "x": 50.443,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 356.4,
+            "x": 50.012,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 373.1,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 389.7,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 406.4,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 423.1,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 439.7,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 456.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 473,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 489.8,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 506.4,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 523,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 539.7,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 556.4,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 573,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 589.7,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 606.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 623,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 639.7,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 656.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          }
+        ]
+      },
+      "innerScroll": {
+        "observationSource": "Direct HTMLElement.scrollTop and window.scrollY reads. The app footer was not used for assertions.",
+        "input": {
+          "kind": "mouseWheel",
+          "deltaY": 560
+        },
+        "before": {
+          "scrollTop": 0,
+          "scrollHeight": 1920,
+          "clientHeight": 674,
+          "windowScrollY": 0
+        },
+        "after": {
+          "scrollTop": 560,
+          "scrollHeight": 1920,
+          "clientHeight": 674,
+          "windowScrollY": 0
+        }
+      },
+      "closing": {
+        "direction": "closing",
+        "openX": 50,
+        "closedX": 390,
+        "intermediatePositionCount": 17,
+        "samples": [
+          {
+            "elapsedMs": -13.076,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 3.6,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 20.3,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": true,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 36.9,
+            "x": 50,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 53.5,
+            "x": 98.543,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 70.3,
+            "x": 145.724,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 86.9,
+            "x": 188.402,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 103.6,
+            "x": 226.072,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 120.3,
+            "x": 258.073,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 136.9,
+            "x": 284.581,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 153.6,
+            "x": 306.573,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 170.2,
+            "x": 324.508,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 186.9,
+            "x": 339.269,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 203.6,
+            "x": 351.301,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 220.3,
+            "x": 361.066,
+            "y": 0,
+            "width": 339.9999694824219,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 236.9,
+            "x": 368.893,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 253.6,
+            "x": 375.173,
+            "y": 0,
+            "width": 339.9999694824219,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 270.2,
+            "x": 380.068,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 287,
+            "x": 383.848,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 303.6,
+            "x": 386.581,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 320.2,
+            "x": 388.447,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 336.9,
+            "x": 389.557,
+            "y": 0,
+            "width": 340.0000305175781,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 353.6,
+            "x": 389.988,
+            "y": 0,
+            "width": 339.9999694824219,
+            "height": 844,
+            "open": false,
+            "visibility": "visible"
+          },
+          {
+            "elapsedMs": 370.3,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 386.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 403.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 420.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 436.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 453.5,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 470.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 486.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 503.5,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 520.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 536.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 553.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 570.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 586.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 603.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 620.2,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 636.9,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          },
+          {
+            "elapsedMs": 653.6,
+            "x": 390,
+            "y": 0,
+            "width": 340,
+            "height": 844,
+            "open": false,
+            "visibility": "hidden"
+          }
+        ]
+      },
+      "validation": {
+        "method": "POST",
+        "path": "/api/proposals",
+        "status": 422,
+        "requestBody": {
+          "title": "x",
+          "email": "broken"
+        },
+        "responseBody": {
+          "feedback": {
+            "title": "Two details need attention",
+            "message": "Use at least 6 characters for the title and an email such as maker@example.invalid.",
+            "tone": "guided"
+          },
+          "errors": [
+            {
+              "field": "title",
+              "message": "Task title must contain at least 6 characters."
+            },
+            {
+              "field": "email",
+              "message": "Contact email must be a valid email address."
+            }
+          ]
+        },
+        "renderedFeedback": {
+          "title": "Two details need attention",
+          "message": "Use at least 6 characters for the title and an email such as maker@example.invalid.",
+          "tone": "guided",
+          "errors": [
+            "Task title must contain at least 6 characters.",
+            "Contact email must be a valid email address."
+          ],
+          "bounds": {
+            "x": 49,
+            "y": 562.703125,
+            "width": 292,
+            "height": 133.28125
+          },
+          "titleInvalid": "true",
+          "emailInvalid": "true",
+          "visible": true
+        },
+        "interceptionUsed": false
+      },
+      "preservation": {
+        "trackedDiffUnchanged": true,
+        "indexTreeUnchanged": true
+      }
+    }
+  ],
+  "cleanup": {
+    "registeredWorktreesBeforeRepositoryRemoval": 1,
+    "ownedProcessCount": 7,
+    "ownedProcessesRemaining": 0,
+    "sideWorktreesRemoved": true,
+    "browserProfileRemoved": true,
+    "generatedRepositoryRemoved": true
+  },
+  "commands": [
+    "pnpm install --frozen-lockfile --offline",
+    "pnpm --filter @workshop/board-data build",
+    "node apps/web/server.mjs <owned-loopback-port>"
+  ],
+  "limitations": [
+    "Source fixture execution only. No installed comparison package was exercised.",
+    "DOM samples prove intermediate drawer positions. They do not prove decoded comparison-media cadence or normal-speed playback.",
+    "The app is a self-authored MIT example with local tab state and no external service. This does not prove universal web-app compatibility."
+  ],
+  "passed": true
+}

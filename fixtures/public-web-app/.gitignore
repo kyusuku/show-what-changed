@@ -1,0 +1,3 @@
+node_modules/
+packages/board-data/dist/
+.show-what-changed/

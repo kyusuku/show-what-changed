@@ -1,0 +1,3176 @@
+{
+  "status": "full_path_inconclusive_candidate_held",
+  "scope": "Standalone sanitizer CPU comparison and a separate paired installed full-path motion comparison. Neither is final release acceptance.",
+  "summarySha256": "8f7af147b33b853160369cf5e3d77d83b3e3ea45e56318fe1a1a4db98fc981a7",
+  "frozenInputSha256": "3f6af2210669c38d59c295082ac48aa126822d1badb730d89a462b87f70da784",
+  "baselineSourceSha256": "99fbb19f70235c6229b0daab80ce59ccdd428fabcf5fdd187e1eca9835de2392",
+  "candidateSourceSha256": "7599219fb932e20977cf1ea2ff2fde13769e9d9327d3b9da38a3db99055537f7",
+  "node": "24.22.2",
+  "processRuns": 40,
+  "successfulCalls": 1320,
+  "errors": 0,
+  "pairedOrder": [
+    "AB",
+    "BA",
+    "AB",
+    "BA",
+    "AB"
+  ],
+  "coldCallsPerProcess": 1,
+  "subsequentCallsPerProcess": 32,
+  "cpuDenominator": "Current-thread user plus system CPU in the sanitizer call windows. Process CPU is a separate supporting counter. Neither is whole-capture CPU.",
+  "sharedHostContention": true,
+  "hostIsolationClaim": false,
+  "mainProductionSourceChanged": false,
+  "comparisons": [
+    {
+      "fixture": "1280x800-rgb-up",
+      "baselineThreadCpuUsPerCall": {
+        "median": 26540.09375,
+        "minimum": 25592.9375,
+        "maximum": 27034.84375
+      },
+      "candidateThreadCpuUsPerCall": {
+        "median": 20071.5,
+        "minimum": 19857.40625,
+        "maximum": 20281.46875
+      },
+      "medianCpuReductionFraction": 0.24372912209475517,
+      "rangesDisjoint": true,
+      "pairs": [
+        {
+          "pair": 1,
+          "baselineThreadCpuUsPerCall": 26540.09375,
+          "candidateThreadCpuUsPerCall": 20087.46875
+        },
+        {
+          "pair": 2,
+          "baselineThreadCpuUsPerCall": 26345.46875,
+          "candidateThreadCpuUsPerCall": 19933.25
+        },
+        {
+          "pair": 3,
+          "baselineThreadCpuUsPerCall": 25592.9375,
+          "candidateThreadCpuUsPerCall": 19857.40625
+        },
+        {
+          "pair": 4,
+          "baselineThreadCpuUsPerCall": 26654.40625,
+          "candidateThreadCpuUsPerCall": 20071.5
+        },
+        {
+          "pair": 5,
+          "baselineThreadCpuUsPerCall": 27034.84375,
+          "candidateThreadCpuUsPerCall": 20281.46875
+        }
+      ]
+    },
+    {
+      "fixture": "1280x800-rgba-up",
+      "baselineThreadCpuUsPerCall": {
+        "median": 35224.625,
+        "minimum": 34437.0625,
+        "maximum": 36397.15625
+      },
+      "candidateThreadCpuUsPerCall": {
+        "median": 26712.375,
+        "minimum": 26628.1875,
+        "maximum": 28335.46875
+      },
+      "medianCpuReductionFraction": 0.24165622771001816,
+      "rangesDisjoint": true,
+      "pairs": [
+        {
+          "pair": 1,
+          "baselineThreadCpuUsPerCall": 36397.15625,
+          "candidateThreadCpuUsPerCall": 28335.46875
+        },
+        {
+          "pair": 2,
+          "baselineThreadCpuUsPerCall": 35224.625,
+          "candidateThreadCpuUsPerCall": 26712.375
+        },
+        {
+          "pair": 3,
+          "baselineThreadCpuUsPerCall": 35391.875,
+          "candidateThreadCpuUsPerCall": 26821.625
+        },
+        {
+          "pair": 4,
+          "baselineThreadCpuUsPerCall": 34437.0625,
+          "candidateThreadCpuUsPerCall": 26657.71875
+        },
+        {
+          "pair": 5,
+          "baselineThreadCpuUsPerCall": 34528.75,
+          "candidateThreadCpuUsPerCall": 26628.1875
+        }
+      ]
+    },
+    {
+      "fixture": "390x844-rgb-up",
+      "baselineThreadCpuUsPerCall": {
+        "median": 8932.53125,
+        "minimum": 8822.09375,
+        "maximum": 9365.625
+      },
+      "candidateThreadCpuUsPerCall": {
+        "median": 6746.09375,
+        "minimum": 6742.3125,
+        "maximum": 6980.3125
+      },
+      "medianCpuReductionFraction": 0.24477244342134263,
+      "rangesDisjoint": true,
+      "pairs": [
+        {
+          "pair": 1,
+          "baselineThreadCpuUsPerCall": 8932.53125,
+          "candidateThreadCpuUsPerCall": 6742.3125
+        },
+        {
+          "pair": 2,
+          "baselineThreadCpuUsPerCall": 9003.1875,
+          "candidateThreadCpuUsPerCall": 6980.3125
+        },
+        {
+          "pair": 3,
+          "baselineThreadCpuUsPerCall": 8860.15625,
+          "candidateThreadCpuUsPerCall": 6746.09375
+        },
+        {
+          "pair": 4,
+          "baselineThreadCpuUsPerCall": 9365.625,
+          "candidateThreadCpuUsPerCall": 6745.59375
+        },
+        {
+          "pair": 5,
+          "baselineThreadCpuUsPerCall": 8822.09375,
+          "candidateThreadCpuUsPerCall": 6754
+        }
+      ]
+    },
+    {
+      "fixture": "390x844-rgba-up",
+      "baselineThreadCpuUsPerCall": {
+        "median": 11951.90625,
+        "minimum": 11633.84375,
+        "maximum": 12483.6875
+      },
+      "candidateThreadCpuUsPerCall": {
+        "median": 9006.65625,
+        "minimum": 8761.25,
+        "maximum": 9448.4375
+      },
+      "medianCpuReductionFraction": 0.24642512569909092,
+      "rangesDisjoint": true,
+      "pairs": [
+        {
+          "pair": 1,
+          "baselineThreadCpuUsPerCall": 12483.6875,
+          "candidateThreadCpuUsPerCall": 9305.34375
+        },
+        {
+          "pair": 2,
+          "baselineThreadCpuUsPerCall": 11950.25,
+          "candidateThreadCpuUsPerCall": 9448.4375
+        },
+        {
+          "pair": 3,
+          "baselineThreadCpuUsPerCall": 11951.90625,
+          "candidateThreadCpuUsPerCall": 8761.25
+        },
+        {
+          "pair": 4,
+          "baselineThreadCpuUsPerCall": 11633.84375,
+          "candidateThreadCpuUsPerCall": 9006.65625
+        },
+        {
+          "pair": 5,
+          "baselineThreadCpuUsPerCall": 11953.75,
+          "candidateThreadCpuUsPerCall": 8843.65625
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "fixture": "1280x800-rgb-up",
+      "side": "baseline",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 36435584,
+          "threadCpuUsPerCall": 30827,
+          "processCpuUsPerCall": 35508,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 39634542,
+          "threadCpuUsPerCall": 33316,
+          "processCpuUsPerCall": 37405,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 37414917,
+          "threadCpuUsPerCall": 30657,
+          "processCpuUsPerCall": 34810,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 44316000,
+          "threadCpuUsPerCall": 30887,
+          "processCpuUsPerCall": 36275,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 37199667,
+          "threadCpuUsPerCall": 32689,
+          "processCpuUsPerCall": 37810,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 37414917,
+        "minimum": 36435584,
+        "maximum": 44316000
+      },
+      "processCpuUsPerCall": {
+        "median": 36275,
+        "minimum": 34810,
+        "maximum": 37810
+      },
+      "threadCpuUsPerCall": {
+        "median": 30887,
+        "minimum": 30657,
+        "maximum": 33316
+      }
+    },
+    {
+      "fixture": "1280x800-rgb-up",
+      "side": "baseline",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 49255737.03125,
+          "threadCpuUsPerCall": 26540.09375,
+          "processCpuUsPerCall": 28456.0625,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 34960600.09375,
+          "threadCpuUsPerCall": 26345.46875,
+          "processCpuUsPerCall": 28345.65625,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 33027020.90625,
+          "threadCpuUsPerCall": 25592.9375,
+          "processCpuUsPerCall": 27224.15625,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 34496445.28125,
+          "threadCpuUsPerCall": 26654.40625,
+          "processCpuUsPerCall": 28693.75,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 38178126.28125,
+          "threadCpuUsPerCall": 27034.84375,
+          "processCpuUsPerCall": 29064.6875,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 34960600.09375,
+        "minimum": 33027020.90625,
+        "maximum": 49255737.03125
+      },
+      "processCpuUsPerCall": {
+        "median": 28456.0625,
+        "minimum": 27224.15625,
+        "maximum": 29064.6875
+      },
+      "threadCpuUsPerCall": {
+        "median": 26540.09375,
+        "minimum": 25592.9375,
+        "maximum": 27034.84375
+      }
+    },
+    {
+      "fixture": "1280x800-rgb-up",
+      "side": "candidate",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 33912959,
+          "threadCpuUsPerCall": 25862,
+          "processCpuUsPerCall": 29081,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 24049167,
+          "threadCpuUsPerCall": 22122,
+          "processCpuUsPerCall": 25376,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 29683375,
+          "threadCpuUsPerCall": 25338,
+          "processCpuUsPerCall": 28577,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 26620458,
+          "threadCpuUsPerCall": 22200,
+          "processCpuUsPerCall": 25571,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 43312542,
+          "threadCpuUsPerCall": 33654,
+          "processCpuUsPerCall": 37381,
+          "inputBytes": 10733,
+          "filteredBytes": 3072800,
+          "outputBytes": 688685,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 29683375,
+        "minimum": 24049167,
+        "maximum": 43312542
+      },
+      "processCpuUsPerCall": {
+        "median": 28577,
+        "minimum": 25376,
+        "maximum": 37381
+      },
+      "threadCpuUsPerCall": {
+        "median": 25338,
+        "minimum": 22122,
+        "maximum": 33654
+      }
+    },
+    {
+      "fixture": "1280x800-rgb-up",
+      "side": "candidate",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 28564266.875,
+          "threadCpuUsPerCall": 20087.46875,
+          "processCpuUsPerCall": 21819.46875,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 23856335.8125,
+          "threadCpuUsPerCall": 19933.25,
+          "processCpuUsPerCall": 21712.28125,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 31375574.09375,
+          "threadCpuUsPerCall": 19857.40625,
+          "processCpuUsPerCall": 21632.53125,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 25975919.28125,
+          "threadCpuUsPerCall": 20071.5,
+          "processCpuUsPerCall": 21669.15625,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 25547507.75,
+          "threadCpuUsPerCall": 20281.46875,
+          "processCpuUsPerCall": 21912.90625,
+          "inputBytes": 343456,
+          "filteredBytes": 98329600,
+          "outputBytes": 22037920,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 25975919.28125,
+        "minimum": 23856335.8125,
+        "maximum": 31375574.09375
+      },
+      "processCpuUsPerCall": {
+        "median": 21712.28125,
+        "minimum": 21632.53125,
+        "maximum": 21912.90625
+      },
+      "threadCpuUsPerCall": {
+        "median": 20071.5,
+        "minimum": 19857.40625,
+        "maximum": 20281.46875
+      }
+    },
+    {
+      "fixture": "1280x800-rgba-up",
+      "side": "baseline",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 49556083,
+          "threadCpuUsPerCall": 43229,
+          "processCpuUsPerCall": 48450,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 46649167,
+          "threadCpuUsPerCall": 39544,
+          "processCpuUsPerCall": 43754,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 49633958,
+          "threadCpuUsPerCall": 45114,
+          "processCpuUsPerCall": 50961,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 39896875,
+          "threadCpuUsPerCall": 38145,
+          "processCpuUsPerCall": 43577,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 49897375,
+          "threadCpuUsPerCall": 38727,
+          "processCpuUsPerCall": 43331,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 49556083,
+        "minimum": 39896875,
+        "maximum": 49897375
+      },
+      "processCpuUsPerCall": {
+        "median": 43754,
+        "minimum": 43331,
+        "maximum": 50961
+      },
+      "threadCpuUsPerCall": {
+        "median": 39544,
+        "minimum": 38145,
+        "maximum": 45114
+      }
+    },
+    {
+      "fixture": "1280x800-rgba-up",
+      "side": "baseline",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 51522334.65625,
+          "threadCpuUsPerCall": 36397.15625,
+          "processCpuUsPerCall": 39313.84375,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 47597868.625,
+          "threadCpuUsPerCall": 35224.625,
+          "processCpuUsPerCall": 38233.15625,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 53366223.96875,
+          "threadCpuUsPerCall": 35391.875,
+          "processCpuUsPerCall": 38417.78125,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 39072019.53125,
+          "threadCpuUsPerCall": 34437.0625,
+          "processCpuUsPerCall": 37615.375,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 39913269.5625,
+          "threadCpuUsPerCall": 34528.75,
+          "processCpuUsPerCall": 37844.59375,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 47597868.625,
+        "minimum": 39072019.53125,
+        "maximum": 53366223.96875
+      },
+      "processCpuUsPerCall": {
+        "median": 38233.15625,
+        "minimum": 37615.375,
+        "maximum": 39313.84375
+      },
+      "threadCpuUsPerCall": {
+        "median": 35224.625,
+        "minimum": 34437.0625,
+        "maximum": 36397.15625
+      }
+    },
+    {
+      "fixture": "1280x800-rgba-up",
+      "side": "candidate",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 98261167,
+          "threadCpuUsPerCall": 35014,
+          "processCpuUsPerCall": 40205,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 51999042,
+          "threadCpuUsPerCall": 33980,
+          "processCpuUsPerCall": 38560,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 40337041,
+          "threadCpuUsPerCall": 33737,
+          "processCpuUsPerCall": 37990,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 40738000,
+          "threadCpuUsPerCall": 35399,
+          "processCpuUsPerCall": 40195,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 32389167,
+          "threadCpuUsPerCall": 30439,
+          "processCpuUsPerCall": 34357,
+          "inputBytes": 12863,
+          "filteredBytes": 4096800,
+          "outputBytes": 923154,
+          "decodedPixels": 1024000,
+          "zeroFilterRows": 800
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 40738000,
+        "minimum": 32389167,
+        "maximum": 98261167
+      },
+      "processCpuUsPerCall": {
+        "median": 38560,
+        "minimum": 34357,
+        "maximum": 40205
+      },
+      "threadCpuUsPerCall": {
+        "median": 33980,
+        "minimum": 30439,
+        "maximum": 35399
+      }
+    },
+    {
+      "fixture": "1280x800-rgba-up",
+      "side": "candidate",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 42381378.8125,
+          "threadCpuUsPerCall": 28335.46875,
+          "processCpuUsPerCall": 31398.03125,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 33919951.625,
+          "threadCpuUsPerCall": 26712.375,
+          "processCpuUsPerCall": 29807.5,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 34485019.40625,
+          "threadCpuUsPerCall": 26821.625,
+          "processCpuUsPerCall": 29632.875,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 30985020.65625,
+          "threadCpuUsPerCall": 26657.71875,
+          "processCpuUsPerCall": 29417.40625,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 36672963.5625,
+          "threadCpuUsPerCall": 26628.1875,
+          "processCpuUsPerCall": 29260.09375,
+          "inputBytes": 411616,
+          "filteredBytes": 131097600,
+          "outputBytes": 29540928,
+          "decodedPixels": 32768000,
+          "zeroFilterRows": 25600
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 34485019.40625,
+        "minimum": 30985020.65625,
+        "maximum": 42381378.8125
+      },
+      "processCpuUsPerCall": {
+        "median": 29632.875,
+        "minimum": 29260.09375,
+        "maximum": 31398.03125
+      },
+      "threadCpuUsPerCall": {
+        "median": 26712.375,
+        "minimum": 26628.1875,
+        "maximum": 28335.46875
+      }
+    },
+    {
+      "fixture": "390x844-rgb-up",
+      "side": "baseline",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 28070458,
+          "threadCpuUsPerCall": 16663,
+          "processCpuUsPerCall": 21615,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 29222000,
+          "threadCpuUsPerCall": 16854,
+          "processCpuUsPerCall": 22947,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 19632083,
+          "threadCpuUsPerCall": 14686,
+          "processCpuUsPerCall": 20284,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 22491167,
+          "threadCpuUsPerCall": 15735,
+          "processCpuUsPerCall": 20182,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 17124750,
+          "threadCpuUsPerCall": 14496,
+          "processCpuUsPerCall": 18693,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 22491167,
+        "minimum": 17124750,
+        "maximum": 29222000
+      },
+      "processCpuUsPerCall": {
+        "median": 20284,
+        "minimum": 18693,
+        "maximum": 22947
+      },
+      "threadCpuUsPerCall": {
+        "median": 15735,
+        "minimum": 14496,
+        "maximum": 16854
+      }
+    },
+    {
+      "fixture": "390x844-rgb-up",
+      "side": "baseline",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 11330035.125,
+          "threadCpuUsPerCall": 8932.53125,
+          "processCpuUsPerCall": 9619.84375,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 11409018.25,
+          "threadCpuUsPerCall": 9003.1875,
+          "processCpuUsPerCall": 9472.65625,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 10417930.90625,
+          "threadCpuUsPerCall": 8860.15625,
+          "processCpuUsPerCall": 9485.125,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 12276438.75,
+          "threadCpuUsPerCall": 9365.625,
+          "processCpuUsPerCall": 10153.28125,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 10840417.78125,
+          "threadCpuUsPerCall": 8822.09375,
+          "processCpuUsPerCall": 9259.53125,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 11330035.125,
+        "minimum": 10417930.90625,
+        "maximum": 12276438.75
+      },
+      "processCpuUsPerCall": {
+        "median": 9485.125,
+        "minimum": 9259.53125,
+        "maximum": 10153.28125
+      },
+      "threadCpuUsPerCall": {
+        "median": 8932.53125,
+        "minimum": 8822.09375,
+        "maximum": 9365.625
+      }
+    },
+    {
+      "fixture": "390x844-rgb-up",
+      "side": "candidate",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 29069500,
+          "threadCpuUsPerCall": 14548,
+          "processCpuUsPerCall": 19009,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 19404542,
+          "threadCpuUsPerCall": 12681,
+          "processCpuUsPerCall": 15978,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 13377583,
+          "threadCpuUsPerCall": 11684,
+          "processCpuUsPerCall": 14745,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 14309750,
+          "threadCpuUsPerCall": 12488,
+          "processCpuUsPerCall": 15669,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 17881834,
+          "threadCpuUsPerCall": 13085,
+          "processCpuUsPerCall": 16158,
+          "inputBytes": 5906,
+          "filteredBytes": 988324,
+          "outputBytes": 240287,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 17881834,
+        "minimum": 13377583,
+        "maximum": 29069500
+      },
+      "processCpuUsPerCall": {
+        "median": 15978,
+        "minimum": 14745,
+        "maximum": 19009
+      },
+      "threadCpuUsPerCall": {
+        "median": 12681,
+        "minimum": 11684,
+        "maximum": 14548
+      }
+    },
+    {
+      "fixture": "390x844-rgb-up",
+      "side": "candidate",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 8297442.71875,
+          "threadCpuUsPerCall": 6742.3125,
+          "processCpuUsPerCall": 7200.53125,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 9256613.28125,
+          "threadCpuUsPerCall": 6980.3125,
+          "processCpuUsPerCall": 7530.15625,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 7522444.09375,
+          "threadCpuUsPerCall": 6746.09375,
+          "processCpuUsPerCall": 7103.34375,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 8248122.40625,
+          "threadCpuUsPerCall": 6745.59375,
+          "processCpuUsPerCall": 7159.34375,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 8307307.1875,
+          "threadCpuUsPerCall": 6754,
+          "processCpuUsPerCall": 7167.25,
+          "inputBytes": 188992,
+          "filteredBytes": 31626368,
+          "outputBytes": 7689184,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 8297442.71875,
+        "minimum": 7522444.09375,
+        "maximum": 9256613.28125
+      },
+      "processCpuUsPerCall": {
+        "median": 7167.25,
+        "minimum": 7103.34375,
+        "maximum": 7530.15625
+      },
+      "threadCpuUsPerCall": {
+        "median": 6746.09375,
+        "minimum": 6742.3125,
+        "maximum": 6980.3125
+      }
+    },
+    {
+      "fixture": "390x844-rgba-up",
+      "side": "baseline",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 25168625,
+          "threadCpuUsPerCall": 17834,
+          "processCpuUsPerCall": 22401,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 29552208,
+          "threadCpuUsPerCall": 18798,
+          "processCpuUsPerCall": 24146,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 19466708,
+          "threadCpuUsPerCall": 17830,
+          "processCpuUsPerCall": 23616,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 26061584,
+          "threadCpuUsPerCall": 19007,
+          "processCpuUsPerCall": 23702,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 21723333,
+          "threadCpuUsPerCall": 18877,
+          "processCpuUsPerCall": 24330,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 25168625,
+        "minimum": 19466708,
+        "maximum": 29552208
+      },
+      "processCpuUsPerCall": {
+        "median": 23702,
+        "minimum": 22401,
+        "maximum": 24330
+      },
+      "threadCpuUsPerCall": {
+        "median": 18798,
+        "minimum": 17830,
+        "maximum": 19007
+      }
+    },
+    {
+      "fixture": "390x844-rgba-up",
+      "side": "baseline",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 20337043.03125,
+          "threadCpuUsPerCall": 12483.6875,
+          "processCpuUsPerCall": 13152.90625,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 17436065.09375,
+          "threadCpuUsPerCall": 11950.25,
+          "processCpuUsPerCall": 12757.09375,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 14900179.78125,
+          "threadCpuUsPerCall": 11951.90625,
+          "processCpuUsPerCall": 12830.9375,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 13338858.03125,
+          "threadCpuUsPerCall": 11633.84375,
+          "processCpuUsPerCall": 12231.53125,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 13734055.90625,
+          "threadCpuUsPerCall": 11953.75,
+          "processCpuUsPerCall": 12803.875,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 14900179.78125,
+        "minimum": 13338858.03125,
+        "maximum": 20337043.03125
+      },
+      "processCpuUsPerCall": {
+        "median": 12803.875,
+        "minimum": 12231.53125,
+        "maximum": 13152.90625
+      },
+      "threadCpuUsPerCall": {
+        "median": 11951.90625,
+        "minimum": 11633.84375,
+        "maximum": 12483.6875
+      }
+    },
+    {
+      "fixture": "390x844-rgba-up",
+      "side": "candidate",
+      "phase": "cold-first-call",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 1,
+          "wallNsPerCall": 20676625,
+          "threadCpuUsPerCall": 16517,
+          "processCpuUsPerCall": 19711,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 1,
+          "calls": 1,
+          "wallNsPerCall": 21934917,
+          "threadCpuUsPerCall": 18436,
+          "processCpuUsPerCall": 22220,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 2,
+          "calls": 1,
+          "wallNsPerCall": 18466250,
+          "threadCpuUsPerCall": 15195,
+          "processCpuUsPerCall": 18257,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 3,
+          "calls": 1,
+          "wallNsPerCall": 27209542,
+          "threadCpuUsPerCall": 17983,
+          "processCpuUsPerCall": 22156,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        },
+        {
+          "pair": 4,
+          "calls": 1,
+          "wallNsPerCall": 18417666,
+          "threadCpuUsPerCall": 16057,
+          "processCpuUsPerCall": 20223,
+          "inputBytes": 6289,
+          "filteredBytes": 1317484,
+          "outputBytes": 325178,
+          "decodedPixels": 329160,
+          "zeroFilterRows": 844
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 20676625,
+        "minimum": 18417666,
+        "maximum": 27209542
+      },
+      "processCpuUsPerCall": {
+        "median": 20223,
+        "minimum": 18257,
+        "maximum": 22220
+      },
+      "threadCpuUsPerCall": {
+        "median": 16517,
+        "minimum": 15195,
+        "maximum": 18436
+      }
+    },
+    {
+      "fixture": "390x844-rgba-up",
+      "side": "candidate",
+      "phase": "subsequent",
+      "processRepetitions": 5,
+      "perProcess": [
+        {
+          "pair": 0,
+          "calls": 32,
+          "wallNsPerCall": 11350709.6875,
+          "threadCpuUsPerCall": 9305.34375,
+          "processCpuUsPerCall": 9876.59375,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 1,
+          "calls": 32,
+          "wallNsPerCall": 14765121.03125,
+          "threadCpuUsPerCall": 9448.4375,
+          "processCpuUsPerCall": 10168.3125,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 2,
+          "calls": 32,
+          "wallNsPerCall": 10947455.84375,
+          "threadCpuUsPerCall": 8761.25,
+          "processCpuUsPerCall": 9583.78125,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 3,
+          "calls": 32,
+          "wallNsPerCall": 10162057.40625,
+          "threadCpuUsPerCall": 9006.65625,
+          "processCpuUsPerCall": 9600.65625,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        },
+        {
+          "pair": 4,
+          "calls": 32,
+          "wallNsPerCall": 9790486.96875,
+          "threadCpuUsPerCall": 8843.65625,
+          "processCpuUsPerCall": 9335.5625,
+          "inputBytes": 201248,
+          "filteredBytes": 42159488,
+          "outputBytes": 10405696,
+          "decodedPixels": 10533120,
+          "zeroFilterRows": 27008
+        }
+      ],
+      "wallNsPerCall": {
+        "median": 10947455.84375,
+        "minimum": 9790486.96875,
+        "maximum": 14765121.03125
+      },
+      "processCpuUsPerCall": {
+        "median": 9600.65625,
+        "minimum": 9335.5625,
+        "maximum": 10168.3125
+      },
+      "threadCpuUsPerCall": {
+        "median": 9006.65625,
+        "minimum": 8761.25,
+        "maximum": 9448.4375
+      }
+    }
+  ],
+  "finalCandidateAcceptance": false,
+  "interpretation": "Five fresh-process pairs per fixture show lower sanitizer thread CPU with disjoint process-mean ranges for subsequent calls. Every output passed complete bytes and independent pixel checks. Shared host contention limits wall-time interpretation. Actual capture, masking workers, ACK, persistence, composition and encode remain unmeasured for this candidate.",
+  "fullPath": {
+    "reviewedIdentitySha256": "df668767a7d1fb63c7977e409cb9df08d257d7bef9c76c52d6a6cebc1d016c30",
+    "summarySha256": "3d670e3cccba0cf8826bdae47d2c21778f02f1843e381c3611ebb34d437fb3e1",
+    "baselinePackageSha256": "a9e0ddf8215714ca1739ca247d3a3bc952c85f67fc606fdcac3e335c5886e751",
+    "candidatePackageSha256": "952350268d5b70bddfb205ea2ca252a1c8ad66c1589ca0feab36d5114dbd9789",
+    "attemptedCases": 20,
+    "missingCases": 0,
+    "numericPassed": {
+      "A": 9,
+      "B": 7
+    },
+    "failedCases": {
+      "A": 1,
+      "B": 3
+    },
+    "failedFreshProcesses": 3,
+    "actualExitCode": 1,
+    "releaseAcceptance": false,
+    "sharedHostContention": true,
+    "performanceVerdict": "inconclusive",
+    "decision": "Keep the existing production implementation. The sanitizer CPU reduction has not established more reliable or faster full-path recordings.",
+    "failureDetails": [
+      {
+        "index": 1,
+        "variant": "B",
+        "viewport": "1280x800",
+        "numericFailures": [
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "before known-moving source gap is 216.65800000001036 ms"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after must retain all three pulses"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "Mapped source pulses must align within 80 ms"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after must retain three decoded pulses"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "Decoded pulses must align within 80 ms"
+          }
+        ],
+        "failure": {
+          "code": "NUMERIC_THRESHOLD_FAILED",
+          "message": "All threshold failures are retained in numericFailures."
+        }
+      },
+      {
+        "index": 1,
+        "variant": "B",
+        "viewport": "390x844",
+        "numericFailures": [
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "before known-moving source gap is 249.9899999999907 ms"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after known-moving source gap is 249.9899999999907 ms"
+          }
+        ],
+        "failure": {
+          "code": "NUMERIC_THRESHOLD_FAILED",
+          "message": "All threshold failures are retained in numericFailures."
+        }
+      },
+      {
+        "index": 4,
+        "variant": "A",
+        "viewport": "1280x800",
+        "numericFailures": [
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after needs 60 actual moving-object positions, observed 54"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after known-moving source gap is 533.3119999999763 ms"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after must retain all three pulses"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "Mapped source pulses must align within 80 ms"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after needs 60 decoded moving-object positions, observed 52"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "after must retain three decoded pulses"
+          },
+          {
+            "code": "NUMERIC_THRESHOLD_FAILED",
+            "message": "Decoded pulses must align within 80 ms"
+          }
+        ],
+        "failure": {
+          "code": "NUMERIC_THRESHOLD_FAILED",
+          "message": "All threshold failures are retained in numericFailures."
+        }
+      },
+      {
+        "index": 5,
+        "variant": "B",
+        "viewport": "1280x800",
+        "numericFailures": [],
+        "failure": {
+          "code": "ERR_ASSERTION",
+          "message": "Expected values to be strictly equal:\n\n'partial' !== 'ok'\n"
+        }
+      }
+    ],
+    "groups": [
+      {
+        "viewport": "1280x800",
+        "variant": "A",
+        "plannedCases": 5,
+        "attemptedCases": 5,
+        "missingCases": 0,
+        "numericPassed": 4,
+        "failures": 1,
+        "metricsIncludeNumericallyFailedCasesWhenAvailable": true,
+        "metrics": {
+          "capture.wallMs": {
+            "observed": 5,
+            "median": 5253.1861739999995,
+            "range": [
+              5062.939452,
+              6625.940923
+            ],
+            "values": [
+              5062.939452,
+              5251.177764999999,
+              5253.1861739999995,
+              5340.961023,
+              6625.940923
+            ],
+            "missing": 0
+          },
+          "capture.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 8.397298,
+            "range": [
+              8.297795,
+              9.896724
+            ],
+            "values": [
+              8.297795,
+              8.38258,
+              8.397298,
+              8.430656,
+              9.896724
+            ],
+            "missing": 0
+          },
+          "capture.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 5.000002,
+            "range": [
+              4.776985,
+              5.778194
+            ],
+            "values": [
+              4.776985,
+              4.98851,
+              5.000002,
+              5.169536,
+              5.778194
+            ],
+            "missing": 0
+          },
+          "compose.wallMs": {
+            "observed": 5,
+            "median": 2688.814457999999,
+            "range": [
+              2252.695901000001,
+              2915.6500589999996
+            ],
+            "values": [
+              2252.695901000001,
+              2355.9958540000007,
+              2688.814457999999,
+              2765.1758929999996,
+              2915.6500589999996
+            ],
+            "missing": 0
+          },
+          "compose.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 3.168921,
+            "range": [
+              2.70558,
+              3.441997
+            ],
+            "values": [
+              2.70558,
+              2.951491,
+              3.168921,
+              3.4017,
+              3.441997
+            ],
+            "missing": 0
+          },
+          "compose.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 2.26514,
+            "range": [
+              1.967154,
+              2.520934
+            ],
+            "values": [
+              1.967154,
+              2.15018,
+              2.26514,
+              2.474082,
+              2.520934
+            ],
+            "missing": 0
+          },
+          "encode.wallMs": {
+            "observed": 5,
+            "median": 29301.068269,
+            "range": [
+              26263.931297,
+              30478.426382000005
+            ],
+            "values": [
+              26263.931297,
+              29076.564563,
+              29301.068269,
+              30420.054842000005,
+              30478.426382000005
+            ],
+            "missing": 0
+          },
+          "encode.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 43.003234,
+            "range": [
+              39.918368,
+              46.638468
+            ],
+            "values": [
+              39.918368,
+              42.929849,
+              43.003234,
+              45.166481,
+              46.638468
+            ],
+            "missing": 0
+          },
+          "encode.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 30.439721,
+            "range": [
+              30.198219,
+              31.725748
+            ],
+            "values": [
+              30.198219,
+              30.207333,
+              30.439721,
+              31.507157,
+              31.725748
+            ],
+            "missing": 0
+          },
+          "sourceValidation.wallMs": {
+            "observed": 5,
+            "median": 3657.4502759999996,
+            "range": [
+              3436.622424,
+              3760.5687960000005
+            ],
+            "values": [
+              3436.622424,
+              3457.8603649999995,
+              3657.4502759999996,
+              3726.039515999999,
+              3760.5687960000005
+            ],
+            "missing": 0
+          },
+          "sourceValidation.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 5.068253,
+            "range": [
+              4.835622,
+              5.276755
+            ],
+            "values": [
+              4.835622,
+              4.91413,
+              5.068253,
+              5.216849,
+              5.276755
+            ],
+            "missing": 0
+          },
+          "sourceValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 4.967529,
+            "range": [
+              4.756867,
+              5.180183
+            ],
+            "values": [
+              4.756867,
+              4.805873,
+              4.967529,
+              5.126056,
+              5.180183
+            ],
+            "missing": 0
+          },
+          "decodedValidation.wallMs": {
+            "observed": 5,
+            "median": 7341.729486999997,
+            "range": [
+              5007.4539060000025,
+              8701.845119999998
+            ],
+            "values": [
+              5007.4539060000025,
+              7306.876372999999,
+              7341.729486999997,
+              7988.050968999996,
+              8701.845119999998
+            ],
+            "missing": 0
+          },
+          "decodedValidation.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 10.61699,
+            "range": [
+              7.406934,
+              12.564466
+            ],
+            "values": [
+              7.406934,
+              10.461628,
+              10.61699,
+              11.3529,
+              12.564466
+            ],
+            "missing": 0
+          },
+          "decodedValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 6.498284,
+            "range": [
+              4.621723,
+              7.868237
+            ],
+            "values": [
+              4.621723,
+              6.403346,
+              6.498284,
+              6.818766,
+              7.868237
+            ],
+            "missing": 0
+          },
+          "source.before.distinctPositions": {
+            "observed": 5,
+            "median": 67,
+            "range": [
+              63,
+              79
+            ],
+            "values": [
+              63,
+              64,
+              67,
+              67,
+              79
+            ],
+            "missing": 0
+          },
+          "source.before.maxMovingGapMs": {
+            "observed": 5,
+            "median": 85.25599999999395,
+            "range": [
+              83.3300000000163,
+              99.99600000004284
+            ],
+            "values": [
+              83.3300000000163,
+              83.3300000000745,
+              85.25599999999395,
+              99.99600000000282,
+              99.99600000004284
+            ],
+            "missing": 0
+          },
+          "source.after.distinctPositions": {
+            "observed": 5,
+            "median": 67,
+            "range": [
+              54,
+              81
+            ],
+            "values": [
+              54,
+              62,
+              67,
+              69,
+              81
+            ],
+            "missing": 0
+          },
+          "source.after.maxMovingGapMs": {
+            "observed": 5,
+            "median": 83.33000000000175,
+            "range": [
+              66.66400000010617,
+              533.3119999999763
+            ],
+            "values": [
+              66.66400000010617,
+              83.32999999995809,
+              83.33000000000175,
+              83.3300000000163,
+              533.3119999999763
+            ],
+            "missing": 0
+          },
+          "decoded.before.distinctPositions": {
+            "observed": 5,
+            "median": 63,
+            "range": [
+              61,
+              73
+            ],
+            "values": [
+              61,
+              62,
+              63,
+              68,
+              73
+            ],
+            "missing": 0
+          },
+          "decoded.before.maxMovingGapMs": {
+            "observed": 5,
+            "median": 33.333333333333485,
+            "range": [
+              33.333333333333485,
+              33.33333333333394
+            ],
+            "values": [
+              33.333333333333485,
+              33.333333333333485,
+              33.333333333333485,
+              33.333333333333485,
+              33.33333333333394
+            ],
+            "missing": 0
+          },
+          "decoded.after.distinctPositions": {
+            "observed": 5,
+            "median": 66,
+            "range": [
+              52,
+              77
+            ],
+            "values": [
+              52,
+              62,
+              66,
+              69,
+              77
+            ],
+            "missing": 0
+          },
+          "decoded.after.maxMovingGapMs": {
+            "observed": 5,
+            "median": 33.333333333333485,
+            "range": [
+              33.333333333333485,
+              33.33333333333394
+            ],
+            "values": [
+              33.333333333333485,
+              33.333333333333485,
+              33.333333333333485,
+              33.333333333333485,
+              33.33333333333394
+            ],
+            "missing": 0
+          }
+        }
+      },
+      {
+        "viewport": "1280x800",
+        "variant": "B",
+        "plannedCases": 5,
+        "attemptedCases": 5,
+        "missingCases": 0,
+        "numericPassed": 3,
+        "failures": 2,
+        "metricsIncludeNumericallyFailedCasesWhenAvailable": true,
+        "metrics": {
+          "capture.wallMs": {
+            "observed": 5,
+            "median": 5320.368224,
+            "range": [
+              4693.202013,
+              5475.833533
+            ],
+            "values": [
+              4693.202013,
+              5245.101228,
+              5320.368224,
+              5339.557956,
+              5475.833533
+            ],
+            "missing": 0
+          },
+          "capture.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 8.328706,
+            "range": [
+              6.703765,
+              8.555038
+            ],
+            "values": [
+              6.703765,
+              8.252783,
+              8.328706,
+              8.512474,
+              8.555038
+            ],
+            "missing": 0
+          },
+          "capture.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 4.632895,
+            "range": [
+              3.939214,
+              4.683892
+            ],
+            "values": [
+              3.939214,
+              4.591263,
+              4.632895,
+              4.644112,
+              4.683892
+            ],
+            "missing": 0
+          },
+          "compose.wallMs": {
+            "observed": 4,
+            "median": 2871.1177560000006,
+            "range": [
+              2799.3639829999993,
+              3061.876705999999
+            ],
+            "values": [
+              2799.3639829999993,
+              2851.057583,
+              2891.1779290000013,
+              3061.876705999999
+            ],
+            "missing": 1
+          },
+          "compose.cgroupCpuCoreSeconds": {
+            "observed": 4,
+            "median": 3.588505,
+            "range": [
+              3.560795,
+              3.772485
+            ],
+            "values": [
+              3.560795,
+              3.576496,
+              3.600514,
+              3.772485
+            ],
+            "missing": 1
+          },
+          "compose.nodeProcessCpuCoreSeconds": {
+            "observed": 4,
+            "median": 2.7007635,
+            "range": [
+              2.6281,
+              2.817539
+            ],
+            "values": [
+              2.6281,
+              2.67751,
+              2.724017,
+              2.817539
+            ],
+            "missing": 1
+          },
+          "encode.wallMs": {
+            "observed": 4,
+            "median": 34827.7048335,
+            "range": [
+              29660.746998000002,
+              37030.728227
+            ],
+            "values": [
+              29660.746998000002,
+              33629.189367,
+              36026.2203,
+              37030.728227
+            ],
+            "missing": 1
+          },
+          "encode.cgroupCpuCoreSeconds": {
+            "observed": 4,
+            "median": 50.510557,
+            "range": [
+              44.129285,
+              53.353395
+            ],
+            "values": [
+              44.129285,
+              48.624984,
+              52.39613,
+              53.353395
+            ],
+            "missing": 1
+          },
+          "encode.nodeProcessCpuCoreSeconds": {
+            "observed": 4,
+            "median": 35.770939999999996,
+            "range": [
+              31.383625,
+              41.242875
+            ],
+            "values": [
+              31.383625,
+              34.553143,
+              36.988737,
+              41.242875
+            ],
+            "missing": 1
+          },
+          "sourceValidation.wallMs": {
+            "observed": 4,
+            "median": 4438.793454500001,
+            "range": [
+              3461.057206999999,
+              5064.553178
+            ],
+            "values": [
+              3461.057206999999,
+              4368.546042000001,
+              4509.040867,
+              5064.553178
+            ],
+            "missing": 1
+          },
+          "sourceValidation.cgroupCpuCoreSeconds": {
+            "observed": 4,
+            "median": 6.2214905,
+            "range": [
+              4.953919,
+              7.120231
+            ],
+            "values": [
+              4.953919,
+              6.091546,
+              6.351435,
+              7.120231
+            ],
+            "missing": 1
+          },
+          "sourceValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 4,
+            "median": 6.1033745,
+            "range": [
+              4.873393,
+              6.936819
+            ],
+            "values": [
+              4.873393,
+              5.931431,
+              6.275318,
+              6.936819
+            ],
+            "missing": 1
+          },
+          "decodedValidation.wallMs": {
+            "observed": 4,
+            "median": 7555.317739499998,
+            "range": [
+              4150.682341,
+              8208.414393000006
+            ],
+            "values": [
+              4150.682341,
+              7410.904456000004,
+              7699.731022999993,
+              8208.414393000006
+            ],
+            "missing": 1
+          },
+          "decodedValidation.cgroupCpuCoreSeconds": {
+            "observed": 4,
+            "median": 10.968435,
+            "range": [
+              6.098074,
+              11.768967
+            ],
+            "values": [
+              6.098074,
+              10.713449,
+              11.223421,
+              11.768967
+            ],
+            "missing": 1
+          },
+          "decodedValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 4,
+            "median": 6.6958005,
+            "range": [
+              3.954451,
+              7.328167
+            ],
+            "values": [
+              3.954451,
+              6.690155,
+              6.701446,
+              7.328167
+            ],
+            "missing": 1
+          },
+          "source.before.distinctPositions": {
+            "observed": 4,
+            "median": 80.5,
+            "range": [
+              64,
+              142
+            ],
+            "values": [
+              64,
+              78,
+              83,
+              142
+            ],
+            "missing": 1
+          },
+          "source.before.maxMovingGapMs": {
+            "observed": 4,
+            "median": 67.74049999997078,
+            "range": [
+              51.92499999993015,
+              216.65800000001036
+            ],
+            "values": [
+              51.92499999993015,
+              66.66400000001886,
+              68.8169999999227,
+              216.65800000001036
+            ],
+            "missing": 1
+          },
+          "source.after.distinctPositions": {
+            "observed": 4,
+            "median": 81.5,
+            "range": [
+              66,
+              151
+            ],
+            "values": [
+              66,
+              79,
+              84,
+              151
+            ],
+            "missing": 1
+          },
+          "source.after.maxMovingGapMs": {
+            "observed": 4,
+            "median": 83.33000000003085,
+            "range": [
+              51.86099999991711,
+              183.32600000001548
+            ],
+            "values": [
+              51.86099999991711,
+              66.66400000001886,
+              99.99600000004284,
+              183.32600000001548
+            ],
+            "missing": 1
+          },
+          "decoded.before.distinctPositions": {
+            "observed": 4,
+            "median": 76,
+            "range": [
+              62,
+              88
+            ],
+            "values": [
+              62,
+              74,
+              78,
+              88
+            ],
+            "missing": 1
+          },
+          "decoded.before.maxMovingGapMs": {
+            "observed": 4,
+            "median": 33.33333333333371,
+            "range": [
+              33.333333333333485,
+              33.33333333333394
+            ],
+            "values": [
+              33.333333333333485,
+              33.333333333333485,
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "missing": 1
+          },
+          "decoded.after.distinctPositions": {
+            "observed": 4,
+            "median": 76.5,
+            "range": [
+              63,
+              88
+            ],
+            "values": [
+              63,
+              76,
+              77,
+              88
+            ],
+            "missing": 1
+          },
+          "decoded.after.maxMovingGapMs": {
+            "observed": 4,
+            "median": 33.33333333333371,
+            "range": [
+              33.333333333333485,
+              33.33333333333394
+            ],
+            "values": [
+              33.333333333333485,
+              33.333333333333485,
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "missing": 1
+          }
+        }
+      },
+      {
+        "viewport": "390x844",
+        "variant": "A",
+        "plannedCases": 5,
+        "attemptedCases": 5,
+        "missingCases": 0,
+        "numericPassed": 5,
+        "failures": 0,
+        "metricsIncludeNumericallyFailedCasesWhenAvailable": true,
+        "metrics": {
+          "capture.wallMs": {
+            "observed": 5,
+            "median": 4862.075757999999,
+            "range": [
+              4489.675390000004,
+              4894.020572999994
+            ],
+            "values": [
+              4489.675390000004,
+              4857.532263999994,
+              4862.075757999999,
+              4874.154597000001,
+              4894.020572999994
+            ],
+            "missing": 0
+          },
+          "capture.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 6.61126,
+            "range": [
+              5.012648,
+              6.737023
+            ],
+            "values": [
+              5.012648,
+              6.583049,
+              6.61126,
+              6.699079,
+              6.737023
+            ],
+            "missing": 0
+          },
+          "capture.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 4.361804,
+            "range": [
+              3.458334,
+              4.532776
+            ],
+            "values": [
+              3.458334,
+              4.252853,
+              4.361804,
+              4.460735,
+              4.532776
+            ],
+            "missing": 0
+          },
+          "compose.wallMs": {
+            "observed": 5,
+            "median": 2317.6201999999976,
+            "range": [
+              1825.2429249999986,
+              3185.3129250000056
+            ],
+            "values": [
+              1825.2429249999986,
+              1963.7436989999987,
+              2317.6201999999976,
+              2714.2564959999945,
+              3185.3129250000056
+            ],
+            "missing": 0
+          },
+          "compose.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 2.666041,
+            "range": [
+              2.086126,
+              3.647173
+            ],
+            "values": [
+              2.086126,
+              2.203375,
+              2.666041,
+              3.093509,
+              3.647173
+            ],
+            "missing": 0
+          },
+          "compose.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 1.890867,
+            "range": [
+              1.505703,
+              2.614894
+            ],
+            "values": [
+              1.505703,
+              1.545869,
+              1.890867,
+              2.208777,
+              2.614894
+            ],
+            "missing": 0
+          },
+          "encode.wallMs": {
+            "observed": 5,
+            "median": 25471.966304,
+            "range": [
+              16577.439825999994,
+              31964.990934
+            ],
+            "values": [
+              16577.439825999994,
+              21842.27824,
+              25471.966304,
+              26144.989357,
+              31964.990934
+            ],
+            "missing": 0
+          },
+          "encode.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 34.96188,
+            "range": [
+              24.880759,
+              39.727511
+            ],
+            "values": [
+              24.880759,
+              31.202346,
+              34.96188,
+              36.786979,
+              39.727511
+            ],
+            "missing": 0
+          },
+          "encode.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 26.151512,
+            "range": [
+              19.436756,
+              28.387929
+            ],
+            "values": [
+              19.436756,
+              22.897874,
+              26.151512,
+              28.06976,
+              28.387929
+            ],
+            "missing": 0
+          },
+          "sourceValidation.wallMs": {
+            "observed": 5,
+            "median": 3451.5541650000014,
+            "range": [
+              2470.563043000002,
+              3626.8894419999997
+            ],
+            "values": [
+              2470.563043000002,
+              3345.88162,
+              3451.5541650000014,
+              3466.7124519999998,
+              3626.8894419999997
+            ],
+            "missing": 0
+          },
+          "sourceValidation.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 4.000136,
+            "range": [
+              3.22093,
+              4.314448
+            ],
+            "values": [
+              3.22093,
+              3.89816,
+              4.000136,
+              4.120254,
+              4.314448
+            ],
+            "missing": 0
+          },
+          "sourceValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 3.888043,
+            "range": [
+              3.164831,
+              4.200647
+            ],
+            "values": [
+              3.164831,
+              3.776043,
+              3.888043,
+              4.003492,
+              4.200647
+            ],
+            "missing": 0
+          },
+          "decodedValidation.wallMs": {
+            "observed": 5,
+            "median": 7193.877615999998,
+            "range": [
+              4187.504223999989,
+              7432.3352640000085
+            ],
+            "values": [
+              4187.504223999989,
+              7131.953475999995,
+              7193.877615999998,
+              7289.954612999994,
+              7432.3352640000085
+            ],
+            "missing": 0
+          },
+          "decodedValidation.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 10.369493,
+            "range": [
+              6.258111,
+              10.713177
+            ],
+            "values": [
+              6.258111,
+              10.177488,
+              10.369493,
+              10.467344,
+              10.713177
+            ],
+            "missing": 0
+          },
+          "decodedValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 6.159884,
+            "range": [
+              3.794326,
+              6.447665
+            ],
+            "values": [
+              3.794326,
+              6.060032,
+              6.159884,
+              6.208864,
+              6.447665
+            ],
+            "missing": 0
+          },
+          "source.before.distinctPositions": {
+            "observed": 5,
+            "median": 110,
+            "range": [
+              103,
+              169
+            ],
+            "values": [
+              103,
+              108,
+              110,
+              129,
+              169
+            ],
+            "missing": 0
+          },
+          "source.before.maxMovingGapMs": {
+            "observed": 5,
+            "median": 65.17200000002049,
+            "range": [
+              53.16199999995297,
+              83.33000000000175
+            ],
+            "values": [
+              53.16199999995297,
+              62.70999999996275,
+              65.17200000002049,
+              66.66399999998976,
+              83.33000000000175
+            ],
+            "missing": 0
+          },
+          "source.after.distinctPositions": {
+            "observed": 5,
+            "median": 117,
+            "range": [
+              110,
+              167
+            ],
+            "values": [
+              110,
+              112,
+              117,
+              125,
+              167
+            ],
+            "missing": 0
+          },
+          "source.after.maxMovingGapMs": {
+            "observed": 5,
+            "median": 66.66400000004796,
+            "range": [
+              49.998000000137836,
+              83.3300000000163
+            ],
+            "values": [
+              49.998000000137836,
+              66.66400000000431,
+              66.66400000004796,
+              66.66400000010617,
+              83.3300000000163
+            ],
+            "missing": 0
+          },
+          "decoded.before.distinctPositions": {
+            "observed": 5,
+            "median": 85,
+            "range": [
+              83,
+              89
+            ],
+            "values": [
+              83,
+              83,
+              85,
+              85,
+              89
+            ],
+            "missing": 0
+          },
+          "decoded.before.maxMovingGapMs": {
+            "observed": 5,
+            "median": 33.33333333333394,
+            "range": [
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "values": [
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "missing": 0
+          },
+          "decoded.after.distinctPositions": {
+            "observed": 5,
+            "median": 83,
+            "range": [
+              83,
+              89
+            ],
+            "values": [
+              83,
+              83,
+              83,
+              85,
+              89
+            ],
+            "missing": 0
+          },
+          "decoded.after.maxMovingGapMs": {
+            "observed": 5,
+            "median": 33.33333333333394,
+            "range": [
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "values": [
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "missing": 0
+          }
+        }
+      },
+      {
+        "viewport": "390x844",
+        "variant": "B",
+        "plannedCases": 5,
+        "attemptedCases": 5,
+        "missingCases": 0,
+        "numericPassed": 4,
+        "failures": 1,
+        "metricsIncludeNumericallyFailedCasesWhenAvailable": true,
+        "metrics": {
+          "capture.wallMs": {
+            "observed": 5,
+            "median": 5061.445092999995,
+            "range": [
+              4488.365164000003,
+              5192.634722999999
+            ],
+            "values": [
+              4488.365164000003,
+              4814.112517000001,
+              5061.445092999995,
+              5134.004532999999,
+              5192.634722999999
+            ],
+            "missing": 0
+          },
+          "capture.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 6.9084,
+            "range": [
+              4.593511,
+              7.10316
+            ],
+            "values": [
+              4.593511,
+              6.389226,
+              6.9084,
+              6.998963,
+              7.10316
+            ],
+            "missing": 0
+          },
+          "capture.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 4.20381,
+            "range": [
+              2.970815,
+              4.426478
+            ],
+            "values": [
+              2.970815,
+              4.008252,
+              4.20381,
+              4.32547,
+              4.426478
+            ],
+            "missing": 0
+          },
+          "compose.wallMs": {
+            "observed": 5,
+            "median": 2578.9579759999997,
+            "range": [
+              1997.0667069999981,
+              2869.189004
+            ],
+            "values": [
+              1997.0667069999981,
+              2555.191251000004,
+              2578.9579759999997,
+              2783.37574399999,
+              2869.189004
+            ],
+            "missing": 0
+          },
+          "compose.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 3.194714,
+            "range": [
+              2.312314,
+              3.582196
+            ],
+            "values": [
+              2.312314,
+              3.120627,
+              3.194714,
+              3.316782,
+              3.582196
+            ],
+            "missing": 0
+          },
+          "compose.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 2.282904,
+            "range": [
+              1.64564,
+              2.553859
+            ],
+            "values": [
+              1.64564,
+              2.264394,
+              2.282904,
+              2.345788,
+              2.553859
+            ],
+            "missing": 0
+          },
+          "encode.wallMs": {
+            "observed": 5,
+            "median": 25395.737739999997,
+            "range": [
+              15815.170552999996,
+              28042.176609000002
+            ],
+            "values": [
+              15815.170552999996,
+              23257.785702999994,
+              25395.737739999997,
+              25593.00735,
+              28042.176609000002
+            ],
+            "missing": 0
+          },
+          "encode.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 35.677401,
+            "range": [
+              23.144359,
+              39.617892
+            ],
+            "values": [
+              23.144359,
+              32.152633,
+              35.677401,
+              36.425828,
+              39.617892
+            ],
+            "missing": 0
+          },
+          "encode.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 25.809449,
+            "range": [
+              18.355067,
+              29.52325
+            ],
+            "values": [
+              18.355067,
+              22.769567,
+              25.809449,
+              27.220008,
+              29.52325
+            ],
+            "missing": 0
+          },
+          "sourceValidation.wallMs": {
+            "observed": 5,
+            "median": 2777.135451999995,
+            "range": [
+              2587.0463369999998,
+              3636.608094000003
+            ],
+            "values": [
+              2587.0463369999998,
+              2709.7871159999922,
+              2777.135451999995,
+              3074.6364200000007,
+              3636.608094000003
+            ],
+            "missing": 0
+          },
+          "sourceValidation.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 3.293162,
+            "range": [
+              3.257416,
+              4.48798
+            ],
+            "values": [
+              3.257416,
+              3.26079,
+              3.293162,
+              3.991338,
+              4.48798
+            ],
+            "missing": 0
+          },
+          "sourceValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 3.2337,
+            "range": [
+              3.134833,
+              4.355834
+            ],
+            "values": [
+              3.134833,
+              3.185913,
+              3.2337,
+              3.884149,
+              4.355834
+            ],
+            "missing": 0
+          },
+          "decodedValidation.wallMs": {
+            "observed": 5,
+            "median": 7351.433808999995,
+            "range": [
+              3673.2247720000014,
+              8718.439866999994
+            ],
+            "values": [
+              3673.2247720000014,
+              7020.545514999991,
+              7351.433808999995,
+              7829.860739000003,
+              8718.439866999994
+            ],
+            "missing": 0
+          },
+          "decodedValidation.cgroupCpuCoreSeconds": {
+            "observed": 5,
+            "median": 10.60273,
+            "range": [
+              5.504596,
+              12.489124
+            ],
+            "values": [
+              5.504596,
+              10.234171,
+              10.60273,
+              11.412385,
+              12.489124
+            ],
+            "missing": 0
+          },
+          "decodedValidation.nodeProcessCpuCoreSeconds": {
+            "observed": 5,
+            "median": 6.305177,
+            "range": [
+              3.418079,
+              7.462409
+            ],
+            "values": [
+              3.418079,
+              6.195903,
+              6.305177,
+              6.856764,
+              7.462409
+            ],
+            "missing": 0
+          },
+          "source.before.distinctPositions": {
+            "observed": 5,
+            "median": 108,
+            "range": [
+              80,
+              168
+            ],
+            "values": [
+              80,
+              90,
+              108,
+              137,
+              168
+            ],
+            "missing": 0
+          },
+          "source.before.maxMovingGapMs": {
+            "observed": 5,
+            "median": 99.99599999998463,
+            "range": [
+              64.61600000003818,
+              249.9899999999907
+            ],
+            "values": [
+              64.61600000003818,
+              99.99599999992643,
+              99.99599999998463,
+              99.99600000004284,
+              249.9899999999907
+            ],
+            "missing": 0
+          },
+          "source.after.distinctPositions": {
+            "observed": 5,
+            "median": 109,
+            "range": [
+              77,
+              170
+            ],
+            "values": [
+              77,
+              97,
+              109,
+              137,
+              170
+            ],
+            "missing": 0
+          },
+          "source.after.maxMovingGapMs": {
+            "observed": 5,
+            "median": 99.99599999998463,
+            "range": [
+              64.61600000003818,
+              249.9899999999907
+            ],
+            "values": [
+              64.61600000003818,
+              99.99599999992643,
+              99.99599999998463,
+              116.66200000001118,
+              249.9899999999907
+            ],
+            "missing": 0
+          },
+          "decoded.before.distinctPositions": {
+            "observed": 5,
+            "median": 80,
+            "range": [
+              70,
+              88
+            ],
+            "values": [
+              70,
+              77,
+              80,
+              85,
+              88
+            ],
+            "missing": 0
+          },
+          "decoded.before.maxMovingGapMs": {
+            "observed": 5,
+            "median": 33.33333333333394,
+            "range": [
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "values": [
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "missing": 0
+          },
+          "decoded.after.distinctPositions": {
+            "observed": 5,
+            "median": 81,
+            "range": [
+              67,
+              88
+            ],
+            "values": [
+              67,
+              74,
+              81,
+              83,
+              88
+            ],
+            "missing": 0
+          },
+          "decoded.after.maxMovingGapMs": {
+            "observed": 5,
+            "median": 33.33333333333394,
+            "range": [
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "values": [
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394,
+              33.33333333333394
+            ],
+            "missing": 0
+          }
+        }
+      }
+    ],
+    "cleanup": {
+      "ownedContainerAbsent": true,
+      "isolatedEngineContainers": 0,
+      "isolatedEngineVolumes": 0,
+      "ownedVmState": "Stopped",
+      "defaultDockerTouched": false,
+      "resourceWindowReturned": true,
+      "errors": [],
+      "status": "ok"
+    },
+    "limits": [
+      "The Mac host is shared and busy. Paired ordering does not establish isolation.",
+      "One-repetition reports individually fail the three-repetition matrix requirement. Aggregate coverage is reported separately.",
+      "Uninstrumented phase CPU counters do not isolate PNG reconstruction. Prior excluded profiles may motivate a limiter hypothesis, but this matrix cannot establish a new causal limiter alone.",
+      "A numeric-passed result still requires normal-speed visual review. There is no publication or release authority."
+    ],
+    "normalSpeedReview": {
+      "status": "incomplete",
+      "sampledVideos": 2,
+      "playbackRate": 1,
+      "observations": "Two baseline desktop videos played to their end at original speed. Sampled contact sheets show source progression, masks, labels, and the failed case missing a pulse on one side.",
+      "playbackQuality": "Browser counters reported dropped frames. Canvas sampling adds review overhead, and the host was shared. This does not establish a clean perceptual smoothness result.",
+      "releaseVisualAcceptance": false
+    }
+  }
+}
