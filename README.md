@@ -4,11 +4,9 @@ Compare a browser scenario across two Git snapshots and produce a labeled BEFORE
 
 Revision 0.3 uses explicit execution recipes for web applications across stacks. Motion is the default. It records actual intermediate Chromium frames and preserves their shared elapsed timing. Keyframes remain an explicit alternative.
 
-Version `0.1.0` is an unpublished experimental candidate. Implementation and acceptance are still in progress. The final installed-package, platform, motion repetition, and representative application gates are not complete. See [release readiness](docs/release-readiness.md) for the current candidate and gate status.
+Version `0.1.0` is experimental. See [release readiness](docs/release-readiness.md) for the exact candidate, completed checks, remaining requirements, and publishing status.
 
-[Development motion clip](fixtures/motion/r4-worker-development-compare.mp4) · [Its synthetic observations](fixtures/motion/r4-worker-development-result.json)
-
-This controlled synthetic clip completed capture, masking, composition, encoding, and decoded movement checks with the current worker implementation. It is a source-build development run, not final-candidate proof. The [older pricing example](docs/demo/success/compare.mp4) and [incomplete example](docs/demo/partial/compare.mp4) are explicitly labeled keyframe recordings.
+The [synthetic examples](docs/demo/README.md) identify each recording's capture mode and candidate. Historical development clips and keyframe examples remain labeled separately from release-candidate motion evidence.
 
 ## Prerequisites
 
