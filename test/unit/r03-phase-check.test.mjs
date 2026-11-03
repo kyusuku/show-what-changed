@@ -348,6 +348,84 @@ if(args[0]==='plan') {
   });
 });
 
+test.each(['none', 'capture-ok', 'checkpoint-missing', 'checkpoint-renamed', 'png-truncated', 'png-crc', 'png-dimensions', 'mask-rgb', 'mask-alpha', 'capture-step', 'capture-status', 'capture-kind', 'capture-path', 'capture-bytes', 'capture-hash', 'capture-malformed', 'capture-advertised', 'capture-undefined', 'retained-video'])('controlled recording cancellation handles %s through full phase reporting', async (corruption) => {
+  await temporary(async (root) => {
+    const entry = phaseCases.find(({ id }) => id === 'recording-sigterm');
+    const image = new PNG({ width: 320, height: 240 }); image.data.fill(128);
+    for (let y = 0; y < 100; y++) for (let x = 0; x < 140; x++) image.data.set([16, 16, 16, 255], (y * 320 + x) * 4);
+    const checkpoint = PNG.sync.write(image), safePath = join(root, 'safe.png'); await writeFile(safePath, checkpoint);
+    image.data[0] = 255; await writeFile(join(root, 'unmasked.png'), PNG.sync.write(image));
+    image.data[0] = 16; image.data[3] = 254; await writeFile(join(root, 'alpha.png'), PNG.sync.write(image));
+    const binary = join(root, 'controlled-cli.mjs');
+    await writeFile(binary, `
+import {copyFile,mkdir,readFile,rename,rm,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {join} from 'node:path';
+const args=process.argv.slice(2),corruption=${JSON.stringify(corruption)},safePath=${JSON.stringify(safePath)};
+if(args[0]==='plan') {
+  console.log(JSON.stringify({data:{baseCommit:args[args.indexOf('--base')+1],headCommit:args[args.indexOf('--head')+1]}}));
+} else {
+  const runId='20261103T010203004Z-0123456789abcdef';
+  const run=join(process.cwd(),'.show-what-changed/runs',runId),checkpointPath='frames/001-before.png';
+  let finishing=false;
+  const finish=async()=>{
+    if(finishing)return;
+    finishing=true;
+    const bytes=await readFile(safePath),image={path:checkpointPath,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};
+    const before={status:'ok',imageKind:'checkpoint',image},step={id:'private-fill',before,after:{...before}};
+    if(corruption==='checkpoint-missing')await rm(join(run,checkpointPath));
+    if(corruption==='checkpoint-renamed')await rename(join(run,checkpointPath),join(run,'frames/002-before.png'));
+    if(corruption==='png-truncated')await writeFile(join(run,checkpointPath),bytes.subarray(0,24));
+    if(corruption==='png-crc'){bytes[29]^=1;await writeFile(join(run,checkpointPath),bytes)}
+    if(corruption==='png-dimensions'){bytes.writeUInt32BE(321,16);await writeFile(join(run,checkpointPath),bytes)}
+    if(corruption==='mask-rgb')await copyFile(${JSON.stringify(join(root, 'unmasked.png'))},join(run,checkpointPath));
+    if(corruption==='mask-alpha')await copyFile(${JSON.stringify(join(root, 'alpha.png'))},join(run,checkpointPath));
+    if(corruption==='capture-step')step.id='open';
+    if(corruption==='capture-status')before.status='failed';
+    if(corruption==='capture-kind')before.imageKind='neutral';
+    if(corruption==='capture-path')image.path='frames/000-before.png';
+    if(corruption==='capture-bytes')image.bytes++;
+    if(corruption==='capture-hash')image.sha256='0'.repeat(64);
+    const artifacts={video:null,poster:null,capture:null,timeline:null,pr:null};
+    if(corruption.startsWith('capture-')&&!['capture-advertised','capture-undefined'].includes(corruption))await writeFile(join(run,'capture.json'),corruption==='capture-malformed'?'{':JSON.stringify({scenarios:[{id:'phase',steps:[step]}]}));
+    if(corruption==='capture-advertised')artifacts.capture={path:'capture.json',bytes:1,sha256:'0'.repeat(64)};
+    if(corruption==='capture-undefined')delete artifacts.capture;
+    if(corruption==='retained-video')await writeFile(join(run,'private/001-encode.mp4'),'unknown retained media');
+    const manifest={runId,state:'terminal',status:'cancelled',exitCode:143,cleanupOutcome:{status:'ok',errors:[]},artifacts};
+    await writeFile(join(run,'manifest.json'),JSON.stringify(manifest));
+    process.stdout.write(JSON.stringify({status:'cancelled',exitCode:143,error:{code:'SIGTERM'},data:manifest})+'\\n',()=>process.exit(143));
+  };
+  process.on('SIGTERM',finish);
+  await mkdir(join(run,'private/execution/before/aaaaaaaaaaaaaaaa/state'),{recursive:true});
+  await mkdir(join(run,'frames'));
+  await writeFile(join(run,'private/processes.json'),'[]');
+  await copyFile(safePath,join(run,'frames/000-before.png'));
+  await copyFile(safePath,join(run,checkpointPath));
+  await writeFile(join(run,'private/execution/before/aaaaaaaaaaaaaaaa/state/r8-phase.json'),JSON.stringify({phase:'recording',pid:process.pid}));
+  setInterval(()=>{},1000);
+}`);
+    const schemas = Object.fromEntries(['ResultSchema', 'ManifestSchema', 'CaptureBundleSchema'].map((name) => [name, { parse: (value) => value }]));
+    const row = await runPhaseCase(entry, { evidenceClass: 'controlled-synthetic-cli', binary, schemas, PNG }, join(root, 'case'));
+    const failure = await readFile(join(root, 'case/failure.json'), 'utf8').then(JSON.parse).catch((error) => { if (error.code === 'ENOENT') return null; throw error; });
+    expect(row).toMatchObject({ phaseReached: true, actualExit: 143, cleanup: 'ok', callerPreserved: true, sentinelPreserved: true, evidence: 'controlled-synthetic-cli' });
+    if (['none', 'capture-ok'].includes(corruption)) {
+      expect(row.status, failure?.message).toBe('passed');
+      expect(row.postFillCheckpoint).toBe(true);
+      expect(row.recordingCheckpoint).toEqual({ path: 'frames/001-before.png', bytes: checkpoint.length, sha256: hash(checkpoint) });
+      expect(row.sourceMasks.checkedImages).toBe(2);
+      expect(row.retainedImages.sourceFrames).toBe(2);
+      expect(row.mediaInspection).toMatchObject({ status: 'none-present', files: [] });
+      expect(row.rawRecordingFilesAbsent).toBe(true);
+    } else {
+      expect(row.status).toBe('failed');
+      expect(row.errors).toContainEqual({ code: 'PHASE_CHECK_FAILED', stage: corruption === 'capture-advertised' ? 'result' : 'privacy' });
+      expect(failure).not.toBe(null);
+    }
+    expect(JSON.stringify(row)).not.toContain(root);
+    expect(JSON.stringify(row)).not.toContain('SYNTHETIC_PHASE_');
+  });
+});
+
 test('existing media is never classified absent when the public manifest has no video', async () => {
   await temporary(async (root) => {
     const manifest = { artifacts: { video: null, poster: null } };

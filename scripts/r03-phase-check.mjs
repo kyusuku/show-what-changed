@@ -440,11 +440,19 @@ export async function runPhaseCase(entry, candidate, directory) {
     assert(!text.join('\n').includes(directory), 'Private fixture path appeared in public output');
     for (const name of await readdir(join(runDir, 'private'))) if (name.endsWith('.log')) text.push(await readFile(join(runDir, 'private', name), 'utf8'));
     for (const secret of [canary, fixture.fillValue]) assert(!text.join('\n').includes(secret), 'Synthetic private input escaped masking/redaction');
-    const capture = await readFile(join(runDir, 'capture.json'), 'utf8').then(JSON.parse).catch((error) => { if (error.code === 'ENOENT') return null; throw error; });
-    if (capture) candidate.schemas.CaptureBundleSchema.parse(capture);
+    const captureText = await readFile(join(runDir, 'capture.json'), 'utf8').catch((error) => { if (error.code === 'ENOENT') return null; throw error; });
+    const capture = captureText === null ? null : candidate.schemas.CaptureBundleSchema.parse(JSON.parse(captureText));
     if (entry.phase === 'recording') {
-      const filled = capture?.scenarios.find(({ id }) => id === 'phase')?.steps.find(({ id }) => id === 'private-fill')?.before;
-      assert(filled?.status === 'ok' && filled.imageKind === 'checkpoint' && filled.image.path === probe.marker.checkpointPath, 'Recording interruption requires a retained post-fill checkpoint');
+      assert.equal(probe.marker.checkpointPath, 'frames/001-before.png', 'Recording interruption requires the observed private-fill checkpoint');
+      checkMask(await pngAt(join(runDir, probe.marker.checkpointPath), candidate.PNG, viewport.width, viewport.height), mask);
+      const bytes = await readFile(join(runDir, probe.marker.checkpointPath));
+      row.recordingCheckpoint = { path: probe.marker.checkpointPath, bytes: bytes.length, sha256: hash(bytes) };
+      if (capture) {
+        const filled = capture.scenarios.find(({ id }) => id === 'phase')?.steps.find(({ id }) => id === 'private-fill')?.before;
+        assert(filled?.status === 'ok' && filled.imageKind === 'checkpoint' && filled.image.path === probe.marker.checkpointPath, 'Recording interruption requires a retained post-fill checkpoint');
+        assert.equal(filled.image.bytes, bytes.length, 'Private-fill checkpoint byte count differs');
+        assert.equal(filled.image.sha256, row.recordingCheckpoint.sha256, 'Private-fill checkpoint hash differs');
+      } else assert.equal(manifest.artifacts.capture, null, 'Missing capture artifact must be null');
       row.postFillCheckpoint = true;
     }
     const neutral = new Set(capture?.scenarios.flatMap((scenario) => scenario.steps.flatMap((step) => ['before', 'after'].filter((side) => step[side].imageKind === 'neutral').map((side) => step[side].image.path))) ?? []);

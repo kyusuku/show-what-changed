@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict';
-import { copyFile, cp, mkdir, mkdtemp, readFile, realpath, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, realpath, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createPublicWebApp } from './create-public-web-app.mjs';
-import { command, hash, installCandidate, saveJson, sourceState, verifyArtifacts } from './release-harness.mjs';
+import { capturePublicAppRun } from './real-app-run.mjs';
+import { command, hash, installCandidate, saveJson, sourceState } from './release-harness.mjs';
 
 const [tarballArgument, outputArgument] = process.argv.slice(2);
 assert(tarballArgument && outputArgument && process.argv.length === 4, 'Usage: node scripts/real-app-smoke.mjs candidate.tgz output-directory');
@@ -20,6 +21,7 @@ const report = {
 try {
   const candidate = await installCandidate(resolve(tarballArgument), root, output);
   report.candidate = { sha256: candidate.sha256, bytes: candidate.bytes };
+  report.commands = candidate.commands;
   const fixture = createPublicWebApp(join(root, 'app'));
   report.fixture = fixture;
   const config = candidate.schemas.ConfigSchema.parse(JSON.parse(await readFile(fixture.configPath, 'utf8')));
@@ -33,26 +35,10 @@ try {
   const original = await sourceState(fixture.repoRoot);
   assert(original.disk.some((entry) => entry.kind === 'symlink' && entry.path.startsWith('apps/web/node_modules/')), 'Caller workspace links must exist before preservation checks');
   assert(original.disk.some((entry) => entry.kind === 'file' && entry.path === 'node_modules/caller-sentinel.txt'));
+  await saveJson(join(output, 'caller-original.json'), original);
+  report.callerBaselines = { original: { path: 'caller-original.json', sha256: hash(await readFile(join(output, 'caller-original.json'))) } };
   const selection = ['--base', fixture.baseCommit, '--head', fixture.headCommit, '--config', fixture.configPath];
-  const captureRun = async (name, args, source) => {
-    const envelope = await candidate.cli(name, ['compare', ...args, '--allow-exec'], fixture.repoRoot, 0);
-    const run = await verifyArtifacts(fixture.repoRoot, envelope, candidate.schemas);
-    assert.equal(run.manifest.captureMode, 'motion');
-    assert.equal(run.manifest.summary.failedSteps, 0);
-    assert(run.manifest.summary.verifiedPairs > 0);
-    const capture = candidate.schemas.CaptureBundleSchema.parse(JSON.parse(await readFile(join(run.runDir, 'capture.json'), 'utf8')));
-    for (const motion of capture.motion) for (const side of ['before', 'after']) {
-      assert.equal(motion.tracks[side].status, 'ok');
-      assert(motion.tracks[side].frames.length > 1, 'A motion run must retain multiple source frames');
-    }
-    assert.deepEqual(await sourceState(fixture.repoRoot), source);
-    const destination = join(output, name);
-    await mkdir(destination, { recursive: true });
-    for (const filename of ['manifest.json', 'capture.json', 'timeline.json', 'compare.mp4', 'poster.png', 'pr.md']) await copyFile(join(run.runDir, filename), join(destination, filename));
-    for (const directory of ['frames', 'composed']) await cp(join(run.runDir, directory), join(destination, directory), { recursive: true });
-    report.runs.push({ name, runId: run.manifest.runId, summary: run.manifest.summary, comparison: run.manifest.comparisonOutcome, video: run.manifest.artifacts.video, poster: run.manifest.artifacts.poster, captureQuality: run.manifest.captureQuality });
-    return run;
-  };
+  const captureRun = (name, flow, args, source) => capturePublicAppRun({ name, flow, args, source }, { candidate, fixture, output, report });
   for (const [flow, scenarioPath] of Object.entries(fixture.scenarios)) {
     candidate.schemas.ScenarioSchema.parse(JSON.parse(await readFile(scenarioPath, 'utf8')));
     const planned = await candidate.cli(`plan-${flow}`, ['plan', ...selection, '--scenario', scenarioPath], fixture.repoRoot, 0);
@@ -60,20 +46,15 @@ try {
     assert.equal(planned.data.headCommit, fixture.headCommit);
   }
   for (let index = 0; index < 3; index++) for (const [flow, scenarioPath] of Object.entries(fixture.scenarios)) {
-    const run = await captureRun(`${flow}-${index + 1}`, [...selection, '--scenario', scenarioPath], original);
-    if (flow === 'validation') {
-      const checkpoint = run.manifest.scenarios[0].steps.find((step) => step.id === 'validation-feedback');
-      assert(checkpoint && checkpoint.before.status === 'ok' && checkpoint.after.status === 'ok');
-      assert(checkpoint.changeRatio > 0, 'Actual validation feedback must visibly differ');
-    }
+    await captureRun(`${flow}-${index + 1}`, flow, [...selection, '--scenario', scenarioPath], original);
   }
   const priorFeedback = await readFile(fixture.feedbackPath, 'utf8');
   assert(priorFeedback.includes(fixture.worktreeReplacement.from));
   await writeFile(fixture.feedbackPath, priorFeedback.replace(fixture.worktreeReplacement.from, fixture.worktreeReplacement.to));
   const edited = await sourceState(fixture.repoRoot);
-  const worktree = await captureRun('validation-worktree', ['--base', fixture.headCommit, '--head', 'WORKTREE', '--config', fixture.configPath, '--scenario', fixture.scenarios.validation], edited);
-  assert.equal(worktree.manifest.sources.after.kind, 'worktree');
-  assert(worktree.manifest.summary.changedPairs > 0);
+  await saveJson(join(output, 'caller-worktree.json'), edited);
+  report.callerBaselines.worktree = { path: 'caller-worktree.json', sha256: hash(await readFile(join(output, 'caller-worktree.json'))) };
+  await captureRun('validation-worktree', 'validation-worktree', ['--base', fixture.headCommit, '--head', 'WORKTREE', '--config', fixture.configPath, '--scenario', fixture.scenarios.validation], edited);
   report.repeatCommands = Object.fromEntries(Object.entries(fixture.scenarios).map(([flow, scenario]) => [flow, [candidate.binary, 'compare', ...selection, '--scenario', scenario, '--allow-exec', '--json']]));
   report.commands = candidate.commands;
   report.status = 'passed';
