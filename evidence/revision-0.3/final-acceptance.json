@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "specRevision": "0.3",
+  "status": "requirements_accepted",
+  "readyStatementEffectiveOnlyWhen": "Effective only when the separately delivered release-identity.json binds this exact public handoff and archive, accepts both final R16 reviews and refreshed scans, and states ready_for_owner_publish. This in-archive record cannot bind its own final archive digest.",
+  "candidate": {
+    "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+    "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+    "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+    "packageBytes": 385856,
+    "packageMembers": 171,
+    "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+    "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+    "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+    "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+    "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
+  },
+  "reviewedDocumentationCommit": "f01c89b1c2619377eb1982fcc808468a902ebf14",
+  "reviewedSourceArchiveSha256": "f992435c5dabc7ad42940be40c41e88399e6e9fb8f1a56bb7785734a134fca1b",
+  "acceptedGates": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12",
+    "G13",
+    "G14",
+    "G15",
+    "G16",
+    "G17",
+    "G18",
+    "G19",
+    "G20",
+    "G21",
+    "G22",
+    "G23",
+    "G24"
+  ],
+  "requirementReviews": [
+    {
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh",
+      "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+      "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "reasoningEffort": "xhigh",
+      "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+      "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+    }
+  ],
+  "finalHandoffIdentityLocation": "Separately delivered release-identity.json outside the source archive.",
+  "evidence": "evidence/revision-0.3/corrected-candidate-verification-progress.json",
+  "reviewedPrivacy": {
+    "literalCheckedInputs": 6437,
+    "literalMatches": 0,
+    "literalReportSha256": "8432b82c59798ec75ed064a84ae34c68d1d277fcc1c39aa23a2d1f7296d6f46f",
+    "credentialScannedRecords": 1642,
+    "credentialMatches": 8,
+    "credentialDisposition": "Known synthetic fixtures only.",
+    "credentialReportSha256": "b8b8c35cf5c6be0a2769eacd61556e61ad6d338e8c22707d81edb85e186c6036",
+    "reviewedMediaBlobs": 37,
+    "reviewedContextMatches": 22,
+    "unresolvedFindings": 0,
+    "associationReportSha256": "3b189675c6d643517c4992318923d345c11a93b794578aba3891f7a2374b26ab"
+  },
+  "preservedLimits": [
+    "The historical fresh-agent recipe execution remains tied to its actual older package. Unchanged instructions and current installed custom-recipe tests establish separate associations.",
+    "The 26-video collector retains exit 1 for title-only playback drops. All required moving-scene callbacks were retained.",
+    "The original Docker outer wrapper and failed followups remain failed. The native comparison, separate postflight, exports and physical cleanup passed.",
+    "Video review uses sampled agent inspection during actual normal-speed playback, not continuous human viewing or every-frame visual inspection.",
+    "Finite compatibility fixtures and pattern-based scans do not prove universal compatibility or absence of every possible secret.",
+    "All reviewers belong to the GPT model family; no cross-family review is claimed."
+  ],
+  "publishingRoute": "owner-authorized exact local archive without npm provenance",
+  "publicationPerformed": false,
+  "target24HoursMet": false
+}

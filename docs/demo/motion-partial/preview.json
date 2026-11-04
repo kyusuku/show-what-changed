@@ -31,5 +31,5 @@
   },
   "scope": "Synthetic preview subset: video, poster and original public manifest. Source frames, timeline, capture bundle and private run data are not included. Recompose requires the original owned run, not this preview directory.",
   "normalSpeedReview": "Completed two uninterrupted 1x playback passes, each presenting all 267 frames with zero reported dropped or corrupt frames. Agent inspection of 46 chronological screenshots and the original blocked-side screenshot found clear failure labels, preserved masks, continued AFTER motion, and useful partial output. This was not continuous human viewing or every-frame visual inspection. The original required-action failure remains recorded.",
-  "releaseAcceptance": "Separate final acceptance remains pending."
+  "releaseAcceptance": "See the final acceptance record and separately delivered release identity. This preview alone does not establish release readiness."
 }

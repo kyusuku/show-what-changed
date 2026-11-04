@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "specRevision": "0.3",
   "kind": "corrected-candidate-verification-progress",
-  "status": "verification-in-progress",
+  "status": "requirements_accepted",
   "candidate": {
     "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
     "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
@@ -636,12 +636,20 @@
     }
   ],
   "remaining": [
-    "Final public source archive identity and privacy audit.",
-    "Exact publishing handoff, dual R16 reviews, and independent final G01-G24 acceptance."
+    "Final handoff identity and archive association are recorded externally in release-identity.json."
   ],
-  "gatesNewlyAccepted": [],
+  "gatesNewlyAccepted": [
+    "G05",
+    "G09",
+    "G12",
+    "G14",
+    "G18",
+    "G20",
+    "G23",
+    "G24"
+  ],
   "historicalFailuresRemainFailed": true,
-  "releaseReady": false,
+  "releaseReady": true,
   "publicationPerformed": false,
   "privateEvidencePathsIncluded": false,
   "installedPartialMotion": {
@@ -1160,5 +1168,7 @@
     "archiveBytesEqual": true,
     "dependencyMethod": "Same lockfile and read-only reference to already verified installed build dependencies; no install or network. node_modules link remains only in private build directory.",
     "privateReportSha256": "8799faf177327bd043d300e89e77e91f91e23e4f44e65e8a0e5e1ec44a617799"
-  }
+  },
+  "readyStatementEffectiveOnlyWhen": "Effective only when the separately delivered release-identity.json binds this exact public handoff and archive, accepts both final R16 reviews and refreshed scans, and states ready_for_owner_publish. This in-archive record cannot bind its own final archive digest.",
+  "finalAcceptance": "evidence/revision-0.3/final-acceptance.json"
 }

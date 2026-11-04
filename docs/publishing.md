@@ -1,6 +1,6 @@
 # Publish the reviewed 0.1.0 candidate
 
-> Release hold: the revision 0.3 candidate is undergoing final verification. Use this procedure only after [release readiness](release-readiness.md) records every required gate as passed for the exact candidate. This document does not authorize publication.
+> Release status: use this procedure only with the separately delivered accepted release identity and [release readiness](release-readiness.md) for the exact candidate. All required gates must be accepted. This document does not authorize publication.
 
 > Public-history hold: the development history contains private context. Do not push it or change its repository visibility. Use only the separately prepared public checkout named by the final handoff, after its complete intended history, source archive, and package have passed review. Private development originals remain outside that checkout.
 

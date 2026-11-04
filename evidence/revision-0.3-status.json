@@ -3,21 +3,25 @@
   "specRevision": "0.3",
   "productSchemaVersion": 2,
   "date": "2026-11-02",
-  "status": "repair_required",
-  "currentGoal": "implementation",
+  "status": "ready_for_owner_publish",
+  "currentGoal": "owner_publishing_handoff",
   "implementationStarted": true,
   "executionEvidenceRecorded": true,
-  "releaseReady": false,
+  "releaseReady": true,
   "publicationPerformed": false,
   "graphPath": "docs/implementation-graph.json",
   "specPath": "spec.md",
   "candidate": {
-    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
-    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
-    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
-    "sourceArchiveBytes": 8601600,
-    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+    "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+    "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+    "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+    "packageBytes": 385856,
+    "packageMembers": 171,
+    "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+    "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+    "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+    "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+    "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
   },
   "policy": {
     "initialGateStatus": "pending_implementation",
@@ -52,31 +56,73 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Strict schema 2 and every documented JSON example validate; unknown fields, tokens, unsafe paths, v1 inputs, incompatible mask modes, and malformed plans fail.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommands": [
-          0,
-          0
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/source-host-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
-        "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Strict schema 2 and every documented JSON example validate; unknown fields, tokens, unsafe paths, v1 inputs, incompatible mask modes, and malformed plans fail.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommands": [
+            0,
+            0
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/source-host-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+          "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        }
       }
     },
     {
@@ -88,37 +134,79 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Exact refs, diverged endpoints, unique merge base, shallow missing refs, detached HEAD, index-only deletion, staged/unstaged cancellation, and WORKTREE additions/deletions preserve existing semantics.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommands": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          2
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/source-host-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
-        "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Exact refs, diverged endpoints, unique merge base, shallow missing refs, detached HEAD, index-only deletion, staged/unstaged cancellation, and WORKTREE additions/deletions preserve existing semantics.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommands": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/source-host-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+          "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        }
       }
     },
     {
@@ -132,35 +220,77 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose"
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Streaming inventories handle large-repository source and shared packages; source mutation/copy races fail; caller HEAD/index/tracked/untracked/dependencies remain unchanged.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommands": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/source-host-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
-        "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Streaming inventories handle large-repository source and shared packages; source mutation/copy races fail; caller HEAD/index/tracked/untracked/dependencies remain unchanged.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommands": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/source-host-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+          "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        }
       }
     },
     {
@@ -175,39 +305,81 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/compatibility-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Installed package compares root npm, pnpm workspace, Python app, and static site; non-JavaScript/static fixtures have no npm manifest. Tool/app runtime separation is exercised.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommands": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/source-host-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
-        "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/compatibility-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Installed package compares root npm, pnpm workspace, Python app, and static site; non-JavaScript/static fixtures have no npm manifest. Tool/app runtime separation is exercised.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommands": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/source-host-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+          "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        }
       }
     },
     {
@@ -220,43 +392,85 @@
         "R8",
         "R16"
       ],
-      "status": "pending_repair",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "npm test -- test/unit/runtime-recipe.test.ts -t 'ordered services resolve separate env and seed independent datasets'",
-        "node node_modules/vitest/vitest.mjs run test/unit/runtime-docker.test.ts --testNamePattern=\"generic runtime binds seeded independent container datasets and setup-generated image content\" --maxWorkers=1 --no-file-parallelism --reporter=verbose"
-      ],
+      "status": "accepted",
       "sourceIdentity": {
-        "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
-        "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Recipe cwd/env/tokens/ordered services/setup/bootstrap behave as declared. Missing refs/prerequisites fail before app startup; lock/source mutation cannot yield success.",
-      "actualExitCode": {
-        "retainedHostChecks": 0,
-        "focusedHostCorrection": 0,
-        "seededSource": 0,
-        "ownedWindowClose": 0
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/recipe-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "a954080fbdad529b1a251c617355e8d0a32a865515f9fdb8192964cfb205e4fb",
-        "structuredReportSha256": "da1aeab5fcd14d9aaeac9d0eac217ea01c6f55952f5fee0eb477f1172df85098",
-        "closureConditionSatisfied": true,
-        "closureIndependentReviewSha256": "1b050ebc31130d6d49551283022c5645052e3735ca1f8dd31b4aa5c82546cb71"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
       },
-      "priorAcceptanceStatus": "accepted",
-      "acceptanceHold": {
-        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
-        "reason": "Recipe prerequisite and setup/bootstrap exit classification contradicts the documented contract.",
-        "originalEvidencePreserved": true
+      "historicalEvidence": {
+        "status": "pending_repair",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "npm test -- test/unit/runtime-recipe.test.ts -t 'ordered services resolve separate env and seed independent datasets'",
+          "node node_modules/vitest/vitest.mjs run test/unit/runtime-docker.test.ts --testNamePattern=\"generic runtime binds seeded independent container datasets and setup-generated image content\" --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+          "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Recipe cwd/env/tokens/ordered services/setup/bootstrap behave as declared. Missing refs/prerequisites fail before app startup; lock/source mutation cannot yield success.",
+        "actualExitCode": {
+          "retainedHostChecks": 0,
+          "focusedHostCorrection": 0,
+          "seededSource": 0,
+          "ownedWindowClose": 0
+        },
+        "artifacts": [
+          "evidence/revision-0.3/recipe-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "a954080fbdad529b1a251c617355e8d0a32a865515f9fdb8192964cfb205e4fb",
+          "structuredReportSha256": "da1aeab5fcd14d9aaeac9d0eac217ea01c6f55952f5fee0eb477f1172df85098",
+          "closureConditionSatisfied": true,
+          "closureIndependentReviewSha256": "1b050ebc31130d6d49551283022c5645052e3735ca1f8dd31b4aa5c82546cb71"
+        },
+        "priorAcceptanceStatus": "accepted",
+        "acceptanceHold": {
+          "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+          "reason": "Recipe prerequisite and setup/bootstrap exit classification contradicts the documented contract.",
+          "originalEvidencePreserved": true
+        }
       }
     },
     {
@@ -269,33 +483,75 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose"
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Host listener conflicts, silent fallback, unrelated listeners, readiness redirects/timeouts, and startup/capture exits produce truthful errors; unrelated processes survive.",
-      "actualExitCode": {
-        "offlineReview": 0,
-        "retainedSourceCommands": [
-          0,
-          0
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/host-listener-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "94ddca2ef8d279d9e2fb2756f3c7bd6ab4dea4685d9e83f59b2411ce0d7e7674",
-        "structuredReportSha256": "59ee6690f8189bdbbd6d1e2a7a61359226dd8595a1506a9531c7e9fac8a59071"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Host listener conflicts, silent fallback, unrelated listeners, readiness redirects/timeouts, and startup/capture exits produce truthful errors; unrelated processes survive.",
+        "actualExitCode": {
+          "offlineReview": 0,
+          "retainedSourceCommands": [
+            0,
+            0
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/host-listener-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "94ddca2ef8d279d9e2fb2756f3c7bd6ab4dea4685d9e83f59b2411ce0d7e7674",
+          "structuredReportSha256": "59ee6690f8189bdbbd6d1e2a7a61359226dd8595a1506a9531c7e9fac8a59071"
+        }
       }
     },
     {
@@ -308,54 +564,96 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "show-what-changed",
-        "compare",
-        "--plan",
-        ".show-what-changed/plan.json",
-        "--allow-exec",
-        "--timeout",
-        "120",
-        "--json"
-      ],
       "sourceIdentity": {
-        "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
-        "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
-      "expectedResult": "Docker success, startup failure, interruption and timeout preserve unrelated resources and remove exact owned resources; side state and bounded image volumes remain isolated.",
-      "actualExitCode": {
-        "installedDockerComparison": 0,
-        "expectedInterruptionExits": [
-          130,
-          143,
-          10
-        ],
-        "builderCreateInterruption": 143,
-        "serviceCreateInterruption": 143,
-        "originalOutcomesPreserved": true
-      },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
+      "expectedResult": "Docker app plus backing service has side-isolated data, inspected ownership, and exact cleanup on success, startup failure, cancellation, and timeout. App/service image-declared volumes and interrupted buildx builders are covered; unrelated containers, networks, builders, and images survive.",
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/G07-G15-docker-cleanup-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "reportSha256": "212022283f6c293e77fc8f667636647f4fa50044bfefb4a3340ac0c3dcaa797e",
-        "machineReviewSha256": "4ff82ba8ccc2938d10226fa733529849004557348c9a4263d9621f76ec2230ca",
-        "status": "accepted-combined-scoped-evidence",
-        "limitations": [
-          "Historical process and resource observations are reviewed retained evidence, not freshly re-observed runtime facts.",
-          "W2 is one 120-second installed comparison inside a failed outer workload.",
-          "W3 data initialization was performed by the test controller through exact service identities.",
-          "The create-deadline acceptance is a controlled behavioral inference, without kernel signal or winning timer attribution.",
-          "B1 proves post-create and pre-confirmation interruption, not active daemon bootstrap.",
-          "Image uncertainty is covered by controlled behavior tests plus real successful export/load integration; no real partial-upload claim is made.",
-          "S1 normal closure compared stable image-list fields and full network inspections; full image inspection and harness guest-root deletion were not observed.",
-          "Both cancelled B1 and S1 manifests retain SOURCE_MUTATED provenance failures and are not completed comparison evidence.",
-          "G20 and final release acceptance remain outside this judgment."
-        ]
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "show-what-changed",
+          "compare",
+          "--plan",
+          ".show-what-changed/plan.json",
+          "--allow-exec",
+          "--timeout",
+          "120",
+          "--json"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+          "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Docker success, startup failure, interruption and timeout preserve unrelated resources and remove exact owned resources; side state and bounded image volumes remain isolated.",
+        "actualExitCode": {
+          "installedDockerComparison": 0,
+          "expectedInterruptionExits": [
+            130,
+            143,
+            10
+          ],
+          "builderCreateInterruption": 143,
+          "serviceCreateInterruption": 143,
+          "originalOutcomesPreserved": true
+        },
+        "artifacts": [
+          "evidence/revision-0.3/G07-G15-docker-cleanup-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "reportSha256": "212022283f6c293e77fc8f667636647f4fa50044bfefb4a3340ac0c3dcaa797e",
+          "machineReviewSha256": "4ff82ba8ccc2938d10226fa733529849004557348c9a4263d9621f76ec2230ca",
+          "status": "accepted-combined-scoped-evidence",
+          "limitations": [
+            "Historical process and resource observations are reviewed retained evidence, not freshly re-observed runtime facts.",
+            "W2 is one 120-second installed comparison inside a failed outer workload.",
+            "W3 data initialization was performed by the test controller through exact service identities.",
+            "The create-deadline acceptance is a controlled behavioral inference, without kernel signal or winning timer attribution.",
+            "B1 proves post-create and pre-confirmation interruption, not active daemon bootstrap.",
+            "Image uncertainty is covered by controlled behavior tests plus real successful export/load integration; no real partial-upload claim is made.",
+            "S1 normal closure compared stable image-list fields and full network inspections; full image inspection and harness guest-root deletion were not observed.",
+            "Both cancelled B1 and S1 manifests retain SOURCE_MUTATED provenance failures and are not completed comparison evidence.",
+            "G20 and final release acceptance remain outside this judgment."
+          ]
+        }
       }
     },
     {
@@ -367,33 +665,75 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
-        "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Every scenario action, inner-container smooth scroll, exact locator ambiguity, fragment navigation, timeout cancellation, and hover persistence is exercised.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/behavior-package-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
-        "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
+          "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Every scenario action, inner-container smooth scroll, exact locator ambiguity, fragment navigation, timeout cancellation, and hover persistence is exercised.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
+        },
+        "artifacts": [
+          "evidence/revision-0.3/behavior-package-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
+          "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        }
       }
     },
     {
@@ -405,40 +745,82 @@
         "R8",
         "R16"
       ],
-      "status": "pending_repair",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
-        "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
+      "status": "accepted",
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Expected absence/exclusion are unverified pairs; required failure blocks later side actions and is visibly labeled at the correct motion time.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/behavior-package-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
-        "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
       },
-      "priorAcceptanceStatus": "accepted",
-      "acceptanceHold": {
-        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
-        "reason": "Default maximum-duration scenario can lose usable partial capture after required failure.",
-        "originalEvidencePreserved": true
+      "historicalEvidence": {
+        "status": "pending_repair",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
+          "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Expected absence/exclusion are unverified pairs; required failure blocks later side actions and is visibly labeled at the correct motion time.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
+        },
+        "artifacts": [
+          "evidence/revision-0.3/behavior-package-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
+          "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        },
+        "priorAcceptanceStatus": "accepted",
+        "acceptanceHold": {
+          "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+          "reason": "Default maximum-duration scenario can lose usable partial capture after required failure.",
+          "originalEvidencePreserved": true
+        }
       }
     },
     {
@@ -453,38 +835,80 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
-        "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
-        "linuxSelectedSourceArchiveSha256": "b88e9c618f4caed2506a3e4c136ab5f52d367e98e55a7697eac6a30a7cd394b2",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Full motion pipeline meets section 7.4 on both platforms across three runs. Actual positions, source gaps, pulse alignment, and normal-speed viewing are recorded.",
-      "actualExitCode": {
-        "linuxInstalledMotionStage": 0,
-        "macosMotionCheck": 0
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/G10-motion-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-finite-matrix-with-stated-scope",
-        "reportSha256": "faa8e30d3dc7677238430afff6bc2d12da22447bd4f18b579f13b3ca1a5bc57f",
-        "visualVerdictSha256": "b342498e7a8ad01720cab8c7d17fc5df0c344f9e0a3c56b97d1398cacfa0bfaa",
-        "method": "Agent inspection of all chronological timestamp-bracketed image sequences acquired during uninterrupted 1x playback of the exact videos.",
-        "limitations": [
-          "Earlier same-runtime motion failures remain failed, with unresolved causes. No product motion fix or changed failure probability is established.",
-          "No host-cause or universal stall-free reliability claim; no diagnostic passes pooled into this final matrix.",
-          "Unobserved upstream browser frames remain outside delivered counters; sourceDroppedFrames is null.",
-          "Current Linux suite remains failed: public-app navigation-3 CAPTURE_CLOCK_DRIFT bound 44.028714 ms exceeds 40 ms. Subsequent required cases did not complete. Failed detailed media/calibration evidence was not retained by that harness.",
-          "G10 acceptance does not accept G20, re-adjudicate other gates, complete the goal or establish release readiness."
-        ]
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+          "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+          "linuxSelectedSourceArchiveSha256": "b88e9c618f4caed2506a3e4c136ab5f52d367e98e55a7697eac6a30a7cd394b2",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Full motion pipeline meets section 7.4 on both platforms across three runs. Actual positions, source gaps, pulse alignment, and normal-speed viewing are recorded.",
+        "actualExitCode": {
+          "linuxInstalledMotionStage": 0,
+          "macosMotionCheck": 0
+        },
+        "artifacts": [
+          "evidence/revision-0.3/G10-motion-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-finite-matrix-with-stated-scope",
+          "reportSha256": "faa8e30d3dc7677238430afff6bc2d12da22447bd4f18b579f13b3ca1a5bc57f",
+          "visualVerdictSha256": "b342498e7a8ad01720cab8c7d17fc5df0c344f9e0a3c56b97d1398cacfa0bfaa",
+          "method": "Agent inspection of all chronological timestamp-bracketed image sequences acquired during uninterrupted 1x playback of the exact videos.",
+          "limitations": [
+            "Earlier same-runtime motion failures remain failed, with unresolved causes. No product motion fix or changed failure probability is established.",
+            "No host-cause or universal stall-free reliability claim; no diagnostic passes pooled into this final matrix.",
+            "Unobserved upstream browser frames remain outside delivered counters; sourceDroppedFrames is null.",
+            "Current Linux suite remains failed: public-app navigation-3 CAPTURE_CLOCK_DRIFT bound 44.028714 ms exceeds 40 ms. Subsequent required cases did not complete. Failed detailed media/calibration evidence was not retained by that harness.",
+            "G10 acceptance does not accept G20, re-adjudicate other gates, complete the goal or establish release readiness."
+          ]
+        }
       }
     },
     {
@@ -501,36 +925,78 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Every persisted frame has exact opaque masks before encoding through navigation, motion, failure, and cancellation. Decoded output is checked in scaled/letterboxed coordinates with codec-aware criteria for absence of sensitive content, not exact pixel equality after lossy H.264. No unmasked raw artifact exists. Keyframe selector masking still passes.",
-      "actualExitCode": {
-        "offlineReview": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "retainedCommandRecords": "evidence/revision-0.3/media-recovery-acceptance.json"
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/media-recovery-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6.1-sol",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
-        "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Every persisted frame has exact opaque masks before encoding through navigation, motion, failure, and cancellation. Decoded output is checked in scaled/letterboxed coordinates with codec-aware criteria for absence of sensitive content, not exact pixel equality after lossy H.264. No unmasked raw artifact exists. Keyframe selector masking still passes.",
+        "actualExitCode": {
+          "offlineReview": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "retainedCommandRecords": "evidence/revision-0.3/media-recovery-acceptance.json"
+        },
+        "artifacts": [
+          "evidence/revision-0.3/media-recovery-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6.1-sol",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
+          "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137"
+        }
       }
     },
     {
@@ -544,37 +1010,79 @@
         "R14",
         "R16"
       ],
-      "status": "pending_repair",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
-      ],
+      "status": "accepted",
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Clock fields, unit conversion, calibration uncertainty, drift, nonmonotonic/missing timestamps, queue overflow, static pages, and frame bounds have explicit tests.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommands": [
-          0,
-          0
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/source-host-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
-        "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
       },
-      "priorAcceptanceStatus": "accepted",
-      "acceptanceHold": {
-        "reason": "A real Linux capture with valid bounded clocks was rejected because host barrier and uncertain source mapping were compared as exact times.",
-        "evidence": "evidence/revision-0.3/linux-capture-schema-diagnostic.json"
+      "historicalEvidence": {
+        "status": "pending_repair",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Clock fields, unit conversion, calibration uncertainty, drift, nonmonotonic/missing timestamps, queue overflow, static pages, and frame bounds have explicit tests.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommands": [
+            0,
+            0
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/source-host-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+          "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        },
+        "priorAcceptanceStatus": "accepted",
+        "acceptanceHold": {
+          "reason": "A real Linux capture with valid bounded clocks was rejected because host barrier and uncertain source mapping were compared as exact times.",
+          "evidence": "evidence/revision-0.3/linux-capture-schema-diagnostic.json"
+        }
       }
     },
     {
@@ -588,33 +1096,75 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
-        "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Trusted titles/labels/status intervals, dimensions, safe failure panels, poster selection, Unicode fallback, and text escaping render correctly.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/behavior-package-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
-        "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
+          "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Trusted titles/labels/status intervals, dimensions, safe failure panels, poster selection, Unicode fallback, and text escaping render correctly.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
+        },
+        "artifacts": [
+          "evidence/revision-0.3/behavior-package-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
+          "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        }
       }
     },
     {
@@ -628,43 +1178,85 @@
         "R14",
         "R16"
       ],
-      "status": "pending_repair",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
+      "status": "accepted",
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Exact frame schedule/count, first/boundary/final decoded images, codec/FPS/faststart, and offline recompose pass. Recovery cannot clear capture/source/cleanup faults.",
-      "actualExitCode": {
-        "offlineReview": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "retainedCommandRecords": "evidence/revision-0.3/media-recovery-acceptance.json"
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/media-recovery-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6.1-sol",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
-        "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
       },
-      "priorAcceptanceStatus": "accepted",
-      "acceptanceHold": {
-        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
-        "reason": "Measured maximum-duration motion cannot currently pass its bounded timeline schema.",
-        "originalEvidencePreserved": true
+      "historicalEvidence": {
+        "status": "pending_repair",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Exact frame schedule/count, first/boundary/final decoded images, codec/FPS/faststart, and offline recompose pass. Recovery cannot clear capture/source/cleanup faults.",
+        "actualExitCode": {
+          "offlineReview": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "retainedCommandRecords": "evidence/revision-0.3/media-recovery-acceptance.json"
+        },
+        "artifacts": [
+          "evidence/revision-0.3/media-recovery-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6.1-sol",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
+          "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137"
+        },
+        "priorAcceptanceStatus": "accepted",
+        "acceptanceHold": {
+          "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+          "reason": "Measured maximum-duration motion cannot currently pass its bounded timeline schema.",
+          "originalEvidencePreserved": true
+        }
       }
     },
     {
@@ -679,54 +1271,96 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "show-what-changed",
-        "compare",
-        "--plan",
-        ".show-what-changed/plan.json",
-        "--allow-exec",
-        "--timeout",
-        "120",
-        "--json"
-      ],
       "sourceIdentity": {
-        "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
-        "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
-      "expectedResult": "SIGINT, SIGTERM and overall deadline during every required phase produce cancellation-specific exits and owned absence; cleanup faults cannot reduce to clean success.",
-      "actualExitCode": {
-        "installedDockerComparison": 0,
-        "expectedInterruptionExits": [
-          130,
-          143,
-          10
-        ],
-        "builderCreateInterruption": 143,
-        "serviceCreateInterruption": 143,
-        "originalOutcomesPreserved": true
-      },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
+      "expectedResult": "SIGINT/SIGTERM and overall deadline during setup, container build/create, startup, recording, and encoding leave no owned resources; cleanup faults cannot report clean success.",
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/G07-G15-docker-cleanup-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "reportSha256": "212022283f6c293e77fc8f667636647f4fa50044bfefb4a3340ac0c3dcaa797e",
-        "machineReviewSha256": "4ff82ba8ccc2938d10226fa733529849004557348c9a4263d9621f76ec2230ca",
-        "status": "accepted-combined-scoped-evidence",
-        "limitations": [
-          "Historical process and resource observations are reviewed retained evidence, not freshly re-observed runtime facts.",
-          "W2 is one 120-second installed comparison inside a failed outer workload.",
-          "W3 data initialization was performed by the test controller through exact service identities.",
-          "The create-deadline acceptance is a controlled behavioral inference, without kernel signal or winning timer attribution.",
-          "B1 proves post-create and pre-confirmation interruption, not active daemon bootstrap.",
-          "Image uncertainty is covered by controlled behavior tests plus real successful export/load integration; no real partial-upload claim is made.",
-          "S1 normal closure compared stable image-list fields and full network inspections; full image inspection and harness guest-root deletion were not observed.",
-          "Both cancelled B1 and S1 manifests retain SOURCE_MUTATED provenance failures and are not completed comparison evidence.",
-          "G20 and final release acceptance remain outside this judgment."
-        ]
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "show-what-changed",
+          "compare",
+          "--plan",
+          ".show-what-changed/plan.json",
+          "--allow-exec",
+          "--timeout",
+          "120",
+          "--json"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+          "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "SIGINT, SIGTERM and overall deadline during every required phase produce cancellation-specific exits and owned absence; cleanup faults cannot reduce to clean success.",
+        "actualExitCode": {
+          "installedDockerComparison": 0,
+          "expectedInterruptionExits": [
+            130,
+            143,
+            10
+          ],
+          "builderCreateInterruption": 143,
+          "serviceCreateInterruption": 143,
+          "originalOutcomesPreserved": true
+        },
+        "artifacts": [
+          "evidence/revision-0.3/G07-G15-docker-cleanup-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "reportSha256": "212022283f6c293e77fc8f667636647f4fa50044bfefb4a3340ac0c3dcaa797e",
+          "machineReviewSha256": "4ff82ba8ccc2938d10226fa733529849004557348c9a4263d9621f76ec2230ca",
+          "status": "accepted-combined-scoped-evidence",
+          "limitations": [
+            "Historical process and resource observations are reviewed retained evidence, not freshly re-observed runtime facts.",
+            "W2 is one 120-second installed comparison inside a failed outer workload.",
+            "W3 data initialization was performed by the test controller through exact service identities.",
+            "The create-deadline acceptance is a controlled behavioral inference, without kernel signal or winning timer attribution.",
+            "B1 proves post-create and pre-confirmation interruption, not active daemon bootstrap.",
+            "Image uncertainty is covered by controlled behavior tests plus real successful export/load integration; no real partial-upload claim is made.",
+            "S1 normal closure compared stable image-list fields and full network inspections; full image inspection and harness guest-root deletion were not observed.",
+            "Both cancelled B1 and S1 manifests retain SOURCE_MUTATED provenance failures and are not completed comparison evidence.",
+            "G20 and final release acceptance remain outside this judgment."
+          ]
+        }
       }
     },
     {
@@ -740,36 +1374,78 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Locks, PID reuse, stale ledgers, malicious output paths, symlink outputs, repeated clean, and forced-kill residue recovery preserve unrelated resources.",
-      "actualExitCode": {
-        "offlineReview": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "retainedCommandRecords": "evidence/revision-0.3/media-recovery-acceptance.json"
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/media-recovery-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6.1-sol",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
-        "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Locks, PID reuse, stale ledgers, malicious output paths, symlink outputs, repeated clean, and forced-kill residue recovery preserve unrelated resources.",
+        "actualExitCode": {
+          "offlineReview": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "retainedCommandRecords": "evidence/revision-0.3/media-recovery-acceptance.json"
+        },
+        "artifacts": [
+          "evidence/revision-0.3/media-recovery-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6.1-sol",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "8d67b080ee7204376dccd8fa79fd2873d75b2eeca385dcc49c242e69f4e5f580",
+          "structuredReportSha256": "45070671471663e16e53a73329042730dfd92901f137978bfa2dd89c161b5137"
+        }
       }
     },
     {
@@ -782,32 +1458,74 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "A synthetic authenticated app loads independent private storage states; isolated seeded state is side-specific; external-read-only state remains explicitly unverified. Secrets never enter public metadata/logs.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommands": [
-          0,
-          0,
-          0
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/source-host-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
-        "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "A synthetic authenticated app loads independent private storage states; isolated seeded state is side-specific; external-read-only state remains explicitly unverified. Secrets never enter public metadata/logs.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommands": [
+            0,
+            0,
+            0
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/source-host-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+          "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        }
       }
     },
     {
@@ -820,48 +1538,90 @@
         "R8",
         "R16"
       ],
-      "status": "pending_repair",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
-      ],
+      "status": "accepted",
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "Pure planning executes no repository code; consent binding, private env resolution, JSON envelopes, artifact hashes, null missing artifacts, and no-change exits are correct.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommands": [
-          0,
-          0,
-          0,
-          2,
-          2,
-          0,
-          7,
-          0,
-          3,
-          2
-        ]
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/source-host-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
-        "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
       },
-      "priorAcceptanceStatus": "accepted",
-      "acceptanceHold": {
-        "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
-        "reason": "Runtime JSON exit classification and automatic unknown-input coverage require repair.",
-        "originalEvidencePreserved": true
+      "historicalEvidence": {
+        "status": "pending_repair",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "Pure planning executes no repository code; consent binding, private env resolution, JSON envelopes, artifact hashes, null missing artifacts, and no-change exits are correct.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommands": [
+            0,
+            0,
+            0,
+            2,
+            2,
+            0,
+            7,
+            0,
+            3,
+            2
+          ]
+        },
+        "artifacts": [
+          "evidence/revision-0.3/source-host-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "fd5da611cfb92438f27793293e6aa29993a6fd6e54da1d008b64fc495eba4043",
+          "structuredReportSha256": "3101cdc4351384e64dfc00398afcea5217289afc3511d078509ec7fd42e472ec"
+        },
+        "priorAcceptanceStatus": "accepted",
+        "acceptanceHold": {
+          "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+          "reason": "Runtime JSON exit classification and automatic unknown-input coverage require repair.",
+          "originalEvidencePreserved": true
+        }
       }
     },
     {
@@ -873,44 +1633,86 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node",
-        "scripts/real-app-smoke.mjs",
-        "show-what-changed-0.1.0.tgz",
-        "public-app-evidence"
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "executedSourceCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "association": "Only four Docker unit-test portability files changed after execution; package and public application runner inputs are unchanged."
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
-      "expectedResult": "Three navigation and three validation comparisons plus subsequent WORKTREE comparison pass with reviewed actual motion, caller preservation and cleanup.",
-      "actualExitCode": 0,
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
+      "expectedResult": "Publicly redistributable web-app navigation/inner-scroll and form-feedback comparisons pass three consecutive times through the final installed package; exact public inputs, useful reviewed media, a subsequent WORKTREE run, preservation, and cleanup are verified.",
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/G19-public-app-acceptance.json",
-        "docs/demo/motion-success/preview.json",
-        "docs/demo/motion-success/compare.mp4"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "reportSha256": "3f54c8e5a76a38226574c9748cee88c24513b92c631ef95b3b2f87421f8a1fc6",
-        "visualVerdictSha256": "4bb0b28e88e22ebcccdd4e9bcafd508cb57e70bbd86d380318977bed2c2a8269",
-        "decodedOutputFrames": 73,
-        "decodeRecordSha256": "e8b72fcd6ba4a464edf67505053b8bb3901abc64707335bced0db10ebda2c503",
-        "verifiedArtifactHashes": 3506,
-        "findings": [
-          "Actual intermediate drawer opening and closing on both sides in all three navigation runs.",
-          "Inner content moves while the drawer header stays fixed, independently associated with the actual element scrollTop observation.",
-          "All three validation comparisons and the subsequent WORKTREE comparison show the intended feedback.",
-          "Narrow framing and truthful partial-failure annotations remain visible."
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
         ],
-        "limitations": [
-          "Direct frame samples supplement normal-speed playback; this is not human inspection of every output frame.",
-          "Conservative literal redaction changes Explain to E[redacted]plain in the validation title."
-        ]
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node",
+          "scripts/real-app-smoke.mjs",
+          "show-what-changed-0.1.0.tgz",
+          "public-app-evidence"
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "executedSourceCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "association": "Only four Docker unit-test portability files changed after execution; package and public application runner inputs are unchanged."
+        },
+        "expectedResult": "Three navigation and three validation comparisons plus subsequent WORKTREE comparison pass with reviewed actual motion, caller preservation and cleanup.",
+        "actualExitCode": 0,
+        "artifacts": [
+          "evidence/revision-0.3/G19-public-app-acceptance.json",
+          "docs/demo/motion-success/preview.json",
+          "docs/demo/motion-success/compare.mp4"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "reportSha256": "3f54c8e5a76a38226574c9748cee88c24513b92c631ef95b3b2f87421f8a1fc6",
+          "visualVerdictSha256": "4bb0b28e88e22ebcccdd4e9bcafd508cb57e70bbd86d380318977bed2c2a8269",
+          "decodedOutputFrames": 73,
+          "decodeRecordSha256": "e8b72fcd6ba4a464edf67505053b8bb3901abc64707335bced0db10ebda2c503",
+          "verifiedArtifactHashes": 3506,
+          "findings": [
+            "Actual intermediate drawer opening and closing on both sides in all three navigation runs.",
+            "Inner content moves while the drawer header stays fixed, independently associated with the actual element scrollTop observation.",
+            "All three validation comparisons and the subsequent WORKTREE comparison show the intended feedback.",
+            "Narrow framing and truthful partial-failure annotations remain visible."
+          ],
+          "limitations": [
+            "Direct frame samples supplement normal-speed playback; this is not human inspection of every output frame.",
+            "Conservative literal redaction changes Explain to E[redacted]plain in the validation title."
+          ]
+        }
       }
     },
     {
@@ -924,13 +1726,55 @@
         "R14",
         "R16"
       ],
-      "status": "pending_acceptance",
+      "status": "accepted",
+      "sourceIdentity": {
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
+      },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
       "command": null,
-      "sourceIdentity": null,
-      "expectedResult": null,
       "actualExitCode": null,
-      "artifacts": [],
-      "independentReview": null
+      "expectedResult": "Typecheck, build, generated schema checks, configured lint/format, unit/integration, full Linux and macOS installed-package smoke pass against the new candidate.",
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
+      "artifacts": [
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
+      ],
+      "independentReview": {
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "pending_acceptance",
+        "command": null,
+        "sourceIdentity": null,
+        "expectedResult": null,
+        "actualExitCode": null,
+        "artifacts": [],
+        "independentReview": null
+      }
     },
     {
       "id": "G21",
@@ -943,33 +1787,75 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
-        "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "npm pack allowlist, clean tarball installation, help/doctor/plan/compare/compose/clean, bundled assets/skill, and literal public quickstarts pass without source-tree dependencies.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/behavior-package-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
-        "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "accepted",
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
+          "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "npm pack allowlist, clean tarball installation, help/doctor/plan/compare/compose/clean, bundled assets/skill, and literal public quickstarts pass without source-tree dependencies.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json"
+        },
+        "artifacts": [
+          "evidence/revision-0.3/behavior-package-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
+          "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        }
       }
     },
     {
@@ -982,46 +1868,88 @@
         "R16"
       ],
       "status": "accepted",
-      "command": [
-        "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
-        "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
-        "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
-        "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
-      ],
       "sourceIdentity": {
-        "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
-        "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
-        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-        "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
       },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
+      "command": null,
+      "actualExitCode": null,
       "expectedResult": "README, support matrix, CLI help, skill, and synthetic success/partial motion demos accurately describe implemented behavior. A fresh agent completes a documented custom-recipe run.",
-      "actualExitCode": {
-        "review": 0,
-        "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json",
-        "documentDeltaReview": 0
-      },
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
       "artifacts": [
-        "evidence/revision-0.3/behavior-package-acceptance.json",
-        "evidence/revision-0.3/document-refresh-acceptance.json",
-        "evidence/revision-0.3/source-retention-refresh-acceptance.json"
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
       ],
       "independentReview": {
-        "model": "gpt-6-astra",
-        "reasoningEffort": "xhigh",
-        "status": "accepted-with-stated-scope",
-        "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
-        "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
       },
-      "documentIdentity": "Exact current document and preview entries in document-refresh-acceptance.json, with prior behavior coverage retained.",
-      "documentRevision": {
+      "historicalEvidence": {
         "status": "accepted",
-        "evidence": "evidence/revision-0.3/document-refresh-acceptance.json",
-        "priorAcceptedCoverage": "evidence/revision-0.3/behavior-package-acceptance.json",
-        "changedReviewedDocument": "docs/release-readiness.md",
-        "currentSha256": "6256fe24e010e031b1eddf775cbbb52c1a6a9921b620f93ce232902882445cee",
-        "priorSha256": "ec6317e9716c038e85a559633a3a1db4d27ef46772bf4b9fd0c7135aab1a279e",
-        "latestDeltaEvidence": "evidence/revision-0.3/source-retention-refresh-acceptance.json"
+        "command": [
+          "node node_modules/vitest/vitest.mjs run test/unit test/contracts --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node node_modules/vitest/vitest.mjs run test/integration --maxWorkers=1 --no-file-parallelism --reporter=verbose",
+          "node scripts/release-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_EVIDENCE\"",
+          "node scripts/real-app-smoke.mjs \"$SWC_TARBALL\" \"$SWC_NEW_PUBLIC_EVIDENCE\"",
+          "node scripts/revision-0.3-motion-check.mjs --installed-root \"$SWC_INSTALLED_ROOT\" --output-dir \"$SWC_NEW_MOTION_EVIDENCE\""
+        ],
+        "sourceIdentity": {
+          "implementationCommit": "f02afe027afff55fca18b15cba10500f9ba0c0a3",
+          "sourceArchiveSha256": "4cd219b37678354848869f3842fa09fd4c41177fc4d71ab1a3b952a860b9a342",
+          "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+          "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+        },
+        "expectedResult": "README, support matrix, CLI help, skill, and synthetic success/partial motion demos accurately describe implemented behavior. A fresh agent completes a documented custom-recipe run.",
+        "actualExitCode": {
+          "review": 0,
+          "retainedCommandRecords": "evidence/revision-0.3/behavior-package-acceptance.json",
+          "documentDeltaReview": 0
+        },
+        "artifacts": [
+          "evidence/revision-0.3/behavior-package-acceptance.json",
+          "evidence/revision-0.3/document-refresh-acceptance.json",
+          "evidence/revision-0.3/source-retention-refresh-acceptance.json"
+        ],
+        "independentReview": {
+          "model": "gpt-6-astra",
+          "reasoningEffort": "xhigh",
+          "status": "accepted-with-stated-scope",
+          "reportSha256": "4b8c38826c35641150876e8c4ba52bcea97c966b4cdf6e933c3972c131134f26",
+          "structuredReportSha256": "9694525d1047eb806ecc7ef111a34e49cb87d1ad318899d05e0bafbbf600fb6e"
+        },
+        "documentIdentity": "Exact current document and preview entries in document-refresh-acceptance.json, with prior behavior coverage retained.",
+        "documentRevision": {
+          "status": "accepted",
+          "evidence": "evidence/revision-0.3/document-refresh-acceptance.json",
+          "priorAcceptedCoverage": "evidence/revision-0.3/behavior-package-acceptance.json",
+          "changedReviewedDocument": "docs/release-readiness.md",
+          "currentSha256": "6256fe24e010e031b1eddf775cbbb52c1a6a9921b620f93ce232902882445cee",
+          "priorSha256": "ec6317e9716c038e85a559633a3a1db4d27ef46772bf4b9fd0c7135aab1a279e",
+          "latestDeltaEvidence": "evidence/revision-0.3/source-retention-refresh-acceptance.json"
+        }
       }
     },
     {
@@ -1031,13 +1959,55 @@
         "R15",
         "R16"
       ],
-      "status": "pending_acceptance",
+      "status": "accepted",
+      "sourceIdentity": {
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
+      },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
       "command": null,
-      "sourceIdentity": null,
-      "expectedResult": null,
       "actualExitCode": null,
-      "artifacts": [],
-      "independentReview": null
+      "expectedResult": "Exact candidate/archive/spec hashes, full-history/package secret scan, dependency advisory triage, license notices, and public artifact review are complete. Private application context and raw material are absent from the full intended public history and package.",
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
+      "artifacts": [
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
+      ],
+      "independentReview": {
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "pending_acceptance",
+        "command": null,
+        "sourceIdentity": null,
+        "expectedResult": null,
+        "actualExitCode": null,
+        "artifacts": [],
+        "independentReview": null
+      }
     },
     {
       "id": "G24",
@@ -1046,13 +2016,55 @@
         "R15",
         "R16"
       ],
-      "status": "pending_acceptance",
+      "status": "accepted",
+      "sourceIdentity": {
+        "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+        "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+        "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+        "packageBytes": 385856,
+        "packageMembers": 171,
+        "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+        "tree": "4ae31efb5ee09e2d047ca918506fe37bb19a0250",
+        "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+        "publicImplementationTree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+        "identityScope": "Accepted candidate. Historical commands retain their original execution identities. This source archive digest identifies the executed input; the final public archive is bound externally."
+      },
+      "sourceIdentityScope": "Accepted candidate, not the execution identity of every historical command.",
       "command": null,
-      "sourceIdentity": null,
-      "expectedResult": null,
       "actualExitCode": null,
-      "artifacts": [],
-      "independentReview": null
+      "expectedResult": "Owner publishing handoff has exact commands, public-repository/license prerequisites, npm ownership/auth/provenance path, rollback/deprecation guidance, and independent post-publish install verification. Actual publication requires explicit authorization.",
+      "verificationMethod": "Current recorded execution and independently reviewed historical byte associations. Original commands and identities remain in historicalEvidence.",
+      "artifacts": [
+        "evidence/revision-0.3/final-acceptance.json",
+        "evidence/revision-0.3/corrected-candidate-verification-progress.json"
+      ],
+      "independentReview": {
+        "status": "requirements_accepted",
+        "reviewers": [
+          {
+            "model": "gpt-6-astra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "ad9b1f964804f61a4194a621ab5fbac4b91342cdc646d8b2536e9596de80e13e",
+            "structuredReportSha256": "2ea46638634b063e648861de670d4867d55d5b363e5fef270579b5f15ab430ca"
+          },
+          {
+            "model": "gpt-6.1-terra",
+            "reasoningEffort": "xhigh",
+            "reportSha256": "3371c0187611c14f2dc5146f0835c7457baf74bd50e0e405a837b5835a90aa27",
+            "structuredReportSha256": "6df0fe813033fe8ca5e926b584646574e3c4c5a90ff0243491d93d3c553dd214"
+          }
+        ],
+        "finalHandoffBinding": "Separately delivered release-identity.json"
+      },
+      "historicalEvidence": {
+        "status": "pending_acceptance",
+        "command": null,
+        "sourceIdentity": null,
+        "expectedResult": null,
+        "actualExitCode": null,
+        "artifacts": [],
+        "independentReview": null
+      }
     }
   ],
   "activation": {
@@ -1065,90 +2077,175 @@
   "nodes": [
     {
       "id": "R0",
-      "status": "completed_contract_freeze",
-      "evidence": "evidence/revision-0.3/R0.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R0",
+        "status": "completed_contract_freeze",
+        "evidence": "evidence/revision-0.3/R0.md"
+      }
     },
     {
       "id": "R1",
-      "status": "prototype_demonstrated_pending_backend_revalidation",
-      "evidence": "evidence/revision-0.3/R1.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R1",
+        "status": "prototype_demonstrated_pending_backend_revalidation",
+        "evidence": "evidence/revision-0.3/R1.md"
+      }
     },
     {
       "id": "R2",
-      "status": "reviewed_source_repairs_pending_final_integration",
-      "evidence": "evidence/revision-0.3/R2.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R2",
+        "status": "reviewed_source_repairs_pending_final_integration",
+        "evidence": "evidence/revision-0.3/R2.md"
+      }
     },
     {
       "id": "R3",
-      "status": "reviewed_recovery_live_seven_passed_two_failed_diagnosed",
-      "evidence": "evidence/revision-0.3/R3.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R3",
+        "status": "reviewed_recovery_live_seven_passed_two_failed_diagnosed",
+        "evidence": "evidence/revision-0.3/R3.md"
+      }
     },
     {
       "id": "R4",
-      "status": "encoder_repair_verified_linux_capture_cadence_failure_under_investigation",
-      "evidence": "evidence/revision-0.3/R4.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R4",
+        "status": "encoder_repair_verified_linux_capture_cadence_failure_under_investigation",
+        "evidence": "evidence/revision-0.3/R4.md"
+      }
     },
     {
       "id": "R5",
-      "status": "implemented_pending_integration_review",
-      "evidence": "evidence/revision-0.3/R5.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R5",
+        "status": "implemented_pending_integration_review",
+        "evidence": "evidence/revision-0.3/R5.md"
+      }
     },
     {
       "id": "R6",
-      "status": "neighboring_reviews_identified_repairs",
-      "evidence": "evidence/revision-0.3/R6.md",
-      "currentEvidence": "evidence/revision-0.3/R6-final-boundary-findings.json"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R6",
+        "status": "neighboring_reviews_identified_repairs",
+        "evidence": "evidence/revision-0.3/R6.md",
+        "currentEvidence": "evidence/revision-0.3/R6-final-boundary-findings.json"
+      }
     },
     {
       "id": "R7",
-      "status": "in_progress",
-      "evidence": "evidence/revision-0.3/R7.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R7",
+        "status": "in_progress",
+        "evidence": "evidence/revision-0.3/R7.md"
+      }
     },
     {
       "id": "R8",
-      "status": "adversarial_evidence_review_in_progress",
-      "evidence": "evidence/revision-0.3/R8.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R8",
+        "status": "adversarial_evidence_review_in_progress",
+        "evidence": "evidence/revision-0.3/R8.md"
+      }
     },
     {
       "id": "R9",
-      "status": "reviewed_motion_status_repair_pending_installed_revalidation",
-      "evidence": "evidence/revision-0.3/R9.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R9",
+        "status": "reviewed_motion_status_repair_pending_installed_revalidation",
+        "evidence": "evidence/revision-0.3/R9.md"
+      }
     },
     {
       "id": "R10",
-      "status": "fresh_package_bound_installed_linux_motion_repetition_failed",
-      "evidence": "evidence/revision-0.3/R10.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R10",
+        "status": "fresh_package_bound_installed_linux_motion_repetition_failed",
+        "evidence": "evidence/revision-0.3/R10.md"
+      }
     },
     {
       "id": "R11",
-      "status": "pending",
-      "evidence": null
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R11",
+        "status": "pending",
+        "evidence": null
+      }
     },
     {
       "id": "R12",
-      "status": "pending",
-      "evidence": null
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R12",
+        "status": "pending",
+        "evidence": null
+      }
     },
     {
       "id": "R13",
-      "status": "pending",
-      "evidence": null
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R13",
+        "status": "pending",
+        "evidence": null
+      }
     },
     {
       "id": "R14",
-      "status": "pending",
-      "evidence": null
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R14",
+        "status": "pending",
+        "evidence": null
+      }
     },
     {
       "id": "R15",
-      "status": "audit_preparation_pending_final_candidate",
-      "evidence": "evidence/revision-0.3/R15.md"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R15",
+        "status": "audit_preparation_pending_final_candidate",
+        "evidence": "evidence/revision-0.3/R15.md"
+      }
     },
     {
       "id": "R16",
-      "status": "repairing_final_boundary_findings",
-      "evidence": null,
-      "currentEvidence": "evidence/revision-0.3/R6-final-boundary-findings.json"
+      "status": "completed",
+      "evidence": "evidence/revision-0.3/final-acceptance.json",
+      "historicalNodeState": {
+        "id": "R16",
+        "status": "repairing_final_boundary_findings",
+        "evidence": null,
+        "currentEvidence": "evidence/revision-0.3/R6-final-boundary-findings.json"
+      }
     }
   ],
   "publicPrivacyCorrection": "Generic redistributable acceptance; private application inputs and original development records live outside the public repository. Clean public history is required.",
@@ -1622,18 +2719,7 @@
     "optInDockerTestsSkipped": 11,
     "releaseAcceptance": false
   },
-  "candidateAcceptanceStatus": "verification_in_progress",
-  "currentCandidateProgress": {
-    "evidence": "evidence/revision-0.3/candidate-verification-progress.json",
-    "macosMotionNumeric": "six_cases_passed",
-    "hostPhases": "G15 accepted from twelve host cases plus required Docker cases",
-    "releaseReady": false,
-    "linuxMotion": "G10 accepted for exact twelve-case macOS/Linux matrix with numerical checks and sampled normal-speed visual review",
-    "docker": "G07/G15 accepted from installed success, isolated state, startup failure, host/build/create interruption cases, builder and service identity reconciliation, and controlled cleanup-fault evidence",
-    "recipe": "G05 accepted for exact current candidate",
-    "linuxFullSuite": "failed-public-app-navigation-3-clock-bound; exact-failed-evidence-retained",
-    "scope": "Historical package cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428. Current repaired package progress is in correctedCandidateVerification. These historical labels do not accept the repaired package."
-  },
+  "candidateAcceptanceStatus": "requirements_accepted",
   "acceptedEvidenceTransfer": {
     "artifact": "evidence/revision-0.3/source-observation-transfer.json",
     "sourceCommit": "a080372d59edf32925f305782a6a81e81f37c121",
@@ -1652,14 +2738,6 @@
     "retainedAcceptedGateCount": 21,
     "executedIdentitiesPreserved": true
   },
-  "releaseBlockers": {
-    "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
-    "reopenedGateCount": 5,
-    "historicalResultsRetained": true,
-    "additionalEvidence": [
-      "evidence/revision-0.3/linux-capture-schema-diagnostic.json"
-    ]
-  },
   "timingContractClarification": {
     "evidence": "evidence/revision-0.3/timing-contract-clarification.json",
     "priorSpecSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250",
@@ -1673,14 +2751,14 @@
   },
   "correctedCandidateVerification": {
     "evidence": "evidence/revision-0.3/corrected-candidate-verification-progress.json",
-    "sha256": "555d54884373f28338a4eae440562e09ffe4ddb00d74d78aa45cbde9fab39ef9",
+    "sha256": "71366369818045503ea73a8ef5ef6ccb5e4bfb2c30f008a46a21b03cbaa0e9d5",
     "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
     "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
-    "status": "verification-in-progress",
+    "status": "requirements_accepted",
     "macosScriptedChecks": "passed",
     "installedDefaultCapAndOfflineCompose": "passed",
     "linuxFullSuite": "scripted-checks-passed-and-physically-closed",
-    "releaseReady": false,
+    "releaseReady": true,
     "installedPartialMotion": "numeric-format-and-root-sampled-normal-speed-checks-passed",
     "installedHostPhases": "passed-and-independently-accepted-scoped-G15-lifecycle",
     "currentMediaReview": "independent-scoped-G10-G19-media-requirements-accepted; collector-exit-1-retained",
@@ -1692,6 +2770,37 @@
     "installedDockerLifecycle": "accepted-scoped-G07-G15-G16-lifecycle-for-corrected-candidate",
     "installedDockerNormalSpeedReview": "root-sampled-visual-review-passed",
     "publicDemoRefresh": "nine-files-refreshed-and-hash-verified",
-    "gateStatusesChangedByThisRefresh": false
+    "gateStatusesChangedByThisRefresh": false,
+    "finalAcceptance": "evidence/revision-0.3/final-acceptance.json"
+  },
+  "previousCandidateBeforeCorrectedAcceptance": {
+    "implementationCommit": "8ebf3a69b498e08e5a7755b61849a7e1cc651377",
+    "tree": "880a2d3b86d18af17e6ae0b5ded9aa2d39c34924",
+    "sourceArchiveSha256": "cc120dc617ed6dd0b801e43fbce578b3d44a895c2986e8d2161f19a95ddb1816",
+    "sourceArchiveBytes": 8601600,
+    "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
+    "specSha256": "f64ac3b17dbcfa9019e840fd1b56df9f1ca7800f79a4cac9c2437644f9c9b250"
+  },
+  "readyStatementEffectiveOnlyWhen": "Effective only when the separately delivered release-identity.json binds this exact public handoff and archive, accepts both final R16 reviews and refreshed scans, and states ready_for_owner_publish. This in-archive record cannot bind its own final archive digest.",
+  "finalAcceptance": "evidence/revision-0.3/final-acceptance.json",
+  "resolvedReleaseBlockers": {
+    "evidence": "evidence/revision-0.3/R6-final-boundary-findings.json",
+    "reopenedGateCount": 5,
+    "historicalResultsRetained": true,
+    "additionalEvidence": [
+      "evidence/revision-0.3/linux-capture-schema-diagnostic.json"
+    ]
+  },
+  "releaseBlockers": [],
+  "historicalCandidateProgress": {
+    "evidence": "evidence/revision-0.3/candidate-verification-progress.json",
+    "macosMotionNumeric": "six_cases_passed",
+    "hostPhases": "G15 accepted from twelve host cases plus required Docker cases",
+    "releaseReady": false,
+    "linuxMotion": "G10 accepted for exact twelve-case macOS/Linux matrix with numerical checks and sampled normal-speed visual review",
+    "docker": "G07/G15 accepted from installed success, isolated state, startup failure, host/build/create interruption cases, builder and service identity reconciliation, and controlled cleanup-fault evidence",
+    "recipe": "G05 accepted for exact current candidate",
+    "linuxFullSuite": "failed-public-app-navigation-3-clock-bound; exact-failed-evidence-retained",
+    "scope": "Historical package cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428. Current repaired package progress is in correctedCandidateVerification. These historical labels do not accept the repaired package."
   }
 }

@@ -364,3 +364,7 @@ The Docker video completed two uninterrupted 1x passes of 75 frames each over 2.
 All nine refreshed public demo files match their recorded hashes. These are local files for the corrected candidate. Clean public-history repacking, final source archive and privacy checks, exact handoff identity, dual R16 reviews, and independent G01-G24 acceptance remain open. Nothing was published, pushed, deployed, or made public.
 
 The clean public implementation was independently rebuilt and repacked. Build and generated-schema checks passed, and the resulting 385,856-byte archive equals the tested package byte for byte. All 171 package members match the built files. Final archive privacy and independent acceptance remain open.
+
+## Final requirement acceptance
+
+Independent Astra and Terra reviews accept all G01 through G24 requirements for the corrected package and reviewed public handoff. Current runtime observations and historical byte associations remain separate. The final ledger preserves every original gate record and node status. The later documentation-only commit, source archive, bundle, refreshed scans, and final reviewer association are bound by the external release identity. Publication remains an owner action. The original 24-hour target was missed.
