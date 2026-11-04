@@ -1631,7 +1631,8 @@
     "linuxMotion": "G10 accepted for exact twelve-case macOS/Linux matrix with numerical checks and sampled normal-speed visual review",
     "docker": "G07/G15 accepted from installed success, isolated state, startup failure, host/build/create interruption cases, builder and service identity reconciliation, and controlled cleanup-fault evidence",
     "recipe": "G05 accepted for exact current candidate",
-    "linuxFullSuite": "failed-public-app-navigation-3-clock-bound; exact-failed-evidence-retained"
+    "linuxFullSuite": "failed-public-app-navigation-3-clock-bound; exact-failed-evidence-retained",
+    "scope": "Historical package cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428. Current repaired package progress is in correctedCandidateVerification. These historical labels do not accept the repaired package."
   },
   "acceptedEvidenceTransfer": {
     "artifact": "evidence/revision-0.3/source-observation-transfer.json",
@@ -1669,5 +1670,28 @@
     "status": "scoped-verification-passed-final-candidate-pending",
     "evidence": "evidence/revision-0.3/timing-repair-progress.json",
     "newGatesAccepted": []
+  },
+  "correctedCandidateVerification": {
+    "evidence": "evidence/revision-0.3/corrected-candidate-verification-progress.json",
+    "sha256": "555d54884373f28338a4eae440562e09ffe4ddb00d74d78aa45cbde9fab39ef9",
+    "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+    "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+    "status": "verification-in-progress",
+    "macosScriptedChecks": "passed",
+    "installedDefaultCapAndOfflineCompose": "passed",
+    "linuxFullSuite": "scripted-checks-passed-and-physically-closed",
+    "releaseReady": false,
+    "installedPartialMotion": "numeric-format-and-root-sampled-normal-speed-checks-passed",
+    "installedHostPhases": "passed-and-independently-accepted-scoped-G15-lifecycle",
+    "currentMediaReview": "independent-scoped-G10-G19-media-requirements-accepted; collector-exit-1-retained",
+    "independentPublicDom": "passed-direct-source-fixture-observation; independently-bound-to-installed-matrices",
+    "currentNormalSpeedCollectorActualExitCode": 1,
+    "currentNormalSpeedCollectorStatus": "collected-with-recorded-failures",
+    "gateStatusesChangedByCurrentMediaReview": false,
+    "currentMediaRootVisualReview": "all-26-chronological-sheets-reviewed; collector-exit-1-retained",
+    "installedDockerLifecycle": "accepted-scoped-G07-G15-G16-lifecycle-for-corrected-candidate",
+    "installedDockerNormalSpeedReview": "root-sampled-visual-review-passed",
+    "publicDemoRefresh": "nine-files-refreshed-and-hash-verified",
+    "gateStatusesChangedByThisRefresh": false
   }
 }

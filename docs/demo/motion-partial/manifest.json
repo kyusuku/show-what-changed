@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
   "toolVersion": "0.1.0",
-  "runId": "20261103T052335836Z-e9696e34a8840bc3",
+  "runId": "20261103T234938388Z-7925d590d80f4517",
   "state": "terminal",
   "status": "partial",
   "exitCode": 3,
   "captureMode": "motion",
   "specRevision": "0.3",
-  "startedAt": "2026-11-03T05:23:35.836Z",
-  "endedAt": "2026-11-03T05:24:41.286Z",
+  "startedAt": "2026-11-03T23:49:38.388Z",
+  "endedAt": "2026-11-03T23:50:52.791Z",
   "sources": {
     "before": {
       "requested": "fdb005435fa379315cf8e425c385b8f943779b2c",
@@ -74,32 +74,32 @@
       "scenarioId": "partial-motion",
       "side": "before",
       "stats": {
-        "receivedFrames": 181,
-        "persistedFrames": 181,
-        "acknowledgedFrames": 181,
+        "receivedFrames": 151,
+        "persistedFrames": 151,
+        "acknowledgedFrames": 151,
         "rejectedFrames": 0,
         "maxQueueDepth": 1,
         "sourceDroppedFrames": null,
-        "maxGapMs": 249.9599999282509
+        "maxGapMs": 324.1139999590814
       },
-      "clockErrorBoundMs": 6.321375003814865,
-      "maxDriftMs": 2.6085000038146973,
+      "clockErrorBoundMs": 1.7642500898284652,
+      "maxDriftMs": 0.5818955898284912,
       "failureAtMs": null
     },
     {
       "scenarioId": "partial-motion",
       "side": "after",
       "stats": {
-        "receivedFrames": 206,
-        "persistedFrames": 206,
-        "acknowledgedFrames": 206,
+        "receivedFrames": 184,
+        "persistedFrames": 184,
+        "acknowledgedFrames": 184,
         "rejectedFrames": 0,
         "maxQueueDepth": 1,
         "sourceDroppedFrames": null,
-        "maxGapMs": 1566.6039999341592
+        "maxGapMs": 1566.603999817744
       },
-      "clockErrorBoundMs": 6.725895588966068,
-      "maxDriftMs": 2.8794370889663696,
+      "clockErrorBoundMs": 2.8235836201629354,
+      "maxDriftMs": 1.0661876201629639,
       "failureAtMs": null
     }
   ],
@@ -130,7 +130,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 302.4803340000003
+            "elapsedMs": 348.9580000000001
           },
           "after": {
             "status": "ok",
@@ -146,7 +146,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 304.2125000000001
+            "elapsedMs": 344.4395840000002
           },
           "changeRatio": 0.003193359375
         },
@@ -169,7 +169,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 3114.6177500000003
+            "elapsedMs": 3131.775875
           },
           "after": {
             "status": "ok",
@@ -185,7 +185,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 3125.524583
+            "elapsedMs": 3125.7235
           },
           "changeRatio": 0.003193359375
         },
@@ -208,7 +208,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 204.59379199999967
+            "elapsedMs": 189.02045800000087
           },
           "after": {
             "status": "ok",
@@ -224,7 +224,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 201.90954200000033
+            "elapsedMs": 195.32254100000046
           },
           "changeRatio": 0.003193359375
         },
@@ -247,7 +247,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": "prior-success",
-            "elapsedMs": 956.2841250000001
+            "elapsedMs": 961.3761669999994
           },
           "after": {
             "status": "ok",
@@ -263,7 +263,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 573.5370830000002
+            "elapsedMs": 570.7548340000003
           },
           "changeRatio": null
         },
@@ -286,7 +286,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": "prior-success",
-            "elapsedMs": 0.002375000000029104
+            "elapsedMs": 0.0036249999993742676
           },
           "after": {
             "status": "ok",
@@ -302,7 +302,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 1075.5414169999995
+            "elapsedMs": 1067.775791
           },
           "changeRatio": null
         },
@@ -325,7 +325,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": "prior-success",
-            "elapsedMs": 0.004750000000058208
+            "elapsedMs": 0.004000000000814907
           },
           "after": {
             "status": "ok",
@@ -341,7 +341,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 526.1382080000003
+            "elapsedMs": 561.2285000000011
           },
           "changeRatio": null
         },
@@ -364,7 +364,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": "prior-success",
-            "elapsedMs": 0.002833999998983927
+            "elapsedMs": 0.006750000000465661
           },
           "after": {
             "status": "ok",
@@ -380,7 +380,7 @@
               "maskDigest": "9324d0e3b3ed01febd5adb7eece5a215cf8f0af7566649c7295a4f00c7d9d2b9"
             },
             "heldFromStepId": null,
-            "elapsedMs": 1555.324834000001
+            "elapsedMs": 1556.6514169999991
           },
           "changeRatio": null
         }
@@ -398,7 +398,7 @@
   },
   "timeline": {
     "fps": 30,
-    "totalFrames": 265,
+    "totalFrames": 267,
     "templateVersion": 2,
     "width": 1920,
     "height": 686
@@ -406,8 +406,8 @@
   "artifacts": {
     "video": {
       "path": "compare.mp4",
-      "sha256": "1b6e3787a13dc76c638958ff229f11b509fdabd33eb772ad0f6df03e572b195a",
-      "bytes": 108999
+      "sha256": "33ea15e1b516c37702ca27a7a0e5656c01479c1745349ad23219bc1df57269ae",
+      "bytes": 113964
     },
     "poster": {
       "path": "poster.png",
@@ -416,17 +416,17 @@
     },
     "capture": {
       "path": "capture.json",
-      "sha256": "bdc2e9ed30b490976bdef38ff44f4997e10bd812573d6d9a371fd2a0aebcc38b",
-      "bytes": 418064
+      "sha256": "ca3af1cc968ad991a58de59b78b97145304bf27ecbaa178a4eba65ab53292f23",
+      "bytes": 366899
     },
     "timeline": {
       "path": "timeline.json",
-      "sha256": "b7e3b1d7a3939a650b7f293af5837cd9b06e09b2ae020fb9d59297179b91a507",
-      "bytes": 122006
+      "sha256": "339a20461f051cf344476d561d2dcbd87d8fb21007967b82176cc205f5cd80de",
+      "bytes": 113488
     },
     "pr": {
       "path": "pr.md",
-      "sha256": "b2f21267fbf3dfdc27aa58fe5c6cc1038b2f92352f6951a9b4f848eda05f479d",
+      "sha256": "02c0c3d18dac7b32ab3ba9f891d34b6695f446a7a26ce0c14fdfefd2cf315052",
       "bytes": 930
     }
   },
@@ -480,12 +480,12 @@
     }
   ],
   "phaseTimings": {
-    "validating": 575.059667,
-    "preparing": 233.40050000000008,
-    "starting": 970.4133750000001,
-    "recording": 8215.886292,
-    "rendering": 2454.612167000001,
-    "encoding": 16944.456416,
-    "cleaning": 483.64491599999747
+    "validating": 652.437542,
+    "preparing": 604.224,
+    "starting": 1230.6419580000002,
+    "recording": 8627.031667,
+    "rendering": 2780.5557910000007,
+    "encoding": 23256.426833999998,
+    "cleaning": 516.9362919999985
   }
 }

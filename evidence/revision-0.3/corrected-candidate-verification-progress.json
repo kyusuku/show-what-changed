@@ -1,0 +1,1164 @@
+{
+  "schemaVersion": 1,
+  "specRevision": "0.3",
+  "kind": "corrected-candidate-verification-progress",
+  "status": "verification-in-progress",
+  "candidate": {
+    "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+    "sourceArchiveSha256": "8cff2f2799a4fc44420010fd085c8a5e320e7ce7c04fc381ea728b2058880a5f",
+    "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+    "packageBytes": 385856,
+    "packageMembers": 171,
+    "specSha256": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8"
+  },
+  "macos": {
+    "status": "scripted-checks-passed",
+    "stages": [
+      {
+        "name": "install",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "54733397a09314b23439867fd7994a462a01b8a4b8280d9efd8d773e58d7bdd9",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "typecheck",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "82ba8e5f06d7d1a612027a34134d56c81b61a7aef5bb8cfd3c9d00042c91afea",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "schema-check",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "unit",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "85e5350020612d7358ee0a0467b118189c7ceea6abb753eaa22be5d86a0ae39a",
+        "stderrSha256": "00faabd60a5eddfdf972219631c11dc9e1990523ee547c4727ce85e6fcb2057a"
+      },
+      {
+        "name": "contracts",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "150f4976548420968a48f536f761b11dfa6de82378ef7fbc6ec5ec0dd205f70e",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "privacy-scanner",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "69dc6310f860ab6bdd073b74d7126ed3f5fe10af732a1a6c01e1461ba3878bf4",
+        "stderrSha256": "87e0eb2745103262486dc776d5fc67c1074a9c8dafcf4af8e1d0cb18bc886143"
+      },
+      {
+        "name": "pack",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "47e61998187cc830d4a88de2b74b09b84bd707459e6d97733af1b714a92153cd",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "integration",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "ccd1ee774d0396cbbbe836225ca2b782f5138173c2bc2575b046efa18cf885be",
+        "stderrSha256": "bff19e8ef00faf09387b2fa4b8911cc9e6526a92cef2c754b4e1a74672baf160"
+      },
+      {
+        "name": "package-source-binding",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "5f6a81749050a3f52fbeb1feef61feb285a555e35b571c74cedadba4c274b8ee",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "package-smoke",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "2c87dd0d5d2e2b38909a7548fc32742e3da5ab222499f628c84c68dca2910e0e",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "installed-motion",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "0e379d7b0b370952cd8e4ba9a08cc26b125477582e66a0619c67974442cb729f",
+        "stderrSha256": "89e669a6345be1369333698fe6cf2d890d03a30e6761b270afbb55e156b928d2"
+      },
+      {
+        "name": "host-compatibility",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "b8eef539758a3b99b3c8f2afcd44efd6bc0dab0fd0add46d86013abe3ac9347b",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "public-app",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "d01c544ba1357d78c80cc14054747b5608368e445d49dcf90bbc43caf79866eb",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "repeatability",
+        "exitCode": 0,
+        "timedOut": false,
+        "stdoutSha256": "458a0e8939ad2fc1522275db02eeb753caf492955ecf0532c5560cf836564206",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "unitTests": {
+      "passed": 839,
+      "skipped": 11,
+      "files": 43
+    },
+    "contractTests": {
+      "passed": 15,
+      "files": 3
+    },
+    "integrationTests": {
+      "passed": 103,
+      "files": 8
+    },
+    "packageSmokeCommands": 18,
+    "motionCases": 6,
+    "motionStatus": "numeric-passed-scoped-normal-speed-review-accepted",
+    "hostCompatibilityRows": [
+      "static",
+      "npm",
+      "pnpm-workspace",
+      "python"
+    ],
+    "publicAppComparisons": 7,
+    "publicAppNormalSpeedReview": "accepted-scoped-media-requirements",
+    "repeatability": {
+      "mode": "explicit-keyframes",
+      "sourceFrameComparisons": 14,
+      "encodedFrameComparisons": 16,
+      "status": "passed",
+      "motionAcceptance": false
+    },
+    "sourceUnchanged": true,
+    "automaticRetry": false
+  },
+  "installedDefaultCap": {
+    "status": "passed",
+    "actualCompareExitCode": 3,
+    "originalFailureCode": "SCENARIO_TIMEOUT",
+    "defaultLimitMs": 60000,
+    "limitExplicitlyOverridden": false,
+    "motionFrames": 1800,
+    "titleFrames": 30,
+    "totalFrames": 1830,
+    "observedPastPlaybackMs": 42.44437499999913,
+    "clockErrorBoundsMs": {
+      "before": 1.4072705592188868,
+      "after": 9.660041200637806
+    },
+    "frameAccounting": {
+      "before": {
+        "receivedFrames": 66,
+        "persistedFrames": 66,
+        "acknowledgedFrames": 66,
+        "rejectedFrames": 0
+      },
+      "after": {
+        "receivedFrames": 66,
+        "persistedFrames": 66,
+        "acknowledgedFrames": 66,
+        "rejectedFrames": 0
+      }
+    },
+    "hashedArtifactsVerified": 160,
+    "lateFailureBadgesViewed": true,
+    "callerPreserved": true,
+    "installedCandidateUnchanged": true,
+    "cleanupIndependentlyVerified": true,
+    "offlineCompose": {
+      "status": "passed",
+      "actualExitCode": 3,
+      "browserPathAbsent": true,
+      "originalFailurePreserved": true,
+      "preserved": {
+        "capture.json": {
+          "beforeSha256": "e97ae190293ff9a16f0dd68b7618957264f5677ad86bbabb93e4af11128ef34f",
+          "afterSha256": "e97ae190293ff9a16f0dd68b7618957264f5677ad86bbabb93e4af11128ef34f",
+          "byteEqual": true
+        },
+        "timeline.json": {
+          "beforeSha256": "557dcd6a683ac940c52009ee7c1f77adc617bd741a93cc6fe4cf386fecb7b5b3",
+          "afterSha256": "557dcd6a683ac940c52009ee7c1f77adc617bd741a93cc6fe4cf386fecb7b5b3",
+          "byteEqual": true
+        },
+        "compare.mp4": {
+          "beforeSha256": "c716ca47fad861c720559b9bcd2a0c86d3ddcabfe271d5f43ec5814785d7bccd",
+          "afterSha256": "c716ca47fad861c720559b9bcd2a0c86d3ddcabfe271d5f43ec5814785d7bccd",
+          "byteEqual": true
+        },
+        "poster.png": {
+          "beforeSha256": "14105409a7b0e0554078111515750c86946f562228ae870d98a32958a3eb6aff",
+          "afterSha256": "14105409a7b0e0554078111515750c86946f562228ae870d98a32958a3eb6aff",
+          "byteEqual": true
+        }
+      },
+      "decodedFrames": 1830,
+      "durationSeconds": 61,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "fps": 30,
+      "callerPreserved": true,
+      "cleanupIndependentlyVerified": true
+    }
+  },
+  "linux": {
+    "status": "scripted-checks-passed-and-physically-closed",
+    "bindingSha256": "5a97ab8f76e1489035729f43974c6f4dc9c34dbcf51c78e897ccd64158ea3150",
+    "sameCanonicalSuiteContinues": false,
+    "automaticRetry": false,
+    "observationCorrection": {
+      "scope": "verification-only",
+      "reason": "Docker reports the default bridge network mode as bridge. A fresh full inspect matched the admitted bridge network ID and all unchanged isolation constraints.",
+      "originalFailedObservationRetained": true,
+      "evidenceSha256": "da7b928299ed9f94d04720ae2e80064bbecbf8d9468b4834393e5bec609ec12d"
+    },
+    "platformChecksComplete": true,
+    "independentAcceptance": "pending",
+    "stages": [
+      {
+        "name": "extract",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "environment",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "dd2f05523f9dce78fce4072c50fd3d83e209ac01e56f011bef102bdf3da62b92",
+        "stderrSha256": "cb77455242c043feb833a0b4c7a6cea2d8e4fb1a05bc59f068acc8853c691876"
+      },
+      {
+        "name": "install",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "abdf836a928a2af83005c0cd2dbebbf7f7a4fd719b8959e8fb6cc99ac1ff8581",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "sandbox",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "f47dd8185578cbde8a878f0ceb4fd96a50c94169281e12fb664a3c0e06f3554e",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "typecheck",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "d1e5a265fd2a1657c16b373a2a79425d607997303a5ee6fd3d5323deb4bf6718",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "82ba8e5f06d7d1a612027a34134d56c81b61a7aef5bb8cfd3c9d00042c91afea",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "schema-check",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "fbf96b4f395e22b7994465f1d6ba9817413b90a9cb1686ec1262a9bab91def4a",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "unit",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "6fdbb342b19fe9b13c2af61edc76eeeb7d69ee2d77325d9dcf917f49c77d3a0a",
+        "stderrSha256": "1f205b04222d35c9c1bd1c27f737ee5a485db9b1fa0efa7f9c3aff8a74617928"
+      },
+      {
+        "name": "contracts",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "24c158ce6ccd2627b4848c1b3748070f902851b95936bd850157a2810461d4fe",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "privacy-scanner",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "69dc6310f860ab6bdd073b74d7126ed3f5fe10af732a1a6c01e1461ba3878bf4",
+        "stderrSha256": "c9aacee9a5860197372b544c3c3cda838a3ab64f3b3850d632ce47634af30dd2"
+      },
+      {
+        "name": "integration",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "093cb85a41ea6cde70ffc6b0f02b06f6f32d22d99817ad992ce72a6a4819eedd",
+        "stderrSha256": "1ca4c8d92f60df8d50c9e01133fb0cc2a2100fbf49c961cf46fb6332180175b5"
+      },
+      {
+        "name": "package-source-binding",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "5f6a81749050a3f52fbeb1feef61feb285a555e35b571c74cedadba4c274b8ee",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "package-smoke",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "2be7c8ba7f902f676ee708746f49492b89a206bf3415821eb3609c808dc749a1",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "installed-motion",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "9c58322629c516533c8ff5656a4dff39f4fcf1ee02a05b1a6c6e28c7675d357b",
+        "stderrSha256": "89e669a6345be1369333698fe6cf2d890d03a30e6761b270afbb55e156b928d2"
+      },
+      {
+        "name": "host-compatibility",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "b8eef539758a3b99b3c8f2afcd44efd6bc0dab0fd0add46d86013abe3ac9347b",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "public-app",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "182c91d3a38a4cde64847d8be3c676c88b2b7e651fa533b2fa3f23f7a26a0633",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "repeatability",
+        "exitCode": 0,
+        "signal": null,
+        "oomKillDelta": 0,
+        "stdoutSha256": "83673ba9c20fb0b1995b275d0ae8b1641dad5c73e6d220f8c45c4b5d811a3487",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "unitTests": {
+      "passed": 839,
+      "skipped": 11,
+      "files": 43
+    },
+    "contractTests": {
+      "passed": 15,
+      "files": 3
+    },
+    "integrationTests": {
+      "passed": 103,
+      "files": 8
+    },
+    "motionCases": 6,
+    "publicAppComparisons": 7,
+    "normalSpeedReview": "accepted-scoped-G10-G19-media-requirements",
+    "cleanup": {
+      "ownedContainerAbsent": true,
+      "ownedHostPidAndGroupAbsent": true,
+      "fullInventoryRestored": true,
+      "normalVmStop": true
+    },
+    "physicalCommandRecords": 28,
+    "physicalRawStreamsVerified": 56
+  },
+  "publicHistoryCleanup": {
+    "status": "transformed-and-file-verified",
+    "commit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+    "tree": "f3e71eb10efc034949a5a7d2e921b8b25972c47c",
+    "commits": 8,
+    "trackedPaths": 476,
+    "sanitizedPaths": 9,
+    "sanitizedOccurrences": 29,
+    "otherTrackedPathsByteAndModeUnchanged": 467,
+    "repackEquality": "pending",
+    "finalHistoryAudit": "pending"
+  },
+  "historicalMedia": {
+    "pngBlobsReviewed": 24,
+    "pngVisiblePrivacyFindings": 0,
+    "remainingMp4Blobs": 0,
+    "mp4BlobsReviewed": 6,
+    "mp4VisiblePrivacyFindings": 0,
+    "mp4TechnicalDecode": "All six finite videos fully decoded without errors; no audio streams.",
+    "mp4VisualMethod": "Complete chronological sheets of 4 FPS samples, plus both capability-fixture frames. Root directly inspected all six sheets. This does not establish every-frame visual inspection or hidden-byte absence.",
+    "mp4TotalSamples": 112,
+    "mp4ReviewSha256": "047f9c5d3e0e6ca3499206858bf97d2b45da289c7a4dcf3af83a0021f4c1050a",
+    "scope": "Historical media privacy review. Current motion demos and final intended public history remain separately verified."
+  },
+  "proofs": [
+    {
+      "id": "macos-build-unit",
+      "sha256": "67979ca4d32be52d5000fe532cd2dfc8a17ce7b2391a51a079e6ce288bfe9a99",
+      "bytes": 5381
+    },
+    {
+      "id": "macos-installed-matrix",
+      "sha256": "bca97e95bbe6d19c8b1a3432965ed964e97632b146ad4bc96b6f397d80e67149",
+      "bytes": 5538
+    },
+    {
+      "id": "package-smoke",
+      "sha256": "64491ab8ab8bb7a487597743167d1b8baf28edc73fb33c0f1c2c546358772585",
+      "bytes": 14678
+    },
+    {
+      "id": "motion",
+      "sha256": "37db3b1b78bef45d8e1c3271af0c871c1be3d481fd33b3f5eaac1422abbf91da",
+      "bytes": 967535
+    },
+    {
+      "id": "host-compatibility",
+      "sha256": "46edd0d0cc700d8a6f829212eb41faf707215373c7d139c77b188ef52df9e533",
+      "bytes": 20376
+    },
+    {
+      "id": "public-app",
+      "sha256": "b0316b853f6799ee83e30271921246a47e7839a43f56c87fe57c8a8abfa5873a",
+      "bytes": 82804
+    },
+    {
+      "id": "keyframe-repeatability",
+      "sha256": "4f1fa99980689abf9afd0b15f0bb7aed9adba3945b0469db9aac644d4e686053",
+      "bytes": 5764
+    },
+    {
+      "id": "installed-default-cap",
+      "sha256": "f256688f396068be3b526617206aca29ec91c99129a7cef68caace8524e35b8c",
+      "bytes": 87616
+    },
+    {
+      "id": "installed-offline-compose",
+      "sha256": "f2a7c8bffa2c11be0e106d5ae63fa0e688fb216ab64c8346e26ddd1c0f2b3a4a",
+      "bytes": 2140
+    },
+    {
+      "id": "history-transformation",
+      "sha256": "6b6b3ab0cc597bd0e7c4ae7a49a365fba91567bfd49ac5de68579dfb309ca3cb",
+      "bytes": 61358
+    },
+    {
+      "id": "historical-png-review",
+      "sha256": "ff8bf1d86c5cd66359a776117e9d7549a42cfc18ba6b9f24e59a2546186ff339",
+      "bytes": 44873
+    },
+    {
+      "id": "linux-full-suite",
+      "sha256": "867ed1966c96f4271faf8165db5d11d4679c7c9b9c2b600dd6c49d78e9286bc3",
+      "bytes": 87875
+    },
+    {
+      "id": "linux-physical-closure",
+      "sha256": "ad874216b030949a1a9d305eb5f6a9f5f2113a5e37edb62918c9656eecdeb0c3",
+      "bytes": 107742
+    },
+    {
+      "id": "installed-partial-motion",
+      "sha256": "49df22ba87b6cb88bf00110ef9301c87ee0589a13780f4fbabf440b9e95a255c",
+      "bytes": 137335
+    },
+    {
+      "id": "installed-partial-full-video-probe",
+      "sha256": "4217f44e5c165b2e66a16011c604241d06f19cb74063898ec389da619c83facf",
+      "bytes": 1515
+    },
+    {
+      "id": "installed-host-phases",
+      "sha256": "ab44c5fb614529e8dc55856ae59fe75a81a6813153fd856973e345df322c0fb1",
+      "bytes": 59772
+    },
+    {
+      "id": "current-normal-speed-collector",
+      "sha256": "85a3225b6f80f559a413ed99943345a98f15e27cbf0b6979797639ca061b5285",
+      "bytes": 64562
+    },
+    {
+      "id": "current-normal-speed-cleanup",
+      "sha256": "84c39c2d2186dfe874f6b4569ba3597284016961f3f8eed931355305bc43b3f3",
+      "bytes": 2526
+    },
+    {
+      "id": "current-normal-speed-clean-playback",
+      "sha256": "21fdd6d3b89a9a8e05fa62f603970f3569a64fa5ae4b3a1ebb397e2a25c7db47",
+      "bytes": 2138528
+    },
+    {
+      "id": "current-normal-speed-temporal",
+      "sha256": "08a18ae2fe982587a552502a82a358124476e987efaf68a9ca4b6d96e923014a",
+      "bytes": 4527239
+    },
+    {
+      "id": "current-normal-speed-sheets",
+      "sha256": "58c691ed0032e3b5501534fc2fad14682459e75595c0a2dbd6babcb7d6fded29",
+      "bytes": 297966
+    },
+    {
+      "id": "current-normal-speed-artifact-inventory",
+      "sha256": "5c6a3ace5c9b3639580b5c923b90a99dfebe6e0b7caeebb01a12d72de2695ca4",
+      "bytes": 220563
+    },
+    {
+      "id": "current-media-independent-review",
+      "sha256": "9100dab9dab431ba54f0c2d0f9fcb6523027f208d63ae184cb53e9e3fd2f1fb3",
+      "bytes": 11141
+    },
+    {
+      "id": "current-media-playback-analysis",
+      "sha256": "287d37346d92bb491b2ace643f7a9e9a6e7733ad6f2b66e4bbe10f3c1c78fac0",
+      "bytes": 132018
+    },
+    {
+      "id": "current-media-visual-review",
+      "sha256": "74bc2598b33d17361a7d8b0e192e9c1dccae87c59cd2246284d74f70aa712a24",
+      "bytes": 25138
+    },
+    {
+      "id": "current-public-dom",
+      "sha256": "ba13430fd0c52170c082138c3f5fdf7f5315c1cd9daf4821ea06f2b2a62f67be",
+      "bytes": 46125
+    },
+    {
+      "id": "historical-six-mp4-visual-review",
+      "sha256": "047f9c5d3e0e6ca3499206858bf97d2b45da289c7a4dcf3af83a0021f4c1050a",
+      "bytes": 7140
+    },
+    {
+      "id": "current-normal-speed-root-visual-review",
+      "sha256": "eab2f9964b93b451b25b06ce0b89f76dad8b67eeb53578267fef6385ad9c4878",
+      "bytes": 7724
+    },
+    {
+      "id": "installed-partial-normal-speed-root-review",
+      "sha256": "b2f5dcec7dcfc6f089f87d584c562b22d912f935c7dbaeaab363fc04866b9413",
+      "bytes": 4884
+    },
+    {
+      "id": "installed-partial-normal-speed-native-command",
+      "sha256": "857d53c66dbbe31cc80e87d074cd1f23fd252f954ee5455ce156c967e538a2d1",
+      "bytes": 1551
+    },
+    {
+      "id": "installed-docker-lifecycle-independent-report",
+      "sha256": "840c85ffc24ceac5abda861006efcf25c4587a340c67b77f4aefea27bc6f327a",
+      "bytes": 5405
+    },
+    {
+      "id": "installed-docker-lifecycle-independent-review",
+      "sha256": "958abd367ef04c965db9606c26a46ffea53fdaacc71da27332ed5c4eae1e3477",
+      "bytes": 14235
+    },
+    {
+      "id": "installed-docker-positive-result",
+      "sha256": "438add8d97dd88c495d1f69f1acaaf5d581114b8ee26940a449a633da8277b0f",
+      "bytes": 4611
+    },
+    {
+      "id": "installed-docker-postflight-correction",
+      "sha256": "0bc23d350b6cfd4bfe1723f87a2f6831e46cc0070c80f8d1c4b06ec54a04cacc",
+      "bytes": 4337
+    },
+    {
+      "id": "installed-docker-export-result",
+      "sha256": "0848e212a4e89689b6d8761bc66ab59eb376d9d1828f1a4ed1df411c62b98223",
+      "bytes": 226406
+    },
+    {
+      "id": "installed-docker-export-file-only-finish",
+      "sha256": "f94cd372ad8f220f6fbd598bde9c4b3ea658eadd285147f32ef1c3aa1459e5bb",
+      "bytes": 2138
+    },
+    {
+      "id": "installed-docker-root-closure-verification",
+      "sha256": "074c4b535e147705b8c1bfe3d8d98dee3484985a42ec31d64b78d95d8f366656",
+      "bytes": 824
+    },
+    {
+      "id": "installed-docker-physical-closure",
+      "sha256": "91d00104c2804907d1e4ead95de63b5dd0e96b0c67fce93620151fdb7a7b7b24",
+      "bytes": 2320634
+    },
+    {
+      "id": "public-demo-refresh-inventory",
+      "sha256": "e28b857e4b50da0c3d36a96e5f38bd2eec84d6d1238361e28bc37a00b0b91b29",
+      "bytes": 1554
+    },
+    {
+      "id": "installed-docker-normal-speed-root-review",
+      "sha256": "d1fe321f783fe3f0397ad6d943bb51b49b00c648dc701868612aefae67b3bed7",
+      "bytes": 4159
+    },
+    {
+      "id": "installed-docker-normal-speed-native-command",
+      "sha256": "82a842a327a46a4df91a0de58c4013fae65522d32d7f696eee7132a663221f3b",
+      "bytes": 1562
+    },
+    {
+      "id": "installed-docker-full-video-probe",
+      "sha256": "698781fdee85b06c1d719e5284e249312bba0e0ddc6d54575e4cbc8b0a117229",
+      "bytes": 1921
+    }
+  ],
+  "remaining": [
+    "Final public source archive identity and privacy audit.",
+    "Exact publishing handoff, dual R16 reviews, and independent final G01-G24 acceptance."
+  ],
+  "gatesNewlyAccepted": [],
+  "historicalFailuresRemainFailed": true,
+  "releaseReady": false,
+  "publicationPerformed": false,
+  "privateEvidencePathsIncluded": false,
+  "installedPartialMotion": {
+    "status": "numeric-format-and-sampled-normal-speed-checks-passed",
+    "commands": [
+      {
+        "name": "plan",
+        "code": 0,
+        "expectedCode": 0,
+        "status": "ok",
+        "errorCode": null
+      },
+      {
+        "name": "compare-partial",
+        "code": 3,
+        "expectedCode": 3,
+        "status": "partial",
+        "errorCode": "LOCATOR_MISSING"
+      },
+      {
+        "name": "compose-unavailable-encoder",
+        "code": 8,
+        "expectedCode": 8,
+        "status": "failed",
+        "errorCode": "MEDIA_CAPABILITY_UNAVAILABLE"
+      },
+      {
+        "name": "compose-recovered-partial",
+        "code": 3,
+        "expectedCode": 3,
+        "status": "partial",
+        "errorCode": "LOCATOR_MISSING"
+      }
+    ],
+    "summary": {
+      "verifiedPairs": 3,
+      "changedPairs": 3,
+      "expectedAbsences": 0,
+      "exclusions": 0,
+      "failedSteps": 1,
+      "blockedSteps": 3,
+      "coverageOmissions": 0
+    },
+    "failureTiming": {
+      "timing": {
+        "startMs": 2950.5515840000003,
+        "limitMs": 20000,
+        "observedEndMs": 10839.040167
+      },
+      "playbackWindow": {
+        "startMs": 2950.5515840000003,
+        "endMs": 10839.040167,
+        "durationFrames": 237
+      },
+      "failureAtMs": 7612.510875,
+      "firstFailureFrameMs": 7617.218250666667,
+      "nextBarrierMs": 7629.38175,
+      "failureEndMs": 7650.551584000001,
+      "blockedAtMs": 7629.388416999999,
+      "firstBlockedFrameMs": 7650.551584000001,
+      "failureFrame": 170,
+      "annotationDurationFrames": 1,
+      "blockedFrame": 171,
+      "heldSource": "frames/partial-motion-before-00150.png",
+      "continuedAfterSources": 19
+    },
+    "offlineRecovery": {
+      "unavailableEncoderExitCode": 8,
+      "recoveryExitCode": 3,
+      "comparisonOutcomePreserved": true,
+      "cleanupOutcomePreserved": true,
+      "captureAndTimelineUnchanged": true,
+      "allSourceImagesUnchanged": true,
+      "browserUnavailable": true,
+      "earlierEncodingFailureRetained": true
+    },
+    "persistedMasksChecked": 349,
+    "preservedArtifactHashesChecked": 351,
+    "videoSha256": "33ea15e1b516c37702ca27a7a0e5656c01479c1745349ad23219bc1df57269ae",
+    "fullDecodedFrames": 267,
+    "durationSeconds": 8.9,
+    "codec": "h264",
+    "fps": 30,
+    "faststart": true,
+    "cleanup": {
+      "processLedgers": 1,
+      "dockerIdentities": 0,
+      "ownerState": "inactive",
+      "workspaceAbsent": true
+    },
+    "normalSpeedReview": {
+      "status": "root-sampled-visual-review-passed",
+      "nativeExitCode": 0,
+      "normalSpeedPasses": 2,
+      "framesPerPass": 267,
+      "playbackRate": 1,
+      "droppedFramesPerPass": 0,
+      "corruptedFramesPerPass": 0,
+      "chronologicalScreenshotsReviewed": 46,
+      "verifiedCollectorArtifacts": 59,
+      "mandatoryVisibleDefectsFound": 0,
+      "failureAndBlockedLabelsVisible": true,
+      "masksRemainFixed": true,
+      "validAfterFootageContinues": true,
+      "reviewSha256": "b2f5dcec7dcfc6f089f87d584c562b22d912f935c7dbaeaab363fc04866b9413",
+      "nativeCommandSha256": "857d53c66dbbe31cc80e87d074cd1f23fd252f954ee5455ce156c967e538a2d1",
+      "method": "Agent inspection of timestamp-bracketed screenshots acquired during actual uninterrupted 1x playback, not continuous human viewing or every-frame visual inspection.",
+      "limitations": [
+        "The single failure boundary frame is established by the separate decoded-frame numerical proof, not the 200ms screenshot sampling.",
+        "Source LOCATOR_MISSING and encoding capability error history remain unchanged."
+      ],
+      "gateAcceptance": false,
+      "releaseAcceptance": false
+    }
+  },
+  "installedHostPhases": {
+    "status": "passed",
+    "caseIds": [
+      "setup-deadline",
+      "startup-deadline",
+      "recording-sigint",
+      "recording-sigterm",
+      "recording-deadline",
+      "encoding-deadline",
+      "setup-sigint",
+      "setup-sigterm",
+      "startup-sigint",
+      "startup-sigterm",
+      "encoding-sigint",
+      "encoding-sigterm"
+    ],
+    "actualExits": {
+      "setup-deadline": 10,
+      "startup-deadline": 10,
+      "recording-sigint": 130,
+      "recording-sigterm": 143,
+      "recording-deadline": 10,
+      "encoding-deadline": 10,
+      "setup-sigint": 130,
+      "setup-sigterm": 143,
+      "startup-sigint": 130,
+      "startup-sigterm": 143,
+      "encoding-sigint": 130,
+      "encoding-sigterm": 143
+    },
+    "allPhaseBoundariesObserved": true,
+    "callersPreserved": true,
+    "unrelatedSentinelsPreserved": true,
+    "ownedProcessesAndGroupsIndependentlyAbsent": true,
+    "cleanupPassed": true,
+    "independentAcceptance": "accepted-scoped-G15-lifecycle-in-combined-G07-G15-G16-review",
+    "actualNativeExitCode": 0,
+    "nativeSessionClosed": true,
+    "independentReviewSha256": "958abd367ef04c965db9606c26a46ffea53fdaacc71da27332ed5c4eae1e3477"
+  },
+  "currentMediaReview": {
+    "status": "independent-scoped-media-requirements-accepted",
+    "scope": "G10 controlled motion and G19 public-app media requirements for this exact installed candidate. No broad gate promotion or overall release acceptance.",
+    "controlledMotionVideos": 12,
+    "publicAppVideos": 14,
+    "collector": {
+      "status": "collected-with-recorded-failures",
+      "actualExitCode": 1,
+      "nativeSessionClosed": true,
+      "completedCleanPasses": 26,
+      "completedTemporalPasses": 26,
+      "chronologicalSheetsReviewed": 26,
+      "playbackRate": 1,
+      "seekingOrRetries": false,
+      "allPassesReachedExpectedTotalFrameCount": true,
+      "firstClipFailure": {
+        "id": "macos-motion-1280x800-run-1",
+        "videoSha256": "256064d072c06a51e59b7b14e150d575982c0a3f03a72d807977e147f3406919",
+        "cleanDroppedFrames": 12,
+        "temporalDroppedFrames": 4,
+        "corruptedFrames": 0,
+        "staticTitleFrameRange": [
+          0,
+          29
+        ],
+        "motionFrameRange": [
+          30,
+          155
+        ],
+        "postTitleCallbacksPresentPerPass": 126,
+        "missingPostTitleCallbackFrames": [],
+        "maximumPostTitlePresentationGapMs": {
+          "clean": 35.2,
+          "temporal": 35.1
+        },
+        "observedGapLocation": "Recorded anomalous intervals end inside the static title in both passes.",
+        "cause": "Unknown. Exact individual clean-pass dropped timestamps are not established.",
+        "cleanSuccess": false
+      },
+      "otherVideosZeroDroppedAndCorruptedFramesInBothPasses": 25,
+      "callbackObservationLimit": "Linux navigation-1 temporal callbacks omit frames 126 and 222 while its terminal dropped count is zero. Counter jumps do not establish lost output frames.",
+      "cleanup": {
+        "status": "closed",
+        "pagesClosed": true,
+        "contextClosed": true,
+        "browserDisconnected": true,
+        "actualBrowserExitedZero": true,
+        "loopbackHttpServerClosed": true
+      }
+    },
+    "method": "Agent inspection of chronological timestamp-bracketed screenshots acquired during actual 1x playback without seeking or user pause. Recorded waiting events remain in the evidence. This is not continuous human viewing or visual inspection of every decoded frame.",
+    "verifiedCollectorArtifacts": 946,
+    "artifactHashMismatches": 0,
+    "independentReview": {
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh",
+      "status": "accepted-scoped-G10-G19-media-requirements",
+      "reportSha256": "9100dab9dab431ba54f0c2d0f9fcb6523027f208d63ae184cb53e9e3fd2f1fb3"
+    },
+    "limitations": [
+      "The collector remains failed with exit 1. Its introductory player losses have an unknown cause.",
+      "Numerical movement and pulse checks supplement sampled visual inspection. File FPS alone does not prove motion.",
+      "The public example does not establish universal web-app compatibility, hosted authentication, external-provider behavior, or untested flows.",
+      "Final archive and public-history identity, dual R16 reviews, and independent final acceptance remain separate."
+    ],
+    "gateStatusesChanged": false,
+    "releaseAcceptance": false,
+    "rootVisualReview": {
+      "status": "all-26-chronological-sheets-reviewed",
+      "chronologicalSheetsReviewed": 26,
+      "mandatoryVisibleDefectsFound": 0,
+      "reviewSha256": "eab2f9964b93b451b25b06ce0b89f76dad8b67eeb53578267fef6385ad9c4878",
+      "originalCollectorExitCodeUnchanged": 1,
+      "gateAcceptance": false,
+      "releaseAcceptance": false
+    }
+  },
+  "independentPublicDom": {
+    "status": "passed-direct-source-fixture-observation",
+    "actualExitCode": 0,
+    "nativeSessionClosed": true,
+    "application": "Workshop board",
+    "origin": "Self-authored public example with no upstream application.",
+    "license": "MIT",
+    "installedPackageExecuted": false,
+    "fixtureIdentity": {
+      "fixtureFilesSha256": "cda67a65efb0d30a3bf8b9b5959f79c2044e29b2fe7ab71ece6d31c1dd16d283",
+      "generatorSha256": "adec9007236a8e2dfc5e5662344279381144fa180a231e6144d12e914e29fff0",
+      "probeSha256": "568fbc7013e25e2aa4a173333a0453547dc9b0d537f720962c57e9762d734181",
+      "baseCommit": "0363218e459653bdfdf806407241148cb09212f8",
+      "headCommit": "cbc415a909dc27b625361be51dea09b18ecd8ab8",
+      "baseTree": "83ef0369331c73a6c5633b2039bc87cedd8ddbbb",
+      "headTree": "89924be571bf83dd7e2af054c258ad8610c2797e"
+    },
+    "observations": [
+      {
+        "side": "before",
+        "innerScroll": {
+          "source": "Direct HTMLElement.scrollTop and window.scrollY reads. The footer was not an assertion source.",
+          "initialScrollTop": 0,
+          "finalScrollTop": 560,
+          "initialWindowScrollY": 0,
+          "finalWindowScrollY": 0
+        },
+        "openingIntermediatePositions": 17,
+        "closingIntermediatePositions": 17,
+        "validation": {
+          "method": "POST",
+          "path": "/api/proposals",
+          "status": 422,
+          "interceptionUsed": false,
+          "expectedFeedbackRendered": true
+        },
+        "trackedDiffUnchanged": true,
+        "indexTreeUnchanged": true
+      },
+      {
+        "side": "after",
+        "innerScroll": {
+          "source": "Direct HTMLElement.scrollTop and window.scrollY reads. The footer was not an assertion source.",
+          "initialScrollTop": 0,
+          "finalScrollTop": 560,
+          "initialWindowScrollY": 0,
+          "finalWindowScrollY": 0
+        },
+        "openingIntermediatePositions": 17,
+        "closingIntermediatePositions": 17,
+        "validation": {
+          "method": "POST",
+          "path": "/api/proposals",
+          "status": 422,
+          "interceptionUsed": false,
+          "expectedFeedbackRendered": true
+        },
+        "trackedDiffUnchanged": true,
+        "indexTreeUnchanged": true
+      }
+    ],
+    "cleanup": {
+      "ownedProcesses": 7,
+      "ownedProcessesRemaining": 0,
+      "sideWorktreesRemoved": true,
+      "browserProfileRemoved": true,
+      "generatedRepositoryRemoved": true
+    },
+    "installedMatrixAssociation": {
+      "status": "independently-reviewed-input-equivalence",
+      "method": "The exact executed source generator and verifier hashes, base/head commits and trees, and config/navigation/validation hashes match the installed matrices. Installed matrices and their reviewed media establish the package path separately.",
+      "macosPublicAppReportSha256": "b0316b853f6799ee83e30271921246a47e7839a43f56c87fe57c8a8abfa5873a",
+      "linuxPublicAppReportSha256": "83fce8a315bd49c361d9f87a5c0b36435b3c800fc1dcbfe376a00ba018c3e0a9",
+      "originalInstalledReportsAcceptanceComplete": false,
+      "reviewSha256": "9100dab9dab431ba54f0c2d0f9fcb6523027f208d63ae184cb53e9e3fd2f1fb3"
+    },
+    "scope": "Direct fixture behavior only. This source observation does not independently establish installed-package execution or full web-app compatibility."
+  },
+  "installedDockerLifecycle": {
+    "status": "accepted-scoped-G07-G15-G16-lifecycle-for-corrected-candidate",
+    "scope": "Docker lifecycle, ownership, interruption coverage and exact corrected candidate association only. This is not normal-speed media or full release acceptance.",
+    "historicalDependencyAssociation": {
+      "status": "independently-accepted-exact-unchanged-dependency-association",
+      "matchedDependencyRows": 77,
+      "historicalAndCurrentProofsRehashed": 40,
+      "historicalExecutionIdentity": {
+        "implementationCommit": "a080372d59edf32925f305782a6a81e81f37c121",
+        "sourceArchiveSha256": "90c919f87c9f37118a6a4e4637e45e448b93aa01a8924e060c10d1a8b3e1e9f9",
+        "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428"
+      },
+      "currentHostInterruptionCells": 12,
+      "historicalFailureDispositionsRetained": true,
+      "newDockerMatrixRequired": false
+    },
+    "positiveComparison": {
+      "actualInstalledCompareExitCode": 0,
+      "actualNativeLauncherExitCode": 0,
+      "originalOuterWrapperExitCode": 1,
+      "originalOuterFailureRetained": true,
+      "postflightContinuationExitCode": 0,
+      "comparisonReexecuted": false,
+      "explicitTimeoutSeconds": 120,
+      "default1800SecondTimeoutExecuted": false,
+      "savedManifestEqualsStdout": true,
+      "verifiedPairs": 2,
+      "changedPairs": 2,
+      "validProvenanceBothSides": true,
+      "motionCaptureAndEncoding": "ok",
+      "cleanupOutcome": "ok",
+      "callerAndIndexBytesUnchanged": true,
+      "installedPackageFileBindingsMatched": 171,
+      "videoSha256": "33bd1e8767d398cc3cadd7ace8b40d1484458e894c6c39973b7d25fb732c693c",
+      "normalSpeedVisualReview": "root-sampled-visual-review-passed"
+    },
+    "postflight": {
+      "productDockerIdentitiesIndependentlyAbsent": 12,
+      "appAndServiceCreateIntentsChecked": 4,
+      "appAndServiceIntentsUseLabeledSideNetworks": true,
+      "appAndServiceIntentsUseBoundedTmpfs": true,
+      "appAndServiceIntentsRequestHostNetworkSocketOrPrivilege": false,
+      "exactContainerStatesAndResourceIdentitiesUnchanged": true,
+      "originalOuterListComparisonDifferences": [
+        "RunningFor and elapsed Status labels"
+      ],
+      "completeInspectionNormalizations": [
+        "Complete mount-array ordering",
+        "Metadata.LastTagTime for two images"
+      ],
+      "allOtherCompleteInspectionFieldsEqual": true,
+      "unrelatedBuilderSentinelState": "Exited with code 1 before and after. No running-builder readiness claim."
+    },
+    "exportAndPhysicalClosure": {
+      "status": "root-and-independently-verified-physical-closure",
+      "closureProofRecordsRehashed": 3666,
+      "uniqueClosureProofPaths": 3640,
+      "exportedFilesRehashed": 698,
+      "exportManifestEqualsOriginalGuestInventory": true,
+      "supplementInventoryBytesIdentical": true,
+      "fileOnlyExportFinishAccepted": true,
+      "productResourcesAbsentBeforeHarnessClose": true,
+      "originalEngineInventoryRestored": true,
+      "ownedProcessesAndGroupsAbsent": true,
+      "newOwnedGuestRootAbsent": true,
+      "removedGuestFiles": 3755,
+      "missingOriginals": 0,
+      "unsettledEffects": 0,
+      "finalAuditExitCode": 0,
+      "physicalCloseExitCode": 0,
+      "normalVmStopExitCode": 0,
+      "finalVmStatus": "Stopped",
+      "historicalTemporaryDirectoryScope": "An older failed-setup root remains retained. This closure does not establish that every historical temporary directory is absent."
+    },
+    "retainedFailures": {
+      "originalOuterElapsedLabelComparisonExitCode": 1,
+      "firstPostflightMountOrderingComparisonExitCode": 1,
+      "localExportSupplementWriteExitCodes": [
+        1,
+        1
+      ],
+      "prematureMissingFileAuditExitCode": 1,
+      "historicalCreateDeadlineAssertionRemainsFailed": true,
+      "historicalBuilderAndServiceProvenanceErrorsRetained": true,
+      "priorResultsAndManifestsRetained": true
+    },
+    "independentReview": {
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh",
+      "status": "accepted-scoped-G07-G15-G16-lifecycle-for-corrected-candidate",
+      "reportSha256": "840c85ffc24ceac5abda861006efcf25c4587a340c67b77f4aefea27bc6f327a",
+      "structuredReviewSha256": "958abd367ef04c965db9606c26a46ffea53fdaacc71da27332ed5c4eae1e3477"
+    },
+    "limitations": [
+      "Acceptance associates the exact unchanged lifecycle dependencies and retained historical observations with current affected-branch evidence.",
+      "The source-only Linux suite did not execute its 11 gated or skipped tests. Real Docker observations remain separate.",
+      "The setup controller has a separate host-network and Docker-socket contract. This does not permit those settings for app or service recipes.",
+      "No real partial-upload or active-daemon-bootstrap behavior is claimed. The short Docker video does not replace the separate full synthetic motion matrix.",
+      "Docker lifecycle acceptance does not complete R16, G20, or the full G01-G24 release decision."
+    ],
+    "gateStatusesChanged": false,
+    "releaseAcceptance": false,
+    "normalSpeedReview": {
+      "status": "root-sampled-visual-review-passed",
+      "nativeExitCode": 0,
+      "normalSpeedPasses": 2,
+      "framesPerPass": 75,
+      "durationSeconds": 2.5,
+      "playbackRate": 1,
+      "droppedFramesPerPass": 0,
+      "corruptedFramesPerPass": 0,
+      "unexpectedEventsPerPass": 0,
+      "chronologicalScreenshotsReviewed": 14,
+      "allSamplesHaveAcquisitionBounds": true,
+      "verifiedCollectorArtifacts": 27,
+      "mandatoryVisibleDefectsFound": 0,
+      "sourceHeadingChangeVisible": true,
+      "objectMotionVisible": true,
+      "stateParityRemainsExplicitlyUnverified": true,
+      "cleanup": "closed",
+      "reviewSha256": "d1fe321f783fe3f0397ad6d943bb51b49b00c648dc701868612aefae67b3bed7",
+      "nativeCommandSha256": "82a842a327a46a4df91a0de58c4013fae65522d32d7f696eee7132a663221f3b",
+      "method": "Agent inspection of timestamp-bracketed screenshots acquired during actual uninterrupted 1x playback, not continuous human viewing or every-frame visual inspection.",
+      "limitations": [
+        "This short Docker compatibility fixture demonstrates route rendering and visible source changes, not the separate full synthetic motion quality matrix."
+      ],
+      "gateAcceptance": false,
+      "releaseAcceptance": false
+    },
+    "videoFormat": {
+      "status": "full-uncapped-probe-passed",
+      "fullDecodedFrames": 75,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "fps": 30,
+      "durationSeconds": 2.5,
+      "faststart": true,
+      "probeSha256": "698781fdee85b06c1d719e5284e249312bba0e0ddc6d54575e4cbc8b0a117229"
+    }
+  },
+  "publicDemoRefresh": {
+    "status": "nine-public-demo-files-refreshed-and-hash-verified",
+    "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+    "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+    "filesVerified": 9,
+    "hashMismatches": 0,
+    "files": [
+      {
+        "path": "docs/demo/motion-success/compare.mp4",
+        "bytes": 115425,
+        "sha256": "a7249cd0b2d6a174501dd6e50f1c786465771b97d3431f8ca1e4eceb352f9a4f"
+      },
+      {
+        "path": "docs/demo/motion-success/poster.png",
+        "bytes": 79698,
+        "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74"
+      },
+      {
+        "path": "docs/demo/motion-success/manifest.json",
+        "bytes": 18082,
+        "sha256": "348232d470256d51b025992372b234aae79fa7e00bc5a55eb39bc2c7ec79f1a5"
+      },
+      {
+        "path": "docs/demo/motion-success/preview.json",
+        "bytes": 1361,
+        "sha256": "ed807911cf56591aa326aca1c4def1169624bd8b72ccb9d6daca31fe5ff61a49"
+      },
+      {
+        "path": "docs/demo/motion-partial/compare.mp4",
+        "bytes": 113964,
+        "sha256": "33ea15e1b516c37702ca27a7a0e5656c01479c1745349ad23219bc1df57269ae"
+      },
+      {
+        "path": "docs/demo/motion-partial/poster.png",
+        "bytes": 53582,
+        "sha256": "577b735fa55538ebfc0d92a16f5eb4534e78fb387f6984df4d8bdb29e7af26f1"
+      },
+      {
+        "path": "docs/demo/motion-partial/manifest.json",
+        "bytes": 15719,
+        "sha256": "693fd2fb2731716c670512e1e52eedfa6532a4c9a67c5c0f38739260b050ed38"
+      },
+      {
+        "path": "docs/demo/motion-partial/preview.json",
+        "bytes": 1630,
+        "sha256": "1b049c9cef16d7b9b14d936731ba8e59b74e426fe040d5ce30d997e94bcb7792"
+      },
+      {
+        "path": "docs/demo/README.md",
+        "bytes": 2931,
+        "sha256": "36aaa38ce9705dbc5140521bc4fbea8ef5480ec49daa2722e18e5e14c1a5b6e2"
+      }
+    ],
+    "scope": "Local public demo files for the corrected installed candidate. This does not publish artifacts or accept the final release.",
+    "gateAcceptance": false,
+    "releaseAcceptance": false,
+    "implementationOrTestedPackageChanged": false
+  },
+  "cleanPublicRepack": {
+    "status": "passed",
+    "publicImplementationCommit": "3f32d256cea93798098b8456da99eeb39f9ca9df",
+    "executedImplementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
+    "packageSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+    "packageBytes": 385856,
+    "packageMembers": 171,
+    "archiveBytesEqual": true,
+    "dependencyMethod": "Same lockfile and read-only reference to already verified installed build dependencies; no install or network. node_modules link remains only in private build directory.",
+    "privateReportSha256": "8799faf177327bd043d300e89e77e91f91e23e4f44e65e8a0e5e1ec44a617799"
+  }
+}

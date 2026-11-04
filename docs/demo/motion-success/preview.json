@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-  "executedSourceCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+  "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+  "executedSourceCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
   "captureMode": "motion",
   "files": [
     {
       "path": "compare.mp4",
-      "sha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
-      "bytes": 115270
+      "sha256": "a7249cd0b2d6a174501dd6e50f1c786465771b97d3431f8ca1e4eceb352f9a4f",
+      "bytes": 115425
     },
     {
       "path": "poster.png",
@@ -16,8 +16,8 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "86e63b094f971a868de857c769f38e0ad99a7e83805c497d0df7bc86b1f66ff8",
-      "bytes": 18087
+      "sha256": "348232d470256d51b025992372b234aae79fa7e00bc5a55eb39bc2c7ec79f1a5",
+      "bytes": 18082
     }
   ],
   "summary": {
@@ -30,6 +30,6 @@
     "coverageOmissions": 0
   },
   "scope": "Synthetic preview subset: video, poster and original public manifest. Source frames, timeline, capture bundle and private run data are not included. Recompose requires the original owned run, not this preview directory.",
-  "normalSpeedReview": "Full 1x playback plus sampled visual inspection; not every-frame human review.",
+  "normalSpeedReview": "Completed 1x playback with agent visual inspection of chronological screenshots acquired during playback; not continuous human viewing or every-frame visual inspection.",
   "releaseAcceptance": "Separate final acceptance remains pending."
 }

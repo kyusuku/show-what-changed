@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
   "toolVersion": "0.1.0",
-  "runId": "20261103T053301275Z-1f932e651b249641",
+  "runId": "20261103T230628139Z-a318bb91a9b64a0c",
   "state": "terminal",
   "status": "ok",
   "exitCode": 0,
   "captureMode": "motion",
   "specRevision": "0.3",
-  "startedAt": "2026-11-03T05:33:01.275Z",
-  "endedAt": "2026-11-03T05:33:58.657Z",
+  "startedAt": "2026-11-03T23:06:28.139Z",
+  "endedAt": "2026-11-03T23:07:00.763Z",
   "sources": {
     "before": {
       "requested": "0363218e459653bdfdf806407241148cb09212f8",
@@ -74,32 +74,32 @@
       "scenarioId": "workshop-validation",
       "side": "before",
       "stats": {
-        "receivedFrames": 20,
-        "persistedFrames": 20,
-        "acknowledgedFrames": 20,
+        "receivedFrames": 24,
+        "persistedFrames": 24,
+        "acknowledgedFrames": 24,
         "rejectedFrames": 0,
         "maxQueueDepth": 1,
         "sourceDroppedFrames": null,
-        "maxGapMs": 933.295999886468
+        "maxGapMs": 816.6340000461787
       },
-      "clockErrorBoundMs": 32.908604580017254,
-      "maxDriftMs": 14.07883358001709,
+      "clockErrorBoundMs": 9.98118754187044,
+      "maxDriftMs": 2.806333541870117,
       "failureAtMs": null
     },
     {
       "scenarioId": "workshop-validation",
       "side": "after",
       "stats": {
-        "receivedFrames": 20,
-        "persistedFrames": 20,
-        "acknowledgedFrames": 20,
+        "receivedFrames": 23,
+        "persistedFrames": 23,
+        "acknowledgedFrames": 23,
         "rejectedFrames": 0,
         "maxQueueDepth": 1,
         "sourceDroppedFrames": null,
-        "maxGapMs": 933.295999886468
+        "maxGapMs": 816.6340000461787
       },
-      "clockErrorBoundMs": 33.50933286476129,
-      "maxDriftMs": 14.555395364761353,
+      "clockErrorBoundMs": 10.621271530151716,
+      "maxDriftMs": 3.155271530151367,
       "failureAtMs": null
     }
   ],
@@ -130,7 +130,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 1048.574834
+            "elapsedMs": 956.8788329999998
           },
           "after": {
             "status": "ok",
@@ -146,7 +146,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 1047.0447079999994
+            "elapsedMs": 964.9251670000003
           },
           "changeRatio": 0
         },
@@ -169,7 +169,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 477.3621670000002
+            "elapsedMs": 468.8814999999995
           },
           "after": {
             "status": "ok",
@@ -185,7 +185,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 477.2630829999998
+            "elapsedMs": 483.79441700000007
           },
           "changeRatio": 0
         },
@@ -208,7 +208,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 697.3024999999998
+            "elapsedMs": 698.3340419999995
           },
           "after": {
             "status": "ok",
@@ -224,7 +224,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 697.3056250000009
+            "elapsedMs": 695.0705420000004
           },
           "changeRatio": 0
         },
@@ -247,7 +247,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 467.06354199999987
+            "elapsedMs": 459.13879199999974
           },
           "after": {
             "status": "ok",
@@ -263,7 +263,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 469.6119580000013
+            "elapsedMs": 469.10549999999967
           },
           "changeRatio": 0
         },
@@ -286,7 +286,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 405.42483399999946
+            "elapsedMs": 369.61320800000067
           },
           "after": {
             "status": "ok",
@@ -302,7 +302,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 405.48504200000025
+            "elapsedMs": 367.39787500000057
           },
           "changeRatio": 0
         },
@@ -325,7 +325,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 383.41158299999915
+            "elapsedMs": 363.8674169999995
           },
           "after": {
             "status": "ok",
@@ -341,7 +341,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 383.3719579999997
+            "elapsedMs": 363.03050000000076
           },
           "changeRatio": 0
         },
@@ -364,7 +364,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 909.4095830000006
+            "elapsedMs": 922.0034589999996
           },
           "after": {
             "status": "ok",
@@ -380,7 +380,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 913.3039589999989
+            "elapsedMs": 916.0229159999999
           },
           "changeRatio": 0.05285271600437477
         },
@@ -403,7 +403,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 480.21716600000036
+            "elapsedMs": 438.08599999999933
           },
           "after": {
             "status": "ok",
@@ -419,7 +419,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 480.21941700000025
+            "elapsedMs": 454.53791699999965
           },
           "changeRatio": 0.05285271600437477
         },
@@ -442,7 +442,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 470.4912910000003
+            "elapsedMs": 442.61162499999955
           },
           "after": {
             "status": "ok",
@@ -458,7 +458,7 @@
               "maskDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
             },
             "heldFromStepId": null,
-            "elapsedMs": 490.6324170000007
+            "elapsedMs": 463.1064580000002
           },
           "changeRatio": 0.05285271600437477
         }
@@ -476,7 +476,7 @@
   },
   "timeline": {
     "fps": 30,
-    "totalFrames": 199,
+    "totalFrames": 191,
     "templateVersion": 2,
     "width": 1920,
     "height": 686
@@ -484,8 +484,8 @@
   "artifacts": {
     "video": {
       "path": "compare.mp4",
-      "sha256": "2a7c81a765d3b344896b3181a653acdb9da739973a695cae3c3a97a7685851be",
-      "bytes": 115270
+      "sha256": "a7249cd0b2d6a174501dd6e50f1c786465771b97d3431f8ca1e4eceb352f9a4f",
+      "bytes": 115425
     },
     "poster": {
       "path": "poster.png",
@@ -494,17 +494,17 @@
     },
     "capture": {
       "path": "capture.json",
-      "sha256": "987f5eabfbc0d558631fd0adb5ddd10107027a380308477323fd39d71af65202",
-      "bytes": 87522
+      "sha256": "d78b9c411f44f8bb5fbd166d4f1f80acf862d21495ca41b48462e0c9971ee593",
+      "bytes": 94416
     },
     "timeline": {
       "path": "timeline.json",
-      "sha256": "b705da30af6c69a935001ea0bfb896c40ffd1f4bf342f1d368dda9753695393e",
-      "bytes": 54124
+      "sha256": "7ffd9976e49ae7dfc6dcee232fba5217aea9d8f9d8ae7984a05c37411a045553",
+      "bytes": 53817
     },
     "pr": {
       "path": "pr.md",
-      "sha256": "7d905c0ccee0c1dbcb3d5f1d5760109152f7af722776966bd7e628c9a564d6df",
+      "sha256": "8e610c96fc2b35020346cc74678fe3b1b0f2a248edff6e7cf4067bcb16f912cc",
       "bytes": 925
     }
   },
@@ -550,12 +550,12 @@
   "errors": [],
   "errorHistory": [],
   "phaseTimings": {
-    "validating": 813.021917,
-    "preparing": 433.12649999999985,
-    "starting": 4725.4292080000005,
-    "recording": 7696.2810420000005,
-    "rendering": 6648.497083999999,
-    "encoding": 35399.107541,
-    "cleaning": 1798.9615419999973
+    "validating": 1225.251584,
+    "preparing": 630.722458,
+    "starting": 3657.2450830000002,
+    "recording": 5996.371125,
+    "rendering": 3606.4331669999992,
+    "encoding": 16667.729041,
+    "cleaning": 1237.6529169999994
   }
 }

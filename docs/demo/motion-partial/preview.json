@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "packageTarballSha256": "cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428",
-  "executedSourceCommit": "8aad8ee7d2e3fc60a040ec7d3fc4d32af02e801b",
+  "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+  "executedSourceCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
   "captureMode": "motion",
   "files": [
     {
       "path": "compare.mp4",
-      "sha256": "1b6e3787a13dc76c638958ff229f11b509fdabd33eb772ad0f6df03e572b195a",
-      "bytes": 108999
+      "sha256": "33ea15e1b516c37702ca27a7a0e5656c01479c1745349ad23219bc1df57269ae",
+      "bytes": 113964
     },
     {
       "path": "poster.png",
@@ -16,8 +16,8 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "2b3d898d6d94fbe386f94eedd00b54948a3fa754642965276bbc0159f0a7e335",
-      "bytes": 15736
+      "sha256": "693fd2fb2731716c670512e1e52eedfa6532a4c9a67c5c0f38739260b050ed38",
+      "bytes": 15719
     }
   ],
   "summary": {
@@ -30,6 +30,6 @@
     "coverageOmissions": 0
   },
   "scope": "Synthetic preview subset: video, poster and original public manifest. Source frames, timeline, capture bundle and private run data are not included. Recompose requires the original owned run, not this preview directory.",
-  "normalSpeedReview": "Full 1x playback plus sampled visual inspection; not every-frame human review.",
+  "normalSpeedReview": "Completed two uninterrupted 1x playback passes, each presenting all 267 frames with zero reported dropped or corrupt frames. Agent inspection of 46 chronological screenshots and the original blocked-side screenshot found clear failure labels, preserved masks, continued AFTER motion, and useful partial output. This was not continuous human viewing or every-frame visual inspection. The original required-action failure remains recorded.",
   "releaseAcceptance": "Separate final acceptance remains pending."
 }

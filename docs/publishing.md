@@ -25,7 +25,7 @@ Use Node `24.22.2` and npm `11.12.1`. Set these values from the readiness record
 ```sh
 set -eu
 SWC_PUBLIC_ROOT='/absolute/path/from-reviewed-public-handoff'
-SWC_RELEASE_COMMIT='replace-with-tested-implementation-commit'
+SWC_RELEASE_COMMIT='read-public-implementation-commit-from-release-identity.json'
 SWC_HANDOFF_COMMIT='read-from-separately-delivered-release-identity.json'
 SWC_SOURCE_ARCHIVE='/absolute/path/to/final-public-source.tar'
 SWC_EXPECTED_SOURCE_SHA256='read-from-separately-delivered-release-identity.json'
@@ -53,7 +53,9 @@ tar -xOf "$SWC_TARBALL" package/package.json
 npm publish "$SWC_TARBALL" --dry-run --ignore-scripts --access public --registry=https://registry.npmjs.org/
 ```
 
-Check that the package manifest names `show-what-changed` version `0.1.0`. `SWC_RELEASE_COMMIT` identifies the tested implementation. `SWC_HANDOFF_COMMIT` identifies the final documentation and evidence commit. Read the handoff commit and final source archive digest from the separately delivered release identity manifest. Keep that manifest outside the archive it hashes. A documentation-only handoff must preserve package inputs and the approved tarball bytes. A dry run does not verify publishing authority.
+Check that the package manifest names `show-what-changed` version `0.1.0`. `SWC_RELEASE_COMMIT` identifies the public implementation commit. `SWC_HANDOFF_COMMIT` identifies the final documentation and evidence commit. Read both commits and the final source archive digest from the separately delivered release identity manifest. Keep that manifest outside the archive it hashes. A documentation-only handoff must preserve package inputs and the approved tarball bytes. A dry run does not verify publishing authority.
+
+Privacy sanitation can recreate commit IDs while preserving implementation and package inputs. In that case, review the recorded byte equivalence between the executed candidate and the public implementation commit. Use the public commit for the Git checks above. The original executed commit remains an evidence identity and may be absent from the public history. Do not import development objects to make that original commit available.
 
 The package allowlist is `dist`, `schema`, `skills`, `assets`, `README.md`, `LICENSE`, and `THIRD_PARTY_NOTICES.md`, plus npm's package metadata. Reject fixtures, private plans, logs, local configuration, credentials, and audit temp files in the archive.
 
@@ -139,7 +141,7 @@ npm provenance requires a public source repository that matches `package.json`, 
 
 This route needs separate owner approval to make `kyusuku/show-what-changed` public. Confirm available hosted-runner usage before starting a job. The build's private-repository verification did not establish an included usage balance.
 
-Prepare a manually dispatched `.github/workflows/publish.yml` at the reviewed commit. It must perform these steps before publishing.
+This handoff does not include a publishing workflow. Add a manually dispatched `.github/workflows/publish.yml` in a later commit and review that exact workflow before use. Bind the later commit and its new source archive to the approved tarball, record any affected checks, and update the owner handoff before dispatch. Preserve the original tested implementation identity. The workflow must perform these steps before publishing.
 
 1. Check out the exact approved commit with read-only repository access.
 2. Select Node `24.22.2` and npm `11.12.1`. Pin workflow actions to reviewed full commit IDs.
