@@ -1124,6 +1124,57 @@
       },
       {
         "path": "docs/demo/motion-success/preview.json",
+        "bytes": 1450,
+        "sha256": "cfa5e27e72979e539a064a96e249b7412d8e3591b45d02b5e30b9c58ab7a272a"
+      },
+      {
+        "path": "docs/demo/motion-partial/compare.mp4",
+        "bytes": 113964,
+        "sha256": "33ea15e1b516c37702ca27a7a0e5656c01479c1745349ad23219bc1df57269ae"
+      },
+      {
+        "path": "docs/demo/motion-partial/poster.png",
+        "bytes": 53582,
+        "sha256": "577b735fa55538ebfc0d92a16f5eb4534e78fb387f6984df4d8bdb29e7af26f1"
+      },
+      {
+        "path": "docs/demo/motion-partial/manifest.json",
+        "bytes": 15719,
+        "sha256": "693fd2fb2731716c670512e1e52eedfa6532a4c9a67c5c0f38739260b050ed38"
+      },
+      {
+        "path": "docs/demo/motion-partial/preview.json",
+        "bytes": 1719,
+        "sha256": "d2c4f0671b9cb498fdd14fd59093ab80673f17bcc2b68a0e8744dbd20726456d"
+      },
+      {
+        "path": "docs/demo/README.md",
+        "bytes": 2931,
+        "sha256": "36aaa38ce9705dbc5140521bc4fbea8ef5480ec49daa2722e18e5e14c1a5b6e2"
+      }
+    ],
+    "scope": "Local public demo files for the corrected installed candidate. This does not publish artifacts or accept the final release.",
+    "gateAcceptance": false,
+    "releaseAcceptance": false,
+    "implementationOrTestedPackageChanged": false,
+    "historicalFilesBeforeReadinessMetadata": [
+      {
+        "path": "docs/demo/motion-success/compare.mp4",
+        "bytes": 115425,
+        "sha256": "a7249cd0b2d6a174501dd6e50f1c786465771b97d3431f8ca1e4eceb352f9a4f"
+      },
+      {
+        "path": "docs/demo/motion-success/poster.png",
+        "bytes": 79698,
+        "sha256": "dc9bacd313a33b58b8c6c42cbfccdb1eba095b4b85c5fb91c9a910aa2eb1ac74"
+      },
+      {
+        "path": "docs/demo/motion-success/manifest.json",
+        "bytes": 18082,
+        "sha256": "348232d470256d51b025992372b234aae79fa7e00bc5a55eb39bc2c7ec79f1a5"
+      },
+      {
+        "path": "docs/demo/motion-success/preview.json",
         "bytes": 1361,
         "sha256": "ed807911cf56591aa326aca1c4def1169624bd8b72ccb9d6daca31fe5ff61a49"
       },
@@ -1153,10 +1204,7 @@
         "sha256": "36aaa38ce9705dbc5140521bc4fbea8ef5480ec49daa2722e18e5e14c1a5b6e2"
       }
     ],
-    "scope": "Local public demo files for the corrected installed candidate. This does not publish artifacts or accept the final release.",
-    "gateAcceptance": false,
-    "releaseAcceptance": false,
-    "implementationOrTestedPackageChanged": false
+    "metadataAssociation": "Only acceptance-pointer prose changed after the original nine-file refresh. Current hashes are in files; original refresh hashes remain in historicalFilesBeforeReadinessMetadata. Video, poster and original manifest bytes did not change."
   },
   "cleanPublicRepack": {
     "status": "passed",

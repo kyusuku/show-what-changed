@@ -2751,7 +2751,7 @@
   },
   "correctedCandidateVerification": {
     "evidence": "evidence/revision-0.3/corrected-candidate-verification-progress.json",
-    "sha256": "71366369818045503ea73a8ef5ef6ccb5e4bfb2c30f008a46a21b03cbaa0e9d5",
+    "sha256": "88e1e3448e7622d9f9f7680ece59e2437c662fe61682b5dd4a285002a216d92e",
     "implementationCommit": "e6934a8161e29f5a74b340ba3c982c92f3c212cc",
     "packageTarballSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
     "status": "requirements_accepted",
