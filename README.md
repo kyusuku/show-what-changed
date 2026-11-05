@@ -15,6 +15,7 @@ The [synthetic examples](docs/demo/README.md) identify each recording's capture 
 | Node.js | Tool runtime `24.x`. Candidate checks use `24.22.2`. |
 | npm | Installs this CLI. Candidate checks use `11.12.1`. Applications may use other tools. |
 | Playwright and Chromium | Package dependency `1.64.1`, with Chromium revision `1248` installed separately. |
+| Chromium sandbox | Linux must allow the pinned browser to create its sandbox. See the Linux setup note below. |
 | FFmpeg and ffprobe | Matching system versions with H.264 `libx264` and the composition filters checked by `doctor`. Development macOS checks use `9.0.2`. |
 | Git, `ps`, and `lsof` | Source and listener ownership checks. Linux needs `lsof` `4.99.7` or newer. macOS uses its system `lsof`. |
 | Application tools | Declared by the recipe, such as Python, npm, or pnpm. The tool's Node version does not select the application's runtime. |
@@ -37,6 +38,8 @@ lsof -v
 ```
 
 The installer verifies its source hash and does not edit shell configuration.
+
+Ubuntu 23.10 and newer can restrict the user namespaces that Chromium needs. If browser startup reports `No usable sandbox`, follow [Chromium's scoped AppArmor or sandbox-helper setup](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md). The CLI keeps Chromium's sandbox enabled.
 
 ## Install
 

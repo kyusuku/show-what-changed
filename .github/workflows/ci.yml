@@ -52,7 +52,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg procps build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates
+          sudo apt-get install -y ffmpeg procps build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates apparmor
           sh scripts/linux-gate/install-lsof.sh "$HOME/.local"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Install macOS media prerequisite
@@ -63,6 +63,24 @@ jobs:
       - name: Install pinned Chromium and Linux libraries
         if: runner.os == 'Linux'
         run: node node_modules/playwright/cli.js install --with-deps chromium
+      - name: Permit pinned Chromium sandbox on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          chromium_shells=( "$HOME"/.cache/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell )
+          if [ "${#chromium_shells[@]}" -ne 1 ] || [ ! -x "${chromium_shells[0]}" ]; then
+            echo "Expected exactly one installed Chromium headless shell." >&2
+            exit 1
+          fi
+          chromium_shell=$(realpath "${chromium_shells[0]}")
+          sudo tee /etc/apparmor.d/show-what-changed-chromium > /dev/null <<EOF
+          abi <abi/4.0>,
+          include <tunables/global>
+          profile show-what-changed-chromium "$chromium_shell" flags=(unconfined) {
+            userns,
+          }
+          EOF
+          sudo apparmor_parser -r /etc/apparmor.d/show-what-changed-chromium
       - name: Install pinned Chromium on macOS
         if: runner.os == 'macOS'
         run: node node_modules/playwright/cli.js install chromium

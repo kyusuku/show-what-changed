@@ -22,6 +22,8 @@ Presentation labels use printable ASCII. Unsupported label characters become `?`
 
 The tool runs on Node 24 on Linux and macOS. Other Node majors and Windows are unsupported. The application's runtime is selected by its explicit execution recipe. Static sites, Python apps, npm apps, and pnpm workspaces do not need the same source layout or package manager. Missing prerequisites fail before setup; the tool does not install arbitrary system runtimes automatically.
 
+Linux must provide a working Chromium sandbox. Hosts with restricted user namespaces may need a scoped AppArmor profile or a supported sandbox helper. See [Chromium's host setup guidance](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md). The CLI does not fall back to an unsandboxed browser.
+
 The following source layouts fail validation before execution.
 
 - Sparse checkouts, unmerged indexes, submodules, LFS pointers, symlinks, and nonregular source files.
