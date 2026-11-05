@@ -2,6 +2,8 @@
 
 Use this document as the execution contract when activating the implementation goal. Authoring this file does not start implementation. Target completion within 24 hours of activation. Record the start and target times in UTC and Asia/Bangkok. Elapsed time never counts as passing evidence.
 
+This document preserves the original 0.1.0 implementation goal. The input digests below track the current documents. Updated digests do not transfer historical acceptance to a new package. See [release readiness](release-readiness.md) for the separate 0.1.1 patch status.
+
 ## Deliver the usable release
 
 Implement every mandatory requirement in spec.md revision 0.3. Deliver a verified experimental 0.1.0 candidate that compares web applications across stacks, records actual smooth browser motion, works across representative public web applications, and is ready for the owner to publish publicly.
@@ -16,7 +18,7 @@ Work in the current show-what-changed repository root. The observed baseline HEA
 
 The owner-requested public privacy correction and the verified delivery-cutoff clarification reconciled the activated input contract. The latter defines delivered-frame accounting and discloses unobserved upstream frames without changing motion thresholds, masking, acknowledgement, or cleanup requirements. The evidenced timing clarification also separates observed events from bounded playback and preserves host/source clock domains without changing the 60-second or 40 ms limits. Earlier input identities remain in the evidence trail. Verify these revised input digests before dependent work:
 
-- spec.md SHA-256 is 24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8.
+- spec.md SHA-256 is 1f4d9bd6b79b16fe46aaa4b2f3b9eaf8dca7cb433d6349249ad2abbbf2eaec36.
 - docs/implementation-graph.json SHA-256 is e998e4a494d132f3ad4e36b6c12ddfee4e9949cdd70ea01c247b6007c0ed6274.
 - docs/web-app-acceptance.md SHA-256 is c7e3fca6f0fbc4fc7c6c56bf662ff9cd3efe3893d31c5909a8887fc93b766a46.
 

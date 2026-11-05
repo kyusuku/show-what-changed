@@ -2250,7 +2250,7 @@
   ],
   "publicPrivacyCorrection": "Generic redistributable acceptance; private application inputs and original development records live outside the public repository. Clean public history is required.",
   "publicContractInputs": {
-    "spec.md": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+    "spec.md": "1f4d9bd6b79b16fe46aaa4b2f3b9eaf8dca7cb433d6349249ad2abbbf2eaec36",
     "docs/implementation-graph.json": "e998e4a494d132f3ad4e36b6c12ddfee4e9949cdd70ea01c247b6007c0ed6274",
     "docs/web-app-acceptance.md": "c7e3fca6f0fbc4fc7c6c56bf662ff9cd3efe3893d31c5909a8887fc93b766a46"
   },
@@ -2802,5 +2802,11 @@
     "recipe": "G05 accepted for exact current candidate",
     "linuxFullSuite": "failed-public-app-navigation-3-clock-bound; exact-failed-evidence-retained",
     "scope": "Historical package cb641268db180b67257a73db5da5c4c640db880dbe49e2fe8b7a38db02c60428. Current repaired package progress is in correctedCandidateVerification. These historical labels do not accept the repaired package."
-  }
+  },
+  "historicalPublicContractInputs": {
+    "spec.md": "24d135fdbdc87211f593c1016f145537c7f1c018989ae4f88b00391f84a4e5d8",
+    "docs/implementation-graph.json": "e998e4a494d132f3ad4e36b6c12ddfee4e9949cdd70ea01c247b6007c0ed6274",
+    "docs/web-app-acceptance.md": "c7e3fca6f0fbc4fc7c6c56bf662ff9cd3efe3893d31c5909a8887fc93b766a46"
+  },
+  "publicContractInputScope": "Current document bindings only. Candidate identities, gate acceptance and execution evidence in this ledger describe the historical 0.1.0 archive. They do not accept the 0.1.1 patch."
 }
