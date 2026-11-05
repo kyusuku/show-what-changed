@@ -3,7 +3,8 @@ import { sanitizeText } from './io.js';
 import { RecipeSchema, RelativePathSchema, SourceSettingsSchema } from './recipe.js';
 export * from './recipe.js';
 
-export const TOOL_VERSION = '0.1.0';
+export const TOOL_VERSION = '0.1.1';
+const Schema2ProducerVersionSchema = z.enum(['0.1.0', '0.1.1']);
 export const FPS = 30;
 export const VIEWPORT = { width: 1280, height: 800, deviceScaleFactor: 1 } as const;
 export const CANVAS = { width: 1920, height: 686 } as const;
@@ -262,7 +263,7 @@ export const MotionScenarioSchema = z.strictObject({
 });
 export type MotionScenario = z.infer<typeof MotionScenarioSchema>;
 const CaptureBundleFields = {
-  schemaVersion: z.literal(2), runId: RunIdSchema, toolVersion: z.literal(TOOL_VERSION), browserVersion: z.string().min(1), viewport: ViewportSchema,
+  schemaVersion: z.literal(2), runId: RunIdSchema, toolVersion: Schema2ProducerVersionSchema, browserVersion: z.string().min(1), viewport: ViewportSchema,
   sources: SourcePairSchema, labels: z.strictObject({ before: HumanTextSchema, after: HumanTextSchema }),
   scenarios: z.array(CapturedScenarioSchema).min(1).max(3), warnings: z.array(WarningSchema),
 };
@@ -363,7 +364,7 @@ export const RuntimeSideProvenanceSchema = z.discriminatedUnion('kind', [
 ]);
 export type RuntimeSideProvenance = z.infer<typeof RuntimeSideProvenanceSchema>;
 export const ManifestSchema = z.strictObject({
-  schemaVersion: z.literal(2), toolVersion: z.literal(TOOL_VERSION), runId: RunIdSchema, state: RunStateSchema, status: ResultStatusSchema, exitCode: z.number().int().min(0).max(255), captureMode: z.enum(['motion', 'keyframes']), specRevision: z.literal('0.3'),
+  schemaVersion: z.literal(2), toolVersion: Schema2ProducerVersionSchema, runId: RunIdSchema, state: RunStateSchema, status: ResultStatusSchema, exitCode: z.number().int().min(0).max(255), captureMode: z.enum(['motion', 'keyframes']), specRevision: z.literal('0.3'),
   startedAt: z.iso.datetime(), endedAt: z.iso.datetime().nullable(), sources: z.strictObject({ before: SourceIdentitySchema, after: SourceIdentitySchema, baseResolution: z.enum(['exact', 'merge-base']) }),
   versions: z.strictObject({ node: z.string(), browser: z.string().nullable(), ffmpeg: z.string().nullable(), ffprobe: z.string().nullable() }),
   publicRecipeDigest: Sha256Schema.nullable(), publicScenarioDigest: Sha256Schema.nullable(), viewport: ViewportSchema, dataParity: z.enum(['stateless-declared', 'isolated-declared', 'external-unverified']), coverage: CoverageSchema,

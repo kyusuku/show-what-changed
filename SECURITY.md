@@ -1,6 +1,6 @@
 # Security policy
 
-`show-what-changed` runs application code to compare browser scenarios across Git snapshots. Version `0.1.0` is an unpublished experimental candidate. Revision 0.3 acceptance is incomplete; see [release readiness](docs/release-readiness.md). No production security support or response-time guarantee is claimed.
+`show-what-changed` runs application code to compare browser scenarios across Git snapshots. The tool is experimental. See [release readiness](docs/release-readiness.md) for current verification and publication status. No production security support or response-time guarantee is claimed.
 
 ## Execution trust
 

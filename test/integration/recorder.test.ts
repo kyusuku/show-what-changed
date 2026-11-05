@@ -312,7 +312,7 @@ describe('real Chromium recorder', () => {
         [
           scenario('required-failure', [
             open,
-            { id: 'required', op: 'click', target, timeoutMs: 350 },
+            { id: 'required', op: 'click', target },
             { id: 'blocked', op: 'screenshot' },
           ]),
         ],
@@ -320,11 +320,26 @@ describe('real Chromium recorder', () => {
         run,
       );
       const peer = side === 'before' ? 'after' : 'before';
-      expect(bundle.scenarios[0]?.outcome).toBe('partial');
-      expect(step(bundle, 1)[side].status).toBe('failed');
-      expect(step(bundle, 2)[side].status).toBe('blocked');
-      expect(step(bundle, 2)[side].heldFromStepId).not.toBeNull();
-      expect(step(bundle, 2)[peer].status).toBe('ok');
+      const results = JSON.stringify(
+        bundle.scenarios[0]?.steps.map(({ id, before, after }) => ({
+          id,
+          before: { status: before.status, reasonCode: before.reasonCode, elapsedMs: before.elapsedMs },
+          after: { status: after.status, reasonCode: after.reasonCode, elapsedMs: after.elapsedMs },
+        })),
+      );
+      expect(bundle.scenarios[0]?.outcome, results).toBe('partial');
+      expect(step(bundle, 1)[side], results).toMatchObject({
+        status: 'failed',
+        reasonCode: expect.stringMatching(/^(LOCATOR_MISSING|STEP_TIMEOUT)$/),
+        heldFromStepId: 'open',
+      });
+      expect(step(bundle, 2)[side], results).toMatchObject({
+        status: 'blocked',
+        reasonCode: 'PREVIOUS_STEP_FAILED',
+        heldFromStepId: 'open',
+      });
+      expect(step(bundle, 1)[peer].status, results).toBe('ok');
+      expect(step(bundle, 2)[peer].status, results).toBe('ok');
       expect(step(bundle, 1).changeRatio).toBeNull();
       expect(step(bundle, 2).changeRatio).toBeNull();
       await assertMasked(bundle);

@@ -4,7 +4,7 @@ Compare a browser scenario across two Git snapshots and produce a labeled BEFORE
 
 Revision 0.3 uses explicit execution recipes for web applications across stacks. Motion is the default. It records actual intermediate Chromium frames and preserves their shared elapsed timing. Keyframes remain an explicit alternative.
 
-Version `0.1.0` is experimental. See [release readiness](docs/release-readiness.md) for the exact candidate, completed checks, remaining requirements, and publishing status.
+Version `0.1.1` fixes a motion-capture defect in `0.1.0` that could lose a static page update while an earlier frame awaited masking and acknowledgement. The tool remains experimental. See [release readiness](docs/release-readiness.md) for verification and publication status.
 
 The [synthetic examples](docs/demo/README.md) identify each recording's capture mode and candidate. Historical development clips and keyframe examples remain labeled separately from release-candidate motion evidence.
 
@@ -15,6 +15,7 @@ The [synthetic examples](docs/demo/README.md) identify each recording's capture 
 | Node.js | Tool runtime `24.x`. Candidate checks use `24.22.2`. |
 | npm | Installs this CLI. Candidate checks use `11.12.1`. Applications may use other tools. |
 | Playwright and Chromium | Package dependency `1.64.1`, with Chromium revision `1248` installed separately. |
+| Chromium sandbox | Linux must allow the pinned browser to create its sandbox. See the Linux setup note below. |
 | FFmpeg and ffprobe | Matching system versions with H.264 `libx264` and the composition filters checked by `doctor`. Development macOS checks use `9.0.2`. |
 | Git, `ps`, and `lsof` | Source and listener ownership checks. Linux needs `lsof` `4.99.7` or newer. macOS uses its system `lsof`. |
 | Application tools | Declared by the recipe, such as Python, npm, or pnpm. The tool's Node version does not select the application's runtime. |
@@ -38,22 +39,23 @@ lsof -v
 
 The installer verifies its source hash and does not edit shell configuration.
 
-## Install a reviewed local candidate
+Ubuntu 23.10 and newer can restrict the user namespaces that Chromium needs. If browser startup reports `No usable sandbox`, use the scoped AppArmor profile described in Option 2 of [Chromium's setup guide](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md). The CLI keeps Chromium's sandbox enabled.
 
-Get the tarball and its SHA-256 from [release readiness](docs/release-readiness.md). Verify that identity before installing outside the application checkout.
+## Install
+
+Install the package outside your application's checkout. Use Node 24 and the system prerequisites above. The commands below target `0.1.1`. Before that version is published on [npm](https://www.npmjs.com/package/show-what-changed), replace `show-what-changed@0.1.1` with the path to its reviewed tarball.
 
 ```sh
-shasum -a 256 /absolute/path/show-what-changed-0.1.0.tgz
 SWC_INSTALL="$(mktemp -d)"
-npm install --prefix "$SWC_INSTALL" --no-audit --no-fund /absolute/path/show-what-changed-0.1.0.tgz
+npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.1
 SWC="$SWC_INSTALL/node_modules/.bin/show-what-changed"
 node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
 "$SWC" doctor --json
 ```
 
-On Linux, use `sha256sum` if needed. Playwright's `install --with-deps chromium` variant also installs system libraries and can require administrator access. Use the installed pinned Playwright dependency rather than an unqualified latest installer.
+Playwright's `install --with-deps chromium` variant also installs Linux system libraries and can require administrator access. Use the installed pinned Playwright dependency rather than an unqualified latest installer.
 
-No registry installation or npm publication is claimed while this candidate is unpublished.
+For archive installation, use the reviewed tarball and SHA-256 in [release readiness](docs/release-readiness.md). Verify the downloaded archive against its recorded digest.
 
 ## Describe how your app runs
 
@@ -107,7 +109,7 @@ Motion uses change-driven browser sampling. Shutdown finishes frames already del
 
 | Area | Current contract |
 | --- | --- |
-| Platforms | Node 24 on Linux and macOS. Final revision 0.3 platform acceptance is pending. |
+| Platforms | Node 24 on Linux and macOS. See the accepted platform evidence in [release readiness](docs/release-readiness.md). |
 | Sources | One Git repository and one selected app per run. Explicit recipes cover multiple stacks. Basic Next.js App Router route discovery is a convenience. |
 | Browser | Chromium, one viewport per run, device scale factor `1`. Width `320–1920`, height `240–1200`, at most `2,073,600` source pixels. |
 | Scenarios | At most three scenarios, twelve steps each, and sixty seconds of source capture per scenario. |

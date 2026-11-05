@@ -1,4 +1,6 @@
-# Publish the reviewed 0.1.0 candidate
+# Historical 0.1.0 publishing procedure
+
+Version `0.1.0` is already published. This procedure preserves its reviewed handoff. A correction requires a separately reviewed version and archive. Do not reuse `0.1.0` or its approval for the `0.1.1` candidate. See [release readiness](release-readiness.md) for current status.
 
 > Release status: use this procedure only with the separately delivered accepted release identity and [release readiness](release-readiness.md) for the exact candidate. All required gates must be accepted. This document does not authorize publication.
 
@@ -13,12 +15,14 @@ The project owner is Tampraphon Lorattanasane. The GitHub owner is `kyusuku`. Th
 Proceed only when [release readiness](release-readiness.md) says `ready_for_owner_publish` and identifies the exact commit, tarball, and SHA-256. Review the following evidence at that identity.
 
 - Every required acceptance check and any remaining supported limitations.
-- Node24 Linux full gate, macOS smoke, and three consecutive real-app comparisons.
+- Node24 Linux full gate, macOS smoke, the complete local macOS synthetic motion gate, and three consecutive real-app comparisons.
 - Installed-tarball help, doctor, planning, comparison, and re-encoding checks.
 - Success and partial demo videos, posters, and matching manifests.
 - Secret scans of staged files and complete Git history, tarball contents, dependency advisory triage, and licenses.
 
 Missing implementation, platform evidence, or package verification prevents readiness. Final owner approval, npm login, and a publishing second factor can remain handoff actions.
+
+Run the [mandatory local macOS release gate](ci.md#run-the-mandatory-local-macos-release-gate) against the exact approved archive and digest. Require all six cases, both viewports with three repetitions each, and every unchanged source, mask, clock, pulse, scroll, encoding, decoding, and cleanup check. Review every resulting video at normal speed. Retain the actual host and workload, report and media hashes, all failures, and the review result with the release identity. Hosted macOS skips this entire synthetic step. Green hosted CI alone does not satisfy Mac motion acceptance or guarantee cadence on all hardware.
 
 Use Node `24.22.2` and npm `11.12.1`. Set these values from the readiness record, not from an older build.
 

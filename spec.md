@@ -75,9 +75,11 @@ flowchart LR
 
 ### 3.1 Schema policy
 
-All active input/output documents use schemaVersion 2. The package is unpublished, so do not build parallel v1 execution paths. Reject v1 inputs with a migration diagnostic. Port existing keyframe behavior into schema 2. Old candidate archives and v1 media remain readable with their historical binary; new compose does not claim v1 compatibility.
+All active input/output documents use schemaVersion 2. Reject v1 inputs with a migration diagnostic. Port existing keyframe behavior into schema 2. Old candidate archives and v1 media remain readable with their historical binary; new compose does not claim v1 compatibility.
 
-The corrected unpublished motion capture contract separates observed timing from bounded playback. Earlier experimental schema 2 captures with the obsolete motion start/end shape remain associated with their historical binary. Current compose requires the current strict capture shape and must reject the obsolete shape rather than silently reinterpret it. Config, scenario, recipe, and plan shapes do not change for this correction.
+The corrected motion capture contract separates observed timing from bounded playback. Earlier experimental schema 2 captures with the obsolete motion start/end shape remain associated with their historical binary. Current compose requires the current strict capture shape and must reject the obsolete shape rather than silently reinterpret it. Config, scenario, recipe, and plan shapes do not change for this correction.
+
+The toolVersion field records the producing release separately from schemaVersion. Version 0.1.1 accepts schema 2 captures and manifests produced by 0.1.0 or 0.1.1, including manifests in result envelopes, subject to all current strict field and integrity checks. Unknown producer versions remain unsupported. Newly created captures and manifests identify 0.1.1. Recomposition preserves the saved producer identity and capture/timeline bytes. This compatibility does not admit obsolete experimental shapes or schema 1 documents.
 
 Use strict objects and discriminated unions. Reject unknown keys, invalid combinations, and unsupported versions. Generate JSON schemas from the same definitions used at runtime. Every JSON example in this spec and the packaged documentation must validate.
 

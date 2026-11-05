@@ -1,10 +1,12 @@
 # Limitations and result codes
 
-Revision 0.3 implements schema 2 recipes, motion capture, and explicit keyframes. Version `0.1.0` remains an unpublished experimental candidate. Final installed-package, platform, repeated-motion, and application acceptance are incomplete. [Release readiness](release-readiness.md) records the evidence and remaining gates. This page describes the current implementation contract, not a release certification.
+Revision 0.3 implements schema 2 recipes, motion capture, and explicit keyframes. Version `0.1.1` remains experimental. [Release readiness](release-readiness.md) records verification and publication status. This page describes the supported behavior and limits.
 
 ## Capture and interpretation
 
 Motion is the default. It records actual intermediate Chromium frames, keeps animations running, and selects the latest available source frame on a common elapsed timeline. The 30-FPS MP4 does not imply 30 newly captured frames per second. Repeated frames can reflect unchanged content, capture gaps, or explicitly held failure states. The tool does not measure application performance, interpolate motion, or retime each side independently.
+
+Stopping capture does not flush frames still queued in Chromium or Playwright. A trailing frame can be absent even if the browser presented it before recording stopped. Frame counters cover only frames delivered to the recorder, and `sourceDroppedFrames` remains `null` because unobserved losses are unknown. A successful capture does not guarantee that every browser frame or the final page state appears in the video.
 
 Keyframes require `capture.mode: "keyframes"`. They use animation-disabled checkpoints held for each step's observation interval. Keyframe output cannot establish animation or smooth-scroll behavior. A motion failure never switches modes automatically.
 
@@ -21,6 +23,8 @@ Presentation labels use printable ASCII. Unsupported label characters become `?`
 ## Application and source layout
 
 The tool runs on Node 24 on Linux and macOS. Other Node majors and Windows are unsupported. The application's runtime is selected by its explicit execution recipe. Static sites, Python apps, npm apps, and pnpm workspaces do not need the same source layout or package manager. Missing prerequisites fail before setup; the tool does not install arbitrary system runtimes automatically.
+
+Linux must provide a working Chromium sandbox. Hosts with restricted user namespaces may need the scoped AppArmor profile described in Option 2 of [Chromium's host setup guidance](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md). The CLI does not fall back to an unsandboxed browser.
 
 The following source layouts fail validation before execution.
 

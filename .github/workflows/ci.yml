@@ -27,6 +27,21 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - name: Remove hosted runner Git LFS filters
+        run: |
+          git config --show-origin --show-scope --name-only --get-regexp '^filter\.lfs\.' || test "$?" -eq 1
+          for scope in global system; do
+            if git config "--$scope" --get-regexp '^filter\.lfs\.' > /dev/null; then
+              if [ "$scope" = system ]; then
+                sudo git config --system --remove-section filter.lfs
+              else
+                git config --global --remove-section filter.lfs
+              fi
+            else
+              config_status=$?
+              if [ "$config_status" -ne 1 ]; then exit "$config_status"; fi
+            fi
+          done
       - name: Set up Node 24.22.2
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
@@ -37,7 +52,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg procps build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates
+          sudo apt-get install -y ffmpeg procps build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates apparmor
           sh scripts/linux-gate/install-lsof.sh "$HOME/.local"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Install macOS media prerequisite
@@ -48,6 +63,24 @@ jobs:
       - name: Install pinned Chromium and Linux libraries
         if: runner.os == 'Linux'
         run: node node_modules/playwright/cli.js install --with-deps chromium
+      - name: Permit pinned Chromium sandbox on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          chromium_shells=( "$HOME"/.cache/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell )
+          if [ "${#chromium_shells[@]}" -ne 1 ] || [ ! -x "${chromium_shells[0]}" ]; then
+            echo "Expected exactly one installed Chromium headless shell." >&2
+            exit 1
+          fi
+          chromium_shell=$(realpath "${chromium_shells[0]}")
+          sudo tee /etc/apparmor.d/show-what-changed-chromium > /dev/null <<EOF
+          abi <abi/4.0>,
+          include <tunables/global>
+          profile show-what-changed-chromium "$chromium_shell" flags=(unconfined) {
+            userns,
+          }
+          EOF
+          sudo apparmor_parser -r /etc/apparmor.d/show-what-changed-chromium
       - name: Install pinned Chromium on macOS
         if: runner.os == 'macOS'
         run: node node_modules/playwright/cli.js install chromium
@@ -56,6 +89,17 @@ jobs:
           npm run typecheck
           npm run build
           npm run schema:check
+      - name: Verify sandboxed Chromium prerequisite
+        if: runner.os == 'Linux'
+        timeout-minutes: 2
+        run: |
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { childEnvironment } from './dist/runtime/process-table.js';
+          const server = await chromium.launchServer({ headless: true, chromiumSandbox: true, timeout: 30_000, env: childEnvironment('ci-browser-prerequisite') });
+          try { console.log('Sandboxed Chromium launch succeeded.'); }
+          finally { await server.close(); }
+          NODE
       - name: Test source and integration behavior
         run: |
           npm run test:unit -- --maxWorkers=1
@@ -67,10 +111,11 @@ jobs:
           mkdir -p "$RUNNER_TEMP/candidate"
           npm pack --pack-destination "$RUNNER_TEMP/candidate" --json
       - name: Bind the candidate to the tested source
-        run: node scripts/verify-package-source.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-source-binding"
+        run: node scripts/verify-package-source.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/package-source-binding"
       - name: Verify the installed candidate
-        run: node scripts/release-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-smoke"
-      - name: Verify installed motion across both viewports and three repetitions
+        run: node scripts/release-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/package-smoke"
+      - name: Verify complete installed synthetic motion on Linux across both viewports and three repetitions
+        if: runner.os == 'Linux'
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
@@ -80,12 +125,24 @@ jobs:
           import { isAbsolute, join } from 'node:path';
           const root = process.env.RUNNER_TEMP;
           const smoke = JSON.parse(await readFile(join(root, 'package-smoke/report.json'), 'utf8'));
-          const tarball = await readFile(join(root, 'candidate/show-what-changed-0.1.0.tgz'));
+          const tarball = await readFile(join(root, 'candidate/show-what-changed-0.1.1.tgz'));
           assert.equal(smoke.status, 'passed', 'Installed package smoke must pass before motion verification.');
           assert.equal(smoke.candidate?.sha256, createHash('sha256').update(tarball).digest('hex'), 'The installed package must match the candidate tarball.');
           assert(typeof smoke.root === 'string' && isAbsolute(smoke.root), 'The smoke report must identify its fresh installation.');
           const result = spawnSync(process.execPath, ['scripts/revision-0.3-motion-check.mjs', '--installed-root', join(smoke.root, 'installed/node_modules/show-what-changed'), '--output-dir', join(root, 'installed-motion')], { stdio: 'inherit' });
           if (result.error) throw result.error;
+          if (result.status !== 0) {
+            try {
+              const motion = JSON.parse(await readFile(join(root, 'installed-motion/motion-check.json'), 'utf8'));
+              for (const item of motion.cases.slice(0, 6)) {
+                const captureTracks = Object.fromEntries(['before', 'after'].map((side) => {
+                  const track = item.captureTracks?.[side];
+                  return [side, track ? { status: track.status, failureCode: track.failureCode, failureAtMs: track.failureAtMs, stats: track.stats, clockErrorBoundMs: track.clock?.errorBoundMs, frameCount: track.frameCount } : null];
+                }));
+                console.error(JSON.stringify({ id: item.id, failure: item.failure, captureOutcome: item.captureOutcome, captureTracks, cleanup: item.cleanup }).slice(0, 12000));
+              }
+            } catch (error) { console.error('Installed motion failure summary unavailable.', error.code ?? 'UNKNOWN'); }
+          }
           assert.equal(result.signal, null, 'Installed motion verification must finish without a signal.');
           assert.equal(result.status, 0, 'Installed motion verification must exit successfully.');
           const motion = JSON.parse(await readFile(join(root, 'installed-motion/motion-check.json'), 'utf8'));
@@ -93,11 +150,56 @@ jobs:
           assert.equal(motion.completeRepetitionMatrix, true, 'All required viewports and repetitions must complete.');
           NODE
       - name: Verify installed host recipes
-        run: node scripts/compatibility-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/compatibility-smoke"
+        run: node scripts/compatibility-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/compatibility-smoke"
       - name: Verify installed public workspace application
-        run: node scripts/real-app-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/public-app-smoke"
+        if: runner.os == 'Linux'
+        run: |
+          public_app_status=0
+          node scripts/real-app-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/public-app-smoke" || public_app_status=$?
+          if [ "$public_app_status" -ne 0 ]; then
+            node --input-type=module <<'NODE' || true
+          import { readFile } from 'node:fs/promises';
+          import { join, resolve } from 'node:path';
+          const output = join(process.env.RUNNER_TEMP, 'public-app-smoke');
+          const clip = (value, limit = 4000) => String(value ?? '').slice(-limit);
+          let report;
+          const emit = (value) => {
+            let line = JSON.stringify(value);
+            for (const path of [report?.root, process.env.RUNNER_TEMP, process.env.GITHUB_WORKSPACE].filter(Boolean)) line = line.split(path).join('<workspace>');
+            console.error(line.slice(0, 16000));
+          };
+          const command = (result) => result ? { argv: result.argv, code: result.code, signal: result.signal, timedOut: result.timedOut, overflow: result.overflow, elapsedMs: result.elapsedMs, stdout: clip(result.stdout), stderr: clip(result.stderr) } : null;
+          try {
+            report = JSON.parse(await readFile(join(output, 'report.json'), 'utf8'));
+            emit({ diagnostic: 'public-app-report', status: report.status, candidate: report.candidate, error: { message: clip(report.error?.message), stack: clip(report.error?.stack, 2000), command: command(report.error?.command) }, runs: report.runs?.map(({ name, status }) => ({ name, status })) });
+            for (const row of (report.runs ?? []).filter((run) => run.status !== 'passed').slice(0, 7)) {
+              emit({ diagnostic: 'public-app-run', name: row.name, status: row.status, error: row.error, command: row.command, runIds: row.runIds, cleanup: row.cleanup, callerPreserved: row.callerPreserved, verificationErrors: row.verificationErrors, artifactEvidence: row.artifactEvidence });
+              try { emit({ diagnostic: 'public-app-command', name: row.name, ...command(JSON.parse(await readFile(join(output, row.name + '.json'), 'utf8'))) }); }
+              catch (error) { emit({ diagnostic: 'public-app-command-unavailable', name: row.name, code: error.code ?? 'INVALID_JSON' }); }
+              for (const evidence of (row.artifactEvidence ?? []).slice(0, 3)) {
+                const directory = resolve(output, evidence.directory);
+                if (!directory.startsWith(output + '/')) continue;
+                for (const file of ['manifest.json', 'capture.json']) {
+                  try {
+                    const data = JSON.parse(await readFile(join(directory, file), 'utf8'));
+                    const scenarios = data.scenarios?.slice(0, 3).map((scenario) => ({ id: scenario.id, outcome: scenario.outcome, errors: scenario.errors, steps: (scenario.steps ?? []).filter((step) => step.before?.status !== 'ok' || step.after?.status !== 'ok').slice(0, 20).map((step) => ({
+                      id: step.id, op: step.op, ...Object.fromEntries(['before', 'after'].map((side) => { const result = step[side]; return [side, result ? { status: result.status, reasonCode: result.reasonCode, elapsedMs: result.elapsedMs, heldFromStepId: result.heldFromStepId } : null]; })),
+                    })) })).filter((scenario) => scenario.outcome !== 'ok' || scenario.errors?.length || scenario.steps.length);
+                    const motion = data.motion?.slice(0, 3).map((scenario) => ({ id: scenario.id, tracks: Object.fromEntries(['before', 'after'].map((side) => {
+                      const track = scenario.tracks?.[side];
+                      return [side, track ? { status: track.status, error: track.error, failureAtMs: track.failureAtMs, stats: track.stats, frameCount: track.frames?.length, clock: track.clock ? { ...track.clock, sampleCount: track.clock.samples?.length, samples: track.clock.samples?.slice(-8) } : null } : null];
+                    })) }));
+                    emit({ diagnostic: 'public-app-artifact', name: row.name, file, runId: data.runId, scenarios, state: data.state, status: data.status, exitCode: data.exitCode, summary: data.summary, comparisonOutcome: data.comparisonOutcome, cleanupOutcome: data.cleanupOutcome, encodingOutcome: data.encodingOutcome, errors: data.errors, captureQuality: data.captureQuality, motion });
+                  } catch (error) { emit({ diagnostic: 'public-app-artifact-unavailable', name: row.name, file, code: error.code ?? 'INVALID_JSON' }); }
+                }
+              }
+            }
+          } catch (error) { emit({ diagnostic: 'public-app-report-unavailable', code: error.code ?? 'INVALID_JSON' }); }
+          NODE
+          fi
+          exit "$public_app_status"
       - name: Verify Linux repeatability
         if: runner.os == 'Linux'
-        run: node scripts/repeatability.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/repeatability"
+        run: node scripts/repeatability.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/repeatability"
       - name: Review dependency metadata and scan candidate content
-        run: node scripts/release-audit.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/release-audit"
+        run: node scripts/release-audit.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/release-audit"
