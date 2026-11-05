@@ -2,15 +2,15 @@
 
 This guide creates a disposable Git app and a local BEFORE | AFTER video. The pricing lesson explicitly uses keyframes so its checkpoints remain repeatable. Motion is the default for recipes that omit capture mode.
 
-This tutorial uses the published experimental `0.1.0` release. Use synthetic or disposable data when adapting it.
+This tutorial targets experimental version `0.1.1`. Use synthetic or disposable data when adapting it.
 
-## Install the published package
+## Install the package
 
-Use Node `24.x`. Release checks use Node `24.22.2` and npm `11.12.1`. The exact archive identity is recorded in [release readiness](release-readiness.md).
+Use Node `24.x`. Release checks use Node `24.22.2` and npm `11.12.1`. Check [release readiness](release-readiness.md) for the archive identity and publication status. Before `0.1.1` is published, replace the package name below with the path to its reviewed tarball.
 
 ```sh
 SWC_INSTALL="$(mktemp -d)"
-npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.0
+npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.1
 SWC="$SWC_INSTALL/node_modules/.bin/show-what-changed"
 node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
 "$SWC" doctor --json

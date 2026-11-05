@@ -1,4 +1,6 @@
-# Publish the reviewed 0.1.0 candidate
+# Historical 0.1.0 publishing procedure
+
+Version `0.1.0` is already published. This procedure preserves its reviewed handoff. A correction requires a separately reviewed version and archive. Do not reuse `0.1.0` or its approval for the `0.1.1` candidate. See [release readiness](release-readiness.md) for current status.
 
 > Release status: use this procedure only with the separately delivered accepted release identity and [release readiness](release-readiness.md) for the exact candidate. All required gates must be accepted. This document does not authorize publication.
 

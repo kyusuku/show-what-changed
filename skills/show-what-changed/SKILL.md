@@ -5,7 +5,7 @@ description: Use when a user wants local visual evidence of a web application ch
 
 # Show what changed
 
-Use the installed CLI with `--json`. Version `0.1.0` is unpublished and revision 0.3 acceptance remains in progress. Read the [packaged README](../../README.md) and release evidence. Never infer publication from local artifacts.
+Use the installed CLI with `--json`. The tool is experimental and uses schema 2. Read the [packaged README](../../README.md) and release evidence. Never infer publication from local artifacts.
 
 ## Inspect and plan
 

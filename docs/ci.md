@@ -24,7 +24,7 @@ npm run build
 mkdir -p /absolute/candidate-directory
 npm pack --pack-destination /absolute/candidate-directory
 SWC_CANDIDATE_COMMIT="$(git rev-parse HEAD)"
-SWC_CANDIDATE_TARBALL=/absolute/candidate-directory/show-what-changed-0.1.0.tgz
+SWC_CANDIDATE_TARBALL=/absolute/candidate-directory/show-what-changed-0.1.1.tgz
 SWC_CANDIDATE_SHA256="$(shasum -a 256 "$SWC_CANDIDATE_TARBALL" | cut -d ' ' -f 1)"
 node scripts/linux-gate.mjs --release \
   --commit "$SWC_CANDIDATE_COMMIT" \
@@ -41,7 +41,7 @@ Use the exact reviewed tarball on macOS with Node `24.22.2` and npm `11.12.1`. R
 
 ```sh
 set -eu
-SWC_CANDIDATE_TARBALL=/absolute/path/show-what-changed-0.1.0.tgz
+SWC_CANDIDATE_TARBALL=/absolute/path/show-what-changed-0.1.1.tgz
 SWC_CANDIDATE_SHA256='read-approved-package-sha256-from-release-identity'
 SWC_MAC_EVIDENCE=/absolute/new-macos-evidence-directory
 test "$(shasum -a 256 "$SWC_CANDIDATE_TARBALL" | cut -d ' ' -f 1)" = "$SWC_CANDIDATE_SHA256"

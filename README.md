@@ -4,7 +4,7 @@ Compare a browser scenario across two Git snapshots and produce a labeled BEFORE
 
 Revision 0.3 uses explicit execution recipes for web applications across stacks. Motion is the default. It records actual intermediate Chromium frames and preserves their shared elapsed timing. Keyframes remain an explicit alternative.
 
-Version `0.1.0` is published on [npm](https://www.npmjs.com/package/show-what-changed) and remains experimental. It can lose a static page update while an earlier frame awaits masking and acknowledgement. This branch prepares the `0.1.1` correction. See [release readiness](docs/release-readiness.md) for verification status and the published archive's historical evidence.
+Version `0.1.1` fixes a motion-capture defect in `0.1.0` that could lose a static page update while an earlier frame awaited masking and acknowledgement. The tool remains experimental. See [release readiness](docs/release-readiness.md) for verification and publication status.
 
 The [synthetic examples](docs/demo/README.md) identify each recording's capture mode and candidate. Historical development clips and keyframe examples remain labeled separately from release-candidate motion evidence.
 
@@ -43,11 +43,11 @@ Ubuntu 23.10 and newer can restrict the user namespaces that Chromium needs. If 
 
 ## Install
 
-Install the published package outside your application's checkout. Use Node 24 and the system prerequisites above.
+Install the package outside your application's checkout. Use Node 24 and the system prerequisites above. The commands below target `0.1.1`. Before that version is published on [npm](https://www.npmjs.com/package/show-what-changed), replace `show-what-changed@0.1.1` with the path to its reviewed tarball.
 
 ```sh
 SWC_INSTALL="$(mktemp -d)"
-npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.0
+npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.1
 SWC="$SWC_INSTALL/node_modules/.bin/show-what-changed"
 node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
 "$SWC" doctor --json
@@ -55,7 +55,7 @@ node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
 
 Playwright's `install --with-deps chromium` variant also installs Linux system libraries and can require administrator access. Use the installed pinned Playwright dependency rather than an unqualified latest installer.
 
-For archive installation, use the reviewed tarball and SHA-256 in [release readiness](docs/release-readiness.md). The npm archive has the same bytes.
+For archive installation, use the reviewed tarball and SHA-256 in [release readiness](docs/release-readiness.md). Verify the downloaded archive against its recorded digest.
 
 ## Describe how your app runs
 
