@@ -39,7 +39,7 @@ lsof -v
 
 The installer verifies its source hash and does not edit shell configuration.
 
-Ubuntu 23.10 and newer can restrict the user namespaces that Chromium needs. If browser startup reports `No usable sandbox`, follow [Chromium's scoped AppArmor or sandbox-helper setup](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md). The CLI keeps Chromium's sandbox enabled.
+Ubuntu 23.10 and newer can restrict the user namespaces that Chromium needs. If browser startup reports `No usable sandbox`, use the scoped AppArmor profile described in Option 2 of [Chromium's setup guide](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md). The CLI keeps Chromium's sandbox enabled.
 
 ## Install
 
