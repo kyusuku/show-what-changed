@@ -219,13 +219,13 @@ test('T09 keeps one real masked secret and fill value private through failed cap
   const fill = 'N6-PRIVATE-FILL-123';
   const html = `<style>body{margin:0;background:white;color:black}.secret{position:fixed;left:10px;top:10px;width:600px;height:120px;background:#ff0000;color:#0000ff;overflow:hidden}input{background:#ff0000;color:#0000ff}h1{margin-top:160px}</style><div class="secret">${secret}<label>Private code<input></label></div><h1>Masked comparison</h1>`;
   await writeFile(join(fixture.path, 'server.mjs'), `import http from 'node:http';http.createServer((req,res)=>{res.setHeader('content-type','text/html');res.end(${JSON.stringify(html)});}).listen(Number(process.argv[2]),'127.0.0.1');`);
-  await writeFile(join(fixture.path, 'show-what-changed.config.json'), JSON.stringify({ schemaVersion: 2, execution: { start: { kind: 'process', argv: [process.execPath, 'server.mjs', '{port}'] }, state: { kind: 'stateless' } }, capture: { mode: 'keyframes', maskSelectors: ['.secret'], stepTimeoutMs: 400, observeMs: 200 } }));
+  await writeFile(join(fixture.path, 'show-what-changed.config.json'), JSON.stringify({ schemaVersion: 2, execution: { start: { kind: 'process', argv: [process.execPath, 'server.mjs', '{port}'] }, state: { kind: 'stateless' } }, capture: { mode: 'keyframes', maskSelectors: ['.secret'], stepTimeoutMs: 10_000, observeMs: 200 } }));
   await git(fixture.path, 'add', '.');
   await git(fixture.path, 'commit', '-qm', 'Mask continuity fixture');
   await writeFile(fixture.scenario, JSON.stringify({ schemaVersion: 2, id: 'privacy', title: 'Masked fixture', steps: [
     { id: 'open', op: 'goto', path: '/', timeoutMs: 3000 },
     { id: 'fill', op: 'fill', target: { label: 'Private code' }, value: fill },
-    { id: 'missing', op: 'expectVisible', target: { testId: 'missing' } },
+    { id: 'missing', op: 'expectVisible', target: { testId: 'missing' }, timeoutMs: 400 },
     { id: 'blocked', op: 'screenshot' },
   ] }));
   const result = await compare({ kind: 'new', request: { invocationDir: fixture.path, scenarioPaths: [fixture.scenario] } }, {
