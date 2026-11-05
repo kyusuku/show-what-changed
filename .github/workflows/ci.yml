@@ -130,6 +130,18 @@ jobs:
           assert(typeof smoke.root === 'string' && isAbsolute(smoke.root), 'The smoke report must identify its fresh installation.');
           const result = spawnSync(process.execPath, ['scripts/revision-0.3-motion-check.mjs', '--installed-root', join(smoke.root, 'installed/node_modules/show-what-changed'), '--output-dir', join(root, 'installed-motion')], { stdio: 'inherit' });
           if (result.error) throw result.error;
+          if (result.status !== 0) {
+            try {
+              const motion = JSON.parse(await readFile(join(root, 'installed-motion/motion-check.json'), 'utf8'));
+              for (const item of motion.cases.slice(0, 6)) {
+                const captureTracks = Object.fromEntries(['before', 'after'].map((side) => {
+                  const track = item.captureTracks?.[side];
+                  return [side, track ? { status: track.status, failureCode: track.failureCode, failureAtMs: track.failureAtMs, stats: track.stats, clockErrorBoundMs: track.clock?.errorBoundMs, frameCount: track.frameCount } : null];
+                }));
+                console.error(JSON.stringify({ id: item.id, failure: item.failure, captureOutcome: item.captureOutcome, captureTracks, cleanup: item.cleanup }).slice(0, 12000));
+              }
+            } catch (error) { console.error('Installed motion failure summary unavailable.', error.code ?? 'UNKNOWN'); }
+          }
           assert.equal(result.signal, null, 'Installed motion verification must finish without a signal.');
           assert.equal(result.status, 0, 'Installed motion verification must exit successfully.');
           const motion = JSON.parse(await readFile(join(root, 'installed-motion/motion-check.json'), 'utf8'));
