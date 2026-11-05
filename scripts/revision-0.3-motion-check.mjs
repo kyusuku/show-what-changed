@@ -213,6 +213,58 @@ const nativeRectangle = (viewport) => ({ x: 0, y: 205, width: viewport.width, he
 const pulseRectangle = (viewport) => ({ x: viewport.width - 110, y: 40, width: 90, height: 40 });
 const pulseOn = (observation, rectangle) => observation.pixels > rectangle.width * rectangle.height / 2;
 
+export async function sourceTimingDiagnostics(api, bundle, run, viewport) {
+  const scenario = bundle.motion[0];
+  const diagnostics = {};
+  for (const side of sides) {
+    const track = scenario.tracks[side];
+    const timing = scenario.steps[1][side];
+    if (timing.kind !== 'executed') {
+      diagnostics[side] = { trackStatus: track.status, timingKind: timing.kind };
+      continue;
+    }
+    const observations = [];
+    for (const frame of track.frames) {
+      const image = await imageAt(api, run, frame.artifact, viewport);
+      observations.push({ sequence: frame.sequence, runElapsedMs: frame.runElapsedMs, sourceMonotonicSeconds: frame.sourceMonotonicSeconds, receivedMs: frame.receivedMs, ...observe(image, moverRectangle(viewport), 'mover') });
+    }
+    const dispatchMs = timing.dispatch.runElapsedMs;
+    const completionMs = timing.completion.runElapsedMs;
+    const windowEndMs = dispatchMs + 3000;
+    const summarize = (entries, startMs = null) => ({
+      sampleCount: entries.length,
+      visibleSamples: entries.filter((entry) => entry.x !== null).length,
+      distinctPositions: new Set(entries.filter((entry) => entry.x !== null).map((entry) => entry.x)).size,
+      distinctPositionValues: [...new Set(entries.filter((entry) => entry.x !== null).map((entry) => entry.x))],
+      duplicateSamples: entries.filter((entry) => entry.x !== null).length - new Set(entries.filter((entry) => entry.x !== null).map((entry) => entry.x)).size,
+      ...(startMs === null ? {} : { maxMovingGapMs: movingMetrics(entries, startMs).maxMovingGapMs }),
+    });
+    const inside = observations.filter((entry) => entry.runElapsedMs >= dispatchMs && entry.runElapsedMs <= windowEndMs);
+    const before = observations.filter((entry) => entry.runElapsedMs < dispatchMs);
+    const after = observations.filter((entry) => entry.runElapsedMs > windowEndMs);
+    const completionWindow = observations.filter((entry) => entry.runElapsedMs >= completionMs && entry.runElapsedMs <= completionMs + 3000);
+    const baseline = before.filter((entry) => entry.x !== null).at(-1) ?? observations.find((entry) => entry.x !== null);
+    const firstChangedIndex = observations.findIndex((entry) => entry.runElapsedMs >= dispatchMs && entry.x !== null && baseline && entry.x !== baseline.x);
+    const firstChanged = firstChangedIndex < 0 ? null : observations[firstChangedIndex];
+    const preceding = firstChangedIndex > 0 ? observations[firstChangedIndex - 1] : null;
+    const intervals = observations.slice(1).map((entry, index) => ({ fromSequence: observations[index].sequence, toSequence: entry.sequence, fromMs: observations[index].runElapsedMs, toMs: entry.runElapsedMs, sourceGapMs: (entry.sourceMonotonicSeconds - observations[index].sourceMonotonicSeconds) * 1000, receiptGapMs: entry.receivedMs - observations[index].receivedMs }));
+    diagnostics[side] = {
+      trackStatus: track.status, dispatchMs, completionMs, observationEndMs: timing.observationEnd.runElapsedMs,
+      dispatchToCompletionMs: completionMs - dispatchMs,
+      dispatchWindow: { startMs: dispatchMs, endMs: windowEndMs, ...summarize(inside, dispatchMs) },
+      completionWindowDiagnosticOnly: { startMs: completionMs, endMs: completionMs + 3000, ...summarize(completionWindow, completionMs) },
+      beforeDispatch: summarize(before), afterDispatchWindow: summarize(after), entireTrack: summarize(observations),
+      positionsOnlyAfterDispatchWindow: [...new Set(after.filter((entry) => entry.x !== null && !inside.some((value) => value.x === entry.x)).map((entry) => entry.x))],
+      firstVisibleChangeBracket: { baseline, preceding, firstChanged, firstChangedAfterDispatchMs: firstChanged ? firstChanged.runElapsedMs - dispatchMs : null, limitation: 'Captured observations bracket visible change. They do not identify the browser animation start time.' },
+      largestSourceIntervals: [...intervals].sort((a, b) => b.sourceGapMs - a.sourceGapMs).slice(0, 8),
+      largestDispatchWindowSourceIntervals: intervals.filter((entry) => entry.toMs >= dispatchMs && entry.fromMs <= windowEndMs).sort((a, b) => b.sourceGapMs - a.sourceGapMs).slice(0, 8),
+      largestReceiptIntervals: [...intervals].sort((a, b) => b.receiptGapMs - a.receiptGapMs).slice(0, 8),
+      observations: observations.slice(0, 512), omittedObservations: Math.max(0, observations.length - 512),
+    };
+  }
+  return diagnostics;
+}
+
 async function sourceMetrics(api, bundle, run, viewport) {
   const scenario = bundle.motion[0];
   const results = {};
@@ -404,6 +456,8 @@ async function executeCase(api, original, viewport, repetition, outputDir, signa
     assert.equal(bundle.scenarios[0].outcome, 'ok');
     result.dispatchSkewMs = Math.abs(bundle.motion[0].steps[1].before.dispatch.runElapsedMs - bundle.motion[0].steps[1].after.dispatch.runElapsedMs);
     result.stepTiming = bundle.motion[0].steps;
+    result.sourceTimingDiagnostics = await sourceTimingDiagnostics(api, bundle, run, viewport);
+    process.stderr.write(JSON.stringify({ kind: 'source-timing-diagnostic-only', id, tracks: result.sourceTimingDiagnostics }) + '\n');
     result.source = await sourceMetrics(api, bundle, run, viewport);
     const timeline = await api.render(bundle, { coverage: { selected: [], unresolved: [], omitted: [], unsupported: [], complete: true }, provenance: { before: { valid: true, actualHash: null, errors: [] }, after: { valid: true, actualHash: null, errors: [] } } }, run);
     api.validateTimelineCapture(timeline, bundle);
