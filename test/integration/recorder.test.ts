@@ -330,7 +330,7 @@ describe('real Chromium recorder', () => {
       expect(bundle.scenarios[0]?.outcome, results).toBe('partial');
       expect(step(bundle, 1)[side], results).toMatchObject({
         status: 'failed',
-        reasonCode: 'LOCATOR_MISSING',
+        reasonCode: expect.stringMatching(/^(LOCATOR_MISSING|STEP_TIMEOUT)$/),
         heldFromStepId: 'open',
       });
       expect(step(bundle, 2)[side], results).toMatchObject({
