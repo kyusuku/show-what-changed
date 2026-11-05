@@ -114,7 +114,8 @@ jobs:
         run: node scripts/verify-package-source.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-source-binding"
       - name: Verify the installed candidate
         run: node scripts/release-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-smoke"
-      - name: Verify installed motion across both viewports and three repetitions
+      - name: Verify complete installed synthetic motion on Linux across both viewports and three repetitions
+        if: runner.os == 'Linux'
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';

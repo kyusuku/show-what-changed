@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 1,
+  "scope": "Published 0.1.0 complete synthetic motion verification on the observed local macOS host",
+  "status": "numeric-and-scoped-media-passed",
+  "packageSha256": "0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31",
+  "sourceTagCommit": "c415b2139de1b53ccdf3fa8683dee7bccab153d8",
+  "installedPackageFilesSha256": "6bfb7f94f370c3f898f9e0447cddbf3f2cf786f212df70ea9c6f74594ac431f2",
+  "verifierSha256": "2915eb49edf5d2af4b7c01b8269b33527cfe26641b29090eb9b687faf6571112",
+  "rawMotionReportSha256": "2e33d24d757f7044d5608d8fd14c75a30cd649ea5e3ce6fd6459131174d09c10",
+  "normalSpeedReviewSha256": "e081f5a4b90eec3ff13f238885c1a467bbe34c720b5b943dfa55fb6942ddd565",
+  "playbackReportSha256": "b20fc1015bd42077311163fa3b81b804732177600e8887d953c60d0c06256391",
+  "startedAt": "2026-11-05T10:09:58.320Z",
+  "completedAt": "2026-11-05T10:13:50.938Z",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v24.22.2",
+  "macosVersion": "27.0",
+  "host": {
+    "startedAt": "2026-11-05T10:09:58.261Z",
+    "architecture": "arm64",
+    "parallelism": 10,
+    "cpuModels": [
+      "Apple M5"
+    ],
+    "loadAverage": [
+      16.66455078125,
+      26.3251953125,
+      26.57080078125
+    ],
+    "memoryBytes": 34359738368,
+    "note": "Observed local host; no unrelated process was stopped or changed."
+  },
+  "hostScope": "Observed shared desktop environment. No unrelated process was stopped or changed. Background workload was not exhaustively inventoried; per-case load averages are retained. No host-isolation or all-hardware cadence claim.",
+  "completeRepetitionMatrix": true,
+  "thresholdsUnchanged": true,
+  "cases": [
+    {
+      "id": "1280x800-run-1",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "repetition": 1,
+      "status": "numeric-passed",
+      "host": {
+        "parallelism": 10,
+        "loadAverage": [
+          16.66455078125,
+          26.3251953125,
+          26.57080078125
+        ]
+      },
+      "source": {
+        "before": {
+          "distinctPositions": 114,
+          "maxMovingGapMs": 51.30499982833862,
+          "nativeDistinctPositions": 44
+        },
+        "after": {
+          "distinctPositions": 118,
+          "maxMovingGapMs": 51.419999837875366,
+          "nativeDistinctPositions": 45
+        }
+      },
+      "sourcePulseErrorsMs": [
+        0.046854257583618164,
+        16.61914563179016,
+        16.61914587020874
+      ],
+      "decoded": {
+        "before": {
+          "distinctPositions": 88,
+          "maxMovingGapMs": 33.333333333333485
+        },
+        "after": {
+          "distinctPositions": 88,
+          "maxMovingGapMs": 33.333333333333485
+        }
+      },
+      "decodedPulseErrorsMs": [
+        0,
+        0,
+        0
+      ],
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "artifacts": {
+        "compare.mp4": {
+          "path": "1280x800-run-1/compare.mp4",
+          "sha256": "db2af66e6c575987f6131b8e84f41227b2dd43e916ee8171e47b82e1feee9169",
+          "bytes": 64720
+        },
+        "poster.png": {
+          "path": "1280x800-run-1/poster.png",
+          "sha256": "b206529b55fbe54b137349663aecf473d5fb649ce5988f581c3a6f51c474ee5a",
+          "bytes": 28149
+        },
+        "capture.json": {
+          "path": "1280x800-run-1/capture.json",
+          "sha256": "60c73111e3cff74b9041a7a2ba5741cbec7a4513027caeb4fa2870d87aeae8ac",
+          "bytes": 309015
+        },
+        "timeline.json": {
+          "path": "1280x800-run-1/timeline.json",
+          "sha256": "6b8349c67f36c57e9b8b0d7818f45de668fb4ec69b0991e81d19cec207bf1e76",
+          "bytes": 81711
+        }
+      },
+      "playback": {
+        "duration": 5.266667,
+        "currentTime": 5.266667,
+        "playbackRate": 1,
+        "ended": true,
+        "error": null,
+        "totalVideoFrames": 158,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      }
+    },
+    {
+      "id": "1280x800-run-2",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "repetition": 2,
+      "status": "numeric-passed",
+      "host": {
+        "parallelism": 10,
+        "loadAverage": [
+          25.08837890625,
+          27.02197265625,
+          26.80224609375
+        ]
+      },
+      "source": {
+        "before": {
+          "distinctPositions": 96,
+          "maxMovingGapMs": 66.6639997959137,
+          "nativeDistinctPositions": 39
+        },
+        "after": {
+          "distinctPositions": 103,
+          "maxMovingGapMs": 50.277000188827515,
+          "nativeDistinctPositions": 38
+        }
+      },
+      "sourcePulseErrorsMs": [
+        0.20691680908203125,
+        16.459083557128906,
+        0.20691657066345215
+      ],
+      "decoded": {
+        "before": {
+          "distinctPositions": 85,
+          "maxMovingGapMs": 33.33333333333394
+        },
+        "after": {
+          "distinctPositions": 85,
+          "maxMovingGapMs": 33.33333333333394
+        }
+      },
+      "decodedPulseErrorsMs": [
+        0,
+        0,
+        0
+      ],
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "artifacts": {
+        "compare.mp4": {
+          "path": "1280x800-run-2/compare.mp4",
+          "sha256": "c027e82185d5e42504eb94abbe30a6b8f837a1024b4490588962cd7884705676",
+          "bytes": 64897
+        },
+        "poster.png": {
+          "path": "1280x800-run-2/poster.png",
+          "sha256": "b206529b55fbe54b137349663aecf473d5fb649ce5988f581c3a6f51c474ee5a",
+          "bytes": 28149
+        },
+        "capture.json": {
+          "path": "1280x800-run-2/capture.json",
+          "sha256": "4d731822d02f83de75c622ae0b86e2adcc9a694687752abc6139d7c1cc4f6211",
+          "bytes": 270322
+        },
+        "timeline.json": {
+          "path": "1280x800-run-2/timeline.json",
+          "sha256": "d1adfa4c83485de45b818201b40bf885d756b072a6889af917876b22bd1bf998",
+          "bytes": 74462
+        }
+      },
+      "playback": {
+        "duration": 5.233333,
+        "currentTime": 5.233333,
+        "playbackRate": 1,
+        "ended": true,
+        "error": null,
+        "totalVideoFrames": 157,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      }
+    },
+    {
+      "id": "1280x800-run-3",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "repetition": 3,
+      "status": "numeric-passed",
+      "host": {
+        "parallelism": 10,
+        "loadAverage": [
+          36.2685546875,
+          29.91748046875,
+          27.89111328125
+        ]
+      },
+      "source": {
+        "before": {
+          "distinctPositions": 118,
+          "maxMovingGapMs": 66.66400003433228,
+          "nativeDistinctPositions": 48
+        },
+        "after": {
+          "distinctPositions": 116,
+          "maxMovingGapMs": 66.66400003433228,
+          "nativeDistinctPositions": 47
+        }
+      },
+      "sourcePulseErrorsMs": [
+        0.9514174461364746,
+        15.714582920074463,
+        0.9514169692993164
+      ],
+      "decoded": {
+        "before": {
+          "distinctPositions": 87,
+          "maxMovingGapMs": 33.33333333333394
+        },
+        "after": {
+          "distinctPositions": 86,
+          "maxMovingGapMs": 33.33333333333394
+        }
+      },
+      "decodedPulseErrorsMs": [
+        0,
+        33.333333333333485,
+        0
+      ],
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "artifacts": {
+        "compare.mp4": {
+          "path": "1280x800-run-3/compare.mp4",
+          "sha256": "7086f035b5c5df1e338bc13ebbfb25c4bab6108c047ab5f5275444a0aece8e0b",
+          "bytes": 63703
+        },
+        "poster.png": {
+          "path": "1280x800-run-3/poster.png",
+          "sha256": "b206529b55fbe54b137349663aecf473d5fb649ce5988f581c3a6f51c474ee5a",
+          "bytes": 28149
+        },
+        "capture.json": {
+          "path": "1280x800-run-3/capture.json",
+          "sha256": "62059b58c906d1a65daaeef8dca20b07f1805f7ee62ec2b96b60328e90455d91",
+          "bytes": 324737
+        },
+        "timeline.json": {
+          "path": "1280x800-run-3/timeline.json",
+          "sha256": "36cdcf1b0129ce537368e68c2d11261047724e14b473ab123650b80e4c86b00b",
+          "bytes": 83764
+        }
+      },
+      "playback": {
+        "duration": 5.166667,
+        "currentTime": 5.166667,
+        "playbackRate": 1,
+        "ended": true,
+        "error": null,
+        "totalVideoFrames": 155,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      }
+    },
+    {
+      "id": "390x844-run-1",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "repetition": 1,
+      "status": "numeric-passed",
+      "host": {
+        "parallelism": 10,
+        "loadAverage": [
+          32.2529296875,
+          29.77783203125,
+          27.94580078125
+        ]
+      },
+      "source": {
+        "before": {
+          "distinctPositions": 177,
+          "maxMovingGapMs": 65.52699995040894,
+          "nativeDistinctPositions": 71
+        },
+        "after": {
+          "distinctPositions": 176,
+          "maxMovingGapMs": 64.51399993896484,
+          "nativeDistinctPositions": 70
+        }
+      },
+      "sourcePulseErrorsMs": [
+        0.6580626964569092,
+        0.6580629348754883,
+        0.6580626964569092
+      ],
+      "decoded": {
+        "before": {
+          "distinctPositions": 88,
+          "maxMovingGapMs": 33.33333333333394
+        },
+        "after": {
+          "distinctPositions": 88,
+          "maxMovingGapMs": 33.33333333333394
+        }
+      },
+      "decodedPulseErrorsMs": [
+        0,
+        0,
+        0
+      ],
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "artifacts": {
+        "compare.mp4": {
+          "path": "390x844-run-1/compare.mp4",
+          "sha256": "4ad9064040e91bf10bef96b110e06bf435976dc225c87edde90db8fcc05cb541",
+          "bytes": 60195
+        },
+        "poster.png": {
+          "path": "390x844-run-1/poster.png",
+          "sha256": "489581e3e2d0239ffa36033e6bc3495504bbfd2a6f8583c7db5c16ead432083e",
+          "bytes": 27732
+        },
+        "capture.json": {
+          "path": "390x844-run-1/capture.json",
+          "sha256": "eae83b594c756d46055b14455e44d730a13c6ba165fc5698331ad249a0fae822",
+          "bytes": 442427
+        },
+        "timeline.json": {
+          "path": "390x844-run-1/timeline.json",
+          "sha256": "fcb8cc15eb8440367c66ce5b9654659459bf290d749fa6528b4061b65acc9daf",
+          "bytes": 105202
+        }
+      },
+      "playback": {
+        "duration": 5.3,
+        "currentTime": 5.3,
+        "playbackRate": 1,
+        "ended": true,
+        "error": null,
+        "totalVideoFrames": 159,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      }
+    },
+    {
+      "id": "390x844-run-2",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "repetition": 2,
+      "status": "numeric-passed",
+      "host": {
+        "parallelism": 10,
+        "loadAverage": [
+          26.07568359375,
+          28.5966796875,
+          27.5849609375
+        ]
+      },
+      "source": {
+        "before": {
+          "distinctPositions": 163,
+          "maxMovingGapMs": 66.57699990272522,
+          "nativeDistinctPositions": 68
+        },
+        "after": {
+          "distinctPositions": 156,
+          "maxMovingGapMs": 53.924999952316284,
+          "nativeDistinctPositions": 66
+        }
+      },
+      "sourcePulseErrorsMs": [
+        12.617166996002197,
+        12.617166996002197,
+        12.617166996002197
+      ],
+      "decoded": {
+        "before": {
+          "distinctPositions": 88,
+          "maxMovingGapMs": 33.33333333333394
+        },
+        "after": {
+          "distinctPositions": 89,
+          "maxMovingGapMs": 33.33333333333394
+        }
+      },
+      "decodedPulseErrorsMs": [
+        0,
+        0,
+        0
+      ],
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "artifacts": {
+        "compare.mp4": {
+          "path": "390x844-run-2/compare.mp4",
+          "sha256": "53b5ab11313ed57c5608152a172ead655bde00984477e72b11a1ded2d6087d79",
+          "bytes": 60131
+        },
+        "poster.png": {
+          "path": "390x844-run-2/poster.png",
+          "sha256": "489581e3e2d0239ffa36033e6bc3495504bbfd2a6f8583c7db5c16ead432083e",
+          "bytes": 27732
+        },
+        "capture.json": {
+          "path": "390x844-run-2/capture.json",
+          "sha256": "396b79bb866c35a4896e5175856b275670da5d87884f6ad66b3bc03ba3e05aa4",
+          "bytes": 425146
+        },
+        "timeline.json": {
+          "path": "390x844-run-2/timeline.json",
+          "sha256": "f87e982a8bbd86f2685056407289bd76873d526685f0b0db5ae332a2e98e04fd",
+          "bytes": 101256
+        }
+      },
+      "playback": {
+        "duration": 5.133333,
+        "currentTime": 5.133333,
+        "playbackRate": 1,
+        "ended": true,
+        "error": null,
+        "totalVideoFrames": 154,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      }
+    },
+    {
+      "id": "390x844-run-3",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "repetition": 3,
+      "status": "numeric-passed",
+      "host": {
+        "parallelism": 10,
+        "loadAverage": [
+          23.9033203125,
+          27.77197265625,
+          27.3232421875
+        ]
+      },
+      "source": {
+        "before": {
+          "distinctPositions": 178,
+          "maxMovingGapMs": 40.85699963569641,
+          "nativeDistinctPositions": 71
+        },
+        "after": {
+          "distinctPositions": 178,
+          "maxMovingGapMs": 41.78600001335144,
+          "nativeDistinctPositions": 71
+        }
+      },
+      "sourcePulseErrorsMs": [
+        1.1097919940948486,
+        1.1097922325134277,
+        1.1097917556762695
+      ],
+      "decoded": {
+        "before": {
+          "distinctPositions": 89,
+          "maxMovingGapMs": 33.33333333333394
+        },
+        "after": {
+          "distinctPositions": 89,
+          "maxMovingGapMs": 33.33333333333394
+        }
+      },
+      "decodedPulseErrorsMs": [
+        0,
+        0,
+        0
+      ],
+      "cleanup": {
+        "status": "ok",
+        "errors": [],
+        "ownedChildGroupsChecked": 16,
+        "serversClosed": 2
+      },
+      "artifacts": {
+        "compare.mp4": {
+          "path": "390x844-run-3/compare.mp4",
+          "sha256": "2a77e83c127ec0d495ef0454c4589a8790840bdacbb1858be9f88ad28a40ad0f",
+          "bytes": 59297
+        },
+        "poster.png": {
+          "path": "390x844-run-3/poster.png",
+          "sha256": "489581e3e2d0239ffa36033e6bc3495504bbfd2a6f8583c7db5c16ead432083e",
+          "bytes": 27732
+        },
+        "capture.json": {
+          "path": "390x844-run-3/capture.json",
+          "sha256": "2ac25e98d0604780ae1ef1878a21976e50b5bbd911cb88ab35207baa662c8c5d",
+          "bytes": 461483
+        },
+        "timeline.json": {
+          "path": "390x844-run-3/timeline.json",
+          "sha256": "0f2e198f94d04c39f259a4f99a6842b3eb647da1da3424e110fa94a6ee43a0b9",
+          "bytes": 107251
+        }
+      },
+      "playback": {
+        "duration": 5.1,
+        "currentTime": 5.1,
+        "playbackRate": 1,
+        "ended": true,
+        "error": null,
+        "totalVideoFrames": 153,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      }
+    }
+  ],
+  "mediaReview": {
+    "status": "accepted-scoped",
+    "method": "Root inspected all 36 chronological screenshots collected during six uninterrupted normal-speed Chromium playbacks, plus all six contact sheets. Every encoded video also completed a full FFmpeg decode.",
+    "samplesInspected": 36,
+    "fullDecodePasses": 6,
+    "normalSpeedPasses": 6,
+    "observerDroppedFrames": 0,
+    "observerCorruptedFrames": 0,
+    "visibleBlockingFindings": [],
+    "limitations": [
+      "Sampled agent inspection, not manual inspection of every decoded frame.",
+      "The numerical verifier independently checks source and decoded masks, all pulses, timing, transitions, scrolling, encoding, decoding, and cleanup.",
+      "A local pass does not explain or erase failed hosted Mac observations."
+    ]
+  },
+  "hostedMacFailures": {
+    "cause": "unknown",
+    "runs": [
+      {
+        "url": "https://github.com/kyusuku/show-what-changed/actions/runs/42001878199",
+        "beforeDistinctPositions": 42,
+        "requiredPositions": 60
+      },
+      {
+        "url": "https://github.com/kyusuku/show-what-changed/actions/runs/42004975241",
+        "beforeDistinctPositions": 54,
+        "entireBeforeTrackPositions": 58,
+        "requiredPositions": 60
+      }
+    ],
+    "instrumentedDiagnostic": "https://github.com/kyusuku/show-what-changed/actions/runs/42007042033",
+    "instrumentedDiagnosticIsAcceptance": false
+  },
+  "releaseAcceptance": "This scoped result does not replace other required gates or owner publication approval."
+}
