@@ -1688,6 +1688,7 @@ describe('motion delivery closure', () => {
     });
     h.send(h.event(1));
     await until(() => h.acknowledged.length === 1);
+    await until(() => h.recorder.result().stats.persistedFrames === 1);
     const stopStartedAtMs = performance.now() - h.run.startedMonotonicMs;
     try {
       await expect(h.recorder.stop(performance.now() + 20)).rejects.toMatchObject({ code: 'CAPTURE_DRAIN_TIMEOUT' });
@@ -1760,6 +1761,7 @@ describe('motion delivery closure', () => {
     });
     h.send(h.event(1));
     await until(() => h.acknowledged.length === 1);
+    await until(() => h.recorder.result().stats.persistedFrames === 1);
     const stopped = h.recorder.stop(performance.now() + 20);
     await expect(stopped).rejects.toMatchObject({ code: 'CAPTURE_DRAIN_TIMEOUT' });
     expect(entered).toBe(true);
@@ -1772,6 +1774,7 @@ describe('motion delivery closure', () => {
     expect(published).toEqual(saved);
     expect(h.recorder.result()).toEqual(saved);
     expect(h.faults).toEqual([mode === 'reject' ? 'CAPTURE_CLOSE_FAILED' : 'CAPTURE_DRAIN_TIMEOUT']);
+    expect(h.budget).toMatchObject({ rawBytes: 0, sanitizedBytes: 0 });
   });
 
   it('keeps a failed published snapshot unchanged when a safe write settles late', async () => {
