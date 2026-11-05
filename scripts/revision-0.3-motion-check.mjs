@@ -415,7 +415,7 @@ export async function saveValidatedArtifacts(api, media, runDirectory, caseDirec
   return artifacts;
 }
 
-async function executeCase(api, original, viewport, repetition, outputDir, signal) {
+export async function executeCase(api, original, viewport, repetition, outputDir, signal, { captureOnly = false } = {}) {
   const id = `${viewport.width}x${viewport.height}-run-${repetition}`;
   const caseDirectory = join(outputDir, id);
   await mkdir(caseDirectory, { mode: 0o700 });
@@ -450,7 +450,10 @@ async function executeCase(api, original, viewport, repetition, outputDir, signa
       { id: 'checkpoint', op: 'screenshot', observeMs: 0 },
     ] });
     const settings = api.schema.CaptureSettingsSchema.parse({ mode: 'motion', viewport, maskRects: [mask] });
-    const bundle = await api.capture(pair, [scenario], settings, run);
+    result.captureCallTiming = { startedMonotonicMs: performance.now(), completedMonotonicMs: null };
+    let bundle;
+    try { bundle = await api.capture(pair, [scenario], settings, run); }
+    finally { result.captureCallTiming.completedMonotonicMs = performance.now(); }
     result.captureOutcome = bundle.scenarios[0].outcome;
     result.captureTracks = captureTrackEvidence(bundle);
     assert.equal(bundle.scenarios[0].outcome, 'ok');
@@ -459,6 +462,10 @@ async function executeCase(api, original, viewport, repetition, outputDir, signa
     result.sourceTimingDiagnostics = await sourceTimingDiagnostics(api, bundle, run, viewport);
     process.stderr.write(JSON.stringify({ kind: 'source-timing-diagnostic-only', id, tracks: result.sourceTimingDiagnostics }) + '\n');
     result.source = await sourceMetrics(api, bundle, run, viewport);
+    if (captureOnly) {
+      result.status = 'source-numeric-passed';
+      return result;
+    }
     const timeline = await api.render(bundle, { coverage: { selected: [], unresolved: [], omitted: [], unsupported: [], complete: true }, provenance: { before: { valid: true, actualHash: null, errors: [] }, after: { valid: true, actualHash: null, errors: [] } } }, run);
     api.validateTimelineCapture(timeline, bundle);
     const media = await api.encode(timeline, run);

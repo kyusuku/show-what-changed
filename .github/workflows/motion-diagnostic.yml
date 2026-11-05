@@ -13,7 +13,11 @@ concurrency:
 
 jobs:
   diagnostic:
-    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     steps:
       - name: Check out source
@@ -114,35 +118,12 @@ jobs:
           const candidate = await installCandidate(archive, root, join(root, 'install-report'));
           console.log(JSON.stringify({ sourceCommit: process.env.GITHUB_SHA, candidateSha256: candidate.sha256, bytes: candidate.bytes, installedRoot: candidate.packageRoot, diagnosticOnly: true }));
           NODE
-      - name: Diagnose one repetition of the installed motion check
+      - name: Profile one untouched published desktop source capture
         run: |
-          node --input-type=module <<'NODE'
-          import { spawnSync } from 'node:child_process';
-          import { readFile } from 'node:fs/promises';
-          import { join } from 'node:path';
-          const root = join(process.env.RUNNER_TEMP, 'motion-diagnostic');
-          const result = spawnSync(process.execPath, ['scripts/revision-0.3-motion-check.mjs', '--installed-root', join(root, 'installed/node_modules/show-what-changed'), '--output-dir', join(root, 'motion'), '--repetitions', '1'], { stdio: 'inherit' });
-          try {
-            const motion = JSON.parse(await readFile(join(root, 'motion/motion-check.json'), 'utf8'));
-            console.log(JSON.stringify({ diagnosticOnly: true, status: motion.status, repetitions: motion.repetitions, completeRepetitionMatrix: motion.completeRepetitionMatrix, releaseAcceptance: motion.releaseAcceptance, failure: motion.failure }));
-            const metricTracks = (metrics) => metrics ? Object.fromEntries(['before', 'after'].map((side) => {
-              const track = metrics.tracks?.[side];
-              return [side, track ? { distinctPositions: track.distinctPositions, maxMovingGapMs: track.maxMovingGapMs, pulses: track.pulses?.slice(0, 4), nativeDistinctPositions: track.nativeDistinctPositions, checkedMasks: track.checkedMasks, scroll: track.scroll } : null];
-            })) : null;
-            for (const item of motion.cases.slice(0, 6)) {
-              const captureTracks = Object.fromEntries(['before', 'after'].map((side) => {
-                const track = item.captureTracks?.[side];
-                return [side, track ? { status: track.status, failureCode: track.failureCode, failureAtMs: track.failureAtMs, stats: track.stats, clock: track.clock ? { rate: track.clock.rate, uncertaintyMs: track.clock.uncertaintyMs, maxDriftMs: track.clock.maxDriftMs, errorBoundMs: track.clock.errorBoundMs, sampleCount: track.clock.sampleCount } : null, frameCount: track.frameCount, firstFrame: track.firstFrame, lastFrame: track.lastFrame } : null];
-              }));
-              console.log(JSON.stringify({ id: item.id, viewport: item.viewport, repetition: item.repetition, status: item.status, host: item.host, failure: item.failure, captureOutcome: item.captureOutcome, captureTracks, source: metricTracks(item.source), sourcePulseErrorsMs: item.source?.pulseErrorsMs, checkedPersistedImages: item.source?.checkedPersistedImages, decoded: metricTracks(item.decoded), decodedFrames: item.decoded?.decodedFrames, decodedPulseErrorsMs: item.decoded?.pulseErrorsMs, cleanup: item.cleanup, processing: item.processing?.slice(-4), timestampRejections: item.timestampRejections?.slice(-4), shutdownFailures: item.shutdownFailures?.slice(-4) }).slice(0, 16000));
-            }
-          } catch (error) {
-            console.error(JSON.stringify({ diagnosticReportUnavailable: true, code: error.code ?? null, message: String(error.message).slice(0, 1000) }));
-          }
-          if (result.error) console.error(JSON.stringify({ motionLaunchError: result.error.code ?? 'SPAWN_FAILED' }));
-          if (result.signal) console.error(JSON.stringify({ motionSignal: result.signal }));
-          process.exitCode = result.status ?? 1;
-          NODE
+          node scripts/macos-capture-diagnostic.mjs \
+            "$RUNNER_TEMP/motion-diagnostic/installed/node_modules/show-what-changed" \
+            "$RUNNER_TEMP/motion-diagnostic/profile" \
+            "$RUNNER_TEMP/motion-diagnostic/candidate/show-what-changed-0.1.0.tgz"
       - name: Remove diagnostic installation and generated artifacts
         if: always()
         run: rm -rf -- "$RUNNER_TEMP/motion-diagnostic"
