@@ -27,6 +27,21 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - name: Remove hosted runner Git LFS filters
+        run: |
+          git config --show-origin --show-scope --name-only --get-regexp '^filter\.lfs\.' || test "$?" -eq 1
+          for scope in global system; do
+            if git config "--$scope" --get-regexp '^filter\.lfs\.' > /dev/null; then
+              if [ "$scope" = system ]; then
+                sudo git config --system --remove-section filter.lfs
+              else
+                git config --global --remove-section filter.lfs
+              fi
+            else
+              config_status=$?
+              if [ "$config_status" -ne 1 ]; then exit "$config_status"; fi
+            fi
+          done
       - name: Set up Node 24.22.2
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
@@ -56,6 +71,17 @@ jobs:
           npm run typecheck
           npm run build
           npm run schema:check
+      - name: Verify sandboxed Chromium prerequisite
+        if: runner.os == 'Linux'
+        timeout-minutes: 2
+        run: |
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { childEnvironment } from './dist/runtime/process-table.js';
+          const server = await chromium.launchServer({ headless: true, chromiumSandbox: true, timeout: 30_000, env: childEnvironment('ci-browser-prerequisite') });
+          try { console.log('Sandboxed Chromium launch succeeded.'); }
+          finally { await server.close(); }
+          NODE
       - name: Test source and integration behavior
         run: |
           npm run test:unit -- --maxWorkers=1
