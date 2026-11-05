@@ -1,0 +1,133 @@
+name: Diagnose installed motion
+
+on:
+  push:
+    branches: [release/motion-diagnostic]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: motion-diagnostic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Remove hosted runner Git LFS filters
+        run: |
+          git config --show-origin --show-scope --name-only --get-regexp '^filter\.lfs\.' || test "$?" -eq 1
+          for scope in global system; do
+            if git config "--$scope" --get-regexp '^filter\.lfs\.' > /dev/null; then
+              if [ "$scope" = system ]; then
+                sudo git config --system --remove-section filter.lfs
+              else
+                git config --global --remove-section filter.lfs
+              fi
+            else
+              config_status=$?
+              if [ "$config_status" -ne 1 ]; then exit "$config_status"; fi
+            fi
+          done
+      - name: Set up Node 24.22.2
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24.22.2
+      - name: Pin package-manager prerequisites
+        run: npm install --global npm@11.12.1 pnpm@11.9.0
+      - name: Install Linux prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg procps build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates apparmor
+          sh scripts/linux-gate/install-lsof.sh "$HOME/.local"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Install tool dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install pinned Chromium and Linux libraries
+        run: node node_modules/playwright/cli.js install --with-deps chromium
+      - name: Permit pinned Chromium sandbox on Linux
+        shell: bash
+        run: |
+          chromium_shells=( "$HOME"/.cache/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell )
+          if [ "${#chromium_shells[@]}" -ne 1 ] || [ ! -x "${chromium_shells[0]}" ]; then
+            echo "Expected exactly one installed Chromium headless shell." >&2
+            exit 1
+          fi
+          chromium_shell=$(realpath "${chromium_shells[0]}")
+          sudo tee /etc/apparmor.d/show-what-changed-chromium > /dev/null <<EOF
+          abi <abi/4.0>,
+          include <tunables/global>
+          profile show-what-changed-chromium "$chromium_shell" flags=(unconfined) {
+            userns,
+          }
+          EOF
+          sudo apparmor_parser -r /etc/apparmor.d/show-what-changed-chromium
+      - name: Typecheck and build
+        run: |
+          npm run typecheck
+          npm run build
+          npm run schema:check
+      - name: Verify sandboxed Chromium prerequisite
+        timeout-minutes: 2
+        run: |
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { childEnvironment } from './dist/runtime/process-table.js';
+          const server = await chromium.launchServer({ headless: true, chromiumSandbox: true, timeout: 30_000, env: childEnvironment('ci-browser-prerequisite') });
+          try { console.log('Sandboxed Chromium launch succeeded.'); }
+          finally { await server.close(); }
+          NODE
+      - name: Fetch and install the exact published archive without smoke scenarios
+        run: |
+          mkdir -p "$RUNNER_TEMP/motion-diagnostic/candidate"
+          npm pack show-what-changed@0.1.0 --ignore-scripts --pack-destination "$RUNNER_TEMP/motion-diagnostic/candidate" --json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFile } from 'node:fs/promises';
+          import { join } from 'node:path';
+          import { hash, installCandidate } from './scripts/release-harness.mjs';
+          const root = join(process.env.RUNNER_TEMP, 'motion-diagnostic');
+          const archive = join(root, 'candidate/show-what-changed-0.1.0.tgz');
+          assert.equal(hash(await readFile(archive)), '0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31', 'Diagnostic archive must match the exact published candidate.');
+          const candidate = await installCandidate(archive, root, join(root, 'install-report'));
+          console.log(JSON.stringify({ sourceCommit: process.env.GITHUB_SHA, candidateSha256: candidate.sha256, bytes: candidate.bytes, installedRoot: candidate.packageRoot, diagnosticOnly: true }));
+          NODE
+      - name: Diagnose one repetition of the installed motion check
+        run: |
+          node --input-type=module <<'NODE'
+          import { spawnSync } from 'node:child_process';
+          import { readFile } from 'node:fs/promises';
+          import { join } from 'node:path';
+          const root = join(process.env.RUNNER_TEMP, 'motion-diagnostic');
+          const result = spawnSync(process.execPath, ['scripts/revision-0.3-motion-check.mjs', '--installed-root', join(root, 'installed/node_modules/show-what-changed'), '--output-dir', join(root, 'motion'), '--repetitions', '1'], { stdio: 'inherit' });
+          try {
+            const motion = JSON.parse(await readFile(join(root, 'motion/motion-check.json'), 'utf8'));
+            console.log(JSON.stringify({ diagnosticOnly: true, status: motion.status, repetitions: motion.repetitions, completeRepetitionMatrix: motion.completeRepetitionMatrix, releaseAcceptance: motion.releaseAcceptance, failure: motion.failure }));
+            const metricTracks = (metrics) => metrics ? Object.fromEntries(['before', 'after'].map((side) => {
+              const track = metrics.tracks?.[side];
+              return [side, track ? { distinctPositions: track.distinctPositions, maxMovingGapMs: track.maxMovingGapMs, pulses: track.pulses?.slice(0, 4), nativeDistinctPositions: track.nativeDistinctPositions, checkedMasks: track.checkedMasks, scroll: track.scroll } : null];
+            })) : null;
+            for (const item of motion.cases.slice(0, 6)) {
+              const captureTracks = Object.fromEntries(['before', 'after'].map((side) => {
+                const track = item.captureTracks?.[side];
+                return [side, track ? { status: track.status, failureCode: track.failureCode, failureAtMs: track.failureAtMs, stats: track.stats, clock: track.clock ? { rate: track.clock.rate, uncertaintyMs: track.clock.uncertaintyMs, maxDriftMs: track.clock.maxDriftMs, errorBoundMs: track.clock.errorBoundMs, sampleCount: track.clock.sampleCount } : null, frameCount: track.frameCount, firstFrame: track.firstFrame, lastFrame: track.lastFrame } : null];
+              }));
+              console.log(JSON.stringify({ id: item.id, viewport: item.viewport, repetition: item.repetition, status: item.status, host: item.host, failure: item.failure, captureOutcome: item.captureOutcome, captureTracks, source: metricTracks(item.source), sourcePulseErrorsMs: item.source?.pulseErrorsMs, checkedPersistedImages: item.source?.checkedPersistedImages, decoded: metricTracks(item.decoded), decodedFrames: item.decoded?.decodedFrames, decodedPulseErrorsMs: item.decoded?.pulseErrorsMs, cleanup: item.cleanup, processing: item.processing?.slice(-4), timestampRejections: item.timestampRejections?.slice(-4), shutdownFailures: item.shutdownFailures?.slice(-4) }).slice(0, 16000));
+            }
+          } catch (error) {
+            console.error(JSON.stringify({ diagnosticReportUnavailable: true, code: error.code ?? null, message: String(error.message).slice(0, 1000) }));
+          }
+          if (result.error) console.error(JSON.stringify({ motionLaunchError: result.error.code ?? 'SPAWN_FAILED' }));
+          if (result.signal) console.error(JSON.stringify({ motionSignal: result.signal }));
+          process.exitCode = result.status ?? 1;
+          NODE
+      - name: Remove diagnostic installation and generated artifacts
+        if: always()
+        run: rm -rf -- "$RUNNER_TEMP/motion-diagnostic"
