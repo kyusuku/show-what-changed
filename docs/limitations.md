@@ -1,6 +1,6 @@
 # Limitations and result codes
 
-Revision 0.3 implements schema 2 recipes, motion capture, and explicit keyframes. Version `0.1.0` remains an unpublished experimental candidate. Final installed-package, platform, repeated-motion, and application acceptance are incomplete. [Release readiness](release-readiness.md) records the evidence and remaining gates. This page describes the current implementation contract, not a release certification.
+Revision 0.3 implements schema 2 recipes, motion capture, and explicit keyframes. Version `0.1.0` is published and remains experimental. [Release readiness](release-readiness.md) records the accepted candidate and its evidence. This page describes the supported behavior and limits.
 
 ## Capture and interpretation
 

@@ -1,6 +1,8 @@
 # Revision 0.3 release readiness
 
-Status. `ready_for_owner_publish` applies when the separately delivered `release-identity.json` confirms this exact public handoff and archive with both final reviews accepted. All 24 specification requirements have independent acceptance. Publication still requires the owner's explicit authorization. Nothing has been published, pushed, deployed, or made public during this run.
+Publication update, 5 November 2026. The owner authorized publication, the [GitHub repository](https://github.com/kyusuku/show-what-changed) is public, and [`show-what-changed@0.1.0`](https://www.npmjs.com/package/show-what-changed/v/0.1.0) is published. A fresh npm download matches the accepted archive SHA-256 and registry SHA-512 integrity. A fresh installation reports version `0.1.0` and passes `doctor`.
+
+The candidate evidence below preserves the prepublication acceptance record. Its `ready_for_owner_publish` status identifies the reviewed handoff and archive, with both final reviews and all 24 specification requirements accepted. Historical statements about pending publication describe that earlier verification run. The published package uses the exact reviewed archive without npm provenance.
 
 The accepted package SHA-256 is `0ca52c4395e27c9282489375ffd5c1924c718f829d65818c2284c367cdb9ed31`. Runtime tests executed implementation `e6934a8161e29f5a74b340ba3c982c92f3c212cc`. The sanitized public implementation `3f32d256cea93798098b8456da99eeb39f9ca9df` rebuilds into exactly that archive. The final documentation commit and public source archive digest are recorded outside the archive in the release identity. [Final requirement acceptance](../evidence/revision-0.3/final-acceptance.json) preserves both reviewers and the limits of the evidence.
 

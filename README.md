@@ -4,7 +4,7 @@ Compare a browser scenario across two Git snapshots and produce a labeled BEFORE
 
 Revision 0.3 uses explicit execution recipes for web applications across stacks. Motion is the default. It records actual intermediate Chromium frames and preserves their shared elapsed timing. Keyframes remain an explicit alternative.
 
-Version `0.1.0` is experimental. See [release readiness](docs/release-readiness.md) for the exact candidate, completed checks, remaining requirements, and publishing status.
+Version `0.1.0` is published on [npm](https://www.npmjs.com/package/show-what-changed). It remains experimental. See [release readiness](docs/release-readiness.md) for the reviewed archive and acceptance evidence.
 
 The [synthetic examples](docs/demo/README.md) identify each recording's capture mode and candidate. Historical development clips and keyframe examples remain labeled separately from release-candidate motion evidence.
 
@@ -38,22 +38,21 @@ lsof -v
 
 The installer verifies its source hash and does not edit shell configuration.
 
-## Install a reviewed local candidate
+## Install
 
-Get the tarball and its SHA-256 from [release readiness](docs/release-readiness.md). Verify that identity before installing outside the application checkout.
+Install the published package outside your application's checkout. Use Node 24 and the system prerequisites above.
 
 ```sh
-shasum -a 256 /absolute/path/show-what-changed-0.1.0.tgz
 SWC_INSTALL="$(mktemp -d)"
-npm install --prefix "$SWC_INSTALL" --no-audit --no-fund /absolute/path/show-what-changed-0.1.0.tgz
+npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.0
 SWC="$SWC_INSTALL/node_modules/.bin/show-what-changed"
 node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
 "$SWC" doctor --json
 ```
 
-On Linux, use `sha256sum` if needed. Playwright's `install --with-deps chromium` variant also installs system libraries and can require administrator access. Use the installed pinned Playwright dependency rather than an unqualified latest installer.
+Playwright's `install --with-deps chromium` variant also installs Linux system libraries and can require administrator access. Use the installed pinned Playwright dependency rather than an unqualified latest installer.
 
-No registry installation or npm publication is claimed while this candidate is unpublished.
+For archive installation, use the reviewed tarball and SHA-256 in [release readiness](docs/release-readiness.md). The npm archive has the same bytes.
 
 ## Describe how your app runs
 
@@ -107,7 +106,7 @@ Motion uses change-driven browser sampling. Shutdown finishes frames already del
 
 | Area | Current contract |
 | --- | --- |
-| Platforms | Node 24 on Linux and macOS. Final revision 0.3 platform acceptance is pending. |
+| Platforms | Node 24 on Linux and macOS. See the accepted platform evidence in [release readiness](docs/release-readiness.md). |
 | Sources | One Git repository and one selected app per run. Explicit recipes cover multiple stacks. Basic Next.js App Router route discovery is a convenience. |
 | Browser | Chromium, one viewport per run, device scale factor `1`. Width `320–1920`, height `240–1200`, at most `2,073,600` source pixels. |
 | Scenarios | At most three scenarios, twelve steps each, and sixty seconds of source capture per scenario. |

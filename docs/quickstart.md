@@ -2,22 +2,21 @@
 
 This guide creates a disposable Git app and a local BEFORE | AFTER video. The pricing lesson explicitly uses keyframes so its checkpoints remain repeatable. Motion is the default for recipes that omit capture mode.
 
-Revision 0.3 acceptance is still in progress. This tutorial is not a release-readiness claim. Use synthetic or disposable data when adapting it.
+This tutorial uses the published experimental `0.1.0` release. Use synthetic or disposable data when adapting it.
 
-## Install the reviewed candidate
+## Install the published package
 
-Use Node `24.x`. Candidate checks use Node `24.22.2` and npm `11.12.1`. Obtain the local tarball and SHA-256 from [release readiness](release-readiness.md).
+Use Node `24.x`. Release checks use Node `24.22.2` and npm `11.12.1`. The exact archive identity is recorded in [release readiness](release-readiness.md).
 
 ```sh
-shasum -a 256 /absolute/path/show-what-changed-0.1.0.tgz
 SWC_INSTALL="$(mktemp -d)"
-npm install --prefix "$SWC_INSTALL" --no-audit --no-fund /absolute/path/show-what-changed-0.1.0.tgz
+npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.0
 SWC="$SWC_INSTALL/node_modules/.bin/show-what-changed"
 node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
 "$SWC" doctor --json
 ```
 
-On Linux, use `sha256sum` if `shasum` is unavailable. The Playwright `install --with-deps chromium` variant also installs system libraries. Follow [the prerequisites](../README.md#prerequisites), including matching FFmpeg and ffprobe, Git, `ps`, and a supported `lsof`.
+The Playwright `install --with-deps chromium` variant also installs system libraries. Follow [the prerequisites](../README.md#prerequisites), including matching FFmpeg and ffprobe, Git, `ps`, and a supported `lsof`.
 
 Continue when `doctor` reports `status: "ok"` and `exitCode: 0`. This checks tool capabilities, including the composition filters. Application-specific prerequisites are checked from the selected recipe after consent.
 
