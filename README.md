@@ -4,7 +4,7 @@ Compare a browser scenario across two Git snapshots and produce a labeled BEFORE
 
 Revision 0.3 uses explicit execution recipes for web applications across stacks. Motion is the default. It records actual intermediate Chromium frames and preserves their shared elapsed timing. Keyframes remain an explicit alternative.
 
-Version `0.1.0` is published on [npm](https://www.npmjs.com/package/show-what-changed). It remains experimental. See [release readiness](docs/release-readiness.md) for the reviewed archive and acceptance evidence.
+Version `0.1.0` is published on [npm](https://www.npmjs.com/package/show-what-changed) and remains experimental. It can lose a static page update while an earlier frame awaits masking and acknowledgement. This branch prepares the `0.1.1` correction. See [release readiness](docs/release-readiness.md) for verification status and the published archive's historical evidence.
 
 The [synthetic examples](docs/demo/README.md) identify each recording's capture mode and candidate. Historical development clips and keyframe examples remain labeled separately from release-candidate motion evidence.
 

@@ -26,6 +26,6 @@ describe('T01 CLI flags and T14 single-command selection', () => {
   it('describes motion recipes and supports common help and version flags', () => {
     expect(parseCli(['--help'], '/repo')).toMatchObject({ kind: 'help', text: expect.stringMatching(/motion\s+video/) });
     expect(parseCli(['plan', '--help'], '/repo')).toMatchObject({ kind: 'help', text: expect.stringContaining('--route') });
-    expect(parseCli(['doctor', '--version', '--json'], '/repo')).toMatchObject({ kind: 'version', json: true, text: '0.1.0\n' });
+    expect(parseCli(['doctor', '--version', '--json'], '/repo')).toMatchObject({ kind: 'version', json: true, text: '0.1.1\n' });
   });
 });

@@ -1,5 +1,7 @@
 # Revision 0.3 release readiness
 
+Patch candidate update, 5 November 2026. A controlled real-browser test found that published `0.1.0` can omit a static page update when an earlier frame is still being masked. The `0.1.1` candidate enables Chromium's retention of the latest pending presentation while preserving one frame in flight. Candidate verification and publication remain pending. The `0.1.0` GitHub release remains a draft. The historical acceptance below does not certify this correction or erase the later failures.
+
 Publication update, 5 November 2026. The owner authorized publication, the [GitHub repository](https://github.com/kyusuku/show-what-changed) is public, and [`show-what-changed@0.1.0`](https://www.npmjs.com/package/show-what-changed/v/0.1.0) is published. A fresh npm download matches the accepted archive SHA-256 and registry SHA-512 integrity. A fresh installation reports version `0.1.0` and passes `doctor`.
 
 The candidate evidence below preserves the prepublication acceptance record. Its `ready_for_owner_publish` status identifies the reviewed handoff and archive, with both final reviews and all 24 specification requirements accepted. Historical statements about pending publication describe that earlier verification run. The published package uses the exact reviewed archive without npm provenance.

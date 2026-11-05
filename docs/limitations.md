@@ -6,6 +6,8 @@ Revision 0.3 implements schema 2 recipes, motion capture, and explicit keyframes
 
 Motion is the default. It records actual intermediate Chromium frames, keeps animations running, and selects the latest available source frame on a common elapsed timeline. The 30-FPS MP4 does not imply 30 newly captured frames per second. Repeated frames can reflect unchanged content, capture gaps, or explicitly held failure states. The tool does not measure application performance, interpolate motion, or retime each side independently.
 
+Stopping capture does not flush frames still queued in Chromium or Playwright. A trailing frame can be absent even if the browser presented it before recording stopped. Frame counters cover only frames delivered to the recorder, and `sourceDroppedFrames` remains `null` because unobserved losses are unknown. A successful capture does not guarantee that every browser frame or the final page state appears in the video.
+
 Keyframes require `capture.mode: "keyframes"`. They use animation-disabled checkpoints held for each step's observation interval. Keyframe output cannot establish animation or smooth-scroll behavior. A motion failure never switches modes automatically.
 
 The browser uses device scale factor `1`, locale `en-US`, timezone UTC, and light color scheme. The default viewport is `1280×800`. Configured dimensions may be 320–1920 wide and 240–1200 high, with at most 2,073,600 pixels. Both sides use one identical viewport. Output is fixed at `1920×686`; narrow or small sources are letterboxed without upscaling. Physical device emulation, multiple simultaneous viewports, audio, GIF, and WebM are unavailable. A run contains at most three scenarios, twelve steps per scenario, and 60 seconds per scenario.

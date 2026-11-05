@@ -111,9 +111,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/candidate"
           npm pack --pack-destination "$RUNNER_TEMP/candidate" --json
       - name: Bind the candidate to the tested source
-        run: node scripts/verify-package-source.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-source-binding"
+        run: node scripts/verify-package-source.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/package-source-binding"
       - name: Verify the installed candidate
-        run: node scripts/release-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/package-smoke"
+        run: node scripts/release-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/package-smoke"
       - name: Verify complete installed synthetic motion on Linux across both viewports and three repetitions
         if: runner.os == 'Linux'
         run: |
@@ -125,7 +125,7 @@ jobs:
           import { isAbsolute, join } from 'node:path';
           const root = process.env.RUNNER_TEMP;
           const smoke = JSON.parse(await readFile(join(root, 'package-smoke/report.json'), 'utf8'));
-          const tarball = await readFile(join(root, 'candidate/show-what-changed-0.1.0.tgz'));
+          const tarball = await readFile(join(root, 'candidate/show-what-changed-0.1.1.tgz'));
           assert.equal(smoke.status, 'passed', 'Installed package smoke must pass before motion verification.');
           assert.equal(smoke.candidate?.sha256, createHash('sha256').update(tarball).digest('hex'), 'The installed package must match the candidate tarball.');
           assert(typeof smoke.root === 'string' && isAbsolute(smoke.root), 'The smoke report must identify its fresh installation.');
@@ -150,11 +150,11 @@ jobs:
           assert.equal(motion.completeRepetitionMatrix, true, 'All required viewports and repetitions must complete.');
           NODE
       - name: Verify installed host recipes
-        run: node scripts/compatibility-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/compatibility-smoke"
+        run: node scripts/compatibility-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/compatibility-smoke"
       - name: Verify installed public workspace application
-        run: node scripts/real-app-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/public-app-smoke"
+        run: node scripts/real-app-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/public-app-smoke"
       - name: Verify Linux repeatability
         if: runner.os == 'Linux'
-        run: node scripts/repeatability.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/repeatability"
+        run: node scripts/repeatability.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/repeatability"
       - name: Review dependency metadata and scan candidate content
-        run: node scripts/release-audit.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.0.tgz" "$RUNNER_TEMP/release-audit"
+        run: node scripts/release-audit.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/release-audit"

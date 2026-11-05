@@ -303,7 +303,7 @@ export class MotionRecorder {
             everyNthFrame: 1,
             maxWidth: settings.viewport.width,
             maxHeight: settings.viewport.height,
-            ...{ maxFramesInFlight: 1 },
+            ...{ maxFramesInFlight: 1, sendLastFrame: true },
           }),
         stop: () => cdp.send('Page.stopScreencast'),
         acknowledge: (sessionId) => cdp.send('Page.screencastFrameAck', { sessionId }),
