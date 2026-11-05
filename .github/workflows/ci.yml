@@ -152,7 +152,51 @@ jobs:
       - name: Verify installed host recipes
         run: node scripts/compatibility-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/compatibility-smoke"
       - name: Verify installed public workspace application
-        run: node scripts/real-app-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/public-app-smoke"
+        run: |
+          public_app_status=0
+          node scripts/real-app-smoke.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/public-app-smoke" || public_app_status=$?
+          if [ "$public_app_status" -ne 0 ]; then
+            node --input-type=module <<'NODE' || true
+          import { readFile } from 'node:fs/promises';
+          import { join, resolve } from 'node:path';
+          const output = join(process.env.RUNNER_TEMP, 'public-app-smoke');
+          const clip = (value, limit = 4000) => String(value ?? '').slice(-limit);
+          let report;
+          const emit = (value) => {
+            let line = JSON.stringify(value);
+            for (const path of [report?.root, process.env.RUNNER_TEMP, process.env.GITHUB_WORKSPACE].filter(Boolean)) line = line.split(path).join('<workspace>');
+            console.error(line.slice(0, 16000));
+          };
+          const command = (result) => result ? { argv: result.argv, code: result.code, signal: result.signal, timedOut: result.timedOut, overflow: result.overflow, elapsedMs: result.elapsedMs, stdout: clip(result.stdout), stderr: clip(result.stderr) } : null;
+          try {
+            report = JSON.parse(await readFile(join(output, 'report.json'), 'utf8'));
+            emit({ diagnostic: 'public-app-report', status: report.status, candidate: report.candidate, error: { message: clip(report.error?.message), stack: clip(report.error?.stack, 2000), command: command(report.error?.command) }, runs: report.runs?.map(({ name, status }) => ({ name, status })) });
+            for (const row of (report.runs ?? []).filter((run) => run.status !== 'passed').slice(0, 7)) {
+              emit({ diagnostic: 'public-app-run', name: row.name, status: row.status, error: row.error, command: row.command, runIds: row.runIds, cleanup: row.cleanup, callerPreserved: row.callerPreserved, verificationErrors: row.verificationErrors, artifactEvidence: row.artifactEvidence });
+              try { emit({ diagnostic: 'public-app-command', name: row.name, ...command(JSON.parse(await readFile(join(output, row.name + '.json'), 'utf8'))) }); }
+              catch (error) { emit({ diagnostic: 'public-app-command-unavailable', name: row.name, code: error.code ?? 'INVALID_JSON' }); }
+              for (const evidence of (row.artifactEvidence ?? []).slice(0, 3)) {
+                const directory = resolve(output, evidence.directory);
+                if (!directory.startsWith(output + '/')) continue;
+                for (const file of ['manifest.json', 'capture.json']) {
+                  try {
+                    const data = JSON.parse(await readFile(join(directory, file), 'utf8'));
+                    const scenarios = data.scenarios?.slice(0, 3).map((scenario) => ({ id: scenario.id, outcome: scenario.outcome, errors: scenario.errors, steps: (scenario.steps ?? []).filter((step) => step.before?.status !== 'ok' || step.after?.status !== 'ok').slice(0, 20).map((step) => ({
+                      id: step.id, op: step.op, ...Object.fromEntries(['before', 'after'].map((side) => { const result = step[side]; return [side, result ? { status: result.status, reasonCode: result.reasonCode, elapsedMs: result.elapsedMs, heldFromStepId: result.heldFromStepId } : null]; })),
+                    })) })).filter((scenario) => scenario.outcome !== 'ok' || scenario.errors?.length || scenario.steps.length);
+                    const motion = data.motion?.slice(0, 3).map((scenario) => ({ id: scenario.id, tracks: Object.fromEntries(['before', 'after'].map((side) => {
+                      const track = scenario.tracks?.[side];
+                      return [side, track ? { status: track.status, error: track.error, failureAtMs: track.failureAtMs, stats: track.stats, frameCount: track.frames?.length, clock: track.clock ? { ...track.clock, sampleCount: track.clock.samples?.length, samples: track.clock.samples?.slice(-8) } : null } : null];
+                    })) }));
+                    emit({ diagnostic: 'public-app-artifact', name: row.name, file, runId: data.runId, scenarios, state: data.state, status: data.status, exitCode: data.exitCode, summary: data.summary, comparisonOutcome: data.comparisonOutcome, cleanupOutcome: data.cleanupOutcome, encodingOutcome: data.encodingOutcome, errors: data.errors, captureQuality: data.captureQuality, motion });
+                  } catch (error) { emit({ diagnostic: 'public-app-artifact-unavailable', name: row.name, file, code: error.code ?? 'INVALID_JSON' }); }
+                }
+              }
+            }
+          } catch (error) { emit({ diagnostic: 'public-app-report-unavailable', code: error.code ?? 'INVALID_JSON' }); }
+          NODE
+          fi
+          exit "$public_app_status"
       - name: Verify Linux repeatability
         if: runner.os == 'Linux'
         run: node scripts/repeatability.mjs "$RUNNER_TEMP/candidate/show-what-changed-0.1.1.tgz" "$RUNNER_TEMP/repeatability"
