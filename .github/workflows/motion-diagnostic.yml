@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   diagnostic:
-    runs-on: ubuntu-24.04
+    runs-on: macos-15
     timeout-minutes: 20
     steps:
       - name: Check out source
@@ -43,16 +43,31 @@ jobs:
       - name: Pin package-manager prerequisites
         run: npm install --global npm@11.12.1 pnpm@11.9.0
       - name: Install Linux prerequisites
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg procps build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates apparmor
           sh scripts/linux-gate/install-lsof.sh "$HOME/.local"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Install macOS media prerequisite
+        if: runner.os == 'macOS'
+        run: brew install ffmpeg
+      - name: Report hosted resource characteristics
+        run: |
+          node --input-type=module <<'NODE'
+          import { arch, availableParallelism, cpus, loadavg, platform, totalmem } from 'node:os';
+          console.log(JSON.stringify({ architecture: arch(), platform: platform(), parallelism: availableParallelism(), cpuModels: [...new Set(cpus().map(cpu => cpu.model))], memoryBytes: totalmem(), loadAverage: loadavg() }));
+          NODE
       - name: Install tool dependencies
         run: npm ci --no-audit --no-fund
       - name: Install pinned Chromium and Linux libraries
+        if: runner.os == 'Linux'
         run: node node_modules/playwright/cli.js install --with-deps chromium
+      - name: Install pinned Chromium on macOS
+        if: runner.os == 'macOS'
+        run: node node_modules/playwright/cli.js install chromium
       - name: Permit pinned Chromium sandbox on Linux
+        if: runner.os == 'Linux'
         shell: bash
         run: |
           chromium_shells=( "$HOME"/.cache/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell )
