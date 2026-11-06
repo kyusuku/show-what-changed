@@ -104,6 +104,71 @@ test('endpoint failure diagnostics retain proof boundaries without unreviewed pa
   expect(verifier.captureTrackEvidence(captureBundle).before.clock.proof).toBeUndefined();
 });
 
+test('the hosted failure summary selects public scalar diagnostics without raw report content', () => {
+  const marker = { kind: 'source', runElapsedMs: 12.5, errorBoundMs: 4, raw: sentinel };
+  const result = verifier.selectMotionFailureDiagnostics({
+    id: '1280x800-run-1', failure: { code: 'ERR_ASSERTION', message: sentinel }, captureOutcome: 'ok',
+    host: { parallelism: 2, loadAverage: [0.5, 1, 1.5], hostname: sentinel }, dispatchSkewMs: 0.5,
+    processing: [{ kind: 'capture-processing', side: 'after', frames: 75, pendingRaw: 0, pendingSanitized: 0, sharedSanitizedBytes: 0, maskMs: 1200.5, writeMs: 20, maxMaskMs: 80, maxWriteMs: 3, maxAckLatencyMs: 85, maxSanitizedQueueDepth: 1, maxSharedSanitizedBytes: 4096, backpressureWaits: 0, raw: sentinel }],
+    stepTiming: [{ id: 'move', barrierMs: 10, before: { kind: 'executed', dispatch: marker, completion: marker, observationEnd: marker, raw: sentinel }, after: { kind: 'failed', dispatch: marker, failure: { message: sentinel } }, raw: sentinel }],
+    captureTracks: { before: { status: 'ok', frameCount: 75, stats: { receivedFrames: 75, raw: sentinel }, clock: { errorBoundMs: 4, samples: [sentinel] }, firstFrame: { runElapsedMs: 20, sourceMonotonicSeconds: sentinel }, lastFrame: { runElapsedMs: 4020, path: sentinel } } },
+    cleanup: { status: 'ok', errors: [sentinel], path: sentinel }, raw: sentinel,
+  });
+  expect(result).toMatchObject({
+    id: '1280x800-run-1', failure: { code: 'ERR_ASSERTION' }, captureOutcome: 'ok',
+    host: { parallelism: 2, loadAverage: [0.5, 1, 1.5] }, dispatchSkewMs: 0.5,
+    processing: [{ side: 'after', frames: 75, maskMs: 1200.5, maxAckLatencyMs: 85, maxSharedSanitizedBytes: 4096 }],
+    stepTiming: [{ id: 'move', before: { kind: 'executed', dispatch: { runElapsedMs: 12.5, errorBoundMs: 4 } }, after: { kind: 'failed', dispatch: { runElapsedMs: 12.5, errorBoundMs: 4 } } }],
+    captureTracks: { before: { status: 'ok', frameCount: 75, stats: { receivedFrames: 75 }, clockErrorBoundMs: 4, firstFrameRunElapsedMs: 20, lastFrameRunElapsedMs: 4020 } },
+    cleanup: { status: 'ok' },
+  });
+  expect(result.diagnosticCode).toBeUndefined();
+  expect(result.failure).toEqual({ code: 'ERR_ASSERTION', assertion: null });
+  expect(result.cleanup).toEqual({ status: 'ok' });
+  expect(result.processing).toHaveLength(1);
+  expect(result.stepTiming).toHaveLength(1);
+  expect(JSON.stringify(result)).not.toContain(sentinel);
+});
+
+test('the hosted failure summary rejects invalid numbers, enums, and duplicate sides or steps', () => {
+  const result = verifier.selectMotionFailureDiagnostics({
+    id: sentinel, failure: { code: sentinel + '/invalid', message: sentinel },
+    host: { parallelism: 1.5, loadAverage: [0, Infinity, -1] }, dispatchSkewMs: NaN,
+    processing: [{ kind: 'capture-processing', side: 'before', frames: 1.5, pendingRaw: -1, maskMs: Infinity }, { kind: 'capture-processing', side: 'before', frames: 2 }],
+    stepTiming: [{ id: 'move', before: { kind: sentinel, dispatch: { runElapsedMs: 1 } }, after: { kind: 'executed', dispatch: { runElapsedMs: -1, errorBoundMs: Infinity } } }, { id: 'move', before: { kind: 'executed' } }],
+  });
+  expect(result).toMatchObject({
+    diagnosticCode: 'MOTION_DIAGNOSTIC_INVALID', id: null, failure: { code: null },
+    host: { parallelism: null, loadAverage: [0, null, null] }, dispatchSkewMs: null,
+    processing: [{ side: 'before', frames: null, pendingRaw: null, maskMs: null }],
+    stepTiming: [{ id: 'move', before: null, after: { kind: 'executed', dispatch: { runElapsedMs: null, errorBoundMs: null } } }],
+  });
+  expect(result.processing).toHaveLength(1);
+  expect(result.stepTiming).toHaveLength(1);
+  expect(JSON.stringify(result)).not.toContain(sentinel);
+  expect(verifier.selectMotionFailureDiagnostics({ processing: [{ kind: sentinel, side: 'after' }] })).toMatchObject({ diagnosticCode: 'MOTION_DIAGNOSTIC_INVALID', processing: [] });
+  expect(verifier.selectMotionFailureDiagnostics({ stepTiming: [{ id: sentinel }] })).toMatchObject({ diagnosticCode: 'MOTION_DIAGNOSTIC_INVALID', stepTiming: [] });
+});
+
+test('the hosted failure summary bounds diagnostic arrays before inspecting their entries', () => {
+  const oversized = (length) => new Proxy(Array(length), { get(target, key, receiver) {
+    if (/^\d+$/.test(String(key))) throw new Error('Oversized diagnostic entries must not be read');
+    return Reflect.get(target, key, receiver);
+  } });
+  expect(verifier.selectMotionFailureDiagnostics({
+    host: { loadAverage: oversized(4) }, processing: oversized(3), stepTiming: oversized(5),
+  })).toMatchObject({ diagnosticCode: 'MOTION_DIAGNOSTIC_INVALID', host: { loadAverage: null }, processing: [], stepTiming: [] });
+});
+
+test('recognized motion failures retain their measurements without arbitrary assertion text', () => {
+  const select = (message) => verifier.selectMotionFailureDiagnostics({ failure: { code: 'ERR_ASSERTION', message } }).failure;
+  expect(select('before needs 60 actual moving-object positions, observed 57').assertion).toEqual({ check: 'source-position-count', side: 'before', required: 60, observed: 57 });
+  expect(select('after needs 60 decoded moving-object positions, observed 59').assertion).toEqual({ check: 'decoded-position-count', side: 'after', required: 60, observed: 59 });
+  expect(select('before known-moving source gap is 316.654 ms').assertion).toEqual({ check: 'source-moving-gap', side: 'before', maximumMs: 200, observedMs: 316.654 });
+  expect(select(`${sentinel} before needs 60 actual moving-object positions, observed 57`).assertion).toBeNull();
+  expect(select(`before needs 60 actual moving-object positions, observed 57 ${sentinel}`).assertion).toBeNull();
+});
+
 test('missing clocks and empty frames remain explicit safe values after capture failure', async () => {
   const captureBundle = bundle();
   captureBundle.motion[0].tracks.before.clock = null;
