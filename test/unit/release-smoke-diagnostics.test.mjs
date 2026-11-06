@@ -25,6 +25,27 @@ test('failure projection emits only known process and schema identifiers without
   expect(JSON.stringify(releaseFailureSummary(unknown, { ResultSchema }))).not.toContain(secret);
 });
 
+test.each([['CAPTURE_INPUT_INVALID', 9], ['CAPTURE_MEDIA_UNAVAILABLE', 9], ['FONT_UNAVAILABLE', 8], ['RENDER_FAILED', 9], ['IMAGE_INPUT_INVALID', 9], ['IMAGE_INVALID', 9]])('a failed rendering envelope retains %s alongside recording timeouts without private details', (code, exitCode) => {
+  const fault = { code, phase: 'rendering', message: secret, hint: secret, logPath: 'private/' + secret };
+  const timeouts = ['before', 'after'].map((side) => ({ code: 'STEP_TIMEOUT', phase: 'recording', side, stepId: 'open', message: secret, hint: secret, logPath: 'private/' + secret }));
+  const provenance = { valid: false, actualHash: null, errors: [] };
+  const runId = '20261107T000000000Z-0123456789abcdef';
+  const data = {
+    schemaVersion: 2, toolVersion: '0.1.2', specRevision: '0.3', runId, state: 'terminal', status: 'failed', exitCode, captureMode: 'motion', startedAt: '2026-11-07T00:00:00.000Z', endedAt: null,
+    sources: { before: { requested: secret, commit: 'a'.repeat(40), kind: 'commit', materializedHash: null }, after: { requested: secret, commit: 'b'.repeat(40), kind: 'commit', materializedHash: null }, baseResolution: 'exact' },
+    versions: { node: 'v24.22.2', browser: null, ffmpeg: null, ffprobe: null }, publicRecipeDigest: null, publicScenarioDigest: null, viewport: { width: 1280, height: 800, deviceScaleFactor: 1 }, dataParity: 'stateless-declared',
+    coverage: { selected: [], omitted: [], unsupported: [], unresolved: [], complete: true }, execution: null, captureQuality: [], scenarios: [], summary: { verifiedPairs: 0, changedPairs: 0, expectedAbsences: 0, exclusions: 0, failedSteps: 2, blockedSteps: 0, coverageOmissions: 0 }, timeline: null,
+    artifacts: { video: null, poster: null, capture: null, timeline: null, pr: null }, comparisonOutcome: { status: 'failed', capture: 'failed', coverage: 'complete', provenance: { before: provenance, after: provenance } }, cleanupOutcome: { status: 'ok', errors: [] }, encodingOutcome: { status: 'pending', errors: [] }, warnings: [], errors: [...timeouts, fault], errorHistory: [], phaseTimings: {},
+  };
+  const failed = ResultSchema.parse({ schemaVersion: 2, command: 'compare', status: 'failed', exitCode, data, error: fault, warnings: [] });
+  const input = report(failed);
+  Object.assign(input.error.command, { code: exitCode, signal: null, timedOut: false });
+  const summary = releaseFailureSummary(input, { ResultSchema });
+  expect(summary.diagnosis).toEqual({ status: 'failed', exitCode, runId, code, phase: 'rendering', errors: [{ code: 'STEP_TIMEOUT', phase: 'recording' }, { code: 'STEP_TIMEOUT', phase: 'recording' }, { code, phase: 'rendering' }] });
+  expect(JSON.stringify(summary)).not.toContain(secret);
+  expect(JSON.stringify(summary)).not.toContain('private/');
+});
+
 test('diagnosis requires a bounded schema-valid matching envelope and limits error details', () => {
   expect(releaseFailureSummary(report()).diagnosis).toBeNull();
   const input = report();

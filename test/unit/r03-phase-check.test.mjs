@@ -89,16 +89,36 @@ test.each(['deadline', 'SIGINT'])('a %s observation that completes outside the r
   });
 });
 
-test('a real deadline result preserves an early phase witness and the expected output', async () => {
+test('a deadline result preserves its witness and output with a controlled observation clock', async () => {
   await temporary(async (root) => {
-    const marker = join(root, 'active');
+    const marker = join(root, 'active'), release = join(root, 'release');
     const entry = { stimulus: 'deadline', runSeconds: 0.2, exitCode: 10, errorCode: 'DEADLINE_EXCEEDED' };
     const envelope = { status: 'cancelled', exitCode: 10, error: { code: entry.errorCode }, data: { state: 'terminal', status: 'cancelled', exitCode: 10 } };
-    const script = `require('node:fs').writeFileSync(${JSON.stringify(marker)},'active');setTimeout(()=>process.stdout.write(${JSON.stringify(JSON.stringify(envelope) + '\n')},()=>process.exit(10)),300)`;
-    const probe = await interruptPhaseCommand({ argv: [process.execPath, '-e', script], cwd: root, entry, observe: async () => await readFile(marker, 'utf8').then(() => ({ phase: 'controlled' }), () => null) });
-    expect(probe).toMatchObject({ code: 10, signal: null, phaseReached: true, signalSent: null, timedOut: false, overflow: false, events: [], transportError: null, exit: { code: 10, signal: null }, close: { code: 10, signal: null }, stdout: JSON.stringify(envelope) + '\n', stderr: '' });
-    expect(() => assertPhaseResult(entry, probe, envelope)).not.toThrow();
-    expect(() => assertPhaseResult(entry, { ...probe, transportError: 'PIPE_CLOSE_TIMEOUT' }, envelope)).toThrow('CLI_TRANSPORT_FAILED');
+    const script = `const fs=require('node:fs'),bound=setTimeout(()=>process.exit(1),3000);fs.writeFileSync(${JSON.stringify(marker)},'active');const poll=setInterval(()=>{if(fs.existsSync(${JSON.stringify(release)})){clearInterval(poll);clearTimeout(bound);process.stdout.write(${JSON.stringify(JSON.stringify(envelope) + '\n')},()=>process.exit(10))}},10);`;
+    let elapsedMs = 0, cliPid, observed, settled = false;
+    const observation = new Promise((done) => { observed = done; });
+    const clock = vi.spyOn(performance, 'now').mockImplementation(() => elapsedMs);
+    const running = interruptPhaseCommand({ argv: [process.execPath, '-e', script], cwd: root, entry, observe: async ({ pid }) => {
+      cliPid = pid;
+      if (!await readFile(marker, 'utf8').catch(() => null)) return null;
+      elapsedMs = 100;
+      observed();
+      return { phase: 'controlled' };
+    } }).finally(() => { settled = true; });
+    try {
+      await Promise.race([observation, running.then(() => { throw new Error('Fixture exited before its phase was observed'); })]);
+      await new Promise(setImmediate);
+      elapsedMs = 300;
+      await writeFile(release, 'release');
+      const probe = await running;
+      expect(probe).toMatchObject({ code: 10, signal: null, phaseReached: true, marker: { phase: 'controlled', elapsedMs: 100 }, signalSent: null, timedOut: false, overflow: false, events: [], transportError: null, exit: { code: 10, signal: null, observedElapsedMs: 300 }, close: { code: 10, signal: null }, stdout: JSON.stringify(envelope) + '\n', stderr: '' });
+      expect(() => assertPhaseResult(entry, probe, envelope)).not.toThrow();
+      expect(() => assertPhaseResult(entry, { ...probe, transportError: 'PIPE_CLOSE_TIMEOUT' }, envelope)).toThrow('CLI_TRANSPORT_FAILED');
+    } finally {
+      if (!settled && cliPid) { try { process.kill(cliPid, 'SIGKILL'); } catch (error) { if (error.code !== 'ESRCH') throw error; } }
+      await running.catch(() => {});
+      clock.mockRestore();
+    }
   });
 });
 
