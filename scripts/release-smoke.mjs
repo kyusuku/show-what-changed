@@ -34,6 +34,9 @@ try {
   const original = await sourceState(fixture.repoRoot);
   const selection = ['--base', fixture.baseCommit, '--head', fixture.headCommit, '--scenario', scenario];
   await candidate.cli('help', ['--help'], candidate.installRoot, 0);
+  const setup = await candidate.cli('setup', ['setup'], candidate.installRoot, 0);
+  assert.equal(setup.command, 'setup');
+  assert(setup.data.capabilities.find((capability) => capability.name === 'chromium')?.available);
   await candidate.cli('doctor', ['doctor'], candidate.installRoot, 0);
   await candidate.cli('invalid-flag', ['--unknown-option'], candidate.installRoot, 2);
   await candidate.cli('missing-compose', ['compose', join(root, 'missing-run')], candidate.installRoot, 2);

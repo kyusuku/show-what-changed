@@ -12,7 +12,7 @@ export type ParsedCommand =
   | (Flags & { kind: 'plan'; request: PlanRequest })
   | (Flags & { kind: 'compare'; request: CompareRequest; allowExec: boolean; ci: boolean; timeoutMs: number })
   | (Flags & { kind: 'compose'; runDir: string })
-  | (Flags & { kind: 'doctor' })
+  | (Flags & { kind: 'doctor' | 'setup' })
   | (Flags & { kind: 'clean'; runId: string })
   | (Flags & { kind: 'help'; command: CommandName; text: string })
   | (Flags & { kind: 'version'; command: CommandName; text: string });
@@ -42,7 +42,7 @@ function planRequest(options: z.infer<typeof OptionsSchema>, invocationDir: stri
   };
 }
 function commandName(value: string | undefined): CommandName {
-  return value === 'plan' || value === 'compose' || value === 'doctor' || value === 'clean' ? value : 'compare';
+  return value === 'plan' || value === 'compose' || value === 'doctor' || value === 'setup' || value === 'clean' ? value : 'compare';
 }
 export function parseCli(args: readonly string[], invocationDir: string, ciEnvironment = false): ParsedCommand {
   const output: string[] = [];
@@ -65,7 +65,7 @@ export function parseCli(args: readonly string[], invocationDir: string, ciEnvir
       parsed = { kind: 'compare', json, request: options.plan === undefined ? { kind: 'new', request: planRequest(options, invocationDir) } : { kind: 'saved', path: options.plan }, allowExec: options.allowExec ?? false, ci: ciEnvironment || (options.ci ?? false), timeoutMs: Number(timeout) * 1000 };
       return;
     }
-    if (name === 'doctor') { parsed = { kind: 'doctor', json }; return; }
+    if (name === 'doctor' || name === 'setup') { parsed = { kind: name, json }; return; }
     if (argument === undefined) throw failure(2, 'MISSING_ARGUMENT', 'arguments', 'This command requires one argument.', 'Run the command with --help to see its argument.');
     parsed = name === 'compose' ? { kind: 'compose', json, runDir: argument } : { kind: 'clean', json, runId: argument };
   };
@@ -78,6 +78,7 @@ export function parseCli(args: readonly string[], invocationDir: string, ciEnvir
   const planner = sourceFlags(common(program.command('plan').description('Inspect source and write a private plan without running app code')));
   planner.action((_options, command: Command) => accept('plan', command));
   common(program.command('compose').description('Re-encode saved sanitized frames and timeline without app servers or a browser')).argument('<runDir>').action((argument: string, _options, command: Command) => accept('compose', command, argument));
+  common(program.command('setup').description('Download the pinned Chromium browser and check machine prerequisites without running app code')).action((_options, command: Command) => accept('setup', command));
   common(program.command('doctor').description('Diagnose prerequisites and abandoned runs without running app code')).action((_options, command: Command) => accept('doctor', command));
   common(program.command('clean').description('Remove one registered inactive owned run')).argument('<runId>').action((argument: string, _options, command: Command) => accept('clean', command, argument));
   try {
@@ -86,7 +87,7 @@ export function parseCli(args: readonly string[], invocationDir: string, ciEnvir
     return parsed;
   } catch (error) {
     if (error instanceof CommanderError && error.exitCode === 0) {
-      const requested = args.find((arg) => ['compare', 'plan', 'compose', 'doctor', 'clean'].includes(arg));
+      const requested = args.find((arg) => ['compare', 'plan', 'compose', 'doctor', 'setup', 'clean'].includes(arg));
       return { kind: error.code === 'commander.version' ? 'version' : 'help', command: commandName(requested) ?? active, json: args.includes('--json'), text: output.join('') };
     }
     if (error instanceof ToolFailure) throw error;

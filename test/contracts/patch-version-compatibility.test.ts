@@ -26,10 +26,10 @@ describe('schema2 patch producer compatibility', () => {
   it('preserves the historical producer identity in unchanged committed artifacts', () => {
     expect(CaptureBundleSchema.parse(capture).toolVersion).toBe('0.1.0');
     expect(ManifestSchema.parse(manifest).toolVersion).toBe('0.1.0');
-    expect(TOOL_VERSION).toBe('0.1.1');
+    expect(TOOL_VERSION).toBe('0.1.2');
   });
 
-  it.each(['0.1.0', '0.1.1'])('accepts known producer %s in runtime and published schemas', (version) => {
+  it.each(['0.1.0', '0.1.1', '0.1.2'])('accepts known producer %s in runtime and published schemas', (version) => {
     for (const document of documents) {
       const value = document.versioned(version);
       expect(document.runtime.safeParse(value).success, document.name).toBe(true);
@@ -37,7 +37,7 @@ describe('schema2 patch producer compatibility', () => {
     }
   });
 
-  it.each(['0.0.9', '0.1.2', '0.2.0', '1.0.0', 'unknown'])('rejects unreviewed producer %s in runtime and published schemas', (version) => {
+  it.each(['0.0.9', '0.1.3', '0.2.0', '1.0.0', 'unknown'])('rejects unreviewed producer %s in runtime and published schemas', (version) => {
     for (const document of documents) {
       const value = document.versioned(version);
       expect(document.runtime.safeParse(value).success, document.name).toBe(false);

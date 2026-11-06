@@ -3,8 +3,8 @@ import { sanitizeText } from './io.js';
 import { RecipeSchema, RelativePathSchema, SourceSettingsSchema } from './recipe.js';
 export * from './recipe.js';
 
-export const TOOL_VERSION = '0.1.1';
-const Schema2ProducerVersionSchema = z.enum(['0.1.0', '0.1.1']);
+export const TOOL_VERSION = '0.1.2';
+const Schema2ProducerVersionSchema = z.enum(['0.1.0', '0.1.1', '0.1.2']);
 export const FPS = 30;
 export const VIEWPORT = { width: 1280, height: 800, deviceScaleFactor: 1 } as const;
 export const CANVAS = { width: 1920, height: 686 } as const;
@@ -383,7 +383,7 @@ export type DoctorReport = z.infer<typeof DoctorReportSchema>;
 export const CleanReportSchema = z.strictObject({ schemaVersion: z.literal(2), runId: RunIdSchema, removed: z.boolean() });
 export type CleanReport = z.infer<typeof CleanReportSchema>;
 export function resultSchema<T extends z.ZodType>(dataSchema: T) {
-  return z.strictObject({ schemaVersion: z.literal(2), command: z.enum(['plan', 'compare', 'compose', 'doctor', 'clean']), status: ResultStatusSchema, exitCode: z.number().int().min(0).max(255), data: dataSchema.nullable(), error: ToolErrorSchema.nullable(), warnings: z.array(WarningSchema) });
+  return z.strictObject({ schemaVersion: z.literal(2), command: z.enum(['plan', 'compare', 'compose', 'doctor', 'setup', 'clean']), status: ResultStatusSchema, exitCode: z.number().int().min(0).max(255), data: dataSchema.nullable(), error: ToolErrorSchema.nullable(), warnings: z.array(WarningSchema) });
 }
 export const ResultSchema = resultSchema(z.union([PlanSchema, ManifestSchema, DoctorReportSchema, CleanReportSchema]));
 export type Result<T> = Omit<z.infer<typeof ResultSchema>, 'data'> & { data: T | null };

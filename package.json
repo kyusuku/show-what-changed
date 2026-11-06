@@ -1,6 +1,6 @@
 {
   "name": "show-what-changed",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Compare web-app behavior across Git snapshots with labeled BEFORE and AFTER motion recordings.",
   "type": "module",
   "license": "MIT",

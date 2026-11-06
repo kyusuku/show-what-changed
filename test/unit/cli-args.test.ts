@@ -12,11 +12,19 @@ describe('T01 CLI flags and T14 single-command selection', () => {
   it('keeps command-like ref values as ref values', () => {
     expect(parseCli(['--base', 'plan', '--head', 'doctor', '--allow-exec'], '/repo')).toMatchObject({ kind: 'compare', request: { kind: 'new', request: { base: 'plan', head: 'doctor' } }, allowExec: true });
   });
+  it('accepts setup without flags and with either JSON position', () => {
+    expect(parseCli(['setup'], '/outside')).toEqual({ kind: 'setup', json: false });
+    expect(parseCli(['--json', 'setup'], '/outside')).toEqual({ kind: 'setup', json: true });
+    expect(parseCli(['setup', '--json'], '/outside')).toEqual({ kind: 'setup', json: true });
+    expect(parseCli(['setup', '--help', '--json'], '/outside')).toMatchObject({ kind: 'help', command: 'setup', json: true, text: expect.stringContaining('Download the pinned Chromium') });
+    expect(parseCli(['setup', '--version', '--json'], '/outside')).toMatchObject({ kind: 'version', command: 'setup', json: true, text: '0.1.2\n' });
+  });
   it('accepts bounded saved-plan execution and CI environment', () => {
     expect(parseCli(['compare', '--plan', 'plan.json', '--timeout', '3600'], '/repo', true)).toMatchObject({ kind: 'compare', request: { kind: 'saved', path: 'plan.json' }, timeoutMs: 3600000, ci: true });
   });
   it.each([
     ['--yes'], ['--browser', 'firefox'], ['plan', '--allow-exec'], ['doctor', '--route', '/'],
+    ['setup', '--allow-exec'], ['setup', '--route', '/'], ['setup', '--timeout', '10'], ['setup', 'extra'],
     ['compose'], ['clean'], ['clean', 'one', 'two'], ['compare', '--route', '/', '--scenario', 's.json'],
     ['compare', '--plan', 'p.json', '--base', 'HEAD'], ['compare', '--plan', 'p.json', '--merge-base'],
     ['compare', '--timeout', '0'], ['compare', '--timeout', '3601'], ['compare', '--timeout', '1.5'], ['unknown'],
@@ -26,6 +34,6 @@ describe('T01 CLI flags and T14 single-command selection', () => {
   it('describes motion recipes and supports common help and version flags', () => {
     expect(parseCli(['--help'], '/repo')).toMatchObject({ kind: 'help', text: expect.stringMatching(/motion\s+video/) });
     expect(parseCli(['plan', '--help'], '/repo')).toMatchObject({ kind: 'help', text: expect.stringContaining('--route') });
-    expect(parseCli(['doctor', '--version', '--json'], '/repo')).toMatchObject({ kind: 'version', json: true, text: '0.1.1\n' });
+    expect(parseCli(['doctor', '--version', '--json'], '/repo')).toMatchObject({ kind: 'version', json: true, text: '0.1.2\n' });
   });
 });

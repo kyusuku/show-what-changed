@@ -2,23 +2,13 @@
 
 This guide creates a disposable Git app and a local BEFORE | AFTER video. The pricing lesson explicitly uses keyframes so its checkpoints remain repeatable. Motion is the default for recipes that omit capture mode.
 
-This tutorial targets experimental version `0.1.1`. Use synthetic or disposable data when adapting it.
+This tutorial works with experimental version `0.1.1` and the `0.1.2` branch. Use synthetic or disposable data when adapting it.
 
 ## Install the package
 
-Use Node `24.x`. Release checks use Node `24.22.2` and npm `11.12.1`. Check [release readiness](release-readiness.md) for the archive identity and publication status. Before `0.1.1` is published, replace the package name below with the path to its reviewed tarball.
+Follow [installation help](installation.md) for the published version or the next release's setup command. Use Node.js 24 and continue when the required tool checks pass.
 
-```sh
-SWC_INSTALL="$(mktemp -d)"
-npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.1
-SWC="$SWC_INSTALL/node_modules/.bin/show-what-changed"
-node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
-"$SWC" doctor --json
-```
-
-The Playwright `install --with-deps chromium` variant also installs system libraries. Follow [the prerequisites](../README.md#prerequisites), including matching FFmpeg and ffprobe, Git, `ps`, and a supported `lsof`.
-
-Continue when `doctor` reports `status: "ok"` and `exitCode: 0`. This checks tool capabilities, including the composition filters. Application-specific prerequisites are checked from the selected recipe after consent.
+The commands below use a globally installed `show-what-changed`. For a temporary-prefix installation, substitute that installation's executable path.
 
 ## Create the disposable application
 
@@ -61,7 +51,7 @@ The switch is deliberately absent in BEFORE. `allowMissing` permits only zero ma
 ## Review the bound plan
 
 ```sh
-"$SWC" plan --base fixture-base --head fixture-head --scenario pricing.scenario.json --json
+show-what-changed plan --base fixture-base --head fixture-head --scenario pricing.scenario.json --json
 ```
 
 Inspect the private `.show-what-changed/plan.json`. Confirm both resolved commit IDs, the seven steps, the keyframe mode, the recipe commands, generated directories, and state declaration. Confirm that the output directory is ignored before committing any tool output.
@@ -73,7 +63,7 @@ Planning executes no application code. A saved plan binds exact input bytes and 
 The next command permits both snapshots' recipe commands to run with your account's privileges.
 
 ```sh
-"$SWC" compare --plan .show-what-changed/plan.json --allow-exec --json
+show-what-changed compare --plan .show-what-changed/plan.json --allow-exec --json
 ```
 
 Without `--allow-exec`, an interactive terminal can ask for consent. A noninteractive command returns exit `7` until execution is authorized. `--ci` and `CI=true` disable prompts and do not grant consent.
@@ -139,7 +129,7 @@ Replace the run ID with the exact value from the result.
 
 ```sh
 SWC_RUN_ID='replace-with-runId-from-result'
-"$SWC" compose ".show-what-changed/runs/$SWC_RUN_ID" --json
+show-what-changed compose ".show-what-changed/runs/$SWC_RUN_ID" --json
 ```
 
 Recomposition validates the saved capture, timeline, source images, overlays, and hashes. It starts no app server, Docker resources, or browser. It preserves earlier capture, provenance, coverage, and cleanup faults.
@@ -147,7 +137,7 @@ Recomposition validates the saved capture, timeline, source images, overlays, an
 After reviewing or copying the required artifacts, remove that inactive run.
 
 ```sh
-"$SWC" clean "$SWC_RUN_ID" --json
+show-what-changed clean "$SWC_RUN_ID" --json
 ```
 
 The command refuses active or uncertain ownership. After a forced kill or power loss, inspect `doctor --json` before attempting recovery. Never replace ownership checks with broad process killing or directory deletion.

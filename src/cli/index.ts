@@ -6,6 +6,7 @@ import { formatConsentRecipe } from './consent.js';
 import { plan } from '../planner/index.js';
 import { writePlan } from '../planner/persist.js';
 import { compare, compose, failureResult, normalizeFailure } from '../runner/index.js';
+import { setup } from '../runner/setup.js';
 import { doctor } from '../runner/doctor.js';
 import { cleanOwnedRun } from '../runtime/ownership.js';
 import { repositoryRoot } from '../workspace/git.js';
@@ -18,7 +19,7 @@ import { sanitizeText } from '../schema/io.js';
 type Data = Plan | Manifest | DoctorReport | CleanReport;
 function requestedCommand(args: readonly string[]): Result<Data>['command'] {
   const first = args.find((arg) => !['--json', '--help', '--version', '-h', '-V'].includes(arg));
-  return first === 'plan' || first === 'compose' || first === 'doctor' || first === 'clean' ? first : 'compare';
+  return first === 'plan' || first === 'compose' || first === 'doctor' || first === 'setup' || first === 'clean' ? first : 'compare';
 }
 function printResult(result: Result<Data>, json: boolean): void {
   const validated = ResultSchema.parse(result);
@@ -35,6 +36,7 @@ function printResult(result: Result<Data>, json: boolean): void {
     process.stdout.write(`${capability.available ? 'OK' : 'MISSING'} ${capability.name}: ${capability.message}\n`);
     if (!capability.available && capability.setupCommand) process.stdout.write(`  ${capability.setupCommand}\n`);
   }
+  if (result.command === 'setup' && result.status === 'ok') process.stdout.write('Machine setup is ready. Next, configure each app with show-what-changed.config.json.\nSee https://github.com/kyusuku/show-what-changed/blob/main/docs/app-setup.md\n');
   for (const warning of result.warnings) process.stderr.write(`${warning.code}: ${sanitizeText(warning.message)}\n`);
 }
 async function main(): Promise<number> {
@@ -79,6 +81,7 @@ async function main(): Promise<number> {
       }
       case 'compare': result = await compare(parsed.request, context); break;
       case 'compose': result = await compose(resolve(context.invocationDir, parsed.runDir), context); break;
+      case 'setup': result = await setup(context); break;
       case 'doctor': result = await doctor(context); break;
       case 'clean': {
         const report = await cleanOwnedRun(await repositoryRoot(context.invocationDir), parsed.runId);

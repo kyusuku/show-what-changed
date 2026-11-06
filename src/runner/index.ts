@@ -61,7 +61,7 @@ async function compareCapabilities(run: RunContext): Promise<void> {
     await access(chromium.executablePath(), constants.X_OK);
     const font = await readFile(new URL('../../assets/fonts/Inter-Regular.woff2', import.meta.url));
     if (font.subarray(0, 4).toString('ascii') !== 'wOF2') throw new Error('Invalid font asset');
-  } catch { throw failure(8, 'CAPTURE_CAPABILITY_UNAVAILABLE', 'capabilities', 'The pinned Chromium or bundled font is unavailable.', 'Run doctor. Install Chromium with npx playwright@1.64.1 install chromium or reinstall the package.'); }
+  } catch { throw failure(8, 'CAPTURE_CAPABILITY_UNAVAILABLE', 'capabilities', 'The pinned Chromium or bundled font is unavailable.', 'Run show-what-changed setup, or reinstall the package if the bundled font is missing.'); }
   await checkMediaCapabilities(run);
 }
 function uniqueErrors(errors: Manifest['errors']): Manifest['errors'] {

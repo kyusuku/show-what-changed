@@ -60,8 +60,8 @@ export async function doctor(context: CommandContext): Promise<Result<DoctorRepo
       run = await createRunContext({ repoRoot: root, timeoutMs: 60000, signal: context.signal, diagnostics: context.diagnostics });
       if (browserInstalled) {
         try { const browser = await openBrowser(run); record('chromium', true, browser.version(), 'Pinned Chromium launch passed.'); await browser.close(); }
-        catch { record('chromium', false, null, 'Pinned Chromium could not launch.', 'npx playwright@1.64.1 install --with-deps chromium'); }
-      } else record('chromium', false, null, 'Pinned Chromium is not installed.', 'npx playwright@1.64.1 install chromium');
+        catch { record('chromium', false, null, 'Pinned Chromium could not launch.', 'Run show-what-changed setup. If Chromium still cannot launch, install the operating system browser libraries listed at https://github.com/kyusuku/show-what-changed/blob/main/docs/installation.md#linux-setup.'); }
+      } else record('chromium', false, null, 'Pinned Chromium is not installed.', 'Run show-what-changed setup.');
       try { await checkMediaCapabilities(run); record('h264', true, null, 'A real libx264 encode and ffprobe decoded-frame check passed.'); }
       catch { record('h264', false, null, 'H.264 encoding or decoded-media validation failed.', 'Install matching FFmpeg and ffprobe with libx264 support.'); }
     } catch {
@@ -71,7 +71,7 @@ export async function doctor(context: CommandContext): Promise<Result<DoctorRepo
     checkCancelled(context.signal);
     try { report.abandonedRuns = await inspectOwnedRuns(await repositoryRoot(context.invocationDir)); }
     catch { warnings.push({ code: 'RUN_INSPECTION_UNAVAILABLE', message: 'No readable repository run inventory was available from this directory.' }); }
-  } catch (error) { return failureResult('doctor', cancellation(context.signal) ?? normalizeFailure(error, 'doctor')); }
+  } catch (error) { return { ...failureResult<DoctorReport>('doctor', cancellation(context.signal) ?? normalizeFailure(error, 'doctor')), warnings }; }
   finally {
     const cleanup = run ? await cleanupRun(run) : null;
     if (cleanup?.status === 'failed') warnings.push({ code: 'DOCTOR_CLEANUP_FAILED', message: 'A temporary capability probe needs manual cleanup.' });
