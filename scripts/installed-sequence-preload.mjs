@@ -5,8 +5,8 @@ import { cpus, freemem, loadavg } from 'node:os';
 
 const command = process.argv[2];
 const directory = process.env.SWC_OPERATION_TRACE_DIR;
-const entry = process.argv[1] ? realpathSync(process.argv[1]) : '';
-if (directory && ['compare', 'compose'].includes(command) && entry.endsWith('/show-what-changed/dist/cli/index.js')) {
+const entry = directory && ['compare', 'compose'].includes(command) && process.argv[1] ? realpathSync(process.argv[1]) : '';
+if (entry.endsWith('/show-what-changed/dist/cli/index.js')) {
   const output = join(directory, `${process.pid}.ndjson`);
   const started = performance.now();
   let eventCount = 0;
