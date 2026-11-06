@@ -2,9 +2,26 @@
 
 Use Node.js 24 on macOS or Linux. The tool's npm package is separate from your app's dependencies. Your app can use another package manager or runtime.
 
+## Install 0.1.2 and run setup
+
+Install the tool, then download its matching browser and check the prerequisites.
+
+```sh
+npm install -g show-what-changed@0.1.2
+show-what-changed setup
+```
+
+Continue when setup reports `setup: ok (exit 0)`. Then [configure your app](app-setup.md).
+
+The setup command installs Chromium through this package's Playwright dependency. It does not select a global or application-local Playwright installation. Run setup again after a tool upgrade to get its matching browser.
+
+For automation, use `show-what-changed setup --json`. The command emits one result on stdout and writes progress to stderr. Exit `0` means required tool checks passed. Missing optional Docker tools do not block host-process recipes.
+
+A browser download alone does not establish readiness. If a system dependency is missing, follow the reported instructions and rerun setup. The command does not run application code, create a recipe, or install operating-system packages.
+
 ## Use the published 0.1.1 version
 
-Version `0.1.1` does not include `setup`. These commands install that version and its pinned browser, then check the prerequisites.
+Version `0.1.1` does not include `setup`. To keep that version, install its pinned browser and check the prerequisites manually.
 
 ```sh
 npm install -g show-what-changed@0.1.1
@@ -13,21 +30,6 @@ show-what-changed doctor
 ```
 
 Continue when `doctor` reports `doctor: ok (exit 0)`. Then [configure your app](app-setup.md).
-
-## Use setup in the next release
-
-The `0.1.2` branch adds `show-what-changed setup`. It is not yet published to npm. Once that release is available, install the tool and run setup.
-
-```sh
-npm install -g show-what-changed
-show-what-changed setup
-```
-
-The setup command installs Chromium through this package's Playwright dependency. It does not select a global or application-local Playwright installation. Run setup again after a tool upgrade to get its matching browser.
-
-For automation, use `show-what-changed setup --json`. The command emits one result on stdout and writes progress to stderr. Exit `0` means required tool checks passed. Missing optional Docker tools do not block host-process recipes.
-
-A browser download alone does not establish readiness. If a system dependency is missing, follow the reported instructions and rerun setup. The command does not run application code, create a recipe, or install operating-system packages.
 
 ## Check requirements
 
@@ -90,7 +92,7 @@ Playwright supports `HTTPS_PROXY`, custom certificate settings, and `PLAYWRIGHT_
 
 If global npm installation reports a permissions error, use an npm installation managed by your Node version manager, or follow [npm's permissions guide](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally). Do not use `sudo npm install` as the default fix.
 
-For a temporary installation of an unreleased reviewed archive, use a private prefix outside your app's checkout.
+For a temporary installation from a reviewed archive, use a private prefix outside your app's checkout.
 
 ```sh
 SWC_INSTALL="$(mktemp -d)"

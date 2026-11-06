@@ -1,6 +1,6 @@
 # Clock proof for 0.1.2
 
-This addendum changes the recording contract for the unreleased 0.1.2 candidate. It supersedes the clock-measurement and final-sampling order in [specification section 7.2](../../spec.md#72-motion-backend-and-clocks) for the new proof branch. The historical specification and release evidence remain unchanged.
+This addendum defines the 0.1.2 clock-proof contract. It supersedes the clock-measurement and final-sampling order in [specification section 7.2](../../spec.md#72-motion-backend-and-clocks) for the new proof branch. The historical specification and release evidence remain unchanged.
 
 The recorder keeps one unit-rate mapping for each browser session:
 

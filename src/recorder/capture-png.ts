@@ -184,37 +184,55 @@ function decodeRows(compressed: Buffer, capture: Capture): Scanlines {
   const { width, height, gammaInteger, pixels } = capture;
   const stride = width * pixels.channels + 1;
   const rows = inflateExact(compressed, capture.filteredBytes);
+  const channels = pixels.channels;
   for (let y = 0; y < height; y++) {
     const start = y * stride;
     const filter = rows[start]!;
     if (filter > 4) invalid();
     if (filter === 0) continue;
-    for (let x = 1; x < stride; x++) {
-      const index = start + x;
-      const left = x > pixels.channels ? rows[index - pixels.channels]! : 0;
-      const above = y > 0 ? rows[index - stride]! : 0;
-      const upperLeft = y > 0 && x > pixels.channels ? rows[index - stride - pixels.channels]! : 0;
-      let prediction = 0;
-      switch (filter) {
-        case 1:
-          prediction = left;
-          break;
-        case 2:
-          prediction = above;
-          break;
-        case 3:
-          prediction = (left + above) >>> 1;
-          break;
-        case 4: {
-          const p = left + above - upperLeft;
-          const a = Math.abs(p - left);
-          const b = Math.abs(p - above);
-          const c = Math.abs(p - upperLeft);
-          prediction = a <= b && a <= c ? left : b <= c ? above : upperLeft;
-          break;
+    const first = start + 1;
+    const interior = first + channels;
+    const end = start + stride;
+    switch (filter) {
+      case 1:
+        for (let index = interior; index < end; index++)
+          rows[index] = rows[index]! + rows[index - channels]!;
+        break;
+      case 2:
+        if (y > 0)
+          for (let index = first; index < end; index++) rows[index] = rows[index]! + rows[index - stride]!;
+        break;
+      case 3:
+        if (y === 0) {
+          for (let index = interior; index < end; index++)
+            rows[index] = rows[index]! + (rows[index - channels]! >>> 1);
+        } else {
+          for (let index = first; index < interior; index++)
+            rows[index] = rows[index]! + (rows[index - stride]! >>> 1);
+          for (let index = interior; index < end; index++)
+            rows[index] = rows[index]! + ((rows[index - channels]! + rows[index - stride]!) >>> 1);
         }
-      }
-      rows[index] = rows[index]! + prediction;
+        break;
+      case 4:
+        if (y === 0) {
+          for (let index = interior; index < end; index++)
+            rows[index] = rows[index]! + rows[index - channels]!;
+        } else {
+          for (let index = first; index < interior; index++)
+            rows[index] = rows[index]! + rows[index - stride]!;
+          for (let index = interior; index < end; index++) {
+            const left = rows[index - channels]!;
+            const above = rows[index - stride]!;
+            const upperLeft = rows[index - stride - channels]!;
+            const p = left + above - upperLeft;
+            const a = Math.abs(p - left);
+            const b = Math.abs(p - above);
+            const c = Math.abs(p - upperLeft);
+            const prediction = a <= b && a <= c ? left : b <= c ? above : upperLeft;
+            rows[index] = rows[index]! + prediction;
+          }
+        }
+        break;
     }
     rows[start] = 0;
   }

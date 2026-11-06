@@ -4,15 +4,13 @@ Compare a browser scenario across two Git snapshots and produce a labeled BEFORE
 
 Revision 0.3 uses explicit execution recipes for web applications across stacks. Motion is the default. It records actual intermediate Chromium frames and preserves their shared elapsed timing. Keyframes remain an explicit alternative.
 
-Version `0.1.1` fixes a motion-capture defect in `0.1.0` that could lose a static page update while an earlier frame awaited masking and acknowledgement. The tool remains experimental. See [release readiness](docs/release-readiness.md) for verification and publication status.
+Version `0.1.2` adds browser setup, an app-configuration prompt for coding agents, and clock recovery for delayed browser responses. The 40 ms clock error limit remains unchanged. The tool remains experimental. See [release readiness](docs/release-readiness.md) for verification and publication status.
 
 The [synthetic examples](docs/demo/README.md) identify each recording's capture mode and candidate. Historical development clips and keyframe examples remain labeled separately from release-candidate motion evidence.
 
 ## Install and set up
 
 Use Node.js 24 on macOS or Linux. Install the tool once, outside your application's dependencies.
-
-`setup` is new in the unreleased `0.1.2` branch. Until that version is published, use the [0.1.1 installation commands](docs/installation.md#use-the-published-011-version).
 
 ```sh
 npm install -g show-what-changed
@@ -109,4 +107,4 @@ The [agent skill](skills/show-what-changed/SKILL.md) uses the same CLI and JSON 
 
 ## Development and license
 
-Read [contributing](CONTRIBUTING.md) for development, [the specification](spec.md) for acceptance, and [publishing](docs/publishing.md) for the owner's later handoff. Authored code uses the [MIT license](LICENSE). The bundled Inter font uses the SIL Open Font License. Dependencies retain their licenses in [third-party notices](THIRD_PARTY_NOTICES.md).
+Read [contributing](CONTRIBUTING.md) for development, [the specification](spec.md) for acceptance, and [publishing](docs/publishing.md) for the release procedure. Authored code uses the [MIT license](LICENSE). The bundled Inter font uses the SIL Open Font License. Dependencies retain their licenses in [third-party notices](THIRD_PARTY_NOTICES.md).
