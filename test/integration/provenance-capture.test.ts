@@ -34,7 +34,11 @@ test('T03 T04 adds a visible provenance caveat when the app creates a new source
       { id: 'ready', op: 'expectVisible', target: { text: 'Mutation complete' } }, { id: 'poster', op: 'screenshot' },
     ] }));
     const original = { head: await git('rev-parse', 'HEAD'), index: await readFile(join(app, '.git/index')), server: await readFile(join(app, 'server.mjs')) };
-    const result = await execute(process.execPath, ['--no-warnings', '--experimental-transform-types', '--input-type=module', '-e', loader, sourceCli, 'compare', '--head', 'HEAD', '--scenario', scenario, '--allow-exec', '--json'], { cwd: app, maxBuffer: 10 * 1024 * 1024, timeout: 45_000 }).then(() => { throw new Error('Mutation comparison incorrectly succeeded'); }, (error: { code: number; stdout: string; stderr: string }) => error);
+    const startedAt = performance.now();
+    const result = await execute(process.execPath, ['--no-warnings', '--experimental-transform-types', '--input-type=module', '-e', loader, sourceCli, 'compare', '--head', 'HEAD', '--scenario', scenario, '--allow-exec', '--json'], { cwd: app, maxBuffer: 10 * 1024 * 1024, timeout: 45_000 }).then(() => { throw new Error('Mutation comparison incorrectly succeeded'); }, (error: { code: number | string; signal: string | null; killed: boolean; message: string; cmd: string; stdout: string; stderr: string }) => error);
+    let output: unknown = result.stdout.slice(-24_000);
+    try { output = JSON.parse(result.stdout); } catch { /* Preserve invalid output in this synthetic diagnostic. */ }
+    console.error(JSON.stringify({ diagnostic: 'provenance-cli-exit', code: result.code, signal: result.signal, killed: result.killed, message: result.message.slice(0, 2_000), cmd: result.cmd.slice(0, 4_000), elapsedMs: Math.round(performance.now() - startedAt), stdout: output, stderr: result.stderr.slice(-8_000) }).slice(0, 36_000));
     expect(result.code).toBe(3);
     expect(result.stdout.trim().split('\n')).toHaveLength(1);
     const envelope = ResultSchema.parse(JSON.parse(result.stdout));
