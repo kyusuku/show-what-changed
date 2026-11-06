@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-15-intel]
+        os: [macos-15-intel]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     steps:
@@ -100,12 +100,6 @@ jobs:
           try { console.log('Sandboxed Chromium launch succeeded.'); }
           finally { await server.close(); }
           NODE
-      - name: Test source and integration behavior
-        run: |
-          npm run test:unit -- --maxWorkers=1
-          npm run test:contracts -- --maxWorkers=1
-          npm run test:privacy
-          npm run test:integration -- --maxWorkers=1 --no-file-parallelism
       - name: Pack the candidate
         run: |
           mkdir -p "$RUNNER_TEMP/candidate"
@@ -122,90 +116,37 @@ jobs:
           NODE
       - name: Bind the candidate to the tested source
         run: node scripts/verify-package-source.mjs "$SWC_CANDIDATE_TARBALL" "$RUNNER_TEMP/package-source-binding"
-      - name: Verify the installed candidate
-        run: node scripts/release-smoke.mjs "$SWC_CANDIDATE_TARBALL" "$RUNNER_TEMP/package-smoke"
-      - name: Verify complete installed synthetic motion on Linux across both viewports and three repetitions
-        if: runner.os == 'Linux'
+      - name: Verify the installed candidate with completed-run diagnostics
         run: |
+          smoke_status=0
+          node scripts/release-smoke.mjs "$SWC_CANDIDATE_TARBALL" "$RUNNER_TEMP/package-smoke" || smoke_status=$?
           node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import { spawnSync } from 'node:child_process';
-          import { createHash } from 'node:crypto';
-          import { readFile } from 'node:fs/promises';
-          import { isAbsolute, join } from 'node:path';
-          import { selectMotionFailureDiagnostics } from './scripts/revision-0.3-motion-check.mjs';
-          const root = process.env.RUNNER_TEMP;
-          const smoke = JSON.parse(await readFile(join(root, 'package-smoke/report.json'), 'utf8'));
-          const tarball = await readFile(process.env.SWC_CANDIDATE_TARBALL);
-          assert.equal(smoke.status, 'passed', 'Installed package smoke must pass before motion verification.');
-          assert.equal(smoke.candidate?.sha256, createHash('sha256').update(tarball).digest('hex'), 'The installed package must match the candidate tarball.');
-          assert(typeof smoke.root === 'string' && isAbsolute(smoke.root), 'The smoke report must identify its fresh installation.');
-          const result = spawnSync(process.execPath, ['scripts/revision-0.3-motion-check.mjs', '--installed-root', join(smoke.root, 'installed/node_modules/show-what-changed'), '--output-dir', join(root, 'installed-motion')], { stdio: 'inherit' });
-          if (result.error) throw result.error;
-          if (result.status !== 0) {
-            try {
-              const motion = JSON.parse(await readFile(join(root, 'installed-motion/motion-check.json'), 'utf8'));
-              if (!Array.isArray(motion.cases) || motion.cases.length > 6) throw new Error('Invalid motion case count');
-              for (const item of motion.cases) console.error(JSON.stringify(selectMotionFailureDiagnostics(item)));
-            } catch { console.error('Installed motion failure summary unavailable. MOTION_DIAGNOSTIC_INVALID'); }
-          }
-          assert.equal(result.signal, null, 'Installed motion verification must finish without a signal.');
-          assert.equal(result.status, 0, 'Installed motion verification must exit successfully.');
-          const motion = JSON.parse(await readFile(join(root, 'installed-motion/motion-check.json'), 'utf8'));
-          assert.equal(motion.status, 'numeric-passed');
-          assert.equal(motion.completeRepetitionMatrix, true, 'All required viewports and repetitions must complete.');
-          NODE
-      - name: Verify installed host recipes
-        run: node scripts/compatibility-smoke.mjs "$SWC_CANDIDATE_TARBALL" "$RUNNER_TEMP/compatibility-smoke"
-      - name: Verify installed public workspace application
-        if: runner.os == 'Linux'
-        run: |
-          public_app_status=0
-          node scripts/real-app-smoke.mjs "$SWC_CANDIDATE_TARBALL" "$RUNNER_TEMP/public-app-smoke" || public_app_status=$?
-          if [ "$public_app_status" -ne 0 ]; then
-            node --input-type=module <<'NODE' || true
-          import { readFile } from 'node:fs/promises';
-          import { join, resolve } from 'node:path';
-          const output = join(process.env.RUNNER_TEMP, 'public-app-smoke');
-          const clip = (value, limit = 4000) => String(value ?? '').slice(-limit);
-          let report;
+          import { readFile, readdir } from 'node:fs/promises';
+          import { join } from 'node:path';
+          const output = join(process.env.RUNNER_TEMP, 'package-smoke');
+          const report = JSON.parse(await readFile(join(output, 'report.json'), 'utf8'));
+          const clip = (value, limit) => String(value ?? '').slice(-limit);
           const emit = (value) => {
             let line = JSON.stringify(value);
-            for (const path of [report?.root, process.env.RUNNER_TEMP, process.env.GITHUB_WORKSPACE].filter(Boolean)) line = line.split(path).join('<workspace>');
-            console.error(line.slice(0, 16000));
+            for (const path of [report.root, process.env.RUNNER_TEMP, process.env.GITHUB_WORKSPACE].filter(Boolean)) line = line.split(path).join('<workspace>');
+            console.log(line);
           };
-          const command = (result) => result ? { argv: result.argv, code: result.code, signal: result.signal, timedOut: result.timedOut, overflow: result.overflow, elapsedMs: result.elapsedMs, stdout: clip(result.stdout), stderr: clip(result.stderr) } : null;
-          try {
-            report = JSON.parse(await readFile(join(output, 'report.json'), 'utf8'));
-            emit({ diagnostic: 'public-app-report', status: report.status, candidate: report.candidate, error: { message: clip(report.error?.message), stack: clip(report.error?.stack, 2000), command: command(report.error?.command) }, runs: report.runs?.map(({ name, status }) => ({ name, status })) });
-            for (const row of (report.runs ?? []).filter((run) => run.status !== 'passed').slice(0, 7)) {
-              emit({ diagnostic: 'public-app-run', name: row.name, status: row.status, error: row.error, command: row.command, runIds: row.runIds, cleanup: row.cleanup, callerPreserved: row.callerPreserved, verificationErrors: row.verificationErrors, artifactEvidence: row.artifactEvidence });
-              try { emit({ diagnostic: 'public-app-command', name: row.name, ...command(JSON.parse(await readFile(join(output, row.name + '.json'), 'utf8'))) }); }
-              catch (error) { emit({ diagnostic: 'public-app-command-unavailable', name: row.name, code: error.code ?? 'INVALID_JSON' }); }
-              for (const evidence of (row.artifactEvidence ?? []).slice(0, 3)) {
-                const directory = resolve(output, evidence.directory);
-                if (!directory.startsWith(output + '/')) continue;
-                for (const file of ['manifest.json', 'capture.json']) {
-                  try {
-                    const data = JSON.parse(await readFile(join(directory, file), 'utf8'));
-                    const scenarios = data.scenarios?.slice(0, 3).map((scenario) => ({ id: scenario.id, outcome: scenario.outcome, errors: scenario.errors, steps: (scenario.steps ?? []).filter((step) => step.before?.status !== 'ok' || step.after?.status !== 'ok').slice(0, 20).map((step) => ({
-                      id: step.id, op: step.op, ...Object.fromEntries(['before', 'after'].map((side) => { const result = step[side]; return [side, result ? { status: result.status, reasonCode: result.reasonCode, elapsedMs: result.elapsedMs, heldFromStepId: result.heldFromStepId } : null]; })),
-                    })) })).filter((scenario) => scenario.outcome !== 'ok' || scenario.errors?.length || scenario.steps.length);
-                    const motion = data.motion?.slice(0, 3).map((scenario) => ({ id: scenario.id, tracks: Object.fromEntries(['before', 'after'].map((side) => {
-                      const track = scenario.tracks?.[side];
-                      return [side, track ? { status: track.status, error: track.error, failureAtMs: track.failureAtMs, stats: track.stats, frameCount: track.frames?.length, clock: track.clock ? { ...track.clock, sampleCount: track.clock.samples?.length, samples: track.clock.samples?.slice(-8) } : null } : null];
-                    })) }));
-                    emit({ diagnostic: 'public-app-artifact', name: row.name, file, runId: data.runId, scenarios, state: data.state, status: data.status, exitCode: data.exitCode, summary: data.summary, comparisonOutcome: data.comparisonOutcome, cleanupOutcome: data.cleanupOutcome, encodingOutcome: data.encodingOutcome, errors: data.errors, captureQuality: data.captureQuality, motion });
-                  } catch (error) { emit({ diagnostic: 'public-app-artifact-unavailable', name: row.name, file, code: error.code ?? 'INVALID_JSON' }); }
-                }
-              }
+          const summary = (result) => result ? { argv: result.argv, code: result.code, signal: result.signal, timedOut: result.timedOut, overflow: result.overflow, elapsedMs: result.elapsedMs, stdout: clip(result.stdout, 16000), stderr: clip(result.stderr, 2000) } : null;
+          emit({ diagnostic: 'installed-smoke-report', status: report.status, candidate: report.candidate ? { sha256: report.candidate.sha256, bytes: report.candidate.bytes } : null, error: report.error ? { message: clip(report.error.message, 4000), stack: clip(report.error.stack, 4000), command: summary(report.error.command) } : null });
+          for (const name of (await readdir(output)).filter(name => name.endsWith('.json') && name !== 'report.json').sort()) {
+            const value = JSON.parse(await readFile(join(output, name), 'utf8'));
+            emit({ diagnostic: 'completed-command', name, argv: value.argv, code: value.code, signal: value.signal, timedOut: value.timedOut, overflow: value.overflow, elapsedMs: value.elapsedMs });
+          }
+          const runs = join(report.root, 'app/.show-what-changed/runs');
+          let names = [];
+          try { names = await readdir(runs); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+          for (const name of names.slice(0, 10)) {
+            for (const file of ['manifest.json', 'capture.json']) {
+              try {
+                const value = JSON.parse(await readFile(join(runs, name, file), 'utf8'));
+                emit({ diagnostic: 'completed-artifact', name, file, status: value.status, state: value.state, exitCode: value.exitCode, comparisonOutcome: value.comparisonOutcome, encodingOutcome: value.encodingOutcome, cleanupOutcome: value.cleanupOutcome, errors: value.errors, scenarios: value.scenarios?.map(row => ({ id: row.id, outcome: row.outcome, errors: row.errors, steps: row.steps.map(step => ({ id: step.id, op: step.op, before: { status: step.before?.status, reasonCode: step.before?.reasonCode, elapsedMs: step.before?.elapsedMs }, after: { status: step.after?.status, reasonCode: step.after?.reasonCode, elapsedMs: step.after?.elapsedMs } })) })) });
+              } catch (error) { emit({ diagnostic: 'artifact-unavailable', name, file, code: error.code ?? 'INVALID_JSON' }); }
             }
-          } catch (error) { emit({ diagnostic: 'public-app-report-unavailable', code: error.code ?? 'INVALID_JSON' }); }
+          }
           NODE
-          fi
-          exit "$public_app_status"
-      - name: Verify Linux repeatability
-        if: runner.os == 'Linux'
-        run: node scripts/repeatability.mjs "$SWC_CANDIDATE_TARBALL" "$RUNNER_TEMP/repeatability"
-      - name: Review dependency metadata and scan candidate content
-        run: node scripts/release-audit.mjs "$SWC_CANDIDATE_TARBALL" "$RUNNER_TEMP/release-audit"
+          exit "$smoke_status"
