@@ -1,9 +1,9 @@
 import { execFileSync } from 'node:child_process';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { copyFile, mkdtemp, mkdir, readFile, realpath, rm, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { expect, test } from 'vitest';
-import { command, sourceState } from '../../scripts/release-harness.mjs';
+import { command, installCandidate, sourceState } from '../../scripts/release-harness.mjs';
 import { gitEnvironment } from '../../scripts/git-env.mjs';
 
 test('release fixtures cannot mutate or inspect a different repository through inherited Git variables', async () => {
@@ -36,4 +36,47 @@ test('release fixtures cannot mutate or inspect a different repository through i
     for (const [name, value] of Object.entries(original)) { if (value === undefined) delete process.env[name]; else process.env[name] = value; }
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test('installed CLI failures retain private process evidence before every validation gate and preserve the primary error if saving fails', async () => {
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'swc-release-evidence-')));
+  const packageRoot = join(root, 'package');
+  const reports = join(root, 'private');
+  try {
+    for (const directory of ['dist/cli', 'dist/recorder', 'dist/schema', 'schema', 'skills/show-what-changed', 'assets/fonts']) await mkdir(join(packageRoot, directory), { recursive: true });
+    await writeFile(join(packageRoot, 'package.json'), JSON.stringify({ name: 'show-what-changed', version: '0.0.0', type: 'module', bin: { 'show-what-changed': 'dist/cli/index.js' } }));
+    await writeFile(join(packageRoot, 'dist/cli/index.js'), '#!/usr/bin/env node\nprocess.stdout.write(process.env.SWC_TEST_OUTPUT); process.stderr.write("PRIVATE_STDERR"); process.exitCode = Number(process.env.SWC_TEST_EXIT);\n', { mode: 0o755 });
+    await writeFile(join(packageRoot, 'dist/schema/index.js'), 'export const ResultSchema = { parse(value) { if (value.valid !== true) throw new Error("PRIVATE_SCHEMA_REJECTION"); return value; } };\n');
+    for (const file of ['dist/recorder/mask-worker.js', 'dist/recorder/masker.js', 'skills/show-what-changed/SKILL.md', 'assets/fonts/Inter-Regular.woff2', 'assets/fonts/OFL.txt', 'assets/fonts/provenance.json', 'README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md']) await writeFile(join(packageRoot, file), 'Synthetic harness fixture.\n');
+    for (const name of ['capture', 'config', 'manifest', 'plan', 'result', 'scenario', 'timeline']) await copyFile(new URL(`../../schema/${name}.v2.json`, import.meta.url), join(packageRoot, `schema/${name}.v2.json`));
+    const archive = join(root, 'show-what-changed-0.0.0.tgz');
+    execFileSync('npm', ['pack', '--ignore-scripts', '--pack-destination', root], { cwd: packageRoot, stdio: 'pipe' });
+    const candidate = await installCandidate(archive, root, reports);
+    for (const [name, stdout, actualExit, stage] of [
+      ['nonzero', '{"valid":true,"exitCode":6}', 6, 'process'],
+      ['malformed', 'PRIVATE_NOT_JSON', 0, 'json'],
+      ['schema', '{"private":"PRIVATE_SCHEMA_VALUE"}', 0, 'schema'],
+      ['envelope', '{"valid":true,"exitCode":2}', 0, 'envelope-exit'],
+    ]) {
+      const pending = candidate.cli(name, ['PRIVATE_ARGUMENT'], root, 0, { SWC_TEST_OUTPUT: stdout, SWC_TEST_EXIT: String(actualExit) });
+      expect(candidate.commands.at(-1).name).toBe(name);
+      const error = await pending.then(() => { throw new Error('Expected installed CLI rejection'); }, (failure) => failure);
+      expect(error.validationStage).toBe(stage);
+      expect(error.result).toMatchObject({ code: actualExit, stdout, stderr: 'PRIVATE_STDERR' });
+      const path = join(reports, name + '.json');
+      expect(JSON.parse(await readFile(path, 'utf8'))).toEqual(error.result);
+      expect((await stat(path)).mode & 0o777).toBe(0o600);
+      expect(candidate.commands.at(-1)).toMatchObject({ name, validationStage: stage, actualExit });
+    }
+    await rm(reports, { recursive: true });
+    await writeFile(reports, 'Block the private evidence directory.\n');
+    const error = await candidate.cli('save-failed', [], root, 0, { SWC_TEST_OUTPUT: 'PRIVATE_FAILED_OUTPUT', SWC_TEST_EXIT: '6' }).catch((failure) => failure);
+    expect(error.message).toMatch(/^Command failed:/);
+    expect(error.result).toMatchObject({ code: 6, stdout: 'PRIVATE_FAILED_OUTPUT' });
+    expect(error.evidenceError).toBeInstanceOf(Error);
+    expect(error.validationStage).toBe('process');
+    const saveError = await candidate.cli('save-failed-success', [], root, 0, { SWC_TEST_OUTPUT: '{"valid":true,"exitCode":0}', SWC_TEST_EXIT: '0' }).catch((failure) => failure);
+    expect(saveError.validationStage).toBe('evidence');
+    expect(saveError.result.code).toBe(0);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
