@@ -450,6 +450,7 @@ describe('T07 T09 T10 T11 real composer media', () => {
 
   it('encodes actual odd narrow motion viewports without upscaling and keeps their letterboxes', async () => {
     const run = await context();
+    run.diagnostics.event = (message) => process.stderr.write(`SWC_NARROW_EVENT ${message}\n`);
     const server = createServer((_request, response) => {
       response.writeHead(200, { 'content-type': 'text/html' });
       response.end(
@@ -486,6 +487,38 @@ describe('T07 T09 T10 T11 real composer media', () => {
         }),
         run,
       );
+      process.stderr.write(`${JSON.stringify({
+        kind: 'narrow-capture-result',
+        elapsedMs: performance.now() - run.startedMonotonicMs,
+        scenarios: bundle.scenarios.map((scenario) => ({
+          outcome: scenario.outcome,
+          errors: scenario.errors.map(({ code, phase, side, stepId }) => ({ code, phase, side, stepId })),
+          steps: scenario.steps.map((step) => ({
+            id: step.id,
+            before: { status: step.before.status, reasonCode: step.before.reasonCode, elapsedMs: step.before.elapsedMs },
+            after: { status: step.after.status, reasonCode: step.after.reasonCode, elapsedMs: step.after.elapsedMs },
+          })),
+        })),
+        motion: bundle.captureMode === 'motion' ? bundle.motion.map((scenario) => ({
+          timing: scenario.timing,
+          steps: scenario.steps,
+          tracks: (['before', 'after'] as const).map((side) => {
+            const track = scenario.tracks[side];
+            return {
+              side,
+              status: track.status,
+              errorCode: track.error?.code ?? null,
+              failureAtMs: track.status === 'failed' ? track.failureAtMs : null,
+              clock: track.clock,
+              stats: track.stats,
+              gaps: track.gaps,
+              frames: track.frames.map(({ sequence, sourceMonotonicSeconds, runElapsedMs, receivedMs, width, height }) => ({
+                sequence, sourceMonotonicSeconds, runElapsedMs, receivedMs, width, height,
+              })),
+            };
+          }),
+        })) : null,
+      })}\n`);
       expect(bundle.scenarios[0]?.outcome).toBe('ok');
       const timeline = await render(bundle, settings, run);
       await encode(timeline, run);
