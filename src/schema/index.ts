@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { sanitizeText } from './io.js';
+import { CLOCK_NUMERIC_ALLOWANCE_MS, CLOCK_MAGNITUDE_MS, inspectEndpointClock, endpointFrameCovered, eventErrorBound } from './clock.js';
 import { RecipeSchema, RelativePathSchema, SourceSettingsSchema } from './recipe.js';
 export * from './recipe.js';
 
@@ -164,11 +165,11 @@ export const SourceIdentitySchema = z.strictObject({ requested: HumanTextSchema,
 export type SourceIdentity = z.infer<typeof SourceIdentitySchema>;
 const SourcePairSchema = z.strictObject({ before: SourceIdentitySchema, after: SourceIdentitySchema });
 export const ClockSampleSchema = z.strictObject({ sourceSeconds: MillisecondsSchema, hostBeforeMs: MillisecondsSchema, hostAfterMs: MillisecondsSchema });
-export const ClockMappingRecordSchema = z.strictObject({
+const LegacyClockMappingRecordSchema = z.strictObject({
   rate: z.literal(1), offsetMs: z.number().finite(), uncertaintyMs: MillisecondsSchema, maxDriftMs: MillisecondsSchema, errorBoundMs: MillisecondsSchema,
   samples: z.array(ClockSampleSchema).min(1).max(128),
 });
-export const ClockMappingSchema = ClockMappingRecordSchema.superRefine((clock, context) => {
+const LegacyClockMappingSchema = LegacyClockMappingRecordSchema.superRefine((clock, context) => {
   if (clock.errorBoundMs > 40) context.addIssue({ code: 'custom', message: 'A successful source clock must stay within 40 ms' });
   if (clock.errorBoundMs < clock.uncertaintyMs + clock.maxDriftMs) context.addIssue({ code: 'custom', message: 'Clock error bound must cover uncertainty and drift' });
   for (const sample of clock.samples) {
@@ -176,6 +177,22 @@ export const ClockMappingSchema = ClockMappingRecordSchema.superRefine((clock, c
     if (sample.hostAfterMs < sample.hostBeforeMs || mapped < sample.hostBeforeMs - clock.errorBoundMs || mapped > sample.hostAfterMs + clock.errorBoundMs) context.addIssue({ code: 'custom', message: 'Clock sample contradicts the fixed mapping' });
   }
 });
+const EndpointClockRecordSchema = z.strictObject({
+  rate: z.literal(1), offsetMs: z.number().finite().min(-CLOCK_MAGNITUDE_MS).max(CLOCK_MAGNITUDE_MS), errorBoundMs: MillisecondsSchema.max(CLOCK_MAGNITUDE_MS),
+  samples: z.array(ClockSampleSchema).min(5).max(128),
+  proof: z.strictObject({ kind: z.literal('monotone-endpoints'), anchorIndex: z.number().int().min(0).max(4), finalIndex: z.number().int().min(5).max(127).nullable(), numericAllowanceMs: z.literal(CLOCK_NUMERIC_ALLOWANCE_MS) }),
+});
+const EndpointClockSchema = EndpointClockRecordSchema.superRefine((clock, context) => {
+  try {
+    const proof = inspectEndpointClock(clock);
+    if (clock.proof.finalIndex !== clock.samples.length - 1 || proof.latestBoundMs > 40 || clock.errorBoundMs < proof.acceptedBoundMs || clock.errorBoundMs > 40)
+      throw new Error('A successful clock must cover its final endpoint and every accepted bound within 40 ms');
+  } catch (cause) {
+    context.addIssue({ code: 'custom', message: cause instanceof Error ? cause.message : 'Invalid endpoint clock proof' });
+  }
+});
+export const ClockMappingRecordSchema = z.union([LegacyClockMappingRecordSchema, EndpointClockRecordSchema]);
+export const ClockMappingSchema = z.union([LegacyClockMappingSchema, EndpointClockSchema]);
 export const MotionFrameSchema = z.strictObject({
   artifact: ArtifactSchema, sequence: z.number().int().nonnegative(), sourceMonotonicSeconds: MillisecondsSchema,
   sourceEpochSeconds: MillisecondsSchema.nullable(), runElapsedMs: MillisecondsSchema, receivedMs: MillisecondsSchema,
@@ -197,15 +214,29 @@ export const MotionTrackSchema = z.discriminatedUnion('status', [
     const previous = track.frames[i - 1];
     if (!frame) continue;
     if (previous && (frame.sequence <= previous.sequence || frame.sourceMonotonicSeconds <= previous.sourceMonotonicSeconds || frame.runElapsedMs <= previous.runElapsedMs)) context.addIssue({ code: 'custom', message: 'Motion frames must have increasing source clocks and sequences' });
+    if (track.status === 'ok' && 'proof' in track.clock && !endpointFrameCovered(track.clock, frame.sourceMonotonicSeconds)) context.addIssue({ code: 'custom', message: 'Motion frames must lie strictly between proven clock anchors' });
     if (!track.clock || Math.abs(frame.runElapsedMs - (1000 * frame.sourceMonotonicSeconds + track.clock.offsetMs)) > 0.001) context.addIssue({ code: 'custom', message: 'Motion frames must use the fixed session clock mapping' });
   }
   if (track.stats.persistedFrames !== track.frames.length || track.stats.receivedFrames < track.stats.persistedFrames + track.stats.rejectedFrames || track.stats.acknowledgedFrames > track.stats.receivedFrames) context.addIssue({ code: 'custom', message: 'Track counters must match observed work' });
   if (track.status === 'ok' && (!track.frames.length || track.stats.rejectedFrames !== 0 || track.stats.acknowledgedFrames !== track.stats.receivedFrames || track.stats.persistedFrames !== track.stats.receivedFrames)) context.addIssue({ code: 'custom', message: 'Successful motion needs actual frames and complete observed processing' });
 });
-export const SourceMarkerSchema = z.strictObject({
+const LegacySourceMarkerSchema = z.strictObject({
   kind: z.literal('source'), sourceSeconds: MillisecondsSchema, hostBeforeMs: MillisecondsSchema, hostAfterMs: MillisecondsSchema,
   runElapsedMs: MillisecondsSchema, uncertaintyMs: MillisecondsSchema.max(40),
 }).refine((marker) => marker.hostAfterMs >= marker.hostBeforeMs && marker.runElapsedMs >= marker.hostBeforeMs - marker.uncertaintyMs && marker.runElapsedMs <= marker.hostAfterMs + marker.uncertaintyMs, 'Source markers need bounded host brackets');
+const EventSourceMarkerSchema = z.strictObject({
+  kind: z.literal('source'), sourceSeconds: MillisecondsSchema, hostBeforeMs: MillisecondsSchema, hostAfterMs: MillisecondsSchema,
+  runElapsedMs: MillisecondsSchema.max(CLOCK_MAGNITUDE_MS), sampleIndex: z.number().int().min(0).max(127),
+  eventHostMs: MillisecondsSchema.max(CLOCK_MAGNITUDE_MS), eventEndHostMs: MillisecondsSchema.max(CLOCK_MAGNITUDE_MS), errorBoundMs: MillisecondsSchema.max(40),
+}).superRefine((marker, context) => {
+  try {
+    if (marker.hostAfterMs < marker.hostBeforeMs || eventErrorBound(marker.runElapsedMs, marker.eventHostMs, marker.eventEndHostMs) > marker.errorBoundMs)
+      throw new Error('Source marker must bound its actual host event');
+  } catch (cause) {
+    context.addIssue({ code: 'custom', message: cause instanceof Error ? cause.message : 'Invalid source event' });
+  }
+});
+export const SourceMarkerSchema = z.union([LegacySourceMarkerSchema, EventSourceMarkerSchema]);
 export const FailureMarkerSchema = z.union([
   SourceMarkerSchema,
   z.strictObject({ kind: z.literal('host'), runElapsedMs: MillisecondsSchema, reason: z.literal('source-clock-unavailable') }),
@@ -254,7 +285,22 @@ export const MotionScenarioSchema = z.strictObject({
           if (previous?.kind === 'source' && marker.runElapsedMs < previous.runElapsedMs) context.addIssue({ code: 'custom', message: 'Source action markers must retain source order' });
           const clock = scenario.tracks[side].clock;
           if (!clock || Math.abs(marker.runElapsedMs - (1000 * marker.sourceSeconds + clock.offsetMs)) > 0.001) context.addIssue({ code: 'custom', message: 'Action markers must use the fixed track clock mapping' });
-        } else if (marker.runElapsedMs < step.barrierMs || marker.runElapsedMs > scenario.timing.observedEndMs || previous?.kind === 'source' && marker.runElapsedMs < previous.hostBeforeMs) {
+          if ('sampleIndex' in marker) {
+            const dispatch = (timing.kind === 'executed' || timing.kind === 'failed') && timing.dispatch === marker;
+            const previousEventMs = previous?.kind === 'source' && 'eventHostMs' in previous
+              ? timing.kind === 'failed' ? previous.eventHostMs : previous.eventEndHostMs
+              : null;
+            if ((dispatch ? marker.eventHostMs < marker.hostAfterMs : marker.eventEndHostMs > marker.hostBeforeMs) ||
+                previousEventMs !== null && marker.eventHostMs < previousEventMs)
+              context.addIssue({ code: 'custom', message: 'Observed action events must respect invocation, sampling and completion order' });
+            const sample = clock?.samples[marker.sampleIndex];
+            if (!clock || !('proof' in clock) || !sample || marker.sampleIndex < clock.proof.anchorIndex ||
+                sample.sourceSeconds !== marker.sourceSeconds || sample.hostBeforeMs !== marker.hostBeforeMs || sample.hostAfterMs !== marker.hostAfterMs ||
+                marker.eventHostMs < step.barrierMs || marker.eventEndHostMs > scenario.timing.observedEndMs ||
+                scenario.tracks[side].status === 'ok' && (clock.proof.finalIndex === null || marker.sampleIndex > clock.proof.finalIndex || marker.errorBoundMs < clock.errorBoundMs))
+              context.addIssue({ code: 'custom', message: 'Action markers must identify a covered retained sample and bound the final mapping' });
+          } else if (clock && 'proof' in clock) context.addIssue({ code: 'custom', message: 'Endpoint clocks require observed action events' });
+        } else if (marker.runElapsedMs < step.barrierMs || marker.runElapsedMs > scenario.timing.observedEndMs || previous?.kind === 'source' && marker.runElapsedMs < ('eventHostMs' in previous ? previous.eventHostMs : previous.hostBeforeMs)) {
           context.addIssue({ code: 'custom', message: 'Host failure must respect the dispatch host bracket and observed interval' });
         }
       }

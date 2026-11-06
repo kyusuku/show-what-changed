@@ -93,6 +93,17 @@ test('a partial capture retains clock evidence and rejects media production', as
   });
 });
 
+test('endpoint failure diagnostics retain proof boundaries without unreviewed payloads', () => {
+  const captureBundle = bundle();
+  const clock = captureBundle.motion[0].tracks.before.clock;
+  clock.proof = { kind: 'monotone-endpoints', anchorIndex: 2, finalIndex: null, numericAllowanceMs: 0.01, raw: sentinel };
+  const evidence = verifier.captureTrackEvidence(captureBundle).before;
+  expect(evidence.clock.proof).toEqual({ kind: 'monotone-endpoints', anchorIndex: 2, finalIndex: null, numericAllowanceMs: 0.01 });
+  expect(JSON.stringify(evidence)).not.toContain(sentinel);
+  clock.proof = { kind: sentinel, anchorIndex: 2, finalIndex: 8, numericAllowanceMs: 0.01 };
+  expect(verifier.captureTrackEvidence(captureBundle).before.clock.proof).toBeUndefined();
+});
+
 test('missing clocks and empty frames remain explicit safe values after capture failure', async () => {
   const captureBundle = bundle();
   captureBundle.motion[0].tracks.before.clock = null;

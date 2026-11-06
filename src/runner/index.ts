@@ -156,7 +156,7 @@ export async function compare(request: CompareRequest, context: CommandContext):
     const provenance = await verify(workspaces, run);
     manifest.comparisonOutcome = comparisonOutcome(bundle, selected.coverage, provenance);
     manifest.scenarios = bundle.scenarios; manifest.versions.browser = bundle.browserVersion;
-    manifest.captureQuality = bundle.captureMode === 'motion' ? bundle.motion.flatMap((scenario) => (['before', 'after'] as const).map((side) => ({ scenarioId: scenario.id, side, stats: scenario.tracks[side].stats, clockErrorBoundMs: scenario.tracks[side].clock?.errorBoundMs ?? null, maxDriftMs: scenario.tracks[side].clock?.maxDriftMs ?? null, failureAtMs: scenario.tracks[side].status === 'failed' ? scenario.tracks[side].failureAtMs : null }))) : [];
+    manifest.captureQuality = bundle.captureMode === 'motion' ? bundle.motion.flatMap((scenario) => (['before', 'after'] as const).map((side) => ({ scenarioId: scenario.id, side, stats: scenario.tracks[side].stats, clockErrorBoundMs: scenario.tracks[side].clock?.errorBoundMs ?? null, maxDriftMs: scenario.tracks[side].clock && 'maxDriftMs' in scenario.tracks[side].clock ? scenario.tracks[side].clock.maxDriftMs : null, failureAtMs: scenario.tracks[side].status === 'failed' ? scenario.tracks[side].failureAtMs : null }))) : [];
     manifest.summary = summarize(bundle, selected.coverage);
     manifest.errors.push(...captureErrors(bundle), ...provenance.before.errors, ...provenance.after.errors);
     manifest.warnings.push(...bundle.warnings);

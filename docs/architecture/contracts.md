@@ -1,5 +1,7 @@
 # Revision 0.3 module contracts
 
+The unreleased 0.1.2 [clock-proof addendum](clock-proof.md) defines the new endpoint proof, action event evidence, and final-sampling order. Legacy capture records retain the contracts below.
+
 R0 selects the existing shallow modules with new schema 2 data. The concrete definitions are src/schema/index.ts, src/schema/recipe.ts, and src/schema/contracts.ts. This document records caller usage and ownership. R2 through R5 callers have migrated and the full typecheck passes. Runtime, motion, installed-package, and release acceptance remain separate checks.
 
 ## Read the flow
@@ -68,7 +70,7 @@ Runtime parses bounded storage-state files only after bootstrap and validates ex
 
 ## Bounded sanitized persistence
 
-Motion transport owns two distinct shutdown boundaries. A required synchronous, terminal subscription cutoff prevents new normal recorder callbacks while leaving the same CDP command channel usable. Forwarding is synchronous, with no adapter-owned deferred callback queue. The recorder stops the source, finishes clock sampling, cuts off delivery, then drains every admitted raw operation and fulfilled protocol acknowledgement response before protocol detachment. Sending an ACK alone cannot increment the acknowledged count. Safe persistence can continue independently after detachment, but successful bundle completion must drain it and join owned work. Source-stop capture time is unchanged by these later operations.
+Motion transport owns two distinct shutdown boundaries. A required synchronous, terminal subscription cutoff prevents new normal recorder callbacks while leaving the same CDP command channel usable. Forwarding is synchronous, with no adapter-owned deferred callback queue. The legacy recorder stops the source, finishes clock sampling, and cuts off delivery. The new endpoint proof cuts off delivery before its final clock sample so that the sample covers all admitted frames. Both paths drain every admitted raw operation and fulfilled protocol acknowledgement response before protocol detachment. Sending an ACK alone cannot increment the acknowledged count. Safe persistence can continue independently after detachment, but successful bundle completion must drain it and join owned work. Source-stop capture time is unchanged by these later operations.
 
 The adapter guards against a forwarding listener already selected by a reentrant emitter before unsubscription. Any such observed invocation excluded after cutoff must notify a fixed-code rejected-frame failure and attempt its real acknowledgement; it cannot leave a successful zero-rejection track. An upstream event that never reaches the recorder's subscription remains unmeasured. Cutoff and detach do not prove that Chromium or Playwright flushed all queued frames. Preserve the unknown source-drop count and the strict successful-track receipt, persistence, and acknowledgement equality. A failed deadline may leave a stable incomplete result while actual resource ownership remains pending.
 

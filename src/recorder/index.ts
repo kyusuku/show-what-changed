@@ -125,7 +125,7 @@ async function createSide(
     state.fault ??= new CaptureFault(code);
     state.faultAtMs ??= performance.now() - run.startedMonotonicMs;
     state.faultMarker ??= state.motion
-      ? state.motion.marker().catch(() => ({
+      ? state.motion.marker(state.faultAtMs).catch(() => ({
           kind: 'host' as const,
           runElapsedMs: state.faultAtMs ?? performance.now() - run.startedMonotonicMs,
           reason: 'source-clock-unavailable' as const,
@@ -282,7 +282,7 @@ async function settleFailedSide(options: {
     runElapsedMs: original >= options.attemptStartMs ? original : options.observedAtMs,
     reason: 'source-clock-unavailable' as const,
   };
-  const candidate = state.faultMarker ?? (state.motion ? state.motion.marker() : Promise.resolve(fallback));
+  const candidate = state.faultMarker ?? (state.motion ? state.motion.marker(fallback.runElapsedMs) : Promise.resolve(fallback));
   const stopping = state.motion?.stop();
   if (stopping) void stopping.catch(() => {});
   const closing = (state.motion ? state.motion.contextMayClose() : Promise.resolve())
@@ -362,18 +362,28 @@ async function execute(
     if (state.fault) throw state.fault;
     if (performance.now() >= deadline) throw deadlineFailure();
     if (step.op !== 'goto' && state.successfulDocument === null) throw new CaptureFault('DOCUMENT_UNAVAILABLE');
-    if (state.motion) dispatch = await state.motion.marker();
-    if (performance.now() >= deadline) throw deadlineFailure();
-    const result = await performAction({
+    const invoke = () => performAction({
       page: state.page,
       step,
       origin: state.server.origin,
       deadline,
       successfulDocument: state.successfulDocument,
     });
+    let completionTask: ReturnType<typeof invoke>;
+    if (state.motion) {
+      const attempt = await state.motion.dispatch(invoke, () => {
+        checkCancelled(run.signal);
+        if (state.fault) throw state.fault;
+        if (performance.now() >= deadline) throw deadlineFailure();
+      });
+      dispatch = attempt.marker;
+      completionTask = attempt.completion;
+    } else completionTask = invoke();
+    const result = await completionTask;
+    const completedAtMs = elapsed(run);
     if (result.kind === 'missing') {
       if (!step.allowMissing.includes(state.side)) throw new CaptureFault('LOCATOR_MISSING');
-      const completion = state.motion ? await state.motion.marker() : null;
+      const completion = state.motion ? await state.motion.marker(completedAtMs) : null;
       return {
         status: 'expected_absent',
         code: 'EXPECTED_ABSENT',
@@ -385,10 +395,11 @@ async function execute(
       };
     }
     if (step.op === 'goto') state.successfulDocument = result.successfulDocument;
-    const completion = state.motion ? await state.motion.marker() : null;
+    const completion = state.motion ? await state.motion.marker(completedAtMs) : null;
     await settle(state.page);
     await state.page.waitForTimeout(step.observeMs ?? settings.observeMs);
-    const observationEnd = state.motion ? await state.motion.marker() : null;
+    const observedAtMs = elapsed(run);
+    const observationEnd = state.motion ? await state.motion.marker(observedAtMs) : null;
     if (state.fault) throw state.fault;
     let bytes: Buffer;
     if (settings.mode === 'keyframes')

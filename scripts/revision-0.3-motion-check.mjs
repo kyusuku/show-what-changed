@@ -332,6 +332,12 @@ export function captureTrackEvidence(bundle) {
       failureAtMs: Number.isFinite(track?.failureAtMs) ? track.failureAtMs : null,
       clock: track?.clock ? {
         ...numeric(track.clock, ['rate', 'offsetMs', 'uncertaintyMs', 'maxDriftMs', 'errorBoundMs']),
+        ...(track.clock.proof?.kind === 'monotone-endpoints' ? {
+          proof: {
+            kind: 'monotone-endpoints',
+            ...numeric(track.clock.proof, ['anchorIndex', 'finalIndex', 'numericAllowanceMs']),
+          },
+        } : {}),
         sampleCount: samples.length,
         samples: samples.slice(-128).map((sample) => numeric(sample, ['sourceSeconds', 'hostBeforeMs', 'hostAfterMs'])),
       } : null,

@@ -560,7 +560,7 @@ async function adapterProbe(stage) {
   };
   let recorder;
   try {
-    recorder = await MotionRecorder.start({ context: () => ({ newCDPSession: async () => client }) }, settings, run, 'before', 'adapter-probe', budget, (code) => faults.push(code));
+    recorder = await MotionRecorder.start({ context: () => ({ browser: () => null, newCDPSession: async () => client }) }, settings, run, 'before', 'adapter-probe', budget, (code) => faults.push(code));
   } finally {
     MotionRecorder.fromTransport = original;
   }
