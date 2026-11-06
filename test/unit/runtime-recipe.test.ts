@@ -36,7 +36,8 @@ test('manifest-free empty setup starts generic host applications with stable sid
   }
 });
 test('Python uses the same generic runtime contract and selected prerequisite', async () => {
-  const f = await fixture({ ...basic, ready: { timeoutMs: 15_000 }, requires: [{ argv: ['python3', '--version'], expectedVersion: '>=3.8.0' }], start: { kind: 'process', argv: ['python3', '-m', 'http.server', '{port}', '--bind', '127.0.0.1'] } });
+  const pythonServer = "import http.server, socketserver, sys; socketserver.TCPServer(('127.0.0.1', int(sys.argv[1])), http.server.SimpleHTTPRequestHandler).serve_forever()";
+  const f = await fixture({ ...basic, ready: { timeoutMs: 15_000 }, requires: [{ argv: ['python3', '--version'], expectedVersion: '>=3.8.0' }], start: { kind: 'process', argv: ['python3', '-c', pythonServer, '{port}'] } });
   for (const workspace of Object.values(f.workspaces)) await writeFile(join(workspace.root, 'index.html'), 'generic-python');
   type ServerWitness = { owned: OwnedProcess; side: string; port: number; executable: string };
   const servers: ServerWitness[] = [];

@@ -1,4 +1,5 @@
 import http.server
+import socketserver
 import sys
 
 class Page(http.server.BaseHTTPRequestHandler):
@@ -8,4 +9,4 @@ class Page(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b'<h1>Python source</h1><button onclick="this.textContent=\'Selected\'">Select item</button>')
 
-http.server.HTTPServer(('127.0.0.1', int(sys.argv[1])), Page).serve_forever()
+socketserver.TCPServer(('127.0.0.1', int(sys.argv[1])), Page).serve_forever()

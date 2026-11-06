@@ -23,6 +23,48 @@ jobs:
         run: npm install --global npm@11.12.1
       - name: Install tool dependencies
         run: npm ci --no-audit --no-fund
+      - name: Compare Python HTTPServer and TCPServer on the same host
+        timeout-minutes: 1
+        run: |
+          node --input-type=module <<'NODE'
+          import { execFile } from 'node:child_process';
+          import { promisify } from 'node:util';
+          const execute = promisify(execFile);
+          const env = Object.fromEntries(['PATH', 'HOME', 'TMPDIR', 'TMP', 'TEMP', 'LANG', 'LC_ALL', 'CI'].filter((name) => process.env[name] !== undefined).map((name) => [name, process.env[name]]));
+          for (const serverClass of ['http.server.HTTPServer', 'socketserver.TCPServer']) {
+            const source = [
+              'import sys, faulthandler, http.server, http.client, socketserver, threading',
+              "print('executable=' + sys.executable, flush=True)",
+              "print('version=' + sys.version.replace('\\n', ' '), flush=True)",
+              'faulthandler.dump_traceback_later(1)',
+              'class Page(http.server.BaseHTTPRequestHandler):',
+              '    def do_GET(self):',
+              '        self.send_response(200)',
+              '        self.end_headers()',
+              "        self.wfile.write(b'generic-python')",
+              '    def log_message(self, *args): pass',
+              "print('stage=before-bind', flush=True)",
+              `server = ${serverClass}(('127.0.0.1', 0), Page)`,
+              "print('stage=after-bind', flush=True)",
+              'threading.Thread(target=server.handle_request, daemon=True).start()',
+              "connection = http.client.HTTPConnection('127.0.0.1', server.server_address[1], timeout=1)",
+              "connection.request('GET', '/')",
+              'response = connection.getresponse()',
+              "assert response.status == 200 and response.read() == b'generic-python'",
+              'connection.close()',
+              "print('stage=http-200-body-verified', flush=True)",
+              'server.server_close()',
+              'faulthandler.cancel_dump_traceback_later()',
+            ].join('\n');
+            try {
+              const result = await execute('python3', ['-u', '-c', source], { encoding: 'utf8', timeout: 4000, maxBuffer: 4096, env });
+              console.log(JSON.stringify({ diagnostic: 'python-server-counterfactual', serverClass, code: 0, stdout: result.stdout.slice(-2048), stderr: result.stderr.slice(-2048) }));
+            } catch (error) {
+              console.log(JSON.stringify({ diagnostic: 'python-server-counterfactual', serverClass, code: typeof error.code === 'number' ? error.code : null, timedOut: error.killed === true, stdout: String(error.stdout ?? '').slice(-2048), stderr: String(error.stderr ?? '').slice(-2048) }));
+              if (serverClass === 'socketserver.TCPServer') process.exitCode = 1;
+            }
+          }
+          NODE
       - name: Run only the Python generic runtime contract
         timeout-minutes: 2
         run: node node_modules/vitest/vitest.mjs run test/unit/runtime-recipe.test.ts --testNamePattern='^Python uses the same generic runtime contract and selected prerequisite$' --maxWorkers=1 --no-file-parallelism --reporter=verbose
