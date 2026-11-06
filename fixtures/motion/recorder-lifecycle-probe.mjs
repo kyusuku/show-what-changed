@@ -150,13 +150,16 @@ function harness(overrides = {}) {
 }
 const { probeExecute, probeSettleFailedSide } = await import(root + 'recorder/index.ts');
 const results = [];
-async function bounded(promise, name) {
-  const result = await Promise.race([
-    promise.then((value) => ({ kind: 'done', value })),
-    delay(150).then(() => ({ kind: 'timeout' })),
-  ]);
-  assert.equal(result.kind, 'done', name);
-  return result.value;
+async function bounded(promise, name, timeoutMs = 150) {
+  const controller = new AbortController();
+  try {
+    const result = await Promise.race([
+      promise.then((value) => ({ kind: 'done', value })),
+      delay(timeoutMs, undefined, { signal: controller.signal }).then(() => ({ kind: 'timeout' })),
+    ]);
+    assert.equal(result.kind, 'done', name);
+    return result.value;
+  } finally { controller.abort(); }
 }
 {
   const gate = deferred();
@@ -423,12 +426,15 @@ async function bounded(promise, name) {
 }
 {
   const closed = deferred();
+  const sanitizing = deferred(), stepFailed = deferred();
+  const screenshot = PNG.sync.write(new PNG(settings.viewport));
   let retained,
     closeCalls = 0,
     state;
   const h = harness({
     sanitize: (bytes) => {
       retained = bytes;
+      sanitizing.resolve();
       return new Promise(() => {});
     },
     close: async () => {
@@ -448,10 +454,10 @@ async function bounded(promise, name) {
       evaluate: async () => {},
       locator: () => ({ count: async () => 0 }),
       waitForTimeout: async () => {},
-      screenshot: async () => PNG.sync.write(new PNG(settings.viewport)),
+      screenshot: async () => screenshot,
     },
     server: { origin: 'http://127.0.0.1:4310' },
-    close: async () => { closeCalls++; },
+    close: async () => { closeCalls++; stepFailed.resolve(); },
     failedStep: null,
     safe: null,
     successfulDocument: 'http://127.0.0.1:4310/',
@@ -463,11 +469,11 @@ async function bounded(promise, name) {
     wakeFault: null,
     disposed: false,
   };
-  const step = { id: 'checkpoint-deadline', op: 'screenshot', only: 'both', allowMissing: [], timeoutMs: 10 };
-  const executing = probeExecute(state, step, settings, h.run, performance.now() + 1000, h.budget);
-  await until(() => retained !== undefined);
+  const step = { id: 'checkpoint-deadline', op: 'screenshot', only: 'both', allowMissing: [], timeoutMs: 1000 };
+  const executing = probeExecute(state, step, settings, h.run, performance.now() + 5000, h.budget);
+  await bounded(sanitizing.promise, 'checkpoint sanitizer admission', 5000);
   const reserved = h.budget.rawBytes;
-  await delay(20);
+  await bounded(stepFailed.promise, 'checkpoint step timeout', 5000);
   const cleanup = await h.dispose(performance.now() + 10).then(() => 'ok', () => 'failed');
   const value = await bounded(executing, 'checkpoint caller after unjoined worker deadline');
   assert.equal(value.status, 'failed');

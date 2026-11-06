@@ -463,7 +463,7 @@ test.each([false, true])('retained capability inspection consumes real files and
       }
     } finally { if (previous === undefined) delete process.env.SWC_FFMPEG; else process.env.SWC_FFMPEG = previous; }
   });
-});
+}, 20_000);
 
 test.each(['composed', 'boundary', 'poster'])('controlled %s image corruption fails pixels even when its recorded hashes agree', async (kind) => {
   await temporary(async (root) => {

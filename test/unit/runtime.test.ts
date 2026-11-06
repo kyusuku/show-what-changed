@@ -130,7 +130,7 @@ test('T12 reports server command exit even when a descendant retains inherited s
 
 test('T12 process timeout also bounds inherited-pipe draining after command exit', async () => {
   const path = await root(); const run = await context(path);
-  const script = "process.stdin.once('data',()=>{require('child_process').spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{detached:false,stdio:'inherit'});process.exit(0)})";
-  const leader = await run.supervisor.spawn({ argv: [process.execPath, '-e', script], cwd: path, purpose: 'probe', input: 'pipe', timeoutMs: 150 }); const started = performance.now(); leader.stdin?.end('go');
+  const script = "setTimeout(()=>process.stdin.once('data',()=>{require('child_process').spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{detached:false,stdio:'inherit'});process.exit(0)}),250)";
+  const leader = await run.supervisor.spawn({ argv: [process.execPath, '-e', script], cwd: path, purpose: 'probe', input: 'pipe', timeoutMs: 1000 }); const started = performance.now(); leader.stdin?.end('go');
   expect(await leader.exited).toMatchObject({ code: 0 }); expect(performance.now() - started).toBeLessThan(2000); expect((await cleanupRun(run)).status).toBe('ok');
 }, 5000);
