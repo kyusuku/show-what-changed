@@ -51,6 +51,7 @@ const findings = [];
 const reviewedSynthetic = new Map([
   ['b91f66fa76232858c51c833219b7ec000bcda014b6f75860e4efc3f48a4f94a3', 'Disposable local PostgreSQL fixture password from runtime-docker.test.ts'],
   ['3e87fb25cc7a413e4e424f9cae3aa58b42e92af821d88f35f15533269c7ce92a', 'T09 synthetic masking canary from adversarial-gaps.test.ts'],
+  ['09241cd2398ff033b9a8be8b867f56c434d18066cafcfd2ce8a1bb12400be62a', 'Synthetic failure-summary privacy canary from release-smoke-diagnostics.test.mjs'],
   ['a69ede8ec6c0b4d2c8e8f277631e2263c9c386fe44adbbbb4ef9ff7baa4bcb12', 'T04 fake credential URL at registry.example.invalid in source.test.ts'],
   ['c127c198e854b5e5bc0d7bab9e2b196ba415c2c09b022db2dbde20ae57a5982a', 'Synthetic installer output masking canary at invalid.example in setup-lifecycle.test.ts'],
   ['f6729932bd0216a9ced489911667e48ede49c4c0c9886343567e8abee5e4a2b6', 'Synthetic redactText output omission canary at example.test in setup.test.ts'],
