@@ -4,9 +4,10 @@ import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { expect, test, vi } from 'vitest';
-import { compatibilityProfiles, compatibilitySelection, compatibilitySmoke, prepareCompatibilityFixture, runCompatibilityRow } from '../../scripts/compatibility-smoke.mjs';
-import { assertNoOwnedActivity, hash, sourceState, verifyArtifacts } from '../../scripts/release-harness.mjs';
+import { compatibilityProfiles, compatibilitySelection, compatibilitySmoke, compatibilitySummary, prepareCompatibilityFixture, runCompatibilityRow } from '../../scripts/compatibility-smoke.mjs';
+import { assertNoOwnedActivity, command, hash, sourceState, verifyArtifacts } from '../../scripts/release-harness.mjs';
 import { gitEnvironment } from '../../scripts/git-env.mjs';
+import { ResultSchema } from '../../src/schema/index.js';
 
 const docker = compatibilityProfiles.find((profile) => profile.name === 'docker');
 const runId = '20261103T010203004Z-0123456789abcdef';
@@ -25,7 +26,7 @@ async function temporary(run) {
 function fakeCandidate(options = {}) {
   const state = { environments: [] };
   const candidate = {
-    schemas: {}, installRoot: '', sha256: digest, bytes: 1234,
+    schemas: { ResultSchema }, installRoot: '', sha256: digest, bytes: 1234,
     cli: vi.fn(async (name, args, repo, code, env = {}) => {
       state.environments.push(env);
       if (name === 'doctor') return { exitCode: 0, data: { capabilities: [{ name: 'docker', available: options.dockerAvailable !== false, version: '29.0.0' }, { name: 'buildx', available: true, version: '0.30.0' }] } };
@@ -48,6 +49,7 @@ function fakeCandidate(options = {}) {
       await writeFile(join(runDir, 'manifest.json'), JSON.stringify(manifest));
       await writeFile(join(runDir, 'compare.mp4'), video);
       if (options.mutateCaller) await writeFile(join(repo, 'caller-state.txt'), 'Unexpected caller mutation.\n');
+      if (options.compareFailure) throw options.compareFailure;
       if (options.compareError) throw Object.assign(new Error(`${repo} ${env.SWC_FIXTURE_DB_PASSWORD} ${env.SWC_FIXTURE_LOG_CANARY}`), { result: { code: 6, timedOut: false, stderr: repo } });
       return { exitCode: code, data: manifest };
     }),
@@ -134,6 +136,88 @@ test.each([{ compareError: true, stage: 'compare' }, { artifactError: true, stag
   });
 });
 
+test('a failed command retains validated error identifiers in its row and CLI summary without exposing private output', async () => {
+  await temporary(async (root) => {
+    const fixture = await prepareCompatibilityFixture(docker, root);
+    const privateText = `${root} https://private.example/SECRET_ONLY SECRET_ONLY`;
+    const envelope = ResultSchema.parse({ schemaVersion: 2, command: 'compare', status: 'failed', exitCode: 6, data: null, error: { code: 'PAGE_ERROR', phase: 'recording', message: privateText, hint: privateText, logPath: 'private/SECRET_ONLY.log' }, warnings: [] });
+    let compareFailure;
+    try {
+      await command([process.execPath, '-e', 'process.stdout.write(process.argv[1]); process.stderr.write(process.argv[2]); process.exit(6)', JSON.stringify(envelope), privateText], root, { expectedCode: 0 });
+    } catch (error) { compareFailure = error; }
+    expect(compareFailure.result.code).toBe(6);
+    const { candidate, checks } = fakeCandidate({ compareFailure });
+    const row = await runCompatibilityRow(docker, fixture, candidate, join(root, 'evidence'), checks);
+    expect(row.diagnosis).toEqual({ status: 'failed', exitCode: 6, code: 'PAGE_ERROR', phase: 'recording', errors: [] });
+    const summary = compatibilitySummary({ status: 'failed', error: { code: 'COMPATIBILITY_ACCEPTANCE_FAILED', stage: 'comparison' }, rows: [row] });
+    expect(summary.failedRows).toEqual([{ application: 'docker', stage: 'compare', code: 'COMPATIBILITY_ROW_FAILED', commands: [{ actualExit: 0, timedOut: false, overflow: false }, { actualExit: 6, timedOut: false, overflow: false }], diagnosis: row.diagnosis }]);
+    for (const value of [root, 'SECRET_ONLY', 'private.example', 'stderr', 'message', 'hint', 'logPath']) expect(JSON.stringify(row) + JSON.stringify(summary)).not.toContain(value);
+    expect(row.cleanup.status).toBe('ok');
+    expect(row.callerPreserved).toBe(true);
+  });
+});
+
+test.each(['malformed', 'invalid-schema', 'unsafe-identifiers', 'oversized-identifiers', 'mismatched-exit'])('failure diagnostics omit private or invalid command payloads for %s', async (kind) => {
+  await temporary(async (root) => {
+    const fixture = await prepareCompatibilityFixture(docker, root);
+    const envelope = { schemaVersion: 2, command: 'compare', status: 'failed', exitCode: kind === 'mismatched-exit' ? 5 : 6, data: null, error: { code: kind === 'unsafe-identifiers' ? `PRIVATE_ONLY/${root}` : 'PAGE_ERROR', phase: kind === 'unsafe-identifiers' ? 'https://PRIVATE_ONLY.example' : 'recording', message: root, hint: 'PRIVATE_ONLY' }, warnings: [] };
+    if (kind === 'invalid-schema') envelope.status = 'PRIVATE_ONLY';
+    if (kind === 'oversized-identifiers') { envelope.error.code = 'P'.repeat(81); envelope.error.phase = 'p'.repeat(41); }
+    const stdout = kind === 'malformed' ? `PRIVATE_ONLY ${root}` : JSON.stringify(envelope);
+    const compareFailure = Object.assign(new Error(`PRIVATE_ONLY ${root}`), { result: { code: 6, timedOut: true, overflow: true, stdout, stderr: `PRIVATE_ONLY ${root}` } });
+    const { candidate, checks } = fakeCandidate({ compareFailure });
+    const row = await runCompatibilityRow(docker, fixture, candidate, join(root, 'evidence'), checks);
+    expect(row.diagnosis).toEqual(['unsafe-identifiers', 'oversized-identifiers'].includes(kind) ? { status: 'failed', exitCode: 6, code: null, phase: null, errors: [] } : null);
+    expect(row.commands.at(-1)).toMatchObject({ actualExit: 6, timedOut: true, overflow: true });
+    const summary = compatibilitySummary({ status: 'failed', error: { code: 'COMPATIBILITY_ACCEPTANCE_FAILED', stage: 'comparison' }, rows: [row] });
+    expect(JSON.stringify(row) + JSON.stringify(summary)).not.toContain(root);
+    expect(JSON.stringify(row) + JSON.stringify(summary)).not.toContain('PRIVATE_ONLY');
+  });
+});
+
+test('validated manifest error identifiers are bounded to eight entries without exposing their private guidance', async () => {
+  await temporary(async (root) => {
+    const fixture = await prepareCompatibilityFixture(docker, root);
+    const detail = { code: 'PAGE_ERROR', phase: 'recording', message: `PRIVATE_ONLY ${root}`, hint: 'https://PRIVATE_ONLY.example' };
+    const provenance = { valid: false, actualHash: null, errors: [] };
+    const data = {
+      schemaVersion: 2, toolVersion: '0.1.2', specRevision: '0.3', runId, state: 'terminal', status: 'failed', exitCode: 6, captureMode: 'motion', startedAt: '2026-11-06T00:00:00.000Z', endedAt: null,
+      sources: { before: { requested: 'main', commit: digest.slice(0, 40), kind: 'commit', materializedHash: null }, after: { requested: 'HEAD', commit: digest.slice(0, 40), kind: 'commit', materializedHash: null }, baseResolution: 'exact' },
+      versions: { node: 'v24.22.2', browser: null, ffmpeg: null, ffprobe: null }, publicRecipeDigest: null, publicScenarioDigest: null, viewport: { width: 1280, height: 800, deviceScaleFactor: 1 }, dataParity: 'stateless-declared',
+      coverage: { selected: [], omitted: [], unsupported: [], unresolved: [], complete: true }, execution: null, captureQuality: [], scenarios: [], summary: { verifiedPairs: 0, changedPairs: 0, expectedAbsences: 0, exclusions: 0, failedSteps: 0, blockedSteps: 0, coverageOmissions: 0 }, timeline: null,
+      artifacts: { video: null, poster: null, capture: null, timeline: null, pr: null }, comparisonOutcome: { status: 'pending', capture: 'pending', coverage: 'explicit', provenance: { before: provenance, after: provenance } }, cleanupOutcome: { status: 'ok', errors: [] }, encodingOutcome: { status: 'pending', errors: [] }, warnings: [], errors: Array.from({ length: 12 }, () => detail), errorHistory: [], phaseTimings: {},
+    };
+    const envelope = ResultSchema.parse({ schemaVersion: 2, command: 'compare', status: 'failed', exitCode: 6, data, error: detail, warnings: [] });
+    const compareFailure = Object.assign(new Error(root), { result: { code: 6, stdout: JSON.stringify(envelope) } });
+    const { candidate, checks } = fakeCandidate({ compareFailure });
+    const row = await runCompatibilityRow(docker, fixture, candidate, join(root, 'evidence'), checks);
+    expect(row.diagnosis.errors).toEqual(Array.from({ length: 8 }, () => ({ code: 'PAGE_ERROR', phase: 'recording' })));
+    expect(JSON.stringify(row)).not.toContain(root);
+    expect(JSON.stringify(row)).not.toContain('PRIVATE_ONLY');
+  });
+});
+
+test.each(['install', 'doctor'])('top-level %s failures retain their stage and process flags without guessing an exception cause', async (stage) => {
+  await temporary(async (root) => {
+    const { candidate, checks } = fakeCandidate();
+    const envelope = ResultSchema.parse({ schemaVersion: 2, command: 'doctor', status: 'failed', exitCode: 8, data: null, error: { code: 'ENVIRONMENT_INCOMPLETE', phase: 'doctor', message: root, hint: 'PRIVATE_ONLY' }, warnings: [] });
+    const commandError = Object.assign(new Error(root), { result: { code: 8, timedOut: true, overflow: false, stdout: JSON.stringify(envelope), stderr: 'PRIVATE_ONLY' } });
+    if (stage === 'doctor') candidate.cli = vi.fn(async () => { throw commandError; });
+    const selection = compatibilitySelection(['candidate.tgz', join(root, 'evidence')]);
+    const report = await compatibilitySmoke(selection, { ...checks, installCandidate: async (_tarball, owned) => { roots.push(owned); if (stage === 'install') throw commandError; candidate.installRoot = owned; return candidate; } });
+    expect(report.error).toEqual({ code: 'COMPATIBILITY_ACCEPTANCE_FAILED', stage });
+    expect(report.commandFailure).toEqual({ actualExit: 8, timedOut: true, overflow: false });
+    expect(report.diagnosis).toEqual(stage === 'doctor' ? { status: 'failed', exitCode: 8, code: 'ENVIRONMENT_INCOMPLETE', phase: 'doctor', errors: [] } : null);
+    const summary = compatibilitySummary(report);
+    expect(summary.failedRows).toEqual([]);
+    expect(summary.error).toEqual(report.error);
+    expect(summary.commandFailure).toEqual(report.commandFailure);
+    expect(summary.diagnosis).toEqual(report.diagnosis);
+    expect(JSON.stringify(summary)).not.toContain(root);
+    expect(JSON.stringify(summary)).not.toContain('PRIVATE_ONLY');
+  });
+});
+
 test.each([{ processLedgers: 1 }, { dockerIdentities: 0 }, { cleanupError: true }])('a missing independent Docker cleanup requirement cannot pass or export evidence', async (options) => {
   await temporary(async (root) => {
     const fixture = await prepareCompatibilityFixture(docker, root);
@@ -217,6 +301,7 @@ test.each(['host', 'docker-only', 'docker'])('mode %s records only its completed
     const install = vi.fn(async (_tarball, owned, reportDir) => { roots.push(owned); expect(reportDir).toBe(join(owned, 'private-evidence')); candidate.installRoot = join(owned, 'installed'); return candidate; });
     const report = await compatibilitySmoke(selection, { ...checks, installCandidate: install });
     expect(report.status).toBe('passed');
+    expect(compatibilitySummary(report)).toEqual({ status: 'passed', gateComplete: false, report: 'report.json' });
     expect(report.gateComplete).toBe(false);
     expect(report.releaseAcceptance).toContain('pending');
     expect(report.rows.map(({ application }) => application)).toEqual(selection.profiles.map(({ name }) => name));
