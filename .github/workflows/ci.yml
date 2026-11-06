@@ -103,11 +103,19 @@ jobs:
       - name: Observe runner before source tests
         run: node scripts/installed-sequence-diagnostic.mjs resources before-source
       - name: Test source and integration behavior
+        id: source-tests
+        continue-on-error: true
         run: |
-          npm run test:unit -- --maxWorkers=1
-          npm run test:contracts -- --maxWorkers=1
-          npm run test:privacy
-          npm run test:integration -- --maxWorkers=1 --no-file-parallelism
+          unit_status=0
+          contracts_status=0
+          privacy_status=0
+          integration_status=0
+          npm run test:unit -- --maxWorkers=1 || unit_status=$?
+          npm run test:contracts -- --maxWorkers=1 || contracts_status=$?
+          npm run test:privacy || privacy_status=$?
+          npm run test:integration -- --maxWorkers=1 --no-file-parallelism || integration_status=$?
+          printf '{"sourceTestExitCodes":{"unit":%s,"contracts":%s,"privacy":%s,"integration":%s}}\n' "$unit_status" "$contracts_status" "$privacy_status" "$integration_status"
+          test "$unit_status:$contracts_status:$privacy_status:$integration_status" = '0:0:0:0'
       - name: Observe runner after source tests
         run: node scripts/installed-sequence-diagnostic.mjs resources after-source
       - name: Pack the candidate
@@ -146,3 +154,6 @@ jobs:
           node scripts/installed-sequence-diagnostic.mjs report "$RUNNER_TEMP/package-smoke" || true
           node scripts/installed-sequence-diagnostic.mjs trace "$RUNNER_TEMP/installed-operation-trace" || true
           exit "$smoke_status"
+      - name: Preserve source test failure
+        if: always() && steps.source-tests.outcome == 'failure'
+        run: exit 1
