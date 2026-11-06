@@ -715,9 +715,12 @@ export async function capture(
         : { ...common, captureMode: 'keyframes', settings: { fixedTime: settings.fixedTime } },
     );
     await writeRunFile(run, 'capture.json', `${JSON.stringify(bundle, null, 2)}\n`);
+    checkCancelled(run.signal);
     return bundle;
+  } catch (error) {
+    checkCancelled(run.signal);
+    throw error;
   } finally {
-    await browser.close().catch(() => {});
     releaseCheckpointStorage(budget);
   }
 }

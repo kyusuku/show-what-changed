@@ -34,8 +34,13 @@ test('T03 T04 adds a visible provenance caveat when the app creates a new source
       { id: 'ready', op: 'expectVisible', target: { text: 'Mutation complete' } }, { id: 'poster', op: 'screenshot' },
     ] }));
     const original = { head: await git('rev-parse', 'HEAD'), index: await readFile(join(app, '.git/index')), server: await readFile(join(app, 'server.mjs')) };
-    const result = await execute(process.execPath, ['--no-warnings', '--experimental-transform-types', '--input-type=module', '-e', loader, sourceCli, 'compare', '--head', 'HEAD', '--scenario', scenario, '--allow-exec', '--json'], { cwd: app, maxBuffer: 10 * 1024 * 1024, timeout: 45_000 }).then(() => { throw new Error('Mutation comparison incorrectly succeeded'); }, (error: { code: number; stdout: string; stderr: string }) => error);
-    expect(result.code).toBe(3);
+    const result = await execute(process.execPath, ['--no-warnings', '--experimental-transform-types', '--input-type=module', '-e', loader, sourceCli, 'compare', '--head', 'HEAD', '--scenario', scenario, '--allow-exec', '--json'], { cwd: app, maxBuffer: 10 * 1024 * 1024, timeout: 45_000 }).then(() => { throw new Error('Mutation comparison incorrectly succeeded'); }, (error: { code: number; signal?: string | null; killed?: boolean; stdout: string; stderr: string }) => error);
+    expect(result.code, JSON.stringify({
+      signal: result.signal ?? null,
+      killed: result.killed ?? false,
+      stdout: result.stdout.slice(0, 16_000),
+      stderr: result.stderr.slice(0, 2_000),
+    })).toBe(3);
     expect(result.stdout.trim().split('\n')).toHaveLength(1);
     const envelope = ResultSchema.parse(JSON.parse(result.stdout));
     const manifest = ManifestSchema.parse(envelope.data);
