@@ -1,14 +1,17 @@
+import { execFile } from 'node:child_process';
 import { chmod, lstat, mkdtemp, mkdir, readFile, readdir, realpath, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
+import { performance } from 'node:perf_hooks';
+import { promisify } from 'node:util';
 import { afterEach, expect, test } from 'vitest';
 import { z } from 'zod';
 import { ConfigSchema, PlanSchema } from '../../src/schema/index.js';
 import type { Config, Plan } from '../../src/schema/index.js';
-import type { RunContext, WorkspacePair } from '../../src/schema/contracts.js';
+import type { OwnedProcess, RunContext, WorkspacePair } from '../../src/schema/contracts.js';
 import { createRunContext, cleanupRun } from '../../src/runtime/context.js';
 import { start } from '../../src/runtime/index.js';
-import { groupMembers } from '../../src/runtime/process-table.js';
+import { childEnvironment, groupMembers } from '../../src/runtime/process-table.js';
 import { sha256 } from '../../src/schema/io.js';
 import { applicationEnvironment, bindEnvironment, commandArguments, prepareInputs, readAuthState, readBoundInputs } from '../../src/runtime/recipe.js';
 const roots: string[] = []; const runs: RunContext[] = [];
@@ -35,9 +38,98 @@ test('manifest-free empty setup starts generic host applications with stable sid
 test('Python uses the same generic runtime contract and selected prerequisite', async () => {
   const f = await fixture({ ...basic, ready: { timeoutMs: 15_000 }, requires: [{ argv: ['python3', '--version'], expectedVersion: '>=3.8.0' }], start: { kind: 'process', argv: ['python3', '-m', 'http.server', '{port}', '--bind', '127.0.0.1'] } });
   for (const workspace of Object.values(f.workspaces)) await writeFile(join(workspace.root, 'index.html'), 'generic-python');
-  const result = await start(f.workspaces, f.plan, f.run);
-  expect(await (await fetch(result.servers.before.origin)).text()).toBe('generic-python');
-  expect(JSON.parse(await readFile(join(f.run.paths.privateDir, 'execution.json'), 'utf8')).prerequisites).toHaveLength(2);
+  type ServerWitness = { owned: OwnedProcess; side: string; port: number; executable: string };
+  const servers: ServerWitness[] = [];
+  const samples: unknown[] = [];
+  const began = performance.now();
+  const execute = promisify(execFile);
+  const sanitize = (value: string): string => f.run.redactions.text(value)
+    .split(f.run.paths.repoRoot).join('<fixture>')
+    .split(process.cwd()).join('<checkout>')
+    .replace(/\/Users\/[^/\s]+/g, '/Users/<user>')
+    .replace(/(?:Bearer\s+)[A-Za-z0-9._~+\/-]+/gi, 'Bearer [redacted]')
+    .replace(/((?:token|password|secret|authorization|api[_-]?key)\s*[=:]\s*)[^\s,;]+/gi, '$1[redacted]');
+  const clip = (value: string): string => sanitize(value).slice(-2048);
+  const emit = (value: unknown): void => { console.error(sanitize(JSON.stringify(value)).slice(0, 12_000)); };
+  const probe = async (argv: string[], timeout = 1000) => {
+    const [command, ...args] = argv;
+    if (!command) throw new Error('Diagnostic probe requires an executable');
+    try {
+      const result = await execute(command, args, { encoding: 'utf8', timeout, maxBuffer: 4096, env: childEnvironment('python-diagnostic') });
+      return { code: 0, errorCode: null, timedOut: false, stdout: clip(result.stdout), stderr: clip(result.stderr) };
+    } catch (error) {
+      return {
+        code: error instanceof Error && 'code' in error && typeof error.code === 'number' ? error.code : null,
+        errorCode: error instanceof Error && 'code' in error && typeof error.code === 'string' ? error.code : null,
+        timedOut: error instanceof Error && 'killed' in error && error.killed === true,
+        stdout: error instanceof Error && 'stdout' in error && typeof error.stdout === 'string' ? clip(error.stdout) : '',
+        stderr: error instanceof Error && 'stderr' in error && typeof error.stderr === 'string' ? clip(error.stderr) : '',
+      };
+    }
+  };
+  const http = async (port: number) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:${port}/`, { redirect: 'manual', signal: AbortSignal.timeout(750) });
+      const status = response.status;
+      await response.body?.cancel();
+      return { kind: 'response', status };
+    } catch (error) {
+      const cause = error instanceof Error ? error.cause : undefined;
+      return { kind: 'error', name: error instanceof Error ? error.name : 'unknown', code: cause instanceof Error && 'code' in cause && typeof cause.code === 'string' ? cause.code : null };
+    }
+  };
+  const snapshot = async (server: ServerWitness) => {
+    const [listeners, ownedProcesses, response] = await Promise.all([
+      probe(['lsof', '-nP', `-iTCP:${server.port}`, '-sTCP:LISTEN', '-Fpn']),
+      groupMembers(server.owned.groupId),
+      http(server.port),
+    ]);
+    const memberPids = ownedProcesses.map((row) => row.pid);
+    const listenerPids = listeners.stdout.split('\n').filter((line) => /^p\d+$/.test(line)).map((line) => Number(line.slice(1)));
+    const listenerState = listeners.code === 1 && !listeners.stdout.trim() ? 'no-listener-observed'
+      : listeners.code !== 0 ? 'listener-probe-failed'
+      : listenerPids.some((pid) => memberPids.includes(pid)) ? 'owned-listener-observed' : 'listener-ownership-unconfirmed';
+    const processDetails = memberPids.length ? await probe(['ps', '-p', memberPids.join(','), '-o', 'pid=,ppid=,pgid=,stat=,comm=']) : null;
+    return { elapsedMs: Math.round(performance.now() - began), side: server.side, port: server.port, pid: server.owned.pid, groupId: server.owned.groupId, alive: server.owned.isAlive(), listenerState, listeners, ownedProcesses: ownedProcesses.slice(0, 8), processDetails, http: response };
+  };
+  const spawn = f.run.supervisor.spawn.bind(f.run.supervisor);
+  f.run.supervisor.spawn = async (spec) => {
+    const owned = await spawn(spec);
+    if (spec.purpose === 'server' && spec.port !== undefined) servers.push({ owned, side: spec.side ?? 'unknown', port: spec.port, executable: spec.argv[0] ?? 'python3' });
+    return owned;
+  };
+  let pending: Promise<void> | undefined;
+  let ticks = 0;
+  const witness = setInterval(() => {
+    if (++ticks >= 16) clearInterval(witness);
+    if (!pending && servers.length) {
+      pending = Promise.all(servers.map(snapshot)).then((rows) => { samples.push(...rows); }, () => { samples.push({ diagnostic: 'sample-unavailable' }); }).finally(() => { pending = undefined; });
+    }
+  }, 1000);
+  witness.unref();
+  try {
+    const result = await start(f.workspaces, f.plan, f.run);
+    expect(await (await fetch(result.servers.before.origin)).text()).toBe('generic-python');
+    expect(JSON.parse(await readFile(join(f.run.paths.privateDir, 'execution.json'), 'utf8')).prerequisites).toHaveLength(2);
+  } catch (error) {
+    clearInterval(witness);
+    await pending;
+    try {
+      emit({ diagnostic: 'python-readiness-failure', readyTimeoutMs: 15_000, elapsedMs: Math.round(performance.now() - began), errorName: error instanceof Error ? error.name : 'unknown' });
+      for (const sample of samples.slice(-32)) emit({ diagnostic: 'python-readiness-witness', sample });
+      for (const server of servers) {
+        const output = server.owned.output();
+        emit({ diagnostic: 'python-owned-output', side: server.side, stdout: clip(output.stdout), stderr: clip(output.stderr), truncated: output.truncated });
+        emit({ diagnostic: 'python-readiness-final', snapshot: await snapshot(server) });
+      }
+      emit({ diagnostic: 'python-executable-import-and-bind', result: await probe([servers[0]?.executable ?? 'python3', '-u', '-c', "import sys; print('stage=interpreter', flush=True); print('executable=' + sys.executable, flush=True); print('version=' + sys.version.replace('\\n', ' '), flush=True); import faulthandler; faulthandler.dump_traceback_later(1); print('stage=before-http-server-import', flush=True); import http.server; print('stage=after-http-server-import', flush=True); print('stage=before-server-bind', flush=True); server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), http.server.SimpleHTTPRequestHandler); print('stage=after-server-bind', flush=True); server.server_close(); faulthandler.cancel_dump_traceback_later()"], 3000) });
+    } catch { emit({ diagnostic: 'python-failure-diagnostic-unavailable' }); }
+    throw error;
+  } finally {
+    clearInterval(witness);
+    await pending;
+    f.run.supervisor.spawn = spawn;
+  }
 }, 30_000);
 test.each([
   [{ requires: [{ argv: ['swc-nonexistent-runtime-executable', '--version'], expectedVersion: '*' }] }, { exitCode: 8, detail: { code: 'PREREQUISITE_MISSING' } }],
