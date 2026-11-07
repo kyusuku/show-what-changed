@@ -4,7 +4,7 @@
 
 Version `0.1.2` adds `setup`, an app-configuration prompt for coding agents, and bounded clock recovery for delayed browser responses. It supports Node 24 on Linux and macOS. The 40 ms clock error limit and motion acceptance thresholds remain unchanged.
 
-The package archive is `show-what-changed-0.1.2.tgz`, with SHA-256 `187e61f85e762da89a17bffde3ac014a7a9e60e7df2c1bd514931d19d1e184db`. This identifies its bytes, not release approval. Final verification and registry confirmation accompany the [GitHub release assets](https://github.com/kyusuku/show-what-changed/releases). Those records bind the tested source, final archive, platform results, media review, and retained failures. Check [npm](https://www.npmjs.com/package/show-what-changed) for publication status.
+The package archive is `show-what-changed-0.1.2.tgz`, with SHA-256 `54fdbe6d2b7425b3d1aab34f749e412127adf3b4a18db26835eb0629729ee67b`. This identifies its bytes, not release approval. Final verification and registry confirmation accompany the [GitHub release assets](https://github.com/kyusuku/show-what-changed/releases). Those records bind the tested source, final archive, platform results, media review, and retained failures. Check [npm](https://www.npmjs.com/package/show-what-changed) for publication status.
 
 The 0.1.2 reader accepts supported schema 2 artifacts from 0.1.0 and 0.1.1. Artifacts with the new clock proof require the updated reader. See [clock proof and artifact compatibility](architecture/clock-proof.md#artifact-compatibility).
 
