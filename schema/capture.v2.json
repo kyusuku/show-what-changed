@@ -16,7 +16,8 @@
           "type": "string",
           "enum": [
             "0.1.0",
-            "0.1.1"
+            "0.1.1",
+            "0.1.2"
           ]
         },
         "browserVersion": {
@@ -729,7 +730,8 @@
           "type": "string",
           "enum": [
             "0.1.0",
-            "0.1.1"
+            "0.1.1",
+            "0.1.2"
           ]
         },
         "browserVersion": {
@@ -1682,65 +1684,161 @@
                             "const": "ok"
                           },
                           "clock": {
-                            "type": "object",
-                            "properties": {
-                              "rate": {
-                                "type": "number",
-                                "const": 1
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "rate": {
+                                    "type": "number",
+                                    "const": 1
+                                  },
+                                  "offsetMs": {
+                                    "type": "number"
+                                  },
+                                  "uncertaintyMs": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "maxDriftMs": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "errorBoundMs": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "samples": {
+                                    "minItems": 1,
+                                    "maxItems": 128,
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        }
+                                      },
+                                      "required": [
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "rate",
+                                  "offsetMs",
+                                  "uncertaintyMs",
+                                  "maxDriftMs",
+                                  "errorBoundMs",
+                                  "samples"
+                                ],
+                                "additionalProperties": false
                               },
-                              "offsetMs": {
-                                "type": "number"
-                              },
-                              "uncertaintyMs": {
-                                "type": "number",
-                                "minimum": 0
-                              },
-                              "maxDriftMs": {
-                                "type": "number",
-                                "minimum": 0
-                              },
-                              "errorBoundMs": {
-                                "type": "number",
-                                "minimum": 0
-                              },
-                              "samples": {
-                                "minItems": 1,
-                                "maxItems": 128,
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "sourceSeconds": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostBeforeMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostAfterMs": {
-                                      "type": "number",
-                                      "minimum": 0
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "rate": {
+                                    "type": "number",
+                                    "const": 1
+                                  },
+                                  "offsetMs": {
+                                    "type": "number",
+                                    "minimum": -1099511627776,
+                                    "maximum": 1099511627776
+                                  },
+                                  "errorBoundMs": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1099511627776
+                                  },
+                                  "samples": {
+                                    "minItems": 5,
+                                    "maxItems": 128,
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        }
+                                      },
+                                      "required": [
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs"
+                                      ],
+                                      "additionalProperties": false
                                     }
                                   },
-                                  "required": [
-                                    "sourceSeconds",
-                                    "hostBeforeMs",
-                                    "hostAfterMs"
-                                  ],
-                                  "additionalProperties": false
-                                }
+                                  "proof": {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "monotone-endpoints"
+                                      },
+                                      "anchorIndex": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 4
+                                      },
+                                      "finalIndex": {
+                                        "anyOf": [
+                                          {
+                                            "type": "integer",
+                                            "minimum": 5,
+                                            "maximum": 127
+                                          },
+                                          {
+                                            "type": "null"
+                                          }
+                                        ]
+                                      },
+                                      "numericAllowanceMs": {
+                                        "type": "number",
+                                        "const": 0.01
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "anchorIndex",
+                                      "finalIndex",
+                                      "numericAllowanceMs"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "required": [
+                                  "rate",
+                                  "offsetMs",
+                                  "errorBoundMs",
+                                  "samples",
+                                  "proof"
+                                ],
+                                "additionalProperties": false
                               }
-                            },
-                            "required": [
-                              "rate",
-                              "offsetMs",
-                              "uncertaintyMs",
-                              "maxDriftMs",
-                              "errorBoundMs",
-                              "samples"
-                            ],
-                            "additionalProperties": false
+                            ]
                           },
                           "error": {
                             "type": "null"
@@ -1952,65 +2050,161 @@
                           "clock": {
                             "anyOf": [
                               {
-                                "type": "object",
-                                "properties": {
-                                  "rate": {
-                                    "type": "number",
-                                    "const": 1
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "rate": {
+                                        "type": "number",
+                                        "const": 1
+                                      },
+                                      "offsetMs": {
+                                        "type": "number"
+                                      },
+                                      "uncertaintyMs": {
+                                        "type": "number",
+                                        "minimum": 0
+                                      },
+                                      "maxDriftMs": {
+                                        "type": "number",
+                                        "minimum": 0
+                                      },
+                                      "errorBoundMs": {
+                                        "type": "number",
+                                        "minimum": 0
+                                      },
+                                      "samples": {
+                                        "minItems": 1,
+                                        "maxItems": 128,
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "sourceSeconds": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostBeforeMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostAfterMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            }
+                                          },
+                                          "required": [
+                                            "sourceSeconds",
+                                            "hostBeforeMs",
+                                            "hostAfterMs"
+                                          ],
+                                          "additionalProperties": false
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "rate",
+                                      "offsetMs",
+                                      "uncertaintyMs",
+                                      "maxDriftMs",
+                                      "errorBoundMs",
+                                      "samples"
+                                    ],
+                                    "additionalProperties": false
                                   },
-                                  "offsetMs": {
-                                    "type": "number"
-                                  },
-                                  "uncertaintyMs": {
-                                    "type": "number",
-                                    "minimum": 0
-                                  },
-                                  "maxDriftMs": {
-                                    "type": "number",
-                                    "minimum": 0
-                                  },
-                                  "errorBoundMs": {
-                                    "type": "number",
-                                    "minimum": 0
-                                  },
-                                  "samples": {
-                                    "minItems": 1,
-                                    "maxItems": 128,
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "sourceSeconds": {
-                                          "type": "number",
-                                          "minimum": 0
-                                        },
-                                        "hostBeforeMs": {
-                                          "type": "number",
-                                          "minimum": 0
-                                        },
-                                        "hostAfterMs": {
-                                          "type": "number",
-                                          "minimum": 0
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "rate": {
+                                        "type": "number",
+                                        "const": 1
+                                      },
+                                      "offsetMs": {
+                                        "type": "number",
+                                        "minimum": -1099511627776,
+                                        "maximum": 1099511627776
+                                      },
+                                      "errorBoundMs": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1099511627776
+                                      },
+                                      "samples": {
+                                        "minItems": 5,
+                                        "maxItems": 128,
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "sourceSeconds": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostBeforeMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostAfterMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            }
+                                          },
+                                          "required": [
+                                            "sourceSeconds",
+                                            "hostBeforeMs",
+                                            "hostAfterMs"
+                                          ],
+                                          "additionalProperties": false
                                         }
                                       },
-                                      "required": [
-                                        "sourceSeconds",
-                                        "hostBeforeMs",
-                                        "hostAfterMs"
-                                      ],
-                                      "additionalProperties": false
-                                    }
+                                      "proof": {
+                                        "type": "object",
+                                        "properties": {
+                                          "kind": {
+                                            "type": "string",
+                                            "const": "monotone-endpoints"
+                                          },
+                                          "anchorIndex": {
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 4
+                                          },
+                                          "finalIndex": {
+                                            "anyOf": [
+                                              {
+                                                "type": "integer",
+                                                "minimum": 5,
+                                                "maximum": 127
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ]
+                                          },
+                                          "numericAllowanceMs": {
+                                            "type": "number",
+                                            "const": 0.01
+                                          }
+                                        },
+                                        "required": [
+                                          "kind",
+                                          "anchorIndex",
+                                          "finalIndex",
+                                          "numericAllowanceMs"
+                                        ],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": [
+                                      "rate",
+                                      "offsetMs",
+                                      "errorBoundMs",
+                                      "samples",
+                                      "proof"
+                                    ],
+                                    "additionalProperties": false
                                   }
-                                },
-                                "required": [
-                                  "rate",
-                                  "offsetMs",
-                                  "uncertaintyMs",
-                                  "maxDriftMs",
-                                  "errorBoundMs",
-                                  "samples"
-                                ],
-                                "additionalProperties": false
+                                ]
                               },
                               {
                                 "type": "null"
@@ -2278,65 +2472,161 @@
                             "const": "ok"
                           },
                           "clock": {
-                            "type": "object",
-                            "properties": {
-                              "rate": {
-                                "type": "number",
-                                "const": 1
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "rate": {
+                                    "type": "number",
+                                    "const": 1
+                                  },
+                                  "offsetMs": {
+                                    "type": "number"
+                                  },
+                                  "uncertaintyMs": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "maxDriftMs": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "errorBoundMs": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "samples": {
+                                    "minItems": 1,
+                                    "maxItems": 128,
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        }
+                                      },
+                                      "required": [
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "rate",
+                                  "offsetMs",
+                                  "uncertaintyMs",
+                                  "maxDriftMs",
+                                  "errorBoundMs",
+                                  "samples"
+                                ],
+                                "additionalProperties": false
                               },
-                              "offsetMs": {
-                                "type": "number"
-                              },
-                              "uncertaintyMs": {
-                                "type": "number",
-                                "minimum": 0
-                              },
-                              "maxDriftMs": {
-                                "type": "number",
-                                "minimum": 0
-                              },
-                              "errorBoundMs": {
-                                "type": "number",
-                                "minimum": 0
-                              },
-                              "samples": {
-                                "minItems": 1,
-                                "maxItems": 128,
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "sourceSeconds": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostBeforeMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostAfterMs": {
-                                      "type": "number",
-                                      "minimum": 0
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "rate": {
+                                    "type": "number",
+                                    "const": 1
+                                  },
+                                  "offsetMs": {
+                                    "type": "number",
+                                    "minimum": -1099511627776,
+                                    "maximum": 1099511627776
+                                  },
+                                  "errorBoundMs": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1099511627776
+                                  },
+                                  "samples": {
+                                    "minItems": 5,
+                                    "maxItems": 128,
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        }
+                                      },
+                                      "required": [
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs"
+                                      ],
+                                      "additionalProperties": false
                                     }
                                   },
-                                  "required": [
-                                    "sourceSeconds",
-                                    "hostBeforeMs",
-                                    "hostAfterMs"
-                                  ],
-                                  "additionalProperties": false
-                                }
+                                  "proof": {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "monotone-endpoints"
+                                      },
+                                      "anchorIndex": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 4
+                                      },
+                                      "finalIndex": {
+                                        "anyOf": [
+                                          {
+                                            "type": "integer",
+                                            "minimum": 5,
+                                            "maximum": 127
+                                          },
+                                          {
+                                            "type": "null"
+                                          }
+                                        ]
+                                      },
+                                      "numericAllowanceMs": {
+                                        "type": "number",
+                                        "const": 0.01
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "anchorIndex",
+                                      "finalIndex",
+                                      "numericAllowanceMs"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "required": [
+                                  "rate",
+                                  "offsetMs",
+                                  "errorBoundMs",
+                                  "samples",
+                                  "proof"
+                                ],
+                                "additionalProperties": false
                               }
-                            },
-                            "required": [
-                              "rate",
-                              "offsetMs",
-                              "uncertaintyMs",
-                              "maxDriftMs",
-                              "errorBoundMs",
-                              "samples"
-                            ],
-                            "additionalProperties": false
+                            ]
                           },
                           "error": {
                             "type": "null"
@@ -2548,65 +2838,161 @@
                           "clock": {
                             "anyOf": [
                               {
-                                "type": "object",
-                                "properties": {
-                                  "rate": {
-                                    "type": "number",
-                                    "const": 1
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "rate": {
+                                        "type": "number",
+                                        "const": 1
+                                      },
+                                      "offsetMs": {
+                                        "type": "number"
+                                      },
+                                      "uncertaintyMs": {
+                                        "type": "number",
+                                        "minimum": 0
+                                      },
+                                      "maxDriftMs": {
+                                        "type": "number",
+                                        "minimum": 0
+                                      },
+                                      "errorBoundMs": {
+                                        "type": "number",
+                                        "minimum": 0
+                                      },
+                                      "samples": {
+                                        "minItems": 1,
+                                        "maxItems": 128,
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "sourceSeconds": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostBeforeMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostAfterMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            }
+                                          },
+                                          "required": [
+                                            "sourceSeconds",
+                                            "hostBeforeMs",
+                                            "hostAfterMs"
+                                          ],
+                                          "additionalProperties": false
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "rate",
+                                      "offsetMs",
+                                      "uncertaintyMs",
+                                      "maxDriftMs",
+                                      "errorBoundMs",
+                                      "samples"
+                                    ],
+                                    "additionalProperties": false
                                   },
-                                  "offsetMs": {
-                                    "type": "number"
-                                  },
-                                  "uncertaintyMs": {
-                                    "type": "number",
-                                    "minimum": 0
-                                  },
-                                  "maxDriftMs": {
-                                    "type": "number",
-                                    "minimum": 0
-                                  },
-                                  "errorBoundMs": {
-                                    "type": "number",
-                                    "minimum": 0
-                                  },
-                                  "samples": {
-                                    "minItems": 1,
-                                    "maxItems": 128,
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "sourceSeconds": {
-                                          "type": "number",
-                                          "minimum": 0
-                                        },
-                                        "hostBeforeMs": {
-                                          "type": "number",
-                                          "minimum": 0
-                                        },
-                                        "hostAfterMs": {
-                                          "type": "number",
-                                          "minimum": 0
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "rate": {
+                                        "type": "number",
+                                        "const": 1
+                                      },
+                                      "offsetMs": {
+                                        "type": "number",
+                                        "minimum": -1099511627776,
+                                        "maximum": 1099511627776
+                                      },
+                                      "errorBoundMs": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1099511627776
+                                      },
+                                      "samples": {
+                                        "minItems": 5,
+                                        "maxItems": 128,
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "sourceSeconds": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostBeforeMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            },
+                                            "hostAfterMs": {
+                                              "type": "number",
+                                              "minimum": 0
+                                            }
+                                          },
+                                          "required": [
+                                            "sourceSeconds",
+                                            "hostBeforeMs",
+                                            "hostAfterMs"
+                                          ],
+                                          "additionalProperties": false
                                         }
                                       },
-                                      "required": [
-                                        "sourceSeconds",
-                                        "hostBeforeMs",
-                                        "hostAfterMs"
-                                      ],
-                                      "additionalProperties": false
-                                    }
+                                      "proof": {
+                                        "type": "object",
+                                        "properties": {
+                                          "kind": {
+                                            "type": "string",
+                                            "const": "monotone-endpoints"
+                                          },
+                                          "anchorIndex": {
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 4
+                                          },
+                                          "finalIndex": {
+                                            "anyOf": [
+                                              {
+                                                "type": "integer",
+                                                "minimum": 5,
+                                                "maximum": 127
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ]
+                                          },
+                                          "numericAllowanceMs": {
+                                            "type": "number",
+                                            "const": 0.01
+                                          }
+                                        },
+                                        "required": [
+                                          "kind",
+                                          "anchorIndex",
+                                          "finalIndex",
+                                          "numericAllowanceMs"
+                                        ],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": [
+                                      "rate",
+                                      "offsetMs",
+                                      "errorBoundMs",
+                                      "samples",
+                                      "proof"
+                                    ],
+                                    "additionalProperties": false
                                   }
-                                },
-                                "required": [
-                                  "rate",
-                                  "offsetMs",
-                                  "uncertaintyMs",
-                                  "maxDriftMs",
-                                  "errorBoundMs",
-                                  "samples"
-                                ],
-                                "additionalProperties": false
+                                ]
                               },
                               {
                                 "type": "null"
@@ -2710,121 +3096,307 @@
                               "const": "executed"
                             },
                             "dispatch": {
-                              "type": "object",
-                              "properties": {
-                                "kind": {
-                                  "type": "string",
-                                  "const": "source"
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "uncertaintyMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "uncertaintyMs"
+                                  ],
+                                  "additionalProperties": false
                                 },
-                                "sourceSeconds": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostBeforeMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostAfterMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "runElapsedMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "uncertaintyMs": {
-                                  "type": "number",
-                                  "minimum": 0,
-                                  "maximum": 40
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "sampleIndex": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 127
+                                    },
+                                    "eventHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "eventEndHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "errorBoundMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "sampleIndex",
+                                    "eventHostMs",
+                                    "eventEndHostMs",
+                                    "errorBoundMs"
+                                  ],
+                                  "additionalProperties": false
                                 }
-                              },
-                              "required": [
-                                "kind",
-                                "sourceSeconds",
-                                "hostBeforeMs",
-                                "hostAfterMs",
-                                "runElapsedMs",
-                                "uncertaintyMs"
-                              ],
-                              "additionalProperties": false
+                              ]
                             },
                             "completion": {
-                              "type": "object",
-                              "properties": {
-                                "kind": {
-                                  "type": "string",
-                                  "const": "source"
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "uncertaintyMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "uncertaintyMs"
+                                  ],
+                                  "additionalProperties": false
                                 },
-                                "sourceSeconds": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostBeforeMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostAfterMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "runElapsedMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "uncertaintyMs": {
-                                  "type": "number",
-                                  "minimum": 0,
-                                  "maximum": 40
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "sampleIndex": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 127
+                                    },
+                                    "eventHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "eventEndHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "errorBoundMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "sampleIndex",
+                                    "eventHostMs",
+                                    "eventEndHostMs",
+                                    "errorBoundMs"
+                                  ],
+                                  "additionalProperties": false
                                 }
-                              },
-                              "required": [
-                                "kind",
-                                "sourceSeconds",
-                                "hostBeforeMs",
-                                "hostAfterMs",
-                                "runElapsedMs",
-                                "uncertaintyMs"
-                              ],
-                              "additionalProperties": false
+                              ]
                             },
                             "observationEnd": {
-                              "type": "object",
-                              "properties": {
-                                "kind": {
-                                  "type": "string",
-                                  "const": "source"
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "uncertaintyMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "uncertaintyMs"
+                                  ],
+                                  "additionalProperties": false
                                 },
-                                "sourceSeconds": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostBeforeMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostAfterMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "runElapsedMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "uncertaintyMs": {
-                                  "type": "number",
-                                  "minimum": 0,
-                                  "maximum": 40
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "sampleIndex": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 127
+                                    },
+                                    "eventHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "eventEndHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "errorBoundMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "sampleIndex",
+                                    "eventHostMs",
+                                    "eventEndHostMs",
+                                    "errorBoundMs"
+                                  ],
+                                  "additionalProperties": false
                                 }
-                              },
-                              "required": [
-                                "kind",
-                                "sourceSeconds",
-                                "hostBeforeMs",
-                                "hostAfterMs",
-                                "runElapsedMs",
-                                "uncertaintyMs"
-                              ],
-                              "additionalProperties": false
+                              ]
                             }
                           },
                           "required": [
@@ -2845,43 +3417,105 @@
                             "dispatch": {
                               "anyOf": [
                                 {
-                                  "type": "object",
-                                  "properties": {
-                                    "kind": {
-                                      "type": "string",
-                                      "const": "source"
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "uncertaintyMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "uncertaintyMs"
+                                      ],
+                                      "additionalProperties": false
                                     },
-                                    "sourceSeconds": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostBeforeMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostAfterMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "runElapsedMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "uncertaintyMs": {
-                                      "type": "number",
-                                      "minimum": 0,
-                                      "maximum": 40
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "sampleIndex": {
+                                          "type": "integer",
+                                          "minimum": 0,
+                                          "maximum": 127
+                                        },
+                                        "eventHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "eventEndHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "errorBoundMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "sampleIndex",
+                                        "eventHostMs",
+                                        "eventEndHostMs",
+                                        "errorBoundMs"
+                                      ],
+                                      "additionalProperties": false
                                     }
-                                  },
-                                  "required": [
-                                    "kind",
-                                    "sourceSeconds",
-                                    "hostBeforeMs",
-                                    "hostAfterMs",
-                                    "runElapsedMs",
-                                    "uncertaintyMs"
-                                  ],
-                                  "additionalProperties": false
+                                  ]
                                 },
                                 {
                                   "type": "null"
@@ -2891,43 +3525,105 @@
                             "failure": {
                               "anyOf": [
                                 {
-                                  "type": "object",
-                                  "properties": {
-                                    "kind": {
-                                      "type": "string",
-                                      "const": "source"
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "uncertaintyMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "uncertaintyMs"
+                                      ],
+                                      "additionalProperties": false
                                     },
-                                    "sourceSeconds": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostBeforeMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostAfterMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "runElapsedMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "uncertaintyMs": {
-                                      "type": "number",
-                                      "minimum": 0,
-                                      "maximum": 40
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "sampleIndex": {
+                                          "type": "integer",
+                                          "minimum": 0,
+                                          "maximum": 127
+                                        },
+                                        "eventHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "eventEndHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "errorBoundMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "sampleIndex",
+                                        "eventHostMs",
+                                        "eventEndHostMs",
+                                        "errorBoundMs"
+                                      ],
+                                      "additionalProperties": false
                                     }
-                                  },
-                                  "required": [
-                                    "kind",
-                                    "sourceSeconds",
-                                    "hostBeforeMs",
-                                    "hostAfterMs",
-                                    "runElapsedMs",
-                                    "uncertaintyMs"
-                                  ],
-                                  "additionalProperties": false
+                                  ]
                                 },
                                 {
                                   "type": "object",
@@ -3010,121 +3706,307 @@
                               "const": "executed"
                             },
                             "dispatch": {
-                              "type": "object",
-                              "properties": {
-                                "kind": {
-                                  "type": "string",
-                                  "const": "source"
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "uncertaintyMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "uncertaintyMs"
+                                  ],
+                                  "additionalProperties": false
                                 },
-                                "sourceSeconds": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostBeforeMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostAfterMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "runElapsedMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "uncertaintyMs": {
-                                  "type": "number",
-                                  "minimum": 0,
-                                  "maximum": 40
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "sampleIndex": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 127
+                                    },
+                                    "eventHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "eventEndHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "errorBoundMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "sampleIndex",
+                                    "eventHostMs",
+                                    "eventEndHostMs",
+                                    "errorBoundMs"
+                                  ],
+                                  "additionalProperties": false
                                 }
-                              },
-                              "required": [
-                                "kind",
-                                "sourceSeconds",
-                                "hostBeforeMs",
-                                "hostAfterMs",
-                                "runElapsedMs",
-                                "uncertaintyMs"
-                              ],
-                              "additionalProperties": false
+                              ]
                             },
                             "completion": {
-                              "type": "object",
-                              "properties": {
-                                "kind": {
-                                  "type": "string",
-                                  "const": "source"
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "uncertaintyMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "uncertaintyMs"
+                                  ],
+                                  "additionalProperties": false
                                 },
-                                "sourceSeconds": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostBeforeMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostAfterMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "runElapsedMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "uncertaintyMs": {
-                                  "type": "number",
-                                  "minimum": 0,
-                                  "maximum": 40
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "sampleIndex": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 127
+                                    },
+                                    "eventHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "eventEndHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "errorBoundMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "sampleIndex",
+                                    "eventHostMs",
+                                    "eventEndHostMs",
+                                    "errorBoundMs"
+                                  ],
+                                  "additionalProperties": false
                                 }
-                              },
-                              "required": [
-                                "kind",
-                                "sourceSeconds",
-                                "hostBeforeMs",
-                                "hostAfterMs",
-                                "runElapsedMs",
-                                "uncertaintyMs"
-                              ],
-                              "additionalProperties": false
+                              ]
                             },
                             "observationEnd": {
-                              "type": "object",
-                              "properties": {
-                                "kind": {
-                                  "type": "string",
-                                  "const": "source"
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "uncertaintyMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "uncertaintyMs"
+                                  ],
+                                  "additionalProperties": false
                                 },
-                                "sourceSeconds": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostBeforeMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "hostAfterMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "runElapsedMs": {
-                                  "type": "number",
-                                  "minimum": 0
-                                },
-                                "uncertaintyMs": {
-                                  "type": "number",
-                                  "minimum": 0,
-                                  "maximum": 40
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "kind": {
+                                      "type": "string",
+                                      "const": "source"
+                                    },
+                                    "sourceSeconds": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostBeforeMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "hostAfterMs": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    },
+                                    "runElapsedMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "sampleIndex": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 127
+                                    },
+                                    "eventHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "eventEndHostMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1099511627776
+                                    },
+                                    "errorBoundMs": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 40
+                                    }
+                                  },
+                                  "required": [
+                                    "kind",
+                                    "sourceSeconds",
+                                    "hostBeforeMs",
+                                    "hostAfterMs",
+                                    "runElapsedMs",
+                                    "sampleIndex",
+                                    "eventHostMs",
+                                    "eventEndHostMs",
+                                    "errorBoundMs"
+                                  ],
+                                  "additionalProperties": false
                                 }
-                              },
-                              "required": [
-                                "kind",
-                                "sourceSeconds",
-                                "hostBeforeMs",
-                                "hostAfterMs",
-                                "runElapsedMs",
-                                "uncertaintyMs"
-                              ],
-                              "additionalProperties": false
+                              ]
                             }
                           },
                           "required": [
@@ -3145,43 +4027,105 @@
                             "dispatch": {
                               "anyOf": [
                                 {
-                                  "type": "object",
-                                  "properties": {
-                                    "kind": {
-                                      "type": "string",
-                                      "const": "source"
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "uncertaintyMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "uncertaintyMs"
+                                      ],
+                                      "additionalProperties": false
                                     },
-                                    "sourceSeconds": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostBeforeMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostAfterMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "runElapsedMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "uncertaintyMs": {
-                                      "type": "number",
-                                      "minimum": 0,
-                                      "maximum": 40
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "sampleIndex": {
+                                          "type": "integer",
+                                          "minimum": 0,
+                                          "maximum": 127
+                                        },
+                                        "eventHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "eventEndHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "errorBoundMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "sampleIndex",
+                                        "eventHostMs",
+                                        "eventEndHostMs",
+                                        "errorBoundMs"
+                                      ],
+                                      "additionalProperties": false
                                     }
-                                  },
-                                  "required": [
-                                    "kind",
-                                    "sourceSeconds",
-                                    "hostBeforeMs",
-                                    "hostAfterMs",
-                                    "runElapsedMs",
-                                    "uncertaintyMs"
-                                  ],
-                                  "additionalProperties": false
+                                  ]
                                 },
                                 {
                                   "type": "null"
@@ -3191,43 +4135,105 @@
                             "failure": {
                               "anyOf": [
                                 {
-                                  "type": "object",
-                                  "properties": {
-                                    "kind": {
-                                      "type": "string",
-                                      "const": "source"
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "uncertaintyMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "uncertaintyMs"
+                                      ],
+                                      "additionalProperties": false
                                     },
-                                    "sourceSeconds": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostBeforeMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "hostAfterMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "runElapsedMs": {
-                                      "type": "number",
-                                      "minimum": 0
-                                    },
-                                    "uncertaintyMs": {
-                                      "type": "number",
-                                      "minimum": 0,
-                                      "maximum": 40
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "kind": {
+                                          "type": "string",
+                                          "const": "source"
+                                        },
+                                        "sourceSeconds": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostBeforeMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "hostAfterMs": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "runElapsedMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "sampleIndex": {
+                                          "type": "integer",
+                                          "minimum": 0,
+                                          "maximum": 127
+                                        },
+                                        "eventHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "eventEndHostMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1099511627776
+                                        },
+                                        "errorBoundMs": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 40
+                                        }
+                                      },
+                                      "required": [
+                                        "kind",
+                                        "sourceSeconds",
+                                        "hostBeforeMs",
+                                        "hostAfterMs",
+                                        "runElapsedMs",
+                                        "sampleIndex",
+                                        "eventHostMs",
+                                        "eventEndHostMs",
+                                        "errorBoundMs"
+                                      ],
+                                      "additionalProperties": false
                                     }
-                                  },
-                                  "required": [
-                                    "kind",
-                                    "sourceSeconds",
-                                    "hostBeforeMs",
-                                    "hostAfterMs",
-                                    "runElapsedMs",
-                                    "uncertaintyMs"
-                                  ],
-                                  "additionalProperties": false
+                                  ]
                                 },
                                 {
                                   "type": "object",

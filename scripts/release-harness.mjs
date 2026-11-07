@@ -42,6 +42,21 @@ export function command(argv, cwd, options = {}) {
     });
   });
 }
+async function privateCommand(argv, cwd, options, path) {
+  let result;
+  let failure;
+  try { result = await command(argv, cwd, options); }
+  catch (error) { failure = error; result = error.result; }
+  if (result) {
+    try { await saveJson(path, result); }
+    catch (error) {
+      if (failure) failure.evidenceError = error;
+      else failure = Object.assign(error, { validationStage: 'evidence' });
+    }
+  }
+  if (failure) throw Object.assign(failure, { result, commandName: basename(path, '.json'), validationStage: failure.validationStage ?? 'process' });
+  return result;
+}
 export async function sourceState(repoRoot) {
   const git = async (...args) => (await command(['git', ...args], repoRoot, { expectedCode: 0 })).stdout;
   const paths = [...new Set((await git('ls-files', '-z', '--cached', '--others', '--exclude-standard')).split('\0').filter(Boolean))].sort();
@@ -119,7 +134,7 @@ export async function installCandidate(tarball, root, reportDir) {
   assert.match(process.version, /^v24\./);
   tarball = await realpath(tarball);
   const bytes = await readFile(tarball);
-  const listing = (await command(['tar', '-tzf', tarball], root, { expectedCode: 0 })).stdout.trim().split('\n');
+  const listing = (await privateCommand(['tar', '-tzf', tarball], root, { expectedCode: 0 }, join(reportDir, 'tar-list.json'))).stdout.trim().split('\n');
   const documents = ['capture', 'config', 'manifest', 'plan', 'result', 'scenario', 'timeline'];
   const required = ['package/package.json', 'package/dist/cli/index.js', 'package/dist/recorder/mask-worker.js', 'package/dist/recorder/masker.js', ...documents.map((name) => `package/schema/${name}.v2.json`), 'package/skills/show-what-changed/SKILL.md', 'package/assets/fonts/Inter-Regular.woff2', 'package/assets/fonts/OFL.txt', 'package/assets/fonts/provenance.json', 'package/README.md', 'package/LICENSE', 'package/THIRD_PARTY_NOTICES.md'];
   for (const entry of required) assert(listing.includes(entry), `Missing packed file ${entry}`);
@@ -130,8 +145,7 @@ export async function installCandidate(tarball, root, reportDir) {
   const installRoot = join(root, 'installed');
   await mkdir(installRoot, { recursive: true });
   await writeFile(join(installRoot, 'package.json'), '{"private":true}\n');
-  const install = await command(['npm', 'install', '--omit=dev', '--ignore-scripts', '--no-audit', '--no-fund', tarball], installRoot, { expectedCode: 0 });
-  await saveJson(join(reportDir, 'install.json'), install);
+  await privateCommand(['npm', 'install', '--omit=dev', '--ignore-scripts', '--no-audit', '--no-fund', tarball], installRoot, { expectedCode: 0 }, join(reportDir, 'install.json'));
   const packageRoot = join(installRoot, 'node_modules/show-what-changed');
   const binary = join(installRoot, 'node_modules/.bin/show-what-changed');
   assert.equal(await realpath(binary), join(packageRoot, 'dist/cli/index.js'));
@@ -147,13 +161,26 @@ export async function installCandidate(tarball, root, reportDir) {
   const schemas = await import(pathToFileURL(join(packageRoot, 'dist/schema/index.js')).href);
   const commands = [];
   const cli = async (name, args, cwd, code, env = {}) => {
-    const result = await command([binary, ...args, '--json'], cwd, { expectedCode: code, env });
-    const envelope = JSON.parse(result.stdout);
-    schemas.ResultSchema.parse(envelope);
-    assert.equal(envelope.exitCode, code);
-    await saveJson(join(reportDir, name + '.json'), result);
-    commands.push({ name, args, code, elapsedMs: result.elapsedMs });
-    return envelope;
+    const entry = { name, args, code, validationStage: 'process' };
+    commands.push(entry);
+    let result;
+    try {
+      result = await privateCommand([binary, ...args, '--json'], cwd, { expectedCode: code, env }, join(reportDir, name + '.json'));
+      entry.validationStage = 'json';
+      const envelope = JSON.parse(result.stdout);
+      entry.validationStage = 'schema';
+      schemas.ResultSchema.parse(envelope);
+      entry.validationStage = 'envelope-exit';
+      assert.equal(envelope.exitCode, code);
+      entry.validationStage = 'complete';
+      return envelope;
+    } catch (error) {
+      result ??= error.result;
+      entry.validationStage = error.validationStage ?? entry.validationStage;
+      throw Object.assign(error, { result, commandName: name, validationStage: entry.validationStage });
+    } finally {
+      if (result) Object.assign(entry, { elapsedMs: result.elapsedMs, actualExit: result.code, signal: result.signal, timedOut: result.timedOut, overflow: result.overflow });
+    }
   };
   return { tarball, sha256: hash(bytes), bytes: bytes.length, listing, installRoot, packageRoot, binary, schemas, commands, cli };
 }

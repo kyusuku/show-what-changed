@@ -5,16 +5,20 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createFixture } from './create-fixture.mjs';
 import { hash, installCandidate, saveJson, sourceState, verifyArtifacts } from './release-harness.mjs';
+import { releaseFailureSummary } from './release-smoke-diagnostics.mjs';
 
 const [tarballArgument, outputArgument] = process.argv.slice(2);
 assert(tarballArgument && outputArgument && process.argv.length === 4, 'Usage: node scripts/release-smoke.mjs candidate.tgz output-directory');
 const output = resolve(outputArgument);
 await mkdir(output, { recursive: true });
 const root = await realpath(await mkdtemp(join(tmpdir(), 'swc-package-')));
-const report = { status: 'running', startedAt: new Date().toISOString(), platform: process.platform, arch: process.arch, node: process.version, root };
+const report = { status: 'running', stage: 'install', startedAt: new Date().toISOString(), platform: process.platform, arch: process.arch, node: process.version, root, commands: [], runs: {} };
+let candidate;
 try {
-  const candidate = await installCandidate(resolve(tarballArgument), root, output);
+  candidate = await installCandidate(resolve(tarballArgument), root, output);
+  report.commands = candidate.commands;
   report.candidate = { path: candidate.tarball, sha256: candidate.sha256, bytes: candidate.bytes, files: candidate.listing };
+  report.stage = 'fixture';
   const fixture = createFixture(join(root, 'app'));
   report.fixture = fixture;
   await mkdir(join(fixture.repoRoot, 'node_modules'), { recursive: true });
@@ -33,7 +37,11 @@ try {
   await copyFile(new URL('../test/fixtures/scenarios/required-before-failure.scenario.json', import.meta.url), partialScenario);
   const original = await sourceState(fixture.repoRoot);
   const selection = ['--base', fixture.baseCommit, '--head', fixture.headCommit, '--scenario', scenario];
+  report.stage = 'acceptance';
   await candidate.cli('help', ['--help'], candidate.installRoot, 0);
+  const setup = await candidate.cli('setup', ['setup'], candidate.installRoot, 0);
+  assert.equal(setup.command, 'setup');
+  assert(setup.data.capabilities.find((capability) => capability.name === 'chromium')?.available);
   await candidate.cli('doctor', ['doctor'], candidate.installRoot, 0);
   await candidate.cli('invalid-flag', ['--unknown-option'], candidate.installRoot, 2);
   await candidate.cli('missing-compose', ['compose', join(root, 'missing-run')], candidate.installRoot, 2);
@@ -42,6 +50,7 @@ try {
   assert.equal(plan.data.headCommit, fixture.headCommit);
   await candidate.cli('consent-required', ['compare', ...selection], fixture.repoRoot, 7);
   const successEnvelope = await candidate.cli('compare-success', ['compare', '--plan', join(fixture.repoRoot, '.show-what-changed/plan.json'), '--allow-exec'], fixture.repoRoot, 0);
+  if (successEnvelope.data?.runId) report.runs.success = join(fixture.repoRoot, '.show-what-changed/runs', successEnvelope.data.runId);
   const success = await verifyArtifacts(fixture.repoRoot, successEnvelope, candidate.schemas);
   assert.equal(success.manifest.summary.expectedAbsences, 1);
   assert.equal(success.manifest.summary.exclusions, 1);
@@ -56,6 +65,7 @@ try {
   assert.deepEqual(recomposedSuccess.data.comparisonOutcome, success.manifest.comparisonOutcome);
 
   const mergeBaseEnvelope = await candidate.cli('compare-merge-base', ['compare', '--base', fixture.headCommit, '--head', fixture.baseCommit, '--merge-base', '--route', '/pricing', '--allow-exec'], fixture.repoRoot, 0);
+  if (mergeBaseEnvelope.data?.runId) report.runs.mergeBase = join(fixture.repoRoot, '.show-what-changed/runs', mergeBaseEnvelope.data.runId);
   const mergeBase = await verifyArtifacts(fixture.repoRoot, mergeBaseEnvelope, candidate.schemas);
   assert.equal(mergeBase.manifest.sources.baseResolution, 'merge-base');
   assert.equal(mergeBase.manifest.sources.before.requested, fixture.headCommit);
@@ -67,6 +77,7 @@ try {
   assert.deepEqual(await sourceState(fixture.repoRoot), original);
 
   const partialEnvelope = await candidate.cli('compare-partial', ['compare', '--base', fixture.baseCommit, '--head', fixture.headCommit, '--scenario', partialScenario, '--allow-exec'], fixture.repoRoot, 3);
+  if (partialEnvelope.data?.runId) report.runs.partial = join(fixture.repoRoot, '.show-what-changed/runs', partialEnvelope.data.runId);
   const partial = await verifyArtifacts(fixture.repoRoot, partialEnvelope, candidate.schemas);
   assert.equal(partial.manifest.summary.failedSteps, 1);
   assert.equal(partial.manifest.summary.blockedSteps, 3);
@@ -86,6 +97,7 @@ try {
   await writeFile(revisionPath, (await readFile(revisionPath, 'utf8')).replace('#d24b27', '#17845a'));
   const editedState = await sourceState(fixture.repoRoot);
   const worktreeEnvelope = await candidate.cli('compare-worktree', ['compare', '--base', fixture.baseCommit, '--head', 'WORKTREE', '--scenario', scenario, '--allow-exec'], fixture.repoRoot, 0);
+  if (worktreeEnvelope.data?.runId) report.runs.worktree = join(fixture.repoRoot, '.show-what-changed/runs', worktreeEnvelope.data.runId);
   const worktree = await verifyArtifacts(fixture.repoRoot, worktreeEnvelope, candidate.schemas);
   assert.equal(worktree.manifest.sources.after.kind, 'worktree');
   assert.notEqual(worktree.manifest.sources.after.materializedHash, success.manifest.sources.after.materializedHash);
@@ -96,6 +108,7 @@ try {
   assert.equal(readmePlan.data.requestedHead, 'WORKTREE');
   assert.equal(readmePlan.data.baseCommit, fixture.headCommit);
   const readmeEnvelope = await candidate.cli('readme-compare', ['compare', '--plan', '.show-what-changed/plan.json', '--allow-exec'], fixture.repoRoot, 0);
+  if (readmeEnvelope.data?.runId) report.runs.readme = join(fixture.repoRoot, '.show-what-changed/runs', readmeEnvelope.data.runId);
   const readme = await verifyArtifacts(fixture.repoRoot, readmeEnvelope, candidate.schemas);
   assert.equal(readme.manifest.sources.before.commit, fixture.headCommit);
   assert.equal(readme.manifest.sources.after.kind, 'worktree');
@@ -116,6 +129,7 @@ try {
   await saveJson(automaticConfig, { ...fixtureConfig, routes: {}, capture: { ...fixtureConfig.capture, observeMs: 200 } });
   const automaticState = await sourceState(fixture.repoRoot);
   const automaticEnvelope = await candidate.cli('compare-automatic-incomplete', ['compare', '--base', fixture.baseCommit, '--head', 'WORKTREE', '--config', automaticConfig, '--allow-exec'], fixture.repoRoot, 3);
+  if (automaticEnvelope.data?.runId) report.runs.automaticIncomplete = join(fixture.repoRoot, '.show-what-changed/runs', automaticEnvelope.data.runId);
   const automatic = await verifyArtifacts(fixture.repoRoot, automaticEnvelope, candidate.schemas);
   assert.equal(automatic.manifest.comparisonOutcome.capture, 'ok');
   assert.equal(automatic.manifest.comparisonOutcome.coverage, 'incomplete');
@@ -127,8 +141,7 @@ try {
   assert.equal(automatic.manifest.summary.verifiedPairs, 3);
   assert(automatic.manifest.summary.coverageOmissions > 0);
   assert.deepEqual(await sourceState(fixture.repoRoot), automaticState);
-  report.commands = candidate.commands;
-  report.runs = { success: success.runDir, partial: partial.runDir, worktree: worktree.runDir, mergeBase: mergeBase.runDir, automaticIncomplete: automatic.runDir, readme: readme.runDir };
+  report.stage = 'demo-copy';
   for (const [name, run] of [['success', success], ['partial', partial]]) {
     const destination = join(output, 'demo', name);
     await mkdir(destination, { recursive: true });
@@ -139,10 +152,15 @@ try {
   report.demoVideoHashes = Object.fromEntries(await Promise.all(['success', 'partial'].map(async (name) => [name, hash(await readFile(join(output, 'demo', name, 'compare.mp4')))])));
   report.status = 'passed';
 } catch (error) {
-  report.status = 'failed'; report.error = { message: error.message, stack: error.stack, command: error.result };
+  report.status = 'failed'; report.error = { code: error.code, message: error.message, stack: error.stack, command: error.result, commandName: error.commandName, validationStage: error.validationStage, evidenceError: error.evidenceError && { message: error.evidenceError.message, stack: error.evidenceError.stack } };
   process.exitCode = 1;
 } finally {
   report.endedAt = new Date().toISOString();
-  await saveJson(join(output, 'report.json'), report);
-  process.stdout.write(JSON.stringify({ status: report.status, report: join(output, 'report.json'), root }) + '\n');
+  try { await saveJson(join(output, 'report.json'), report); }
+  catch (error) {
+    report.status = 'failed'; report.stage = 'report';
+    report.error ??= { code: error.code, message: error.message, stack: error.stack };
+    process.exitCode = 1;
+  }
+  process.stdout.write(JSON.stringify(report.status === 'passed' ? { status: report.status, report: join(output, 'report.json'), root } : releaseFailureSummary(report, candidate?.schemas)) + '\n');
 }

@@ -1,6 +1,10 @@
 # Verification environments
 
-The [verification workflow](../.github/workflows/ci.yml) checks Node 24.22.2 and npm 11.12.1 on Ubuntu 24.04 and macOS 15. The action revisions are pinned to official checkout v7.0.1 and setup-node v7.1.0 commits, verified on 2 November 2026. Runner labels come from the [official runner image inventory](https://github.com/actions/runner-images).
+The [verification workflow](../.github/workflows/ci.yml) checks Node 24.22.2 and npm 11.12.1 on Ubuntu 24.04 and macOS 15 Intel. The action revisions are pinned to official checkout v7.0.1 and setup-node v7.1.0 commits, verified on 2 November 2026. Runner labels come from the [official runner image inventory](https://github.com/actions/runner-images).
+
+The [7 November diagnostic run](https://github.com/kyusuku/show-what-changed/actions/runs/42267379310) could not acquire a macOS ARM runner within GitHub's queue limit. Its Mac job was cancelled before any test ran. Hosted verification now uses the standard `macos-15-intel` runner with the same checks. The required local Mac release workload retains its recorded Apple Silicon host and exact archive identity.
+
+Python test fixtures use `socketserver.TCPServer` with real HTTP handlers and address reuse enabled. On the Intel runner, Python 3.14.7's `HTTPServer` stalled in `socket.getfqdn` before listening. The [focused diagnostic](https://github.com/kyusuku/show-what-changed/actions/runs/42279131576) captured that stack. A [same-host comparison](https://github.com/kyusuku/show-what-changed/actions/runs/42279865611) reproduced the stall, verified the TCPServer HTTP response, and passed the runtime test. The fixtures avoid this unnecessary DNS dependency. Runtime readiness, process ownership, HTTP assertions, and cleanup checks remain unchanged.
 
 Both runners install the package's exact Playwright browser, check types and generated schemas, run source, contract, privacy, and integration tests, then install and exercise the actual npm tarball. Both retain installed host-recipe and release-audit checks. Linux also runs the complete six-case synthetic motion verifier, the seven public-app comparisons, and masked-source and decoded-video repeatability checks. Linux builds lsof 4.99.7 from a checksum-pinned upstream archive with the shared installer. Media prerequisites are system packages, so each run records actual versions through doctor and manifests. The workflow is a validation definition, not evidence that a hosted run has passed.
 
@@ -30,7 +34,7 @@ npm run build
 mkdir -p /absolute/candidate-directory
 npm pack --pack-destination /absolute/candidate-directory
 SWC_CANDIDATE_COMMIT="$(git rev-parse HEAD)"
-SWC_CANDIDATE_TARBALL=/absolute/candidate-directory/show-what-changed-0.1.1.tgz
+SWC_CANDIDATE_TARBALL=/absolute/candidate-directory/show-what-changed-0.1.2.tgz
 SWC_CANDIDATE_SHA256="$(shasum -a 256 "$SWC_CANDIDATE_TARBALL" | cut -d ' ' -f 1)"
 node scripts/linux-gate.mjs --release \
   --commit "$SWC_CANDIDATE_COMMIT" \
@@ -47,7 +51,7 @@ Use the exact reviewed tarball on macOS with Node `24.22.2` and npm `11.12.1`. R
 
 ```sh
 set -eu
-SWC_CANDIDATE_TARBALL=/absolute/path/show-what-changed-0.1.1.tgz
+SWC_CANDIDATE_TARBALL=/absolute/path/show-what-changed-0.1.2.tgz
 SWC_CANDIDATE_SHA256='read-approved-package-sha256-from-release-identity'
 SWC_MAC_EVIDENCE=/absolute/new-macos-evidence-directory
 test "$(shasum -a 256 "$SWC_CANDIDATE_TARBALL" | cut -d ' ' -f 1)" = "$SWC_CANDIDATE_SHA256"

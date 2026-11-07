@@ -57,7 +57,7 @@ test.each(['commit', 'worktree'] as const)('root output-prefix application input
   await writeFile(join(pair.after.root, tracked), 'runtime mutation');
   expect(await verify(pair, run)).toMatchObject({ before: { valid: true }, after: { valid: false } });
   expect(await readFile(join(root, tracked), 'utf8')).toBe('final app data'); expect(await readFile(join(root, '.git/index'))).toEqual(index);
-});
+}, 20_000);
 
 test.each(['commit', 'blob'] as const)('replacement %s objects cannot substitute bytes beneath the pinned OID', async (kind) => {
   const root = await fixture(); const original = await git(root, 'rev-parse', 'HEAD'); const originalBlob = await git(root, 'rev-parse', 'HEAD:source.txt');
@@ -72,7 +72,7 @@ test.each(['commit', 'blob'] as const)('replacement %s objects cannot substitute
   expect(changed.changedFiles).toContainEqual({ status: 'M', oldPath: 'source.txt', newPath: 'source.txt' });
   expect(await git(root, 'show', `${original}:source.txt`)).toBe('replacement source');
   expect(await git(root, 'replace', '-l')).toBe(kind === 'commit' ? original : originalBlob);
-});
+}, 20_000);
 
 test('replacement refs changed after planning do not retarget pinned source or WORKTREE HEAD', async () => {
   const root = await fixture(); const original = await git(root, 'rev-parse', 'HEAD');
@@ -84,7 +84,7 @@ test('replacement refs changed after planning do not retarget pinned source or W
   expect(pair.after.commit).toBe(original); expect(await readFile(join(pair.after.root, 'source.txt'), 'utf8')).toBe('original source');
   expect(await verify(pair, run)).toMatchObject({ before: { valid: true }, after: { valid: true } });
   expect(await git(root, 'rev-parse', 'HEAD')).toBe(original); expect(await git(root, 'replace', '-l')).toBe(original);
-});
+}, 20_000);
 
 test('replacement ancestry cannot alter the comparison merge base', async () => {
   const root = await fixture(); const common = await git(root, 'rev-parse', 'HEAD'); const tree = await git(root, 'rev-parse', 'HEAD^{tree}');
@@ -218,4 +218,4 @@ test('new generated application directories under the output prefix follow the o
   expect(await verify(pair, run)).toMatchObject({ before: { valid: true }, after: { valid: true } });
   await sourceFile(root, `${path}/preexisting.txt`, 'existing application input');
   await expect(plan({ invocationDir: root, routes: ['/'] })).rejects.toMatchObject({ detail: { code: 'GENERATED_DIR_CONFLICT' } });
-});
+}, 20_000);

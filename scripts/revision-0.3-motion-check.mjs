@@ -332,6 +332,12 @@ export function captureTrackEvidence(bundle) {
       failureAtMs: Number.isFinite(track?.failureAtMs) ? track.failureAtMs : null,
       clock: track?.clock ? {
         ...numeric(track.clock, ['rate', 'offsetMs', 'uncertaintyMs', 'maxDriftMs', 'errorBoundMs']),
+        ...(track.clock.proof?.kind === 'monotone-endpoints' ? {
+          proof: {
+            kind: 'monotone-endpoints',
+            ...numeric(track.clock.proof, ['anchorIndex', 'finalIndex', 'numericAllowanceMs']),
+          },
+        } : {}),
         sampleCount: samples.length,
         samples: samples.slice(-128).map((sample) => numeric(sample, ['sourceSeconds', 'hostBeforeMs', 'hostAfterMs'])),
       } : null,
@@ -341,6 +347,88 @@ export function captureTrackEvidence(bundle) {
       lastFrame: frameTimes(frames.at(-1)),
     }];
   }));
+}
+
+export function selectMotionFailureDiagnostics(item) {
+  let invalid = !item || typeof item !== 'object' || Array.isArray(item);
+  if (invalid) item = {};
+  const number = (value, integer = false) => {
+    if (value == null) return null;
+    if (Number.isFinite(value) && value >= 0 && (!integer || Number.isSafeInteger(value))) return value;
+    invalid = true;
+    return null;
+  };
+  const numeric = (value, keys, integers = []) => Object.fromEntries(keys.map((key) => [key, number(value?.[key], integers.includes(key))]));
+  const choice = (value, allowed) => {
+    if (value == null) return null;
+    if (allowed.includes(value)) return value;
+    invalid = true;
+    return null;
+  };
+  const code = (value) => {
+    if (value == null) return null;
+    if (typeof value === 'string' && /^[A-Z][A-Z0-9_]{0,63}$/.test(value)) return value;
+    invalid = true;
+    return null;
+  };
+  const assertion = () => {
+    const message = item.failure?.message;
+    if (typeof message !== 'string' || message.length > 160) return null;
+    const positions = /^(before|after) needs 60 (actual|decoded) moving-object positions, observed (\d+)$/.exec(message);
+    if (positions) return { check: positions[2] === 'actual' ? 'source-position-count' : 'decoded-position-count', side: positions[1], required: 60, observed: number(Number(positions[3]), true) };
+    const gap = /^(before|after) known-moving source gap is (\d+(?:\.\d+)?) ms$/.exec(message);
+    return gap ? { check: 'source-moving-gap', side: gap[1], maximumMs: 200, observedMs: number(Number(gap[2])) } : null;
+  };
+  const bounded = (value, limit) => {
+    if (value == null) return [];
+    if (Array.isArray(value) && value.length <= limit) return value;
+    invalid = true;
+    return [];
+  };
+  const marker = (value) => value ? numeric(value, ['runElapsedMs', 'errorBoundMs', 'uncertaintyMs']) : null;
+  const timing = (value) => {
+    const kind = choice(value?.kind, ['executed', 'failed', 'excluded', 'blocked']);
+    return kind ? { kind, dispatch: marker(value.dispatch), completion: marker(value.completion), observationEnd: marker(value.observationEnd) } : null;
+  };
+  const processing = [];
+  const processedSides = new Set();
+  const counts = ['frames', 'pendingRaw', 'pendingSanitized', 'sharedSanitizedBytes', 'maxSanitizedQueueDepth', 'maxSharedSanitizedBytes', 'backpressureWaits'];
+  for (const entry of bounded(item.processing, 2)) {
+    if (entry?.kind !== 'capture-processing' || !sides.includes(entry.side) || processedSides.has(entry.side)) { invalid = true; continue; }
+    processedSides.add(entry.side);
+    processing.push({ side: entry.side, ...numeric(entry, [...counts, 'maskMs', 'writeMs', 'maxMaskMs', 'maxWriteMs', 'maxAckLatencyMs'], counts) });
+  }
+  const stepTiming = [];
+  const stepIds = new Set();
+  for (const step of bounded(item.stepTiming, 4)) {
+    if (!['open', 'move', 'scroll', 'checkpoint'].includes(step?.id) || stepIds.has(step.id)) { invalid = true; continue; }
+    stepIds.add(step.id);
+    stepTiming.push({ id: step.id, before: timing(step.before), after: timing(step.after) });
+  }
+  let loadAverage = null;
+  if (item.host?.loadAverage != null) {
+    if (Array.isArray(item.host.loadAverage) && item.host.loadAverage.length === 3) loadAverage = item.host.loadAverage.map((value) => number(value));
+    else invalid = true;
+  }
+  let id = null;
+  if (typeof item.id === 'string' && /^(1280x800|390x844)-run-[1-3]$/.test(item.id)) id = item.id;
+  else if (item.id != null) invalid = true;
+  const stats = ['receivedFrames', 'persistedFrames', 'acknowledgedFrames', 'rejectedFrames', 'maxQueueDepth', 'sourceDroppedFrames'];
+  const result = {
+    id, failure: { code: code(item.failure?.code), assertion: assertion() }, captureOutcome: choice(item.captureOutcome, ['ok', 'partial', 'failed']),
+    captureTracks: Object.fromEntries(sides.map((side) => {
+      const track = item.captureTracks?.[side];
+      return [side, track ? {
+        status: choice(track.status, ['ok', 'failed']), failureCode: code(track.failureCode), failureAtMs: number(track.failureAtMs),
+        stats: numeric(track.stats, [...stats, 'maxGapMs'], stats), clockErrorBoundMs: number(track.clock?.errorBoundMs), frameCount: number(track.frameCount, true),
+        firstFrameRunElapsedMs: number(track.firstFrame?.runElapsedMs), lastFrameRunElapsedMs: number(track.lastFrame?.runElapsedMs),
+      } : null];
+    })),
+    cleanup: { status: choice(item.cleanup?.status, ['ok', 'failed']) },
+    host: { parallelism: number(item.host?.parallelism, true), loadAverage },
+    dispatchSkewMs: number(item.dispatchSkewMs), processing, stepTiming,
+  };
+  return invalid ? { ...result, diagnosticCode: 'MOTION_DIAGNOSTIC_INVALID' } : result;
 }
 
 export async function saveValidatedArtifacts(api, media, runDirectory, caseDirectory, id) {

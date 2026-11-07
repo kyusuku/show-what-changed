@@ -8,9 +8,12 @@ import { MaskWorker } from './masker.js';
 import type { FrameSanitizer } from './masker.js';
 import { MAX_PNG_BYTES } from '../composer/images.js';
 import { CaptureFault, sanitizeFrame } from './images.js';
+import { LOCAL_MONOTONE_CLOCK, localClockCapability } from '../runtime/browser.js';
+import { CLOCK_PAIR_ALLOWANCE_MS, CLOCK_NUMERIC_ALLOWANCE_MS, clockNumber, inspectEndpointClock, startupAnchor, sampleOffset, endpointFrameCovered, eventErrorBound } from '../schema/clock.js';
 
 type Track = MotionScenario['tracks']['before'];
 type Clock = NonNullable<Track['clock']>;
+type LegacyClock = Exclude<Clock, { proof: unknown }>;
 type Sample = Clock['samples'][number];
 type SourceObservation = Readonly<{ sequence: number; sourceSeconds: number; receivedMs: number }>;
 export interface MotionTransport {
@@ -158,7 +161,7 @@ export function reserveArtifact(budget: CaptureBudget, bytes: number, kind: 'sou
 function now(run: RunContext): number {
   return performance.now() - run.startedMonotonicMs;
 }
-export function validateClock(clock: Clock, sample: Sample): void {
+export function validateClock(clock: LegacyClock, sample: Sample): void {
   const previous = clock.samples.at(-1);
   const half = (sample.hostAfterMs - sample.hostBeforeMs) / 2;
   const midpointOffset = (sample.hostBeforeMs + sample.hostAfterMs) / 2 - sample.sourceSeconds * 1000;
@@ -180,6 +183,7 @@ function error(code: string, side: Side): ToolError {
 }
 export class MotionRecorder {
   private clock: Clock | null = null;
+  private readonly markers: Extract<Marker, { sampleIndex: number }>[] = [];
   private readonly frames: MotionFrame[] = [];
   private readonly gaps: Track['gaps'] = [];
   private readonly stats: Track['stats'] = {
@@ -230,6 +234,7 @@ export class MotionRecorder {
   private stoppedAtMs: number | null = null;
   private lastAcceptedObservation: SourceObservation | null = null;
   private previousReceivedObservation: SourceObservation | null = null;
+  private greatestReceivedSourceSeconds: number | null = null;
   private stopping: Promise<void> | undefined;
   private sourceStartGuard: Promise<void> = Promise.resolve();
   private contextCloseResolve: () => void = () => {};
@@ -322,6 +327,7 @@ export class MotionRecorder {
       onFault,
       undefined,
       () => new MaskWorker(settings, run.signal),
+      localClockCapability(page.context().browser()),
     );
   }
   static async fromTransport(
@@ -339,6 +345,7 @@ export class MotionRecorder {
       sanitize: async (bytes) => sanitizeFrame(bytes, settings.viewport, settings.maskRects),
       close: async () => {},
     }),
+    clockCapability?: typeof LOCAL_MONOTONE_CLOCK,
   ): Promise<MotionRecorder> {
     let sanitizer: FrameSanitizer = {
       ready: Promise.resolve(),
@@ -374,15 +381,28 @@ export class MotionRecorder {
       }
       const best = samples.reduce((a, b) => (a.hostAfterMs - a.hostBeforeMs < b.hostAfterMs - b.hostBeforeMs ? a : b));
       const uncertaintyMs = (best.hostAfterMs - best.hostBeforeMs) / 2;
-      recorder.clock = {
-        rate: 1,
-        offsetMs: (best.hostAfterMs + best.hostBeforeMs) / 2 - best.sourceSeconds * 1000,
-        uncertaintyMs,
-        maxDriftMs: 0,
-        errorBoundMs: uncertaintyMs,
-        samples: [best],
-      };
-      if (uncertaintyMs > 40) throw new CaptureFault('CAPTURE_CLOCK_DRIFT');
+      recorder.clock = clockCapability === LOCAL_MONOTONE_CLOCK
+        ? {
+            rate: 1,
+            offsetMs: sampleOffset(best),
+            errorBoundMs: 0,
+            samples,
+            proof: { kind: 'monotone-endpoints', anchorIndex: startupAnchor(samples), finalIndex: null, numericAllowanceMs: CLOCK_NUMERIC_ALLOWANCE_MS },
+          }
+        : {
+            rate: 1,
+            offsetMs: (best.hostAfterMs + best.hostBeforeMs) / 2 - best.sourceSeconds * 1000,
+            uncertaintyMs,
+            maxDriftMs: 0,
+            errorBoundMs: uncertaintyMs,
+            samples: [best],
+          };
+      if ('proof' in recorder.clock) {
+        if (!recorder.inspectProof()) {
+          await recorder.startup(recorder.takeSample());
+          if (!recorder.inspectProof()) throw new CaptureFault('CAPTURE_CLOCK_UNCERTAIN');
+        }
+      } else if (uncertaintyMs > 40) throw new CaptureFault('CAPTURE_CLOCK_DRIFT');
       recorder.ensureStarting();
       recorder.lifecycle = 'active';
       recorder.delivery = 'open';
@@ -474,32 +494,96 @@ export class MotionRecorder {
     if (sourceSeconds === undefined || sourceSeconds < 0) throw new CaptureFault('CAPTURE_CLOCK_UNSUPPORTED');
     return { sourceSeconds, hostBeforeMs, hostAfterMs };
   }
-  marker(): Promise<Marker> {
-    const pending = this.clockTail.then(() => this.measureMarker());
-    this.clockTail = pending.then(
-      () => {},
-      () => {},
-    );
+  private inspectProof(): boolean {
+    if (!this.clock || !('proof' in this.clock)) throw new CaptureFault('CAPTURE_CLOCK_UNSUPPORTED');
+    try {
+      const proof = inspectEndpointClock(this.clock);
+      this.clock.errorBoundMs = Math.max(this.clock.errorBoundMs, proof.acceptedBoundMs);
+      return proof.latestBoundMs <= 40;
+    } catch {
+      throw new CaptureFault('CAPTURE_CLOCK_DRIFT');
+    }
+  }
+  private async takeSample(lifetime: 'capture' | 'cleanup' = 'capture'): Promise<{ sample: Sample; index: number; proven: boolean }> {
+    if (!this.clock) throw new CaptureFault('CAPTURE_CLOCK_UNSUPPORTED');
+    if (this.clock.samples.length >= 128) throw new CaptureFault('CAPTURE_CLOCK_SAMPLE_LIMIT');
+    let sample: Sample;
+    try { sample = await this.sample(lifetime); }
+    catch (cause) { throw cause instanceof CaptureFault ? cause : new CaptureFault('CAPTURE_CLOCK_UNSUPPORTED'); }
+    if (lifetime === 'capture' && (this.fault || this.run.signal.aborted || !['starting', 'active'].includes(this.lifecycle)))
+      throw new CaptureFault(this.failureCode() ?? 'CAPTURE_STOPPED');
+    const index = this.clock.samples.length;
+    if ('proof' in this.clock) {
+      this.clock.samples.push(sample);
+      return { sample, index, proven: this.inspectProof() };
+    }
+    validateClock(this.clock, sample);
+    return { sample, index, proven: true };
+  }
+  private active(): void {
+    if (this.lifecycle !== 'active' || this.fault || this.run.signal.aborted)
+      throw new CaptureFault(this.failureCode() ?? 'CAPTURE_STOPPED');
+  }
+  private serializeClock<T>(operation: () => Promise<T>): Promise<T> {
+    const pending = this.clockTail.then(operation);
+    this.clockTail = pending.then(() => {}, () => {});
     return pending;
   }
-  private async measureMarker(): Promise<Marker> {
-    if (this.lifecycle !== 'active') throw new CaptureFault(this.failureCode() ?? 'CAPTURE_STOPPED');
-    if (!this.clock || this.fault) throw new CaptureFault(this.fault?.code ?? 'CAPTURE_CLOCK_UNSUPPORTED');
-    try {
-      const sample = await this.sample();
-      const currentFailure = this.failureCode();
-      if (currentFailure) throw new CaptureFault(currentFailure);
-      validateClock(this.clock, sample);
-      return {
-        kind: 'source',
-        ...sample,
-        runElapsedMs: sample.sourceSeconds * 1000 + this.clock.offsetMs,
-        uncertaintyMs: this.clock.errorBoundMs,
-      };
-    } catch (cause) {
-      this.fail(cause instanceof CaptureFault ? cause.code : 'CAPTURE_CLOCK_UNSUPPORTED');
-      throw cause;
-    }
+  marker(eventHostMs = now(this.run)): Promise<Marker> {
+    return this.serializeClock(async () => {
+      this.active();
+      try {
+        const candidate = await this.takeSample();
+        if (!candidate.proven && !(await this.takeSample()).proven) throw new CaptureFault('CAPTURE_CLOCK_UNCERTAIN');
+        this.active();
+        return this.sourceMarker(candidate, eventHostMs, eventHostMs);
+      } catch (cause) {
+        this.fail(cause instanceof CaptureFault ? cause.code : 'CAPTURE_CLOCK_UNSUPPORTED');
+        throw cause;
+      }
+    });
+  }
+  dispatch<T>(invoke: () => Promise<T>, check: () => void = () => {}): Promise<{ marker: Marker; completion: Promise<T> }> {
+    return this.serializeClock(async () => {
+      this.active();
+      try {
+        for (let attempt = 0; attempt < 2; attempt++) {
+          const candidate = await this.takeSample();
+          this.active();
+          check();
+          this.active();
+          const eventHostMs = now(this.run);
+          if (!candidate.proven || this.eventBound(candidate.sample, eventHostMs) > 40) {
+            if (attempt === 0) continue;
+            throw new CaptureFault(candidate.proven ? 'CAPTURE_MARKER_STALE' : 'CAPTURE_CLOCK_UNCERTAIN');
+          }
+          const completion = invoke();
+          void completion.catch(() => {});
+          const eventEndHostMs = now(this.run);
+          const marker = this.sourceMarker(candidate, eventHostMs, eventEndHostMs);
+          return { marker, completion };
+        }
+        throw new CaptureFault('CAPTURE_CLOCK_UNCERTAIN');
+      } catch (cause) {
+        if (cause instanceof CaptureFault && cause.code.startsWith('CAPTURE_')) this.fail(cause.code);
+        throw cause;
+      }
+    });
+  }
+  private eventBound(sample: Sample, eventHostMs: number, eventEndHostMs = eventHostMs): number {
+    if (!this.clock) throw new CaptureFault('CAPTURE_CLOCK_UNSUPPORTED');
+    try { return eventErrorBound(sample.sourceSeconds * 1000 + this.clock.offsetMs, eventHostMs, eventEndHostMs); }
+    catch { throw new CaptureFault('CAPTURE_CLOCK_DRIFT'); }
+  }
+  private sourceMarker(candidate: { sample: Sample; index: number }, eventHostMs: number, eventEndHostMs: number): Marker {
+    if (!this.clock) throw new CaptureFault('CAPTURE_CLOCK_UNSUPPORTED');
+    const errorBoundMs = Math.max(this.clock.errorBoundMs, this.eventBound(candidate.sample, eventHostMs, eventEndHostMs));
+    if (errorBoundMs > 40) throw new CaptureFault('CAPTURE_MARKER_STALE');
+    const shared = { kind: 'source' as const, ...candidate.sample, runElapsedMs: candidate.sample.sourceSeconds * 1000 + this.clock.offsetMs };
+    if (!('proof' in this.clock)) return { ...shared, uncertaintyMs: this.clock.errorBoundMs };
+    const marker = { ...shared, sampleIndex: candidate.index, eventHostMs, eventEndHostMs, errorBoundMs };
+    this.markers.push(marker);
+    return marker;
   }
   private failureCode(): string | null {
     return this.fault?.code ?? null;
@@ -564,6 +648,7 @@ export class MotionRecorder {
       void this.ack(event.sessionId);
       return;
     }
+    this.greatestReceivedSourceSeconds = Math.max(this.greatestReceivedSourceSeconds ?? 0, observation.sourceSeconds);
     this.tail = this.tail.then(async () => {
       let sanitizerOwnsRaw = false;
       let releaseRaw = () => {};
@@ -598,6 +683,9 @@ export class MotionRecorder {
           }
           throw new CaptureFault('CAPTURE_TIMESTAMP_REGRESSION');
         }
+        if ('proof' in this.clock && (!clockNumber(metadata.monotonicTimestamp * 1000) ||
+            metadata.monotonicTimestamp * 1000 - this.clock.samples[this.clock.proof.anchorIndex]!.sourceSeconds * 1000 <= CLOCK_PAIR_ALLOWANCE_MS))
+          throw new CaptureFault('CAPTURE_CLOCK_COVERAGE');
         await this.reserveProcessingMemory(memory);
         const maskStart = performance.now();
         let raw = Buffer.from(event.data, 'base64');
@@ -790,12 +878,9 @@ export class MotionRecorder {
         } catch {
           drained = false;
         }
-        if (!this.fault && this.clock) {
-          try {
-            validateClock(this.clock, await this.sample('cleanup'));
-          } catch (cause) {
-            this.fail(cause instanceof CaptureFault ? cause.code : 'CAPTURE_CLOCK_UNSUPPORTED');
-          }
+        if (!this.fault && this.clock && !('proof' in this.clock)) {
+          try { await this.takeSample('cleanup'); }
+          catch (cause) { this.fail(cause instanceof CaptureFault ? cause.code : 'CAPTURE_CLOCK_UNSUPPORTED'); }
         }
         let cutoff = true;
         try {
@@ -805,6 +890,44 @@ export class MotionRecorder {
         } catch {
           cutoff = false;
           this.fail('CAPTURE_CUTOFF_FAILED');
+        }
+        if (!this.fault && this.clock && 'proof' in this.clock && cutoff && drained) {
+          try {
+            const lastSourceMs = this.greatestReceivedSourceSeconds === null ? null : this.greatestReceivedSourceSeconds * 1000;
+            if (lastSourceMs !== null && !clockNumber(lastSourceMs)) throw new CaptureFault('CAPTURE_CLOCK_COVERAGE');
+            let endpoint = await this.takeSample('cleanup');
+            const sourceGapMs = lastSourceMs === null ? -Infinity : lastSourceMs - endpoint.sample.sourceSeconds * 1000;
+            if (!endpoint.proven || sourceGapMs >= -CLOCK_PAIR_ALLOWANCE_MS) {
+              if (this.fault || this.run.signal.aborted) throw new CaptureFault(this.failureCode() ?? 'CAPTURE_CANCELLED');
+              if (sourceGapMs >= -CLOCK_PAIR_ALLOWANCE_MS) {
+                // Display timestamps can lead delivery. Advance past the source target before the one fresh endpoint.
+                const advanceMs = sourceGapMs + 2 * CLOCK_PAIR_ALLOWANCE_MS;
+                const waitMs = Math.max(1, Math.ceil(endpoint.sample.hostAfterMs + advanceMs - now(this.run)));
+                if (advanceMs > 40 || waitMs > 40) throw new CaptureFault('CAPTURE_CLOCK_COVERAGE');
+                let timer: ReturnType<typeof setTimeout> | undefined;
+                let cancel = () => {};
+                try {
+                  await this.awaitOwned(new Promise<void>((resolve, reject) => {
+                    cancel = () => reject(new CaptureFault('CAPTURE_CANCELLED'));
+                    this.run.signal.addEventListener('abort', cancel, { once: true });
+                    timer = setTimeout(resolve, waitMs);
+                    if (this.run.signal.aborted) cancel();
+                  }), 'cleanup');
+                } finally {
+                  if (timer) clearTimeout(timer);
+                  this.run.signal.removeEventListener('abort', cancel);
+                }
+              }
+              if (this.fault || this.run.signal.aborted) throw new CaptureFault(this.failureCode() ?? 'CAPTURE_CANCELLED');
+              endpoint = await this.takeSample('cleanup');
+            }
+            if (!endpoint.proven) throw new CaptureFault('CAPTURE_CLOCK_UNCERTAIN');
+            if (lastSourceMs !== null && endpoint.sample.sourceSeconds * 1000 - lastSourceMs <= CLOCK_PAIR_ALLOWANCE_MS)
+              throw new CaptureFault('CAPTURE_CLOCK_COVERAGE');
+            if ('proof' in this.clock) this.clock.proof.finalIndex = endpoint.index;
+          } catch (cause) {
+            this.fail(cause instanceof CaptureFault ? cause.code : 'CAPTURE_CLOCK_UNSUPPORTED');
+          }
         }
         try {
           await this.awaitOwned(this.tail, 'cleanup');
@@ -841,6 +964,12 @@ export class MotionRecorder {
         if (!sourceStopped || !cutoff || !closed || !drained || !persisted || !joined) {
           this.fail('CAPTURE_DRAIN_TIMEOUT');
           throw new CaptureFault('CAPTURE_DRAIN_TIMEOUT');
+        }
+        if (!this.fault && this.clock && 'proof' in this.clock) {
+          const clock = this.clock;
+          if (this.frames.some((frame) => !endpointFrameCovered(clock, frame.sourceMonotonicSeconds)))
+            this.fail('CAPTURE_CLOCK_COVERAGE');
+          for (const marker of this.markers) marker.errorBoundMs = Math.max(marker.errorBoundMs, this.clock.errorBoundMs);
         }
         if (!this.frames.length && !this.fault) this.fail('CAPTURE_NO_FRAMES');
         this.run.diagnostics.event(
@@ -892,12 +1021,13 @@ export class MotionRecorder {
   result(): Track {
     if (this.finalResult) return structuredClone(this.finalResult);
     const shared = { frames: this.frames, gaps: this.gaps, stats: this.stats };
-    return structuredClone(this.fault || !this.clock
+    const incomplete = this.clock && 'proof' in this.clock && (this.lifecycle !== 'stopped' || this.clock.proof.finalIndex === null);
+    return structuredClone(this.fault || !this.clock || incomplete
       ? {
           ...shared,
           status: 'failed',
           clock: this.clock,
-          error: error(this.fault?.code ?? 'CAPTURE_CLOCK_UNSUPPORTED', this.side),
+          error: error(this.fault?.code ?? (incomplete ? 'CAPTURE_CLOCK_INCOMPLETE' : 'CAPTURE_CLOCK_UNSUPPORTED'), this.side),
           failureAtMs: this.fault?.atMs ?? now(this.run),
         }
       : { ...shared, status: 'ok', clock: this.clock, error: null });

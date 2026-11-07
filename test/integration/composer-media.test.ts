@@ -486,7 +486,29 @@ describe('T07 T09 T10 T11 real composer media', () => {
         }),
         run,
       );
-      expect(bundle.scenarios[0]?.outcome).toBe('ok');
+      expect(bundle.scenarios[0]?.outcome, JSON.stringify({
+        scenarios: bundle.scenarios.map((scenario) => ({
+          outcome: scenario.outcome,
+          errors: scenario.errors.map(({ code, phase, side, stepId }) => ({ code, phase, side, stepId })),
+          steps: scenario.steps.map((step) => ({
+            id: step.id,
+            before: { status: step.before.status, reasonCode: step.before.reasonCode },
+            after: { status: step.after.status, reasonCode: step.after.reasonCode },
+          })),
+        })),
+        motion: bundle.captureMode === 'motion' ? bundle.motion.map((scenario) => ({
+          timing: scenario.timing,
+          steps: scenario.steps,
+          tracks: Object.entries(scenario.tracks).map(([side, track]) => ({
+            side,
+            status: track.status,
+            errorCode: track.error?.code ?? null,
+            failureAtMs: track.status === 'failed' ? track.failureAtMs : null,
+            clock: track.clock,
+            stats: track.stats,
+          })),
+        })) : null,
+      })).toBe('ok');
       const timeline = await render(bundle, settings, run);
       await encode(timeline, run);
       const actual = await extract(run, timeline.totalFrames - 1);

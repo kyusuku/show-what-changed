@@ -67,6 +67,44 @@ async function runDirectories(repo) {
   } catch (error) { if (error.code === 'ENOENT') return []; throw error; }
 }
 
+function failureProcess(error) {
+  const result = error?.result;
+  return {
+    actualExit: Number.isInteger(result?.code) && result.code >= 0 && result.code <= 255 ? result.code : null,
+    timedOut: result?.timedOut === true, overflow: result?.overflow === true,
+  };
+}
+
+function failureDiagnosis(error, schemas) {
+  try {
+    const envelope = schemas.ResultSchema.parse(JSON.parse(error.result.stdout));
+    if (envelope.exitCode !== error.result.code) return null;
+    const identifiers = (detail) => ({
+      code: typeof detail?.code === 'string' && /^[A-Z][A-Z0-9_]{0,79}$/.test(detail.code) ? detail.code : null,
+      phase: typeof detail?.phase === 'string' && /^[a-z][a-z0-9-]{0,39}$/.test(detail.phase) ? detail.phase : null,
+    });
+    return {
+      status: envelope.status, exitCode: envelope.exitCode, ...identifiers(envelope.error),
+      errors: (envelope.data?.errors ?? []).slice(0, 8).map(identifiers),
+    };
+  } catch { return null; }
+}
+
+export function compatibilitySummary(report) {
+  const summary = { status: report.status, gateComplete: false, report: 'report.json' };
+  if (report.status !== 'passed') {
+    summary.error = report.error;
+    summary.commandFailure = report.commandFailure ?? null;
+    summary.diagnosis = report.diagnosis ?? null;
+    summary.failedRows = report.rows.filter((row) => row.status !== 'passed').map((row) => ({
+      application: row.application, stage: row.error.stage, code: row.error.code,
+      commands: row.commands.map(({ actualExit, timedOut, overflow }) => ({ actualExit, timedOut: timedOut === true, overflow: overflow === true })),
+      diagnosis: row.diagnosis ?? null,
+    }));
+  }
+  return summary;
+}
+
 export async function runCompatibilityRow(profile, fixture, candidate, output, checks = {}) {
   const verify = checks.verifyArtifacts ?? verifyArtifacts;
   const inspectCleanup = checks.assertNoOwnedActivity ?? assertNoOwnedActivity;
@@ -95,8 +133,7 @@ export async function runCompatibilityRow(profile, fixture, candidate, output, c
       entry.actualExit = envelope.exitCode;
       return envelope;
     } catch (error) {
-      entry.actualExit = error.result?.code ?? null;
-      entry.timedOut = error.result?.timedOut === true;
+      Object.assign(entry, failureProcess(error));
       throw error;
     }
   };
@@ -130,8 +167,9 @@ export async function runCompatibilityRow(profile, fixture, candidate, output, c
     row.versions = run.manifest.versions;
     row.summary = run.manifest.summary;
     row.artifactRedaction = 'passed';
-  } catch {
+  } catch (error) {
     row.error = { code: 'COMPATIBILITY_ROW_FAILED', stage };
+    row.diagnosis = failureDiagnosis(error, candidate.schemas);
   } finally {
     try {
       const createdRuns = (await runDirectories(repo)).filter((runId) => !existingRuns.includes(runId));
@@ -187,8 +225,9 @@ export async function compatibilitySmoke(selection, dependencies = {}) {
     startedAt: new Date().toISOString(), platform: process.platform, arch: process.arch, node: process.version, rows: [],
   };
   let stage = 'install';
+  let candidate;
   try {
-    const candidate = await (dependencies.installCandidate ?? installCandidate)(selection.tarball, root, join(root, 'private-evidence'));
+    candidate = await (dependencies.installCandidate ?? installCandidate)(selection.tarball, root, join(root, 'private-evidence'));
     report.candidate = { sha256: candidate.sha256, bytes: candidate.bytes };
     report.fixtureLicense = { spdx: 'MIT', path: 'LICENSE', sha256: hash(await readFile(new URL('../LICENSE', import.meta.url))) };
     stage = 'doctor';
@@ -197,7 +236,7 @@ export async function compatibilitySmoke(selection, dependencies = {}) {
     try {
       doctor = await candidate.cli('doctor', ['doctor'], candidate.installRoot, 0);
       report.doctor.actualExit = doctor.exitCode;
-    } catch (error) { report.doctor.actualExit = error.result?.code ?? null; throw error; }
+    } catch (error) { Object.assign(report.doctor, failureProcess(error)); throw error; }
     report.tools = doctor.data.capabilities.map(({ name, available, version }) => ({ name, available, version: version && !/[\/\\\r\n]/.test(version) ? version : null }));
     if (selection.mode !== 'host') for (const name of ['docker', 'buildx']) assert(doctor.data.capabilities.some((capability) => capability.name === name && capability.available), 'Docker mode requires Docker Engine and buildx');
     for (const profile of selection.profiles) {
@@ -210,9 +249,11 @@ export async function compatibilitySmoke(selection, dependencies = {}) {
       report.pending = report.pending.filter((pending) => pending !== `${profile.name} installed-package acceptance`);
     }
     report.status = 'passed';
-  } catch {
+  } catch (error) {
     report.status = 'failed';
     report.error = { code: 'COMPATIBILITY_ACCEPTANCE_FAILED', stage };
+    report.commandFailure = failureProcess(error);
+    report.diagnosis = failureDiagnosis(error, candidate?.schemas);
   } finally {
     report.endedAt = new Date().toISOString();
     await saveJson(join(output, 'report.json'), report);
@@ -223,7 +264,7 @@ export async function compatibilitySmoke(selection, dependencies = {}) {
 if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
   try {
     const report = await compatibilitySmoke(compatibilitySelection(process.argv.slice(2)));
-    process.stdout.write(JSON.stringify({ status: report.status, gateComplete: false, report: 'report.json' }) + '\n');
+    process.stdout.write(JSON.stringify(compatibilitySummary(report)) + '\n');
     if (report.status !== 'passed') process.exitCode = 1;
   } catch {
     process.stderr.write(usage + '\n');

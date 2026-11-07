@@ -148,6 +148,23 @@ describe('capture PNG pixels', () => {
       });
     }
 
+  for (const channels of [3, 4])
+    for (const filter of [0, 1, 2, 3, 4]) {
+      it(`reconstructs unmasked single-pixel rows with ${channels} channels and filter ${filter}`, () => {
+        const width = 1;
+        const height = 3;
+        const pixels = patterned(width * height * channels);
+        const input = png(
+          header(width, height, channels),
+          chunk('IDAT', deflateSync(filtered(pixels, width, height, channels, [filter]))),
+          end,
+        );
+        expect(PNG.sync.read(input).data).toEqual(expectedPixels(pixels, channels, width, height));
+        const output = sanitizeFrame(input, { width, height }, []);
+        expect(PNG.sync.read(output).data).toEqual(expectedPixels(pixels, channels, width, height));
+      });
+    }
+
   it('uses the specified Paeth tie order at the left edge and inside a row', () => {
     // Above/upper-left and left/upper-left ties choose different sample values.
     const pixels = Buffer.from([1, 1, 3, 3, 0, 3, 0, 3, 3, 250, 14, 99]);

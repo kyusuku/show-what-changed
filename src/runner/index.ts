@@ -61,7 +61,7 @@ async function compareCapabilities(run: RunContext): Promise<void> {
     await access(chromium.executablePath(), constants.X_OK);
     const font = await readFile(new URL('../../assets/fonts/Inter-Regular.woff2', import.meta.url));
     if (font.subarray(0, 4).toString('ascii') !== 'wOF2') throw new Error('Invalid font asset');
-  } catch { throw failure(8, 'CAPTURE_CAPABILITY_UNAVAILABLE', 'capabilities', 'The pinned Chromium or bundled font is unavailable.', 'Run doctor. Install Chromium with npx playwright@1.64.1 install chromium or reinstall the package.'); }
+  } catch { throw failure(8, 'CAPTURE_CAPABILITY_UNAVAILABLE', 'capabilities', 'The pinned Chromium or bundled font is unavailable.', 'Run show-what-changed setup, or reinstall the package if the bundled font is missing.'); }
   await checkMediaCapabilities(run);
 }
 function uniqueErrors(errors: Manifest['errors']): Manifest['errors'] {
@@ -156,7 +156,7 @@ export async function compare(request: CompareRequest, context: CommandContext):
     const provenance = await verify(workspaces, run);
     manifest.comparisonOutcome = comparisonOutcome(bundle, selected.coverage, provenance);
     manifest.scenarios = bundle.scenarios; manifest.versions.browser = bundle.browserVersion;
-    manifest.captureQuality = bundle.captureMode === 'motion' ? bundle.motion.flatMap((scenario) => (['before', 'after'] as const).map((side) => ({ scenarioId: scenario.id, side, stats: scenario.tracks[side].stats, clockErrorBoundMs: scenario.tracks[side].clock?.errorBoundMs ?? null, maxDriftMs: scenario.tracks[side].clock?.maxDriftMs ?? null, failureAtMs: scenario.tracks[side].status === 'failed' ? scenario.tracks[side].failureAtMs : null }))) : [];
+    manifest.captureQuality = bundle.captureMode === 'motion' ? bundle.motion.flatMap((scenario) => (['before', 'after'] as const).map((side) => ({ scenarioId: scenario.id, side, stats: scenario.tracks[side].stats, clockErrorBoundMs: scenario.tracks[side].clock?.errorBoundMs ?? null, maxDriftMs: scenario.tracks[side].clock && 'maxDriftMs' in scenario.tracks[side].clock ? scenario.tracks[side].clock.maxDriftMs : null, failureAtMs: scenario.tracks[side].status === 'failed' ? scenario.tracks[side].failureAtMs : null }))) : [];
     manifest.summary = summarize(bundle, selected.coverage);
     manifest.errors.push(...captureErrors(bundle), ...provenance.before.errors, ...provenance.after.errors);
     manifest.warnings.push(...bundle.warnings);

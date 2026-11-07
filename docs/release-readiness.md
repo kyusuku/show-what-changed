@@ -1,10 +1,22 @@
 # Revision 0.3 release readiness
 
+## Version 0.1.2
+
+Version `0.1.2` adds `setup`, an app-configuration prompt for coding agents, and bounded clock recovery for delayed browser responses. It supports Node 24 on Linux and macOS. The 40 ms clock error limit and motion acceptance thresholds remain unchanged.
+
+The package archive is `show-what-changed-0.1.2.tgz`, with SHA-256 `187e61f85e762da89a17bffde3ac014a7a9e60e7df2c1bd514931d19d1e184db`. This identifies its bytes, not release approval. Final verification and registry confirmation accompany the [GitHub release assets](https://github.com/kyusuku/show-what-changed/releases). Those records bind the tested source, final archive, platform results, media review, and retained failures. Check [npm](https://www.npmjs.com/package/show-what-changed) for publication status.
+
+The 0.1.2 reader accepts supported schema 2 artifacts from 0.1.0 and 0.1.1. Artifacts with the new clock proof require the updated reader. See [clock proof and artifact compatibility](architecture/clock-proof.md#artifact-compatibility).
+
+The release requires complete local macOS synthetic-motion and public-app gates for the exact final archive, plus every enabled hosted Linux and Mac check. Hosted macOS omits those two complete motion workloads. It retains source, browser integration, installed-package smoke, host-recipe, and release-audit checks. Follow the [mandatory local Mac procedure](ci.md#run-the-mandatory-local-macos-release-gate). A green hosted workflow alone cannot accept G10 or G19. Keep the 40 ms clock bound, all required repetitions, decoded-media review, caller preservation, and cleanup requirements unchanged. The final verification manifest must bind both the local and hosted results and preserve the failed hosted observations described in [verification environments](ci.md).
+
+## Historical 0.1.1 and 0.1.0 records
+
+The following records describe earlier archives. They do not accept the 0.1.2 archive.
+
 The `0.1.1` package archive has SHA-256 `ff08c0ee2aec5bd9a344f8f2300260f45c531da504f496cb016239c93de32846`. This identifies its bytes, not release approval. Check [GitHub releases](https://github.com/kyusuku/show-what-changed/releases) and [npm](https://www.npmjs.com/package/show-what-changed) for current publication status. Final approval and verification records accompany the release assets.
 
 The dated records below preserve preparation and verification checkpoints. Their pending states describe those checkpoints, not the current registry or release-page state.
-
-The release requires complete local macOS synthetic-motion and public-app gates for the exact final archive, plus every enabled hosted Linux and Mac check. Hosted macOS omits those two complete motion workloads. It retains source, browser integration, installed-package smoke, host-recipe, and release-audit checks. Follow the [mandatory local Mac procedure](ci.md#run-the-mandatory-local-macos-release-gate). A green hosted workflow alone cannot accept G10 or G19. Keep the 40 ms clock bound, all required repetitions, decoded-media review, caller preservation, and cleanup requirements unchanged. The final verification manifest must bind both the local and hosted results and preserve the failed hosted observations described in [verification environments](ci.md).
 
 Patch preparation checkpoint, 5 November 2026. A controlled real-browser test found that published `0.1.0` can omit a static page update when an earlier frame is still being masked. The `0.1.1` candidate enables Chromium's retention of the latest pending presentation while preserving one frame in flight. Candidate verification and publication remain pending. The `0.1.0` GitHub release remains a draft. The historical acceptance below does not certify this correction or erase the later failures.
 
@@ -18,7 +30,7 @@ The original 24-hour target was missed. The release record describes completed v
 
 The required outcome is a verified experimental 0.1.0 package implementing schema 2 and spec revision 0.3. The authoritative acceptance record is [the revision status ledger](../evidence/revision-0.3-status.json). Every G01 through G24 gate must be accepted for the exact final candidate before the status becomes ready_for_owner_publish.
 
-## Current evidence
+## Historical 0.1.0 candidate evidence
 
 The shared schema, general recipe runtime, whole-repository source handling, CLI integration, and motion implementation have development checks and independent reviews. These results are recorded under [the implementation work log](../evidence/revision-0.3/work.md). They do not certify a final package or platform.
 

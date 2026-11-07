@@ -1,11 +1,12 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createServer } from 'node:http';
-import type { Server as HttpServer } from 'node:http';
+import type { Server as HttpServer, ServerResponse } from 'node:http';
 import { cp, mkdir, mkdtemp, readFile, rm, stat, readdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { PNG } from 'pngjs';
 import { capture } from '../../src/recorder/index.js';
+import * as images from '../../src/recorder/images.js';
 import { CaptureBundleSchema, CaptureSettingsSchema, parseScenario } from '../../src/schema/index.js';
 import type { CaptureBundle, Scenario, Side } from '../../src/schema/index.js';
 import type { RunContext, ServerPair } from '../../src/schema/contracts.js';
@@ -16,7 +17,7 @@ const settings = CaptureSettingsSchema.parse({
   mode: 'keyframes',
   fixedTime: '2000-01-01T00:00:00.000Z',
   observeMs: 0,
-  stepTimeoutMs: 1500,
+  stepTimeoutMs: 5000,
   maskSelectors: ['.secret', '.not-present'],
 });
 function scenario(id: string, steps: unknown[]): Scenario {
@@ -36,7 +37,6 @@ function html(side: 'before' | 'after'): string {
   ${side === 'after' ? '<button role="switch" aria-label="Yearly" onclick="document.getElementById(\'saving\').hidden=false">Yearly</button>' : '<button onclick="this.textContent=\'Legacy opened\'">Legacy details</button>'}
   <p id="saving" hidden>Save 20%</p><button data-testid="css-button" onclick="this.dataset.clicked=\'yes\'">CSS action</button>
   <button class="duplicate" onclick="fetch('/clicked-duplicate')">Duplicate</button><button class="duplicate" onclick="fetch('/clicked-neighbor')">Duplicate</button><button class="hidden" aria-label="Hidden">Hidden</button><button disabled>Disabled</button>
-  <button id="late" disabled onclick="fetch('/clicked-late')">Late control</button>
   <button id="popup" onclick="window.open('/popup')">Popup</button><button id="dialog" onclick="alert('synthetic')">Dialog</button>
   <button id="chooser" onclick="document.getElementById('file').click()">Choose file</button><input id="file" type="file" hidden>
   <a href="/download" download>Download</a><a href="https://example.invalid/escaped">External</a>
@@ -48,7 +48,6 @@ function html(side: 'before' | 'after'): string {
   document.getElementById('date').textContent=new Date().toISOString();
   requestAnimationFrame(()=>requestAnimationFrame(()=>document.getElementById('frames').textContent='Animation frames live'));
   setTimeout(()=>document.getElementById('ready').textContent='Data ready',150);
-  setTimeout(()=>document.getElementById('late').disabled=false,1000);
   document.getElementById('fresh').textContent=localStorage.getItem('state')?'Dirty context':'Fresh context';
   let timer;document.getElementById('search').addEventListener('input',event=>{clearTimeout(timer);timer=setTimeout(()=>document.getElementById('results').textContent='Results for '+event.target.value,100)});
   setInterval(()=>fetch('/poll').catch(()=>{}),30); console.warn('SYNTHETIC-SECRET-777');
@@ -64,6 +63,10 @@ describe('real Chromium recorder', () => {
   let diagnostics: string[];
   let exitBefore: () => void;
   let clicks: string[];
+  let pendingControls: Map<Side, ServerResponse>;
+  let peerPending: Promise<void>;
+  let markPeerPending: () => void;
+  let releasePeer: () => void;
 
   beforeEach(async () => {
     root = await mkdtemp(join(tmpdir(), 'swc-recorder-'));
@@ -71,6 +74,8 @@ describe('real Chromium recorder', () => {
     diagnostics = [];
     httpServers = [];
     clicks = [];
+    pendingControls = new Map();
+    peerPending = new Promise<void>((resolve) => { markPeerPending = resolve; });
     run = await createRunContext({
       repoRoot: root,
       timeoutMs: 60000,
@@ -118,6 +123,15 @@ describe('real Chromium recorder', () => {
           response.end();
           return;
         }
+        if (request.url === '/pending-control') {
+          response.writeHead(200, { 'content-type': 'text/html' });
+          response.end('<button id="late" disabled onclick="fetch(\'/clicked-late\')">Late control</button><script>fetch("/enable-late").then(()=>document.getElementById("late").disabled=false)</script>');
+          return;
+        }
+        if (request.url === '/enable-late') {
+          pendingControls.set(side, response);
+          return;
+        }
         if (request.url === '/font-hang') {
           response.writeHead(200, { 'content-type': 'text/html' });
           response.end(
@@ -137,19 +151,15 @@ describe('real Chromium recorder', () => {
         }
         if (request.url === '/late-error' || request.url === '/late-exit') {
           if (side === 'after') {
-            setTimeout(() => {
+            releasePeer = () => {
               response.writeHead(200, { 'content-type': 'text/html' });
               response.end('<p>Peer ready</p>');
-            }, 900);
+            };
+            markPeerPending();
             return;
           }
           response.writeHead(200, { 'content-type': 'text/html' });
-          response.end(
-            request.url === '/late-error'
-              ? '<p>First ready</p><script>setTimeout(()=>{throw new Error("synthetic")},250)</script>'
-              : '<p>First ready</p>',
-          );
-          if (request.url === '/late-exit') setTimeout(() => exitBefore(), 250);
+          response.end('<p>First ready</p>');
           return;
         }
         response.writeHead(200, { 'content-type': 'text/html' });
@@ -175,6 +185,7 @@ describe('real Chromium recorder', () => {
     servers = { before: await makeServer('before'), after: await makeServer('after') };
   });
   afterEach(async () => {
+    vi.restoreAllMocks();
     const outcome = await cleanupRun(run);
     await Promise.all(
       httpServers.map(
@@ -281,7 +292,6 @@ describe('real Chromium recorder', () => {
             op: 'click',
             target: { role: 'switch', name: 'Yearly' },
             allowMissing: ['before'],
-            timeoutMs: 1000,
           },
           { id: 'saving', op: 'expectVisible', target: { text: 'Save 20%' }, only: 'after' },
           { id: 'poster', op: 'screenshot' },
@@ -484,12 +494,27 @@ describe('real Chromium recorder', () => {
   }, 30000);
 
   it('closes a timed-out context before a pending control can become actionable', async () => {
-    const started = performance.now();
+    type ContextWitness = { checkpointAt: number; closedAt: number | null };
+    const contexts = new Map<Side, ContextWitness>();
+    const maskedFrame = images.maskedFrame;
+    vi.spyOn(images, 'maskedFrame').mockImplementation((...args) => {
+      const pending = maskedFrame(...args);
+      void pending.then(() => {
+        const [page] = args;
+        for (const side of ['before', 'after'] satisfies Side[]) {
+          if (page.url() !== servers[side].origin + '/pending-control') continue;
+          const witness: ContextWitness = { checkpointAt: performance.now(), closedAt: null };
+          contexts.set(side, witness);
+          page.context().once('close', () => { witness.closedAt = performance.now(); });
+        }
+      }, () => {});
+      return pending;
+    });
     const bundle = await capture(
       servers,
       [
         scenario('pending-action', [
-          open,
+          { ...open, path: '/pending-control' },
           { id: 'late', op: 'click', target: { role: 'button', name: 'Late control' }, timeoutMs: 350 },
           { id: 'blocked', op: 'screenshot' },
         ]),
@@ -497,9 +522,22 @@ describe('real Chromium recorder', () => {
       settings,
       run,
     );
-    expect(step(bundle, 1).before).toMatchObject({ status: 'failed', reasonCode: 'STEP_TIMEOUT' });
-    expect(step(bundle, 2).before.status).toBe('blocked');
-    expect(performance.now() - started).toBeLessThan(2500);
+    const checkpointTimes: number[] = [];
+    const contextCloseTimes: number[] = [];
+    for (const side of ['before', 'after'] satisfies Side[]) {
+      expect(step(bundle, 0)[side].status).toBe('ok');
+      expect(step(bundle, 1)[side]).toMatchObject({ status: 'failed', reasonCode: 'STEP_TIMEOUT' });
+      expect(step(bundle, 1)[side].elapsedMs).toBeLessThan(2500);
+      expect(step(bundle, 2)[side].status).toBe('blocked');
+      const witness = contexts.get(side);
+      expect(witness?.closedAt).toEqual(expect.any(Number));
+      if (!witness || witness.closedAt === null) throw new Error('Missing context close witness');
+      checkpointTimes.push(witness.checkpointAt);
+      contextCloseTimes.push(witness.closedAt);
+    }
+    expect(Math.max(...contextCloseTimes) - Math.max(...checkpointTimes)).toBeLessThan(2500);
+    expect([...pendingControls.keys()].sort()).toEqual(['after', 'before']);
+    for (const response of pendingControls.values()) response.end();
     await new Promise((resolve) => setTimeout(resolve, 1100));
     expect(clicks).toEqual([]);
   }, 30000);
@@ -549,9 +587,45 @@ describe('real Chromium recorder', () => {
   ])(
     'records a fault after one side captures while its peer is pending at %s',
     async (path, reason) => {
+      const ordering: string[] = [];
+      let checkpoint: Buffer | undefined;
+      const maskedFrame = images.maskedFrame;
+      vi.spyOn(images, 'maskedFrame').mockImplementation((...args) => {
+        const pending = maskedFrame(...args);
+        void pending.then((bytes) => {
+          const [page] = args;
+          if (page.url() === servers.before.origin + path) {
+            checkpoint = bytes;
+            ordering.push('before checkpoint');
+            void peerPending.then(() => setImmediate(() => {
+              const observed = () => {
+                ordering.push('fault observed');
+                releasePeer();
+                ordering.push('peer released');
+              };
+              if (reason === 'PAGE_ERROR') {
+                page.once('pageerror', observed);
+                void page.evaluate(() => {
+                  const script = document.createElement('script');
+                  script.textContent = 'throw new Error("synthetic")';
+                  document.body.append(script);
+                }).catch(() => {});
+              } else {
+                void servers.before.exited.then(observed);
+                exitBefore();
+              }
+            }));
+          }
+        }, () => {});
+        return pending;
+      });
       const bundle = await capture(servers, [scenario('late-fault', [{ ...open, path }])], settings, run);
+      expect(ordering).toEqual(['before checkpoint', 'fault observed', 'peer released']);
       expect(bundle.scenarios[0]?.outcome).toBe('partial');
-      expect(step(bundle, 0).before).toMatchObject({ status: 'failed', reasonCode: reason });
+      expect(step(bundle, 0).before).toMatchObject({
+        status: 'failed', reasonCode: reason, heldFromStepId: 'open', imageKind: 'held',
+      });
+      expect(await readFile(join(run.paths.runDir, step(bundle, 0).before.image.path))).toEqual(checkpoint);
       expect(step(bundle, 0).after.status).toBe('ok');
       expect(step(bundle, 0).changeRatio).toBeNull();
     },

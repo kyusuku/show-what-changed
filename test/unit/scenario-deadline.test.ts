@@ -12,7 +12,7 @@ import { openBrowser } from '../../src/runtime/browser.js';
 import { performAction } from '../../src/recorder/actions.js';
 
 const clock = vi.hoisted(() => ({ now: 1000, expireAfterCheckpoint: false }));
-vi.mock('../../src/runtime/browser.js', () => ({ openBrowser: vi.fn() }));
+vi.mock('../../src/runtime/browser.js', async (original) => ({ ...await original<typeof import('../../src/runtime/browser.js')>(), openBrowser: vi.fn() }));
 vi.mock('../../src/recorder/actions.js', () => ({ performAction: vi.fn(), settle: async () => {} }));
 vi.mock('../../src/runtime/files.js', async (original) => {
   const actual = await original<typeof import('../../src/runtime/files.js')>();

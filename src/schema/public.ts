@@ -34,6 +34,12 @@ export function publicRoute(path: string): string {
 }
 type PublicGuidance = Pick<ToolError, 'message' | 'hint'>;
 const ERROR_GUIDANCE: ReadonlyMap<string, PublicGuidance> = new Map(Object.entries({
+  BROWSER_INSTALL_FAILED: { message: 'The pinned Chromium installation did not complete.', hint: 'Check network access and the browser download settings at https://github.com/kyusuku/show-what-changed/blob/main/docs/installation.md, then rerun show-what-changed setup.' },
+  BROWSER_INSTALL_UNAVAILABLE: { message: 'The packaged Chromium installer is unavailable.', hint: 'Reinstall show-what-changed, then rerun show-what-changed setup.' },
+  BROWSER_INSTALL_PROCESS_INSPECTION_UNAVAILABLE: { message: 'Chromium installation was skipped because process ownership could not be inspected.', hint: 'Ensure ps is installed and process inspection is allowed, then rerun show-what-changed setup.' },
+  NODE_VERSION_UNSUPPORTED: { message: 'This release requires Node 24.x.', hint: 'Use Node 24.x, then rerun show-what-changed setup.' },
+  BROWSER_INSTALL_CLEANUP_FAILED: { message: 'Machine setup could not verify cleanup of its owned processes.', hint: 'Inspect the remaining owned installer or capability probe processes before retrying setup.' },
+  SETUP_DEADLINE_EXCEEDED: { message: 'Machine setup reached its deadline.', hint: 'Check network access and machine prerequisites, then rerun show-what-changed setup.' },
   RECIPE_REQUIRED: { message: 'An explicit schema 2 execution recipe is required.', hint: 'Create show-what-changed.config.json or pass --config with execution.start and execution.state.' },
   INVALID_INPUT: { message: 'An input path or document is invalid.', hint: 'Check regular-file paths, JSON syntax, and the packaged schema 2 fields and bounds.' },
   INVALID_DOCUMENT: { message: 'A document does not satisfy schema 2.', hint: 'Validate it against the packaged schema. Version 1 inputs require migration before use.' },

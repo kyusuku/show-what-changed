@@ -4,81 +4,40 @@ Compare a browser scenario across two Git snapshots and produce a labeled BEFORE
 
 Revision 0.3 uses explicit execution recipes for web applications across stacks. Motion is the default. It records actual intermediate Chromium frames and preserves their shared elapsed timing. Keyframes remain an explicit alternative.
 
-Version `0.1.1` fixes a motion-capture defect in `0.1.0` that could lose a static page update while an earlier frame awaited masking and acknowledgement. The tool remains experimental. See [release readiness](docs/release-readiness.md) for verification and publication status.
+Version `0.1.2` adds browser setup, an app-configuration prompt for coding agents, and clock recovery for delayed browser responses. The 40 ms clock error limit remains unchanged. The tool remains experimental. See [release readiness](docs/release-readiness.md) for verification and publication status.
 
 The [synthetic examples](docs/demo/README.md) identify each recording's capture mode and candidate. Historical development clips and keyframe examples remain labeled separately from release-candidate motion evidence.
 
-## Prerequisites
+## Install and set up
 
-| Requirement | Scope |
-| --- | --- |
-| Node.js | Tool runtime `24.x`. Candidate checks use `24.22.2`. |
-| npm | Installs this CLI. Candidate checks use `11.12.1`. Applications may use other tools. |
-| Playwright and Chromium | Package dependency `1.64.1`, with Chromium revision `1248` installed separately. |
-| Chromium sandbox | Linux must allow the pinned browser to create its sandbox. See the Linux setup note below. |
-| FFmpeg and ffprobe | Matching system versions with H.264 `libx264` and the composition filters checked by `doctor`. Development macOS checks use `9.0.2`. |
-| Git, `ps`, and `lsof` | Source and listener ownership checks. Linux needs `lsof` `4.99.7` or newer. macOS uses its system `lsof`. |
-| Application tools | Declared by the recipe, such as Python, npm, or pnpm. The tool's Node version does not select the application's runtime. |
-| Docker Engine and buildx | Required for container recipes. Host-process recipes do not require Docker. |
-
-The CLI checks capabilities. It does not install browsers, system runtimes, FFmpeg, or Docker automatically. A successful `doctor` checks tool prerequisites; it does not certify that an application recipe works.
-
-### Linux setup
-
-Older `lsof` versions can omit listeners when Linux truncates a process name. Linux checks reject versions below `4.99.7` or an unidentifiable version. See the [upstream issue](https://github.com/lsof-org/lsof/issues/359).
-
-From this repository's checkout, Ubuntu users can build the pinned version into a private installation directory.
+Use Node.js 24 on macOS or Linux. Install the tool once, outside your application's dependencies.
 
 ```sh
-sudo apt-get update
-sudo apt-get install -y build-essential pkg-config libtirpc-dev libselinux1-dev curl ca-certificates ffmpeg git procps
-sh scripts/linux-gate/install-lsof.sh "$HOME/.local"
-export PATH="$HOME/.local/bin:$PATH"
-lsof -v
+npm install -g show-what-changed
+show-what-changed setup
 ```
 
-The installer verifies its source hash and does not edit shell configuration.
+`setup` downloads the matching Chromium browser and checks the tools needed to record a comparison. It reports any missing system dependencies with instructions. Continue when it prints `setup: ok (exit 0)`.
 
-Ubuntu 23.10 and newer can restrict the user namespaces that Chromium needs. If browser startup reports `No usable sandbox`, use the scoped AppArmor profile described in Option 2 of [Chromium's setup guide](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md). The CLI keeps Chromium's sandbox enabled.
+For missing prerequisites, restricted networks, or an installation without global npm access, see [installation help](docs/installation.md). To check an existing installation without downloading anything, run `show-what-changed doctor`.
 
-## Install
+## Configure your app once
 
-Install the package outside your application's checkout. Use Node 24 and the system prerequisites above. The commands below target `0.1.1`. Before that version is published on [npm](https://www.npmjs.com/package/show-what-changed), replace `show-what-changed@0.1.1` with the path to its reviewed tarball.
+Paste this prompt into your coding agent while it has access to the app repository. The agent adapts the configuration to your app. The prompt authorizes a first local comparison using test data.
 
-```sh
-SWC_INSTALL="$(mktemp -d)"
-npm install --prefix "$SWC_INSTALL" --no-audit --no-fund show-what-changed@0.1.1
-SWC="$SWC_INSTALL/node_modules/.bin/show-what-changed"
-node "$SWC_INSTALL/node_modules/playwright/cli.js" install chromium
-"$SWC" doctor --json
+```text
+Set up show-what-changed for this repository and produce a first local comparison.
+
+Inspect the repository before choosing commands. Identify its web app, package manager, workspace layout, start command, readiness route, required environment variables, and test-data needs. Use the installed CLI's --help, README, and schemas for its exact supported behavior.
+
+Create a minimal show-what-changed.config.json that matches this app. Keep existing valid configuration. Use a frozen dependency install when a lockfile exists, bind the server to 127.0.0.1 with the assigned {port}, and choose one meaningful page or short scenario. Configure state honestly. Use stateless only when appropriate; otherwise use isolated, disposable test data. Reference secrets through fromEnv instead of writing their values into files. Keep .show-what-changed/ out of Git.
+
+Run doctor and create a plan for HEAD versus the current working tree. Inspect the plan before execution. You may run the planned setup and app commands in isolated source copies for this local comparison. Do not use production services, enable paid integrations, change application code to force success, or modify the checkout's dependencies or lockfile. Do not commit, push, or publish.
+
+If required test credentials, services, or choices cannot be discovered safely, finish the independent setup and ask me only for those missing items. Otherwise run the comparison, inspect its result and video, and return the exact video path, a short explanation of the configuration, and any limitations. Do not claim success from the presence of an MP4 alone.
 ```
 
-Playwright's `install --with-deps chromium` variant also installs Linux system libraries and can require administrator access. Use the installed pinned Playwright dependency rather than an unqualified latest installer.
-
-For archive installation, use the reviewed tarball and SHA-256 in [release readiness](docs/release-readiness.md). Verify the downloaded archive against its recorded digest.
-
-## Describe how your app runs
-
-Every app needs a schema 2 recipe. There is no root-manifest or package-manager whitelist. This example serves a Git repository's `public` directory using an already installed Python 3.
-
-Save it as `show-what-changed.config.json` at the application Git root.
-
-```json
-{
-	"schemaVersion": 2,
-	"execution": {
-		"start": {
-			"kind": "process",
-			"argv": ["python3", "-m", "http.server", "{port}", "--bind", "127.0.0.1", "--directory", "public"]
-		},
-		"state": {"kind": "stateless"}
-	}
-}
-```
-
-Capture defaults to motion at `1280×800`. Adapt the recipe's setup, working directory, foreground start command, readiness route, environment references, and state declaration to your app. Tokens occupy complete command arguments. Use explicit `fromEnv` bindings for secrets; do not place secret values in command arguments or config literals.
-
-Recipes can describe static sites, Python apps, npm apps, pnpm workspaces, and restricted container apps. These are supported configuration paths, not a claim that every application or final platform gate has passed. Read the [recipe contract](spec.md#4-general-execution-recipe) and [current limitations](docs/limitations.md).
+For manual configuration, use the [pnpm and Next.js example or static-site recipe](docs/app-setup.md). See the [recipe contract](spec.md#4-general-execution-recipe) for other stacks and [current limitations](docs/limitations.md) for supported behavior.
 
 ## Plan before execution
 
@@ -86,7 +45,7 @@ From the application's Git root, select a route that exists in the intended snap
 
 ```sh
 cd /absolute/path/to/your/app
-"$SWC" plan --route / --json
+show-what-changed plan --route / --json
 ```
 
 BEFORE defaults to exact `HEAD`. AFTER defaults to the eligible current filesystem snapshot, including staged, unstaged, and nonignored untracked files. The tool creates isolated source copies. It does not modify `.gitignore`; exclude `.show-what-changed/` before committing output.
@@ -96,7 +55,7 @@ Read the private `.show-what-changed/plan.json`. Review source IDs, source limit
 After authorizing those commands, run the saved plan.
 
 ```sh
-"$SWC" compare --plan .show-what-changed/plan.json --allow-exec --json
+show-what-changed compare --plan .show-what-changed/plan.json --allow-exec --json
 ```
 
 This executes both snapshots' recipe with your account's privileges. Source copies protect the checkout from the tool's normal writes; they are not a security sandbox. `--ci` disables prompts and never grants execution permission.
@@ -130,6 +89,7 @@ Motion accepts fixed viewport rectangle masks. Keyframes accept CSS selector mas
 | `plan` | Inspect source and bind a private plan without running app code. |
 | `compare` | Obtain execution consent, prepare isolated snapshots, run the recipe, capture, and compose. This is the default command. |
 | `compose <runDir>` | Validate saved capture, timeline, images, and hashes, then re-encode without app servers, Docker, or a browser. |
+| `setup` | Install the matching Chromium browser and check tool prerequisites. |
 | `doctor` | Check capabilities and report abandoned runs without running app code. |
 | `clean <runId>` | Remove one registered inactive run and verified owned residue. |
 
@@ -147,4 +107,4 @@ The [agent skill](skills/show-what-changed/SKILL.md) uses the same CLI and JSON 
 
 ## Development and license
 
-Read [contributing](CONTRIBUTING.md) for development, [the specification](spec.md) for acceptance, and [publishing](docs/publishing.md) for the owner's later handoff. Authored code uses the [MIT license](LICENSE). The bundled Inter font uses the SIL Open Font License. Dependencies retain their licenses in [third-party notices](THIRD_PARTY_NOTICES.md).
+Read [contributing](CONTRIBUTING.md) for development, [the specification](spec.md) for acceptance, and [publishing](docs/publishing.md) for the release procedure. Authored code uses the [MIT license](LICENSE). The bundled Inter font uses the SIL Open Font License. Dependencies retain their licenses in [third-party notices](THIRD_PARTY_NOTICES.md).

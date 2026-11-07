@@ -13,6 +13,7 @@
         "compare",
         "compose",
         "doctor",
+        "setup",
         "clean"
       ]
     },
@@ -3013,7 +3014,8 @@
                   "type": "string",
                   "enum": [
                     "0.1.0",
-                    "0.1.1"
+                    "0.1.1",
+                    "0.1.2"
                   ]
                 },
                 "runId": {

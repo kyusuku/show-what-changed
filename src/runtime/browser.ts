@@ -6,6 +6,14 @@ import { checkCancelled, failure } from '../schema/errors.js';
 import { beforeDeadline } from './context.js';
 import { childEnvironment } from './process-table.js';
 
+const localBrowsers = new WeakSet<Browser>();
+export const LOCAL_MONOTONE_CLOCK = Symbol('trusted-local-monotone-clock');
+export function localClockCapability(browser: Browser | null): typeof LOCAL_MONOTONE_CLOCK | undefined {
+  return browser && localBrowsers.has(browser) && browser.version() === '156.0.8078.4' &&
+    process.versions.node.split('.')[0] === '24' && ['darwin', 'linux'].includes(process.platform)
+    ? LOCAL_MONOTONE_CLOCK : undefined;
+}
+
 export async function openBrowser(run: RunContext): Promise<Browser> {
   checkCancelled(run.signal);
   const timeout = Math.max(1, Math.min(30_000, run.deadlineMs - performance.now()));
@@ -19,6 +27,10 @@ export async function openBrowser(run: RunContext): Promise<Browser> {
     catch { await run.supervisor.stop(owned); await beforeDeadline(server.kill(), deadline); }
   } });
   checkCancelled(run.signal);
-  try { return await chromium.connect(server.wsEndpoint(), { timeout }); }
+  try {
+    const browser = await chromium.connect(server.wsEndpoint(), { timeout });
+    localBrowsers.add(browser);
+    return browser;
+  }
   catch { await run.supervisor.stop(owned); checkCancelled(run.signal); throw failure(8, 'BROWSER_UNAVAILABLE', 'browser', 'The owned Chromium browser could not be connected.', 'Run doctor and retry.'); }
 }
